@@ -13,5 +13,9 @@
    <li>
       <a href="./project/test.do">footer 확인</a>
    </li>
+   
+     <li>
+      <a href="./project/list.do">store 확인</a>
+   </li>
 </body>
 </html>

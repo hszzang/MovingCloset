@@ -71,7 +71,8 @@
 </script>
 <style>
 	#img{
-		"max-width:100%; height:auto;"
+		max-width:100%; height:auto;
+		z-index:1;
 
 	}
 	#btnBuy, #basket, #wish{
@@ -116,6 +117,9 @@
 		display: inline;
 	}
 	
+	body{
+		z-index:1;
+	}
 
 </style>
 

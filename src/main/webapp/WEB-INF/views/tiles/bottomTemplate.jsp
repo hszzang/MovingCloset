@@ -11,16 +11,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 
-<style type="text/css">
-.Footer{
-	background-color: #000000;
-	height: 100%; color: white;
-	width: 100%;
-	font-size:13px;	
-	padding:5%;
-	
-}
-</style>
+
 
 </head>
 <body>

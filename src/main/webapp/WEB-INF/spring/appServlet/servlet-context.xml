@@ -15,8 +15,6 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
-	
-		
 	<!-- 
 		프로젝트 생성시 기본적으로 제공되는 ViewResolver로 컨트롤러가
 		반환하는 뷰의 경로를 조립하는 역할을 담당한다. 
