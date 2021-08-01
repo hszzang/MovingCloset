@@ -15,11 +15,47 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	
+		
+	<!-- 
+		프로젝트 생성시 기본적으로 제공되는 ViewResolver로 컨트롤러가
+		반환하는 뷰의 경로를 조립하는 역할을 담당한다. 
+		타일즈의 ViewResolver가 먼저 호출될수 있도록 order프로퍼티를
+		추가하여 2로 설정한다.
+	-->
+	<beans:bean id="viewResolver" 
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="order" value="2" />
 	</beans:bean>
+	
+	<!-- 
+		Maven : spring-webmvc.jar 
+		타일즈에서 제공하는 ViewResolver가 먼저 호출되게 하여 템플릿을 통한
+		레이아웃을 먼저 설정할 수 있도록 해준다. 따라서 order프로퍼티를
+		추가하여 1로 설정한다.
+	-->
+	<beans:bean id="tilesViewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<beans:property name="viewClass"
+			value="org.springframework.web.servlet.view.tiles3.TilesView" />
+		<beans:property name="order" value="1" />	
+	</beans:bean>
+	
+	<!--  
+		타일즈 설정 파일의 위치를 설정한다.
+	--> 
+	<beans:bean id="titlesConfigurer"
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<beans:property name="definitions" >
+			<beans:list>
+				<beans:value>/WEB-INF/spring/tiles-define.xml</beans:value>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+	          
+	
 	
 	<context:component-scan base-package="com.project.movingcloset" />
 	
