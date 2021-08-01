@@ -41,10 +41,10 @@ public class HomeController {
 		
 		return "body/store_detail";
 	}
-	
-	@RequestMapping(value="/project/list.do", method=RequestMethod.GET)
-	public String board(Locale locale, Model model) {
-		
+
+	@RequestMapping(value="/project/test1.do", method=RequestMethod.GET)
+	public String storeList(Locale locale, Model model) {
+
 		return "body/store_list";
 	}
 	

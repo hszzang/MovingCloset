@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?> 
+
+<?xml version="1.0" encoding="UTF-8"?>
 
 <!-- 
 	일반적인 xml파일로 생성한 후 DOCTYPE만 추가하면 된다.
@@ -29,15 +30,7 @@
 	<definition name="*/*" extends="layout-tiles">
 		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
 		<put-attribute name="title" value="타일즈적용"/>
-	</definition>
+	</definition>	
 </tiles-definitions>
-
-
-
-
-
-
-
-
 
 

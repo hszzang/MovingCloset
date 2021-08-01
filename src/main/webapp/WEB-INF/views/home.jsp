@@ -12,6 +12,7 @@
 
    <li>
       <a href="./project/test.do">footer 확인</a>
+      <a href="./project/test1.do">storelist</a>
    </li>
    
      <li>
