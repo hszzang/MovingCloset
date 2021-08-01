@@ -45,6 +45,7 @@
 	
 	<!--  
 		타일즈 설정 파일의 위치를 설정한다.
+
 	--> 
 	<beans:bean id="titlesConfigurer"
 		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
@@ -54,8 +55,7 @@
 			</beans:list>
 		</beans:property>
 	</beans:bean>
-	          
-	
+
 	
 	<context:component-scan base-package="com.project.movingcloset" />
 	
