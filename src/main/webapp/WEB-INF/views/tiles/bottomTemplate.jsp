@@ -1,20 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <style type="text/css">
-.Footer{
+#footerRow{
 	background-color: #000000;
-	height: 100%; color: white;
+	height: 20%; color: white;
 	width: 100%;
 	font-size:13px;	
 	padding:5%;
@@ -23,14 +17,12 @@
 }
 </style>
 
-</head>
-<body>
 
 
 
 
 	<div class="Footer">
-		<div class="row">
+		<div class="row" id="footerRow">
 		<a href="">회사소개</a>&nbsp;|&nbsp;
 		<a href="">이용약관</a>&nbsp;|&nbsp;
 		<a href="">개인정보처리방침</a>&nbsp;|&nbsp;
@@ -63,8 +55,3 @@
 
 
 
-
-
-
-</body>
-</html>
