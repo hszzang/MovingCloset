@@ -34,9 +34,9 @@
 		<a href="">개인정보처리방침</a>&nbsp;|&nbsp;
 		<a href="">사업자정보확인</a>&nbsp;|&nbsp;
 		<a href="">인재채용</a>&nbsp;|&nbsp;
-		<a href="">입점문의</a>&nbsp;|&nbsp;
-		<a href="">셀러어드민</a>&nbsp;|&nbsp;
-		<a href="">자주묻는질문</a>&nbsp;|&nbsp;
+<!-- 		<a href="">입점문의</a>&nbsp;|&nbsp; -->
+<!-- 		<a href="">셀러어드민</a>&nbsp;|&nbsp; -->
+<!-- 		<a href="">자주묻는질문</a>&nbsp;|&nbsp; -->
 		 
 		플러스친구 페이스북 인스타그램 <br />
 		

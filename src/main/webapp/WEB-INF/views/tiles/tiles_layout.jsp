@@ -29,7 +29,7 @@
 	아래의 주석 부분은 마이페이지에서 쓸 사이드바 부분
 -->
 <div class="container-fluid">
-	<div class="wrap">
+	<div class="wrap" style="margin-left: -15px; margin-right: -15px">
 		<tiles:insertAttribute name="top"/>
 		<div class="content">
 			<%-- <tiles:insertAttribute name="left"/> --%>
