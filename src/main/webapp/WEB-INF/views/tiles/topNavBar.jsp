@@ -17,7 +17,7 @@
 * {margin: 0; padding: 0; }
 li {list-style: none; }
           
-.topMenu {position: relative; width: 100%; margin-bottom: 20px; text-align: center; height: 40px; }
+.topMenu {position: relative; width: 100%; margin-bottom: 20px; text-align: center; height: 40px;}
 .topMenu:after {content: ""; display: block; clear: both; }
 .menu01>li {float: left; width: 20%; line-height: 40px; }
 .menu01 span {font-size: 20px; font-weight: bold; }
