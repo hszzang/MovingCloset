@@ -54,11 +54,19 @@ public class HomeController {
 		
 		return "body/search";
 	}
+	
 	// 고객센터
 	@RequestMapping(value="/project/test3.do", method=RequestMethod.GET)
 	public String helpPage(Locale locale, Model model) {
 		
 		return "body/help";
+	}
+	
+	// 모여
+	@RequestMapping(value="/project/test4.do", method=RequestMethod.GET)
+	public String moyo(Locale locale, Model model) {
+		
+		return "body/moyo";
 	}
 	
 	

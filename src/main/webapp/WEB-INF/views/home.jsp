@@ -15,6 +15,7 @@
       <a href="./project/test1.do">storelist</a>
       <a href="./project/test2.do">검색</a>
       <a href="./project/test3.do">고객센터</a>
+      <a href="./project/test4.do">모여</a>
    </li>
 </body>
 </html>
