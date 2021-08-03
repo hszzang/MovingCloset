@@ -48,4 +48,18 @@ public class HomeController {
 		return "body/store_list";
 	}
 	
+	// 검색페이지
+	@RequestMapping(value="/project/test2.do", method=RequestMethod.GET)
+	public String searchPage(Locale locale, Model model) {
+		
+		return "body/search";
+	}
+	// 고객센터
+	@RequestMapping(value="/project/test3.do", method=RequestMethod.GET)
+	public String helpPage(Locale locale, Model model) {
+		
+		return "body/help";
+	}
+	
+	
 }
