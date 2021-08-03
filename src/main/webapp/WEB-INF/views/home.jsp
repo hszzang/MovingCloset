@@ -9,7 +9,7 @@
 </head>
 <body>
    <h2>메인 페이지입니다.</h2>
-
+ 
    <li>
       <a href="./project/test.do">footer 확인</a>
       <a href="./project/test1.do">storelist</a>
