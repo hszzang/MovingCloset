@@ -49,17 +49,36 @@ public class HomeController {
 	}
 	
 	// 검색페이지
-	@RequestMapping(value="/project/test2.do", method=RequestMethod.GET)
+	@RequestMapping(value="/project/search.do", method=RequestMethod.GET)
 	public String searchPage(Locale locale, Model model) {
 		
 		return "body/search";
 	}
-	// 고객센터
-	@RequestMapping(value="/project/test3.do", method=RequestMethod.GET)
-	public String helpPage(Locale locale, Model model) {
-		
-		return "body/help";
-	}
 	
+	// 공지사항
+	@RequestMapping(value="/project/notice.do", method=RequestMethod.GET)
+	public String noticeList(Locale locale, Model model) {
+		
+		return "body/notice_list";
+	}
+	// 공지사항_내용
+		@RequestMapping(value="/project/noticedetail.do", method=RequestMethod.GET)
+		public String noticeDetail(Locale locale, Model model) {
+			
+			return "body/notice_detail";
+		}
+		
+	// FAQ랑 QnA
+	@RequestMapping(value="/project/qna.do", method=RequestMethod.GET)
+	public String qnaList(Locale locale, Model model) {
+			
+		return "body/qna_list";
+	}
+	// 질문 폼
+	@RequestMapping(value="/project/question.do", method=RequestMethod.GET)
+	public String qnaDetail(Locale locale, Model model) {
+		
+		return "body/qna_detail";
+	}
 	
 }
