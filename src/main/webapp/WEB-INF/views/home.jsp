@@ -15,7 +15,10 @@
       <a href="./project/test1.do">storelist</a>
       <a href="./project/search.do">검색</a>
       <a href="./project/notice.do">공지</a>
-      <a href="./project/qna.do">FAQ / QnA</a>
+      <a href="./project/qnalist.do">FAQ/QnA</a>
+      <a href="./project/qnadetail.do">질답상세</a>
+      <a href="./project/myplease.do">내쪼르기리스트</a>
+      
       <a href="./project/newD.do">뉴디test</a>
    </li>
 </body>

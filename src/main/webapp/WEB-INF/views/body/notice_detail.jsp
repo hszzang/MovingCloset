@@ -21,8 +21,8 @@
         	border: solid black 1px;
         }
 		#title{
-			font-size:20pt;
-			font-weight:bolder;
+			font-size:20pt; font-weight:bolder;
+			padding-left: 2%;
 		}
 		#date{
 			text-align:right;
@@ -30,8 +30,16 @@
 		}
 		#notice{
 			width:100%; height:auto;
+			padding:2%;
 			margin-bottom:100px;
 		}
+		#listBtn{
+        	width:150px; height:40px;
+        	margin:0;
+        	border:none; background-color:black;
+        	color:white; font-size:12pt; font-weight:lighter;	
+        }
+        #askBtn:focus{outline:none;}
     </style>
    
 </head>
@@ -42,11 +50,14 @@
 	    <div id="date">2021.08.10</div>
 		<div id="notice">
 			공지 내용입니다... <br />
-			혹시.... 넘 휑한가요....? ㅠ 
-			FAQ양식으로도 쌉가능..!ㅁ7ㅁ8
+			혹시.... 넘 휑한가요....? ㅠ  <br />
+			FAQ양식으로도 쌉가능..!ㅁ7ㅁ8 <br />
 			제목 색깔 어떻게 바뀌는지 아시는 분 ㅠ
 		</div>
 		<hr />
+		<span style="float:right;">
+		    <button id="listBtn"><a href="/movingcloset/project/notice.do" style="text-decoration:none;color:white;">뒤로가기</a></button>
+		</span>
     </div>
 </body>
 </html>

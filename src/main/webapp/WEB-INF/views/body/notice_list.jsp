@@ -29,45 +29,10 @@
             })
         })
     </script>
-    <script>
-	    $(document).ready(function(){
-	    	
-	    	$('ul.tabs li').click(function(){							//선택자를 통해 tabs 메뉴를 클릭 이벤트를 지정해줍니다.
-	    		var tab_id = $(this).attr('data-tab');
-	
-	    		$('ul.tabs li').removeClass('current');			//선택 되있던 탭의 current css를 제거하고 
-	    		$('.tab-content').removeClass('current');		
-	
-	    		$(this).addClass('current');								////선택된 탭에 current class를 삽입해줍니다.
-	    		$("#" + tab_id).addClass('current');
-	    	})
-	
-	    });
-    
-    	function change(pageName){
-    		var i, showContent;
-    		showContent = document.getElementById(pageName);
-    	}
-		function openPage(pageName,elmnt,color) {
-		  var i, tabcontent, tablinks;
-		  tabcontent = document.getElementsByClassName("tabcontent");
-		  for (i = 0; i < tabcontent.length; i++) {
-		    tabcontent[i].style.display = "none";
-		  }
-		  tablinks = document.getElementsByClassName("tablink");
-		  for (i = 0; i < tablinks.length; i++) {
-		    tablinks[i].style.backgroundColor = "";
-		  }
-		  document.getElementById(pageName).style.display = "block";
-		  elmnt.style.backgroundColor = color;
-		}
-		
-		// Get the element with id="defaultOpen" and click on it
-		document.getElementById("defaultOpen").click();
-	</script>
+
     <style>
         #notice{
-        	width:1000px; height:800px;
+        	width:1000px; height:900px;
         	border: solid black 1px;
         	margin: 100px 20% 200px 20%;
         	padding: 30px 0 0 20px;
@@ -113,6 +78,7 @@
         table {
             text-align: center;
             font-size: 14px;
+			
         }
         th {
         	color:black;
@@ -127,8 +93,30 @@
             padding: 4px 0px;
             border-bottom:darkgray solid 1px;
             height:40px;
-            font-size: 12px;
+            font-size: 10pt;
         }
+        #pages{
+        	text-align:right;
+			margin-top:20px;
+        }
+        #pageSel{
+        	width:80px; height:40px;
+        	border:lightgray solid 1px;
+        	text-align:center; font-size:11pt;
+        }
+        #pgTotal{
+        	color:gray; font-size: 10pt; 
+        	margin:0 10px 0 10px;
+        }
+        .pageMove{
+        	width:40px; height:40px;
+        	border:none; padding:0;
+        	color:white; font-size:10pt; font-weight:bold;}
+        .pageMove:focus{outline:none;}
+        #pmL{background-color:gray;}
+        #pmR{background-color:black;}
+        
+        select, input, textarea:focus{outline:none;}
     </style>
    
 </head>
@@ -143,92 +131,93 @@
 	        <div id="table1">
 	            <table class="col-100 col">
 	                <colgroup>
-	                    <col width="10%">
-	                    <col width="80%">
-	                    <col width="10%">
+	                    <col width="15%">
+	                    <col width="70%" >
+	                    <col width="15%">
 	                </colgroup>
 	                <thead>
 	                    <tr>
 	                        <th>번호</th>
-	                        <th>제목</th>
+	                        <th style="text-align:left;">제목</th>
 	                        <th>등록일</th>
 	                    </tr>
 	                </thead>
 	                <tbody>
 	                    <tr>
 	                        <td>1</td>
-	                        <td><a href="/movingcloset/project/noticedetail.do" style="text-decoration:none;">
-	                        	공지사항 어쩌고저쩌고 블라블라 시끌시끌</a></td>
+	                        <td style="text-align:left;">
+	                        	<a href="/movingcloset/project/noticedetail.do" style="text-decoration:none;color:black;">
+	                        		공지사항 어쩌고저쩌고 블라블라 시끌시끌</a></td>
 	                        <td>2021.08.01</td>
 	                    </tr>
 	                    <tr>
 							<td>2</td>
-	                        <td>공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+	                        <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
 	                        <td>2021.08.01</td>
 	                    </tr>
 	                    <tr>
 	                        <td>3</td>
-	                        <td>공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+	                        <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
 	                        <td>2021.08.01</td>
 	                    </tr>
 	                    <tr>
 	                        <td>4</td>
-	                        <td>공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+	                        <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
 	                        <td>2021.08.01</td>
 	                    </tr>
 	                    <tr>
 							<td>5</td>
-	                        <td>공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+	                        <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
 	                        <td>2021.08.01</td>
 	                    </tr>
 	                    <tr>
 	                        <td>6</td>
-	                        <td>공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+	                        <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
 	                        <td>2021.08.01</td>
 	                    </tr>
 	                    <tr>
 	                        <td>7</td>
-	                        <td>공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+	                        <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
 	                        <td>2021.08.01</td>
 	                    </tr>
 	                    <tr>
 							<td>8</td>
-	                        <td>공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+	                        <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
 	                        <td>2021.08.01</td>
 	                    </tr>
 	                    <tr>
 	                        <td>9</td>
-	                        <td>공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+	                        <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
 	                        <td>2021.08.01</td>
 	                    </tr>
 	                    <tr>
 	                        <td>10</td>
-	                        <td>공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+	                        <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
 	                        <td>2021.08.01</td>
 	                    </tr>
 	                    <tr>
 							<td>11</td>
-	                        <td>공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+	                        <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
 	                        <td>2021.08.01</td>
 	                    </tr>
 	                    <tr>
 	                        <td>12</td>
-	                        <td>공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+	                        <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
 	                        <td>2021.08.01</td>
 	                    </tr>
 	                    <tr>
 	                        <td>13</td>
-	                        <td>공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+	                        <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
 	                        <td>2021.08.01</td>
 	                    </tr>
 	                    <tr>
 							<td>14</td>
-	                        <td>공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+	                        <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
 	                        <td>2021.08.01</td>
 	                    </tr>
 	                    <tr>
 	                        <td>15</td>
-	                        <td>공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+	                        <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
 	                        <td>2021.08.01</td>
 	                    </tr>
 	                </tbody>
@@ -328,10 +317,21 @@
 	                    </tr>
 	                </tbody>
 	            </table>
-	
+	            
 	        </div>
+			<div id="pages">
+			    <select name="pageSel" id="pageSel" placeholder="1">
+					<option value="pageNum">1</option>
+					<option value="pageNum">2</option>
+					<option value="pageNum">3</option>
+					<option value="pageNum">4</option>
+					<option value="pageNum">5</option>
+			    </select>
+			    <span id="pgTotal">of 5</span>
+			    <button class="pageMove" id="pmL"> < </button>
+			    <button class="pageMove" id="pmR"> > </button>
+			</div>
 	
-
     </div>
 </body>
 </html>

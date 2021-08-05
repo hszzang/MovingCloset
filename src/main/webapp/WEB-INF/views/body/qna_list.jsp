@@ -90,6 +90,34 @@
             height:40px;
             font-size: 12px;
         }
+        #pages{ margin-top:15px; }
+        #askBtn{
+        	width:150px; height:40px;
+        	margin:0;
+        	border:none; background-color:black;
+        	color:white; font-size:12pt; font-weight:lighter;	
+        }
+        #askBtn:focus{outline:none;}
+        
+        #pageSel{
+        	width:80px; height:40px;
+        	border:lightgray solid 1px;
+        	text-align:center; font-size:11pt;
+        }
+        #pgTotal{
+        	color:gray; font-size: 10pt; 
+        	margin:0 10px 0 10px;
+        }
+        .pageMove{
+        	width:40px; height:40px;
+        	border:none; padding:0;
+        	color:white; font-size:10pt; font-weight:bold;
+        }
+        .pageMove:focus{outline:none;}
+        #pmL{background-color:gray;}
+        #pmR{background-color:black;}
+        
+        select, input, textarea:focus{outline:none;}
     </style>
    
 </head>
@@ -134,12 +162,12 @@
 	                    <tr>
 	                        <td>4</td>
 	                        <td>[교환/환불]</td>
-	                        <td>공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+	                        <td>FAQ 어쩌고저쩌고 블라블라 시끌시끌</td>
 	                    </tr>
 	                    <tr>
 							<td>5</td>
 	                        <td>[기타]</td>
-	                        <td>공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+	                        <td>FAQ 어쩌고저쩌고 블라블라 시끌시끌</td>
 	                    </tr>
 	                   
 	                </tbody>
@@ -241,7 +269,19 @@
 	            </table>
 	
 	        </div>
-	
+			<div id="pages">
+		        <span>
+		        	<button id="askBtn"><a href="/movingcloset/project/question.do" style="text-decoration:none;color:white;">문의하기</a></button>
+		        </span>
+		        <span style="float:right;">
+				    <select name="pageSel" id="pageSel" placeholder="1">
+						<option value="pageNum">1</option>
+				    </select>
+				    <span id="pgTotal">of 1</span>
+				    <button class="pageMove" id="pmL"> < </button>
+				    <button class="pageMove" id="pmR"> > </button>
+				</span>
+			</div>
 
     </div>
 </body>
