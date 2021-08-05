@@ -13,6 +13,9 @@
    <li>
       <a href="./project/test.do">footer 확인</a>
       <a href="./project/test1.do">storelist</a>
+      <a href="./project/search.do">검색</a>
+      <a href="./project/notice.do">공지</a>
+      <a href="./project/qna.do">FAQ / QnA</a>
    </li>
 </body>
 </html>
