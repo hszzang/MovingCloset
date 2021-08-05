@@ -15,10 +15,24 @@
 <script> 
 	$(document).ready(function(){
 		$('.moyoDetail').hide();
-		$(".moyoSimple").click(function(){
+		// $(".moyoSimple").click(function(){
+		// 	$(".moyoDetail").slideToggle("slow");
+
+		// });
+		$(".moyoRow").click(function(){
 			$(".moyoDetail").slideToggle("slow");
+			$("#moyoList").css("overflow-y", "hidden");
+			$(".moyoRow").not(this).css("display", "none");
 		});
 	});
+
+	function clickRow(moyoRow){
+
+		var a = moyoRow;
+		console.log(a);
+
+	}
+
 	</script>
 
 <style>
@@ -29,18 +43,35 @@
 		padding-right: 15px;
 	}
 	#findMoyoBtn {
-		background-color: #ff6c2f;
-		color: white;
+		background-color: white; color: #ff6c2f;
+		border: #ff6c2f 1px solid;
 	}
 	.moyoSimple {
 		width:100%; height: 30%;
-		cursor: pointer;
+		cursor: pointer; vertical-align: top;
+	}
+	#moyoList {
+		height: 665px;
+		overflow-y: auto;
 	}
 	#moyoList .row {
+		padding-top: 15px; padding-bottom: 25px;
 		border-bottom: #ff6c2f solid 1px;
 	}
 	.simpleImg {
-		width: 100px; height: 100px;
+		width: 100%; height: 150px;
+		object-fit:cover; margin-bottom: 7px;
+	}
+	.form-control:focus {
+		border-color: #FFFFFF;
+		box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px #ff6c2f;
+	}
+	.moyoMax {
+		font-weight: bold; font-size: 1.25em;
+	}
+	.badge {
+		background-color: white; color: #ff6c2f; 
+		border: #ff6c2f 1px solid;
 	}
 
 
@@ -73,6 +104,13 @@
 				
 						// 지도를 생성한다 
 						var map = new kakao.maps.Map(mapContainer, mapOption); 
+						map.setZoomable(false);
+						
+						// 지도에 확대 축소 컨트롤을 생성한다
+						var zoomControl = new kakao.maps.ZoomControl();
+
+						// 지도의 우측에 확대 축소 컨트롤을 추가한다
+						map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 				
 						var positions = [
 							{
@@ -129,20 +167,93 @@
 				</div>
 			</div>
 			<div id="moyoList" class="col-4">
-				<div class="row" >
+				<div class="row moyoRow" value="1" onclick=clickRow(this.value);>
 					<div class="moyoSimple">
-						<img class="simpleImg" src="../resources/images/list/2.jpg"></a>
+						<div>
+							<img class="simpleImg" src="../resources/images/list/2.jpg"></a>
+						</div>
+						<div>
+							<h5><span class="badge">D-2</span> 나이키 시즌오프 팝업스토어</h5>
+							<span>2021</span>년 <span>08</span>월 <span>05</span>일에 모여 !
+
+							<h6 style="text-align: right;">모일 인원수 <span class="moyoMax">100</span> 명</h6>
+							<div style="font-size: 0.75em; margin-top: -15px;">달성률</div>
+							<div class="progress">
+								<div class="progress-bar" style="width:70%; color:white; background-color: #ff6c2f;">70%</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row moyoRow">
+					<div class="moyoSimple">
+						<div>
+							<img class="simpleImg" src="../resources/images/list/3.jpg"></a>
+						</div>
+						<div>
+							<h5><span class="badge">D-2</span> 나이키 시즌오프 팝업스토어</h5>
+							<span>2021</span>년 <span>08</span>월 <span>05</span>일에 모여 !
+
+							<h6 style="text-align: right;">모일 인원수 <span class="moyoMax">100</span> 명</h6>
+							<div style="font-size: 0.75em; margin-top: -15px;">달성률</div>
+							<div class="progress">
+								<div class="progress-bar" style="width:70%; color:white; background-color: #ff6c2f;">70%</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row moyoRow">
+					<div class="moyoSimple">
+						<div>
+							<img class="simpleImg" src="../resources/images/list/4.jpg"></a>
+						</div>
+						<div>
+							<h5><span class="badge">D-2</span> 나이키 시즌오프 팝업스토어</h5>
+							<span>2021</span>년 <span>08</span>월 <span>05</span>일에 모여 !
+
+							<h6 style="text-align: right;">모일 인원수 <span class="moyoMax">100</span> 명</h6>
+							<div style="font-size: 0.75em; margin-top: -15px;">달성률</div>
+							<div class="progress">
+								<div class="progress-bar" style="width:70%; color:white; background-color: #ff6c2f;">70%</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row moyoRow">
+					<div class="moyoSimple">
+						<div>
+							<img class="simpleImg" src="../resources/images/list/5.jpg"></a>
+						</div>
+						<div>
+							<h5>나이키 시즌오프 팝업스토어</h5>
+							<span>2021</span>년 <span>08</span>월 <span>05</span>일에 모여 !
+							
+							<h6 style="text-align: right;">모일 인원수 <span class="moyoMax">100</span> 명</h6>
+							<div style="font-size: 0.75em; margin-top: -15px;">달성률</div>
+							<div class="progress">
+								<div class="progress-bar" style="width:70%; color:white; background-color: #ff6c2f;">70%</div>
+							</div>
+						</div>
+					</div>
+					<div class="moyoDetail">
+						<button type="button" class="form-control" id="moyoFormBtn">모여 !</button>
+
+
+					</div>
+				</div>
+				<!-- <div class="row">
+					<div class="moyoSimple">
+						<img class="simpleImg" src="../resources/images/list/5.jpg"></a>
 						Click to slide the panel down or up
 					</div>
 					<div class="moyoDetail">Hello world!</div>
-				</div>
+				</div> -->
 
 			</div>
 		
 		</div>
 		
 	
-	
+		
 	</div>
 
 </body>

@@ -17,9 +17,10 @@
 		// 	$(".moyoDetail").slideToggle("slow");
 
 		// });
-		$(".moyoSimple").click(function(){
+		$(".moyoRow").click(function(){
 			$(".moyoDetail").slideToggle("slow");
-			$("#moyoList").
+			$("#moyoList").css("overflow-y", "hidden");
+			$(".moyoRow").not(this).css("display", "none");
 		});
 	});
 
@@ -40,8 +41,8 @@
 		padding-right: 15px;
 	}
 	#findMoyoBtn {
-		background-color: #ff6c2f;
-		color: white;
+		background-color: white; color: #ff6c2f;
+		border: #ff6c2f 1px solid;
 	}
 	.moyoSimple {
 		width:100%; height: 30%;
@@ -67,7 +68,7 @@
 		font-weight: bold; font-size: 1.25em;
 	}
 	.badge {
-		background-color: w; color: #ff6c2f; 
+		background-color: white; color: #ff6c2f; 
 		border: #ff6c2f 1px solid;
 	}
 
@@ -101,6 +102,13 @@
 				
 						// 지도를 생성한다 
 						var map = new kakao.maps.Map(mapContainer, mapOption); 
+						map.setZoomable(false);
+						
+						// 지도에 확대 축소 컨트롤을 생성한다
+						var zoomControl = new kakao.maps.ZoomControl();
+
+						// 지도의 우측에 확대 축소 컨트롤을 추가한다
+						map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 				
 						var positions = [
 							{
@@ -157,7 +165,7 @@
 				</div>
 			</div>
 			<div id="moyoList" class="col-4">
-				<div class="row" value="1" onclick=clickRow(this.value);>
+				<div class="row moyoRow" value="1" onclick=clickRow(this.value);>
 					<div class="moyoSimple">
 						<div>
 							<img class="simpleImg" src="../resources/images/list/2.jpg"></a>
@@ -170,11 +178,16 @@
 							<div style="font-size: 0.75em; margin-top: -15px;">달성률</div>
 							<div class="progress">
 								<div class="progress-bar" style="width:70%; color:white; background-color: #ff6c2f;">70%</div>
-							  </div>
+							</div>
+						</div>
+						<div class="moyoDetail">
+							<button type="button" class="form-control" id="moyoFormBtn">모여 !</button>
+
+
 						</div>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row moyoRow">
 					<div class="moyoSimple">
 						<div>
 							<img class="simpleImg" src="../resources/images/list/3.jpg"></a>
@@ -187,11 +200,16 @@
 							<div style="font-size: 0.75em; margin-top: -15px;">달성률</div>
 							<div class="progress">
 								<div class="progress-bar" style="width:70%; color:white; background-color: #ff6c2f;">70%</div>
-							  </div>
+							</div>
+						</div>
+						<div class="moyoDetail">
+							<button type="button" class="form-control" id="moyoFormBtn">모여 !</button>
+
+
 						</div>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row moyoRow">
 					<div class="moyoSimple">
 						<div>
 							<img class="simpleImg" src="../resources/images/list/4.jpg"></a>
@@ -204,11 +222,16 @@
 							<div style="font-size: 0.75em; margin-top: -15px;">달성률</div>
 							<div class="progress">
 								<div class="progress-bar" style="width:70%; color:white; background-color: #ff6c2f;">70%</div>
-							  </div>
+							</div>
+						</div>
+						<div class="moyoDetail">
+							<button type="button" class="form-control" id="moyoFormBtn">모여 !</button>
+
+
 						</div>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row moyoRow">
 					<div class="moyoSimple">
 						<div>
 							<img class="simpleImg" src="../resources/images/list/5.jpg"></a>
@@ -221,8 +244,18 @@
 							<div style="font-size: 0.75em; margin-top: -15px;">달성률</div>
 							<div class="progress">
 								<div class="progress-bar" style="width:70%; color:white; background-color: #ff6c2f;">70%</div>
-							  </div>
+							</div>
 						</div>
+						<div class="moyoDetail">
+							<button type="button" class="form-control" id="moyoFormBtn">모여 !</button>
+
+
+						</div>
+					</div>
+					<div class="moyoDetail">
+						<button type="button" class="form-control" id="moyoFormBtn">모여 !</button>
+
+
 					</div>
 				</div>
 				<!-- <div class="row">
