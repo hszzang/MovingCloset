@@ -81,4 +81,12 @@ public class HomeController {
 		return "body/qna_detail";
 	}
 	
+	
+	//뉴디
+	@RequestMapping(value="/project/newD.do", method=RequestMethod.GET)
+	public String newDmain(Locale locale, Model model) {
+		
+		return "body/newD_main";
+	}
+	
 }
