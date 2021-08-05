@@ -13,9 +13,11 @@
    <li>
       <a href="./project/test.do">footer 확인</a>
       <a href="./project/test1.do">storelist</a>
-      <a href="./project/test2.do">검색</a>
-      <a href="./project/test3.do">고객센터</a>
+      <a href="./project/search.do">검색</a>
+      <a href="./project/notice.do">공지</a>
       <a href="./project/test4.do">모여</a>
+      <a href="./project/qna.do">FAQ / QnA</a>
+      <a href="./project/newD.do">뉴디test</a>
    </li>
 </body>
 </html>

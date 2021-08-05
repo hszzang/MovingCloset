@@ -12,11 +12,37 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=88444ee8320d4b09aa47995c55b34d58"></script>
 
+<script> 
+	$(document).ready(function(){
+		$('.moyoDetail').hide();
+		$(".moyoSimple").click(function(){
+			$(".moyoDetail").slideToggle("slow");
+		});
+	});
+	</script>
+
 <style>
 
 	.container .row {
-		padding-top:10px;
+		padding:10px;
+		padding-left: 15px;
+		padding-right: 15px;
 	}
+	#findMoyoBtn {
+		background-color: #ff6c2f;
+		color: white;
+	}
+	.moyoSimple {
+		width:100%; height: 30%;
+		cursor: pointer;
+	}
+	#moyoList .row {
+		border-bottom: #ff6c2f solid 1px;
+	}
+	.simpleImg {
+		width: 100px; height: 100px;
+	}
+
 
 </style>
 
@@ -26,12 +52,12 @@
 <div class="container">
 	
 		<div class="row">
-		
 			<div class="col-8">
 				<div class="row">
 					<div class="input-group">
-						<input type="text" placeholder="주소를 입력하세요" class="form-control" />
-						<button type="button" class="form-control">모여찾기</button>
+						<!-- 가입 시 입력한 주소가 기본값으로 들어감 -->
+						<input type="text" placeholder="주소를 입력하세요" class="form-control" style="width: 500px;" />
+						<button type="button" class="form-control" id="findMoyoBtn">모여 찾기</button>
 					</div>
 				</div>
 				<div class="row">
@@ -51,7 +77,7 @@
 						var positions = [
 							{
 								title: '현재 위치', 
-								latlng: new kakao.maps.LatLng(37.4787305, 126.8781986)
+								latlng: mapOption.center
 							},
 							{
 								title: '안양천앞', 
@@ -101,11 +127,16 @@
 						}
 					</script>
 				</div>
-
-			
 			</div>
-			<div class="col-4">
-			리스트
+			<div id="moyoList" class="col-4">
+				<div class="row" >
+					<div class="moyoSimple">
+						<img class="simpleImg" src="../resources/images/list/2.jpg"></a>
+						Click to slide the panel down or up
+					</div>
+					<div class="moyoDetail">Hello world!</div>
+				</div>
+
 			</div>
 		
 		</div>
