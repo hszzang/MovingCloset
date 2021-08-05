@@ -16,7 +16,10 @@
       <a href="./project/search.do">검색</a>
       <a href="./project/notice.do">공지</a>
       <a href="./project/test4.do">모여</a>
-      <a href="./project/qna.do">FAQ / QnA</a>
+      <a href="./project/qnalist.do">FAQ/QnA</a>
+      <a href="./project/qnadetail.do">질답상세</a>
+      <a href="./project/myplease.do">내쪼르기리스트</a>
+      
       <a href="./project/newD.do">뉴디test</a>
       <a href="./project/login.do">로그인</a>
    </li>
