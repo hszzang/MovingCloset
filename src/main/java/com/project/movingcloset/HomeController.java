@@ -62,25 +62,30 @@ public class HomeController {
 		return "body/notice_list";
 	}
 	// 공지사항_내용
-		@RequestMapping(value="/project/noticedetail.do", method=RequestMethod.GET)
-		public String noticeDetail(Locale locale, Model model) {
+	@RequestMapping(value="/project/noticedetail.do", method=RequestMethod.GET)
+	public String noticeDetail(Locale locale, Model model) {
 			
-			return "body/notice_detail";
-		}
+		return "body/notice_detail";
+	}
 		
 	// FAQ랑 QnA
-	@RequestMapping(value="/project/qna.do", method=RequestMethod.GET)
+	@RequestMapping(value="/project/qnalist.do", method=RequestMethod.GET)
 	public String qnaList(Locale locale, Model model) {
-			
+				
 		return "body/qna_list";
+	}
+	// QnA 상세
+	@RequestMapping(value="/project/qnadetail.do", method=RequestMethod.GET)
+	public String qnaDetail(Locale locale, Model model) {
+				
+		return "body/qna_detail";
 	}
 	// 질문 폼
 	@RequestMapping(value="/project/question.do", method=RequestMethod.GET)
-	public String qnaDetail(Locale locale, Model model) {
-		
-		return "body/qna_detail";
+	public String qnaForm(Locale locale, Model model) {
+			
+		return "body/qna_form";
 	}
-	
 	
 	//뉴디
 	@RequestMapping(value="/project/newD.do", method=RequestMethod.GET)
@@ -88,5 +93,12 @@ public class HomeController {
 		
 		return "body/newD_main";
 	}
+	
+	// 쪼르기(은서 부분)
+	@RequestMapping(value="/project/myplease.do", method=RequestMethod.GET)
+	public String myPlease(Locale locale, Model model) {
+		return "body/myPlease";
+	}
+	
 	
 }
