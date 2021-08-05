@@ -16,6 +16,7 @@
       <a href="./project/search.do">검색</a>
       <a href="./project/notice.do">공지</a>
       <a href="./project/qna.do">FAQ / QnA</a>
+      <a href="./project/newD.do">뉴디test</a>
    </li>
 </body>
 </html>

@@ -13,6 +13,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <style>
         #whole{
         	width:1000px; height:800px;
@@ -46,31 +48,30 @@
             font-size: 12pt;
         }
         
-        #qSel{
-        	width:250px; height:35px;
-        	border:lightgray solid 1px;
-        }
         #qTitle{
         	width:98%; height:35px;
-        	border:none;
+        	border:none; padding-top:5px;
         }
         #qText{
         	width:98%; height:350px;
-        	border:lightgray solid 1px;
+        	border:none; padding-top:10px;
         }
+        
         #fileBtn{
-        	width:70px; height:70px;
-        	border:none;
-        	background-color:black;
+        	width:70px; height:70px; 
+        	border:none; padding:0 1% 1% 1%; background-color:black;
         	color:white; font-size:30pt; font-weight:lighter;
+        	margin-bottom:15px;
         }
+        #fileBtn:focus{outline:none;}
         #info{ color:gray; font-size:11pt;}
-        #sendBtn{
+        #modBtn{
         	width:250px; height:40px;
-        	margin:2% 36% 0 38%;
-        	border:none; background-color:darkgray;
+        	margin:10px 36% 0 38%;
+        	border:none; background-color:black;
         	color:white; font-size:15pt; font-weight:lighter;	
         }
+        #modBtn:focus{outline:none;}
         select, input, textarea:focus{outline:none;}
     </style>
    
@@ -89,40 +90,39 @@
 		                    <tr>
 		                        <td>유형</td>
 		                        <td>
-			                        <select name="question" id="qSel" placeholder="문의 유형을 선택해주세요.">
-			                        	<option value="order">주문</option>
-	                        			<option value="delivery">배송</option>
-	                        			<option value="refund">교환/환불</option>
-				                        <option value="paty">결제</option>
-				                        <option value="etc">기타</option>
-			                        </select>
+									<div>
+										기타
+									</div>
 		                        </td>
 		                    </tr>
 		                    <tr>
 								<td>제목</td>
 		                        <td>
-		                        	<input type="text" id="qTitle" /></td>
+		                        	<div id="qTitle">
+		                        		궁금한게 있어용
+		                        	</div>
+								</td>
 		                    </tr>
 		                    <tr>
 		                        <td>내용</td>
 		                        <td>
-		                        	<textarea name="" id="qText" cols="30" rows="10" placeholder="의견을 입력해주세요.">
-		                        	</textarea>
+		                        	<div id="qText">
+		                        		질문 있어요. <br />
+		                        		이건 어쩌고 저쩌구 하나요? <br />
+		                        		또 저건 왱알왱알 블라블라 할 수 있을까요? <br />
+		                        		노고가 많으십니다. <br />
+		                        		답변 기다릴게용 <br />
+		                        	</div>
 		                        </td>
 		                    </tr>
 		  					<tr>
 		                        <td>첨부파일</td>
 		                        <td>
-									<input type="button" id="fileBtn" value="+" />
-									<div id="info">
-										• 용량은 각 20MB 이하, jpg, png, gif 파일만 첨부 가능합니다. <br />
-										• 첨부파일은 최대 3개까지 등록 가능합니다. <br />
-										• 이미지에 개인정보(주민번호 등)가 포함되지 않도록 주의해주세요.
-									</div>
+									<div></div>
 		                        </td>
 		                    </tr>
 		            </table>
-					<button id="sendBtn">보내기</button>
+					<button id="modBtn">수정하기</button>
 	        	</form>
 	        </div>
 
