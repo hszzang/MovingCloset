@@ -18,6 +18,7 @@
       <a href="./project/test4.do">모여</a>
       <a href="./project/qna.do">FAQ / QnA</a>
       <a href="./project/newD.do">뉴디test</a>
+      <a href="./project/login.do">로그인</a>
    </li>
 </body>
 </html>
