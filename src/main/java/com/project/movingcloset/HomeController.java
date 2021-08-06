@@ -89,10 +89,17 @@ public class HomeController {
 	}
 	
 	// 모여
-	@RequestMapping(value="/project/test4.do", method=RequestMethod.GET)
-	public String moyo(Locale locale, Model model) {
+	@RequestMapping(value="/project/moyo.do", method=RequestMethod.GET)
+	public String moyo() {
 		
 		return "body/moyo";
+	}
+	
+	// 모여신청폼
+	@RequestMapping(value="/project/moyoForm.do", method=RequestMethod.GET)
+	public String moyoForm() {
+		
+		return "body/moyoForm";
 	}
 	
 	
