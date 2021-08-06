@@ -11,7 +11,7 @@
    <h2>메인 페이지입니다.</h2>
  
    <li>
-      <a href="./project/test.do">footer 확인</a>
+      <a href="./store/detail.do">상품 상세페이지</a>
       <a href="./project/test1.do">storelist</a>
       <a href="./project/search.do">검색</a>
       <a href="./project/notice.do">공지</a>

@@ -30,45 +30,17 @@
 		
 	}
 
-	/* 
-	팝업창에서 별점 매길때 쓸 함수
-	function fillstar(id){
+	$(function(){
+		$('#btnReview').click(function(){
 
-		var s1 = document.getElementById("star1");
-		var s2 = document.getElementById("star2");
-		var s3 = document.getElementById("star3");
-		var s4 = document.getElementById("star4");
-		var s5 = document.getElementById("star5");
+			var child;
+			child = window.open("./reviewPage.do", "reviewpopup", "height:500px, width:300px");
+		});
 
-		if(id=="star1"){
-			if(s1.className=="fa fa-star-o"){
-				s1.className = "fa fa-star";
-			}else{
-				s1.className = "fa fa-star-o";
-			}
-		}else if(id=="star2"){
-			s1.className = "fa fa-star";
-			s2.className = "fa fa-star";
-		}else if(id=="star3"){
-			s1.className = "fa fa-star";
-			s2.className = "fa fa-star";
-			s3.className = "fa fa-star";
-		}else if(id=="star4"){
-			s1.className = "fa fa-star";
-			s2.className = "fa fa-star";
-			s3.className = "fa fa-star";
-			s4.className = "fa fa-star";
-		}else if(id=="star5"){
-			s1.className = "fa fa-star";
-			s2.className = "fa fa-star";
-			s3.className = "fa fa-star";
-			s4.className = "fa fa-star";
-			s5.className = "fa fa-star";
-		}
+	});
 
 
-	} */
-
+	
 </script>
 
 	
@@ -122,7 +94,7 @@
 		display: inline;
 	}
 	
-
+	
 </style>
 <style>
 	body {font-family: Arial, Helvetica, sans-serif;}
@@ -220,6 +192,15 @@
 		word-spacing: 20px;
 		
 	}
+
+	a{
+		color:black; text-decoration: none;
+		
+	}
+	a:hover{
+		text-decoration: none;
+		color:black;
+	}
 	</style>
 <!-- 
 브랜드명
@@ -243,7 +224,7 @@
 		<div class="row" style="height: 500px;">
 			<div class="col-8 d-flex justify-content-center" >
 			<span class="a">
-				<img src="../../../resources/images/feet-1840619_640.jpg" alt="상품이미지" id='img' class="rounded"/>
+				<img src="../resources/images/feet-1840619_640.jpg" alt="상품이미지" id='img' class="rounded"/>
 			</span>
 			</div>
 			<div class="col-4" style="padding-left: 0%; padding-top: 1%;">
@@ -294,11 +275,11 @@
 
 				<br>
 				<div>
-					<button id="btnBuy" style="width: 90%;">구매하기</button>
-				</div><br>
+					<button id="btnBuy" style="width: 90%;"><a href="#" style="color: white;">구매하기</a> </button>
+				</div><br> 
 				<div>
-					<span><button style="width: 45%;" id="basket">장바구니 <i class="fas fa-shopping-cart"></i></button></span>
-					<span><button style="width: 45%;" id="wish">위시리스트 <i class="fa fa-heart" style="color: red;"></i></button></span>
+					<span><button style="width: 45%;" id="basket"><a href="">장바구니</a><i class="fas fa-shopping-cart"></i></button></span>
+					<span><button style="width: 45%;" id="wish" onclick="location.href='#';">위시리스트 <i class="fa fa-heart" style="color: red;"></i></button></span>
 				</div>
 			</div>
 			
@@ -314,7 +295,7 @@
 					<label for="photocheck" style="font-size: 24px;">포토리뷰</label>
 			</div>
 			<div class="d-flex ml-auto">
-				<button id="btnReview">리뷰 쓰기</button>
+				<button id="btnReview" >리뷰 쓰기</button>
 			</div>
 		</div>
 
@@ -346,7 +327,7 @@
 				<td style="text-align: left;">신발이 예뻐요!</td>
 				<td>2021-07-31</td>
 				<td>
-					<img id="myImg" src="../../../resources/images/feet-1840619_640.jpg" alt="상품이미지"
+					<img id="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
 					style="width: 100px; height: auto;"/>
 				</td>
 			</tr>
@@ -362,7 +343,7 @@
 				<td style="text-align: left;">신발이 예뻐요!</td>
 				<td>2021-07-31</td>
 				<td>
-					<img id="myImg" src="../../../resources/images/feet-1840619_640.jpg" alt="상품이미지"
+					<img id="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
 					style="width: 100px; height: auto;"/>
 				</td>
 			</tr>
@@ -378,7 +359,7 @@
 				<td style="text-align: left;">신발이 예뻐요!</td>
 				<td>2021-07-31</td>
 				<td>
-					<img id="myImg" src="../../../resources/images/feet-1840619_640.jpg" alt="상품이미지"
+					<img id="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
 					style="width: 100px; height: auto;"/>
 				</td>
 			</tr>
@@ -394,7 +375,7 @@
 				<td style="text-align: left;">신발이 예뻐요!</td>
 				<td>2021-07-31</td>
 				<td>
-					<img id="myImg" src="../../../resources/images/feet-1840619_640.jpg" alt="상품이미지"
+					<img id="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
 					style="width: 100px; height: auto;"/>
 				</td>
 			</tr>
@@ -410,7 +391,7 @@
 				<td style="text-align: left;">신발이 예뻐요!</td>
 				<td>2021-07-31</td>
 				<td>
-					<img id="myImg" src="../../../resources/images/feet-1840619_640.jpg" alt="상품이미지"
+					<img id="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
 					style="width: 100px; height: auto;"/>
 				</td>
 			</tr>
@@ -430,7 +411,7 @@
 	<!-- The Modal -->
 	<div id="myModal" class="modal">
 		<span class="close">&times;</span>
-		<img class="modal-content" id="img01"></img>
+		<img class="modal-content" id="img01" />
 		<div class="modaltext" style="text-align: center;">
 			<br>
 			<!-- 키, 몸무게, 발사이즈 -->
@@ -444,7 +425,7 @@
 			<span>#예뻐요</span> 
 		</div>
 	</div>
-	 
+
 	<script>
 		// Get the modal
 		var modal = document.getElementById("myModal");
