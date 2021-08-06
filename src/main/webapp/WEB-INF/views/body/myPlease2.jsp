@@ -91,12 +91,13 @@
         
 		#outDiv{
 			width:90%; height:auto;
-			border:lightgray solid 1px;
-			margin-bottom:1%; padding:1%;
+			border:none;
+			margin-bottom:1%; padding:0;
 		}
 		#innerDiv{
 			width:100%; height:auto;
-			border:#FF6C2F solid 1px;
+			/*border:#FF6C2F solid 1px;*/
+			border:lightgray solid 1px;
 			padding:3%;
 		}
 
@@ -561,8 +562,143 @@
 	            			</span>
             			</div>
             		</div>
-            	</div> 
-                      
+            	</div> <!-- 1 끝 -->
+            	
+            	<div id="outDiv">
+            		<div id="innerDiv">
+            			<div id="titleDiv">
+            				<span id="title">쪼르기상품</span>
+            			</div>
+            			<hr />	
+            			<div id="product">
+            				<span id="imgs">
+	            				<span id="mainImg">
+	            					<img id="img" src="../resources/images/please/p8.jpg"/>
+	            				</span>
+            				</span>
+            				
+	            			<span id="desc">
+	            				<div id="upper">
+	            					<div id="brand">TEN C</div>
+	            					<div id="pName">
+	            						TEN C_ARCTIC PARKA <br />
+	            						17CTCUC03075003780 769 PURPLE PANSE</div>
+	            					<div id="oriPrice"><strike>1,180,000</strike></div>
+	            					<div id="nowPrice">
+	            						<span id="per"><em>34%</em></span>
+	            						<span id="price">778,000</span>
+	            						<span id="won">원</span>	
+	            					</div>
+	            				</div>
+	            				<div id="down">
+	            					<div id="until">마감까지</div><br />
+	            					<div id="expNums">
+	            						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
+	            						<span class="expNum">12</span><span class="expWord">시</span>
+	            						<span class="expNum">35</span><span class="expWord">분</span>
+	            						<span class="expNum">20</span><span class="expWord">초</span>
+	            					</div>
+	            					 <div class="progress">
+    									<div class="progress-bar bg-warning" style="width:100%">100%</div>
+  									</div>
+  									<span id="finish">700 / 700 달성</span>
+	            				</div>
+	            				<button id="pleaseBtn">쪼르기 성공!</button>
+	            			</span>
+            			</div>
+            		</div>
+            	</div> <!-- 2 끝 -->
+            	
+            	<div id="outDiv">
+            		<div id="innerDiv">
+            			<div id="titleDiv">
+            				<span id="title">쪼르기상품</span>
+            			</div>
+            			<hr />	
+            			<div id="product">
+            				<span id="imgs">
+	            				<span id="mainImg">
+	            					<img id="img" src="../resources/images/please/p9.jpg"/>
+	            				</span>
+            				</span>
+            				
+	            			<span id="desc">
+	            				<div id="upper">
+	            					<div id="brand">TATRAS</div>
+	            					<div id="pName">
+	            						남성 라구사 RAGUSA <br />
+	            						MTA19S8064TT01</div>
+	            					<div id="oriPrice"><strike>318,000</strike></div>
+	            					<div id="nowPrice">
+	            						<span id="per"><em>53%</em></span>
+	            						<span id="price">151,050</span>
+	            						<span id="won">원</span>	
+	            					</div>
+	            				</div>
+	            				<div id="down">
+	            					<div id="until">마감까지</div><br />
+	            					<div id="expNums">
+	            						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
+	            						<span class="expNum">12</span><span class="expWord">시</span>
+	            						<span class="expNum">35</span><span class="expWord">분</span>
+	            						<span class="expNum">20</span><span class="expWord">초</span>
+	            					</div>
+	            					 <div class="progress">
+    									<div class="progress-bar bg-warning" style="width:100%">100%</div>
+  									</div>
+  									<span id="finish">700 / 700 달성</span>
+	            				</div>
+	            				<button id="pleaseBtn">쪼르기 성공!</button>
+	            			</span>
+            			</div>
+            		</div>
+            	</div> <!-- 3 끝 -->
+            	
+            	<div id="outDiv">
+            		<div id="innerDiv">
+            			<div id="titleDiv">
+            				<span id="title">쪼르기상품</span>
+            			</div>
+            			<hr />	
+            			<div id="product">
+            				<span id="imgs">
+	            				<span id="mainImg">
+	            					<img id="img" src="../resources/images/please/p10.jpg"/>
+	            				</span>
+            				</span>
+            				
+	            			<span id="desc">
+	            				<div id="upper">
+	            					<div id="brand">OFF WHITE</div>
+	            					<div id="pName">
+	            						애로우 체크 플란넬 오버셔츠 <br />
+	            						OMGA133R21FAB0022500</div>
+	            					<div id="oriPrice"><strike>588,000</strike></div>
+	            					<div id="nowPrice">
+	            						<span id="per"><em>22%</em></span>
+	            						<span id="price">457,000</span>
+	            						<span id="won">원</span>	
+	            					</div>
+	            				</div>
+	            				<div id="down">
+	            					<div id="until">마감까지</div><br />
+	            					<div id="expNums">
+	            						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
+	            						<span class="expNum">12</span><span class="expWord">시</span>
+	            						<span class="expNum">35</span><span class="expWord">분</span>
+	            						<span class="expNum">20</span><span class="expWord">초</span>
+	            					</div>
+	            					 <div class="progress">
+    									<div class="progress-bar bg-warning" style="width:70%">70%</div>
+  									</div>
+  									<span id="finish">490 / 700 달성</span>
+	            				</div>
+	            				<button id="pleaseBtn">쪼르기 실패!</button>
+	            			</span>
+            			</div>
+            		</div>
+            	</div> <!-- 4 끝 -->
+            	
             </div>
             <!-- 마감한 쪼르기 끝  -->
                 
