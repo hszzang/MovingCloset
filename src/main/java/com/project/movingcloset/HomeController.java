@@ -122,6 +122,10 @@ public class HomeController {
 	public String myPlease(Locale locale, Model model) {
 		return "body/myPlease";
 	}
+	@RequestMapping(value="/project/myplease2.do", method=RequestMethod.GET)
+	public String myPlease2(Locale locale, Model model) {
+		return "body/myPlease2";
+	}
 	
 	
 }
