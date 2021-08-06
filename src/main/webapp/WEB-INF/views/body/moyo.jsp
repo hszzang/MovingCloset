@@ -21,15 +21,25 @@
 		// });
 		$(".moyoRow").click(function(){
 			$(".moyoDetail").slideToggle("slow");
-			$("#moyoList").css("overflow-y", "hidden");
-			$(".moyoRow").not(this).css("display", "none");
+
+			// $("#moyoList").css("overflow-y", "hidden");
+			// $(".moyoRow").not(this).css("display", "none");
+			
+			if($(".moyoDetail").is(":hidden")){
+				// $("#moyoList").css("overflow-y", "scroll");
+				$(".moyoRow").not(this).slideDown("fast");
+			} 
+			else {
+				// $("#moyoList").css("overflow-y", "hidden");
+				$(".moyoRow").not(this).slideUp("fast");
+				// $(".moyoRow").not(this).css("display", "none");
+			}
 		});
 	});
 
 	function clickRow(moyoRow){
 
-		var a = moyoRow;
-		console.log(a);
+		
 
 	}
 
@@ -59,8 +69,8 @@
 		border-bottom: #ff6c2f solid 1px;
 	}
 	.simpleImg {
-		width: 100%; height: 150px;
-		object-fit:cover; margin-bottom: 7px;
+		width: 100%; height: 170px;
+		object-fit:cover; margin-bottom: 7px;	
 	}
 	.form-control:focus {
 		border-color: #FFFFFF;
@@ -72,6 +82,17 @@
 	.badge {
 		background-color: white; color: #ff6c2f; 
 		border: #ff6c2f 1px solid;
+	}
+	.moyoDetail {
+		padding: 10px 0;
+	}
+
+	.moyoDetail h6 {
+		font-weight: 1.1em; margin-top: 10px;
+	}
+
+	.moyoDetail .moyoFormBtn {
+		background-color: #ff6c2f; color: white; 
 	}
 
 
@@ -179,8 +200,15 @@
 							<h6 style="text-align: right;">모일 인원수 <span class="moyoMax">100</span> 명</h6>
 							<div style="font-size: 0.75em; margin-top: -15px;">달성률</div>
 							<div class="progress">
-								<div class="progress-bar" style="width:70%; color:white; background-color: #ff6c2f;">70%</div>
+								<div class="progress-bar bg-warning" style="width:70%; color:white;">70%</div>
 							</div>
+						</div>
+						<div class="moyoDetail">
+							<button type="button" class="form-control moyoFormBtn" >모여 !</button>
+							<h6>📌 모집기간</h6> 2021.08.01 - 2021.08.03 <br />&mdash;
+							<h6>📌 모임일자</h6> 2021.08.05 목요일 <br />&mdash;
+							<h6>📌 모일장소</h6> 서울시 금천구 가산동 426-5 월드메르디앙 앞 <br />&mdash;
+							<h6>📌 판매자 공지사항</h6> 안녕하세요 나이키입니다. 안녕하세요 나이키입니다.  <br />&mdash;
 						</div>
 					</div>
 				</div>
@@ -196,8 +224,15 @@
 							<h6 style="text-align: right;">모일 인원수 <span class="moyoMax">100</span> 명</h6>
 							<div style="font-size: 0.75em; margin-top: -15px;">달성률</div>
 							<div class="progress">
-								<div class="progress-bar" style="width:70%; color:white; background-color: #ff6c2f;">70%</div>
+								<div class="progress-bar bg-warning" style="width:70%; color:white;">70%</div>
 							</div>
+						</div>
+						<div class="moyoDetail">
+							<button type="button" class="form-control moyoFormBtn" >모여 !</button>
+							<h6>📌 모집기간</h6> 2021.08.01 - 2021.08.03 <br />&mdash;
+							<h6>📌 모임일자</h6> 2021.08.05 목요일 <br />&mdash;
+							<h6>📌 모일장소</h6> 서울시 금천구 가산동 426-5 월드메르디앙 앞 <br />&mdash;
+							<h6>📌 판매자 공지사항</h6> 안녕하세요 나이키입니다. 안녕하세요 나이키입니다.  <br />&mdash;
 						</div>
 					</div>
 				</div>
@@ -213,8 +248,15 @@
 							<h6 style="text-align: right;">모일 인원수 <span class="moyoMax">100</span> 명</h6>
 							<div style="font-size: 0.75em; margin-top: -15px;">달성률</div>
 							<div class="progress">
-								<div class="progress-bar" style="width:70%; color:white; background-color: #ff6c2f;">70%</div>
+								<div class="progress-bar bg-warning" style="width:70%; color:white;">70%</div>
 							</div>
+						</div>
+						<div class="moyoDetail">
+							<button type="button" class="form-control moyoFormBtn" >모여 !</button>
+							<h6>📌 모집기간</h6> 2021.08.01 - 2021.08.03 <br />&mdash;
+							<h6>📌 모임일자</h6> 2021.08.05 목요일 <br />&mdash;
+							<h6>📌 모일장소</h6> 서울시 금천구 가산동 426-5 월드메르디앙 앞 <br />&mdash;
+							<h6>📌 판매자 공지사항</h6> 안녕하세요 나이키입니다. 안녕하세요 나이키입니다.  <br />&mdash;
 						</div>
 					</div>
 				</div>
@@ -230,15 +272,18 @@
 							<h6 style="text-align: right;">모일 인원수 <span class="moyoMax">100</span> 명</h6>
 							<div style="font-size: 0.75em; margin-top: -15px;">달성률</div>
 							<div class="progress">
-								<div class="progress-bar" style="width:70%; color:white; background-color: #ff6c2f;">70%</div>
+								<div class="progress-bar bg-warning" style="width:70%; color:white;">70%</div>
 							</div>
 						</div>
+						<div class="moyoDetail">
+							<button type="button" class="form-control moyoFormBtn" >모여 !</button>
+							<h6>📌 모집기간</h6> 2021.08.01 - 2021.08.03 <br />&mdash;
+							<h6>📌 모임일자</h6> 2021.08.05 목요일 <br />&mdash;
+							<h6>📌 모일장소</h6> 서울시 금천구 가산동 426-5 월드메르디앙 앞 <br />&mdash;
+							<h6>📌 판매자 공지사항</h6> 안녕하세요 나이키입니다. 안녕하세요 나이키입니다.  <br />&mdash;
+						</div>
 					</div>
-					<div class="moyoDetail">
-						<button type="button" class="form-control" id="moyoFormBtn">모여 !</button>
-
-
-					</div>
+					
 				</div>
 				<!-- <div class="row">
 					<div class="moyoSimple">
@@ -253,7 +298,7 @@
 		</div>
 		
 	
-		
+	
 	</div>
 
 </body>
