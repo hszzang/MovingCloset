@@ -11,7 +11,7 @@ public class EventController {
 	@RequestMapping(value="/event_main.do", method=RequestMethod.GET)
 	public String event_main() {
 		
-		return "body/event_main";
+		return "body/eventcoupon/event_main";
 	}
 
 }
