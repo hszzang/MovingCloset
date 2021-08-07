@@ -13,19 +13,19 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 	<style>
-		nav{ width:100%; height:40px; margin:0px;}
+		nav{ width:100%; height:50px; margin:0px;}
 	    #homeBtn{margin:0 3% 0 5%;}
 	    li{ width:100px; margin-right:1%;}
 	    i{ font-size:28px; color:white;}
-	    #rightNav{ margin:20px 0 0 50%; }
+	    #rightNav{ margin:20px 0 0 55%; }
 	      
 	    #megaMenu{
-	        width:100%; height:12%; display:none;
+	        width:100%; height:10%; display:none;
 	        background-color: #212529; color:whitesmoke;
-	        padding:55px 20% 0 20%;
+	        padding:65px 20% 0 15%; 
 	    }
 	    .megaLinks{
-	        width:100px; height:200px; display:inline-block;
+	        width:95px; height:200px; display:inline-block;
 	        color:whitesmoke; font-size:10pt; text-align:left;    
 	    }
 	    .megaA{
@@ -33,9 +33,7 @@
 	        margin-bottom:10px;
 	    }
 	    .megaA:hover{ color:whitesmoke; text-decoration:none; }
-	    a{  
-	        text-decoration:none;
-	    }
+	    a{  text-decoration:none; }
 	</style>
 	
 	<script>
@@ -51,11 +49,8 @@
 <!-- body style="height:1500px" -->	
 
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-	  <a class="navbar-brand" id="homeBtn"  href="#">Moving Closet</a>
+	  <a class="navbar-brand" id="homeBtn" href="#">Moving Closet</a>
 	  <ul class="navbar-nav" id="navi">
-	    <li class="nav-item">
-	      <a class="nav-link" href="#">HOME</a>
-	    </li>
 	    <li class="nav-item">
 	      <a class="nav-link" href="#">MOYO</a>
 	    </li>
@@ -77,7 +72,7 @@
 	    </span>
 	</nav>
 	
-	<div id="megaMenu">
+	<div id="megaMenu" style="width:100%;">
 	    <span id="wrapper">
 	        <span class="megaLinks">
 	            <a href="" class="megaA">링크1</a>
