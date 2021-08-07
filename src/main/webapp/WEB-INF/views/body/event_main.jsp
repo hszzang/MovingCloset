@@ -1,10 +1,13 @@
-<!doctype html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-	<meta charset='utf-8'>
-	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-    <link rel="stylesheet" href="./event_main.css">
-	<title>Moving Closet</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../resources/css/event_main.css" />
+<link rel="stylesheet" href="../resources/css/bootstrap.css" />
+<script src="../resources/jquery/jquery-3.6.0.js"></script>
+<title>Insert title here</title>
 </head>
 <body>
 
@@ -17,17 +20,17 @@
 			<!-- 슬라이드 영역 -->
 			<li class="slideitem">
 				<a>
-					<img src="./event_banner/blackfriday.jpg">
+					<img src="../resources/images/event_banner/blackfriday.jpg">
 				</a>
 			</li>
 			<li class="slideitem">
 				<a>
-					<img src="./event_banner/moocleday.jpg">
+					<img src="../resources/images/event_banner/moocleday.jpg">
 				</a>
 			</li>
 			<li class="slideitem">
 				<a>
-					<img src="./event_banner/bucketlist.jpg">
+					<img src="../resources/images/event_banner/bucketlist.jpg">
 				</a>
 			</li class="slideitem">
 
@@ -69,32 +72,32 @@
 
 	<div class="conbox con1">
 		<a>
-			<img src="./event_banner/ddaeng_event.jpg" style="width: 100%;">
+			<img src="../resources/images/event_banner/ddaeng_event.jpg" style="width: 100%;">
 		</a>
 		<a>
-			<img src="./event_banner/horror_event.jpg" style="width: 100%;">
+			<img src="../resources/images/event_banner/horror_event.jpg" style="width: 100%;">
 		</a>
 		<a>
-			<img src="./event_banner/summer_event.jpg" style="width: 100%;">
+			<img src="../resources/images/event_banner/summer_event.jpg" style="width: 100%;">
 		</a>
 	</div>
 	<div class="conbox con2">
 		<a>
-			<img src="./event_banner/horror_event.jpg" style="width: 100%;">
+			<img src="../resources/images/event_banner/horror_event.jpg" style="width: 100%;">
 		</a>
 		<a>
-			<img src="./event_banner/horror_event.jpg" style="width: 100%;">
+			<img src="../resources/images/event_banner/horror_event.jpg" style="width: 100%;">
 		</a>
 		<a>
-			<img src="./event_banner/horror_event.jpg" style="width: 100%;">
+			<img src="../resources/images/event_banner/horror_event.jpg" style="width: 100%;">
 		</a>
 	</div>
 	<div class="conbox con3">
 		<a>
-			<img src="./event_banner/horror_event.jpg" style="width: 100%;">
+			<img src="../resources/images/event_banner/horror_event.jpg" style="width: 100%;">
 		</a>
 		<a>
-			<img src="./event_banner/horror_event.jpg" style="width: 100%;">
+			<img src="../resources/images/event_banner/horror_event.jpg" style="width: 100%;">
 		</a>
 	</div>
 	
