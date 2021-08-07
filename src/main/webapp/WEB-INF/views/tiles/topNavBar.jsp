@@ -17,7 +17,7 @@
 <script src="https://bootstrapcreative.com/wp-bc/wp-content/themes/wp-bootstrap/codepen/bootstrapcreative.js?v=11"></script>
 -->
 <style>
-	 /*Nav 시작*/
+    /*Nav 시작*/
         /* adds some margin below the link sets  */
         .navbar .dropdown-menu div[class*="col"] {
         margin-bottom:1rem;
@@ -83,7 +83,7 @@
 
         // breakpoint and up  
         $(window).resize(function(){
-            if ($(window).width() >= 980){	
+            if ($(window).width() >= 980){   
 
             // when you hover a toggle show its dropdown menu
             $(".navbar .dropdown-toggle").hover(function () {
@@ -97,7 +97,7 @@
             });
         
                 // do something here
-            }	
+            }   
         });  
 
         // document ready  
@@ -105,7 +105,7 @@
     </script>
 </head>
 <body>
-	
+   
  <!--nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="background-color: #000000;"-->
     <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #000000;">
         <a class="navbar-brand" href="#">MovingCloset</a>
@@ -217,7 +217,7 @@
       </nav>
 
 <!--  
-	여기는 나중에 NavBar 생성
+   여기는 나중에 NavBar 생성
 <div class="Header">NavBar 생성할 부분</div>
 -->
 </body>
