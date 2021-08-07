@@ -31,7 +31,7 @@
 		<put-attribute name="title" value="타일즈적용"/>
 	</definition>	
 	<definition name="body/*" extends="layout-tiles">
-		<put-attribute name="body" value="/WEB-INF/views/body/{2}.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/{2}.jsp" />
 		<put-attribute name="title" value="타일즈적용"/>
 	</definition>	
 </tiles-definitions>
