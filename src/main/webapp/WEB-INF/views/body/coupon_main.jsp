@@ -1,38 +1,39 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./coupon_main.css">
-    <link rel="stylesheet" href="./list.css">
-    <title>Document</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../resources/css/coupon_main.css" />
+<link rel="stylesheet" href="../resources/css/bootstrap.css" />
+<script src="../resources/jquery/jquery-3.6.0.js"></script>
+<title>Insert title here</title>
 </head>
 <body>
-    <div class="coupon_wrap">
+<div class="coupon_wrap">
         <a href="#">
             <div class="coupon_brand">
-                    <img src="./coupon_brand/nike.png">
+                    <img src="../resources/images/coupon_brand/nike.png">
             </div>
         </a>
         <a href="#">
             <div class="coupon_brand">
-                <img src="./coupon_brand/gucci.png">
+                <img src="../resources/images/coupon_brand/gucci.png">
             </div>
         </a>
         <a href="#">
             <div class="coupon_brand">
-                <img src="./coupon_brand/musinsa.png">
+                <img src="../resources/images/coupon_brand/musinsa.png">
             </div>
         </a>
         <a href="#">
             <div class="coupon_brand">
-                <img src="./coupon_brand/new balance.png">
+                <img src="../resources/images/coupon_brand/new balance.png">
             </div>
         </a>
         <a href="#">
             <div class="coupon_brand">
-                <img src="./coupon_brand/adidas.png">
+                <img src="../resources/images/coupon_brand/adidas.png">
             </div>
         </a>
         <div class="category">
@@ -73,7 +74,7 @@
 
         <div class="list_wrap">
             <div class="list_coupon">
-                <img src="./coupon/musinsa_blackfriday.jpg">
+                <img src="../resources/images/coupon/musinsa_blackfriday.jpg">
                 <div class="list_coupon_cont">
                     <strong>NUSINSA BLACK FIRDAY</strong>
                     <p>의류, 신발 최대 80%할인행사</p>
@@ -83,7 +84,7 @@
                 </div>
             </div>
             <div class="list_coupon">
-                <img src="./coupon/musinsa_blackfriday.jpg">
+                <img src="../resources/images/coupon/musinsa_blackfriday.jpg">
                 <div class="list_coupon_cont">
                     <strong>NUSINSA BLACK FIRDAY</strong>
                     <p>의류, 신발 최대 80%할인행사</p>
@@ -93,7 +94,7 @@
                 </div>
             </div>
             <div class="list_coupon">
-                <img src="./coupon/musinsa_blackfriday.jpg">
+                <img src="../resources/images/coupon/musinsa_blackfriday.jpg">
                 <div class="list_coupon_cont">
                     <strong>NUSINSA BLACK FIRDAY</strong>
                     <p>의류, 신발 최대 80%할인행사</p>
@@ -103,7 +104,7 @@
                 </div>
             </div>
             <div class="list_coupon">
-                <img src="./coupon/musinsa_blackfriday.jpg">
+                <img src="../resources/images/coupon/musinsa_blackfriday.jpg">
                 <div class="list_coupon_cont">
                     <strong>NUSINSA BLACK FIRDAY</strong>
                     <p>의류, 신발 최대 80%할인행사</p>
@@ -113,7 +114,7 @@
                 </div>
             </div>
             <div class="list_coupon">
-                <img src="./coupon/musinsa_blackfriday.jpg">
+                <img src="../resources/images/coupon/musinsa_blackfriday.jpg">
                 <div class="list_coupon_cont">
                     <strong>NUSINSA BLACK FIRDAY</strong>
                     <p>의류, 신발 최대 80%할인행사</p>
@@ -123,7 +124,7 @@
                 </div>
             </div>
             <div class="list_coupon">
-                <img src="./coupon/musinsa_blackfriday.jpg">
+                <img src="../resources/images/coupon/musinsa_blackfriday.jpg">
                 <div class="list_coupon_cont">
                     <strong>NUSINSA BLACK FIRDAY</strong>
                     <p>의류, 신발 최대 80%할인행사</p>
@@ -133,7 +134,7 @@
                 </div>
             </div>
             <div class="list_coupon">
-                <img src="./coupon/musinsa_blackfriday.jpg">
+                <img src="../resources/images/coupon/musinsa_blackfriday.jpg">
                 <div class="list_coupon_cont">
                     <strong>NUSINSA BLACK FIRDAY</strong>
                     <p>의류, 신발 최대 80%할인행사</p>
