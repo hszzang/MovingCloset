@@ -205,7 +205,26 @@
 	button a, button a:hover{
 		color: black; text-decoration:none;
 	}
-	
+	#pages{
+       	text-align:right;
+		margin:2% 2% 3% 0;
+    }
+    #pageSel{
+    	width:80px; height:40px;
+    	border:lightgray solid 1px;
+    	text-align:center; font-size:11pt;
+    }
+    #pgTotal{
+    	color:gray; font-size: 10pt; 
+    	margin:0 10px 0 10px;
+    }
+    .pageMove{
+    	width:40px; height:40px;
+    	border:none; padding:0;
+    	color:white; font-size:10pt; font-weight:bold;}
+    .pageMove:focus{outline:none;}
+    #pmL{background-color:gray;}
+    #pmR{background-color:black;}
 	</style>
 <!-- 
 브랜드명
@@ -403,14 +422,20 @@
 
 			</tbody>
 		</table>
-		<div>
-			<ul class="pagination justify-content-center">
-				<li class="page-item"><a class="page-link" href="javascript:void(0);">Previous</a></li>
-				<li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
-				<li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
-				<li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
-			  </ul>
-		</div>
+
+			<div id="pages">
+			    <select name="pageSel" id="pageSel" placeholder="1">
+					<option value="pageNum">1</option>
+					<option value="pageNum">2</option>
+					<option value="pageNum">3</option>
+					<option value="pageNum">4</option>
+					<option value="pageNum">5</option>
+			    </select>
+			    <span id="pgTotal">of 5</span>
+			    <button class="pageMove" id="pmL"> < </button>
+			    <button class="pageMove" id="pmR"> > </button>
+			</div>
+			<br />
 		</div>
 
 	<!-- The Modal -->
