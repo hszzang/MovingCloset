@@ -60,9 +60,8 @@
 		border: solid 1px;
 		outline: 0;
 	}
-	#btnBuy:hover {background-color: gray;}
-	#basket:hover {background-color: lightgray;}
-	#wish:hover {background-color: lightgray;}
+	#btnBuy:hover,#btnReview:hover  {background-color: gray;}
+	#basket:hover, #wish:hover {background-color: lightgray;}
 	
 	#basket, #wish{
 		background-color: white;
@@ -79,6 +78,7 @@
 		color: white;
 		width:auto;
 		outline: 0;
+		
 
 	}
 	#brandName ,#prodName ,#shoes ,#prodCount ,#price {
@@ -201,6 +201,11 @@
 		text-decoration: none;
 		color:black;
 	}
+	
+	button a, button a:hover{
+		color: black; text-decoration:none;
+	}
+	
 	</style>
 <!-- 
 브랜드명
@@ -278,7 +283,7 @@
 					<button id="btnBuy" style="width: 90%;"><a href="#" style="color: white;">구매하기</a> </button>
 				</div><br> 
 				<div>
-					<span><button style="width: 45%;" id="basket"><a href="">장바구니</a><i class="fas fa-shopping-cart"></i></button></span>
+					<span><button style="width: 45%;" id="basket"><a href="#">장바구니<i class="fas fa-shopping-cart"></i></a></button></span>
 					<span><button style="width: 45%;" id="wish" onclick="location.href='#';">위시리스트 <i class="fa fa-heart" style="color: red;"></i></button></span>
 				</div>
 			</div>
