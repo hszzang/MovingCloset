@@ -111,7 +111,7 @@
 	            <a href="" class="megaA">이벤트/쿠폰</a>
 	        </div>
 	        <div class="megaLinks">
-	            <a href="" class="megaA">공지사항</a>
+	            <a href="../movingcloset/notice.do" class="megaA">공지사항</a>
 	            <a href="" class="megaA">1:1문의</a>
 	            <a href="" class="megaA">FAQ</a>
 	            <a href="" class="megaA">QnA</a>
