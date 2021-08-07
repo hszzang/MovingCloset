@@ -92,7 +92,7 @@ public class HomeController {
 	@RequestMapping(value="/project/moyo.do", method=RequestMethod.GET)
 	public String moyo() {
 		
-		return "body/moyo";
+		return "body/moyo/moyo";
 	}
 	
 	// 모여신청폼
