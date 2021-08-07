@@ -15,7 +15,7 @@
 	line-height: 3em;
 }
 #footerRow a {
-	color: white;
+	color: white; height: 10px;
 }
 </style>
 
@@ -39,6 +39,7 @@
 	
 		<br/>
 		<div class="col-8">
+			<img alt="" src="../resources/images/MovingClosetLogoWhite.png" style="width: 250px;">
 			(주)무빙클로젯 <br />
 			대표이사 : 강혜수 &nbsp;&nbsp;사업자등록번호 : 111-22-33333 &nbsp;&nbsp;통신판매업신고 : 2021-서울-00000<br />
 			호스팅사업자 : (주)무빙클로젯 &nbsp;&nbsp;주소 : (153-759) 서울시 금천구 가산동 426-5 월드메르디앙 2차 413호 <br />
