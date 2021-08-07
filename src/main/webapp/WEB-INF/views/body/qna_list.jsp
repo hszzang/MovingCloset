@@ -14,20 +14,26 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
     <script type="text/javascript">
-        window.onload = function() {
-            $("#table1").show();
-            $("#table2").hide();
-        }
-        $(document).ready(function() {
-            $("#btn1").click(function() {
-                $("#table1").show();
-                $("#table2").hide();
-            })
-            $("#btn2").click(function() {
-                $("#table1").hide();
-                $("#table2").show();
-            })
-        })
+	    window.onload = function() {
+	        $("FAQ").show();
+	        $("QnA").hide();
+	    }
+		function openPage(pageName,elmnt,color) {
+		  var i, tabcontent, tablinks;
+		  tabcontent = document.getElementsByClassName("tabcontent");
+		  for (i = 0; i < tabcontent.length; i++) {
+		    tabcontent[i].style.display = "none";
+		  }
+		  tablinks = document.getElementsByClassName("tablink");
+		  for (i = 0; i < tablinks.length; i++) {
+		    tablinks[i].style.backgroundColor = "";
+		  }
+		  document.getElementById(pageName).style.display = "block";
+		  elmnt.style.backgroundColor = color;
+		  elmnt.style.color= white;
+		}
+		// Get the element with id="defaultOpen" and click on it
+		document.getElementById("defaultOpen").click();
     </script>
     
     <style>
@@ -43,6 +49,7 @@
         #helptable{
         	margin: 0;
         }
+        #QnA{ display:none; }
         body{
             margin-top: 0;
             margin-left: 0;
@@ -51,7 +58,7 @@
             border-collapse: collapse;
         }
 
-        .tabBtn {
+        .tablink {
             background-color: white;
             padding: 8px 30px !important;
             width: 200px;
@@ -60,8 +67,8 @@
             border: 1px solid gray;
             float: left;
         }
-		.tabBtn:focus{outline:none;}
-        .tabBtn:hover {
+		.tablink:focus{outline:none;}
+        .tablink:hover {
         	border:black;
         	color:white;
             background-color: black;
@@ -90,18 +97,51 @@
             height:40px;
             font-size: 12px;
         }
+        #pages{ margin-top:15px; }
+        #askBtn{
+        	width:150px; height:40px;
+        	margin:0;
+        	border:none; background-color:black;
+        	color:white; font-size:12pt; font-weight:lighter;	
+        }
+        #askBtn:focus{outline:none;}
+        
+        #pageSel{
+        	width:80px; height:40px;
+        	border:lightgray solid 1px;
+        	text-align:center; font-size:11pt;
+        }
+        #pgTotal{
+        	color:gray; font-size: 10pt; 
+        	margin:0 10px 0 10px;
+        }
+        .pageMove{
+        	width:40px; height:40px;
+        	border:none; padding:0;
+        	color:white; font-size:10pt; font-weight:bold;
+        }
+        .pageMove:focus{outline:none;}
+        #pmL{background-color:gray;}
+        #pmR{background-color:black;}
+        
+        select, input, textarea:focus{outline:none;}
     </style>
    
 </head>
 <body>
     <div id="help">
 		<div class="tabs">
+			<button class="tablink" onclick="openPage('FAQ', this, 'black')" id="defaultOpen">자주 묻는 질문</button>
+			<button class="tablink" onclick="openPage('QnA', this, 'black')" >1:1 문의</button>
+			<!-- 
 			<button class="tabBtn" id="#btn1" >자주 묻는 질문</button>
 			<button class="tabBtn" id="#btn2" >1:1 문의</button>
+			 -->
 		</div>
 		<div style="clear:both;"></div>
 	    <div id="helpTable" style="width : 950px; height: 750px;">
-	        <div id="table1">
+	    
+	        <div id="FAQ" class="tabcontent">
 	            <table class="col-100 col">
 	                <colgroup>
 	                    <col width="10%">
@@ -134,20 +174,19 @@
 	                    <tr>
 	                        <td>4</td>
 	                        <td>[교환/환불]</td>
-	                        <td>공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+	                        <td>FAQ 어쩌고저쩌고 블라블라 시끌시끌</td>
 	                    </tr>
 	                    <tr>
 							<td>5</td>
 	                        <td>[기타]</td>
-	                        <td>공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+	                        <td>FAQ 어쩌고저쩌고 블라블라 시끌시끌</td>
 	                    </tr>
 	                   
 	                </tbody>
 	            </table>
-	
 	        </div>
 	        
-	        <div id="table2">
+	        <div id="QnA" class="tabcontent">
 	            <table class="col-100 col">
 	                <colgroup>
 	                    <col width="10%">
@@ -241,7 +280,19 @@
 	            </table>
 	
 	        </div>
-	
+			<div id="pages">
+		        <span>
+		        	<button id="askBtn"><a href="/movingcloset/project/question.do" style="text-decoration:none;color:white;">문의하기</a></button>
+		        </span>
+		        <span style="float:right;">
+				    <select name="pageSel" id="pageSel" placeholder="1">
+						<option value="pageNum">1</option>
+				    </select>
+				    <span id="pgTotal">of 1</span>
+				    <button class="pageMove" id="pmL"> < </button>
+				    <button class="pageMove" id="pmR"> > </button>
+				</span>
+			</div>
 
     </div>
 </body>

@@ -48,13 +48,17 @@
             font-size: 12pt;
         }
         
+        #qSel{
+        	width:250px; height:35px;
+        	border:lightgray solid 1px;
+        }
         #qTitle{
         	width:98%; height:35px;
-        	border:none; padding-top:5px;
+        	border:none;
         }
         #qText{
         	width:98%; height:350px;
-        	border:none; padding-top:10px;
+        	border:lightgray solid 1px;
         }
         
         #fileBtn{
@@ -65,13 +69,13 @@
         }
         #fileBtn:focus{outline:none;}
         #info{ color:gray; font-size:11pt;}
-        #modBtn{
+        #sendBtn{
         	width:250px; height:40px;
-        	margin:10px 36% 0 38%;
-        	border:none; background-color:black;
+        	margin:2% 36% 0 38%;
+        	border:none; background-color:darkgray;
         	color:white; font-size:15pt; font-weight:lighter;	
         }
-        #modBtn:focus{outline:none;}
+        #sendBtn:focus{outline:none;}
         select, input, textarea:focus{outline:none;}
     </style>
    
@@ -79,7 +83,7 @@
 <body>
     <div id="whole">
 	    <div style="width : 950px; height: 750px;">
-	    	<span id="title">1:1문의</span>
+	    	<span id="title">1:1문의하기</span>
 	        <div>
 	        	<form action="">
 		            <table class="col-100 col" id="tableFrm">
@@ -90,39 +94,44 @@
 		                    <tr>
 		                        <td>유형</td>
 		                        <td>
-									<div>
-										기타
-									</div>
+			                        <select name="question" id="qSel" placeholder="문의 유형을 선택해주세요.">
+			                        	<option value="order">주문</option>
+	                        			<option value="delivery">배송</option>
+	                        			<option value="refund">교환/환불</option>
+				                        <option value="paty">결제</option>
+				                        <option value="etc">기타</option>
+			                        </select>
 		                        </td>
 		                    </tr>
 		                    <tr>
 								<td>제목</td>
 		                        <td>
-		                        	<div id="qTitle">
-		                        		궁금한게 있어용
-		                        	</div>
-								</td>
+		                        	<input type="text" id="qTitle" /></td>
 		                    </tr>
 		                    <tr>
 		                        <td>내용</td>
 		                        <td>
-		                        	<div id="qText">
-		                        		질문 있어요. <br />
-		                        		이건 어쩌고 저쩌구 하나요? <br />
-		                        		또 저건 왱알왱알 블라블라 할 수 있을까요? <br />
-		                        		노고가 많으십니다. <br />
-		                        		답변 기다릴게용 <br />
-		                        	</div>
+		                        	<textarea name="" id="qText" cols="30" rows="10" placeholder="의견을 입력해주세요.">
+		                        	</textarea>
 		                        </td>
 		                    </tr>
 		  					<tr>
 		                        <td>첨부파일</td>
 		                        <td>
-									<div></div>
+									<button id="fileBtn"/>
+										<span style="color:white; padding:0; margin:0;">
+											+
+										</span>
+									</button>
+									
+									<div id="info">
+										• 용량은 각 20MB 이하, jpg, png, gif 파일만 첨부 가능합니다. <br />
+										• 이미지에 개인정보(주민번호 등)가 포함되지 않도록 주의해주세요.
+									</div>
 		                        </td>
 		                    </tr>
 		            </table>
-					<button id="modBtn">수정하기</button>
+					<button id="sendBtn">보내기</button>
 	        	</form>
 	        </div>
 
