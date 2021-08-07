@@ -97,7 +97,8 @@ textarea::placeholder{
 }
 
 #reviewTOP{
-
+	font-size: 25px; padding: 15px 0px; 
+	margin-left: -20px; margin-right:-20px;
     background-color: #FF6C2F;
     color: white;
     font-weight: bold;
@@ -244,7 +245,7 @@ html {
     
     <div class="container-fluid">
 
-        <div style="font-size: 25px; padding: 15px 0px;" id="reviewTOP">
+        <div id="reviewTOP">
             리뷰쓰기
         </div>
         
@@ -331,7 +332,7 @@ html {
                   <label for="radio-6"></label>
                   <span>아주편해요</span> 
                 </div>
-              
+            </div>  
         </div>  
         <br>
         <hr>
@@ -357,7 +358,7 @@ html {
                   <label for="radio-9"></label>
                   <span>한 치수 크게요</span> 
                 </div>
-              
+            </div>  
         </div>
         <br>  
         <hr>
@@ -383,6 +384,7 @@ html {
                   <label for="radio-12"></label>
                   <span>아주깔끔해요</span> 
                 </div>
+            </div>    
         </div>    
         <br>
         <hr>

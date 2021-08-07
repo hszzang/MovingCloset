@@ -46,8 +46,6 @@ public class HomeController {
 		return "body/search";
 	}
 	
-
-	
 	
 	//뉴디
 	@RequestMapping(value="/project/newD.do", method=RequestMethod.GET)

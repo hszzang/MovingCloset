@@ -34,7 +34,7 @@
 		$('#btnReview').click(function(){
 
 			var child;
-			child = window.open("./reviewPage.do", "reviewpopup", "height:500px, width:300px");
+			child = window.open("./reviewPage.do", "reviewpopup", "height:500px, width:250px");
 		});
 
 	});
@@ -52,7 +52,7 @@
 	}
 	#btnBuy, #basket, #wish{
 		padding: 5%;
-		border-radius: 50px;
+		border-radius: 8px;
 		background-color: black;
 		color: white;
 		font-size: 1.2em;
@@ -73,7 +73,7 @@
 	
 	#btnReview{
 		padding: 15px 30px;
-		border-radius: 50px;
+		border-radius: 8px;
 		background-color: black;
 		color: white;
 		width:auto;
@@ -302,7 +302,7 @@
 					<button id="btnBuy" style="width: 90%;"><a href="#" style="color: white;">구매하기</a> </button>
 				</div><br> 
 				<div>
-					<span><button style="width: 45%;" id="basket"><a href="#">장바구니<i class="fas fa-shopping-cart"></i></a></button></span>
+					<span><button style="width: 45%;" id="basket"><a href="#">장바구니<i class="fas fa-shopping-cart" style="color:black"></i></a></button></span>
 					<span><button style="width: 45%;" id="wish" onclick="location.href='#';">위시리스트 <i class="fa fa-heart" style="color: red;"></i></button></span>
 				</div>
 			</div>
