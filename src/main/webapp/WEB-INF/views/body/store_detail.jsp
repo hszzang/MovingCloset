@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script>
@@ -29,49 +30,24 @@
 		
 	}
 
-	/* 
-	팝업창에서 별점 매길때 쓸 함수
-	function fillstar(id){
+	$(function(){
+		$('#btnReview').click(function(){
 
-		var s1 = document.getElementById("star1");
-		var s2 = document.getElementById("star2");
-		var s3 = document.getElementById("star3");
-		var s4 = document.getElementById("star4");
-		var s5 = document.getElementById("star5");
+			var child;
+			child = window.open("./reviewPage.do", "reviewpopup", "height:500px, width:300px");
+		});
 
-		if(id=="star1"){
-			if(s1.className=="fa fa-star-o"){
-				s1.className = "fa fa-star";
-			}else{
-				s1.className = "fa fa-star-o";
-			}
-		}else if(id=="star2"){
-			s1.className = "fa fa-star";
-			s2.className = "fa fa-star";
-		}else if(id=="star3"){
-			s1.className = "fa fa-star";
-			s2.className = "fa fa-star";
-			s3.className = "fa fa-star";
-		}else if(id=="star4"){
-			s1.className = "fa fa-star";
-			s2.className = "fa fa-star";
-			s3.className = "fa fa-star";
-			s4.className = "fa fa-star";
-		}else if(id=="star5"){
-			s1.className = "fa fa-star";
-			s2.className = "fa fa-star";
-			s3.className = "fa fa-star";
-			s4.className = "fa fa-star";
-			s5.className = "fa fa-star";
-		}
+	});
 
 
-	} */
-
+	
 </script>
+
+	
+
 <style>
 	#img{
-		"max-width:100%; height:auto;"
+		max-width:100%; height:auto;
 
 	}
 	#btnBuy, #basket, #wish{
@@ -82,10 +58,10 @@
 		font-size: 1.2em;
 		font-weight: bold;
 		border: solid 1px;
+		outline: 0;
 	}
-	#btnBuy:hover {background-color: gray;}
-	#basket:hover {background-color: lightgray;}
-	#wish:hover {background-color: lightgray;}
+	#btnBuy:hover,#btnReview:hover  {background-color: gray;}
+	#basket:hover, #wish:hover {background-color: lightgray;}
 	
 	#basket, #wish{
 		background-color: white;
@@ -96,11 +72,13 @@
 	
 	
 	#btnReview{
-		padding: 10px;
-		border-radius: 8px;
+		padding: 15px 30px;
+		border-radius: 50px;
 		background-color: black;
 		color: white;
 		width:auto;
+		outline: 0;
+		
 
 	}
 	#brandName ,#prodName ,#shoes ,#prodCount ,#price {
@@ -116,9 +94,119 @@
 		display: inline;
 	}
 	
-
+	
 </style>
+<style>
+	body {font-family: Arial, Helvetica, sans-serif;}
+	
+	#myImg {
+	  border-radius: 5px;
+	  cursor: pointer;
+	  transition: 0.3s;
+	}
+	
+	#myImg:hover {opacity: 0.7;}
+	
+	/* The Modal (background) */
+	.modal {
+	  display: none; /* Hidden by default */
+	  position: fixed; /* Stay in place */
+	  z-index: 1; /* Sit on top */
+	  padding-top: 100px; /* Location of the box */
+	  left: 0;
+	  top: 0;
+	  width: 100%; /* Full width */
+	  height: 100%; /* Full height */
+	  overflow: auto; /* Enable scroll if needed */
+	  background-color: rgb(0,0,0); /* Fallback color */
+	  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+	}
+	
+	/* Modal Content (image) */
+	.modal-content {
+	  margin: auto;
+	  display: block;
+	  width: 80%;
+	  max-width: 700px;
+	}
+	
+	/* Caption of Modal Image */
+	#caption {
+	  margin: auto;
+	  display: block;
+	  width: 80%;
+	  max-width: 700px;
+	  text-align: center;
+	  color: #ccc;
+	  padding: 10px 0;
+	  height: 150px;
+	}
+	
+	/* 애니메이션 효과 있는 부분 주석처리함 */
+	/* Add Animation */
+	/* .modal-content, #caption {  
+	  -webkit-animation-name: zoom;
+	  -webkit-animation-duration: 0.6s;
+	  animation-name: zoom;
+	  animation-duration: 0.6s;
+	} */
+	
+	@-webkit-keyframes zoom {
+	  from {-webkit-transform:scale(0)} 
+	  to {-webkit-transform:scale(1)}
+	}
+	
+	@keyframes zoom {
+	  from {transform:scale(0)} 
+	  to {transform:scale(1)}
+	}
+	
+	/* The Close Button */
+	.close {
+	  position: absolute;
+	  top: 100px;
+	  right: 300px;
+	  color: #f1f1f1;
+	  font-size: 40px;
+	  font-weight: bold;
+	  transition: 0.3s;
+	  
+	}
+	
+	.close:hover,
+	.close:focus {
+	  color: #bbb;
+	  text-decoration: none;
+	  cursor: pointer;
+	}
+	
+	/* 100% Image Width on Smaller Screens */
+	@media only screen and (max-width: 700px){
+	  .modal-content {
+		width: 100%;
+	  }
+	}
 
+	.modaltext{
+		color: white;
+		word-spacing: 20px;
+		
+	}
+
+	a{
+		color:black; text-decoration: none;
+		
+	}
+	a:hover{
+		text-decoration: none;
+		color:black;
+	}
+	
+	button a, button a:hover{
+		color: black; text-decoration:none;
+	}
+	
+	</style>
 <!-- 
 브랜드명
 상품명 가격
@@ -192,11 +280,11 @@
 
 				<br>
 				<div>
-					<button id="btnBuy" style="width: 90%;">구매하기</button>
-				</div><br>
+					<button id="btnBuy" style="width: 90%;"><a href="#" style="color: white;">구매하기</a> </button>
+				</div><br> 
 				<div>
-					<span><button style="width: 45%;" id="basket">장바구니</button></span>
-					<span><button style="width: 45%;" id="wish">위시리스트 <i class="fa fa-heart" style="color: red;"></i></button></span>
+					<span><button style="width: 45%;" id="basket"><a href="#">장바구니<i class="fas fa-shopping-cart"></i></a></button></span>
+					<span><button style="width: 45%;" id="wish" onclick="location.href='#';">위시리스트 <i class="fa fa-heart" style="color: red;"></i></button></span>
 				</div>
 			</div>
 			
@@ -205,14 +293,14 @@
 	<hr>
 
 	<div class="container">
-		<h2>평균 평점 : <span>99.99</span></h2>
-		<div class="row" style="padding: 2%;">
-			<div class="d-flex mr-auto">
-				<input type="checkbox" name="photocheck" id="photocheck" value="photocheck">
-					<label for="photocheck">포토리뷰</label>
+		<h2>평균 평점 : <span>5.0</span></h2>
+		<div class="row" style="padding: 4%;">
+			<div class="d-flex mr-auto" >
+				<input type="checkbox" name="photocheck" id="photocheck" value="photocheck" class="form-check-input" style="zoom: 1.5;">
+					<label for="photocheck" style="font-size: 24px;">포토리뷰</label>
 			</div>
 			<div class="d-flex ml-auto">
-				<button id="btnReview">리뷰 쓰기</button>
+				<button id="btnReview" >리뷰 쓰기</button>
 			</div>
 		</div>
 
@@ -220,11 +308,11 @@
 			<thead>
 			<tr>
 				<th style="width: 15%;">평점
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
 				</th>
 				<th style="width: 40%;">한줄평</th>
 				<th style="width: 20%;">작성일</th>
@@ -244,10 +332,8 @@
 				<td style="text-align: left;">신발이 예뻐요!</td>
 				<td>2021-07-31</td>
 				<td>
-				<a href="">
-					<img src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
+					<img id="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
 					style="width: 100px; height: auto;"/>
-				</a>
 				</td>
 			</tr>
 			<tr >
@@ -262,10 +348,8 @@
 				<td style="text-align: left;">신발이 예뻐요!</td>
 				<td>2021-07-31</td>
 				<td>
-				<a href="">
-					<img src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
+					<img id="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
 					style="width: 100px; height: auto;"/>
-				</a>
 				</td>
 			</tr>
 			<tr >
@@ -280,10 +364,8 @@
 				<td style="text-align: left;">신발이 예뻐요!</td>
 				<td>2021-07-31</td>
 				<td>
-				<a href="">
-					<img src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
+					<img id="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
 					style="width: 100px; height: auto;"/>
-				</a>
 				</td>
 			</tr>
 			<tr >
@@ -298,10 +380,8 @@
 				<td style="text-align: left;">신발이 예뻐요!</td>
 				<td>2021-07-31</td>
 				<td>
-				<a href="">
-					<img src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
+					<img id="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
 					style="width: 100px; height: auto;"/>
-				</a>
 				</td>
 			</tr>
 			<tr >
@@ -316,10 +396,8 @@
 				<td style="text-align: left;">신발이 예뻐요!</td>
 				<td>2021-07-31</td>
 				<td>
-				<a href="">
-					<img src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
+					<img id="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
 					style="width: 100px; height: auto;"/>
-				</a>
 				</td>
 			</tr>
 
@@ -335,9 +413,45 @@
 		</div>
 		</div>
 
+	<!-- The Modal -->
+	<div id="myModal" class="modal">
+		<span class="close">&times;</span>
+		<img class="modal-content" id="img01" />
+		<div class="modaltext" style="text-align: center;">
+			<br>
+			<!-- 키, 몸무게, 발사이즈 -->
+			<span>키</span>
+			<span>몸무게</span>
+			<span>발사이즈</span>
+			<br><br>
+			<!-- 해시태그 부분 -->
+			<span>#정사이즈</span>
+			<span>#흰색</span>
+			<span>#예뻐요</span> 
+		</div>
+	</div>
 
-	
+	<script>
+		// Get the modal
+		var modal = document.getElementById("myModal");
+		
+		// Get the image and insert it inside the modal - use its "alt" text as a caption
+		var img = document.getElementById("myImg");
 
+		var modalImg = document.getElementById("img01");
+		img.onclick = function(){
+		  modal.style.display = "block";
+		  modalImg.src = this.src;;
+		}
+		
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("close")[0];
+		
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function() { 
+		  modal.style.display = "none";
+		}
+	</script>
 
 </body>
 </html>
