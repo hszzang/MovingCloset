@@ -14,14 +14,14 @@ public class MoyoController {
 	@RequestMapping(value="/project/moyo.do", method=RequestMethod.GET)
 	public String moyo() {
 		
-		return "body/moyo";
+		return "body/moyo/moyo";
 	}
 		
 	// 모여신청폼
 	@RequestMapping(value="/project/moyoForm.do", method=RequestMethod.GET)
 	public String moyoForm() {
 		
-		return "body/moyoForm";
+		return "body/moyo/moyoForm";
 	}
 	
 	
