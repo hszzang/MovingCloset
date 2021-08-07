@@ -20,7 +20,7 @@
 	    #rightNav{ margin:20px 0 0 50%; }
 	      
 	    #megaMenu{
-	        width:100%; height:12%; display:none;
+	        width:100%; height:12%; display:none;																																																																																					
 	        background-color: #212529; color:whitesmoke;
 	        padding:55px 20% 0 20%;
 	    }
