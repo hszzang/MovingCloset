@@ -14,22 +14,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
     <script type="text/javascript">
-    /*
-        window.onload = function() {
-            $("#table1").show();
-            $("#table2").hide();
-        }
-        $(document).ready(function() {
-            $("#btn1").click(function() {
-                $("#table1").show();
-                $("#table2").hide();
-            })
-            $("#btn2").click(function() {
-                $("#table1").hide();
-                $("#table2").show();
-            })
-        })
-    */
 		window.onload = function() {
 	        $("Notice").show();
 	        $("Events").hide();
@@ -53,37 +37,39 @@
 	</script>
 	
     <style>
-        #noticeWrap{
-        	width:1000px; height:900px;
-        	border: solid black 1px;
-        	margin: 100px 20% 200px 20%;
-        	padding: 30px 20px 0 20px;
+        #wrapper{
+        	width:70%; height:auto;
+        	border: none;
+        	margin: 100px 15% 200px 15%;
+        	padding: 0;
         }
-        * {
-            box-sizing: border-box;
+        #title{font-size:3em; color:black; font-weight:bold;
+        	margin-left:10px;
         }
+        #workD{
+        	font-size:1em; color:gray; 
+        	margin-left:10px;
+        }
+        #workTime{
+        	font-size:1em; color:gray; 
+        	margin-left:15px;
+        }
+        
+        * { box-sizing: border-box; }
+        .col { border-collapse: collapse; }
+        .col-100 { width: 100%; }
         
         a:link{ color:black; text-decoration:none; }
         a:hover{ color:black; text-decoration:none; !important}
         a:focus{ color:black; text-decoration:none; }
         
-        #noticetable{
-        	margin: 0;
-        }
-        body{
-            margin-top: 0; margin-left: 0;
-        }
-        .col {
-            border-collapse: collapse;
-        }
-
         .tablink {
             background-color: white;
             padding: 8px 30px !important;
-            width: 200px;
+            width: 33.3%;
             font-size: 14px;
             color: gray;
-            border: 1px solid gray;
+            border: 1px solid gray; border-bottom:none;
             float: left;
         }
 		.tablink:focus{outline:none;}
@@ -91,16 +77,15 @@
         	border:black; 
             background-color: black; color:white;
         }
-        .col-100 {
-            width: 100%;
-        }
         
 		#Events{ display:none; }
+		#FAQ{display:none;}
         table {
+        	border-bottom:black solid 1px;
+        	width:100%;
             text-align: center;
             font-size: 14px;
-			
-        }
+		}
         th {
         	color:black;
             background-color:none;
@@ -116,9 +101,10 @@
             height:40px;
             font-size: 10pt;
         }
+        
         #pages{
         	text-align:right;
-			margin:1% 2% 0 0;
+			margin:0 5% 0 0;
         }
         #pageSel{
         	width:80px; height:40px;
@@ -141,208 +127,261 @@
     </style>
 </head>
 <body>
-    <div id="noticeWrap">
-		<div class="tabs">
-			<button class="tablink" onclick="openPage('Notice', this, 'black')" id="defaultOpen">공지사항</button>
-			<button class="tablink" onclick="openPage('Events', this, 'black')" >이벤트 당첨 안내</button>
-		<!-- 
-			<button class="tabBtn" id="#btn1" >공지사항</button>
-			<button class="tabBtn" id="#btn2" >이벤트 당첨 안내</button>
-		-->	
-		</div>
-		<div style="clear:both;"></div>
-	    <div id="noticeTable" style="width:950px; height:auto;">
-	    
-	    	<div id="Notice" class="tabcontent">
-			    <table class="col-100 col">
-			        <colgroup>
-			            <col width="15%">
-			            <col width="70%" >
-			            <col width="15%">
-			        </colgroup>
-			        <thead>
-			            <tr>
-			                <th>번호</th>
-			                <th style="text-align:left;">제목</th>
-			                <th>등록일</th>
-			            </tr>
-			        </thead>
-			        <tbody>
-			            <tr>
-			                <td>1</td>
-			                <td style="text-align:left;">
-			                    <a href="/movingcloset/project/noticedetail.do" style="text-decoration:none;color:black;">
-			                        공지사항 어쩌고저쩌고 블라블라 시끌시끌</a></td>
-			                <td>2021.08.01</td>
-			            </tr>
-			            <tr>
-			                <td>2</td>
-			                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
-			                <td>2021.08.01</td>
-			            </tr>
-			            <tr>
-			                <td>3</td>
-			                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
-			                <td>2021.08.01</td>
-			            </tr>
-			            <tr>
-			                <td>4</td>
-			                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
-			                <td>2021.08.01</td>
-			            </tr>
-			            <tr>
-			                <td>5</td>
-			                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
-			                <td>2021.08.01</td>
-			            </tr>
-			            <tr>
-			                <td>6</td>
-			                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
-			                <td>2021.08.01</td>
-			            </tr>
-			            <tr>
-			                <td>7</td>
-			                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
-			                <td>2021.08.01</td>
-			            </tr>
-			            <tr>
-			                <td>8</td>
-			                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
-			                <td>2021.08.01</td>
-			            </tr>
-			            <tr>
-			                <td>9</td>
-			                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
-			                <td>2021.08.01</td>
-			            </tr>
-			            <tr>
-			                <td>10</td>
-			                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
-			                <td>2021.08.01</td>
-			            </tr>
-			            <tr>
-			                <td>11</td>
-			                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
-			                <td>2021.08.01</td>
-			            </tr>
-			            <tr>
-			                <td>12</td>
-			                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
-			                <td>2021.08.01</td>
-			            </tr>
-			            <tr>
-			                <td>13</td>
-			                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
-			                <td>2021.08.01</td>
-			            </tr>
-			            <tr>
-			                <td>14</td>
-			                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
-			                <td>2021.08.01</td>
-			            </tr>
-			            <tr>
-			                <td>15</td>
-			                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
-			                <td>2021.08.01</td>
-			            </tr>
-			        </tbody>
-			    </table>
-			</div>
+    <div id="wrapper">
 
-			<div id="Events" class="tabcontent">
-			    <table class="col-100 col">
-			        <colgroup>
-			            <col width="15%">
-			            <col width="70%">
-			            <col width="15%">
-			        </colgroup>
-			        <thead>
-			            <tr>
-			                <th>번호</th>
-			                <th style="text-align:left;">제목</th>
-			                <th>등록일</th>
-			            </tr>
-			        </thead>
-			        <tbody>
-			            <tr>
-			                <td>1</td>
-			                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
-			                <td>2021.08.01</td>
-			            </tr>
-			            <tr>
-			                <td>2</td>
-			                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
-			                <td>2021.08.01</td>
-			            </tr>
-			            <tr>
-			                <td>3</td>
-			                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
-			                <td>2021.08.01</td>
-			            </tr>
-			            <tr>
-			                <td>4</td>
-			                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
-			                <td>2021.08.01</td>
-			            </tr>
-			            <tr>
-			                <td>5</td>
-			                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
-			                <td>2021.08.01</td>
-			            </tr>
-			            <tr>
-			                <td>6</td>
-			                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
-			                <td>2021.08.01</td>
-			            </tr>
-			            <tr>
-			                <td>7</td>
-			                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
-			                <td>2021.08.01</td>
-			            </tr>
-			            <tr>
-			                <td>8</td>
-			                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
-			                <td>2021.08.01</td>
-			            </tr>
-			            <tr>
-			                <td>9</td>
-			                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
-			                <td>2021.08.01</td>
-			            </tr>
-			            <tr>
-			                <td>10</td>
-			                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
-			                <td>2021.08.01</td>
-			            </tr>
-			            <tr>
-			                <td>11</td>
-			                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
-			                <td>2021.08.01</td>
-			            </tr>
-			            <tr>
-			                <td>12</td>
-			                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
-			                <td>2021.08.01</td>
-			            </tr>
-			            <tr>
-			                <td>13</td>
-			                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
-			                <td>2021.08.01</td>
-			            </tr>
-			            <tr>
-			                <td>14</td>
-			                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
-			                <td>2021.08.01</td>
-			            </tr>
-			            <tr>
-			                <td>15</td>
-			                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
-			                <td>2021.08.01</td>
-			            </tr>
-			        </tbody>
-			    </table>
+    		<hr />
+    		<div id="titleDiv">
+    			<span id="title">CS Center</span>
+    			<span id="workTime">Mon - FRI / 9AM - 6PM</span>
+    		</div>
+
+			<div class="tabs">
+				<button class="tablink" onclick="openPage('Notice', this, 'black')" id="defaultOpen">공지사항</button>
+				<button class="tablink" onclick="openPage('Events', this, 'black')" >이벤트 당첨 안내</button>
+				<button class="tablink" onclick="openPage('FAQ', this, 'black')" >자주 묻는 질문</button>
+
 			</div>
+			<div style="clear:both;"></div>
+		    <div id="noticeTable" style="width:100%; height:auto;">
+		    
+		    	<div id="Notice" class="tabcontent">
+				    <table class="col-100 col">
+				        <colgroup>
+				            <col width="15%">
+				            <col width="70%" >
+				            <col width="15%">
+				        </colgroup>
+				        <thead>
+				            <tr>
+				                <th>번호</th>
+				                <th style="text-align:left;">제목</th>
+				                <th>등록일</th>
+				            </tr>
+				        </thead>
+				        <tbody>
+				            <tr>
+				                <td>1</td>
+				                <td style="text-align:left;">
+				                    <a href="/movingcloset/project/noticedetail.do" style="text-decoration:none;color:black;">
+				                        공지사항 어쩌고저쩌고 블라블라 시끌시끌</a></td>
+				                <td>2021.08.01</td>
+				            </tr>
+				            <tr>
+				                <td>2</td>
+				                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+				                <td>2021.08.01</td>
+				            </tr>
+				            <tr>
+				                <td>3</td>
+				                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+				                <td>2021.08.01</td>
+				            </tr>
+				            <tr>
+				                <td>4</td>
+				                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+				                <td>2021.08.01</td>
+				            </tr>
+				            <tr>
+				                <td>5</td>
+				                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+				                <td>2021.08.01</td>
+				            </tr>
+				            <tr>
+				                <td>6</td>
+				                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+				                <td>2021.08.01</td>
+				            </tr>
+				            <tr>
+				                <td>7</td>
+				                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+				                <td>2021.08.01</td>
+				            </tr>
+				            <tr>
+				                <td>8</td>
+				                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+				                <td>2021.08.01</td>
+				            </tr>
+				            <tr>
+				                <td>9</td>
+				                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+				                <td>2021.08.01</td>
+				            </tr>
+				            <tr>
+				                <td>10</td>
+				                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+				                <td>2021.08.01</td>
+				            </tr>
+				            <tr>
+				                <td>11</td>
+				                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+				                <td>2021.08.01</td>
+				            </tr>
+				            <tr>
+				                <td>12</td>
+				                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+				                <td>2021.08.01</td>
+				            </tr>
+				            <tr>
+				                <td>13</td>
+				                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+				                <td>2021.08.01</td>
+				            </tr>
+				            <tr>
+				                <td>14</td>
+				                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+				                <td>2021.08.01</td>
+				            </tr>
+				            <tr>
+				                <td>15</td>
+				                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
+				                <td>2021.08.01</td>
+				            </tr>
+				        </tbody>
+				    </table>
+				</div>
+	
+				<div id="Events" class="tabcontent">
+				    <table class="col-100 col">
+				        <colgroup>
+				            <col width="15%">
+				            <col width="70%">
+				            <col width="15%">
+				        </colgroup>
+				        <thead>
+				            <tr>
+				                <th>번호</th>
+				                <th style="text-align:left;">제목</th>
+				                <th>등록일</th>
+				            </tr>
+				        </thead>
+				        <tbody>
+				            <tr>
+				                <td>1</td>
+				                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
+				                <td>2021.08.01</td>
+				            </tr>
+				            <tr>
+				                <td>2</td>
+				                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
+				                <td>2021.08.01</td>
+				            </tr>
+				            <tr>
+				                <td>3</td>
+				                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
+				                <td>2021.08.01</td>
+				            </tr>
+				            <tr>
+				                <td>4</td>
+				                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
+				                <td>2021.08.01</td>
+				            </tr>
+				            <tr>
+				                <td>5</td>
+				                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
+				                <td>2021.08.01</td>
+				            </tr>
+				            <tr>
+				                <td>6</td>
+				                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
+				                <td>2021.08.01</td>
+				            </tr>
+				            <tr>
+				                <td>7</td>
+				                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
+				                <td>2021.08.01</td>
+				            </tr>
+				            <tr>
+				                <td>8</td>
+				                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
+				                <td>2021.08.01</td>
+				            </tr>
+				            <tr>
+				                <td>9</td>
+				                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
+				                <td>2021.08.01</td>
+				            </tr>
+				            <tr>
+				                <td>10</td>
+				                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
+				                <td>2021.08.01</td>
+				            </tr>
+				            <tr>
+				                <td>11</td>
+				                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
+				                <td>2021.08.01</td>
+				            </tr>
+				            <tr>
+				                <td>12</td>
+				                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
+				                <td>2021.08.01</td>
+				            </tr>
+				            <tr>
+				                <td>13</td>
+				                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
+				                <td>2021.08.01</td>
+				            </tr>
+				            <tr>
+				                <td>14</td>
+				                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
+				                <td>2021.08.01</td>
+				            </tr>
+				            <tr>
+				                <td>15</td>
+				                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
+				                <td>2021.08.01</td>
+				            </tr>
+				        </tbody>
+				    </table>
+				</div>
+	        	
+	        	<div id="FAQ" class="tabcontent">
+	            <table class="col-100 col">
+	                <colgroup>
+	                    <col width="10%">
+	                    <col width="15%">
+	                    <col width="75%">
+	                </colgroup>
+	                <thead>
+	                    <tr>
+	                        <th>번호</th>
+	                        <th>분류</th>
+	                        <th>제목</th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                    <tr>
+	                        <td>1</td>
+	                        <td>[주문]</td>
+	                        <td> FAQ 어쩌고저쩌고 블라블라 시끌시끌</td>
+	                    </tr>
+	                    <tr>
+							<td>2</td>
+	                        <td>[배송]</td>
+	                        <td> FAQ 어쩌고저쩌고 블라블라 시끌시끌</td>
+	                    </tr>
+	                    <tr>
+	                        <td>3</td>
+	                        <td>[결제]</td>
+	                        <td> FAQ 어쩌고저쩌고 블라블라 시끌시끌</td>
+	                    </tr>
+	                    <tr>
+	                        <td>4</td>
+	                        <td>[교환/환불]</td>
+	                        <td>FAQ 어쩌고저쩌고 블라블라 시끌시끌</td>
+	                    </tr>
+	                    <tr>
+							<td>5</td>
+	                        <td>[기타]</td>
+	                        <td>FAQ 어쩌고저쩌고 블라블라 시끌시끌</td>
+	                    </tr>
+	                   
+	                </tbody>
+	            </table>
 	        </div>
+	        	
+	        	
+    	</div>
+    		<br />
 			<div id="pages">
 			    <select name="pageSel" id="pageSel" placeholder="1">
 					<option value="pageNum">1</option>
