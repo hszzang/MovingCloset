@@ -13,50 +13,27 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
-    <script type="text/javascript">
-	    window.onload = function() {
-	        $("FAQ").show();
-	        $("QnA").hide();
-	    }
-		function openPage(pageName,elmnt,color) {
-		  var i, tabcontent, tablinks;
-		  tabcontent = document.getElementsByClassName("tabcontent");
-		  for (i = 0; i < tabcontent.length; i++) {
-		    tabcontent[i].style.display = "none";
-		  }
-		  tablinks = document.getElementsByClassName("tablink");
-		  for (i = 0; i < tablinks.length; i++) {
-		    tablinks[i].style.backgroundColor = "";
-		  }
-		  document.getElementById(pageName).style.display = "block";
-		  elmnt.style.backgroundColor = color;
-		  elmnt.style.color= white;
-		}
-		// Get the element with id="defaultOpen" and click on it
-		document.getElementById("defaultOpen").click();
-    </script>
-    
     <style>
-        #help{
-        	width:1000px; height:800px;
-        	border: solid black 1px;
-        	margin: 100px 20% 200px 20%;
-        	padding: 30px 0 0 20px;
+        #wrapper{
+        	width:60%; height:auto;
+        	border: none;
+        	margin: 5% 20% 10% 20%;
+        	padding: 0 10% 5% 10%;
         }
-        * {
-            box-sizing: border-box;
+        #title{font-size:3em; color:black; font-weight:bold;
+        	margin-left:10px;
         }
-        #helptable{
-        	margin: 0;
+        #workD{
+        	font-size:1em; color:gray; 
+        	margin-left:10px;
         }
-        #QnA{ display:none; }
-        body{
-            margin-top: 0;
-            margin-left: 0;
+        #workTime{
+        	font-size:1em; color:gray; 
+        	margin-left:15px;
         }
-        .col {
-            border-collapse: collapse;
-        }
+        
+        * { box-sizing: border-box; }
+        .col { border-collapse: collapse; }
 
         .tablink {
             background-color: white;
@@ -73,11 +50,10 @@
         	color:white;
             background-color: black;
         }
-        .col-100 {
-            width: 100%;
-        }
+        .col-100 { width: 100%;}
 
         table {
+        	width:100%; height:auto;
             text-align: center;
             font-size: 14px;
         }
@@ -129,62 +105,15 @@
    
 </head>
 <body>
-    <div id="help">
-		<div class="tabs">
-			<button class="tablink" onclick="openPage('FAQ', this, 'black')" id="defaultOpen">자주 묻는 질문</button>
-			<button class="tablink" onclick="openPage('QnA', this, 'black')" >1:1 문의</button>
-			<!-- 
-			<button class="tabBtn" id="#btn1" >자주 묻는 질문</button>
-			<button class="tabBtn" id="#btn2" >1:1 문의</button>
-			 -->
-		</div>
+    <div id="wrapper">
+    	<hr />
+    	<div id="titleDiv">
+    		<span id="title">1:1 문의하기</span>
+    		<span id="workTime">Mon - FRI / 9AM - 6PM</span>
+    	</div>
+    
 		<div style="clear:both;"></div>
-	    <div id="helpTable" style="width : 950px; height: 750px;">
-	    
-	        <div id="FAQ" class="tabcontent">
-	            <table class="col-100 col">
-	                <colgroup>
-	                    <col width="10%">
-	                    <col width="15%">
-	                    <col width="75%">
-	                </colgroup>
-	                <thead>
-	                    <tr>
-	                        <th>번호</th>
-	                        <th>분류</th>
-	                        <th>제목</th>
-	                    </tr>
-	                </thead>
-	                <tbody>
-	                    <tr>
-	                        <td>1</td>
-	                        <td>[주문]</td>
-	                        <td> FAQ 어쩌고저쩌고 블라블라 시끌시끌</td>
-	                    </tr>
-	                    <tr>
-							<td>2</td>
-	                        <td>[배송]</td>
-	                        <td> FAQ 어쩌고저쩌고 블라블라 시끌시끌</td>
-	                    </tr>
-	                    <tr>
-	                        <td>3</td>
-	                        <td>[결제]</td>
-	                        <td> FAQ 어쩌고저쩌고 블라블라 시끌시끌</td>
-	                    </tr>
-	                    <tr>
-	                        <td>4</td>
-	                        <td>[교환/환불]</td>
-	                        <td>FAQ 어쩌고저쩌고 블라블라 시끌시끌</td>
-	                    </tr>
-	                    <tr>
-							<td>5</td>
-	                        <td>[기타]</td>
-	                        <td>FAQ 어쩌고저쩌고 블라블라 시끌시끌</td>
-	                    </tr>
-	                   
-	                </tbody>
-	            </table>
-	        </div>
+	    <div id="helpTable" style="width:100%; height:auto;">
 	        
 	        <div id="QnA" class="tabcontent">
 	            <table class="col-100 col">
