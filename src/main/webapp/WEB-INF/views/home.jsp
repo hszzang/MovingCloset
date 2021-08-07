@@ -21,7 +21,7 @@
       <a href="./project/qnadetail.do">질답상세</a>
       
       <a href="./project/newD.do">뉴디test</a>
-      <a href="./project/login.do">로그인</a>
+      <a href="./project/login.do">로그인</a>      
       
 <!--       <a href="./project/myplease.do">내쪼르기리스트(ver.1)</a> -->
       <a href="./project/myplease2.do">내쪼르기리스트(ver.2)</a>

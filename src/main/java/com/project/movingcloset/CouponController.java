@@ -12,6 +12,6 @@ public class CouponController {
 	@RequestMapping(value="/coupon_main.do", method=RequestMethod.GET)
 	public String coupon_main(Locale locale) {
 		
-		return "body/coupon_main";
+		return "body/eventcoupon/coupon_main";
 	}
 }
