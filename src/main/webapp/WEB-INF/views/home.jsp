@@ -13,6 +13,9 @@
    <li>
       <a href="./store/detail.do">상품 상세페이지</a>
       <a href="./project/test1.do">storelist</a>
+
+      <a href="./project/mypage.do">mypage</a>
+
       <a href="./project/search.do">검색</a>
       <a href="./project/notice.do">공지</a>
       <a href="./project/moyo.do">모여</a>
@@ -31,7 +34,7 @@
    </li>
    
      <li>
-      <a href="./project/list.do">store 확인</a>
+      <a href="./project/list.do">store 확인</a>s
    </li>
 </body>
 </html>
