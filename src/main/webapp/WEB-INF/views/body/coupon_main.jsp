@@ -4,16 +4,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" href="../resources/css/coupon_main.css" />
-<link rel="stylesheet" href="../resources/css/bootstrap.css" />
-<script src="../resources/jquery/jquery-3.6.0.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
 <div class="coupon_wrap">
         <a href="#">
             <div class="coupon_brand">
-                    <img src="../resources/images/coupon_brand/nike.png">
+                <img src="../resources/images/coupon_brand/nike.png">
             </div>
         </a>
         <a href="#">
