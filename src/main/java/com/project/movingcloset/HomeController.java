@@ -36,15 +36,15 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value="/project/test.do", method=RequestMethod.GET)
-	public String boardList(Locale locale, Model model) {
+	@RequestMapping(value="/store/detail.do", method=RequestMethod.GET)
+	public String storedetail(Locale locale, Model model) {
 		
 		return "body/store_detail";
 	}
-	
+
 	@RequestMapping(value="/project/test1.do", method=RequestMethod.GET)
 	public String storeList(Locale locale, Model model) {
-		
+
 		return "body/store_list";
 	}
 	
@@ -55,6 +55,7 @@ public class HomeController {
 		return "body/search";
 	}
 	
+
 	// 공지사항
 	@RequestMapping(value="/project/notice.do", method=RequestMethod.GET)
 	public String noticeList(Locale locale, Model model) {
@@ -87,11 +88,33 @@ public class HomeController {
 		return "body/qna_form";
 	}
 	
+	// 모여
+	@RequestMapping(value="/project/moyo.do", method=RequestMethod.GET)
+	public String moyo() {
+		
+		return "body/moyo";
+	}
+	
+	// 모여신청폼
+	@RequestMapping(value="/project/moyoForm.do", method=RequestMethod.GET)
+	public String moyoForm() {
+		
+		return "body/moyoForm";
+	}
+	
+	
 	//뉴디
 	@RequestMapping(value="/project/newD.do", method=RequestMethod.GET)
 	public String newDmain(Locale locale, Model model) {
 		
 		return "body/newD_main";
+	}
+	
+	//로그인
+	@RequestMapping(value="/project/login.do", method=RequestMethod.GET)
+	public String newDmain() {
+		
+		return "body/login";
 	}
 	
 	// 쪼르기(은서 부분)
@@ -103,6 +126,15 @@ public class HomeController {
 	public String myPlease2(Locale locale, Model model) {
 		return "body/myPlease2";
 	}
+	
+	// 스토어 상세페이지에서 리뷰쓰기 버튼
+	@RequestMapping("/store/reviewPage.do")
+	public String review(Locale locale, Model model) {
+		System.out.println("컨트롤러 들어옴");
+		return "reviewPage";
+	}
+	
+	
 	
 	
 }

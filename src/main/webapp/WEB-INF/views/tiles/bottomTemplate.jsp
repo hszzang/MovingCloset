@@ -31,7 +31,7 @@
 			<a href=""> 위치정보이용약관 </a>&nbsp;&nbsp;|&nbsp;&nbsp;
 			<a href=""> 사업자정보확인 </a>&nbsp;&nbsp;|&nbsp;&nbsp;
 			<a href=""> 인재채용 </a>&nbsp;&nbsp;|&nbsp;&nbsp;
-			<a href=""> 입점문의 </a>&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="https://forms.gle/Xn98gS7ELfe5cMLh9" target="_blank"> 입점신청 </a>&nbsp;&nbsp;|&nbsp;&nbsp;
 	<!-- 		<a href="">자주묻는질문</a>&nbsp;|&nbsp; -->
 			 
 			
