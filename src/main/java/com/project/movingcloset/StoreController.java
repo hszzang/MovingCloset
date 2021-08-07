@@ -16,7 +16,7 @@ public class StoreController {
 		return "body/store/store_detail";
 	}
 	
-	@RequestMapping(value="/project/test1.do", method=RequestMethod.GET)
+	@RequestMapping(value="/movingcloset/store.do", method=RequestMethod.GET)
 	public String storeList(Locale locale, Model model) {
 
 		return "body/store/store_list";
