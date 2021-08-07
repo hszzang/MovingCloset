@@ -13,7 +13,7 @@
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
-	
+	 
 	<!--   
 		Oracle 드라이버의 경우 메이븐 저장소에서 다운로드 할 수 없으므로
 		다른 저장소의 위치를 설정한다. 만약 자동으로 다운로드 되지 않는다면
