@@ -12,6 +12,7 @@
  
    <li>
       <a href="./store/detail.do">상품 상세페이지</a>
+
       <a href="./movingcloset/store.do">storelist</a>
       <a href="./movingcloset/search.do">검색</a>
       <a href="./movingcloset/notice.do">공지</a>
@@ -19,7 +20,9 @@
       <a href="./movingcloset/moyoForm.do">모여신청폼</a>
       <a href="./movingcloset/qnalist.do">FAQ/QnA</a>
       <a href="./movingcloset/qnadetail.do">질답상세</a>
-      
+
+      <a href="./project/mypage.do">mypage</a>
+
       <a href="./movingcloset/newD.do">뉴디test</a>
       <a href="./movingcloset/login.do">로그인</a>      
       
