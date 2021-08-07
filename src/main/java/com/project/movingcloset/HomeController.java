@@ -48,4 +48,10 @@ public class HomeController {
 		return "body/store_list";
 	}
 	
+	@RequestMapping(value="/project/test2.do", method=RequestMethod.GET)
+	public String mypage(Locale locale, Model model) {
+		
+		return "body/mypage_coupon";
+	}
+	
 }
