@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class EventController {
 	
 	
-	@RequestMapping(value="/event_main.do", method=RequestMethod.GET)
+	@RequestMapping(value="/movingcloset/event_main.do", method=RequestMethod.GET)
 	public String event_main() {
 		
 		return "body/eventcoupon/event_main";
