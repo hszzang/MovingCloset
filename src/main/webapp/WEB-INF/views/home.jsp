@@ -9,11 +9,32 @@
 </head>
 <body>
    <h2>메인 페이지입니다.</h2>
-
+ 
    <li>
-      <a href="./project/test.do">footer 확인</a>
+      <a href="./store/detail.do">상품 상세페이지</a>
       <a href="./project/test1.do">storelist</a>
-      <a href="./project/test2.do">mypage</a>
+
+      <a href="./project/mypage.do">mypage</a>
+
+      <a href="./project/search.do">검색</a>
+      <a href="./project/notice.do">공지</a>
+      <a href="./project/moyo.do">모여</a>
+      <a href="./project/moyoForm.do">모여신청폼</a>
+      <a href="./project/qnalist.do">FAQ/QnA</a>
+      <a href="./project/qnadetail.do">질답상세</a>
+      
+      <a href="./project/newD.do">뉴디test</a>
+      <a href="./project/login.do">로그인</a>      
+      
+<!--       <a href="./project/myplease.do">내쪼르기리스트(ver.1)</a> -->
+      <a href="./project/myplease2.do">내쪼르기리스트(ver.2)</a>
+      <a href="./event_main.do">이벤트페이지(메인 ver.1.0)</a>
+      <a href="./coupon_main.do">쿠폰페이지(메인 ver.1.0)</a>
+      
+   </li>
+   
+     <li>
+      <a href="./project/list.do">store 확인</a>s
    </li>
 </body>
 </html>

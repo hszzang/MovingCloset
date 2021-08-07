@@ -14,41 +14,36 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
     <style>
-        .header {
-            background-color: #f1f1f1;
-            padding: 20px;
-            text-align: center;
-        }
-
+    	#wrapper{margin-top:100px; margin-bottom:100px;}
         #list{
-            border:solid white 1px;
+            border:none;
             width:80%; height:auto;
-            margin:0 10% 0 11%;
-            display: inline;
-            float: left;
+            margin:0 5% 0 10%; padding-left:5%;
+            display: inline; float: left;
         }
 
         #filter{
             width:100%; height:50px;
-            border:solid white 1px;
+            border:none;
             padding: 5px 0 0 0;
-            margin:15px 0 25px 0;
+            margin:30px 0 100px 0;
         }
         #filterBtn{
             display:inline;
-            margin-left:38.5%;
+            margin-left:40%;
             font-size:12pt;
         }
         #filterDropdown{
-            margin-left:80%;
+            margin-left:85%;
             display:inline;
         }
         #filterSel{
-            width:150px; height:35px;
+            width:150px; height:50px;
             text-align: center;
-            border: white;
+            border: none;
         }
-
+		#filterSel:focus{outline:none;}
+		
         .products{
             width: 350px; height:450px;
             border:solid white 1px;
@@ -56,7 +51,7 @@
             display:inline-block;
         }
         .img{ width:300px; height:300px; }
-        .brand{ font-size: 10pt; font-weight:bolder;}
+        .brand{ font-size: 10pt; font-color:darkgray; font-weight:bolder;}
         a{ text-decoration: none; color:black;}
         .name{ font-size: 11pt; }
         .origPrice{ 
@@ -71,19 +66,26 @@
         .heart{ font-size:15pt; }
 
         #pages{
-            width:100%; height:50px;
-            border: black 1px;
-            text-align: center;
-            margin: 500px 0 50px 0;
+        	text-align:right;
+			margin: 50px 10% 100px 75%;
+			display:inline-block;
         }
-        .pageNum{
-            color:slategray;
-            font-size:30pt;
+        #pageSel{
+        	width:80px; height:40px;
+        	border:lightgray solid 1px;
+        	text-align:center; font-size:11pt;
         }
-        .pageArrow{
-            color:slategray;
-            font-size:20pt;
+        #pgTotal{
+        	color:gray; font-size: 10pt; 
+        	margin:0 10px 0 10px;
         }
+        .pageMove{
+        	width:40px; height:40px;
+        	border:none; padding:0;
+        	color:white; font-size:10pt; font-weight:bold;}
+        .pageMove:focus{outline:none;}
+        #pmL{background-color:gray;}
+        #pmR{background-color:black;}
 
 
         @media only screen and (max-width:1000px){
@@ -101,11 +103,7 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>임시Header</h1>
-    </div>
-
-    <div>
+    <div id="wrapper">
         <form action="">
             <div id="list">
                 <div id="filter">
@@ -129,8 +127,8 @@
 						
                         <span class="products">
                             <a href="https://www.29cm.co.kr/product/950775"><img class="img" src="../resources/images/list/1.jpg"></a>
-                            <div class="brand"><u><a href="https://www.29cm.co.kr/shop/brand/2178">adidas</a></u></div>
-                            <div class="name"><label for=""></label>오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</div>
+                            <div class="brand">Adidas</div>
+                            <div class="name"><label for="">오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</label></div>
                             <div class="Price">
                                 <span class="origPrice"><strike>119,000</strike></span><br>
                                 <span class="discountedPrice">34% 79,000원</span>
@@ -144,8 +142,8 @@
 
                         <span class="products">
                             <a href="https://www.29cm.co.kr/product/950775"><img class="img" src="../resources/images/list/2.jpg"></a>
-                            <div class="brand"><u><a href="https://www.29cm.co.kr/shop/brand/2178">adidas</a></u></div>
-                            <div class="name"><label for=""></label>오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</div>
+                            <div class="brand">Adidas</div>
+                            <div class="name"><label for="">오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</label></div>
                             <div class="Price">
                                 <span class="origPrice"><strike>119,000</strike></span><br>
                                 <span class="discountedPrice">34% 79,000원</span>
@@ -158,8 +156,8 @@
 
                         <span class="products">
                             <a href="https://www.29cm.co.kr/product/950775"><img class="img" src="../resources/images/list/3.jpg"></a>
-                            <div class="brand"><u><a href="https://www.29cm.co.kr/shop/brand/2178">adidas</a></u></div>
-                            <div class="name"><label for=""></label>오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</div>
+                            <div class="brand">Adidas</div>
+                            <div class="name"><label for="">오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</label></div>
                             <div class="Price">
                                 <span class="origPrice"><strike>119,000</strike></span><br>
                                 <span class="discountedPrice">34% 79,000원</span>
@@ -172,8 +170,8 @@
 
                         <span class="products">
                             <a href="https://www.29cm.co.kr/product/950775"><img class="img" src="../resources/images/list/4.jpg"></a>
-                            <div class="brand"><u><a href="https://www.29cm.co.kr/shop/brand/2178">adidas</a></u></div>
-                            <div class="name"><label for=""></label>오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</div>
+                            <div class="brand">Adidas</div>
+                            <div class="name"><label for="">오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</label></div>
                             <div class="Price">
                                 <span class="origPrice"><strike>119,000</strike></span><br>
                                 <span class="discountedPrice">34% 79,000원</span>
@@ -186,8 +184,8 @@
 
                         <span class="products">
                             <a href="https://www.29cm.co.kr/product/950775"><img class="img" src="../resources/images/list/5.jpg"></a>
-                            <div class="brand"><u><a href="https://www.29cm.co.kr/shop/brand/2178">adidas</a></u></div>
-                            <div class="name"><label for=""></label>오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</div>
+                            <div class="brand">Adidas</div>
+                            <div class="name"><label for="">오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</label></div>
                             <div class="Price">
                                 <span class="origPrice"><strike>119,000</strike></span><br>
                                 <span class="discountedPrice">34% 79,000원</span>
@@ -200,8 +198,8 @@
                         
                         <span class="products">
                             <a href="https://www.29cm.co.kr/product/950775"><img class="img" src="../resources/images/list/6.jpg"></a>
-                            <div class="brand"><u><a href="https://www.29cm.co.kr/shop/brand/2178">adidas</a></u></div>
-                            <div class="name"><label for=""></label>오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</div>
+                            <div class="brand">Adidas</div>
+                            <div class="name"><label for="">오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</label></div>
                             <div class="Price">
                                 <span class="origPrice"><strike>119,000</strike></span><br>
                                 <span class="discountedPrice">34% 79,000원</span>
@@ -214,8 +212,8 @@
 
                         <span class="products">
                             <a href="https://www.29cm.co.kr/product/950775"><img class="img" src="../resources/images/list/7.jpg"></a>
-                            <div class="brand"><u><a href="https://www.29cm.co.kr/shop/brand/2178">adidas</a></u></div>
-                            <div class="name"><label for=""></label>오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</div>
+                            <div class="brand">Adidas</div>
+                            <div class="name"><label for="">오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</label></div>
                             <div class="Price">
                                 <span class="origPrice"><strike>119,000</strike></span><br>
                                 <span class="discountedPrice">34% 79,000원</span>
@@ -228,8 +226,8 @@
 
                         <span class="products">
                             <a href="https://www.29cm.co.kr/product/950775"><img class="img" src="../resources/images/list/8.jpg"></a>
-                            <div class="brand"><u><a href="https://www.29cm.co.kr/shop/brand/2178">adidas</a></u></div>
-                            <div class="name"><label for=""></label>오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</div>
+                            <div class="brand">Adidas</div>
+                            <div class="name"><label for="">오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</label></div>
                             <div class="Price">
                                 <span class="origPrice"><strike>119,000</strike></span><br>
                                 <span class="discountedPrice">34% 79,000원</span>
@@ -242,8 +240,8 @@
 
                         <span class="products">
                             <a href="https://www.29cm.co.kr/product/950775"><img class="img" src="../resources/images/list/9.jpg"></a>
-                            <div class="brand"><u><a href="https://www.29cm.co.kr/shop/brand/2178">adidas</a></u></div>
-                            <div class="name"><label for=""></label>오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</div>
+                            <div class="brand">Adidas</div>
+                            <div class="name"><label for="">오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</label></div>
                             <div class="Price">
                                 <span class="origPrice"><strike>119,000</strike></span><br>
                                 <span class="discountedPrice">34% 79,000원</span>
@@ -256,8 +254,8 @@
 
                         <span class="products">
                             <a href="https://www.29cm.co.kr/product/950775"><img class="img" src="../resources/images/list/10.jpg"></a>
-                            <div class="brand"><u><a href="https://www.29cm.co.kr/shop/brand/2178">adidas</a></u></div>
-                            <div class="name"><label for=""></label>오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</div>
+                            <div class="brand">Adidas</div>
+                            <div class="name"><label for="">오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</label></div>
                             <div class="Price">
                                 <span class="origPrice"><strike>119,000</strike></span><br>
                                 <span class="discountedPrice">34% 79,000원</span>
@@ -270,8 +268,8 @@
 
                         <span class="products">
                             <a href="https://www.29cm.co.kr/product/950775"><img class="img" src="../resources/images/list/11.jpg"></a>
-                            <div class="brand"><u><a href="https://www.29cm.co.kr/shop/brand/2178">adidas</a></u></div>
-                            <div class="name"><label for=""></label>오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</div>
+                            <div class="brand">Adidas</div>
+                            <div class="name"><label for="">오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</label></div>
                             <div class="Price">
                                 <span class="origPrice"><strike>119,000</strike></span><br>
                                 <span class="discountedPrice">34% 79,000원</span>
@@ -284,8 +282,8 @@
 
                         <span class="products">
                             <a href="https://www.29cm.co.kr/product/950775"><img class="img" src="../resources/images/list/12.jpg"></a>
-                            <div class="brand"><u><a href="https://www.29cm.co.kr/shop/brand/2178">adidas</a></u></div>
-                            <div class="name"><label for=""></label>오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</div>
+                            <div class="brand">Adidas</div>
+                            <div class="name"><label for="">오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</label></div>
                             <div class="Price">
                                 <span class="origPrice"><strike>119,000</strike></span><br>
                                 <span class="discountedPrice">34% 79,000원</span>
@@ -298,8 +296,8 @@
 
                         <span class="products">
                             <a href="https://www.29cm.co.kr/product/950775"><img class="img" src="../resources/images/list/13.jpg"></a>
-                            <div class="brand"><u><a href="https://www.29cm.co.kr/shop/brand/2178">adidas</a></u></div>
-                            <div class="name"><label for=""></label>오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</div>
+                            <div class="brand">Adidas</div>
+                            <div class="name"><label for="">오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</label></div>
                             <div class="Price">
                                 <span class="origPrice"><strike>119,000</strike></span><br>
                                 <span class="discountedPrice">34% 79,000원</span>
@@ -313,8 +311,8 @@
 
                         <span class="products">
                             <a href="https://www.29cm.co.kr/product/950775"><img class="img" src="../resources/images/list/14.jpg"></a>
-                            <div class="brand"><u><a href="https://www.29cm.co.kr/shop/brand/2178">adidas</a></u></div>
-                            <div class="name"><label for=""></label>오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</div>
+                            <div class="brand">Adidas</div>
+                            <div class="name"><label for="">오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</label></div>
                             <div class="Price">
                                 <span class="origPrice"><strike>119,000</strike></span><br>
                                 <span class="discountedPrice">34% 79,000원</span>
@@ -327,8 +325,8 @@
 
                         <span class="products">
                             <a href="https://www.29cm.co.kr/product/950775"><img class="img" src="../resources/images/list/15.jpg"></a>
-                            <div class="brand"><u><a href="https://www.29cm.co.kr/shop/brand/2178">adidas</a></u></div>
-                            <div class="name"><label for=""></label>오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</div>
+                            <div class="brand">Adidas</div>
+                            <div class="name"><label for="">오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</label></div>
                             <div class="Price">
                                 <span class="origPrice"><strike>119,000</strike></span><br>
                                 <span class="discountedPrice">34% 79,000원</span>
@@ -341,8 +339,8 @@
 
                         <span class="products">
                             <a href="https://www.29cm.co.kr/product/950775"><img class="img" src="../resources/images/list/16.jpg"></a>
-                            <div class="brand"><u><a href="https://www.29cm.co.kr/shop/brand/2178">adidas</a></u></div>
-                            <div class="name"><label for=""></label>오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</div>
+                            <div class="brand">Adidas</div>
+                            <div class="name"><label for="">오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</label></div>
                             <div class="Price">
                                 <span class="origPrice"><strike>119,000</strike></span><br>
                                 <span class="discountedPrice">34% 79,000원</span>
@@ -355,8 +353,8 @@
 
                         <span class="products">
                             <a href="https://www.29cm.co.kr/product/950775"><img class="img" src="../resources/images/list/17.jpg"></a>
-                            <div class="brand"><u><a href="https://www.29cm.co.kr/shop/brand/2178">adidas</a></u></div>
-                            <div class="name"><label for=""></label>오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</div>
+                            <div class="brand">Adidas</div>
+                            <div class="name"><label for="">오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</label></div>
                             <div class="Price">
                                 <span class="origPrice"><strike>119,000</strike></span><br>
                                 <span class="discountedPrice">34% 79,000원</span>
@@ -369,8 +367,8 @@
                         
                         <span class="products">
                             <a href="https://www.29cm.co.kr/product/950775"><img class="img" src="../resources/images/list/18.jpg"></a>
-                            <div class="brand"><u><a href="https://www.29cm.co.kr/shop/brand/2178">adidas</a></u></div>
-                            <div class="name"><label for=""></label>오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</div>
+                            <div class="brand">Adidas</div>
+                            <div class="name"><label for="">오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</label></div>
                             <div class="Price">
                                 <span class="origPrice"><strike>119,000</strike></span><br>
                                 <span class="discountedPrice">34% 79,000원</span>
@@ -383,8 +381,8 @@
 
                         <span class="products">
                             <a href="https://www.29cm.co.kr/product/950775"><img class="img" src="../resources/images/list/19.jpg"></a>
-                            <div class="brand"><u><a href="https://www.29cm.co.kr/shop/brand/2178">adidas</a></u></div>
-                            <div class="name"><label for=""></label>오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</div>
+                            <div class="brand">Adidas</div>
+                            <div class="name"><label for="">오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</label></div>
                             <div class="Price">
                                 <span class="origPrice"><strike>119,000</strike></span><br>
                                 <span class="discountedPrice">34% 79,000원</span>
@@ -397,8 +395,8 @@
 
                         <span class="products">
                             <a href="https://www.29cm.co.kr/product/950775"><img class="img" src="../resources/images/list/20.jpg"></a>
-                            <div class="brand"><u><a href="https://www.29cm.co.kr/shop/brand/2178">adidas</a></u></div>
-                            <div class="name"><label for=""></label>오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</div>
+                            <div class="brand">Adidas</div>
+                            <div class="name"><label for="">오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</label></div>
                             <div class="Price">
                                 <span class="origPrice"><strike>119,000</strike></span><br>
                                 <span class="discountedPrice">34% 79,000원</span>
@@ -411,8 +409,8 @@
 
                         <span class="products">
                             <a href="https://www.29cm.co.kr/product/950775"><img class="img" src="../resources/images/list/21.jpg"></a>
-                            <div class="brand"><u><a href="https://www.29cm.co.kr/shop/brand/2178">adidas</a></u></div>
-                            <div class="name"><label for=""></label>오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</div>
+                            <div class="brand">Adidas</div>
+                            <div class="name"><label for="">오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</label></div>
                             <div class="Price">
                                 <span class="origPrice"><strike>119,000</strike></span><br>
                                 <span class="discountedPrice">34% 79,000원</span>
@@ -425,8 +423,8 @@
 
                         <span class="products">
                             <a href="https://www.29cm.co.kr/product/950775"><img class="img" src="../resources/images/list/22.jpg"></a>
-                            <div class="brand"><u><a href="https://www.29cm.co.kr/shop/brand/2178">adidas</a></u></div>
-                            <div class="name"><label for=""></label>오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</div>
+                            <div class="brand">Adidas</div>
+                            <div class="name"><label for="">오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</label></div>
                             <div class="Price">
                                 <span class="origPrice"><strike>119,000</strike></span><br>
                                 <span class="discountedPrice">34% 79,000원</span>
@@ -439,8 +437,8 @@
 
                         <span class="products">
                             <a href="https://www.29cm.co.kr/product/950775"><img class="img" src="../resources/images/list/23.jpg"></a>
-                            <div class="brand"><u><a href="https://www.29cm.co.kr/shop/brand/2178">adidas</a></u></div>
-                            <div class="name"><label for=""></label>오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</div>
+                            <div class="brand">Adidas</div>
+                            <div class="name"><label for="">오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</label></div>
                             <div class="Price">
                                 <span class="origPrice"><strike>119,000</strike></span><br>
                                 <span class="discountedPrice">34% 79,000원</span>
@@ -453,8 +451,8 @@
 
                         <span class="products">
                             <a href="https://www.29cm.co.kr/product/950775"><img class="img" src="../resources/images/list/24.jpg"></a>
-                            <div class="brand"><u><a href="https://www.29cm.co.kr/shop/brand/2178">adidas</a></u></div>
-                            <div class="name"><label for=""></label>오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</div>
+                            <div class="brand">Adidas</div>
+                            <div class="name"><label for="">오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</label></div>
                             <div class="Price">
                                 <span class="origPrice"><strike>119,000</strike></span><br>
                                 <span class="discountedPrice">34% 79,000원</span>
@@ -465,9 +463,20 @@
                             </div>
                         </span>
                         
-                         
+                           
             </div>
-            
+            <div id="pages">
+            	<select name="pageSel" id="pageSel" placeholder="1">
+					<option value="pageNum">1</option>
+					<option value="pageNum">2</option>
+					<option value="pageNum">3</option>
+					<option value="pageNum">4</option>
+					<option value="pageNum">5</option>
+			    </select>
+			    <span id="pgTotal">of 5</span>
+			    <button class="pageMove" id="pmL"> < </button>
+			    <button class="pageMove" id="pmR"> > </button>
+            </div>
         </form>
     </div>
 </body>

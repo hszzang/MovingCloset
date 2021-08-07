@@ -36,22 +36,45 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value="/project/test.do", method=RequestMethod.GET)
-	public String boardList(Locale locale, Model model) {
+	
+	
+	
+	// 검색페이지
+	@RequestMapping(value="/project/search.do", method=RequestMethod.GET)
+	public String searchPage(Locale locale, Model model) {
 		
-		return "body/store_detail";
+		return "body/search";
 	}
 	
-	@RequestMapping(value="/project/test1.do", method=RequestMethod.GET)
-	public String storeList(Locale locale, Model model) {
+	
+	//뉴디
+	@RequestMapping(value="/project/newD.do", method=RequestMethod.GET)
+	public String newDmain(Locale locale, Model model) {
 		
-		return "body/store_list";
+		return "body/newD_main";
 	}
 	
-	@RequestMapping(value="/project/test2.do", method=RequestMethod.GET)
+	//마이페이지
+	@RequestMapping(value="/project/mypage.do", method=RequestMethod.GET)
 	public String mypage(Locale locale, Model model) {
 		
-		return "body/mypage_coupon";
+		return "body/mypage/mypage_coupon";
+	}
+
+	//로그인
+	@RequestMapping(value="/project/login.do", method=RequestMethod.GET)
+	public String newDmain() {
+		
+		return "body/login";
 	}
 	
+	//쪼르깅
+	@RequestMapping(value="/project/myplease2.do", method=RequestMethod.GET)
+	public String myPlease2(Locale locale, Model model) {
+		return "body/myPlease2";
+	}
+	
+	
 }
+	
+	
