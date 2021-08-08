@@ -15,11 +15,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
     <style>
-    	#container{ margin-bottom:100px;}
+    	#wrapper{ margin-bottom:100px;}
         #list{
             border:none;
-            width:80%; height:auto;
-            margin:0 10% 10% 10%; padding-left:7%;
+            width:85%; height:auto;
+            margin:0 5% 10% 10%; padding-left:3%; padding-bottom:3%;
             display: inline; float: left;
         }
 
@@ -123,7 +123,7 @@
     </style>
 </head>
 <body>
-    <div id="container">
+    <div id="wrapper">
     <!--  
         <form action="">
         -->
