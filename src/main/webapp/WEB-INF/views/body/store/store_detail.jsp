@@ -218,7 +218,7 @@
  		background-color:whitesmoke; font-size:10pt; 
  	}
  	
- 	.deliveryInfo{ color:darygray; font-size:10pt; padding:0 0 0 20px; }
+ 	.deliveryInfo{ color:darygray; font-size:10pt; padding:0 0 0 10px; }
  	
  	#options{width:100%; height:auto; margin-top:15px; display:inline-block;}
  	#selDiv{ width:70%; height:auto; display:inline-block;}
