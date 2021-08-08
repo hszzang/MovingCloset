@@ -102,6 +102,12 @@
             font-size: 10pt;
         }
         
+        #gotoqna{
+        	display:inline; float:left;
+        	width:200px; height:40px; background-color:black;
+        }
+        #gotoqna:focus{outline:none;}
+        
         #pages{
         	text-align:right;
 			margin:0 5% 0 0;
@@ -162,7 +168,7 @@
 				            <tr>
 				                <td>1</td>
 				                <td style="text-align:left;">
-				                    <a href="/movingcloset/project/noticedetail.do" style="text-decoration:none;color:black;">
+				                    <a href="/movingcloset/movingcloset/noticedetail.do" style="text-decoration:none;color:black;">
 				                        공지사항 어쩌고저쩌고 블라블라 시끌시끌</a></td>
 				                <td>2021.08.01</td>
 				            </tr>
@@ -382,6 +388,9 @@
 	        	
     	</div>
     		<br />
+    		<button id="gotoqna">
+    			<a href="/movingcloset/movingcloset/question.do" style="text-decoration:none;color:white;">1:1문의하러 가기</a>
+    		</button>
 			<div id="pages">
 			    <select name="pageSel" id="pageSel" placeholder="1">
 					<option value="pageNum">1</option>

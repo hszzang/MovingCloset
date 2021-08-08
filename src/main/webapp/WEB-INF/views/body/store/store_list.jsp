@@ -126,7 +126,7 @@
                 </div>
 						
                         <span class="products">
-                            <a href="https://www.29cm.co.kr/product/950775"><img class="img" src="../resources/images/list/1.jpg"></a>
+                            <a href="/movingcloset/store/detail.do"><img class="img" src="../resources/images/list/1.jpg"></a>
                             <div class="brand">Adidas</div>
                             <div class="name"><label for="">오즈위고 트리플블랙 외 4종 택일<br> (FX6029/EE6999/EE7773/EE6464)</label></div>
                             <div class="Price">

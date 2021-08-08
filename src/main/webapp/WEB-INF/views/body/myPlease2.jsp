@@ -38,32 +38,10 @@
   	</script>
   	
     <style>
-    	/*
-        #filter{
-            width:100%; height:50px;
-            border:solid white 1px;
-            padding: 5px 0 0 0;
-            margin:15px 0 25px 0;
-        }
-        #filterBtn{
-            display:inline;
-            margin-left:38.5%;
-            font-size:12pt;
-        }
-        #filterDropdown{
-            margin-left:80%;
-            display:inline;
-        }
-        #filterSel{
-            width:150px; height:35px;
-            text-align: center;
-            border: white;
-        }
-		*/
 		#wrap{
-			border:solid black 1px;
+			border:none;
 			width:80%; height:auto;
-			float:right;
+			float:right; margin-top:100px;
 		}
 		.tablink {
             background-color: white;
@@ -76,8 +54,8 @@
         }
 		.tablink:focus{outline:none;}
         .tablink:hover {
-            background-color: lightgray; color:white;
-            border:lightgray solid 1px;
+            background-color:white; color:#FF6C2F;
+            border:#FF6C2F solid 1px;
         }
 		
         .tabcontent{
@@ -123,24 +101,7 @@
 		#img{
 			width:95%; height:auto; margin:0 2% 0 2%;
 		}
-		/*
-		#mainImg{
-			width:75%; height:300px;
-			border: black solid 1px;
-			float:left; display:inline-block;
-		}
-		#sides{
-			width:25%; height:300px;
-			border:black solid 1px;
-			padding:0; 
-			float:left; display:inline-block;
-		}
-		.side{
-			width:100%; height:75px;
-			border:lightgray solid 1px;
-			display:block;
-		}
-		*/
+
 		#desc{
 			width:60%; height:350px;
 			border:none; margin:0;
@@ -213,31 +174,11 @@
 </head>
 <body>
     <div id="wrap">
-			<button class="tablink" onclick="openPage('Expired', this, 'lightgray')" >마감한 쪼르기</button>
-        	<button class="tablink" onclick="openPage('onGoing', this, 'lightgray')" id="default">진행중인 쪼르기</button>
+			<button class="tablink" onclick="openPage('Expired', this, 'white')" >마감한 쪼르기</button>
+        	<button class="tablink" onclick="openPage('onGoing', this, 'white')" id="default">진행중인 쪼르기</button>
             
             <div id="onGoing" class="tabcontent">
-            	<!--  
-                <div id="filter">
-                    <span id="filterBtn">
-                        <button type="button" class="btn btn-dark">전체</button>
-                        <button type="button" class="btn btn-dark">의류</button>
-                        <button type="button" class="btn btn-dark">신발</button>
-                        <button type="button" class="btn btn-dark">가방</button>
-                        <button type="button" class="btn btn-dark">잡화</button>
-                    </span>
-                    <span id="filterDropdown">
-                        <select name="filterSelect" id="filterSel" placeholder="신상품순">
-                            <option value="best">베스트순</option>
-                            <option value="lowprice">낮은가격순</option>
-                            <option value="highprice">높은가격순</option>
-                            <option value="discount">높은할인순</option>
-                            <option value="interest">높은관심순</option>
-                        </select>
-                    </span>
-                </div>
-				-->			
-					
+
             <!-- 진행중인 쪼르기 -->
             	<div id="outDiv">
             		<div id="innerDiv">

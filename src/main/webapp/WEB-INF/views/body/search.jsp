@@ -57,7 +57,7 @@
     	}
         #filterBtn{
             display:inline;
-            margin-top:0;
+            margin-left:50px;
             font-size:20pt;
         }
         #filterDropdown{
@@ -145,7 +145,8 @@
                     </div>
                     <br /><hr />
                     <span id="filterDropdown">
-                        <select name="filterSelect" id="filterSel" placeholder="신상품순">
+                        <select name="filterSelect" id="filterSel">
+                            <option value="update">신상품순</option>
                             <option value="best">베스트순</option>
                             <option value="lowprice">낮은가격순</option>
                             <option value="highprice">높은가격순</option>

@@ -132,7 +132,8 @@
 	                <tbody>
 	                    <tr>
 	                        <td>1</td>
-	                        <td>질문과 답변 </td>
+	                        <td><a href="/movingcloset/movingcloset/qnadetail.do" style="color:black;text-decoration:none;">
+	                        	질문과 답변</a></td>
 	                        <td>2021.08.01</td>
 	                    </tr>
 	                    <tr>
@@ -211,7 +212,7 @@
 	        </div>
 			<div id="pages">
 		        <span>
-		        	<button id="askBtn"><a href="/movingcloset/project/question.do" style="text-decoration:none;color:white;">문의하기</a></button>
+		        	<button id="askBtn"><a href="/movingcloset/movingcloset/question.do" style="text-decoration:none;color:white;">문의하기</a></button>
 		        </span>
 		        <span style="float:right;">
 				    <select name="pageSel" id="pageSel" placeholder="1">
