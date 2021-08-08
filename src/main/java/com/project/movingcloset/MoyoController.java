@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class MoyoController {
 
 	// 모여
-	@RequestMapping(value="/project/moyo.do", method=RequestMethod.GET)
+	@RequestMapping(value="/movingcloset/moyo.do", method=RequestMethod.GET)
 	public String moyo() {
 		
 		return "body/moyo/moyo";
 	}
 		
 	// 모여신청폼
-	@RequestMapping(value="/project/moyoForm.do", method=RequestMethod.GET)
+	@RequestMapping(value="/movingcloset/moyoForm.do", method=RequestMethod.GET)
 	public String moyoForm() {
 		
 		return "body/moyo/moyoForm";

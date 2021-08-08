@@ -14,7 +14,7 @@
 <script>
 	function plusminus(id){
 		//console.log("넘어온 값 "+id);
-		var num = document.getElementById("quantity");
+		var num = document.getElementById("qIn");
 
 		if(id=="minus"){ 
 			if(num.value <= 1){
@@ -23,84 +23,25 @@
 				num.value = parseInt(num.value) - 1;
 			}
 		}
-		
 		if(id=="plus"){ 
 			num.value = parseInt(num.value) + 1;
 		}
 		
 	}
-
+	
 	$(function(){
 		$('#btnReview').click(function(){
-
 			var child;
 			child = window.open("./reviewPage.do", "reviewpopup", "height:500px, width:250px");
 		});
-
 	});
-
-
 	
 </script>
-
-	
-
-<style>
-	#img{
-		max-width:100%; height:auto;
-
-	}
-	#btnBuy, #basket, #wish{
-		padding: 5%;
-		border-radius: 8px;
-		background-color: black;
-		color: white;
-		font-size: 1.2em;
-		font-weight: bold;
-		border: solid 1px;
-		outline: 0;
-	}
-	#btnBuy:hover,#btnReview:hover  {background-color: gray;}
-	#basket:hover, #wish:hover {background-color: lightgray;}
-	
-	#basket, #wish{
-		background-color: white;
-		color: black;
-		border-color: gray;
-
-	}
-	
-	
-	#btnReview{
-		padding: 15px 30px;
-		border-radius: 8px;
-		background-color: black;
-		color: white;
-		width:auto;
-		outline: 0;
-		
-
-	}
-	#brandName ,#prodName ,#shoes ,#prodCount ,#price {
-		font-size: 1.8em;
-
-	}
-	
-	span.a {
-		display: inline;
-	}
-	
-	#brandName{
-		display: inline;
-	}
-	
-	
-</style>
 <style>
 	body {font-family: Arial, Helvetica, sans-serif;}
 	
 	#myImg {
-	  border-radius: 5px;
+	  border-radius: 3px;
 	  cursor: pointer;
 	  transition: 0.3s;
 	}
@@ -201,10 +142,10 @@
 		text-decoration: none;
 		color:black;
 	}
-	
 	button a, button a:hover{
 		color: black; text-decoration:none;
 	}
+	
 	#pages{
        	text-align:right;
 		margin:2% 2% 3% 0;
@@ -240,15 +181,342 @@
 평점 별표5개 한줄평 작성일 사진
                           사진은 클릭시 모달로 띄움
 
- -->
+ -------------------------------------------------------------------------------------------------------------------->
+ <style>
+ 	#wrapper{
+ 		width:60%; height:auto; border:none;
+ 		margin:100px 0  200px 20%;
+ 		padding: 50px 1% 0 1%;
+ 	}
+ 	#main{
+ 		width:100%; height:480px; border:none; border-bottom:darkgray solid 1px;
+ 		padding:1% 1% 1% 1%; margin-bottom:100px;
+ 	}
+ 	#mainImg{ width:50%; height:auto; border:none; display:inline; float:left; padding:0 0 0 3%; }
+ 	#img{ width:450px; height:450px; }
+ 	
+ 	#mainInfo{ 
+ 		width:50%; height:500px; 
+ 		border:none; border-top:black solid 2px;
+ 		float:left; display:inline;
+ 		padding:0 1% 0 1%;
+ 	}
+ 	#brand{width:auto; height:auto; float:left; font-weight:bold;}
+ 	#pName{
+ 		width:80%; height:auto; 
+ 		color:black; font-size:12pt; display:inline-block; float:left; padding:10px 0 0 0;}
+ 	#heartDiv{ width:20%; height:80px; border-left:darkgray solid 1px; display:inline-block; }
+ 	
+ 	#priceInfo{ display:block; }
+ 	#origPrice{font-size:12pt; color:gray; font-weight:lighter;}
+ 	#discountedPer{color:#FF6C2F; font-size:14pt;}
+ 	#discountedPrice{color:#FF6C2F; font-size:14pt; font-weight:bold;}
+ 	#won{color:darygray; font-size:10pt; font-weight:bold; }
+ 	
+ 	#benefits{
+ 		width:100%; height:auto; padding:1% 0 1% 25%;
+ 		background-color:whitesmoke; font-size:10pt; 
+ 	}
+ 	
+ 	.deliveryInfo{ color:darygray; font-size:10pt; padding:0 0 0 20px; }
+ 	
+ 	#options{width:100%; height:auto; margin-top:15px; display:inline-block;}
+ 	#selDiv{ width:70%; height:auto; display:inline-block;}
+ 	.select{
+ 		width:100%; height:50px; margin-bottom:5px; display:inline-block; border:lightgray solid 1px; 
+ 		text-size:12pt; color:gray;
+ 	}
+ 	#quantity{
+ 		width:29%; height:101px; display:inline; float:right; border:none;
+ 		padding:35px 10px 30px 15px;
+ 	}
+ 	.qBtns{ border:none; background-color:white;}
+ 	.qBtns:focus{outline:none;}
+ 	
+ 	#buttons{
+ 		width:100%; height:auto; padding:0;
+ 	}
+ 	.optBtn{
+ 		width:49.5%; height:50px; border:lightgray solid 1px; display:inline; font-weight:bold;
+ 	}
+ 	#cart{ background-color:white; color:black; }
+ 	#cart:focus{outline:none;}
+ 	#buy{ background-color:black; color:white; }
+ 	#buy:hover { background-color:orangered; color:white;}
+ 	
+ 	
+ 	#desc{ font-size:12pt; font-weight:bold; }
+ 	#details{
+ 		border:none;
+ 		width:60%; height:auto;
+ 		margin:5% 20% 15% 20%;
+ 	}
+ 	.dImgs{ width:100%; height:auto; border:none; }
+ 	
+ 	
+ 	#Review{ width:100%; height:auto; border:none; 
+ 		margin: 0 10% 10% 10%;
+ 	}
+ 	#reviewTitle{ display:inline; float:left; }
+ 	#btnReview{
+ 		width:200px; height:40px; display:inline; float:right; 
+ 		background-color:black; color:white; border:none;
+ 	}
+ 	#btnReview:focus{outline:none;}
+ 	
+ </style>
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="container" style="margin-top: 5%;">
+	<div id="wrapper">
+		<div id="main">
+			<div id="mainImg">
+				<img src="../resources/images/list/1.jpg" alt="상품이미지" id="img" />
+			</div>
+			
+			<div id="mainInfo">
+				<div id="nameInfo">
+					<div id="pName">
+						<span id="brand">Adidas</span><br />
+						[아디다스] 오즈위고 트리플블랙 외 3종 택일 <br />
+						(EE7773/FX6029/EE6999)
+					</div>
+					<div id="heartDiv">
+					
+					</div>
+				</div>
+				<div id="priceInfo">
+					<span id="origPrice"><strike>119,000</strike></span><br>
+                    <span id="discountedPer"><em>34%</em></span>
+                    <span id="discountedPrice">79,000</span>
+                    <span id="won">원</span>
+				<hr />
+				</div>
+				<!-- 
+				<div id="benefitInfo">
+					<span id="benefit">혜택안내</span>
+					<table>
+						<tr>
+							<td>적립금</td>
+							<td>790원</td>
+						</tr>
+						<tr>
+							<td>상품할인</td>
+							<td>34% 79,000원</td>
+						</tr><tr>
+							<td>카드할인</td>
+							<td><br />
+								현대카드 77,420원 (2% 청구할인) <br />
+								할부금 월 13,167원 (6개월 할부시) <br />
+								<a href=""style="color:lightgray;">무이자카드 보기</a>
+							</td>
+						</tr>
+					</table>
+				</div>
+				 -->
+				<div id="benefits">
+					<span>앱 가입 즉시</span>
+					<span style="color:orangered; font-weight:bold;">15% 할인</span>
+					<span>과 다양한 혜택 →</span>
+				</div>
+				<div>
+					<hr />
+					<span class="deliveryInfo" style="font-weight:bold;">배송정보</span>&nbsp;
+					<span class="deliveryInfo">무료배송상품. 제주도 포함 도서/산간 지역 추가 배송비도 무료</span>
+				</div>
+				<div id="options">
+					<div id="selDiv">
+						<select name="color" class="select">
+								<option value="" diabled select hidden>색상</option>
+	                            <option value="EE7773">EE7773 화이트</option>
+	                            <option value="FX6029">FX6029 베이지</option>
+	                            <option value="EE6999">EE6999 블랙</option>
+	                    </select>
+	                    <select name="size" class="select">
+	                    		<option value="" diabled select hidden>사이즈</option>
+	                            <option value="240">240</option>
+	                            <option value="250">250</option>
+	                            <option value="260">260</option>
+	                    </select>
+	                </div>    
+					<div id="quantity">
+						<span>
+							<button class="qBtns" id="plus" onclick="plusminus(this.id);"><i class="fa fa-plus" style="color:black;"></i></button>
+							<input type="text" id="qIn" value="1" style="border:lightgray solid 1px; width: 50px; background-color: none; text-align:center;">
+							<button class="qBtns" id="minus" onclick="plusminus(this.id);"><i class="fa fa-minus" style="color:black;"></i></button>
+						</span>
+					</div>
+				</div>
+
+				<div id="buttons">
+					<button class="optBtn" id="cart">장바구니 담기</button>
+					<input type="button" class="optBtn" id="buy" value="바로 구매하기" />
+				</div>
+			</div>
+			
+		</div>
+
+		<div id="details">
+			<div id="desc">상품설명</div>
+			<img src="../resources/images/details/noti1.png" class="dImgs" />
+			<img src="../resources/images/details/noti2.png" class="dImgs" />
+			<img src="../resources/images/details/d1.png" class="dImgs" />
+			<img src="../resources/images/details/d2.png" class="dImgs" />
+			<img src="../resources/images/details/d3.png" class="dImgs" />
+			<img src="../resources/images/details/noti3.png" class="dImgs" />
+		</div>
+		
+		
+		<div id="Reviews">
+			<div id="reviewTitle">
+				<h4>리뷰 (5)
+					<span>
+						<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
+						<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
+						<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
+						<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
+						<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
+					</span>
+				</h4>
+			</div>
+				<!--  
+			<div class="row" style="padding: 4%;">
+				<div class="d-flex mr-auto" >
+					<input type="checkbox" name="photocheck" id="photocheck" value="photocheck" class="form-check-input" style="zoom: 1.5;">
+						<label for="photocheck" style="font-size: 24px;">포토리뷰</label>
+				</div>
+			</div>
+				-->
+			<div>
+				<button id="btnReview" >리뷰쓰기</button>
+			</div>
+	
+			<table class="table table-hover" style="border-top:black solid 1px; text-align: center; vertical-align:center;">
+				<thead>
+				<tr>
+					<th style="width: 15%;">평점</th>
+					<th style="width: 40%;">한줄평</th>
+					<th style="width: 20%;">작성일</th>
+					
+				</tr>
+				</thead>
+				<tbody>
+				<tr >
+					<td>
+					<i class="fa fa-star" style="color:#FF6C2F;"></i>
+					<i class="fa fa-star" style="color:#FF6C2F;"></i>
+					<i class="fa fa-star" style="color:#FF6C2F;"></i>
+					<i class="fa fa-star" style="color:#FF6C2F;"></i>
+					<i class="fa fa-star" style="color:#FF6C2F;"></i>
+					</td>
+					<td style="text-align: center; vertical-align:center;">[240] 신발이 예뻐요!</td>
+					<td>2021-07-31</td>
+					<td>
+						<img id="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
+						style="width: 100px; height: auto;"/>
+					</td>
+				</tr>				
+				<tr >
+					<td>
+					<i class="fa fa-star" style="color:#FF6C2F;"></i>
+					<i class="fa fa-star" style="color:#FF6C2F;"></i>
+					<i class="fa fa-star" style="color:#FF6C2F;"></i>
+					<i class="fa fa-star" style="color:#FF6C2F;"></i>
+					<i class="fa fa-star" style="color:#FF6C2F;"></i>
+					</td>
+					<td style="text-align: center;">[240] 신발이 예뻐요!</td>
+					<td>2021-07-31</td>
+					<td>
+						<img id="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
+						style="width: 100px; height: auto;"/>
+					</td>
+				</tr>
+				<tr >
+					<td>
+					<i class="fa fa-star" style="color:#FF6C2F;"></i>
+					<i class="fa fa-star" style="color:#FF6C2F;"></i>
+					<i class="fa fa-star" style="color:#FF6C2F;"></i>
+					<i class="fa fa-star" style="color:#FF6C2F;"></i>
+					<i class="fa fa-star" style="color:#FF6C2F;"></i>
+					</td>
+					<td style="text-align: center;">[240] 신발이 예뻐요!</td>
+					<td>2021-07-31</td>
+					<td>
+						<img id="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
+						style="width: 100px; height: auto;"/>
+					</td>
+				</tr>
+				<tr >
+					<td>
+					<i class="fa fa-star" style="color:#FF6C2F;"></i>
+					<i class="fa fa-star" style="color:#FF6C2F;"></i>
+					<i class="fa fa-star" style="color:#FF6C2F;"></i>
+					<i class="fa fa-star" style="color:#FF6C2F;"></i>
+					<i class="fa fa-star" style="color:#FF6C2F;"></i>
+					</td>
+					<td style="text-align: center;">[240] 신발이 예뻐요!</td>
+					<td>2021-07-31</td>
+					<td>
+						<img id="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
+						style="width: 100px; height: auto;"/>
+					</td>
+				</tr>
+				<tr >
+					<td>
+					<i class="fa fa-star" style="color:#FF6C2F;"></i>
+					<i class="fa fa-star" style="color:#FF6C2F;"></i>
+					<i class="fa fa-star" style="color:#FF6C2F;"></i>
+					<i class="fa fa-star" style="color:#FF6C2F;"></i>
+					<i class="fa fa-star" style="color:#FF6C2F;"></i>
+					</td>
+					<td style="text-align: center;">[240] 신발이 예뻐요!</td>
+					<td>2021-07-31</td>
+					<td>
+						<img id="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
+						style="width: 100px; height: auto;"/>
+					</td>
+				</tr>
+	
+				</tbody>
+			</table>
+	 		<hr />
+	 		
+			<div id="pages">
+				    <select name="pageSel" id="pageSel" placeholder="1">
+						<option value="pageNum">1</option>
+						<option value="pageNum">2</option>
+						<option value="pageNum">3</option>
+						<option value="pageNum">4</option>
+						<option value="pageNum">5</option>
+				    </select>
+				    <span id="pgTotal">of 5</span>
+				    <button class="pageMove" id="pmL"> < </button>
+				    <button class="pageMove" id="pmR"> > </button>
+				</div>
+				<br />
+			</div>
+
+
+
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!------------------------------------------------------------------------------------------------  
+	<div class="container" style="margin:10% 20% 0 20%;">
 		<div class="row" style="height: 500px;">
 			<div class="col-8 d-flex justify-content-center" >
 			<span class="a">
-				<img src="../resources/images/feet-1840619_640.jpg" alt="상품이미지" id='img' class="rounded"/>
+				<img src="../resources/images/list/1.jpg" alt="상품이미지" id='img' />
 			</span>
 			</div>
 			<div class="col-4" style="padding-left: 0%; padding-top: 1%;">
@@ -311,133 +579,7 @@
 	</div><br /><br /><br />
 	<hr>
 
-	<div class="container">
-		<h2>평균 평점 : <span>5.0</span></h2>
-		<div class="row" style="padding: 4%;">
-			<div class="d-flex mr-auto" >
-				<input type="checkbox" name="photocheck" id="photocheck" value="photocheck" class="form-check-input" style="zoom: 1.5;">
-					<label for="photocheck" style="font-size: 24px;">포토리뷰</label>
-			</div>
-			<div class="d-flex ml-auto">
-				<button id="btnReview" >리뷰 쓰기</button>
-			</div>
-		</div>
-
-		<table class="table table-hover" style="text-align: center;">
-			<thead>
-			<tr>
-				<th style="width: 15%;">평점
-					<i class="fa fa-star"></i>
-					<i class="fa fa-star"></i>
-					<i class="fa fa-star"></i>
-					<i class="fa fa-star"></i>
-					<i class="fa fa-star"></i>
-				</th>
-				<th style="width: 40%;">한줄평</th>
-				<th style="width: 20%;">작성일</th>
-				<th style="width: 250%;">리뷰(클릭시 모듈로 이동)</th>
-			</tr>
-			</thead>
-			<tbody>
-			<tr >
-				<td>
-				평점 
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
-				</td>
-				<td style="text-align: left;">신발이 예뻐요!</td>
-				<td>2021-07-31</td>
-				<td>
-					<img id="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
-					style="width: 100px; height: auto;"/>
-				</td>
-			</tr>
-			<tr >
-				<td>
-				평점 
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
-				</td>
-				<td style="text-align: left;">신발이 예뻐요!</td>
-				<td>2021-07-31</td>
-				<td>
-					<img id="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
-					style="width: 100px; height: auto;"/>
-				</td>
-			</tr>
-			<tr >
-				<td>
-				평점 
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
-				</td>
-				<td style="text-align: left;">신발이 예뻐요!</td>
-				<td>2021-07-31</td>
-				<td>
-					<img id="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
-					style="width: 100px; height: auto;"/>
-				</td>
-			</tr>
-			<tr >
-				<td>
-				평점 
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
-				</td>
-				<td style="text-align: left;">신발이 예뻐요!</td>
-				<td>2021-07-31</td>
-				<td>
-					<img id="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
-					style="width: 100px; height: auto;"/>
-				</td>
-			</tr>
-			<tr >
-				<td>
-				평점 
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
-				</td>
-				<td style="text-align: left;">신발이 예뻐요!</td>
-				<td>2021-07-31</td>
-				<td>
-					<img id="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
-					style="width: 100px; height: auto;"/>
-				</td>
-			</tr>
-
-			</tbody>
-		</table>
-
-			<div id="pages">
-			    <select name="pageSel" id="pageSel" placeholder="1">
-					<option value="pageNum">1</option>
-					<option value="pageNum">2</option>
-					<option value="pageNum">3</option>
-					<option value="pageNum">4</option>
-					<option value="pageNum">5</option>
-			    </select>
-			    <span id="pgTotal">of 5</span>
-			    <button class="pageMove" id="pmL"> < </button>
-			    <button class="pageMove" id="pmR"> > </button>
-			</div>
-			<br />
-		</div>
-
+-->
 	<!-- The Modal -->
 	<div id="myModal" class="modal">
 		<span class="close">&times;</span>
