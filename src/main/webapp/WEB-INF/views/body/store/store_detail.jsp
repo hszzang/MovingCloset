@@ -189,14 +189,14 @@
  		padding: 50px 1% 0 1%;
  	}
  	#main{
- 		width:100%; height:480px; border:none; border-bottom:darkgray solid 1px;
+ 		width:1000px; height:480px; border:none; border-bottom:darkgray solid 1px;
  		padding:1% 1% 1% 1%; margin-bottom:100px;
  	}
- 	#mainImg{ width:50%; height:auto; border:none; display:inline; float:left; padding:0 0 0 3%; }
+ 	#mainImg{ width:480px; height:auto; border:none; display:inline; float:left; padding:0 0 0 0; }
  	#img{ width:450px; height:450px; }
  	
  	#mainInfo{ 
- 		width:50%; height:500px; 
+ 		width:480px; height:500px; 
  		border:none; border-top:black solid 2px;
  		float:left; display:inline;
  		padding:0 1% 0 1%;
