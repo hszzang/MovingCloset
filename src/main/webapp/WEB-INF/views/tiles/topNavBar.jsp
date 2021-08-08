@@ -17,7 +17,7 @@
 	    #homeBtn{margin:0 3% 0 5%;}
 	    li{ width:100px; margin-right:1%;}
 	    i{ font-size:28px; color:white;}
-	    #rightNav{ margin:20px 0 0 35%; }
+	    #rightNav{ display:inline; float:right; margin:20px 0 0 600px; }
 	      
 	    #megaMenu{
 	        width:100%; height:12%; display:none;																																																																																					
