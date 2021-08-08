@@ -15,11 +15,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
     <style>
-    	#container{ margin-bottom:100px;}
+    	#wrapper{ margin-bottom:100px;}
         #list{
             border:none;
-            width:80%; height:auto;
-            margin:0 10% 10% 10%; padding-left:7%;
+            width:85%; height:auto;
+            margin:0 5% 10% 10%; padding-left:3%; padding-bottom:3%;
             display: inline; float: left;
         }
 
@@ -57,7 +57,7 @@
     	}
         #filterBtn{
             display:inline;
-            margin-top:0;
+            margin-left:50px;
             font-size:20pt;
         }
         #filterDropdown{
@@ -123,7 +123,7 @@
     </style>
 </head>
 <body>
-    <div id="container">
+    <div id="wrapper">
     <!--  
         <form action="">
         -->
@@ -145,7 +145,8 @@
                     </div>
                     <br /><hr />
                     <span id="filterDropdown">
-                        <select name="filterSelect" id="filterSel" placeholder="신상품순">
+                        <select name="filterSelect" id="filterSel">
+                            <option value="update">신상품순</option>
                             <option value="best">베스트순</option>
                             <option value="lowprice">낮은가격순</option>
                             <option value="highprice">높은가격순</option>
