@@ -12,6 +12,7 @@
  
    <li>
       <a href="./store/detail.do">상품 상세페이지</a>
+      <a href="./store/detail2.do">상품 상세페이지2</a>
 
       <a href="./movingcloset/store.do">storelist</a>
       <a href="./movingcloset/search.do">검색</a>
