@@ -1,23 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 	<style>
-		nav{ width:100%; height:60px; margin:0px;}
-	    #homeBtn{margin:0 3% 0 5%;}
-	    li{ width:100px; margin-right:1%;}
-	    i{ font-size:28px; color:white;}
-	    #rightNav{ display:inline; float:right; margin:20px 0 0 600px; }
+/* 		nav{ width:100%; height:60px; margin:0px;} */
+/* 	    #homeBtn{margin:0 3% 0 5%;} */
+/* 	    li{ width:100px; margin-right:1%;} */
+/* 	    i{ font-size:28px; color:white;} */
+/* 	    #rightNav{ display:inline; float:right; margin:20px 0 0 600px; } */
 	      
 	    #megaMenu{
 	        width:100%; height:12%; display:none;																																																																																					
@@ -34,24 +29,36 @@
 	        margin-bottom:10px;
 	    }
 	    .megaA:hover{ color:whitesmoke; text-decoration:none; }
-	    a{  text-decoration:none; }
+/* 	    a{  text-decoration:none; } */
 	</style>
 	
 	<script>
 		$(document).ready(function(){
+			var delay = 200, setTimeoutConst;
+
 		    $("#navi").click(function(){
 		      $("#megaMenu").slideToggle("slow");
 		    });
+// 		    $("#navi").hover(function(){
+// 		    	setTimeoutConst = setTimeout(function() {
+// 		      		$("#megaMenu").slideDown("slow");
+// 		    	}, delay);
+// 		    }
+// 		    , function() {
+// 		    	clearTimeout(setTimeoutConst);
+// 		    	if($("#megaMenu").hover()){
+		    		
+// 		    	}
+// 		    	else if($("#megaMenu").mouseleave()) {
+// 		    		$("#megaMenu").slideUp("slow");
+// 		    	}
+// 			});
 		  });
 
     </script>
-    
-</head>
-<body>
 
-<!-- body style="height:1500px" -->	
 
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top d-flex">
 	  <a class="navbar-brand" id="homeBtn" href="#">Moving Closet</a>
 	  <ul class="navbar-nav" id="navi">
 	    <li class="nav-item">
@@ -74,16 +81,17 @@
 	    </li>
 	  </ul>
 	  
-	  <span id="rightNav">
-	      <label for=""><a href=""><i class="material-icons">search</i></a></label>
-	      <label for=""><a href=""><i class="material-icons">shopping_basket</i></a></label>
-	      <label for=""><a href=""><i class="material-icons">person</i></a></label>
+	  <span id="rightNav" class="ml-auto">
+	      <label for=""><a href="../movingcloset/search.do"><i class="material-icons">search</i></a></label>
+	      <label for=""><a href="../movingcloset/login.do"><i class="material-icons">shopping_basket</i></a></label>
+	      <label for=""><a href="../movingcloset/mypage.do"><i class="material-icons">person</i></a></label>
 	    </span>
 	</nav>
 	
 	
-	<div id="megaMenu" style="width:100%;">
-	    <div id="wrapper">
+	<div id="megaMenu">
+<!-- 	    <div id="wrapper"> -->
+	    <div class="container">
 	        <div class="megaLinks">
 	            <a href="" class="megaA">회사소개</a>
 	            <a href="" class="megaA">인재상</a>
@@ -113,14 +121,10 @@
 	        <div class="megaLinks">
 	            <a href="../movingcloset/notice.do" class="megaA">공지사항</a>
 	            <a href="" class="megaA">1:1문의</a>
-	            <a href="" class="megaA">FAQ</a>
-	            <a href="" class="megaA">QnA</a>
+	            <a href="../movingcloset/qnalist.do" class="megaA">FAQ</a>
+	            <a href="../movingcloset/qnadetail.do" class="megaA">QnA</a>
 	        </div>
 	    </div>
 	</div> 
  
  
- 
-
-</body>
-</html>
