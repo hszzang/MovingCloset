@@ -45,5 +45,13 @@
      <li>
       <a href="./movingcloset/list.do">store 확인</a>
    </li>
+   
+   
+   
+	<a href="./movingcloset/main.do">메인페이지 바로가기</a>
+   
+   
+   
+   
 </body>
 </html>
