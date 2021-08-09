@@ -9,7 +9,7 @@
 </head>
 <body>
    <h2>메인 페이지입니다.</h2>
- 
+   
    <li>
       <a href="./store/detail.do">상품 상세페이지</a>
       <a href="./store/detail2.do">상품 상세페이지2</a>
