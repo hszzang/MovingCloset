@@ -25,6 +25,12 @@
       <a href="./movingcloset/mypage.do">mypage</a>
 
       <a href="./movingcloset/newD.do">뉴디test</a>
+      
+      <a href="./movingcloset/introduce.do">회사소개/인재상</a>
+      <a href="./movingcloset/recruit.do">채용정보</a>
+      <a href="./movingcloset/map.do">오시는길</a>
+      
+      
       <a href="./movingcloset/login.do">로그인</a>      
       
 <!--       <a href="./project/myplease.do">내쪼르기리스트(ver.1)</a> -->
