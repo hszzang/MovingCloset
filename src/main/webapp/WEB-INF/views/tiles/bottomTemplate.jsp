@@ -19,7 +19,6 @@
 }
 </style>
 
-
 <div class="Footer" style="margin-right: -30px;">
 		<div class="row" id="footerRow">
 		
