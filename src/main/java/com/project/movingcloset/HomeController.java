@@ -54,13 +54,6 @@ public class HomeController {
 		return "body/newD_main";
 	}
 	
-	//마이페이지
-	@RequestMapping(value="/project/mypage.do", method=RequestMethod.GET)
-	public String mypage(Locale locale, Model model) {
-		
-		return "body/mypage/mypage_coupon";
-	}
-
 	//로그인
 	@RequestMapping(value="/movingcloset/login.do", method=RequestMethod.GET)
 	public String newDmain() {
@@ -72,6 +65,12 @@ public class HomeController {
 	@RequestMapping(value="/movingcloset/myplease2.do", method=RequestMethod.GET)
 	public String myPlease2(Locale locale, Model model) {
 		return "body/myPlease2";
+	}
+	
+	//쪼르깅
+	@RequestMapping(value="/movingcloset/main.do", method=RequestMethod.GET)
+	public String main(Locale locale, Model model) {
+		return "main";
 	}
 	
 	

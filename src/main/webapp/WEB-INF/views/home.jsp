@@ -9,9 +9,10 @@
 </head>
 <body>
    <h2>메인 페이지입니다.</h2>
- 
+   
    <li>
       <a href="./store/detail.do">상품 상세페이지</a>
+      <a href="./store/detail2.do">상품 상세페이지2</a>
 
       <a href="./movingcloset/store.do">storelist</a>
       <a href="./movingcloset/search.do">검색</a>
@@ -21,7 +22,7 @@
       <a href="./movingcloset/qnalist.do">FAQ/QnA</a>
       <a href="./movingcloset/qnadetail.do">질답상세</a>
 
-      <a href="./project/mypage.do">mypage</a>
+      <a href="./movingcloset/mypage.do">mypage</a>
 
       <a href="./movingcloset/newD.do">뉴디test</a>
       
@@ -37,10 +38,20 @@
       <a href="./movingcloset/event_main.do">이벤트페이지(메인 ver.1.0)</a>
       <a href="./movingcloset/coupon_main.do">쿠폰페이지(메인 ver.1.0)</a>
       
+      
+      
    </li>
    
      <li>
       <a href="./movingcloset/list.do">store 확인</a>
    </li>
+   
+   
+   
+	<a href="./movingcloset/main.do">메인페이지 바로가기</a>
+   
+   
+   
+   
 </body>
 </html>
