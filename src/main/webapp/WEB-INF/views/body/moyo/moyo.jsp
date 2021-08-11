@@ -101,8 +101,7 @@
 </head>
 <body>
 
-<div class="container">
-	
+	<div class="container">
 		<div class="row">
 			<div class="col-8">
 				<div class="row">
@@ -292,13 +291,8 @@
 					</div>
 					<div class="moyoDetail">Hello world!</div>
 				</div> -->
-
 			</div>
-		
 		</div>
-		
-	
-	
 	</div>
 
 </body>
