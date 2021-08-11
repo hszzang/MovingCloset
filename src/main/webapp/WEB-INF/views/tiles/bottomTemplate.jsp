@@ -19,7 +19,6 @@
 }
 </style>
 
-
 <div class="Footer" style="margin-right: -30px;">
 	<div class="row" id="footerRow">
 	
@@ -53,6 +52,7 @@
 			점심시간 PM 12:30 ~ PM 13:30<br />
 			고객문의 <a href="https://github.com/hszzang/MovingCloset/">https://github.com/hszzang/MovingCloset </a> 
 		</div>
+		
 	</div>
 </div>
 
