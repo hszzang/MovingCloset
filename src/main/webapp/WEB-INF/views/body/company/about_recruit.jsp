@@ -46,14 +46,7 @@
         #title{font-size:3em; color:black; font-weight:bold;
         	margin-left:10px;
         }
-        #workD{
-        	font-size:1em; color:gray; 
-        	margin-left:10px;
-        }
-        #workTime{
-        	font-size:1em; color:gray; 
-        	margin-left:15px;
-        }
+
         
         * { box-sizing: border-box; }
         .col { border-collapse: collapse; }
@@ -170,7 +163,7 @@
 				            <tr>
 				                <td>1</td>
 				                <td style="text-align:left;">
-				                    <a href="/movingcloset/movingcloset/noticedetail.do" style="text-decoration:none;color:black;">
+				                    <a href="/movingcloset/movingcloset/recruitdetail.do" style="text-decoration:none;color:black;">
 				                        신입사원 모집</a></td>
 				                <td>2021.08.01</td>
 				            </tr>

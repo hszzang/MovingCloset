@@ -25,6 +25,13 @@ public class CompanyController {
 		return "body/company/about_recruit";
 	}
 	
+	//채용정보
+	@RequestMapping(value="/movingcloset/recruitdetail.do", method=RequestMethod.GET)
+	public String recruitDetail(Locale locale, Model model) {
+		
+		return "body/company/recruit_detail";
+	}
+	
 	//오시는길
 	@RequestMapping(value="/movingcloset/map.do", method=RequestMethod.GET)
 	public String aboutMap(Locale locale, Model model) {
