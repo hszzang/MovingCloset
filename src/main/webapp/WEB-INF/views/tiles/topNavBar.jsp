@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -59,24 +60,45 @@
 		    width: 100%;
 		    color: white;
 		}
-		/*navbar 변환후*/
+		/*navbar 변환후 */
 		.nav-black{
 	        background-color: #000000;
 	        color: #ff6c2f;
 	        opacity: 1;
 	        transition: all 1s;
-	        height:30px;
+	        height:50px;
 	    }
 	    
 	    .nav-link{
 	    	color:white;
 	    }
 	    
+	    .nav-link:hover{
+	    	color:#ff6c2f;
+	    }
+	    
 	    .material-icons{
 	    	align-items: center;
 	    	color: white;
 	    }
-		
+	    
+	    .nav-sub{
+	    	background-color: #000000;
+	    	color: white;
+	    	width:100%;
+	    	position: fixed; top:50px; right:0px; left:0px;
+	    	z-index: 2;
+	    	/* visibility: hidden; */
+	    }
+	  
+	    .nav-content{
+	    	padding-top:35px;
+	    	padding-bottom:35px;
+	    }
+	    
+	    .megaA{
+	    	color: white;
+	    }
 	
 	</style>
 	
@@ -100,9 +122,7 @@
 	        };
         });
 		  
-		$('.nav-link').hover(function(){
-			
-		});
+		
 
     </script>
     
@@ -111,14 +131,14 @@
 
 <!-- body style="height:1500px" -->	
 
-	<div class="nav-menu nav-black">
-		<h4 style="margin:0" class="large-logo"><i href="#">Moving Closet</i></h4>
-		<a class="nav-link" href="#">About</a>
-		<a class="nav-link" href="#">MOYO</a>
-		<a class="nav-link" href="#">newD</a>
-		<a class="nav-link" href="#">STORE</a>
-		<a class="nav-link" href="#">Events|Coupons</a>
-		<a class="nav-link" href="#">CS center</a>
+	 <div class="nav-menu nav-black">
+		<h4 style="margin:0" class="large-logo"><a>Moving Closet</a></h4>
+		<div><a class="nav-link" id="nav-title" href="#">About</a></div>
+		<a class="nav-link" id="nav-title1" href="#">MOYO</a>
+		<a class="nav-link" id="nav-title2" href="#">newD</a>
+		<a class="nav-link" id="nav-title3" href="#">STORE</a>
+		<a class="nav-link" id="nav-title4" href="#">Events&nbsp;|&nbsp;Coupons</a>
+		<a class="nav-link" id="nav-title5" href="#">CS center</a>
 		<div id="icons">
 			<a href=""><i class="material-icons">search</i></a>
 			&nbsp;
@@ -126,8 +146,43 @@
 			&nbsp;
 			<a href=""><i class="material-icons">person</i></a>
 		</div>
-	</div> 
+	</div>
+	<div class="nav-sub" id="nav-sub">
+		<div class="nav-content container-fluid">
+			 <div class="megaLinks1 d-flex justify-content-around">
+	            <a href="" class="megaA">회사소개</a>
+	            <a href="" class="megaA">채용</a>
+	            <a href="" class="megaA">오시는길</a>
+	        </div>
+		</div>
+	</div>
 	
+	 <!-- <div class="megaLinks2">
+	            <a href="../movingcloset/moyo.do" class="megaA">모여</a>
+	            <a href="../movingcloset/moyoForm.do" class="megaA">모여신청</a>
+	            <a href="" class="megaA">지난(모여/조르기)</a>
+	        </div>
+	        <div class="megaLinks3">
+	            <a href="../movingcloset/newD.do" class="megaA">뉴디</a>
+	            <a href="" class="megaA">뉴디</a>
+	            <a href="" class="megaA">뉴디</a>
+	        </div>
+	        <div class="megaLinks4">
+	            <a href="../movingcloset/store.do" class="megaA">스토어</a>
+	            <a href="" class="megaA">스토어</a>
+	            <a href="" class="megaA">스토어</a>
+	        </div>
+	        <div class="megaLinks5">
+	            <a href="../movingcloset/event_main.do" class="megaA">이벤트</a>
+	            <a href="../movingcloset/coupon_main.do" class="megaA">쿠폰</a>
+	            <a href="" class="megaA">이벤트/쿠폰</a>
+	        </div>
+	        <div class="megaLinks6">
+	            <a href="../movingcloset/notice.do" class="megaA">공지사항</a>
+	            <a href="" class="megaA">1:1문의</a>
+	            <a href="" class="megaA">FAQ</a>
+	            <a href="" class="megaA">QnA</a>
+	        </div> -->
 	
 	
 	<!-- <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
