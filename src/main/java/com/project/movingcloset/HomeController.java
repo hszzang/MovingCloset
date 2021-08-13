@@ -73,7 +73,12 @@ public class HomeController {
 		return "main";
 	}
 	
-	
+	//회원가입
+	@RequestMapping(value="/movingcloset/login.do", method=RequestMethod.GET)
+	public String register() {
+		
+		return "body/registerForm";
+	}
 }
 	
 	
