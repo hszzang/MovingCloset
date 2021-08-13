@@ -74,7 +74,7 @@ public class HomeController {
 	}
 	
 	//회원가입
-	@RequestMapping(value="/movingcloset/login.do", method=RequestMethod.GET)
+	@RequestMapping(value="/movingcloset/register.do", method=RequestMethod.GET)
 	public String register() {
 		
 		return "body/registerForm";
