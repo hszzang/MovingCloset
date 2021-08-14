@@ -40,7 +40,7 @@
 <body>
 
 <section class="well3 center">
-  	
+  	<br/><br/>
   	<center>
    	<div class="section-title">
         <h2>이용약관</h2>
