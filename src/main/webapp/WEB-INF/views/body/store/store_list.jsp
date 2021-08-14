@@ -30,7 +30,7 @@
         }
         #filterBtn{
             display:inline;
-            margin-left:40%;
+            margin-left:35%;
             font-size:12pt;
         }
         #filterDropdown{

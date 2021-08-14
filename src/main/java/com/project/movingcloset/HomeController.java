@@ -68,6 +68,12 @@ public class HomeController {
 		return "body/myPlease2";
 	}
 	
+	//쪼르깅
+	@RequestMapping(value="/movingcloset/main.do", method=RequestMethod.GET)
+	public String main(Locale locale, Model model) {
+		return "main";
+	}
+	
 	
 }
 	
