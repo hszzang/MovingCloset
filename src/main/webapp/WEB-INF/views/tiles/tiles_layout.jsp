@@ -12,8 +12,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!-- <link rel="stylesheet" href="../resources/css/common.css"> -->
 
 </head>
@@ -23,26 +23,21 @@
 	tiles-define.xml에서 설정한 템플릿 파일들을 해당 파일에서
 	레이아웃으로 배치한다.
 -->
-<nav>
-	<tiles:insertAttribute name="top"/>
-</nav>
+
 <!--  
 	아래의 주석 부분은 마이페이지에서 쓸 사이드바 부분
 -->
-<section>
-<!-- <div class="container-fluid"> -->
-<!-- 	<div class="wrap" > -->
-<!-- 		<div class="content"> -->
+<div class="container-fluid">
+	<div class="wrap" >
+		<tiles:insertAttribute name="top"/>
+		<div class="content">
 			<%-- <tiles:insertAttribute name="left"/> --%>
-<!-- 			<div class="page_content"> -->
+			<!-- <div class="page_content"> -->
 				<tiles:insertAttribute name="body"/>
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
-<!-- </div> -->
-</section>
-<footer>
-	<tiles:insertAttribute name="bottom"/>
-</footer>
+			<!-- </div> -->
+		</div>
+		<tiles:insertAttribute name="bottom"/>
+	</div>
+</div>
 </body>
 </html>
