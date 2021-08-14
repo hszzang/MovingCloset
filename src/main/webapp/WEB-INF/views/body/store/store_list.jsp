@@ -67,7 +67,7 @@
 
         #pages{
         	text-align:right;
-			margin: 50px 10% 100px 75%;
+			margin: 50px 10% 100px 70%;
 			display:inline-block;
         }
         #pageSel{
@@ -87,6 +87,7 @@
         #pmL{background-color:gray;}
         #pmR{background-color:black;}
 
+		#productUpload{width:100px; height:40px; background-color:black; color:white;}
 
         @media only screen and (max-width:1000px){
 
@@ -466,6 +467,7 @@
                            
             </div>
             <div id="pages">
+            	<button id="productUpload">상품업로드</button>
             	<select name="pageSel" id="pageSel" placeholder="1">
 					<option value="pageNum">1</option>
 					<option value="pageNum">2</option>
