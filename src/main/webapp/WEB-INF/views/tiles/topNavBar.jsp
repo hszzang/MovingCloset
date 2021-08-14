@@ -32,7 +32,7 @@
 	    }
 	    
 	    .small-logo{
-	        font-size: 20px;
+	        font-size: 25px;
 	        color: #ff6c2f;
 	    }
 	
@@ -56,6 +56,7 @@
 	        opacity: 1;
 	        transition: all 1s;
 	        height:80px;
+	        opacity: 0.8;
 	    }
 	    
 	    .nav-link{
@@ -77,50 +78,56 @@
 	    .nav-sub1{
 	    	background-color: #000000;
 	    	width:100%;
-	    	height:110px;
-	    	position: fixed; top:50px; right:0px; left:0px;
+	    	height:115px;
+	    	position: fixed; top:80px; right:0px; left:0px;
 	    	z-index:4;
 	    	display:none;
+	    	opacity:0.8;
 	    }
 	    .nav-sub2{
 	    	background-color: #000000;
 	    	width:100%;
-	    	position: fixed; top:50px; right:0px; left:0px;
-	    	height:110px;
+	    	position: fixed; top:80px; right:0px; left:0px;
+	    	height:115px;
 	    	z-index:4;
 	    	display:none;
+	    	opacity:0.8;
 	    }
 	    .nav-sub3{
 	    	background-color: #000000;
 	    	width:100%;
-	    	position: fixed; top:50px; right:0px; left:0px;
-	    	height:110px;
+	    	position: fixed; top:80px; right:0px; left:0px;
+	    	height:115px;
 	    	z-index:4;
 	    	display:none;
+	    	opacity:0.8;
 	    }
 	    .nav-sub4{
 	    	background-color: #000000;
 	    	width:100%;
-	    	position: fixed; top:50px; right:0px; left:0px;
-	    	height:110px;
+	    	position: fixed; top:80px; right:0px; left:0px;
+	    	height:115px;
 	    	z-index:4;
 	    	display:none;
+	    	opacity:0.8;
 	    }
 	    .nav-sub5{
 	    	background-color: #000000;
 	    	width:100%;
-	    	position: fixed; top:50px; right:0px; left:0px;
-	    	height:110px;
+	    	position: fixed; top:80px; right:0px; left:0px;
+	    	height:115px;
 	    	z-index:4;
 	    	display:none;
+	    	opacity:0.8;
 	    }
 	    .nav-sub6{
 	    	background-color: #000000;
 	    	width:100%;
-	    	position: fixed; top:50px; right:0px; left:0px;
-	    	height:110px;
+	    	position: fixed; top:80px; right:0px; left:0px;
+	    	height:115px;
 	    	z-index:4;
 	    	display:none;
+	    	opacity:0.8;
 	    }
 	  
 	    .nav-content{
@@ -145,7 +152,7 @@
 	<script>
 
 		$(window).on('scroll', function(){
-	        if($(window).scrollTop() > 100 ){
+	        if($(window).scrollTop() > 50 ){
 	            $('.nav-menu').addClass('nav-black');
 	            $('#logo').addClass('small-logo');
 	        }
@@ -237,8 +244,8 @@
 	<div class="nav-sub2" id="nav-sub">
 		<div class="nav-content container-fluid">
 			 <div class="contentLink d-flex justify-content-around">
-	            <a href="" id="sub-content">모여</a>
-	            <a href="" id="sub-content">모여신청</a>
+	            <a href="../movingcloset/moyo.do" id="sub-content">모여</a>
+	            <a href="../movingcloset/moyoForm.do" id="sub-content">모여신청</a>
 	            <a href="" id="sub-content">조르기</a>
 	            <a href="" id="sub-content">지난 모여&nbsp;/&nbsp;조르기</a>
 	        </div>
@@ -247,7 +254,7 @@
 	<div class="nav-sub3" id="nav-sub">
 		<div class="nav-content container-fluid">
 			 <div class="contentLink d-flex justify-content-around">
-	            <a href="" id="sub-content">New Designer</a>
+	            <a href="../movingcloset/newD.do" id="sub-content">New Designer</a>
 	            <a href="" id="sub-content">New Designer</a>
 	            <a href="" id="sub-content">New Designer</a>
 	        </div>
@@ -256,25 +263,25 @@
 	<div class="nav-sub4" id="nav-sub">
 		<div class="nav-content container-fluid">
 			 <div class="contentLink d-flex justify-content-around">
-	            <a href="" id="sub-content">STORE</a>
+	            <a href="../movingcloset/store.do" id="sub-content">STORE</a>
 	        </div>
 		</div>
 	</div>
 	<div class="nav-sub5" id="nav-sub">
 		<div class="nav-content container-fluid">
 			 <div class="contentLink d-flex justify-content-center">
-	            <a href="" id="sub-content" style="margin-right:30px">EVENT</a>
-	            <a href="" id="sub-content" style="margin-left:30px">COUPON</a>
+	            <a href="../movingcloset/event_main.do" id="sub-content" style="margin-right:30px">EVENT</a>
+	            <a href="../movingcloset/coupon_main.do" id="sub-content" style="margin-left:30px">COUPON</a>
 	        </div>
 		</div>
 	</div>
 	<div class="nav-sub6" id="nav-sub">
 		<div class="nav-content container-fluid">
 			 <div class="contentLink d-flex justify-content-around">
-	            <a href="" id="sub-content">공지사항</a>
+	            <a href="../movingcloset/notice.do" id="sub-content">공지사항</a>
 	            <a href="" id="sub-content">1&nbsp;:&nbsp;1&nbsp;문의</a>
-	            <a href="" id="sub-content">FAQ</a>
-	            <a href="" id="sub-content">Q&A</a>
+	            <a href="../movingcloset/qnalist.do" id="sub-content">FAQ</a>
+	            <a href="../movingcloset/qnadetail.do" id="sub-content">Q&A</a>
 	        </div>
 		</div>
 	</div>
