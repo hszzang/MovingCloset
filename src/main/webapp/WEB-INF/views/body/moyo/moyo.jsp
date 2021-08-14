@@ -13,7 +13,8 @@
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=88444ee8320d4b09aa47995c55b34d58"></script>
+<!-- geocoder를 사용하기 위해 api key 뒤에 &libraries=services 를 붙여준다.-->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=88444ee8320d4b09aa47995c55b34d58&libraries=services"></script>
 
 <script> 
 
@@ -32,10 +33,12 @@
 			if($(".moyoDetail").is(":hidden")){
 				// $("#moyoList").css("overflow-y", "scroll");
 				$(".moyoRow").not(this).slideDown("fast");
+				$(".moyoToggleArrow").text('keyboard_arrow_down');
 			} 
 			else {
 				// $("#moyoList").css("overflow-y", "hidden");
 				$(".moyoRow").not(this).slideUp("fast");
+				$(".moyoToggleArrow").text('keyboard_arrow_up');
 				// $(".moyoRow").not(this).css("display", "none");
 			}
 		});
@@ -181,6 +184,11 @@
 		margin-right: 0;
 	}
 	
+	#inputLocation .form-control:focus {
+		border-color: #FFFFFF;
+		box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px #ff6c2f;
+	}
+	
 
 
 </style>
@@ -242,21 +250,17 @@
 						    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
 						    map.panTo(moveLatLon);       
 						    
-// 						    positions.splice(0, 1, {title : '현재 위치', latlng: moveLatLon});
+						    positions.splice(0, 1, {title : '현재 위치', latlng: moveLatLon});
 						    
 							var marker = new kakao.maps.Marker({
 								map: map, // 마커를 표시할 지도
 								position: moveLatLon // 마커의 위치
 							});
 
-							// 마커에 표시할 인포윈도우를 생성합니다 
 							var infowindow = new kakao.maps.InfoWindow({
 								content: positions[i].content // 인포윈도우에 표시할 내용
 							});
 
-							// 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
-							// 이벤트 리스너로는 클로저를 만들어 등록합니다 
-							// for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
 							kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
 							kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
 
@@ -264,22 +268,28 @@
 				
 						var positions = [
 							{
-								title: '현재 위치', 
-								latlng: mapOption.center
+								title: '중심 위치', 
+								latlng: mapOption.center,
+								content: '중심 위치입니다.',
 							},
 							{
 								title: '안양천앞', 
-								latlng: new kakao.maps.LatLng(37.478838, 126.876454)
+								latlng: new kakao.maps.LatLng(37.478838, 126.876454),
+								content: '중심 위치입니다4.'
 							},
 							{
 								title: '5번출구앞', 
-								latlng: new kakao.maps.LatLng(37.479660, 126.881949)
+								latlng: new kakao.maps.LatLng(37.479660, 126.881949),
+								content: '중심 위치입니다3.'
 							},
 							{
 								title: '맥도날드앞', 
-								latlng: new kakao.maps.LatLng(37.479927, 126.881119)
+								latlng: new kakao.maps.LatLng(37.479927, 126.881119),
+								content: '중심 위치입니다2.'
 							}
 						];
+						
+						var selectedMarker = null;
 				
 						for (var i = 0; i < positions.length; i ++) {
 							// 마커를 생성합니다
@@ -290,14 +300,15 @@
 
 							// 마커에 표시할 인포윈도우를 생성합니다 
 							var infowindow = new kakao.maps.InfoWindow({
-								content: positions[i].content // 인포윈도우에 표시할 내용
+								content: positions[i].content, // 인포윈도우에 표시할 내용
+								removable : true
 							});
 
 							// 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
 							// 이벤트 리스너로는 클로저를 만들어 등록합니다 
 							// for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-							kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-							kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+							kakao.maps.event.addListener(marker, 'click', makeOverListener(map, marker, infowindow));
+// 							kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
 						}
 
 						// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
@@ -314,12 +325,32 @@
 							};
 						}
 						
+						var geocoder = new kakao.maps.services.Geocoder();
+
+						// 주소로 좌표를 검색합니다
+						geocoder.addressSearch('인천광역시 미추홀구 숙골로 112번길 11', function(result, status) {
+
+						    // 정상적으로 검색이 완료됐으면 
+						     if (status === kakao.maps.services.Status.OK) {
+
+						        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+						        console.log(result[0].y);
+
+						        // 결과값으로 받은 위치를 마커로 표시합니다
+						        var marker = new kakao.maps.Marker({
+						            map: map,
+						            position: coords
+						        });
+						     }
+						});
+						
 					</script>
 				</div>
 			</div>
 			<div id="moyoList" class="col-4">
-				<div class="row moyoRow">
+				<div class="row moyoRow" id="moyoRow-1">
 					<div class="moyoSimple">
+						<div style="text-align: right;"><i class="material-icons moyoToggleArrow">keyboard_arrow_down</i></div>
 						<div>
 							<img class="simpleImg" src="../resources/images/list/2.jpg"></a>
 						</div>
@@ -345,6 +376,7 @@
 				<div class="row moyoRow">
 					<div class="moyoSimple">
 						<div>
+							<div style="text-align: right;"><i class="material-icons moyoToggleArrow">keyboard_arrow_down</i></div>
 							<img class="simpleImg" src="../resources/images/list/3.jpg"></a>
 						</div>
 						<div>
@@ -369,6 +401,7 @@
 				<div class="row moyoRow">
 					<div class="moyoSimple">
 						<div>
+							<div style="text-align: right;"><i class="material-icons moyoToggleArrow">keyboard_arrow_down</i></div>
 							<img class="simpleImg" src="../resources/images/list/4.jpg"></a>
 						</div>
 						<div>
@@ -393,6 +426,7 @@
 				<div class="row moyoRow">
 					<div class="moyoSimple">
 						<div>
+							<div style="text-align: right;"><i class="material-icons moyoToggleArrow">keyboard_arrow_down</i></div>
 							<img class="simpleImg" src="../resources/images/list/5.jpg"></a>
 						</div>
 						<div>

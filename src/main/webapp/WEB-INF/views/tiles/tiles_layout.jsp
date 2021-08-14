@@ -16,7 +16,6 @@
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
 <!-- <link rel="stylesheet" href="../resources/css/common.css"> -->
 
-	<tiles:insertAttribute name="top"/>
 </head>
 <body>
 
@@ -24,7 +23,9 @@
 	tiles-define.xml에서 설정한 템플릿 파일들을 해당 파일에서
 	레이아웃으로 배치한다.
 -->
-
+<nav>
+	<tiles:insertAttribute name="top"/>
+</nav>
 <!--  
 	아래의 주석 부분은 마이페이지에서 쓸 사이드바 부분
 -->
@@ -33,9 +34,9 @@
 <!-- 	<div class="wrap" > -->
 <!-- 		<div class="content"> -->
 			<%-- <tiles:insertAttribute name="left"/> --%>
-			<!-- <div class="page_content"> -->
+<!-- 			<div class="page_content"> -->
 				<tiles:insertAttribute name="body"/>
-			<!-- </div> -->
+<!-- 			</div> -->
 <!-- 		</div> -->
 <!-- 	</div> -->
 <!-- </div> -->
