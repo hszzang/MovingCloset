@@ -67,11 +67,11 @@
 	    	color:#FFEBCD;
 	    }
 	    
-	    .material-icons{
+	    #icon{
 	    	align-items: center;
 	    	color: white;
 	    }
-	    .material-icons:hover{
+	    #icon:hover{
 	    	color:#FFEBCD;
 	    }
 	    
@@ -225,11 +225,11 @@
 		<a class="nav-link" id="nav-title5" href="javascript:void(0);">Events&nbsp;|&nbsp;Coupons</a>
 		<a class="nav-link" id="nav-title6" href="javascript:void(0);">CS center</a>
 		<div id="icons">
-			<a href=""><i class="material-icons">search</i></a>
+			<a href=""><i class="material-icons" id="icon">search</i></a>
 			&nbsp;
-			<a href=""><i class="material-icons">shopping_basket</i></a>
+			<a href=""><i class="material-icons" id="icon">shopping_basket</i></a>
 			&nbsp;
-			<a href=""><i class="material-icons">person</i></a>
+			<a href=""><i class="material-icons" id="icon">person</i></a>
 		</div>
 	</div>
 	<div class="nav-sub1" id="nav-sub">
