@@ -24,6 +24,27 @@ public class MoyoController {
 		return "body/moyo/moyoForm";
 	}
 	
+	// 조르기 목록
+	@RequestMapping(value="/movingcloset/pleaseList.do", method=RequestMethod.GET)
+	public String pleaseList() {
+		
+		return "body/moyo/pleaseList";
+	}
+	
+	// 조르기 신청폼
+	@RequestMapping(value="/movingcloset/pleaseForm.do", method=RequestMethod.GET)
+	public String pleaseForm() {
+		
+		return "body/moyo/pleaseForm";
+	}
+	
+	// 지난 모여/조르기 목록
+	@RequestMapping(value="/movingcloset/endMoyoPlz.do", method=RequestMethod.GET)
+	public String endMoyoPlz() {
+		
+		return "body/moyo/endMoyoPlz";
+	}
+	
 	
 	
 }

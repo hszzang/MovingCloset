@@ -13,6 +13,10 @@
 /* 	    li{ width:100px; margin-right:1%;} */
 /* 	    i{ font-size:28px; color:white;} */
 /* 	    #rightNav{ display:inline; float:right; margin:20px 0 0 600px; } */
+
+		.navbar {
+			display: block;
+		}
 	      
 	    #megaMenu{
 	        width:100%; height:12%; display:none;																																																																																					
@@ -58,7 +62,7 @@
     </script>
 
 
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top d-flex">
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark d-flex">
 	  <a class="navbar-brand" id="homeBtn" href="#">Moving Closet</a>
 	  <ul class="navbar-nav" id="navi">
 	    <li class="nav-item">

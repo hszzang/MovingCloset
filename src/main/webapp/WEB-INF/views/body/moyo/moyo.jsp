@@ -10,9 +10,13 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=88444ee8320d4b09aa47995c55b34d58"></script>
 
 <script> 
+
 	$(document).ready(function(){
 		$('.moyoDetail').hide();
 		// $(".moyoSimple").click(function(){
@@ -36,11 +40,62 @@
 			}
 		});
 	});
-
-	function clickRow(moyoRow){
-
+	
+	var nowLat, nowLon;
+	function getNowLocation () {
 		
+		if(navigator.geolocation) {
+			console.log("Geolocation API를 지원합니다.");
+			
+			/*
+			옵션 항목은 3개의 값을 가진 전역객체를 사용한다.
+			enableHighAccurcy : 정확도를 결정하는 Boolean타입의 값
+			timeout : 위치값을 장치로 받을 때까지의 대기시간(1000분의 1초)
+			maximumAge : 캐시된 위치값을 반환받을 수 있는 대기시간. 
+				0을 지정하면 캐시값을 사용하지 않고 항상 현재 위치값을 수집함.
+			*/
+			var options = {
+					enableHighAccurcy:true,
+					timeout:5000,
+					maximumAge:3000
+			};
+			navigator.geolocation.getCurrentPosition(showPosition, showError, options);
+		}
+		else {
+			console.log("이 브라우저는 Geolocation API를 지원하지 않습니다.");
+		}
+		
+	}
 
+	//위치를 찾았을 때의 콜백메소드
+	var showPosition = function (position) {
+		
+		//콜백된 매개변수를 통해 위도, 경도값을 얻어온다.
+		nowLat = position.coords.latitude;
+		nowLon = position.coords.longitude;
+		
+		console.log(position.coords.latitude);
+		console.log(nowLat);
+		
+		panTo();
+		
+	}
+
+	//위치를 찾지 못했을 때의 콜백메소드
+	var showError = function (error) {
+		
+		switch(error.code) {
+			case error.UNKNOWN_ERROR:
+				console.log("알 수 없는 오류 발생"); break;
+			case error.PERMISSION_DENIED:
+				console.log("권한이 없습니다."); break;
+			case error.POSITION_UNAVAILABLE:
+				console.log("위치 확인불가"); break;
+			case error.TIMEOUT:
+				console.log("시간초과"); break;
+		}
+		
+		alert("위치 호출에 실패하였습니다.");
 	}
 
 	</script>
@@ -94,6 +149,38 @@
 	.moyoDetail .moyoFormBtn {
 		background-color: #ff6c2f; color: white; 
 	}
+	
+	.section-title {
+	  text-align: center;
+	  padding-bottom: 30px; padding-top: 50px;
+	}
+	
+	.section-title h2 {
+	  font-size: 32px;
+	  font-weight: bold;
+	  text-transform: uppercase;
+	  margin-bottom: 20px;
+	  padding-bottom: 20px;
+	  position: relative;
+	}
+	
+	.section-title h2::after {
+	  content: '';
+	  position: absolute;
+	  display: block;
+	  width: 50px;
+	  height: 3px;
+	  background: #555555;
+	  bottom: 0;
+	  left: calc(50% - 25px);
+	}
+	
+	#inputLocation {
+		width: 100%;
+		padding-right: 0;
+		margin-right: 0;
+	}
+	
 
 
 </style>
@@ -101,15 +188,25 @@
 </head>
 <body>
 
+<!-- movingcloset geolocation api key : AIzaSyCuUkjkCmZ7UirvN0Vhs0Q3VmgcIbEl_N0 -->
+
 	<div class="container">
+	
+		<div class="section-title">
+		    <h2>모 여 !</h2>
+	    </div>
 		<div class="row">
 			<div class="col-8">
-				<div class="row">
-					<div class="input-group">
-						<!-- 가입 시 입력한 주소가 기본값으로 들어감 -->
-						<input type="text" placeholder="주소를 입력하세요" class="form-control" style="width: 500px;" />
-						<button type="button" class="form-control" id="findMoyoBtn">모여 찾기</button>
-					</div>
+				<div class="row input-group form-inline" id="inputLocation">
+					<button type="button" class="form-control" >
+			        	<i class="material-icons">home</i>
+			        </button>
+					<button type="button" class="form-control" onclick="getNowLocation();">
+			        	<i class="material-icons">my_location</i>
+			        </button>
+					<!-- 가입 시 입력한 주소가 기본값으로 들어감 -->
+					<input type="text" placeholder="주소를 입력하세요" class="form-control" style="width:330px;" />
+					<button type="button" class="form-control" id="findMoyoBtn">모여 찾기</button>
 				</div>
 				<div class="row">
 					<div id="map" style="width:800px;height:600px;"></div>
@@ -131,6 +228,39 @@
 
 						// 지도의 우측에 확대 축소 컨트롤을 추가한다
 						map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+						
+						function panTo() {
+							
+							
+							console.log(nowLat);
+							console.log(nowLon);
+							
+						    // 이동할 위도 경도 위치를 생성합니다 
+						    var moveLatLon = new kakao.maps.LatLng(nowLat, nowLon);
+						    
+						    // 지도 중심을 부드럽게 이동시킵니다
+						    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+						    map.panTo(moveLatLon);       
+						    
+// 						    positions.splice(0, 1, {title : '현재 위치', latlng: moveLatLon});
+						    
+							var marker = new kakao.maps.Marker({
+								map: map, // 마커를 표시할 지도
+								position: moveLatLon // 마커의 위치
+							});
+
+							// 마커에 표시할 인포윈도우를 생성합니다 
+							var infowindow = new kakao.maps.InfoWindow({
+								content: positions[i].content // 인포윈도우에 표시할 내용
+							});
+
+							// 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+							// 이벤트 리스너로는 클로저를 만들어 등록합니다 
+							// for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+							kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+							kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+
+						}        
 				
 						var positions = [
 							{
@@ -183,11 +313,12 @@
 								infowindow.close();
 							};
 						}
+						
 					</script>
 				</div>
 			</div>
 			<div id="moyoList" class="col-4">
-				<div class="row moyoRow" value="1" onclick=clickRow(this.value);>
+				<div class="row moyoRow">
 					<div class="moyoSimple">
 						<div>
 							<img class="simpleImg" src="../resources/images/list/2.jpg"></a>
