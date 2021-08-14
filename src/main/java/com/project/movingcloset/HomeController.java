@@ -54,6 +54,7 @@ public class HomeController {
 		return "body/newD_main";
 	}
 	
+
 	//로그인
 	@RequestMapping(value="/movingcloset/login.do", method=RequestMethod.GET)
 	public String newDmain() {
