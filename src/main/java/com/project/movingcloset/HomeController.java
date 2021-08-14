@@ -68,18 +68,39 @@ public class HomeController {
 		return "body/myPlease2";
 	}
 	
-	//쪼르깅
+	//메인
 	@RequestMapping(value="/movingcloset/main.do", method=RequestMethod.GET)
 	public String main(Locale locale, Model model) {
 		return "main";
 	}
 	
+
 	//회원가입
 	@RequestMapping(value="/movingcloset/register.do", method=RequestMethod.GET)
 	public String register() {
 		
 		return "body/registerForm";
 	}
+
+	
+	//이용약관
+	@RequestMapping(value="/movingcloset/terms.do", method=RequestMethod.GET)
+	public String terms(Locale locale, Model model) {
+		return "body/terms";
+	}
+	//개인정보처리방침
+	@RequestMapping(value="/movingcloset/privacy.do", method=RequestMethod.GET)
+	public String privacy(Locale locale, Model model) {
+		return "body/privacy";
+	}
+	//위치정보이용약관
+	@RequestMapping(value="/movingcloset/rules_loc.do", method=RequestMethod.GET)
+	public String rules_loc(Locale locale, Model model) {
+		return "body/rules_loc";
+	}
+	
+	
+	
 }
 	
 	
