@@ -82,6 +82,17 @@ public class HomeController {
 		return "body/registerForm";
 	}
 
+	// 아이디 중복확인
+	@RequestMapping(value="/movingcloset/idcheck.do", method=RequestMethod.GET)
+	public String idcheck() {
+		
+		return "idCheckForm";
+	}
+
+	
+	
+	
+	
 	
 	//이용약관
 	@RequestMapping(value="/movingcloset/terms.do", method=RequestMethod.GET)

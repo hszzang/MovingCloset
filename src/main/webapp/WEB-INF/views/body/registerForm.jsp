@@ -8,8 +8,8 @@
 	<title>Insert title here</title>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<style>
@@ -94,22 +94,13 @@
 		}
 
 		/* 여러가지 브라우저 환경에서 동일하게 적용하기 위한 코드 */
-		input::-ms-input-placeholder {font-style: italic;font-size: 12px; color:red;}
-		input::-webkit-input-placeholder {font-style: italic;font-size: 12px;color:red;}
-		input::-moz-placeholder {font-style: italic;font-size: 12px;color:red;}
+		input::-ms-input-placeholder {font-style: italic;font-size: 12px; }
+		input::-webkit-input-placeholder {font-style: italic;font-size: 12px;}
+		input::-moz-placeholder {font-style: italic;font-size: 12px;}
 	</style>
 
 
 	<script>
-
-		$(function () {
-			//라디오를 버튼모양으로 바꿔주는 jQuery UI
-			$("input[type=radio]").checkboxradio({
-				icon: false,
-
-			});
-
-		});
 
 
 
@@ -133,8 +124,8 @@
 			}
 			else {
 				fn.user_id.readOnly = true;
-				window.open("./id_overapping.jsp?user_id=" + fn.user_id.value,
-					"idover", "width=500,height=300");
+				window.open("./idcheck.do?user_id=" + fn.user_id.value,
+					"idover", "width=600,height=400");
 			}
 		}
 		function loginValdidate(fn) {
@@ -324,7 +315,7 @@
  -->
 
 <body>
-	<div class="container">
+	<div class="container" style="margin-top:60px;">
 		<div class="input-form-background row">
 			<div class="input-form col-md-12 mx-auto">
 				<div class="input-form-wrap">
@@ -387,18 +378,14 @@
 									</td>
 								</tr>
 
-								<td><span class="red">*</span> 이름</td>
-								<td class="form-inline">
-									<input type="text" class="form-control" name="name" value="" style="width: 250px;"
-										required placeholder="이름을 입력해주세요." />
-									&nbsp;&nbsp;&nbsp;&nbsp;
-									<label for="radio-1">남</label>
-									<input type="radio" name="gender" id="radio-1" value="남" checked>
-									&nbsp;&nbsp;&nbsp;&nbsp;
-									<label for="radio-2">여</label>
-									<input type="radio" name="gender" id="radio-2" value="여">
-
-								</td>
+								<tr>
+									<td><span class="red">*</span> 이름</td>
+									<td class="form-inline">
+										<input type="text" class="form-control" name="name" value="" style="width: 250px;"
+											required placeholder="이름을 입력해주세요." />
+										
+	
+									</td>
 								</tr>
 
 								<tr>
