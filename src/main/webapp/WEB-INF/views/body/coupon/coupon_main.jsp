@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" href="../resources/css/coupon_main.css" />
+<link rel="stylesheet" href="../resources/css/list.css" />
 <title>Insert title here</title>
 </head>
 <body>
@@ -15,19 +15,23 @@
 			<div class="coupon_brand">
 				<img src="../resources/images/coupon_brand/nike.png">
 			</div>
-		</a> <a href="#">
+		</a>
+		<a href="#">
 			<div class="coupon_brand">
 				<img src="../resources/images/coupon_brand/gucci.png">
 			</div>
-		</a> <a href="#">
+		</a>
+		<a href="#">
 			<div class="coupon_brand">
 				<img src="../resources/images/coupon_brand/musinsa.png">
 			</div>
-		</a> <a href="#">
+		</a>
+		<a href="#">
 			<div class="coupon_brand">
 				<img src="../resources/images/coupon_brand/new balance.png">
 			</div>
-		</a> <a href="#">
+		</a>
+		<a href="#">
 			<div class="coupon_brand">
 				<img src="../resources/images/coupon_brand/adidas.png">
 			</div>
@@ -50,8 +54,9 @@
 				<li class="category_detail"><a href="#">신발</a></li>
 			</ul>
 		</div>
+		
 		<hr width="80%">
-
+		
 		<div class="list_wrap">
 			<div class="list_coupon">
 				<img src="../resources/images/coupon/musinsa_blackfriday.jpg">
@@ -124,7 +129,7 @@
 				</div>
 			</div>
 		</div>
-
+ 
 	</div>
 </body>
 </html>

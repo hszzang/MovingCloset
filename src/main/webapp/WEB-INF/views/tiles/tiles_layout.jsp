@@ -24,12 +24,12 @@
 	레이아웃으로 배치한다.
 -->
 
-<!--  
+<!--   
 	아래의 주석 부분은 마이페이지에서 쓸 사이드바 부분
 -->
 <div class="container-fluid">
 	<div class="wrap" >
-		<tiles:insertAttribute name="top"/>
+		<!-- <tiles:insertAttribute name="top"/> --> 
 		<div class="content">
 			<%-- <tiles:insertAttribute name="left"/> --%>
 			<!-- <div class="page_content"> -->
