@@ -235,9 +235,9 @@
 	<div class="nav-sub1" id="nav-sub">
 		<div class="nav-content container-fluid">
 			 <div class="contentLink d-flex justify-content-around">
-	            <a href="" id="sub-content" style="margin-right:-30px">회사소개</a>
-	            <a href="" id="sub-content">채용정보</a>
-	            <a href="" id="sub-content" style="margin-right:30px">오시는 길</a>
+	            <a href="../movingcloset/introduce.do" id="sub-content" style="margin-right:-30px">회사소개</a>
+	            <a href="../movingcloset/recruit.do" id="sub-content">채용정보</a>
+	            <a href="../movingcloset/map.do" id="sub-content" style="margin-right:30px">오시는 길</a>
 	        </div>
 		</div>
 	</div>
@@ -245,7 +245,7 @@
 		<div class="nav-content container-fluid">
 			 <div class="contentLink d-flex justify-content-around">
 	            <a href="../movingcloset/moyo.do" id="sub-content">모여</a>
-	            <a href="../movingcloset/moyoForm.do" id="sub-content">모여신청</a>
+<!-- 	            <a href="../movingcloset/moyoForm.do" id="sub-content">모여신청</a> -->
 	            <a href="" id="sub-content">조르기</a>
 	            <a href="" id="sub-content">지난 모여&nbsp;/&nbsp;조르기</a>
 	        </div>

@@ -3,7 +3,7 @@ package movingcloset.command;
 import org.springframework.ui.Model;
 
 // 게시판의 모든 Command클래스가 구현할 인터페이스 정의
-public interface BbsCommandImpl {
+public interface CommandImpl {
 
 	// 인터페이스에 정의한 모든 메소드는 public abstract 선언되어진다.
 	void execute(Model model);
