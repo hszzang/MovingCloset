@@ -59,7 +59,7 @@
         .col { border-collapse: collapse; }
         .col-100 { width: 100%; }
         
-        a:link{ color:black; text-decoration:none; }
+        /*a:link{ color:black; text-decoration:none; }*/
         a:hover{ color:black; text-decoration:none; !important}
         a:focus{ color:black; text-decoration:none; }
         
