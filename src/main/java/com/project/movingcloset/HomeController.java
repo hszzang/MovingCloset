@@ -74,6 +74,14 @@ public class HomeController {
 		return "main";
 	}
 	
+
+	//회원가입
+	@RequestMapping(value="/movingcloset/register.do", method=RequestMethod.GET)
+	public String register() {
+		
+		return "body/registerForm";
+	}
+
 	
 	//이용약관
 	@RequestMapping(value="/movingcloset/terms.do", method=RequestMethod.GET)
