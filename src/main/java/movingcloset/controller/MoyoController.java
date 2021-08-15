@@ -1,19 +1,35 @@
-package com.project.movingcloset;
+package movingcloset.controller;
 
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import movingcloset.command.CommandImpl;
+import movingcloset.command.MoyoCommand;
+import mybatis.MoyoDTO;
+
 @Controller
 public class MoyoController {
 
+	CommandImpl command = null;
+	
+	@Autowired
+	MoyoCommand moyoCommand;
+	
 	// 모여
 	@RequestMapping(value="/movingcloset/moyo.do", method=RequestMethod.GET)
-	public String moyo() {
+	public String moyo(Model model, HttpServletRequest req, MoyoDTO moyoDTO) {
 		
+		model.addAttribute("req", req);
+		command = moyoCommand;
+		command.execute(model);
+		 
 		return "body/moyo/moyo";
 	}
 		

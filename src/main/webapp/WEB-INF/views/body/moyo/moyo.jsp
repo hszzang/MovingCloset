@@ -105,6 +105,10 @@
 
 <style>
 
+	.container {
+		margin-top: 95px;
+		margin-bottom: 30px;
+	}
 	.container .row {
 		padding:10px;
 		padding-left: 15px;
