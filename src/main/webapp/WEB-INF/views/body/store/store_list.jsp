@@ -87,7 +87,7 @@
         #pmL{background-color:gray;}
         #pmR{background-color:black;}
 
-		#productUpload{width:100px; height:40px; background-color:black; color:white;}
+		#productUpload{width:100px; height:40px; background-color:black; color:white; }
 
         @media only screen and (max-width:1000px){
 

@@ -21,7 +21,13 @@ public class StoreController {
 
 		return "body/store/store_list";
 	}
+	/*
+	@RequestMapping(value="/movingcloset/storeupload.do", method=RequestMethod.GET)
+	public String storeUpload(Locale locale, Model model) {
 
+		return "body/store/Write";
+	}
+	*/
 	// 스토어 상세페이지에서 리뷰쓰기 버튼
 	@RequestMapping("/store/reviewPage.do")
 	public String review(Locale locale, Model model) {

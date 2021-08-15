@@ -28,16 +28,20 @@
 				<div class="login-wrap p-0">
 					<img src="../resources/images/MovingClosetLogoBlack.png" id="loginLogo" />
 					<form name="loginForm" action="./login.memb" onsubmit="return loginValidate(this);">
+					
 						<div class="form-group">
 <%-- 							<input type="text" name="userid" value="<%=loginId %>"  class="form-control" placeholder="Enter ID" required> --%>
 							<input type="text" name="userid"  class="form-control" placeholder="Enter ID" required>
 						</div>
+						
 						<div class="form-group">
 							<input id="password-field" name="userpw" type="password" class="form-control" placeholder="Enter Password" required>
 						</div>
+						
 						<div class="form-group">
 							<button type="submit" class="form-control btn btn-dark submit px-3">LOG IN</button>
 						</div>
+						
 						<div class="form-group d-md-flex">
 							<div class="w-50">
 								<label class="checkbox-wrap checkbox-primary">

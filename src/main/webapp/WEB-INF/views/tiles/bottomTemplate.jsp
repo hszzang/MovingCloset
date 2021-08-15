@@ -53,5 +53,4 @@
 				고객문의 <a href="https://github.com/hszzang/MovingCloset/">https://github.com/hszzang/MovingCloset </a> 
 			</div>
 		</div>
-
 </div>
