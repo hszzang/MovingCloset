@@ -16,5 +16,7 @@ public class MoyoDTO {
 	private java.sql.Date m_start;
 	private java.sql.Date m_end;
     private String m_status;
+    private String m_ofile;
+    private String m_sfile;
 	
 }

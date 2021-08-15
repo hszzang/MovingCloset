@@ -16,93 +16,6 @@
 <!-- geocoder를 사용하기 위해 api key 뒤에 &libraries=services 를 붙여준다.-->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=88444ee8320d4b09aa47995c55b34d58&libraries=services"></script>
 
-<script> 
-
-	$(document).ready(function(){
-		$('.moyoDetail').hide();
-		// $(".moyoSimple").click(function(){
-		// 	$(".moyoDetail").slideToggle("slow");
-
-		// });
-		$(".moyoRow").click(function(){
-			$(".moyoDetail").slideToggle("slow");
-
-			// $("#moyoList").css("overflow-y", "hidden");
-			// $(".moyoRow").not(this).css("display", "none");
-			
-			if($(".moyoDetail").is(":hidden")){
-				// $("#moyoList").css("overflow-y", "scroll");
-				$(".moyoRow").not(this).slideDown("fast");
-				$(".moyoToggleArrow").text('keyboard_arrow_down');
-			} 
-			else {
-				// $("#moyoList").css("overflow-y", "hidden");
-				$(".moyoRow").not(this).slideUp("fast");
-				$(".moyoToggleArrow").text('keyboard_arrow_up');
-				// $(".moyoRow").not(this).css("display", "none");
-			}
-		});
-	});
-	
-	var nowLat, nowLon;
-	function getNowLocation () {
-		
-		if(navigator.geolocation) {
-			console.log("Geolocation API를 지원합니다.");
-			
-			/*
-			옵션 항목은 3개의 값을 가진 전역객체를 사용한다.
-			enableHighAccurcy : 정확도를 결정하는 Boolean타입의 값
-			timeout : 위치값을 장치로 받을 때까지의 대기시간(1000분의 1초)
-			maximumAge : 캐시된 위치값을 반환받을 수 있는 대기시간. 
-				0을 지정하면 캐시값을 사용하지 않고 항상 현재 위치값을 수집함.
-			*/
-			var options = {
-					enableHighAccurcy:true,
-					timeout:5000,
-					maximumAge:3000
-			};
-			navigator.geolocation.getCurrentPosition(showPosition, showError, options);
-		}
-		else {
-			console.log("이 브라우저는 Geolocation API를 지원하지 않습니다.");
-		}
-		
-	}
-
-	//위치를 찾았을 때의 콜백메소드
-	var showPosition = function (position) {
-		
-		//콜백된 매개변수를 통해 위도, 경도값을 얻어온다.
-		nowLat = position.coords.latitude;
-		nowLon = position.coords.longitude;
-		
-		console.log(position.coords.latitude);
-		console.log(nowLat);
-		
-		panTo();
-		
-	}
-
-	//위치를 찾지 못했을 때의 콜백메소드
-	var showError = function (error) {
-		
-		switch(error.code) {
-			case error.UNKNOWN_ERROR:
-				console.log("알 수 없는 오류 발생"); break;
-			case error.PERMISSION_DENIED:
-				console.log("권한이 없습니다."); break;
-			case error.POSITION_UNAVAILABLE:
-				console.log("위치 확인불가"); break;
-			case error.TIMEOUT:
-				console.log("시간초과"); break;
-		}
-		
-		alert("위치 호출에 실패하였습니다.");
-	}
-
-	</script>
-
 <style>
 
 	.container {
@@ -193,9 +106,100 @@
 		box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px #ff6c2f;
 	}
 	
-
-
 </style>
+<script> 
+
+	$(document).ready(function(){
+		$('.moyoDetail').hide();
+		// $(".moyoSimple").click(function(){
+		// 	$(".moyoDetail").slideToggle("slow");
+
+		// });
+		$(".moyoRow").click(function(){
+			$(".moyoDetail").slideToggle("slow");
+
+			// $("#moyoList").css("overflow-y", "hidden");
+			// $(".moyoRow").not(this).css("display", "none");
+			
+			if($(".moyoDetail").is(":hidden")){
+				// $("#moyoList").css("overflow-y", "scroll");
+				$(".moyoRow").not(this).slideDown("fast");
+				$(".moyoToggleArrow").text('keyboard_arrow_down');
+			} 
+			else {
+				// $("#moyoList").css("overflow-y", "hidden");
+				$(".moyoRow").not(this).slideUp("fast");
+				$(".moyoToggleArrow").text('keyboard_arrow_up');
+				// $(".moyoRow").not(this).css("display", "none");
+			}
+		});
+	});
+	
+	var nowLat, nowLon;
+	function getNowLocation() {
+		
+		if(navigator.geolocation) {
+			console.log("Geolocation API를 지원합니다.");
+			
+			/*
+			옵션 항목은 3개의 값을 가진 전역객체를 사용한다.
+			enableHighAccurcy : 정확도를 결정하는 Boolean타입의 값
+			timeout : 위치값을 장치로 받을 때까지의 대기시간(1000분의 1초)
+			maximumAge : 캐시된 위치값을 반환받을 수 있는 대기시간. 
+				0을 지정하면 캐시값을 사용하지 않고 항상 현재 위치값을 수집함.
+			*/
+			var options = {
+					enableHighAccurcy:true,
+					timeout:5000,
+					maximumAge:3000
+			};
+			navigator.geolocation.getCurrentPosition(showPosition, showError, options);
+			
+			document.moyoAddrFrm.submit();
+		}
+		else {
+			console.log("이 브라우저는 Geolocation API를 지원하지 않습니다.");
+		}
+		
+	}
+
+	//위치를 찾았을 때의 콜백메소드
+	var showPosition = function (position) {
+		
+		//콜백된 매개변수를 통해 위도, 경도값을 얻어온다.
+		nowLat = position.coords.latitude;
+		nowLon = position.coords.longitude;
+		
+		console.log(position.coords.latitude);
+		console.log(nowLat);
+		
+		document.moyoAddrFrm.nowLat.value = nowLat;
+		document.moyoAddrFrm.nowLon.value = nowLon;
+		
+// 		panTo();
+		
+	}
+
+	//위치를 찾지 못했을 때의 콜백메소드
+	var showError = function (error) {
+		
+		switch(error.code) {
+			case error.UNKNOWN_ERROR:
+				console.log("알 수 없는 오류 발생"); break;
+			case error.PERMISSION_DENIED:
+				console.log("권한이 없습니다."); break;
+			case error.POSITION_UNAVAILABLE:
+				console.log("위치 확인불가"); break;
+			case error.TIMEOUT:
+				console.log("시간초과"); break;
+		}
+		
+		alert("위치 호출에 실패하였습니다.");
+	}
+
+</script>
+
+
 
 </head>
 <body>
@@ -209,8 +213,11 @@
 	    </div>
 		<div class="row">
 			<div class="col-8">
+				<form action="" name="moyoAddrFrm">
 				<div class="row input-group form-inline" id="inputLocation">
-					<button type="button" class="form-control" >
+					<input type="hid den" name="nowLat" />
+					<input type="hid den" name="nowLon" />
+					<button type="button" class="form-control" onclick="getAddressLatLon();">
 			        	<i class="material-icons">home</i>
 			        </button>
 					<button type="button" class="form-control" onclick="getNowLocation();">
@@ -218,8 +225,9 @@
 			        </button>
 					<!-- 가입 시 입력한 주소가 기본값으로 들어감 -->
 					<input type="text" placeholder="주소를 입력하세요" class="form-control" style="width:330px;" />
-					<button type="button" class="form-control" id="findMoyoBtn">모여 찾기</button>
+					<button type="button" class="form-control" id="findMoyoBtn" onclick="getAddressLatLon();">모여 찾기</button>
 				</div>
+				</form>
 				<div class="row">
 					<div id="map" style="width:800px;height:600px;"></div>
 					<script>
@@ -331,22 +339,20 @@
 						
 						var geocoder = new kakao.maps.services.Geocoder();
 
+						function getAddressLatLon() {
+							
+							geocoder.addressSearch(addrStr, function(result, status) {
+	
+							    // 정상적으로 검색이 완료됐으면 
+							     if (status === kakao.maps.services.Status.OK) {
+	
+							        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+							        console.log(result[0].y);
+	
+							     }
+							});
+						}
 						// 주소로 좌표를 검색합니다
-						geocoder.addressSearch('인천광역시 미추홀구 숙골로 112번길 11', function(result, status) {
-
-						    // 정상적으로 검색이 완료됐으면 
-						     if (status === kakao.maps.services.Status.OK) {
-
-						        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-						        console.log(result[0].y);
-
-						        // 결과값으로 받은 위치를 마커로 표시합니다
-						        var marker = new kakao.maps.Marker({
-						            map: map,
-						            position: coords
-						        });
-						     }
-						});
 						
 					</script>
 				</div>
