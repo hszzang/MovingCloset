@@ -9,15 +9,31 @@
 <style type="text/css">
 .submenu{
 	font-size:45px;
-
+	opacity:30%; 
+	transition : font-size 1s;
 }
 
-li > a > span:hover{
-	background: #FF6C2F;
-	border-radius: 10px;
-	transition-duration: 1.2s;
 
-}
+ li > a > span:hover{
+	color:white; 
+	opacity:1;
+	font-size:60px;
+	transform: scale(1.5);
+	transition: transform 1s;
+
+} 
+
+ li > a > span:hover span{
+	color:white; 
+	opacity:1;
+	font-size:60px;
+	transform: scale(1.5);
+	transition: transform 1s;
+
+
+} 
+
+
 
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

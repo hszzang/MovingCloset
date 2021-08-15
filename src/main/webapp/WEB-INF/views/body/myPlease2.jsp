@@ -38,9 +38,10 @@
   	</script>
   	
     <style>
-		#wrap{
+		.container{
 			border:none;
-			width:80%; height:auto;
+			/* width:80%;  */
+            height:auto;
 			float:right; margin-top:100px;
 		}
 		.tablink {
@@ -67,94 +68,94 @@
         }
         #Expired{ display:none; }
         
-		#outDiv{
+		.outDiv{
 			width:90%; height:auto;
 			border:none;
 			margin-bottom:1%; padding:0;
 		}
-		#innerDiv{
+		.innerDiv{
 			width:100%; height:auto;
 			/*border:#FF6C2F solid 1px;*/
 			border:lightgray solid 1px;
 			padding:3%;
 		}
 
-		#titleDiv{
+		/* #plzTitleDiv{
 			width:100%; height:auto;
 			border:none;
 			padding-left:0; margin-left:1%;	
 			font-size:14pt; font-weight:bold;
-		}
-		#product{
+		} */
+		.plzProduct{
 			width:100%; height:360px;
 			border:none;
 			padding:0; margin:0;
 		}
 
-		#imgs{
+		.plzImgs{
 			width:40%; height:350px;
 			border:none;
 			/*border:black solid 1px;*/
 			padding:0; margin:0;
 			float:left; display:inline-block;
 		}
-		#img{
+		.plzImg{
 			width:95%; height:auto; margin:0 2% 0 2%;
 		}
 
-		#desc{
+		.plzInfo{
 			width:60%; height:350px;
 			border:none; margin:0;
 			float:left; display:inline-block;
 		}
 		
-		#upper{
+		.plzUpperDiv{
 			width:100%; height:30%;
 			border:none; 
 			padding-left:1%; margin:0;
+			margin-bottom: 1%;
 		}
-		#brand{font-size:10pt; color:gray; display:block; }
-		#pName{font-size:12pt; font-weight:bold; display:block;}
-		#oriPrice{font-size:10pt; color:gray; font-weight:lighter; display:inline;}
-		#nowPrice{display:inline;}
-		#per{color:#FF6C2F; display:inline; font-size:12pt;}
-		#price{color:#FF6C2F; font-size:14pt; font-weight:bold; display:inline;}
-		#won{color:black; font-weight:bold; display:inline;}
+		.plzBrand{font-size:10pt; color:gray; display:block; }
+		.plzPName{font-size:12pt; font-weight:bold; display:block;}
+		.plzOriPrice{font-size:10pt; color:gray; font-weight:lighter; display:inline;}
+		.plzNowPrice{display:inline;}
+		.plzPercent{color:#FF6C2F; display:inline; font-size:12pt;}
+		.plzPrice{color:#FF6C2F; font-size:14pt; font-weight:bold; display:inline;}
+	    .plzWon{color:black; font-weight:bold; display:inline;}
 		
-		#down{
+		.plzDownDiv{
 			width:100%; height:55%; margin:0;
 			border:lightgray solid 1px; 
 			padding-left:1%; padding-top:1%;
 		}
-		#expNums{
-			padding:50px; margin-left:5%; display:inline;
+		.plzRemainingTime{
+			padding:50px; margin-left:5%; display:inline; align-content: center;
 		}
 		.expNum{
 			width:auto; height:auto;
 			border:lightgray solid 1px; padding:3%;
 			font-size:18pt; color:orangered; font-weight:bold;
-			
 		}
 		.expWord{
 		 	color:gray; font-size:10pt;
 		 	margin:0 1% 0 1%;
 		 	
 		}
-		#until{
+		.until{
 			color:gray; font-size:10pt; font-weight:lighter;
 			margin:1% 0 0 5%;
 		}
 		.progress{ width:80%; margin:7% 7% 0 7%; }
-		#finish{ 
+		.plzAchivementRate{ 
 			float:right; margin-right:15%;
 			font-size:12pt; font-weight:bold;
 		}
-		#pleaseBtn{
+		.pleaseBtn{
 			width:100%; height:50px;
 			border:none; background-color:#FF6C2F; color:white;
 			font-size:14pt; font-weight:bold;
 		}
-		#pleaseBtn:focus{outline:none;}
+		.pleaseBtn:focus{outline:none;}
 		
 		
 		
@@ -173,477 +174,477 @@
     </style>
 </head>
 <body>
-    <div id="wrap">
-			<button class="tablink" onclick="openPage('Expired', this, 'white')" >마감한 쪼르기</button>
-        	<button class="tablink" onclick="openPage('onGoing', this, 'white')" id="default">진행중인 쪼르기</button>
-            
-            <div id="onGoing" class="tabcontent">
+<div class="container">
+<button class="tablink" onclick="openPage('Expired', this, 'white')" >마감한 쪼르기</button>
+     	<button class="tablink" onclick="openPage('onGoing', this, 'white')" id="default">진행중인 쪼르기</button>
+         
+		<!-- 진행중인 쪼르기 -->
+        <div id="onGoing" class="tabcontent">
 
-            <!-- 진행중인 쪼르기 -->
-            	<div id="outDiv">
-            		<div id="innerDiv">
-            			<div id="titleDiv">
-            				<span id="title">쪼르기상품</span>
-            			</div>
-            			<hr />	
-            			<div id="product">
-            				<span id="imgs">
-	            				<span id="mainImg">
-	            					<img id="img" src="../resources/images/please/p1.jpg"/>
-	            				</span>
-            				</span>
-            				
-	            			<span id="desc">
-	            				<div id="upper">
-	            					<div id="brand">TEN C</div>
-	            					<div id="pName">
-	            						TEN C_ARCTIC PARKA <br />
-	            						17CTCUC03075003780 888 BLUE</div>
-	            					<div id="oriPrice"><strike>1,180,000</strike></div>
-	            					<div id="nowPrice">
-	            						<span id="per"><em>34%</em></span>
-	            						<span id="price">778,800</span>
-	            						<span id="won">원</span>	
-	            					</div>
-	            				</div>
-	            				<div id="down">
-	            					<div id="until">마감까지</div><br />
-	            					<div id="expNums">
-	            						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
-	            						<span class="expNum">12</span><span class="expWord">시</span>
-	            						<span class="expNum">35</span><span class="expWord">분</span>
-	            						<span class="expNum">20</span><span class="expWord">초</span>
-	            					</div>
-	            					 <div class="progress">
-    									<div class="progress-bar bg-warning" style="width:70%">70%</div>
-  									</div>
-  									<span id="finish">490 / 700 달성</span>
-	            				</div>
-	            				<button id="pleaseBtn">쪼르기 !</button>
-	            			</span>
-            			</div>
-            		</div>
-            	</div> <!-- 1 끝 -->
-            	
-            	<div id="outDiv">
-            		<div id="innerDiv">
-            			<div id="titleDiv">
-            				<span id="title">쪼르기상품</span>
-            			</div>
-            			<hr />	
-            			<div id="product">
-            				<span id="imgs">
-	            				<span id="mainImg">
-	            					<img id="img" src="../resources/images/please/p2.jpg"/>
-	            				</span>
-            				</span>
-            				
-	            			<span id="desc">
-	            				<div id="upper">
-	            					<div id="brand">SnowPeak Apparel</div>
-	            					<div id="pName">
-	            						블랙 멀티캠 롱다운 자켓_CA <br />
-	            						S20WME-DJ12
-	            					</div>
-	            					<div id="oriPrice"><strike>599,000</strike></div>
-	            					<div id="nowPrice">
-	            						<span id="per"><em>40%</em></span>
-	            						<span id="price">359,s00</span>
-	            						<span id="won">원</span>	
-	            					</div>
-	            				</div>
-	            				<div id="down">
-	            					<div id="until">마감까지</div><br />
-	            					<div id="expNums">
-	            						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
-	            						<span class="expNum">12</span><span class="expWord">시</span>
-	            						<span class="expNum">35</span><span class="expWord">분</span>
-	            						<span class="expNum">20</span><span class="expWord">초</span>
-	            					</div>
-	            					 <div class="progress">
-    									<div class="progress-bar bg-warning" style="width:70%">70%</div>
-  									</div>
-  									<span id="finish">490 / 700 달성</span>
-	            				</div>
-	            				<button id="pleaseBtn">쪼르기 !</button>
-	            			</span>
-            			</div>
-            		</div>
-            	</div> <!-- 2 끝 -->
-            	
-            	<div id="outDiv">
-            		<div id="innerDiv">
-            			<div id="titleDiv">
-            				<span id="title">쪼르기상품</span>
-            			</div>
-            			<hr />	
-            			<div id="product">
-            				<span id="imgs">
-	            				<span id="mainImg">
-	            					<img id="img" src="../resources/images/please/p3.jpg"/>
-	            				</span>
-            				</span>
-            				
-	            			<span id="desc">
-	            				<div id="upper">
-	            					<div id="brand">SnowPeak Apparel</div>
-	            					<div id="pName">
-	            						에디트 아웃포켓형 숏다운 자켓_MS <br />
-	            						S20WMP-DJ86</div>
-	            					<div id="oriPrice"><strike>439,000</strike></div>
-	            					<div id="nowPrice">
-	            						<span id="per"><em>40%</em></span>
-	            						<span id="price">263,400</span>
-	            						<span id="won">원</span>	
-	            					</div>
-	            				</div>
-	            				<div id="down">
-	            					<div id="until">마감까지</div><br />
-	            					<div id="expNums">
-	            						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
-	            						<span class="expNum">12</span><span class="expWord">시</span>
-	            						<span class="expNum">35</span><span class="expWord">분</span>
-	            						<span class="expNum">20</span><span class="expWord">초</span>
-	            					</div>
-	            					 <div class="progress">
-    									<div class="progress-bar bg-warning" style="width:70%">70%</div>
-  									</div>
-  									<span id="finish">490 / 700 달성</span>
-	            				</div>
-	            				<button id="pleaseBtn">쪼르기 !</button>
-	            			</span>
-            			</div>
-            		</div>
-            	</div> <!-- 3 끝 -->
-            	
-            	<div id="outDiv">
-            		<div id="innerDiv">
-            			<div id="titleDiv">
-            				<span id="title">쪼르기상품</span>
-            			</div>
-            			<hr />	
-            			<div id="product">
-            				<span id="imgs">
-	            				<span id="mainImg">
-	            					<img id="img" src="../resources/images/please/p4.jpg"/>
-	            				</span>
-            				</span>
-            				
-	            			<span id="desc">
-	            				<div id="upper">
-	            					<div id="brand">EASTLOGUE</div>
-	            					<div id="pName">
-	            						FLAK SHIRT / MULTI MADRAS <br />
-	            						1179095</div>
-	            					<div id="oriPrice"><strike>298,000</strike></div>
-	            					<div id="nowPrice">
-	            						<span id="per"><em>50%</em></span>
-	            						<span id="price">149,000</span>
-	            						<span id="won">원</span>	
-	            					</div>
-	            				</div>
-	            				<div id="down">
-	            					<div id="until">마감까지</div><br />
-	            					<div id="expNums">
-	            						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
-	            						<span class="expNum">12</span><span class="expWord">시</span>
-	            						<span class="expNum">35</span><span class="expWord">분</span>
-	            						<span class="expNum">20</span><span class="expWord">초</span>
-	            					</div>
-	            					 <div class="progress">
-    									<div class="progress-bar bg-warning" style="width:70%">70%</div>
-  									</div>
-  									<span id="finish">490 / 700 달성</span>
-	            				</div>
-	            				<button id="pleaseBtn">쪼르기 !</button>
-	            			</span>
-            			</div>
-            		</div>
-            	</div> <!-- 4 끝 -->
-            	
-            	<div id="outDiv">
-            		<div id="innerDiv">
-            			<div id="titleDiv">
-            				<span id="title">쪼르기상품</span>
-            			</div>
-            			<hr />	
-            			<div id="product">
-            				<span id="imgs">
-	            				<span id="mainImg">
-	            					<img id="img" src="../resources/images/please/p5.jpg"/>
-	            				</span>
-            				</span>
-            				
-	            			<span id="desc">
-	            				<div id="upper">
-	            					<div id="brand">BURBERRY</div>
-	            					<div id="pName">
-	            						버버리 8038569 패치워크 퀼팅 체크 자켓<br />
-	            						1175028
-	            					</div>
-	            					<div id="oriPrice"><strike>1,431,000</strike></div>
-	            					<div id="nowPrice">
-	            						<span id="per"><em>22%</em></span>
-	            						<span id="price">1,113,000</span>
-	            						<span id="won">원</span>	
-	            					</div>
-	            				</div>
-	            				<div id="down">
-	            					<div id="until">마감까지</div><br />
-	            					<div id="expNums">
-	            						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
-	            						<span class="expNum">12</span><span class="expWord">시</span>
-	            						<span class="expNum">35</span><span class="expWord">분</span>
-	            						<span class="expNum">20</span><span class="expWord">초</span>
-	            					</div>
-	            					 <div class="progress">
-    									<div class="progress-bar bg-warning" style="width:70%">70%</div>
-  									</div>
-  									<span id="finish">490 / 700 달성</span>
-	            				</div>
-	            				<button id="pleaseBtn">쪼르기 !</button>
-	            			</span>
-            			</div>
-            		</div>
-            	</div> <!-- 5 끝 -->
-            	
-            	<div id="outDiv">
-            		<div id="innerDiv">
-            			<div id="titleDiv">
-            				<span id="title">쪼르기상품</span>
-            			</div>
-            			<hr />	
-            			<div id="product">
-            				<span id="imgs">
-	            				<span id="mainImg">
-	            					<img id="img" src="../resources/images/please/p6.jpg"/>
-	            				</span>
-            				</span>
-            				
-	            			<span id="desc">
-	            				<div id="upper">
-	            					<div id="brand">Acne Studios</div>
-	            					<div id="pName">
-	            						아크네 모크 라이더 가죽 자켓 <br />
-	            						1AZ166 900</div>
-	            					<div id="oriPrice"><strike>2,133,000</strike></div>
-	            					<div id="nowPrice">
-	            						<span id="per"><em>29%</em></span>
-	            						<span id="price">1,523,000</span>
-	            						<span id="won">원</span>	
-	            					</div>
-	            				</div>
-	            				<div id="down">
-	            					<div id="until">마감까지</div><br />
-	            					<div id="expNums">
-	            						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
-	            						<span class="expNum">12</span><span class="expWord">시</span>
-	            						<span class="expNum">35</span><span class="expWord">분</span>
-	            						<span class="expNum">20</span><span class="expWord">초</span>
-	            					</div>
-	            					 <div class="progress">
-    									<div class="progress-bar bg-warning" style="width:70%">70%</div>
-  									</div>
-  									<span id="finish">490 / 700 달성</span>
-	            				</div>
-	            				<button id="pleaseBtn">쪼르기 !</button>
-	            			</span>
-            			</div>
-            		</div>
-            	</div> <!-- 6 끝 -->
-            
-            </div>	
-            <!-- 진행중 쪼르기 끝 -->   
-            
-            
-            
-            <!-- 마감한 쪼르기  -->    
-            <div id="Expired" class="tabcontent">
-            	
-            	<div id="outDiv">
-            		<div id="innerDiv">
-            			<div id="titleDiv">
-            				<span id="title">쪼르기상품</span>
-            			</div>
-            			<hr />	
-            			<div id="product">
-            				<span id="imgs">
-	            				<span id="mainImg">
-	            					<img id="img" src="../resources/images/please/p7.jpg"/>
-	            				</span>
-            				</span>
-            				
-	            			<span id="desc">
-	            				<div id="upper">
-	            					<div id="brand">PRADA</div>
-	            					<div id="pName">
-	            						프라다 체크 코트 <br />
-	            						P625NE 1XF9 F0008</div>
-	            					<div id="oriPrice"><strike>3,983,000</strike></div>
-	            					<div id="nowPrice">
-	            						<span id="per"><em>22%</em></span>
-	            						<span id="price">3,098,000</span>
-	            						<span id="won">원</span>	
-	            					</div>
-	            				</div>
-	            				<div id="down">
-	            					<div id="until">마감까지</div><br />
-	            					<div id="expNums">
-	            						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
-	            						<span class="expNum">12</span><span class="expWord">시</span>
-	            						<span class="expNum">35</span><span class="expWord">분</span>
-	            						<span class="expNum">20</span><span class="expWord">초</span>
-	            					</div>
-	            					 <div class="progress">
-    									<div class="progress-bar bg-warning" style="width:100%">100%</div>
-  									</div>
-  									<span id="finish">700 / 700 달성</span>
-	            				</div>
-	            				<button id="pleaseBtn">쪼르기 성공!</button>
-	            			</span>
-            			</div>
-            		</div>
-            	</div> <!-- 1 끝 -->
-            	
-            	<div id="outDiv">
-            		<div id="innerDiv">
-            			<div id="titleDiv">
-            				<span id="title">쪼르기상품</span>
-            			</div>
-            			<hr />	
-            			<div id="product">
-            				<span id="imgs">
-	            				<span id="mainImg">
-	            					<img id="img" src="../resources/images/please/p8.jpg"/>
-	            				</span>
-            				</span>
-            				
-	            			<span id="desc">
-	            				<div id="upper">
-	            					<div id="brand">TEN C</div>
-	            					<div id="pName">
-	            						TEN C_ARCTIC PARKA <br />
-	            						17CTCUC03075003780 769 PURPLE PANSE</div>
-	            					<div id="oriPrice"><strike>1,180,000</strike></div>
-	            					<div id="nowPrice">
-	            						<span id="per"><em>34%</em></span>
-	            						<span id="price">778,000</span>
-	            						<span id="won">원</span>	
-	            					</div>
-	            				</div>
-	            				<div id="down">
-	            					<div id="until">마감까지</div><br />
-	            					<div id="expNums">
-	            						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
-	            						<span class="expNum">12</span><span class="expWord">시</span>
-	            						<span class="expNum">35</span><span class="expWord">분</span>
-	            						<span class="expNum">20</span><span class="expWord">초</span>
-	            					</div>
-	            					 <div class="progress">
-    									<div class="progress-bar bg-warning" style="width:100%">100%</div>
-  									</div>
-  									<span id="finish">700 / 700 달성</span>
-	            				</div>
-	            				<button id="pleaseBtn">쪼르기 성공!</button>
-	            			</span>
-            			</div>
-            		</div>
-            	</div> <!-- 2 끝 -->
-            	
-            	<div id="outDiv">
-            		<div id="innerDiv">
-            			<div id="titleDiv">
-            				<span id="title">쪼르기상품</span>
-            			</div>
-            			<hr />	
-            			<div id="product">
-            				<span id="imgs">
-	            				<span id="mainImg">
-	            					<img id="img" src="../resources/images/please/p9.jpg"/>
-	            				</span>
-            				</span>
-            				
-	            			<span id="desc">
-	            				<div id="upper">
-	            					<div id="brand">TATRAS</div>
-	            					<div id="pName">
-	            						남성 라구사 RAGUSA <br />
-	            						MTA19S8064TT01</div>
-	            					<div id="oriPrice"><strike>318,000</strike></div>
-	            					<div id="nowPrice">
-	            						<span id="per"><em>53%</em></span>
-	            						<span id="price">151,050</span>
-	            						<span id="won">원</span>	
-	            					</div>
-	            				</div>
-	            				<div id="down">
-	            					<div id="until">마감까지</div><br />
-	            					<div id="expNums">
-	            						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
-	            						<span class="expNum">12</span><span class="expWord">시</span>
-	            						<span class="expNum">35</span><span class="expWord">분</span>
-	            						<span class="expNum">20</span><span class="expWord">초</span>
-	            					</div>
-	            					 <div class="progress">
-    									<div class="progress-bar bg-warning" style="width:100%">100%</div>
-  									</div>
-  									<span id="finish">700 / 700 달성</span>
-	            				</div>
-	            				<button id="pleaseBtn">쪼르기 성공!</button>
-	            			</span>
-            			</div>
-            		</div>
-            	</div> <!-- 3 끝 -->
-            	
-            	<div id="outDiv">
-            		<div id="innerDiv">
-            			<div id="titleDiv">
-            				<span id="title">쪼르기상품</span>
-            			</div>
-            			<hr />	
-            			<div id="product">
-            				<span id="imgs">
-	            				<span id="mainImg">
-	            					<img id="img" src="../resources/images/please/p10.jpg"/>
-	            				</span>
-            				</span>
-            				
-	            			<span id="desc">
-	            				<div id="upper">
-	            					<div id="brand">OFF WHITE</div>
-	            					<div id="pName">
-	            						애로우 체크 플란넬 오버셔츠 <br />
-	            						OMGA133R21FAB0022500</div>
-	            					<div id="oriPrice"><strike>588,000</strike></div>
-	            					<div id="nowPrice">
-	            						<span id="per"><em>22%</em></span>
-	            						<span id="price">457,000</span>
-	            						<span id="won">원</span>	
-	            					</div>
-	            				</div>
-	            				<div id="down">
-	            					<div id="until">마감까지</div><br />
-	            					<div id="expNums">
-	            						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
-	            						<span class="expNum">12</span><span class="expWord">시</span>
-	            						<span class="expNum">35</span><span class="expWord">분</span>
-	            						<span class="expNum">20</span><span class="expWord">초</span>
-	            					</div>
-	            					 <div class="progress">
-    									<div class="progress-bar bg-warning" style="width:70%">70%</div>
-  									</div>
-  									<span id="finish">490 / 700 달성</span>
-	            				</div>
-	            				<button id="pleaseBtn">쪼르기 실패!</button>
-	            			</span>
-            			</div>
-            		</div>
-            	</div> <!-- 4 끝 -->
-            	
-            </div>
-            <!-- 마감한 쪼르기 끝  -->
+			<div class="outDiv">
+        		<div class="innerDiv">
+        			<!-- <div class="plzTitleDiv">
+        				<span class="plzTitle">쪼르기상품</span>
+        			</div> -->
+        			<hr />	
+        			<div class="plzProduct">
+        				<span class="plzImgs">
+                            <!-- <span id="mainImg"> -->
+                                <img class="plzImg" src="../resources/images/please/p1.jpg"/>
+                            <!-- </span> -->
+        				</span>
+        				
+         			<span class="plzInfo">
+         				<div class="plzUpperDiv">
+         					<div class="plzBrand">TEN C</div>
+         					<div class="plzPName">
+         						TEN C_ARCTIC PARKA <br />
+         						17CTCUC03075003780 888 BLUE</div>
+         					<div class="plzOriPrice"><strike>1,180,000</strike></div>
+         					<!-- <div class="plzNowPrice"> -->
+         						<span class="plzPercent"><em>34%</em></span>
+         						<span class="plzPrice">778,800</span>
+         						<span class="plzWon">원</span>	
+         					<!-- </div> -->
+         				</div>
+         				<div class="plzDownDiv">
+         					<div class="until">마감까지</div><br />
+         					<div class="plzRemainingTime">
+         						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
+         						<span class="expNum">12</span><span class="expWord">시</span>
+         						<span class="expNum">35</span><span class="expWord">분</span>
+         						<span class="expNum">20</span><span class="expWord">초</span>
+         					</div>
+         					 <div class="progress">
+									<div class="progress-bar bg-warning" style="width:70%">70%</div>
+							</div>
+							<span class="plzAchivementRate">490 / 700 달성</span>
+         				</div>
+         				<button class="pleaseBtn">쪼르기 !</button>
+         			</span>
+        			</div>
+        		</div>
+        	</div> <!-- 1 끝 -->
+        	
+        	<div class="outDiv">
+        		<div class="innerDiv">
+        			<!-- <div class="plzTitleDiv">
+        				<span class="plzTitle">쪼르기상품</span>
+        			</div> -->
+        			<hr />	
+        			<div class="plzProduct">
+        				<span class="plzImgs">
+                            <!-- <span id="mainImg"> -->
+                                <img class="plzImg" src="../resources/images/please/p2.jpg"/>
+                            <!-- </span> -->
+        				</span>
+        				
+         			<span class="plzInfo">
+         				<div class="plzUpperDiv">
+         					<div class="plzBrand">SnowPeak Apparel</div>
+         					<div class="plzPName">
+         						블랙 멀티캠 롱다운 자켓_CA <br />
+         						S20WME-DJ12
+         					</div>
+         					<div class="plzOriPrice"><strike>599,000</strike></div>
+         					<!-- <div class="plzNowPrice"> -->
+         						<span class="plzPercent"><em>40%</em></span>
+         						<span class="plzPrice">359,s00</span>
+         						<span class="plzWon">원</span>	
+         					<!-- </div> -->
+         				</div>
+         				<div class="plzDownDiv">
+         					<div class="until">마감까지</div><br />
+         					<div class="plzRemainingTime">
+         						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
+         						<span class="expNum">12</span><span class="expWord">시</span>
+         						<span class="expNum">35</span><span class="expWord">분</span>
+         						<span class="expNum">20</span><span class="expWord">초</span>
+         					</div>
+         					 <div class="progress">
+									<div class="progress-bar bg-warning" style="width:70%">70%</div>
+							</div>
+							<span class="plzAchivementRate">490 / 700 달성</span>
+         				</div>
+         				<button class="pleaseBtn">쪼르기 !</button>
+         			</span>
+        			</div>
+        		</div>
+        	</div> <!-- 2 끝 -->
+        	
+        	<div class="outDiv">
+        		<div class="innerDiv">
+        			<!-- <div class="plzTitleDiv">
+        				<span class="plzTitle">쪼르기상품</span>
+        			</div> -->
+        			<hr />	
+        			<div class="plzProduct">
+        				<span class="plzImgs">
+                            <!-- <span id="mainImg"> -->
+                                <img class="plzImg" src="../resources/images/please/p3.jpg"/>
+                            <!-- </span> -->
+        				</span>
+        				
+         			<span class="plzInfo">
+         				<div class="plzUpperDiv">
+         					<div class="plzBrand">SnowPeak Apparel</div>
+         					<div class="plzPName">
+         						에디트 아웃포켓형 숏다운 자켓_MS <br />
+         						S20WMP-DJ86</div>
+         					<div class="plzOriPrice"><strike>439,000</strike></div>
+         					<!-- <div class="plzNowPrice"> -->
+         						<span class="plzPercent"><em>40%</em></span>
+         						<span class="plzPrice">263,400</span>
+         						<span class="plzWon">원</span>	
+         					<!-- </div> -->
+         				</div>
+         				<div class="plzDownDiv">
+         					<div class="until">마감까지</div><br />
+         					<div class="plzRemainingTime">
+         						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
+         						<span class="expNum">12</span><span class="expWord">시</span>
+         						<span class="expNum">35</span><span class="expWord">분</span>
+         						<span class="expNum">20</span><span class="expWord">초</span>
+         					</div>
+         					 <div class="progress">
+									<div class="progress-bar bg-warning" style="width:70%">70%</div>
+							</div>
+							<span class="plzAchivementRate">490 / 700 달성</span>
+         				</div>
+         				<button class="pleaseBtn">쪼르기 !</button>
+         			</span>
+        			</div>
+        		</div>
+        	</div> <!-- 3 끝 -->
+        	
+        	<div class="outDiv">
+        		<div class="innerDiv">
+        			<!-- <div class="plzTitleDiv">
+        				<span class="plzTitle">쪼르기상품</span>
+        			</div> -->
+        			<hr />	
+        			<div class="plzProduct">
+        				<span class="plzImgs">
+                            <!-- <span id="mainImg"> -->
+                                <img class="plzImg" src="../resources/images/please/p4.jpg"/>
+                            <!-- </span> -->
+        				</span>
+        				
+         			<span class="plzInfo">
+         				<div class="plzUpperDiv">
+         					<div class="plzBrand">EASTLOGUE</div>
+         					<div class="plzPName">
+         						FLAK SHIRT / MULTI MADRAS <br />
+         						1179095</div>
+         					<div class="plzOriPrice"><strike>298,000</strike></div>
+         					<!-- <div class="plzNowPrice"> -->
+         						<span class="plzPercent"><em>50%</em></span>
+         						<span class="plzPrice">149,000</span>
+         						<span class="plzWon">원</span>	
+         					<!-- </div> -->
+         				</div>
+         				<div class="plzDownDiv">
+         					<div class="until">마감까지</div><br />
+         					<div class="plzRemainingTime">
+         						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
+         						<span class="expNum">12</span><span class="expWord">시</span>
+         						<span class="expNum">35</span><span class="expWord">분</span>
+         						<span class="expNum">20</span><span class="expWord">초</span>
+         					</div>
+         					 <div class="progress">
+									<div class="progress-bar bg-warning" style="width:70%">70%</div>
+							</div>
+							<span class="plzAchivementRate">490 / 700 달성</span>
+         				</div>
+         				<button class="pleaseBtn">쪼르기 !</button>
+         			</span>
+        			</div>
+        		</div>
+        	</div> <!-- 4 끝 -->
+        	
+        	<div class="outDiv">
+        		<div class="innerDiv">
+        			<!-- <div class="plzTitleDiv">
+        				<span class="plzTitle">쪼르기상품</span>
+        			</div> -->
+        			<hr />	
+        			<div class="plzProduct">
+        				<span class="plzImgs">
+                            <!-- <span id="mainImg"> -->
+                                <img class="plzImg" src="../resources/images/please/p5.jpg"/>
+                            <!-- </span> -->
+        				</span>
+        				
+         			<span class="plzInfo">
+         				<div class="plzUpperDiv">
+         					<div class="plzBrand">BURBERRY</div>
+         					<div class="plzPName">
+         						버버리 8038569 패치워크 퀼팅 체크 자켓<br />
+         						1175028
+         					</div>
+         					<div class="plzOriPrice"><strike>1,431,000</strike></div>
+         					<!-- <div class="plzNowPrice"> -->
+         						<span class="plzPercent"><em>22%</em></span>
+         						<span class="plzPrice">1,113,000</span>
+         						<span class="plzWon">원</span>	
+         					<!-- </div> -->
+         				</div>
+         				<div class="plzDownDiv">
+         					<div class="until">마감까지</div><br />
+         					<div class="plzRemainingTime">
+         						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
+         						<span class="expNum">12</span><span class="expWord">시</span>
+         						<span class="expNum">35</span><span class="expWord">분</span>
+         						<span class="expNum">20</span><span class="expWord">초</span>
+         					</div>
+         					 <div class="progress">
+									<div class="progress-bar bg-warning" style="width:70%">70%</div>
+							</div>
+							<span class="plzAchivementRate">490 / 700 달성</span>
+         				</div>
+         				<button class="pleaseBtn">쪼르기 !</button>
+         			</span>
+        			</div>
+        		</div>
+        	</div> <!-- 5 끝 -->
+        	
+        	<div class="outDiv">
+        		<div class="innerDiv">
+        			<!-- <div class="plzTitleDiv">
+        				<span class="plzTitle">쪼르기상품</span>
+        			</div> -->
+        			<hr />	
+        			<div class="plzProduct">
+        				<span class="plzImgs">
+                            <!-- <span id="mainImg"> -->
+                                <img class="plzImg" src="../resources/images/please/p6.jpg"/>
+                            <!-- </span> -->
+        				</span>
+        				
+         			<span class="plzInfo">
+         				<div class="plzUpperDiv">
+         					<div class="plzBrand">Acne Studios</div>
+         					<div class="plzPName">
+         						아크네 모크 라이더 가죽 자켓 <br />
+         						1AZ166 900</div>
+         					<div class="plzOriPrice"><strike>2,133,000</strike></div>
+         					<!-- <div class="plzNowPrice"> -->
+         						<span class="plzPercent"><em>29%</em></span>
+         						<span class="plzPrice">1,523,000</span>
+         						<span class="plzWon">원</span>	
+         					<!-- </div> -->
+         				</div>
+         				<div class="plzDownDiv">
+         					<div class="until">마감까지</div><br />
+         					<div class="plzRemainingTime">
+         						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
+         						<span class="expNum">12</span><span class="expWord">시</span>
+         						<span class="expNum">35</span><span class="expWord">분</span>
+         						<span class="expNum">20</span><span class="expWord">초</span>
+         					</div>
+         					 <div class="progress">
+									<div class="progress-bar bg-warning" style="width:70%">70%</div>
+							</div>
+							<span class="plzAchivementRate">490 / 700 달성</span>
+         				</div>
+         				<button class="pleaseBtn">쪼르기 !</button>
+         			</span>
+        			</div>
+        		</div>
+        	</div> <!-- 6 끝 -->
+        
+        </div>	
+        <!-- 진행중 쪼르기 끝 -->   
+        
+        
+        
+        <!-- 마감한 쪼르기  -->    
+        <div id="Expired" class="tabcontent">
+        	
+        	<div class="outDiv">
+        		<div class="innerDiv">
+        			<!-- <div class="plzTitleDiv">
+        				<span class="plzTitle">쪼르기상품</span>
+        			</div> -->
+        			<hr />	
+        			<div class="plzProduct">
+        				<span class="plzImgs">
+                            <!-- <span id="mainImg"> -->
+                                <img class="plzImg" src="../resources/images/please/p7.jpg"/>
+                            <!-- </span> -->
+        				</span>
+        				
+         			<span class="plzInfo">
+         				<div class="plzUpperDiv">
+         					<div class="plzBrand">PRADA</div>
+         					<div class="plzPName">
+         						프라다 체크 코트 <br />
+         						P625NE 1XF9 F0008</div>
+         					<div class="plzOriPrice"><strike>3,983,000</strike></div>
+         					<!-- <div class="plzNowPrice"> -->
+         						<span class="plzPercent"><em>22%</em></span>
+         						<span class="plzPrice">3,098,000</span>
+         						<span class="plzWon">원</span>	
+         					<!-- </div> -->
+         				</div>
+         				<div class="plzDownDiv">
+         					<div class="until">마감까지</div><br />
+         					<div class="plzRemainingTime">
+         						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
+         						<span class="expNum">12</span><span class="expWord">시</span>
+         						<span class="expNum">35</span><span class="expWord">분</span>
+         						<span class="expNum">20</span><span class="expWord">초</span>
+         					</div>
+         					 <div class="progress">
+									<div class="progress-bar bg-warning" style="width:100%">100%</div>
+							</div>
+							<span class="plzAchivementRate">700 / 700 달성</span>
+         				</div>
+         				<button class="pleaseBtn">쪼르기 성공!</button>
+         			</span>
+        			</div>
+        		</div>
+        	</div> <!-- 1 끝 -->
+        	
+        	<div class="outDiv">
+        		<div class="innerDiv">
+        			<!-- <div class="plzTitleDiv">
+        				<span class="plzTitle">쪼르기상품</span>
+        			</div> -->
+        			<hr />	
+        			<div class="plzProduct">
+        				<span class="plzImgs">
+                            <!-- <span id="mainImg"> -->
+                                <img class="plzImg" src="../resources/images/please/p8.jpg"/>
+                            <!-- </span> -->
+        				</span>
+        				
+         			<span class="plzInfo">
+         				<div class="plzUpperDiv">
+         					<div class="plzBrand">TEN C</div>
+         					<div class="plzPName">
+         						TEN C_ARCTIC PARKA <br />
+         						17CTCUC03075003780 769 PURPLE PANSE</div>
+         					<div class="plzOriPrice"><strike>1,180,000</strike></div>
+         					<div class="plzNowPrice">
+         						<div class="plzPercent"><em>34%</em></div>
+         						<div class="plzPrice">778,000</div>
+         						<div class="plzWon">원</div>	
+         					</div>
+         				</div>
+         				<div class="plzDownDiv">
+         					<div class="until">마감까지</div><br />
+         					<div class="plzRemainingTime">
+         						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
+         						<span class="expNum">12</span><span class="expWord">시</span>
+         						<span class="expNum">35</span><span class="expWord">분</span>
+         						<span class="expNum">20</span><span class="expWord">초</span>
+         					</div>
+         					 <div class="progress">
+									<div class="progress-bar bg-warning" style="width:100%">100%</div>
+							</div>
+							<span class="plzAchivementRate">700 / 700 달성</span>
+         				</div>
+         				<button class="pleaseBtn">쪼르기 성공!</button>
+         			</span>
+        			</div>
+        		</div>
+        	</div> <!-- 2 끝 -->
+        	
+        	<div class="outDiv">
+        		<div class="innerDiv">
+        			<!-- <div class="plzTitleDiv">
+        				<span class="plzTitle">쪼르기상품</span>
+        			</div> -->
+        			<hr />	
+        			<div class="plzProduct">
+        				<span class="plzImgs">
+                            <!-- <span id="mainImg"> -->
+                                <img class="plzImg" src="../resources/images/please/p9.jpg"/>
+                            <!-- </span> -->
+        				</span>
+        				
+         			<span class="plzInfo">
+         				<div class="plzUpperDiv">
+         					<div class="plzBrand">TATRAS</div>
+         					<div class="plzPName">
+         						남성 라구사 RAGUSA <br />
+         						MTA19S8064TT01</div>
+         					<div class="plzOriPrice"><strike>318,000</strike></div>
+         					<!-- <div class="plzNowPrice"> -->
+         						<span class="plzPercent"><em>53%</em></span>
+         						<span class="plzPrice">151,050</span>
+         						<span class="plzWon">원</span>	
+         					<!-- </div> -->
+         				</div>
+         				<div class="plzDownDiv">
+         					<div class="until">마감까지</div><br />
+         					<div class="plzRemainingTime">
+         						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
+         						<span class="expNum">12</span><span class="expWord">시</span>
+         						<span class="expNum">35</span><span class="expWord">분</span>
+         						<span class="expNum">20</span><span class="expWord">초</span>
+         					</div>
+         					 <div class="progress">
+									<div class="progress-bar bg-warning" style="width:100%">100%</div>
+							</div>
+							<span class="plzAchivementRate">700 / 700 달성</span>
+         				</div>
+         				<button class="pleaseBtn">쪼르기 성공!</button>
+         			</span>
+        			</div>
+        		</div>
+        	</div> <!-- 3 끝 -->
+        	
+        	<div class="outDiv">
+        		<div class="innerDiv">
+        			<!-- <div class="plzTitleDiv">
+        				<span class="plzTitle">쪼르기상품</span>
+        			</div> -->
+        			<hr />	
+        			<div class="plzProduct">
+        				<span class="plzImgs">
+                            <!-- <span id="mainImg"> -->
+                                <img class="plzImg" src="../resources/images/please/p10.jpg"/>
+                            <!-- </span> -->
+        				</span>
+        				
+         			<span class="plzInfo">
+         				<div class="plzUpperDiv">
+         					<div class="plzBrand">OFF WHITE</div>
+         					<div class="plzPName">
+         						애로우 체크 플란넬 오버셔츠 <br />
+         						OMGA133R21FAB0022500</div>
+         					<div class="plzOriPrice"><strike>588,000</strike></div>
+         					<!-- <div class="plzNowPrice"> -->
+         						<span class="plzPercent"><em>22%</em></span>
+         						<span class="plzPrice">457,000</span>
+         						<span class="plzWon">원</span>	
+         					<!-- </div> -->
+         				</div>
+         				<div class="plzDownDiv">
+         					<div class="until">마감까지</div><br />
+         					<div class="plzRemainingTime">
+         						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
+         						<span class="expNum">12</span><span class="expWord">시</span>
+         						<span class="expNum">35</span><span class="expWord">분</span>
+         						<span class="expNum">20</span><span class="expWord">초</span>
+         					</div>
+         					 <div class="progress">
+									<div class="progress-bar bg-warning" style="width:70%">70%</div>
+							</div>
+							<span class="plzAchivementRate">490 / 700 달성</span>
+         				</div>
+         				<button class="pleaseBtn">쪼르기 실패!</button>
+         			</span>
+        			</div>
+        		</div>
+        	</div> <!-- 4 끝 -->
+        	
+        </div>
+        <!-- 마감한 쪼르기 끝  -->
                 
 
-    </div>
+</div>
 </body>
 </html>

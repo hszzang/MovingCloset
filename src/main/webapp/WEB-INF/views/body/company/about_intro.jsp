@@ -194,69 +194,66 @@
 
         <div class="section-title">
           <h2>인재상</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p>
+          성장에 욕심있는 착하고 열정적인 직원을 찾습니다. <br>
+          1. 소통할 줄 아는 사람<br/>
+          2. 성장할 줄 아는 사람<br/>
+          3. 열정적으로 일 할 사람<br/>
+          언제든 무빙클로젯의 문을 두드려주세요.
+          </p>
         </div>
 
         <div class="owl-carousel testimonials-carousel">
 
           <div class="testimonial-item">
-            <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-            <h3>Saul Goodman</h3>
+            <img src="../resources/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+            <h3>문경건</h3>
             <h4>Ceo &amp; Founder</h4>
             <p>
               <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-              Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+              새로운 기술을 빠르게 적용할 수 있는 환경, 의지가 있는 누군가가 선행학습을 하면 바로 업무에 적용할 수 있는 환경을 만들었습니다. 새로운 환경을 만들고 있어한 회사에서도 다양한 경험과 학습을 할 수 있습니다.
               <i class="bx bxs-quote-alt-right quote-icon-right"></i>
             </p>
           </div>
 
           <div class="testimonial-item">
-            <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-            <h3>Sara Wilsson</h3>
+            <img src="../resources/assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+            <h3>민세원</h3>
             <h4>Designer</h4>
             <p>
               <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-              Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
+              직접 스케줄을 결정하는 환경, 구성원들이 직접 최종 일정을 결정합니다. 무리한 개발 일정으로 대충 일을 해결하는 것 보다 시작 단계에서 탄탄한 구조를 만드는 것이 효율적이라는 것을 모두가 알고 있기 때문이죠.
               <i class="bx bxs-quote-alt-right quote-icon-right"></i>
             </p>
           </div>
 
           <div class="testimonial-item">
-            <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-            <h3>Jena Karlis</h3>
+            <img src="../resources/assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
+            <h3>강혜수</h3>
             <h4>Store Owner</h4>
             <p>
               <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-              Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
+              이거 나중에 느낀점으로 활용하면 좋을 것 같기도하고.. 아직 뭐라고 더 넣어야되는지 머리 굳음요
               <i class="bx bxs-quote-alt-right quote-icon-right"></i>
             </p>
           </div>
 
           <div class="testimonial-item">
-            <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-            <h3>Matt Brandon</h3>
+            <img src="../resources/assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
+            <h3>김득환</h3>
             <h4>Freelancer</h4>
             <p>
               <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-              Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
+              무빙클로젯은 일과 학습을 구분하지 않습니다. 우리는 업무중에 당연히 공부를 하고 새로운 스킬을 배우기 위해 일합니다. 성장을 위한 프로그램이 준비되어 있답니다.
               <i class="bx bxs-quote-alt-right quote-icon-right"></i>
             </p>
           </div>
 
-          <div class="testimonial-item">
-            <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-            <h3>John Larson</h3>
-            <h4>Entrepreneur</h4>
-            <p>
-              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-              Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
-              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-            </p>
-          </div>
+        
 
         </div>
 
-      </div>
+    </div>
     </section><!-- End Testimonials Section -->
 
 
