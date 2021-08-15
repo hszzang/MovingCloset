@@ -135,7 +135,7 @@
 		});
 	});
 	
-	var nowLat, nowLon;
+// 	var nowLat, nowLon;
 	function getNowLocation() {
 		
 		if(navigator.geolocation) {
@@ -155,7 +155,8 @@
 			};
 			navigator.geolocation.getCurrentPosition(showPosition, showError, options);
 			
-			document.moyoAddrFrm.submit();
+			console.log(document.moyoAddrFrm.nowLat.value);
+			console.log(document.moyoAddrFrm.nowLon.value);
 		}
 		else {
 			console.log("이 브라우저는 Geolocation API를 지원하지 않습니다.");
@@ -167,14 +168,16 @@
 	var showPosition = function (position) {
 		
 		//콜백된 매개변수를 통해 위도, 경도값을 얻어온다.
-		nowLat = position.coords.latitude;
-		nowLon = position.coords.longitude;
+// 		nowLat = position.coords.latitude;
+// 		nowLon = position.coords.longitude;
 		
-		console.log(position.coords.latitude);
-		console.log(nowLat);
+// 		console.log(position.coords.latitude);
+// 		console.log(nowLat);
 		
-		document.moyoAddrFrm.nowLat.value = nowLat;
-		document.moyoAddrFrm.nowLon.value = nowLon;
+		document.moyoAddrFrm.nowLat.value = position.coords.latitude;
+		document.moyoAddrFrm.nowLon.value = position.coords.longitude;
+
+		document.moyoAddrFrm.submit();
 		
 // 		panTo();
 		
@@ -215,8 +218,9 @@
 			<div class="col-8">
 				<form action="" name="moyoAddrFrm">
 				<div class="row input-group form-inline" id="inputLocation">
-					<input type="hid den" name="nowLat" />
-					<input type="hid den" name="nowLon" />
+					<input type="hid den" name="nowLat" value="${nowLat }" />
+					<input type="hid den" name="nowLon" value="${nowLon }" />
+					<input type="hid den" name="myAddr" class="wantGetLatLon" value="${myAddr }" />
 					<button type="button" class="form-control" onclick="getAddressLatLon();">
 			        	<i class="material-icons">home</i>
 			        </button>
@@ -224,17 +228,21 @@
 			        	<i class="material-icons">my_location</i>
 			        </button>
 					<!-- 가입 시 입력한 주소가 기본값으로 들어감 -->
-					<input type="text" placeholder="주소를 입력하세요" class="form-control" style="width:330px;" />
+					<input type="text" placeholder="주소를 입력하세요" class="form-control wantGetLatLon" 
+						style="width:330px;" />
 					<button type="button" class="form-control" id="findMoyoBtn" onclick="getAddressLatLon();">모여 찾기</button>
 				</div>
 				</form>
 				<div class="row">
 					<div id="map" style="width:800px;height:600px;"></div>
 					<script>
+					
+						var centerLat = document.moyoAddrFrm.nowLat.value;
+						var centerLon = document.moyoAddrFrm.nowLon.value;
 						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 							mapOption = {
 								//지오로케이션으로 위치 받아올 것
-								center: new kakao.maps.LatLng(37.4787305, 126.8781986), // 지도의 중심좌표
+								center: new kakao.maps.LatLng(centerLat, centerLon), // 지도의 중심좌표
 								level: 3, // 지도의 확대 레벨
 								mapTypeId : kakao.maps.MapTypeId.ROADMAP // 지도종류
 							}; 
@@ -341,6 +349,16 @@
 
 						function getAddressLatLon() {
 							
+							var addrStr = document.getElementsByClassName("wantGetLatLon")[0].value;
+							if(addrStr == "") {
+								addrStr = document.getElementsByClassName("wantGetLatLon")[1].value;
+							}
+							else {
+								alert("올바른 주소를 입력해주세요.")	
+							}
+							
+							console.log(addrStr);
+							
 							geocoder.addressSearch(addrStr, function(result, status) {
 	
 							    // 정상적으로 검색이 완료됐으면 
@@ -348,6 +366,10 @@
 	
 							        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 							        console.log(result[0].y);
+							        document.moyoAddrFrm.nowLat.value = result[0].y;
+							        document.moyoAddrFrm.nowLon.value = result[0].x;
+							        
+							        document.moyoAddrFrm.submit();
 	
 							     }
 							});

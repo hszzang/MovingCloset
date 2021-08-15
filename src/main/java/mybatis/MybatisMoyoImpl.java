@@ -8,7 +8,12 @@ import org.springframework.stereotype.Service;
 @Service
 public interface MybatisMoyoImpl {
 	
+	//현재 로그인 계정의 주소 불러오기
+	public String getMyAddr(String userid);
+	
 	//모여 리스트 불러오기
 	public ArrayList<MoyoDTO> getMoyoList(String nowLat, String nowLon);
+	
+	
 
 }
