@@ -80,7 +80,7 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 	margin: 5%; margin-bottom: 8%;
 }
 
-.form-control:focus ,#moyoSubmitBtn:focus{
+#moyoFrm .form-control:focus, #moyoSubmitBtn:focus, #moyoAgree .form-control:focus{
 	border-color: #FFFFFF;
 	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px #ff6c2f;
 }
@@ -89,6 +89,18 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 	background-color: #ff6c2f; color: white;
 	border: 0;
 }
+
+.custom-control-input:checked ~ .custom-control-label::before {
+    border-color: #ff6c2f !important;
+    background-color: #ff6c2f !important;
+}
+
+.custom-control-input:focus ~ 
+          .custom-control-label::before {
+	border-color: #ff6c2f !important;
+	box-shadow: 0 0 0 0rem rgba(0, 0, 0, 0) !important;
+}
+  
 
 </style>
 </head>
@@ -194,7 +206,7 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 						<textarea rows="6" name="content" class="form-control" style="resize:none;"
 							placeholder="노쇼약관노쇼약관" readonly></textarea>
 						<div class="custom-control custom-checkbox mb-5 mt-2">
-							<input type="checkbox" class="custom-control-input" id="cancelAgree"required> 
+							<input type="checkbox" class="custom-control-input" id="cancelAgree" required> 
 							<label class="custom-control-label"
 								for="cancelAgree">무단 취소 시 부여되는 경고사항에 대해 동의합니다.</label>
 						</div>
