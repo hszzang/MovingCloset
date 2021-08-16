@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -22,6 +23,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
+import movingcloset.command.CommandImpl;
+import movingcloset.command.RegisterActionCommand;
+import mybatis.MemberDTO;
+
 
 /**
  * Handles requests for the application home page.
@@ -30,6 +35,16 @@ import org.springframework.web.client.RestTemplate;
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
+	
+
+	
+	CommandImpl command = null;
+	
+	@Autowired
+	RegisterActionCommand registerActionCommand;
+	
+	
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -131,12 +146,30 @@ public class HomeController {
 	}
 	
 
-	//회원가입
+	//회원가입 화면으로 이동
 	@RequestMapping(value="/movingcloset/register.do", method=RequestMethod.GET)
 	public String register() {
 		
 		return "body/registerForm";
 	}
+	
+	
+	//회원가입 처리
+	@RequestMapping(value="/movingcloset/registerAction.do", method=RequestMethod.POST)
+	public String registerAction(MemberDTO memberDTO,Model model, HttpServletRequest req) {
+		
+		
+		model.addAttribute("memberDTO",memberDTO);
+		
+		command = registerActionCommand;
+		command.execute(model);
+		
+		return "body/registerComplete";
+	}
+		
+	
+	
+	
 
 	// 아이디 중복확인
 	@RequestMapping(value="/movingcloset/idcheck.do", method=RequestMethod.GET)

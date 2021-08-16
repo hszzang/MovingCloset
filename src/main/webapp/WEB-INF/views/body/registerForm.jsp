@@ -157,6 +157,7 @@
 			if (fn.name.value == "") {
 				alert("이름을 입력해주세요"); fn.name.focus(); return false;
 			}
+			
 			return true;
 		}
 		function isPassword(param) {
@@ -320,7 +321,7 @@
 			<div class="input-form col-md-12 mx-auto">
 				<div class="input-form-wrap">
 					<h3>회원가입</h3>
-					<form name="registFrm" id="registFrm" action="#" method="post"
+					<form name="registFrm" id="registFrm" action="./movingcloset/registerAction.do" method="post"
 						onsubmit="return loginValdidate(this);">
 						<table class="table table-bordered">
 							<colgroup>
