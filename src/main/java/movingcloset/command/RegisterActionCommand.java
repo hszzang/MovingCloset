@@ -29,8 +29,8 @@ public class RegisterActionCommand implements CommandImpl{
 		Map<String, Object> paramMap = model.asMap();
 		MemberDTO memberDTO = (MemberDTO)paramMap.get("memberDTO");
 		
-		sqlSession.getMapper(MybatisMemberImpl.class).register(memberDTO); // 세션영역에 저장된 VO객체로 부터 아이디를 얻어와 파라미터로 사용
-		//System.out.println("입력결과"+result);
+		int result = sqlSession.getMapper(MybatisMemberImpl.class).register(memberDTO); // 세션영역에 저장된 VO객체로 부터 아이디를 얻어와 파라미터로 사용
+		System.out.println("입력결과"+result);
 		
 	}
 

@@ -9,7 +9,7 @@
   
   <mapper namespace="mybatis.MybatisMemberImpl">
 
-  	<insert id="register" >
+  	<insert id="register" parameterType="mybatis.MemberDTO" >
 		INSERT INTO member (USERID, USERPASS, EMAIL, PHONE, TAG, POSTCODE, ADDR, NAME, BIRTH, REGIDATE) 
 		VALUES
 		(#{userid}, #{userpass} ,#{email},#{phone},#{tag},#{postcode},#{addr},#{name},#{birth},sysdate  )

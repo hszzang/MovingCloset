@@ -1,7 +1,6 @@
 package movingcloset.controller;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
@@ -23,12 +22,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
-import freemarker.template.SimpleDate;
 import movingcloset.command.CommandImpl;
 import movingcloset.command.RegisterActionCommand;
 import mybatis.MemberDTO;
-import oracle.sql.DATE;
 
 
 /**
@@ -150,8 +149,9 @@ public class HomeController {
 	
 
 	//회원가입 화면으로 이동
-	@RequestMapping(value="/movingcloset/register.do", method=RequestMethod.POST)
-	public String register(Locale locale, Model model) {
+	@RequestMapping(value="/movingcloset/register.do")
+	public String register() {
+		System.out.println("registre.do 들어와짐");
 		
 		return "body/registerForm";
 	}
@@ -159,7 +159,7 @@ public class HomeController {
 	
 	//회원가입 처리
 	@RequestMapping(value="/movingcloset/registerAction.do", method=RequestMethod.POST)
-	public String registerAction(Model model, HttpServletRequest req) {
+	public String registerAction(Model model,HttpServletRequest req) {
 		
 		MemberDTO memberDTO = new MemberDTO();
 		
@@ -213,7 +213,7 @@ public class HomeController {
 	
 
 	// 아이디 중복확인
-	@RequestMapping(value="/movingcloset/idcheck.do", method=RequestMethod.POST)
+	@RequestMapping(value="/movingcloset/idcheck.do")
 	public String idcheck() {
 		
 		return "idCheckForm";

@@ -61,11 +61,33 @@
 			margin-bottom: 8%;
 		}
 
-		.form-control:focus,
-		#registerSubmitBtn:focus {
+		.form-control:focus,#registerSubmitBtn:focus {
 			border-color: #FFFFFF;
 			box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px #ff6c2f;
 		}
+
+
+		#registFrm .form-control:focus, #registerSubmitBtn:focus{
+			border-color: #FFFFFF;
+			box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px #ff6c2f;
+		}
+		
+		.custom-control-input:checked ~ .custom-control-label::before {
+		    border-color: #ff6c2f !important;
+		    background-color: #ff6c2f !important;
+		}
+		
+		.custom-control-input:focus ~ 
+		    .custom-control-label::before {
+			border-color: #ff6c2f !important;
+			box-shadow: 0 0 0 0rem rgba(0, 0, 0, 0) !important;
+		}
+  
+		#tag1:checked ~ ,#tag2,#tag3,#tag4,#tag5,#tag6,#tag7,#tag8{
+			border-color: #ff6c2f !important;
+			box-shadow: 0 0 0 0rem rgba(0, 0, 0, 0) !important;
+		}
+	
 
 		#registerSubmitBtn {
 			background-color: #ff6c2f;
@@ -328,7 +350,7 @@
 			<div class="input-form col-md-12 mx-auto">
 				<div class="input-form-wrap">
 					<h3>회원가입</h3>
-					<form name="registFrm" id="registFrm" action="./registerAction.do" method="post"
+					<form name="registFrm" id="registFrm" action="./registerAction.do" method="POST"
 						onsubmit="return loginValdidate(this);">
 						<table class="table table-bordered">
 							<colgroup>
@@ -521,7 +543,7 @@
 						</div>
 
 						<button class="btn btn-primary btn-lg btn-block" id="registerSubmitBtn"
-							type="submit">회&nbsp;원&nbsp;가&nbsp;입</button>
+							type="submit" >회&nbsp;원&nbsp;가&nbsp;입</button>
 					</div>
 					</form>
 				</div>

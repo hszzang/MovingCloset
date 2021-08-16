@@ -5,6 +5,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface MybatisMemberImpl {
 
-	public MemberDTO register(MemberDTO memberDTO) ;
+	public int register(MemberDTO memberDTO) ;
 	
 }
