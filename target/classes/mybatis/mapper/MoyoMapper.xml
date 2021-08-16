@@ -7,9 +7,30 @@
  혜수야 안녕 나야나 첫번째 매퍼를 구경왔단다~~ 홧탱~
  -->
 <mapper namespace="mybatis.MybatisMoyoImpl">
+	
+	<select id="getMyAddr" resultType="String">
+		SELECT addr FROM member where userid=#{userid}
+	</select>
 
 	<select id="getMoyoList" resultType="mybatis.MoyoDTO">
-		SELECT * FROM MOYO
+		SELECT * FROM MOYO 
+		WHERE distance_wgs84(#{0}, #{1}, m_lat, m_lon) <![CDATA[<=]]> 1
+		AND m_status='진행'
+		ORDER BY m_dday DESC
+	</select>
+	
+	<resultMap type="HashMap" id="countMoyoUser">
+		<id column="m_idx" property="usernum" />
+	</resultMap>
+	
+	<select id="countMoyoUser" resultMap="countMoyoUser"
+		parameterType="list">
+		SELECT m_idx, count(*) usernum
+		FROM moyo_use WHERE
+		<foreach collection="list" item="item" separator="or">
+			 m_idx = #{item}
+		</foreach>
+		GROUP BY m_idx
 	</select>
 
 
