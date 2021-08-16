@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -54,7 +53,4 @@
 				고객문의 <a href="https://github.com/hszzang/MovingCloset/">https://github.com/hszzang/MovingCloset </a> 
 			</div>
 		</div>
-
 </div>
-
-

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import movingcloset.command.CommandImpl;
-import movingcloset.command.MoyoCommand;
+import movingcloset.command.moyo.MoyoCommand;
 import mybatis.MoyoDTO;
 
 @Controller
