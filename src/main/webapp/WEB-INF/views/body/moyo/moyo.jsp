@@ -405,6 +405,7 @@
 							</c:if>
 						</div>
 						<div>
+<%-- 							<fmt:parseDate value="${mlist.m_dday }" var="strmdday" pattern="yyyy-MM-dd HH:mm:ss"/> --%>
 							<h5><span class="badge">D-2</span> ${mlist.m_name }</h5>
 							<fmt:parseDate value="${mlist.m_dday }" var="strmdday" pattern="yyyy-MM-dd HH:mm:ss"/>
 							<fmt:formatDate value="${strmdday }" pattern="yyyy년 MM월 dd일"/>에 모여 !
@@ -413,12 +414,16 @@
 							
 							<c:forEach var="usercount" items="${countMoyoUser }">
 								<c:if test="${mlist.m_idx eq usercount.key }">
-									<c:set var="achievementRate" value="${usercount.key.value / mlist.m_goal * 100}" />
+									<c:set var="achievementRate" value="${usercount.value / mlist.m_goal * 100}" />
+								</c:if>
+								<c:if test="${mlist.m_idx ne usercount.key }">
+									<c:set var="achievementRate" value="50" />
 								</c:if>
 							</c:forEach>
 							<div style="font-size: 0.75em; margin-top: -15px;">달성률</div>
 							<div class="progress">
 								<div class="progress-bar bg-warning" style="width:${achievementRate}%; color:white;">${achievementRate }%</div>
+<!-- 								<div class="progress-bar bg-warning" style="width:70%; color:white;">70%</div> -->
 							</div>
 						</div>
 						<div class="moyoDetail">
@@ -431,6 +436,9 @@
 					</div>
 				</div>
 			</c:forEach>
+			<c:if test="${empty moyoList }">
+				주변에 모여가 없습니다 💀
+			</c:if>
 				<!-- <div class="row">
 					<div class="moyoSimple">
 						<img class="simpleImg" src="../resources/images/list/5.jpg"></a>

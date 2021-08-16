@@ -67,12 +67,15 @@ public class MoyoCommand implements CommandImpl {
 			moyoIdxList.add(m.getM_idx());
 		}
 		
+		if(!moyoList.isEmpty()) {
+			
+			HashMap<String, Integer> countMoyoUser = sqlSession
+					.getMapper(MybatisMoyoImpl.class).countMoyoUser(moyoIdxList);
+			
+			System.out.println(countMoyoUser);
+			model.addAttribute("countMoyoUser", countMoyoUser);
+		}
 		
-		HashMap<String, Integer> countMoyoUser = sqlSession
-				.getMapper(MybatisMoyoImpl.class).countMoyoUser(moyoIdxList);
-		
-		System.out.println(countMoyoUser);
-		model.addAttribute("countMoyoUser", countMoyoUser);
 		
 		System.out.println(moyoList);
 	}
