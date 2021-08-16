@@ -40,7 +40,7 @@
 <body>
 
 <section class="well3 center">
-  	<br/><br/>
+  	<br/><br/><br/>
   	<center>
    	<div class="section-title">
         <h2>개인정보취급방침</h2>
