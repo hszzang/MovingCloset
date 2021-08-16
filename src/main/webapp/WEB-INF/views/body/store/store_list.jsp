@@ -1,6 +1,15 @@
+<%@page import="mybatis.ProductDTO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%--
+
+List<ProductDTO> storeList = (List)session.getAttribute("storeList");
+
+--%>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,10 +20,13 @@
     <title>MovingCloset_Store</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     
     <style>
-    	#wrapper{margin-top:90px; margin-bottom:100px;}
+    	#wrapper{margin-top:90px; margin-bottom:100px; padding:0 2% 0 2%;}
         #list{
             border:black;
             width:85%; height:auto;
@@ -30,7 +42,7 @@
         }
         #filterBtn{
             display:inline;
-            margin-left:35%;
+            margin-left:38%;
             font-size:12pt;
         }
         #filterDropdown{
@@ -55,19 +67,20 @@
         a{ text-decoration: none; color:black;}
         .name{ font-size: 11pt; }
         .origPrice{ 
-            font-size:10pt; 
+            font-size:12pt; 
             color:lightgray;
         }
         .discountedPrice{
             color: #FF6C2F;
-            font-size:12pt;
+            font-size:14pt;
             font-weight: bold;
         }
+        .won{color:gray; font-size:12pt; }
         .heart{ font-size:15pt; }
 
         #pages{
         	text-align:right;
-			margin: 50px 10% 100px 70%;
+			margin: 50px 10% 100px 75%;
 			display:inline-block;
         }
         #pageSel{
@@ -87,7 +100,7 @@
         #pmL{background-color:gray;}
         #pmR{background-color:black;}
 
-		#productUpload{width:100px; height:40px; background-color:black; color:white; }
+		.product{width:100px; height:40px; background-color:black; color:white; }
 
         @media only screen and (max-width:1000px){
 
@@ -116,7 +129,8 @@
                         <button type="button" class="btn btn-dark">잡화</button>
                     </span>
                     <span id="filterDropdown">
-                        <select name="filterSelect" id="filterSel" placeholder="신상품순">
+                        <select name="filterSelect" id="filterSel">
+                            <option value="new">신상품순</option>
                             <option value="best">베스트순</option>
                             <option value="lowprice">낮은가격순</option>
                             <option value="highprice">높은가격순</option>
@@ -125,7 +139,45 @@
                         </select>
                     </span>
                 </div>
-						
+                
+					 <c:forEach items="${storeList }" var="product">	
+						<span class="products">
+							<a href="/movingcloset/store/detail.do"><img class="img" src="../resources/images/list/1.jpg"></a>
+							<!-- src="../Uploads/${row.sfile }"  -->
+                            <!--<a href="/movingcloset/store/detail.do"><img class="img" src="${dto.sfile }"></a> -->
+                            <div class="brand">${product.p_brand }</div>
+                            <div class="name"><label>${product.p_name }</label></div>
+                            <div class="price">
+                                <span class="origPrice"><strike>${product.p_price}</strike></span>
+                                <span class="discountedPrice">${product.p_price}</span>
+                                <span class="won">원</span>
+                                <span class="heart" style="text-align:right;"><label class="heart"><i class="fa fa-heart" style="font-size:10pt;color:white;"></i></label></span>
+                            </div>
+                            <div class="event"></div>
+                        </span>   
+					 </c:forEach>	
+					 
+					 
+					 
+					<%--
+					<% for(ProductDTO list : storeList) { %>
+					<span class="products">
+							<a href="/movingcloset/store/detail.do"><img class="img" src="../resources/images/list/1.jpg"></a>
+                            <!--<a href="/movingcloset/store/detail.do"><img class="img" src="${dto.sfile }"></a> -->
+                            <div class="brand"><%= list.getP_brand() %></div>
+                            <div class="name"><label for=""><%= list.getP_name() %></label></div>
+                            <div class="Price">
+                                <span class="origPrice"><strike><%= list.getP_price() %></strike></span><br>
+                                <span class="discountedPrice"><%= list.getP_price() %></span>
+                            </div>
+                            <div class="event"></div>
+                            <div class="icons">
+                                <label class="heart" style="color:white;">♥</label>
+                            </div>
+                        </span>   
+					<% } %>
+					--%>
+<!--  
                         <span class="products">
                             <a href="/movingcloset/store/detail.do"><img class="img" src="../resources/images/list/1.jpg"></a>
                             <div class="brand">Adidas</div>
@@ -140,7 +192,6 @@
                             </div>
                         </span>       
 
-<!--  
                         <span class="products">
                             <a href="https://www.29cm.co.kr/product/950775"><img class="img" src="../resources/images/list/2.jpg"></a>
                             <div class="brand">Adidas</div>
@@ -467,7 +518,6 @@
                            
             </div>
             <div id="pages">
-            	<button id="productUpload">상품업로드</button>
             	<select name="pageSel" id="pageSel" placeholder="1">
 					<option value="pageNum">1</option>
 					<option value="pageNum">2</option>
@@ -478,6 +528,10 @@
 			    <span id="pgTotal">of 5</span>
 			    <button class="pageMove" id="pmL"> < </button>
 			    <button class="pageMove" id="pmR"> > </button>
+            </div>
+            <div style="text-align:right;">
+            	<button type="button" class="product" id="productInsert" onclick="javascript:location.href='/movingcloset/store/insert.do';">상품추가</button>
+            	<button type="button" class="product" id="productUpload" onclick="javascript:location.href='/movingcloset/store/update.do';">상품업로드</button>
             </div>
         </form>
     </div>
