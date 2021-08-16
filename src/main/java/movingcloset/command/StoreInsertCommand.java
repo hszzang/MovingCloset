@@ -16,10 +16,10 @@ import mybatis.MybatisProductImpl;
 import mybatis.ProductDTO;
 
 @Service
-public class StoreListCommand implements CommandImpl {
+public class StoreInsertCommand implements CommandImpl {
 
-		public StoreListCommand() {
-			//System.out.println("스토어리스트 커맨드 호출");
+		public StoreInsertCommand() {
+			//System.out.println("스토어인서트 커맨드 호출");
 		}
 		
 		@Autowired
@@ -28,25 +28,18 @@ public class StoreListCommand implements CommandImpl {
 		@Override
 		public void execute(Model model) {
 			
-			System.out.println("StoreListCommand 호출");
+			System.out.println("StoreInsertCommand 호출");
 			
 			ProductDTO productDTO = new ProductDTO();
-			System.out.println("StoreListCommand 호출2");
-			
-			/*
-			ProductDTO productDTO = sqlSession.getMapper(MybatisProductImpl.class).getProductDTO();
-			model.addAttribute("storeList", productDTO);
-			 */
+			System.out.println("StoreInsertCommand 호출2");
 			
 			List<ProductDTO> storeList = sqlSession.getMapper(MybatisProductImpl.class).getStoreList(productDTO);
-			//System.out.println(storeList);
+			//List<ProductDTO> storeList = sqlSession.getMapper(MybatisProductImpl.class).insertProduct(productDTO);
+			
 			
 			model.addAttribute("storeList", storeList);
-			System.out.println("StoreListCommand 호출3");
+			System.out.println("StoreInsertCommand 호출3");
 			
-			//Map<String, Object> paramMap = ((Model) storeList).asMap();
-			//HttpServletRequest req = (HttpServletRequest)paramMap.get("req");
 			
-			//int totalRecordCount = sqlSession.getMapper(MybatisProductImpl.class).getTotalCount();
 		}
 }
