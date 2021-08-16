@@ -151,13 +151,13 @@
 
 	<script>
 
-		$(window).on('scroll', function(){
-	        if($(window).scrollTop() > 50 ){
+		$(document).on('scroll', function(){
+	        if($(window).scrollTop() > 50){
 	            $('.nav-menu').addClass('nav-black');
 	            $('#logo').addClass('small-logo');
 	        }
 	        else{
-	            $('.nav-menu').removeClass('nav-black');
+	        	$('.nav-menu').removeClass('nav-black');
 	            $('#logo').removeClass('small-logo');
 	        };
         });
@@ -214,9 +214,24 @@
 		});
 		
     </script>
+	<div class="nav-menu">
+		<a class="large-logo" href="#" id="logo">Moving Closet<a>
+		<a class="nav-link" id="nav-title1" href="javascript:void(0);">About</a>
+		<a class="nav-link" id="nav-title2" href="javascript:void(0);">MOYO</a>
+		<a class="nav-link" id="nav-title3" href="javascript:void(0);">NewD</a>
+		<a class="nav-link" id="nav-title4" href="javascript:void(0);">STORE</a>
+		<a class="nav-link" id="nav-title5" href="javascript:void(0);">Events&nbsp;|&nbsp;Coupons</a>
+		<a class="nav-link" id="nav-title6" href="javascript:void(0);">CS center</a>
+		<div id="icons">
+			<a href=""><i class="material-icons" id="icon">search</i></a>
+			&nbsp;
+			<a href=""><i class="material-icons" id="icon">shopping_basket</i></a>
+			&nbsp;
+			<a href=""><i class="material-icons" id="icon">person</i></a>
+		</div>
+	</div>
 
-
-	<div class="nav-menu nav-black">
+	<div class="nav-black">
 		<a class="large-logo" href="#" id="logo">Moving Closet<a>
 		<a class="nav-link" id="nav-title1" href="javascript:void(0);">About</a>
 		<a class="nav-link" id="nav-title2" href="javascript:void(0);">MOYO</a>
