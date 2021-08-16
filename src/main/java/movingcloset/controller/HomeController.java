@@ -1,6 +1,7 @@
-package com.project.movingcloset;
+package movingcloset.controller;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
@@ -23,9 +24,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
+import freemarker.template.SimpleDate;
 import movingcloset.command.CommandImpl;
 import movingcloset.command.RegisterActionCommand;
 import mybatis.MemberDTO;
+import oracle.sql.DATE;
 
 
 /**
@@ -147,8 +150,8 @@ public class HomeController {
 	
 
 	//회원가입 화면으로 이동
-	@RequestMapping(value="/movingcloset/register.do", method=RequestMethod.GET)
-	public String register() {
+	@RequestMapping(value="/movingcloset/register.do", method=RequestMethod.POST)
+	public String register(Locale locale, Model model) {
 		
 		return "body/registerForm";
 	}
@@ -156,7 +159,45 @@ public class HomeController {
 	
 	//회원가입 처리
 	@RequestMapping(value="/movingcloset/registerAction.do", method=RequestMethod.POST)
-	public String registerAction(MemberDTO memberDTO,Model model, HttpServletRequest req) {
+	public String registerAction(Model model, HttpServletRequest req) {
+		
+		MemberDTO memberDTO = new MemberDTO();
+		
+		String userId = req.getParameter("user_id"); 
+		String userPass = req.getParameter("pass2"); 
+		String name = req.getParameter("name"); 
+		
+		// String type 의 birthday를 date 타입으로 변환하는 코드
+		String birthday = req.getParameter("birthday");
+		java.sql.Date birth = java.sql.Date.valueOf(birthday);
+		
+		String postcode = req.getParameter("postcode"); 
+		String addr1 = req.getParameter("addr1"); 
+		String addr2 = req.getParameter("addr2"); 
+		String email1 = req.getParameter("email1"); 
+		String email2 = req.getParameter("email2"); 
+		String mobile1 = req.getParameter("mobile1"); 
+		String mobile2 = req.getParameter("mobile2"); 
+		String mobile3 = req.getParameter("mobile3"); 
+		String tag1 = req.getParameter("tag1");
+		String tag2 = req.getParameter("tag2");
+		String tag3 = req.getParameter("tag3");
+		String tag4 = req.getParameter("tag4");
+		String tag5 = req.getParameter("tag5");
+		String tag6 = req.getParameter("tag6");
+		String tag7 = req.getParameter("tag7");
+		String tag8 = req.getParameter("tag8");
+		
+		memberDTO.setUserid(userId);
+		memberDTO.setUserpass(userPass);
+		memberDTO.setName(name);
+		memberDTO.setBirth(birth);
+		memberDTO.setPostcode(postcode);
+		memberDTO.setAddr(addr1+" "+addr2);
+		memberDTO.setEmail(email1+"@"+email2);
+		memberDTO.setPhone(mobile1+"-"+mobile2+"-"+mobile3);
+		memberDTO.setTag(tag1+","+tag2+","+tag3+","+tag4+","+tag5+","+tag6+","+tag7+","+tag8);
+		
 		
 		
 		model.addAttribute("memberDTO",memberDTO);
@@ -172,7 +213,7 @@ public class HomeController {
 	
 
 	// 아이디 중복확인
-	@RequestMapping(value="/movingcloset/idcheck.do", method=RequestMethod.GET)
+	@RequestMapping(value="/movingcloset/idcheck.do", method=RequestMethod.POST)
 	public String idcheck() {
 		
 		return "idCheckForm";

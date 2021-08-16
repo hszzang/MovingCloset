@@ -11,7 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import movingcloset.model.JDBCTemplateDAO;
+
 import mybatis.MemberDTO;
 import mybatis.MybatisMemberImpl;
 
@@ -21,9 +21,7 @@ public class RegisterActionCommand implements CommandImpl{
 	@Autowired
 	private SqlSession sqlSession;
 	
-	// Dao 빈 자동주입 받기
-	@Autowired
-	JDBCTemplateDAO dao; 
+
 	
 	@Override
 	public void execute(Model model) {
@@ -31,8 +29,7 @@ public class RegisterActionCommand implements CommandImpl{
 		Map<String, Object> paramMap = model.asMap();
 		MemberDTO memberDTO = (MemberDTO)paramMap.get("memberDTO");
 		
-		sqlSession.getMapper(MybatisMemberImpl.class)
-			.register(memberDTO); // 세션영역에 저장된 VO객체로 부터 아이디를 얻어와 파라미터로 사용
+		sqlSession.getMapper(MybatisMemberImpl.class).register(memberDTO); // 세션영역에 저장된 VO객체로 부터 아이디를 얻어와 파라미터로 사용
 		//System.out.println("입력결과"+result);
 		
 	}
