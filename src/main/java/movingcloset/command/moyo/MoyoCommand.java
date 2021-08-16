@@ -1,6 +1,7 @@
 package movingcloset.command.moyo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -59,13 +60,20 @@ public class MoyoCommand implements CommandImpl {
 		ArrayList<MoyoDTO> moyoList = sqlSession
 				.getMapper(MybatisMoyoImpl.class).getMoyoList(nowLat, nowLon);
 		
-		//Mapper에서 동적으로 생성되는 쿼리문을 로그로 출력
-//		String sql = sqlSession
-//				.getConfiguration().getMappedStatement("getMoyoList")
-//				.getBoundSql().getSql();
+		model.addAttribute("moyoList", moyoList);
+		
+		ArrayList<String> moyoIdxList = new ArrayList<String>();
+		for(MoyoDTO m : moyoList) {
+			moyoIdxList.add(m.getM_idx());
+		}
+		
+		
+		HashMap<String, Integer> countMoyoUser = sqlSession
+				.getMapper(MybatisMoyoImpl.class).countMoyoUser(moyoIdxList);
+		
+		System.out.println(countMoyoUser);
+		model.addAttribute("countMoyoUser", countMoyoUser);
 		
 		System.out.println(moyoList);
-
-		
 	}
 }

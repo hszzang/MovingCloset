@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -218,9 +220,9 @@
 			<div class="col-8">
 				<form action="" name="moyoAddrFrm">
 				<div class="row input-group form-inline" id="inputLocation">
-					<input type="hid den" name="nowLat" value="${nowLat }" />
-					<input type="hid den" name="nowLon" value="${nowLon }" />
-					<input type="hid den" name="myAddr" class="wantGetLatLon" value="${myAddr }" />
+					<input type="hidden" name="nowLat" value="${nowLat }" />
+					<input type="hidden" name="nowLon" value="${nowLon }" />
+					<input type="hidden" name="myAddr" class="wantGetLatLon" value="${myAddr }" />
 					<button type="button" class="form-control" onclick="getAddressLatLon();">
 			        	<i class="material-icons">home</i>
 			        </button>
@@ -291,23 +293,33 @@
 								title: '중심 위치', 
 								latlng: mapOption.center,
 								content: '중심 위치입니다.',
-							},
-							{
-								title: '안양천앞', 
-								latlng: new kakao.maps.LatLng(37.478838, 126.876454),
-								content: '중심 위치입니다4.'
-							},
-							{
-								title: '5번출구앞', 
-								latlng: new kakao.maps.LatLng(37.479660, 126.881949),
-								content: '중심 위치입니다3.'
-							},
-							{
-								title: '맥도날드앞', 
-								latlng: new kakao.maps.LatLng(37.479927, 126.881119),
-								content: '중심 위치입니다2.'
 							}
+							<c:forEach items="${moyoList}" var="scmlist">
+							,
+							{
+								title: '${scmlist.m_name}', 
+								latlng: new kakao.maps.LatLng(${scmlist.m_lat }, ${scmlist.m_lon }),
+								content: '${scmlist.m_name}'
+							}
+							</c:forEach>
+							
+// 							{
+// 								title: '안양천앞', 
+// 								latlng: new kakao.maps.LatLng(37.478838, 126.876454),
+// 								content: '중심 위치입니다4.'
+// 							},
+// 							{
+// 								title: '5번출구앞', 
+// 								latlng: new kakao.maps.LatLng(37.479660, 126.881949),
+// 								content: '중심 위치입니다3.'
+// 							},
+// 							{
+// 								title: '맥도날드앞', 
+// 								latlng: new kakao.maps.LatLng(37.479927, 126.881119),
+// 								content: '중심 위치입니다2.'
+// 							}
 						];
+						
 						
 						var selectedMarker = null;
 				
@@ -380,107 +392,45 @@
 				</div>
 			</div>
 			<div id="moyoList" class="col-4">
-				<div class="row moyoRow" id="moyoRow-1">
+			<c:forEach items="${moyoList }" var="mlist">
+				<div class="row moyoRow" id="moyoRow-${mlist.m_idx }">
 					<div class="moyoSimple">
 						<div style="text-align: right;"><i class="material-icons moyoToggleArrow">keyboard_arrow_down</i></div>
 						<div>
-							<img class="simpleImg" src="../resources/images/list/2.jpg"></a>
+							<c:if test="${empty mlist.m_sfile }">
+								<img class="simpleImg" src="../resources/images/list/2.jpg"></a>
+							</c:if>
+							<c:if test="${not empty mlist.m_sfile }">
+								<img class="simpleImg" src="../resources/images/list/${mlist.m_sfile }.jpg"></a>
+							</c:if>
 						</div>
 						<div>
-							<h5><span class="badge">D-2</span> 나이키 시즌오프 팝업스토어</h5>
-							<span>2021</span>년 <span>08</span>월 <span>05</span>일에 모여 !
+							<h5><span class="badge">D-2</span> ${mlist.m_name }</h5>
+							<fmt:parseDate value="${mlist.m_dday }" var="strmdday" pattern="yyyy-MM-dd HH:mm:ss"/>
+							<fmt:formatDate value="${strmdday }" pattern="yyyy년 MM월 dd일"/>에 모여 !
 
-							<h6 style="text-align: right;">모일 인원수 <span class="moyoMax">100</span> 명</h6>
-							<div style="font-size: 0.75em; margin-top: -15px;">달성률</div>
-							<div class="progress">
-								<div class="progress-bar bg-warning" style="width:70%; color:white;">70%</div>
-							</div>
-						</div>
-						<div class="moyoDetail">
-							<button type="button" class="form-control moyoFormBtn" >모여 !</button>
-							<h6>📌 모집기간</h6> 2021.08.01 - 2021.08.03 <br />&mdash;
-							<h6>📌 모임일자</h6> 2021.08.05 목요일 <br />&mdash;
-							<h6>📌 모일장소</h6> 서울시 금천구 가산동 426-5 월드메르디앙 앞 <br />&mdash;
-							<h6>📌 판매자 공지사항</h6> 안녕하세요 나이키입니다. 안녕하세요 나이키입니다.  <br />&mdash;
-						</div>
-					</div>
-				</div>
-				<div class="row moyoRow">
-					<div class="moyoSimple">
-						<div>
-							<div style="text-align: right;"><i class="material-icons moyoToggleArrow">keyboard_arrow_down</i></div>
-							<img class="simpleImg" src="../resources/images/list/3.jpg"></a>
-						</div>
-						<div>
-							<h5><span class="badge">D-2</span> 나이키 시즌오프 팝업스토어</h5>
-							<span>2021</span>년 <span>08</span>월 <span>05</span>일에 모여 !
-
-							<h6 style="text-align: right;">모일 인원수 <span class="moyoMax">100</span> 명</h6>
-							<div style="font-size: 0.75em; margin-top: -15px;">달성률</div>
-							<div class="progress">
-								<div class="progress-bar bg-warning" style="width:70%; color:white;">70%</div>
-							</div>
-						</div>
-						<div class="moyoDetail">
-							<button type="button" class="form-control moyoFormBtn" >모여 !</button>
-							<h6>📌 모집기간</h6> 2021.08.01 - 2021.08.03 <br />&mdash;
-							<h6>📌 모임일자</h6> 2021.08.05 목요일 <br />&mdash;
-							<h6>📌 모일장소</h6> 서울시 금천구 가산동 426-5 월드메르디앙 앞 <br />&mdash;
-							<h6>📌 판매자 공지사항</h6> 안녕하세요 나이키입니다. 안녕하세요 나이키입니다.  <br />&mdash;
-						</div>
-					</div>
-				</div>
-				<div class="row moyoRow">
-					<div class="moyoSimple">
-						<div>
-							<div style="text-align: right;"><i class="material-icons moyoToggleArrow">keyboard_arrow_down</i></div>
-							<img class="simpleImg" src="../resources/images/list/4.jpg"></a>
-						</div>
-						<div>
-							<h5><span class="badge">D-2</span> 나이키 시즌오프 팝업스토어</h5>
-							<span>2021</span>년 <span>08</span>월 <span>05</span>일에 모여 !
-
-							<h6 style="text-align: right;">모일 인원수 <span class="moyoMax">100</span> 명</h6>
-							<div style="font-size: 0.75em; margin-top: -15px;">달성률</div>
-							<div class="progress">
-								<div class="progress-bar bg-warning" style="width:70%; color:white;">70%</div>
-							</div>
-						</div>
-						<div class="moyoDetail">
-							<button type="button" class="form-control moyoFormBtn" >모여 !</button>
-							<h6>📌 모집기간</h6> 2021.08.01 - 2021.08.03 <br />&mdash;
-							<h6>📌 모임일자</h6> 2021.08.05 목요일 <br />&mdash;
-							<h6>📌 모일장소</h6> 서울시 금천구 가산동 426-5 월드메르디앙 앞 <br />&mdash;
-							<h6>📌 판매자 공지사항</h6> 안녕하세요 나이키입니다. 안녕하세요 나이키입니다.  <br />&mdash;
-						</div>
-					</div>
-				</div>
-				<div class="row moyoRow">
-					<div class="moyoSimple">
-						<div>
-							<div style="text-align: right;"><i class="material-icons moyoToggleArrow">keyboard_arrow_down</i></div>
-							<img class="simpleImg" src="../resources/images/list/5.jpg"></a>
-						</div>
-						<div>
-							<h5>나이키 시즌오프 팝업스토어</h5>
-							<span>2021</span>년 <span>08</span>월 <span>05</span>일에 모여 !
+							<h6 style="text-align: right;">모일 인원수 <span class="moyoMax">${mlist.m_goal }</span> 명</h6>
 							
-							<h6 style="text-align: right;">모일 인원수 <span class="moyoMax">100</span> 명</h6>
+							<c:forEach var="usercount" items="${countMoyoUser }">
+								<c:if test="${mlist.m_idx eq usercount.key }">
+									<c:set var="achievementRate" value="${usercount.key.value / mlist.m_goal * 100}" />
+								</c:if>
+							</c:forEach>
 							<div style="font-size: 0.75em; margin-top: -15px;">달성률</div>
 							<div class="progress">
-								<div class="progress-bar bg-warning" style="width:70%; color:white;">70%</div>
+								<div class="progress-bar bg-warning" style="width:${achievementRate}%; color:white;">${achievementRate }%</div>
 							</div>
 						</div>
 						<div class="moyoDetail">
 							<button type="button" class="form-control moyoFormBtn" >모여 !</button>
-							<h6>📌 모집기간</h6> 2021.08.01 - 2021.08.03 <br />&mdash;
-							<h6>📌 모임일자</h6> 2021.08.05 목요일 <br />&mdash;
-							<h6>📌 모일장소</h6> 서울시 금천구 가산동 426-5 월드메르디앙 앞 <br />&mdash;
-							<h6>📌 판매자 공지사항</h6> 안녕하세요 나이키입니다. 안녕하세요 나이키입니다.  <br />&mdash;
+							<h6>📌 모집기간</h6> ${mlist.m_start } - ${mlist.m_end } <br />&mdash;
+							<h6>📌 모임일자</h6><fmt:formatDate value="${strmdday }" pattern="yyyy년 MM월 dd일 E요일"/><br />&mdash;
+							<h6>📌 모일장소</h6> ${mlist.m_addr } <br />&mdash;
+							<h6>📌 판매자 공지사항</h6> ${mlist.m_desc }  <br />&mdash;
 						</div>
 					</div>
-					
 				</div>
+			</c:forEach>
 				<!-- <div class="row">
 					<div class="moyoSimple">
 						<img class="simpleImg" src="../resources/images/list/5.jpg"></a>
