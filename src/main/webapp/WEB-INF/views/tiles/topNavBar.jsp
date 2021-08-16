@@ -231,7 +231,7 @@
 		</div>
 	</div>
 
-	<div class="nav-black">
+	<!-- <div class="nav-black">
 		<a class="large-logo" href="#" id="logo">Moving Closet<a>
 		<a class="nav-link" id="nav-title1" href="javascript:void(0);">About</a>
 		<a class="nav-link" id="nav-title2" href="javascript:void(0);">MOYO</a>
@@ -246,7 +246,7 @@
 			&nbsp;
 			<a href=""><i class="material-icons" id="icon">person</i></a>
 		</div>
-	</div>
+	</div> -->
 	<div class="nav-sub1" id="nav-sub">
 		<div class="nav-content container-fluid">
 			 <div class="contentLink d-flex justify-content-around">
@@ -337,7 +337,7 @@
 	            <a href="../movingcloset/qnadetail.do" class="megaA">QnA</a>
 	        </div>
 	    </div>
-	</div> --> -->
+	</div> --> 
  
  
 

@@ -8,15 +8,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>notice</title>
+    <title>about_recruit</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
     <script type="text/javascript">
 		window.onload = function() {
-	        $("Notice").show();
-	        $("Events").hide();
+	        $("Regular").show();
+	        $("Always").hide();
 	    }
 		function openPage(pageName,elmnt,color) {
 		  var i, tabcontent, tablinks;
@@ -71,14 +71,15 @@
             background-color: black; color:white;
         }
         
-		#Events{ display:none; }
-		#FAQ{display:none;}
+		#Always{ display:none; }
+		
         table {
         	border-bottom:black solid 1px;
         	width:100%;
             text-align: center;
             font-size: 14px;
 		}
+		
         th {
         	color:black;
             background-color:none;
@@ -131,21 +132,21 @@
 </head>
 <body>
     <div id="wrapper">
-
+		<br>
     	<div class="section-title">
           <h2>Recruit</h2>
         </div>
 
 			<div class="tabs">
-				<button class="tablink" onclick="openPage('Notice', this, 'black')" id="defaultOpen">상시채용</button>
-				<button class="tablink" onclick="openPage('Events', this, 'black')" >정기채용</button>
+				<button class="tablink" onclick="openPage('Regular', this, 'black')" id="defaultOpen">상시채용</button>
+				<button class="tablink" onclick="openPage('Always', this, 'black')" >정기채용</button>
 				
 
 			</div>
 			<div style="clear:both;"></div>
-		    <div id="noticeTable" style="width:100%; height:auto;">
+		    <div id="regularTable" style="width:100%; height:auto;">
 		    
-		    	<div id="Notice" class="tabcontent">
+		    	<div id="Regular" class="tabcontent">
 				    <table class="col-100 col">
 				        <colgroup>
 				            <col width="15%">
@@ -176,7 +177,7 @@
 				    </table>
 				</div>
 	
-				<div id="Events" class="tabcontent">
+				<div id="Always" class="tabcontent">
 				    <table class="col-100 col">
 				        <colgroup>
 				            <col width="15%">

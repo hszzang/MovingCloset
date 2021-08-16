@@ -49,7 +49,7 @@
 
 <section id="portfolio" class="portfolio">
   	<div class="container" data-aos="fade-up">
-	
+		<br><br><br>
 	    <div class="section-title">
 	    <h2>New Designer</h2>
 	    </div>
