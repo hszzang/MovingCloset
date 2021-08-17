@@ -49,7 +49,7 @@
 
 <section id="portfolio" class="portfolio">
   	<div class="container" data-aos="fade-up">
-	
+		<br><br><br>
 	    <div class="section-title">
 	    <h2>New Designer</h2>
 	    </div>
@@ -300,20 +300,27 @@
         </div>
     </div>
 
+
+	
     <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
     
+    	<!-- 링크(상세보기페이지로이동)버튼 -->
     	<div class="col-lg-4 col-md-6 portfolio-item filter-jini">
         	<div class="portfolio-wrap">
         		<img src="../resources/assets/img/newdd/black1.jpg" class="img-fluid" alt="">
             		<div class="portfolio-info">
+            		
               			<h4>Jini 1</h4>
             				<p>10,000won</p>
               					<div class="portfolio-links">
                 					<a href="../resources/assets/img/newdd/black1.jpg" data-gall="portfolioGallery" class="venobox" title="App 1"><i class="bx bx-plus"></i></a>
+                					<a href="/movingcloset/store/detail.do"><i class="bx bx-link"></i></a>
               					</div>
             		</div>
           	</div>
      	</div>
+     	
+     	
       
       	<div class="col-lg-4 col-md-6 portfolio-item filter-kelly">
         	<div class="portfolio-wrap">
