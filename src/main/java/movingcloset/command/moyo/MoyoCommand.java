@@ -77,6 +77,6 @@ public class MoyoCommand implements CommandImpl {
 		}
 		
 		
-		System.out.println(moyoList);
+//		System.out.println(moyoList);
 	}
 }

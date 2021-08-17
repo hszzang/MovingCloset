@@ -134,57 +134,18 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
  
 
 </style>
-
-<script type="text/javascript">
-
-	function moyoFormCheck() {
-		var checkSubmit = confirm("작성된 정보로 모여를 신청합니다.");
-		if(checkSubmit == true) {
-			document.moyoFrm.submit();
-		}
-	}
-	
-	function emailSelect(obj) {
-        var emailAdd = document.moyoFrm.email2;
-        emailAdd.value = obj.value;
-
-        if(emailAdd.value == "") {
-            /*
-            select에서 직접입력을 선택하면
-            readOnly속성을 비활성화하고, 입력된 내용을 비워준다.
-            */
-            emailAdd.readOnly = false;
-        }
-        else {
-            /*
-            특정 도메인을 선택하면 
-            선택한 도메인을 입력하고, readOnly속성은 활성화한다.
-            */
-            emailAdd.readOnly = true;
-        }
-    }
-
-    function phoneFocus(num, obj, nextObj){
-        var nextobj = document.getElementsByName(nextObj)[0];
-        if(obj.value.length >= num) {
-            nextobj.focus();
-        }
-    }
-
-</script>
-
 </head>
 <body>
 
 	<div class="container">
 		<div class="section-title">
-		    <h2>모 여 !</h2>
+		    <h2>모 여 신 청 완 료</h2>
 	    </div>
 		<div class="input-form-background row">
 			<div class="input-form col-md-12 mx-auto">
 				<div class="input-form-wrap">
 				
-					<h3>신청할 모여 정보</h3>
+					<h3>신청한 모여 정보</h3>
 					
 					<div id="moyoInfoWrap">
 						<c:if test="${empty moyoDTO.m_sfile }">
@@ -208,19 +169,11 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 							<h6>모일장소</h6> ${moyoDTO.m_addr } <br />&mdash;
 							<h6>판매자 공지사항</h6> ${moyoDTO.m_desc }  <br />
 						</div>
-<!-- 							<h3>컨버스 팝업스토어 in 가산</h3> -->
-<!-- 							<h6>모집기간</h6> 2021.08.01 - 2021.08.03 <br />&mdash; -->
-<!-- 							<h6>모임일자</h6> 2021년 08월 05일 목요일 <br />&mdash; -->
-<!-- 							<h6>모일장소</h6> 서울시 금천구 가산동 426-5 월드메르디앙 앞 <br />&mdash; -->
-<!-- 							<h6>판매자 공지사항</h6> 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다.  <br /> -->
 					</div>
-				</div>
-			</div>
-			<div class="input-form col-md-12 mx-auto">
-				<div class="input-form-wrap">
+					
+					<hr class="mt-4 mb-5">
+					
 					<h3>신청자 정보</h3>
-					<form name="moyoFrm" id="moyoFrm" action="../movingcloset/moyoJoin.do" method="post" > 
-						<input type="hidden" value="${moyoDTO.m_idx }" name="m_idx">
 						<table class="table table-bordered">
 							<colgroup>
 								<col width="20%"/>
@@ -231,7 +184,7 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 									<td class="text-left"
 										style="vertical-align:middle;">이름</td>
 									<td>
-										<input type="text" name="username" class="form-control" style="width: 230px;" required/>
+										${moyoUseDTO.mu_name }
 									</td>
 								</tr>
 								<tr>
@@ -240,7 +193,7 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 									<td class="form-inline">
 										<select name="mobile1" class="form-control" 
 										onchange="phoneFocus(3, this, 'mobile2');" style="width:80px;" required>
-<!-- 											<option value=" "> </option> -->
+											<option value=" "> </option>
 											<option value="010">010</option>
 											<option value="011">011</option>
 											<option value="016">016</option>
@@ -275,39 +228,106 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 									<td class="text-left"
 										style="vertical-align:middle;">방문예정시간</td>
 									<td class="form-inline">
-										<input type="number" name="moyoHour" class="form-control" min="10" max="22" value="10" /> &nbsp;시&nbsp;&nbsp;
+										<input type="number" name="moyoHour" class="form-control" min="0" max="24" value="00" /> &nbsp;시&nbsp;&nbsp;
 										<input type="number" name="moyoMinute" class="form-control" min="0" max="59" value="00" /> &nbsp;분
 									</td>
 								</tr>
 							</tbody>
 						</table>
-					</form>
 					
-					<hr class="mt-4 mb-5">
-
-					<h3>약관동의</h3>
-
-					<div id="moyoAgree">
-						<textarea rows="6" name="content" class="form-control" style="resize:none;"
-							placeholder="개인정보수집약관" readonly></textarea>
-						<div class="custom-control custom-checkbox mb-4 mt-2">
-							<input type="checkbox" class="custom-control-input" id="personalAgree" required> 
-							<label class="custom-control-label"
-								for="personalAgree">개인정보 수집 및 이용에 동의합니다.</label>
-						</div>
-						<textarea rows="6" name="content" class="form-control" style="resize:none;"
-							placeholder="노쇼약관노쇼약관" readonly></textarea>
-						<div class="custom-control custom-checkbox mb-5 mt-2">
-							<input type="checkbox" class="custom-control-input" id="cancelAgree" required> 
-							<label class="custom-control-label"
-								for="cancelAgree">무단 취소 시 부여되는 경고사항에 대해 동의합니다.</label>
-						</div>
-
-						<button class="btn btn-primary btn-lg btn-block" id="moyoSubmitBtn"
-							type="button" onclick="moyoFormCheck();">모여!</button>
-					</div>
 				</div>
 			</div>
+<!-- 			<div class="input-form col-md-12 mx-auto"> -->
+<!-- 				<div class="input-form-wrap"> -->
+<!-- 					<h3>신청자 정보</h3> -->
+<!-- 					<form name="moyoFrm" id="moyoFrm" action="../movingcloset/moyoFormSubmit.do" method="post" >  -->
+<!-- 						<table class="table table-bordered"> -->
+<%-- 							<colgroup> --%>
+<%-- 								<col width="20%"/> --%>
+<%-- 								<col width="*"/> --%>
+<%-- 							</colgroup> --%>
+<!-- 							<tbody> -->
+<!-- 								<tr> -->
+<!-- 									<td class="text-left" -->
+<!-- 										style="vertical-align:middle;">이름</td> -->
+<!-- 									<td> -->
+<!-- 										<input type="text" name="title" class="form-control" style="width: 230px;" required/> -->
+<!-- 									</td> -->
+<!-- 								</tr> -->
+<!-- 								<tr> -->
+<!-- 									<td class="text-left" -->
+<!-- 										style="vertical-align:middle;">전화번호</td> -->
+<!-- 									<td class="form-inline"> -->
+<!-- 										<select name="mobile1" class="form-control"  -->
+<!-- 										onchange="phoneFocus(3, this, 'mobile2');" style="width:80px;" required> -->
+<!-- 											<option value=" "> </option> -->
+<!-- 											<option value="010">010</option> -->
+<!-- 											<option value="011">011</option> -->
+<!-- 											<option value="016">016</option> -->
+<!-- 											<option value="017">017</option> -->
+<!-- 											<option value="018">018</option> -->
+<!-- 											<option value="019">019</option> -->
+<!-- 										</select> -->
+<!-- 										&nbsp;&nbsp;-&nbsp;&nbsp; -->
+<!-- 										<input type="text" class="form-control" name="mobile2" value=""  -->
+<!-- 										maxlength="4" onkeyup="phoneFocus(4, this, 'mobile3');" style="width:100px;" required/> -->
+<!-- 										&nbsp;&nbsp;-&nbsp;&nbsp; -->
+<!-- 										<input type="text" class="form-control" name="mobile3"  value=""  -->
+<!-- 										maxlength="4" style="width:100px;" required/> -->
+<!-- 									</td> -->
+<!-- 								</tr> -->
+<!-- 								<tr> -->
+<!-- 									<td class="text-left" -->
+<!-- 										style="vertical-align:middle;">이메일&nbsp;&nbsp;&nbsp;</td> -->
+<!-- 										<td class="form-inline"> -->
+<!-- 										<input type="text" class="form-control" name="email1" value="" style="width:30%;" required /> -->
+<!-- 										&nbsp;@&nbsp; -->
+<!-- 										<input type="text" class="form-control" name="email2" value="" style="width:30%;" required/>&nbsp;&nbsp; -->
+<!-- 										<select name="email_domain" class="form-control" onchange="emailSelect(this);" style="width:25%;"> -->
+<!-- 											<option value="">- 직접입력 -</option> -->
+<!-- 											<option value="naver.com">naver.com</option> -->
+<!-- 											<option value="hanmail.net">hanmail.net</option> -->
+<!-- 											<option value="gmail.com">gmail.com</option> -->
+<!-- 										</select> -->
+<!-- 									</td> -->
+<!-- 								</tr> -->
+<!-- 								<tr> -->
+<!-- 									<td class="text-left" -->
+<!-- 										style="vertical-align:middle;">방문예정시간</td> -->
+<!-- 									<td class="form-inline"> -->
+<!-- 										<input type="number" name="moyoHour" class="form-control" min="0" max="24" value="00" /> &nbsp;시&nbsp;&nbsp; -->
+<!-- 										<input type="number" name="moyoMinute" class="form-control" min="0" max="59" value="00" /> &nbsp;분 -->
+<!-- 									</td> -->
+<!-- 								</tr> -->
+<!-- 							</tbody> -->
+<!-- 						</table> -->
+<!-- 					</form> -->
+					
+<!-- 					<hr class="mt-4 mb-5"> -->
+
+<!-- 					<h3>약관동의</h3> -->
+
+<!-- 					<div id="moyoAgree"> -->
+<!-- 						<textarea rows="6" name="content" class="form-control" style="resize:none;" -->
+<!-- 							placeholder="개인정보수집약관" readonly></textarea> -->
+<!-- 						<div class="custom-control custom-checkbox mb-4 mt-2"> -->
+<!-- 							<input type="checkbox" class="custom-control-input" id="personalAgree" required>  -->
+<!-- 							<label class="custom-control-label" -->
+<!-- 								for="personalAgree">개인정보 수집 및 이용에 동의합니다.</label> -->
+<!-- 						</div> -->
+<!-- 						<textarea rows="6" name="content" class="form-control" style="resize:none;" -->
+<!-- 							placeholder="노쇼약관노쇼약관" readonly></textarea> -->
+<!-- 						<div class="custom-control custom-checkbox mb-5 mt-2"> -->
+<!-- 							<input type="checkbox" class="custom-control-input" id="cancelAgree" required>  -->
+<!-- 							<label class="custom-control-label" -->
+<!-- 								for="cancelAgree">무단 취소 시 부여되는 경고사항에 대해 동의합니다.</label> -->
+<!-- 						</div> -->
+
+<!-- 						<button class="btn btn-primary btn-lg btn-block" id="moyoSubmitBtn" -->
+<!-- 							type="submit">모여!</button> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
 		</div>
 	</div>
 	
