@@ -14,7 +14,7 @@ public class MemberDTO {
 	private String postcode ;
 	private String addr;
 	private String name ;
-	private java.sql.Date birth ;
+	private String birth ;
 	private java.sql.Date regidate;
 	
 	

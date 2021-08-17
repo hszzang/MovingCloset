@@ -16,8 +16,8 @@
 	
 	</insert>
 
-	<select id="idcheck" >
-		select id from member where id = #{id}
+	<select id="idcheck" resultType="string">
+		select userid from member where userid = #{userid}
 	</select>
 
 

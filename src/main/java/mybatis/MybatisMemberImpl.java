@@ -6,6 +6,6 @@ import org.springframework.stereotype.Service;
 public interface MybatisMemberImpl {
 
 	public int register(MemberDTO memberDTO) ;
-	public boolean idcheck(String id);
+	public String idcheck(String userid);
 	
 }

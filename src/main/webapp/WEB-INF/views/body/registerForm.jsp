@@ -417,7 +417,7 @@
 											style="padding-left: 13px;">생년월일</span> </td>
 									<td>
 										<input type="date" id="birthday" name="birthday" class="form-control"
-											style="width: 250px; font-style: italic; font-size: 12px;" required />
+											style="width: 250px; font-style: italic; font-size: 12px;"  />
 									</td>
 								</tr>
 
@@ -450,7 +450,7 @@
 									<td class="form-inline">
 										<select name="mobile1" class="form-control"
 											onchange="commonFocusMove(this, 3,'mobile2');" style="width:80px;" required>
-											<option value=" ">010</option>
+											<option value=" "></option>
 											<option value="010">010</option>
 											<option value="011">011</option>
 											<option value="016">016</option>
@@ -490,26 +490,26 @@
 									<td class="text-left" style="vertical-align:middle;"><span
 											style="padding-left: 13px;">관심 태그</span></td>
 									<td class="form-inline" style="padding-bottom: 0px;">
-										<input type="checkbox" name="tag1" id="tag1" class="form-control" checked/>
+										<input type="checkbox" name="dandy" value="dandy" class="form-control" checked/>
 										&nbsp;댄디&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="checkbox" name="tag2"  id="tag2" class="form-control" checked/>
+										<input type="checkbox" name="classic"  value="classic" class="form-control" checked/>
 										&nbsp;클래식&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="checkbox" name="tag3"  id="tag3" class="form-control" />
+										<input type="checkbox" name="casual"  value="casual" class="form-control" />
 										&nbsp;캐주얼&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="checkbox" name="tag4"  id="tag4" class="form-control" />
+										<input type="checkbox" name="sporty"  value="sporty" class="form-control" />
 										&nbsp;스포티&nbsp;&nbsp;&nbsp;&nbsp;
 									</td>
 								</tr>
 								<tr>
 									<td class="text-left" style="vertical-align:middle;"></td>
 									<td class="form-inline" style="padding-top: 0px;">
-										<input type="checkbox" name="tag5"  id="tag5" class="form-control" />
+										<input type="checkbox" name="modern"  value="modern" class="form-control" />
 										&nbsp;모던&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="checkbox" name="tag6"  id="tag6" class="form-control" />
+										<input type="checkbox" name="street"  value="street" class="form-control" />
 										&nbsp;스트릿&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="checkbox" name="tag7"  id="tag7" class="form-control" />
+										<input type="checkbox" name="vintage"  value="vintage" class="form-control" />
 										&nbsp;빈티지&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="checkbox" name="tag8"  id="tag8" class="form-control" />
+										<input type="checkbox" name="lovely"  value="lovely" class="form-control" />
 										&nbsp;러블리&nbsp;&nbsp;&nbsp;&nbsp;
 
 									</td>

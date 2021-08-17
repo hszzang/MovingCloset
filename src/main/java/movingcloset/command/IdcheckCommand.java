@@ -20,10 +20,14 @@ public class IdcheckCommand implements CommandImpl{
 	@Override
 	public void execute(Model model) {
 	
+		Map<String, Object> paramMap = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)paramMap.get("req");
+
+		String userid = req.getParameter("user_id");
+		String result = sqlSession.getMapper(MybatisMemberImpl.class).idcheck(userid);
+		System.out.println("id중복확인 "+result);
 		
-		
-		//sqlSession.getMapper(MybatisMemberImpl.class).idcheck(id);
-		
+		model.addAttribute("DBid",result);
 	}
 
 }
