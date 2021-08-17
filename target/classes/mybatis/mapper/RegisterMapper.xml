@@ -16,4 +16,9 @@
 	
 	</insert>
 
+	<select id="idcheck" >
+		select id from member where id = #{id}
+	</select>
+
+
 </mapper>

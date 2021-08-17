@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%
+<%-- <%
 String userid = request.getParameter("user_id"); //  사용자가 입력한것
 boolean check = true;
-%>
+%> --%>
 <!DOCTYPE html>
 <html>
 <head>

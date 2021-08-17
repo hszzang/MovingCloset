@@ -3,7 +3,6 @@
 
 <!DOCTYPE html>
 <html>
-
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
@@ -83,11 +82,6 @@
 			box-shadow: 0 0 0 0rem rgba(0, 0, 0, 0) !important;
 		}
   
-		#tag1:checked ~ ,#tag2,#tag3,#tag4,#tag5,#tag6,#tag7,#tag8{
-			border-color: #ff6c2f !important;
-			box-shadow: 0 0 0 0rem rgba(0, 0, 0, 0) !important;
-		}
-	
 
 		#registerSubmitBtn {
 			background-color: #ff6c2f;
@@ -386,7 +380,7 @@
 									</td>
 									<td>
 										<input type="text" name="pass1" class="form-control" style="width: 250px;"
-											required placeholder="비밀번호를 입력해주세요." />
+											required placeholder="비밀번호를 입력해주세요." value="ALStd1995@"/>
 									</td>
 								</tr>
 
@@ -404,15 +398,15 @@
 										확인</td>
 									<td>
 										<input type="text" name="pass2" class="form-control" style="width: 250px;"
-											required placeholder="비밀번호를 입력해주세요." />
+											required placeholder="비밀번호를 입력해주세요." value="ALStd1995@"/>
 									</td>
 								</tr>
 
 								<tr>
 									<td><span class="red">*</span> 이름</td>
 									<td class="form-inline">
-										<input type="text" class="form-control" name="name" value="" style="width: 250px;"
-											required placeholder="이름을 입력해주세요." />
+										<input type="text" class="form-control" name="name" style="width: 250px;"
+											required placeholder="이름을 입력해주세요." value="민세원"/>
 										
 	
 									</td>
@@ -456,7 +450,7 @@
 									<td class="form-inline">
 										<select name="mobile1" class="form-control"
 											onchange="commonFocusMove(this, 3,'mobile2');" style="width:80px;" required>
-											<option value=" "> </option>
+											<option value=" ">010</option>
 											<option value="010">010</option>
 											<option value="011">011</option>
 											<option value="016">016</option>
@@ -465,10 +459,10 @@
 											<option value="019">019</option>
 										</select>
 										&nbsp;&nbsp;-&nbsp;&nbsp;
-										<input type="text" class="form-control" name="mobile2" value="" maxlength="4"
+										<input type="text" class="form-control" name="mobile2" value="1111" maxlength="4"
 											onkeyup="commonFocusMove(this, 4,'mobile3');" style="width:100px;" required />
 										&nbsp;&nbsp;-&nbsp;&nbsp;
-										<input type="text" class="form-control" name="mobile3" value="" maxlength="4"
+										<input type="text" class="form-control" name="mobile3" value="1111" maxlength="4"
 											style="width:100px;" onkeyup="commonFocusMove(this, 4,'email1');" required />
 									</td>
 								</tr>
@@ -476,10 +470,10 @@
 									<td class="text-left" style="vertical-align:middle;"><span
 											class="red">*</span>이메일&nbsp;&nbsp;&nbsp;</td>
 									<td class="form-inline">
-										<input type="text" class="form-control" name="email1" value=""
+										<input type="text" class="form-control" name="email1" value="minsw626"
 											style="width:30%;" required />
 										&nbsp;@&nbsp;
-										<input type="text" class="form-control" name="email2" value=""
+										<input type="text" class="form-control" name="email2" value="naver.com"
 											style="width:30%;" required />&nbsp;&nbsp;
 										<select name="email_domain" class="form-control"
 											onChange="inputEmail(this.form);" style="width:30%;">
@@ -496,9 +490,9 @@
 									<td class="text-left" style="vertical-align:middle;"><span
 											style="padding-left: 13px;">관심 태그</span></td>
 									<td class="form-inline" style="padding-bottom: 0px;">
-										<input type="checkbox" name="tag1" id="tag1" class="form-control" />
+										<input type="checkbox" name="tag1" id="tag1" class="form-control" checked/>
 										&nbsp;댄디&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="checkbox" name="tag2"  id="tag2" class="form-control" />
+										<input type="checkbox" name="tag2"  id="tag2" class="form-control" checked/>
 										&nbsp;클래식&nbsp;&nbsp;&nbsp;&nbsp;
 										<input type="checkbox" name="tag3"  id="tag3" class="form-control" />
 										&nbsp;캐주얼&nbsp;&nbsp;&nbsp;&nbsp;
@@ -532,13 +526,13 @@
 						<textarea rows="6" name="content" class="form-control" style="resize:none;"
 							placeholder="개인정보수집약관" readonly></textarea>
 						<div class="custom-control custom-checkbox mb-4 mt-2">
-							<input type="checkbox" class="custom-control-input" id="personalAgree" required>
+							<input type="checkbox" class="custom-control-input" id="personalAgree" required checked>
 							<label class="custom-control-label" for="personalAgree">개인정보 수집 및 이용에 동의합니다.</label>
 						</div>
 						<textarea rows="6" name="content" class="form-control" style="resize:none;"
 							placeholder="노쇼약관노쇼약관" readonly></textarea>
 						<div class="custom-control custom-checkbox mb-5 mt-2">
-							<input type="checkbox" class="custom-control-input" id="cancelAgree" required>
+							<input type="checkbox" class="custom-control-input" id="cancelAgree" required checked>
 							<label class="custom-control-label" for="cancelAgree">무단 취소 시 부여되는 경고사항에 대해 동의합니다.</label>
 						</div>
 

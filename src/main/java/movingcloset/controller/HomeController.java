@@ -25,7 +25,10 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+
 import movingcloset.command.CommandImpl;
+import movingcloset.command.IdcheckCommand;
 import movingcloset.command.RegisterActionCommand;
 import mybatis.MemberDTO;
 
@@ -46,6 +49,8 @@ public class HomeController {
 	@Autowired
 	RegisterActionCommand registerActionCommand;
 	
+	@Autowired
+	IdcheckCommand idcheckCommand;
 	
 	
 	/**
@@ -214,7 +219,15 @@ public class HomeController {
 
 	// 아이디 중복확인
 	@RequestMapping(value="/movingcloset/idcheck.do")
-	public String idcheck() {
+	public String idcheck(Model model,HttpServletRequest req) {
+		
+		String userid = req.getParameter("user_id");
+		model.addAttribute("userid",userid);
+		
+		command = idcheckCommand;
+		command.execute(model);
+
+
 		
 		return "idCheckForm";
 	}
