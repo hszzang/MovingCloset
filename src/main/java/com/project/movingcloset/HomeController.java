@@ -59,12 +59,7 @@ public class HomeController {
 	}
 	
 	
-	//뉴디
-	@RequestMapping(value="/movingcloset/newD.do", method=RequestMethod.GET)
-	public String newDmain(Locale locale, Model model) {
-		
-		return "body/newD_main";
-	}
+
 	
 
 	//로그인
