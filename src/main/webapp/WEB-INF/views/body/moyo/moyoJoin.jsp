@@ -208,7 +208,7 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 							</tbody>
 						</table>
 						<button class="btn btn-primary btn-lg btn-block" id="moyoSubmitBtn"
-							type="button" href="javascript:location.href='../movingcloset/moyo.do';" >모여 리스트로 돌아가기</button>
+							type="button" onclick="javascript:location.href='../movingcloset/moyo.do';" >모여 리스트로 돌아가기</button>
 					
 				</div>
 			</div>
