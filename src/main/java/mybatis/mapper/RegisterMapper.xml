@@ -16,8 +16,8 @@
 	
 	</insert>
 
-	<select id="idcheck" resultType="string">
-		select userid from member where userid = #{userid}
+	<select id="idcheck" resultType="int">
+		select count(*) from member where userid = #{userid}
 	</select>
 
 
