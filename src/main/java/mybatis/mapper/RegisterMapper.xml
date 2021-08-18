@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!-- 해당 xml파일이 mapper역할을 하기 위해서 반드시 필요한 DOCTYPE -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  
+  <mapper namespace="mybatis.MybatisMemberImpl">
+
+  	<insert id="register" parameterType="mybatis.MemberDTO" >
+		INSERT INTO member (USERID, USERPASS, EMAIL, PHONE, TAG, POSTCODE, ADDR, NAME, BIRTH, REGIDATE) 
+		VALUES
+		(#{userid}, #{userpass} ,#{email},#{phone},#{tag},#{postcode},#{addr},#{name},#{birth},sysdate  )
+	
+	</insert>
+
+	<select id="idcheck" resultType="string">
+		select userid from member where userid = #{userid}
+	</select>
+
+
+</mapper>

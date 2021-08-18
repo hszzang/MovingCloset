@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
-
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
@@ -60,11 +60,28 @@
 			margin-bottom: 8%;
 		}
 
-		.form-control:focus,
-		#registerSubmitBtn:focus {
+		.form-control:focus,#registerSubmitBtn:focus {
 			border-color: #FFFFFF;
 			box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px #ff6c2f;
 		}
+
+
+		#registFrm .form-control:focus, #registerSubmitBtn:focus{
+			border-color: #FFFFFF;
+			box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px #ff6c2f;
+		}
+		
+		.custom-control-input:checked ~ .custom-control-label::before {
+		    border-color: #ff6c2f !important;
+		    background-color: #ff6c2f !important;
+		}
+		
+		.custom-control-input:focus ~ 
+		    .custom-control-label::before {
+			border-color: #ff6c2f !important;
+			box-shadow: 0 0 0 0rem rgba(0, 0, 0, 0) !important;
+		}
+  
 
 		#registerSubmitBtn {
 			background-color: #ff6c2f;
@@ -144,6 +161,12 @@
 			var p2 = fn.pass2;
 			if (p1.value == "") { alert("패스워드를 입력해주세요"); p1.focus(); return false; }
 			if (p2.value == "") { alert("패스워드확인을 입력해주세요"); p2.focus(); return false; }
+			
+			if(!(p1.value.length >= 8 && p1.value.length <= 16) ){
+				alert("패스워드의 길이는 8~16자로 입력해주세요.");
+				return false;
+			}
+			
 			if (isPassword(p1.value) == false) {
 				alert('패스워드는 숫자와 특수기호가 하나이상 포함되야합니다.');
 				p1.value = ""; p2.value = ""; p1.focus();
@@ -157,6 +180,7 @@
 			if (fn.name.value == "") {
 				alert("이름을 입력해주세요"); fn.name.focus(); return false;
 			}
+			
 			return true;
 		}
 		function isPassword(param) {
@@ -184,9 +208,9 @@
 			else
 				return false;
 		}
-		//아이디가 8~12자 사이가 아니면 false를 반환한다.
+		//아이디가 6~12자 사이가 아니면 false를 반환한다.
 		var idLength = function (param) {
-			if (!(param.value.length >= 8 && param.value.length <= 12)) {
+			if (!(param.value.length >= 6 && param.value.length <= 12)) {
 				return false;
 			}
 			return true;
@@ -220,9 +244,9 @@
 		}
 		//아이디검증 로직을 하나로 묶는다.
 		function idCapsule() {
-			//1.아이디는 8~12자 이내여야 한다. 즉 7자를 쓰거나 13자를 쓰면 잘못된 아이디로 판단하고 재입력을 요구한다.
+			//1.아이디는 6~12자 이내여야 한다. 즉 5자를 쓰거나 13자를 쓰면 잘못된 아이디로 판단하고 재입력을 요구한다.
 			if (!idLength(idObj)) {
-				alert('아이디는 8~12자만 가능합니다.');
+				alert('아이디는 6~12자만 가능합니다.');
 				return false;
 			}
 			//2.아이디는 반드시 영문으로 시작해야 한다. 만약 숫자로 시작하면 잘못된 아이디로 판단한다.
@@ -259,7 +283,7 @@
 		function commonFocusMove(obj, mLength, next_obj) {
 			var strLength = obj.value.length;
 			if (strLength >= mLength) {
-				eval("document.loginFrm." + next_obj + ".focus()");
+				eval("document.registFrm." + next_obj + ".focus();");
 			}
 		}
 	</script>
@@ -320,7 +344,7 @@
 			<div class="input-form col-md-12 mx-auto">
 				<div class="input-form-wrap">
 					<h3>회원가입</h3>
-					<form name="registFrm" id="registFrm" action="#" method="post"
+					<form name="registFrm" id="registFrm" action="./registerAction.do" method="POST"
 						onsubmit="return loginValdidate(this);">
 						<table class="table table-bordered">
 							<colgroup>
@@ -356,7 +380,7 @@
 									</td>
 									<td>
 										<input type="text" name="pass1" class="form-control" style="width: 250px;"
-											required placeholder="비밀번호를 입력해주세요." />
+											required placeholder="비밀번호를 입력해주세요." value="ALStd1995@"/>
 									</td>
 								</tr>
 
@@ -364,7 +388,7 @@
 									<td></td>
 									<td>
 										<span class="comment">
-											※ 영문/숫자/특수문자 조합 8~16자 이상 입력해주세요. (아이디 사용불가)<br>
+											※ 영문/숫자/특수문자 조합 8~16자 이상 입력해주세요. <br>
 										</span>
 									</td>
 								</tr>
@@ -374,15 +398,15 @@
 										확인</td>
 									<td>
 										<input type="text" name="pass2" class="form-control" style="width: 250px;"
-											required placeholder="비밀번호를 입력해주세요." />
+											required placeholder="비밀번호를 입력해주세요." value="ALStd1995@"/>
 									</td>
 								</tr>
 
 								<tr>
 									<td><span class="red">*</span> 이름</td>
 									<td class="form-inline">
-										<input type="text" class="form-control" name="name" value="" style="width: 250px;"
-											required placeholder="이름을 입력해주세요." />
+										<input type="text" class="form-control" name="name" style="width: 250px;"
+											required placeholder="이름을 입력해주세요." value="민세원"/>
 										
 	
 									</td>
@@ -393,7 +417,7 @@
 											style="padding-left: 13px;">생년월일</span> </td>
 									<td>
 										<input type="date" id="birthday" name="birthday" class="form-control"
-											style="width: 250px; font-style: italic; font-size: 12px;" required />
+											style="width: 250px; font-style: italic; font-size: 12px;"  />
 									</td>
 								</tr>
 
@@ -402,7 +426,7 @@
 									</td>
 									<td class="form-inline">
 										<input type="text" name="postcode" class="form-control" style="width: 250px;"
-											required placeholder="우편번호" />&nbsp;&nbsp;&nbsp;&nbsp;
+											required placeholder="우편번호" value="08505"/>&nbsp;&nbsp;&nbsp;&nbsp;
 										<button type="button" id="postBtn" onclick="zipcodeFind();"
 											style="width: 120px;height: 40px;">우편번호</button>
 									</td>
@@ -413,9 +437,9 @@
 									<td class="text-left" style="vertical-align:middle;"></td>
 									<td>
 										<input type="text" name="addr1" class="form-control" style="width: 500px;"
-											required placeholder="주소를 입력해주세요." />&nbsp;&nbsp;&nbsp;&nbsp;
+											required placeholder="주소를 입력해주세요." value="서울 금천구 가산디지털2로 123"/>&nbsp;&nbsp;&nbsp;&nbsp;
 										<input type="text" name="addr2" class="form-control" style="width: 500px;"
-											required placeholder="상세주소를 입력해주세요." />
+											required placeholder="상세주소를 입력해주세요." value="413호"/>
 
 									</td>
 								</tr>
@@ -425,8 +449,8 @@
 									</td>
 									<td class="form-inline">
 										<select name="mobile1" class="form-control"
-											onchange="phoneFocus(3, this, 'mobile2');" style="width:80px;" required>
-											<option value=" "> </option>
+											onchange="commonFocusMove(this, 3,'mobile2');" style="width:80px;" required>
+											<option value=" "></option>
 											<option value="010">010</option>
 											<option value="011">011</option>
 											<option value="016">016</option>
@@ -435,21 +459,21 @@
 											<option value="019">019</option>
 										</select>
 										&nbsp;&nbsp;-&nbsp;&nbsp;
-										<input type="text" class="form-control" name="mobile2" value="" maxlength="4"
-											onkeyup="phoneFocus(4, this, 'mobile3');" style="width:100px;" required />
+										<input type="text" class="form-control" name="mobile2" value="1111" maxlength="4"
+											onkeyup="commonFocusMove(this, 4,'mobile3');" style="width:100px;" required />
 										&nbsp;&nbsp;-&nbsp;&nbsp;
-										<input type="text" class="form-control" name="mobile3" value="" maxlength="4"
-											style="width:100px;" required />
+										<input type="text" class="form-control" name="mobile3" value="1111" maxlength="4"
+											style="width:100px;" onkeyup="commonFocusMove(this, 4,'email1');" required />
 									</td>
 								</tr>
 								<tr>
 									<td class="text-left" style="vertical-align:middle;"><span
 											class="red">*</span>이메일&nbsp;&nbsp;&nbsp;</td>
 									<td class="form-inline">
-										<input type="text" class="form-control" name="email1" value=""
+										<input type="text" class="form-control" name="email1" value="minsw626"
 											style="width:30%;" required />
 										&nbsp;@&nbsp;
-										<input type="text" class="form-control" name="email2" value=""
+										<input type="text" class="form-control" name="email2" value="naver.com"
 											style="width:30%;" required />&nbsp;&nbsp;
 										<select name="email_domain" class="form-control"
 											onChange="inputEmail(this.form);" style="width:30%;">
@@ -466,33 +490,33 @@
 									<td class="text-left" style="vertical-align:middle;"><span
 											style="padding-left: 13px;">관심 태그</span></td>
 									<td class="form-inline" style="padding-bottom: 0px;">
-										<input type="checkbox" name="tag1" class="form-control" />
+										<input type="checkbox" name="dandy" value="dandy" class="form-control" checked/>
 										&nbsp;댄디&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="checkbox" name="tag1" class="form-control" />
+										<input type="checkbox" name="classic"  value="classic" class="form-control" checked/>
 										&nbsp;클래식&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="checkbox" name="tag1" class="form-control" />
+										<input type="checkbox" name="casual"  value="casual" class="form-control" />
 										&nbsp;캐주얼&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="checkbox" name="tag1" class="form-control" />
+										<input type="checkbox" name="sporty"  value="sporty" class="form-control" />
 										&nbsp;스포티&nbsp;&nbsp;&nbsp;&nbsp;
 									</td>
 								</tr>
 								<tr>
 									<td class="text-left" style="vertical-align:middle;"></td>
 									<td class="form-inline" style="padding-top: 0px;">
-										<input type="checkbox" name="tag1" class="form-control" />
+										<input type="checkbox" name="modern"  value="modern" class="form-control" />
 										&nbsp;모던&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="checkbox" name="tag1" class="form-control" />
+										<input type="checkbox" name="street"  value="street" class="form-control" />
 										&nbsp;스트릿&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="checkbox" name="tag1" class="form-control" />
+										<input type="checkbox" name="vintage"  value="vintage" class="form-control" />
 										&nbsp;빈티지&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="checkbox" name="tag1" class="form-control" />
+										<input type="checkbox" name="lovely"  value="lovely" class="form-control" />
 										&nbsp;러블리&nbsp;&nbsp;&nbsp;&nbsp;
 
 									</td>
 								</tr>
 							</tbody>
 						</table>
-					</form>
+					
 
 					<hr class="mt-4 mb-5">
 
@@ -502,19 +526,20 @@
 						<textarea rows="6" name="content" class="form-control" style="resize:none;"
 							placeholder="개인정보수집약관" readonly></textarea>
 						<div class="custom-control custom-checkbox mb-4 mt-2">
-							<input type="checkbox" class="custom-control-input" id="personalAgree" required>
+							<input type="checkbox" class="custom-control-input" id="personalAgree" required checked>
 							<label class="custom-control-label" for="personalAgree">개인정보 수집 및 이용에 동의합니다.</label>
 						</div>
 						<textarea rows="6" name="content" class="form-control" style="resize:none;"
 							placeholder="노쇼약관노쇼약관" readonly></textarea>
 						<div class="custom-control custom-checkbox mb-5 mt-2">
-							<input type="checkbox" class="custom-control-input" id="cancelAgree" required>
+							<input type="checkbox" class="custom-control-input" id="cancelAgree" required checked>
 							<label class="custom-control-label" for="cancelAgree">무단 취소 시 부여되는 경고사항에 대해 동의합니다.</label>
 						</div>
 
 						<button class="btn btn-primary btn-lg btn-block" id="registerSubmitBtn"
-							type="submit">회&nbsp;원&nbsp;가&nbsp;입</button>
+							type="submit" >회&nbsp;원&nbsp;가&nbsp;입</button>
 					</div>
+					</form>
 				</div>
 			</div>
 		</div>
