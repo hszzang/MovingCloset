@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>id_overapping.jsp</title>
+<title>Moving Closet</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script
@@ -38,20 +39,23 @@
 	box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 }
 
-.form-control:focus, #idsubmitBtn:focus {
+#mainbtn:focus {
 	border-color: #FFFFFF;
 	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px #ff6c2f;
 }
 
-#overlapFrm {
-	margin: 4% 7%;
-	width: 70%;
-}
 
-#idsubmitBtn {
+
+#mainbtn {
 	background-color: #ff6c2f;
 	color: white;
 	border: 0;
+	width:200px;
+}
+
+#paramId{
+    color: #ff6c2f;
+    font-weight: bold;
 }
 
 
@@ -61,12 +65,15 @@
 
 <body>
 
-	<div class="container" style="margin-top: 200px;" align="center">
+	<div class="container" style="margin-top: 200px;width: 65%;" align="center">
 		<div class="input-form-background row">
 			<div class="input-form col-md-12 mx-auto">
-				<div class="input-form-wrap">
-					<h2>${param.user_id} 님 회원가입이 완료되었습니다.</h2>
-						
+				<div class="input-form-wrap" style="text-align:center;padding-top: 20px;">
+					<h3><span id="paramId">${param.user_id} </span> 님 회원가입이 완료되었습니다.</h3>
+					<h3><strong>Moving Closet</strong> 을 찾아주셔서 감사합니다.</h3>
+					<h3>즐거운 쇼핑하시기 바랍니다.</h3>	
+                    <br>
+					<button type="button" class="btn btn-primary" id="mainbtn" onclick="location.href='./main.do';">메인</button>
 				</div>
 			</div>
 		</div>
