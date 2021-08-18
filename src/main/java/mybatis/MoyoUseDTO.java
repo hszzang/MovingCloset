@@ -11,4 +11,5 @@ public class MoyoUseDTO {
 	private String mu_phone;
 	private String mu_email;
 	private String mu_time;
+	private String mu_regidate;
 }
