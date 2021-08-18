@@ -3,9 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%
-String idid = (String)request.getAttribute("DBid");
+String DBid = (String)session.getAttribute("DBid");
 
-System.out.println("idid"+idid);
 %>
 <!DOCTYPE html>
 <html>
@@ -66,11 +65,11 @@ form {
 </style>
 <script type="text/javascript">
 	function idUse(f) {
-	<%if (request.getAttribute("DBid") != null) {%> 
-	opener.document.registFrm.user_id.value = document.overlapFrm.user_id.value;
-
-		self.close();
-	<%}%> 
+		<%if (DBid == null) {%> 
+		opener.document.registFrm.user_id.value = document.overlapFrm.user_id.value;
+	
+			self.close();
+		<%}%> 
 	}
 	function idUse2() {
 

@@ -73,12 +73,6 @@ public class HomeController {
 		return "body/search";
 	}
 
-	// 뉴디
-	@RequestMapping(value = "/movingcloset/newD.do", method = RequestMethod.GET)
-	public String newDmain(Locale locale, Model model) {
-
-		return "body/newD_main";
-	}
 
 	// 로그인
 	@RequestMapping(value = "/movingcloset/login.do", method = RequestMethod.GET)
@@ -206,7 +200,8 @@ public class HomeController {
 
 		command = idcheckCommand;
 		command.execute(model);
-
+		
+		
 		return "idCheckForm";
 	}
 

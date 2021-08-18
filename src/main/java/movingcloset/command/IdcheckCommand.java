@@ -3,6 +3,7 @@ package movingcloset.command;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,10 @@ public class IdcheckCommand implements CommandImpl{
 		String result = sqlSession.getMapper(MybatisMemberImpl.class).idcheck(userid);
 		System.out.println("id중복확인 "+result);
 		
-		model.addAttribute("DBid",result);
+		
+		HttpSession session = req.getSession();
+		session.setAttribute("DBid", result);
+		
 	}
 
 }
