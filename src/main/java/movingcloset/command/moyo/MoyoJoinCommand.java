@@ -39,13 +39,13 @@ public class MoyoJoinCommand implements CommandImpl {
 		
 		String m_idx = req.getParameter("m_idx");
 		moyoUseDTO.setM_idx(m_idx);
-		moyoUseDTO.setMu_email(req.getParameter("email1") + "-" + req.getParameter("email2"));
+		moyoUseDTO.setMu_email(req.getParameter("email1") + "@" + req.getParameter("email2"));
 		moyoUseDTO.setMu_name(req.getParameter("username"));
 		moyoUseDTO.setMu_phone(req.getParameter("mobile1") 
 				+ "-" + req.getParameter("mobile2") + "-" + req.getParameter("mobile3"));
 		moyoUseDTO.setMu_time(req.getParameter("moyoHour") + ":" + req.getParameter("moyoMinute"));
 		
-		//로그인 id정보 얻어오기
+		//로그인 id정보 얻어오기(임시로 hszzang 넣어두었습니다.)
 		moyoUseDTO.setUserid("hszzang");
 		
 		int result = sqlSession

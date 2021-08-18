@@ -276,7 +276,7 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 										style="vertical-align:middle;">방문예정시간</td>
 									<td class="form-inline">
 										<input type="number" name="moyoHour" class="form-control" min="10" max="22" value="10" /> &nbsp;시&nbsp;&nbsp;
-										<input type="number" name="moyoMinute" class="form-control" min="0" max="59" value="00" /> &nbsp;분
+										<input type="number" name="moyoMinute" class="form-control" min="0" max="50" value="00" step="10" /> &nbsp;분
 									</td>
 								</tr>
 							</tbody>
