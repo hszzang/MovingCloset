@@ -203,11 +203,12 @@ public class HomeController {
 	public String idcheck(Model model, HttpServletRequest req) {
 
 		
-		try {
+		/*try {*/
 			model.addAttribute("req", req);
 			
 			command = idcheckCommand;
 			command.execute(model);
+			/*
 		}catch (DataIntegrityViolationException e) {
 			try {
 				HttpServletResponse response = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getResponse();
@@ -219,13 +220,14 @@ public class HomeController {
 						+ "	history.back();  "
 						+ "</script>";
 				out.println(str); 
-				System.out.println("냐아아아");
+				System.out.println("냐아아아123");
 			} catch (IOException e2) {
 				e2.printStackTrace();
 			}
 			
+			
 		}
-	
+			 */
 		return "idCheckForm";
 	}
 
