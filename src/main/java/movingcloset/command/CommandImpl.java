@@ -7,6 +7,7 @@ public interface CommandImpl {
 
 	// 인터페이스에 정의한 모든 메소드는 public abstract 선언되어진다.
 	void execute(Model model);
+
 	
 }
 /*

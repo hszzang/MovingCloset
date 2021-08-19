@@ -124,16 +124,18 @@
 		//아이디 검증을 위한 전역변수
 		var idObj;
 		var idFlag;
+		var count;
 		window.onload = function () {
 			idObj = document.registFrm.user_id;//아이디 객체
+			count=0;
 		}
 		
 		
 		
 		
 		
-/* 		function idCheck(fn) {
-
+ 		function idCheck(fn) {
+			
 
 			if (!idCapsule()) {
 				idObj.value = "";
@@ -145,14 +147,15 @@
 				fn.user_id.focus();
 			}
 			else {
+				count++;
 				fn.user_id.readOnly = true;
 				window.open("./idcheck.do?user_id=" + fn.user_id.value,
 					"idover", "width=600,height=400");
 			}
-		} */
+		} 
 		
 		
-		function check_id() {
+/* 		function check_id() {
 			
 			var idCheck = 0;
 			
@@ -169,20 +172,26 @@
 					var result = JSON.parse(data);
 					
 					if(result.check > 0){
-						
+						$(".id-text").css("text-align","center");
+						$(".id-text").css("color","#ff0000");
+						$(".id-text").text("이미 사용 중인 아이디입니다.");
+						$("button#registerSubmitBtn").attr("disabled","true");
 					}else if(result.check ==0){
-						
+						$(".id-text").css("text-align","center");
+						$(".id-text").css("color","#4B89DC");
+						$(".id-text").text("사용 가능한 아이디입니다.");
+						$("button#registerSubmitBtn").removeAttr("disabled");
 					} 
 					
 					
 				}
 				
-			})
+			});
 			
 			
 			
-		}
-		
+		};
+		 */
 		
 		
 		
@@ -200,6 +209,14 @@
 				idObj.focus();
 				return false;
 			}
+			
+			if(count == 0){
+				alert("아이디 중복 확인을 해주세요.");
+				fn.user_id.focus();
+				return false;
+			}
+			
+			
 			var p1 = fn.pass1;
 			var p2 = fn.pass2;
 			if (p1.value == "") { alert("패스워드를 입력해주세요"); p1.focus(); return false; }
@@ -223,6 +240,8 @@
 			if (fn.name.value == "") {
 				alert("이름을 입력해주세요"); fn.name.focus(); return false;
 			}
+			
+			//count=0;
 			
 			return true;
 		}
@@ -302,6 +321,8 @@
 				alert("아이디는 영문과 숫자만 포함할수 있습니다.");
 				return false;
 			}
+
+			
 			return true;
 		}
 		function inputEmail(frm) {
@@ -498,8 +519,8 @@
 									</td>
 									<td class="form-inline">
 										<select name="mobile1" class="form-control"
-											onchange="commonFocusMove(this, 3,'mobile2');" style="width:80px;" required>
-											<option value=" "></option>
+											onchange="commonFocusMove(this, 3,'mobile2');" style="width:100px;" required>
+											<option value="">-선택-</option>
 											<option value="010">010</option>
 											<option value="011">011</option>
 											<option value="016">016</option>

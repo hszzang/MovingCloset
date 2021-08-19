@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -203,35 +204,13 @@ public class HomeController {
 	}
 
 	// 아이디 중복확인
-	@RequestMapping(value = "/movingcloset/idcheck.do")
+	@RequestMapping(value = "/movingcloset/idcheck.do",produces = "application/json")
 	public String idcheck(Model model, HttpServletRequest req) {
 
-		
-		/*try {*/
 			model.addAttribute("req", req);
-			
 			command = idcheckCommand;
 			command.execute(model);
-			/*
-		}catch (DataIntegrityViolationException e) {
-			try {
-				HttpServletResponse response = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getResponse();
-				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter out = response.getWriter();
-				String str = ""
-						+ "<script>"
-						+ "	alert('냐아아아');  "
-						+ "	history.back();  "
-						+ "</script>";
-				out.println(str); 
-				System.out.println("냐아아아123");
-			} catch (IOException e2) {
-				e2.printStackTrace();
-			}
-			
-			
-		}
-			 */
+
 		return "idCheckForm";
 	}
 

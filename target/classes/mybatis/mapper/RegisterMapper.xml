@@ -16,7 +16,7 @@
 	
 	</insert>
 
-	<select id="idcheck" resultType="int">
+	<select id="idcheck" resultType="int" parameterType="String">
 		select count(*) from member where userid = #{userid}
 	</select>
 
