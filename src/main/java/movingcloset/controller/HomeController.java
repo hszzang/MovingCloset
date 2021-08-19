@@ -36,6 +36,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 
 import movingcloset.command.CommandImpl;
 import movingcloset.command.FindIdCommand;
+import movingcloset.command.FindPwCommand;
 import movingcloset.command.IdcheckCommand;
 import movingcloset.command.RegisterActionCommand;
 import mybatis.MemberDTO;
@@ -60,6 +61,9 @@ public class HomeController {
 	@Autowired
 	FindIdCommand findIdCommand;
 
+	@Autowired
+	FindPwCommand findPwCommand;
+	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -233,13 +237,18 @@ public class HomeController {
 		command = findIdCommand;
 		command.execute(model);
 		
-		return "body/findId";
+		return "body/findIdAction";
 	}
 	
 	// 비밀번호 찾기
 	@RequestMapping(value = "/movingcloset/findPw.do", method = RequestMethod.GET)
 	public String findPw(Model model, HttpServletRequest req) {
-		return "body/findPw";
+		
+		model.addAttribute("req", req);
+		command = findPwCommand;
+		command.execute(model);
+		
+		return "body/findPwAction";
 	}
 	
 	// 이용약관

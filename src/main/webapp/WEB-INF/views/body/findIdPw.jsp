@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>아이디/비밀번호찾기 :: MovingCloset</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -102,10 +102,10 @@ function findPwVali(fn){
 	<div class="row justify-content-center">
 		<div class="col-md-6 col-lg-4">
 			<div class="formwrap">
-				<form name="findIdForm" action="./findId.memb" onsubmit="return findIdVali(this);">
+				<form name="findIdForm" action="../movingcloset/findId.do" onsubmit="return findIdVali(this);">
 					<p class="w-100 text-center">&mdash; 아이디찾기 &mdash;</p>
 					<div class="form-group">
-						<input type="text" name="name" class="form-control" placeholder="실명" required>
+						<input type="text" name="name" class="form-control" placeholder="이름" required>
 					</div>
 					<div class="form-group">
 						<input name="email" type="text" class="form-control" placeholder="가입한 이메일" required>
@@ -120,7 +120,7 @@ function findPwVali(fn){
 		<div id="centerline"></div>
 		<div class="col-md-6 col-lg-4">
 			<div class="formwrap">
-				<form name="findPwForm" action="./findPw.memb" onsubmit="return findPwVali(this);">
+				<form name="findPwForm" action="../movingcloset/findPw.do" onsubmit="return findPwVali(this);">
 				<p class="w-100 text-center">&mdash; 비밀번호찾기 &mdash;</p>
 					<div class="form-group">
 						<input type="text" name="userid" class="form-control" placeholder="ID" required>

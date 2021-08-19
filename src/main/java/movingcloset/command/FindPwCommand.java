@@ -13,7 +13,7 @@ import org.springframework.ui.Model;
 import mybatis.MybatisMemberImpl;
 
 @Service
-public class FindIdCommand implements CommandImpl{
+public class FindPwCommand implements CommandImpl{
 	
 	@Autowired
 	private SqlSession sqlSession;
@@ -24,13 +24,15 @@ public class FindIdCommand implements CommandImpl{
 		Map<String, Object> paramMap = model.asMap();
 		HttpServletRequest req = (HttpServletRequest)paramMap.get("req");
 
-		String name = req.getParameter("name");
+		String userid = req.getParameter("userid");
 		String email = req.getParameter("email");
 		
-		String findUserId = sqlSession.getMapper(MybatisMemberImpl.class).findId(name, email);
+		String findPwEmail = sqlSession.getMapper(MybatisMemberImpl.class).findPwEmail(userid, email);
 		
-		model.addAttribute("findUserId", findUserId);
-		System.out.println(findUserId);
+		
+		
+		model.addAttribute("findPwEmail", findPwEmail);
+		System.out.println(findPwEmail);
 		
 	}
 }
