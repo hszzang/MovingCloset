@@ -158,8 +158,8 @@ Kakao.Auth.createLoginButton({
 var naverLogin = new naver.LoginWithNaverId(
 		{
 			clientId: "8dUO8AkoujmRhyEgT8yz", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
-			callbackUrl: "http://localhost:8082/movingcloset/movingcloset/login.do", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
-			isPopup: false,
+			callbackUrl: "http://localhost:8082/movingcloset/movingcloset/register.do", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
+			isPopup: false,  
 			callbackHandle: true
 		}
 	);	
