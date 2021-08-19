@@ -29,6 +29,12 @@
 		SELECT email FROM member 
 		WHERE userid=#{0} AND email=#{1}
 	</select>
+	
+	<update id="changeNewPw">
+		UPDATE member 
+		SET userpass=#{0}
+		WHERE userid=#{1} AND email=#{2}
+	</update>
 
 
 </mapper>
