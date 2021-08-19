@@ -14,7 +14,7 @@ public interface MybatisProductImpl {
 	public List<ProductDTO> getStoreList(ProductDTO productDTO);
 	public int getTotalCount();
 	
-	public int insertProduct(ProductDTO productDTO);
+	public void insertProduct(ProductDTO productDTO);
 	
 	/*
 	public int insertProduct(

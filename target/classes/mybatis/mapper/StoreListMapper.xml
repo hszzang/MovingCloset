@@ -34,7 +34,7 @@
 	
 	<!-- 상품 입력 -->
 	<!--  <insert id="insertProduct" parameterType="mybatis.ProductDTO"> -->
-	<insert id="insertProduct" >
+	<insert id="insertProduct" parameterType="mybatis.ProductDTO" >
 		INSERT INTO product(p_idx, p_name, p_code, p_price, p_brand, p_ofile, p_sfile)
 		VALUES
 		(product_seq.nextval, #{p_name}, #{p_code}, #{p_price}, #{p_brand}, #{p_ofile}, #{p_sfile})

@@ -13,7 +13,7 @@ public class ProductDTO {
 	
 	//private File upload;
 	
-	private int p_idx;
+	private String p_idx;
 	private String p_name;
 	private String p_code;
 	private int p_price;

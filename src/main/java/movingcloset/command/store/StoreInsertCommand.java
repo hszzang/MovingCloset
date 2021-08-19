@@ -30,6 +30,7 @@ public class StoreInsertCommand implements CommandImpl {
 		public void execute(Model model) {
 			
 			System.out.println("StoreInsertCommand 호출");
+
 			ProductDTO productDTO = new ProductDTO();
 			
 			Map<String, Object>paramMap = model.asMap();
@@ -46,24 +47,37 @@ public class StoreInsertCommand implements CommandImpl {
 			System.out.println("productDTO.sfile = " + productDTO.getP_sfile());
 			*/
 			System.out.println("되냐고1");
-			
-			int p_idx = Integer.parseInt(req.getParameter("p_idx"));
+			 
+			//int p_idx = Integer.parseInt(req.getParameter("p_idx"));
+			String p_idx = req.getParameter("p_idx");
 			String p_brand = req.getParameter("p_brand");
 			String p_name = req.getParameter("p_name");
 			String p_code = req.getParameter("p_code");
 			int p_price = Integer.parseInt(req.getParameter("p_price"));
-			String p_ofile = req.getParameter("p_ofile");
-			String p_sfile = req.getParameter("p_sfile");
+			//String p_ofile = req.getParameter("p_ofile");
+			//String p_sfile = req.getParameter("p_sfile");
 			
-			productDTO.setP_idx(p_idx);
+			//System.out.println(p_ofile);
+			//System.out.println(p_sfile);
+			
+			productDTO.setP_idx(p_idx); // null ㅅㅂ
 			productDTO.setP_brand(p_brand);
 			productDTO.setP_name(p_name);
 			productDTO.setP_code(p_code);
 			productDTO.setP_price(p_price);
-			productDTO.setP_ofile(p_ofile);
-			productDTO.setP_sfile(p_sfile);
+			//productDTO.setP_ofile(p_ofile); // null ㅅㅂ
+			//productDTO.setP_sfile(p_sfile); // null ㅅㅂ
 			
-			int result = sqlSession.getMapper(MybatisProductImpl.class).insertProduct(productDTO);
+			System.out.println(productDTO.getP_idx());
+			System.out.println(productDTO.getP_brand());
+			System.out.println(productDTO.getP_name());
+			System.out.println(productDTO.getP_code());
+			System.out.println(productDTO.getP_price());
+			System.out.println(productDTO.getP_ofile());
+			System.out.println(productDTO.getP_sfile());
+			
+			
+			sqlSession.getMapper(MybatisProductImpl.class).insertProduct(productDTO);
 			/*
 			int result = sqlSession.getMapper(MybatisProductImpl.class).insertProduct(
 					req.getParameter("p_idx"),
@@ -77,7 +91,7 @@ public class StoreInsertCommand implements CommandImpl {
 			*/
 			
 			System.out.println("되니>?");
-			System.out.println("insert 결과 : " + result); 
+			//System.out.println("insert 결과 : " + result); 
 			//ProductDTO inserted = sqlSession.getMapper(MybatisProductImpl.class).insertProduct(productDTO);
 			//List<ProductDTO> storeList = sqlSession.getMapper(MybatisProductImpl.class).getStoreList(productDTO);
 			

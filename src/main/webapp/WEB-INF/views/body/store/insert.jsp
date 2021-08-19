@@ -48,7 +48,7 @@
 	<form name="insertFrm" method="post" enctype="multipart/form-data"
 		onsubmit="return checkValidate(this);"
 		action="<c:url value="/store/insertAction.do" />" >
-		
+		<input type="hidden" value="${productDTO.p_idx }" name="p_idx">
 	<table class="table table-bordered">
 	<colgroup>
 		<col width="20%"/>

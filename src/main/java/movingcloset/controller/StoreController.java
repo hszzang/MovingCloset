@@ -169,43 +169,21 @@ public class StoreController {
 		String p_sfile = tempB.toString();
 		System.out.println("sfile: " + p_sfile);
 		
-		
-		
+
 		productDTO.setP_ofile(p_ofile);
 		productDTO.setP_sfile(p_sfile);
-		//Object file1 = temp.get(1);
-		//Object file2 = temp.get(2);
-		//System.out.println("file1 : " + file1);
-		//System.out.println("file2 : " + file2);
 		
-		//String p_ofile = (String)temp.get("ofile");
-		//System.out.println("스트링 변환됌?" + (String)returnObj.get("files"));
-		
-		//String[] tempArr = ((String) temp).split(",");
-		
-		//String p_ofile = (String)returnObj.get("files");
-		
-
-		//p_ofile = (returnObj.get(0)).toString(); 
-		
-		//System.out.println(returnObj.containsValue("sfile"));
-		
-		//MultipartFile insertFile = productDTO.getUploadFile();
-		/*
-		if(!insertFile.isEmpty()) {
-			String fileName = insertFile.getOriginalFilename();
-			insertFile.transferTo(new File("/resources/upload/" + fileName));
-		}
-
-		model.addAttribute("p_ofile", p_ofile);
-		
-		 */
 		// 뷰에서 전송된 폼 값을 저장한 커맨드 객체를 model에 저장
-		model.addAttribute("req", req);
-		model.addAttribute("productDTO", productDTO);
+		//model.addAttribute("p_ofile", p_ofile);
+		//model.addAttribute("p_sfile", p_sfile);
+		//model.addAttribute("productDTO", productDTO);
 		System.out.println("콘트롤러에서productDTO.name = " + productDTO.getP_name());
 		System.out.println("콘트롤러에서productDTO.ofile = " + productDTO.getP_ofile());
+		System.out.println("콘트롤러에서productDTO.ofile = " + productDTO.getP_sfile());
 				
+		
+		model.addAttribute("productDTO", productDTO);
+		model.addAttribute("req", req);
 		command = storeInsertCommand; 
 		command.execute(model);
 			
