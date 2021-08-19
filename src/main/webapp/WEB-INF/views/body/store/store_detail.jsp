@@ -202,12 +202,14 @@
     .container{
     	width:990px;
     }
+    #productUpload{
     
+    }
 	</style>
 <title>Store</title>
 </head>
 <body>
-	<div class="container" style="margin-top:5%;margin-bottom:3%;">
+	<div class="container" style="margin-top:10%;margin-bottom:3%;">
 		<div class="row" style="height: 600px;">
 			<div class="col-8 d-flex justify-content-center" >
 				<div class="col-6" style="padding:0;display:block;height:300px;">
@@ -270,11 +272,15 @@
 					<span><button style="width: 45%;" id="wish" onclick="location.href='#';">위시리스트 <i class="fa fa-heart" style="color: red;"></i></button></span>
 				</div>
 			</div>
-			
 		</div>
-	</div><br /><br /><br />
-	
+	</div>
+	<div style="text-align:right;">
+		<button type="button" class="product" id="productUpload" onclick="javascript:location.href='/movingcloset/store/update.do';">상품수정</button>	
+	</div>
+	<br /><br /><br />
 	<hr>
+
+
 
 	<div class="container">
 		<h4>평균 평점 : <span>5.0</span></h4>

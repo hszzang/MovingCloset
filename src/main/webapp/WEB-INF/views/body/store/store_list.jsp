@@ -531,7 +531,7 @@ List<ProductDTO> storeList = (List)session.getAttribute("storeList");
             </div>
             <div style="text-align:right;">
             	<button type="button" class="product" id="productInsert" onclick="javascript:location.href='/movingcloset/store/insert.do';">상품추가</button>
-            	<button type="button" class="product" id="productUpload" onclick="javascript:location.href='/movingcloset/store/update.do';">상품업로드</button>
+            	<button type="button" class="product" id="productUpload" onclick="javascript:location.href='/movingcloset/store/update.do';">상품수정</button>
             </div>
         </form>
     </div>

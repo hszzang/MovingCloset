@@ -2,6 +2,8 @@ package mybatis;
 
 import java.io.File;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -19,5 +21,6 @@ public class ProductDTO {
 	private String p_ofile;
 	private String p_sfile;
 	
+	private MultipartFile uploadFile;
 
 }

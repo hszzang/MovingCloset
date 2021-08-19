@@ -33,14 +33,15 @@
 	</select>
 	
 	<!-- 상품 입력 -->
-	<insert id="insertProduct" parameterType="mybatis.ProductDTO">
+	<!--  <insert id="insertProduct" parameterType="mybatis.ProductDTO"> -->
+	<insert id="insertProduct" >
 		INSERT INTO product(p_idx, p_name, p_code, p_price, p_brand, p_ofile, p_sfile)
 		VALUES
 		(product_seq.nextval, #{p_name}, #{p_code}, #{p_price}, #{p_brand}, #{p_ofile}, #{p_sfile})
 	</insert>
 	
-	<update id="updateProduct" parameterType="mybatis.ProductDTO">
-		UPDATE product #{p_sfile} where p_idx=#{p_idx}
+	<update id="updateProduct" parameterType="mybatis.ProductDTO" >
+		UPDATE product #{p_name}, #{p_code}, #{p_price}, #{p_brand}, #{p_ofile} where p_idx=#{p_idx}
 	</update>
 	
 	<!-- 리스트이 경우 collection="list"와 같이 파라미터명을 list로 쓰는게 룰 -->

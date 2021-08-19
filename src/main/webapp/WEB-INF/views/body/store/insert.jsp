@@ -6,19 +6,48 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <title>Insert title here</title>
-	<link rel="stylesheet" href="../resources/css/bootstrap.css" />
-	<script src="../resources/jquery/jquery-3.6.0.js"></script>
-	
+	<style>
+	.container{
+		margin:200px 0 100px 0;
+	}
+
+	</style>
 </head>
 <body>
+<script type="text/javascript">
+	function checkValidate(f){
+		if(f.p_brand.value==""){
+			alert("브랜드를 입력하세요");
+			f.p_brand.focus();
+			return false;
+		}
+		if(f.p_name.value==""){
+			alert("제품명을 입력하세요");
+			f.p_name.focus();
+			return false;
+		}
+		if(f.p_code.value==""){
+			alert("상품코드를 입력하세요");
+			f.p_code.focus();
+			return false;
+		}
+		if(f.p_price.value==""){
+			alert("가격을 입력하세요");
+			f.p_price.focus();
+			return false;
+		}
 
+	}
+</script>
 <div class="container">
 	<h5>상품 업로드</h5>
 	
 	<form name="insertFrm" method="post" enctype="multipart/form-data"
-		onsubmit="return writeValidate(this);"
-		action="<c:url value="/mybatis/writeAction.do" />" >
+		onsubmit="return checkValidate(this);"
+		action="<c:url value="/store/insertAction.do" />" >
 		
 	<table class="table table-bordered">
 	<colgroup>
@@ -31,7 +60,7 @@
 				style="vertical-align:middle;">브랜드</th>
 			<td>
 				<input type="text" class="form-control" 
-				style="width:100px;" name="brand"></input>
+				style="width:200px;" name="p_brand"></input>
 			</td>
 		</tr>	
 		<tr>
@@ -39,7 +68,7 @@
 				style="vertical-align:middle;">상품명</th>
 			<td>
 				<input type="text" class="form-control" 
-					style="width:100px;" name="name"  />
+					style="width:200px;" name="p_name"  />
 			</td>
 		</tr>
 		<tr>
@@ -47,7 +76,7 @@
 				style="vertical-align:middle;">상품코드</th>
 			<td>
 				<input type="text" class="form-control" 
-				style="width:100px;" name="code"></input>
+				style="width:200px;" name="p_code"></input>
 			</td>
 		</tr>	
 		<tr>
@@ -55,7 +84,7 @@
 				style="vertical-align:middle;">상품 가격</th>
 			<td>
 				<input type="text" class="form-control" 
-					style="width:100px;" name="price"  />
+					style="width:200px;" name="p_price"  />
 			</td>
 		</tr>
 		<tr>
@@ -63,7 +92,7 @@
 				style="vertical-align:middle;">사진첨부</th>
 			<td>
 				<input type="file" class="form-control" 
-					style="width:100px;" name="ofile"  />
+					style="width:200px;" name="ofile"  />
 			</td>
 		</tr>
 	</tbody>
@@ -75,7 +104,7 @@
 		<button type="submit" class="btn btn-danger">업로드</button>
 		<button type="reset" class="btn">Reset</button>
 		<button type="button" class="btn btn-warning" 
-			onclick="location.href='/movingcloset/store.do';">리스트보기</button>
+			onclick="javascript:location.href='/movingcloset/store.do';">리스트보기</button>
 	</div>
 	</form> 
 </div>
