@@ -34,6 +34,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 
 import movingcloset.command.CommandImpl;
+import movingcloset.command.FindIdCommand;
 import movingcloset.command.IdcheckCommand;
 import movingcloset.command.RegisterActionCommand;
 import mybatis.MemberDTO;
@@ -54,6 +55,9 @@ public class HomeController {
 
 	@Autowired
 	IdcheckCommand idcheckCommand;
+	
+	@Autowired
+	FindIdCommand findIdCommand;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -235,6 +239,29 @@ public class HomeController {
 	
 	
 	
+	
+	// 아이디/비밀번호찾기
+	@RequestMapping(value = "/movingcloset/findIdPw.do", method = RequestMethod.GET)
+	public String findIdPw(Model model, HttpServletRequest req) {
+		return "body/findIdPw";
+	}
+	
+	// 아이디 찾기
+	@RequestMapping(value = "/movingcloset/findId.do", method = RequestMethod.GET)
+	public String findId(Model model, HttpServletRequest req) {
+		
+		model.addAttribute("req", req);
+		command = findIdCommand;
+		command.execute(model);
+		
+		return "body/findId";
+	}
+	
+	// 비밀번호 찾기
+	@RequestMapping(value = "/movingcloset/findPw.do", method = RequestMethod.GET)
+	public String findPw(Model model, HttpServletRequest req) {
+		return "body/findPw";
+	}
 	
 	// 이용약관
 	@RequestMapping(value = "/movingcloset/terms.do", method = RequestMethod.GET)
