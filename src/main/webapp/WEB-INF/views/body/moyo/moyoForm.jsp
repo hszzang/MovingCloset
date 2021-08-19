@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,8 +17,12 @@
 
 <style>
 
+.container {
+	margin-top: 95px;
+	margin-bottom: 30px;
+}
 .input-form-background {
-padding-top: 50px; padding-bottom: 50px; 
+padding-top: 0px; padding-bottom: 50px; 
 
 }
 
@@ -73,7 +79,7 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 }
 #moyoInfoWrap {
 	display: flex; align-items: center;
-	margin-top: -30px;
+	margin-top: -10px;
 }
 
 #moyoAgree {
@@ -100,13 +106,80 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 	border-color: #ff6c2f !important;
 	box-shadow: 0 0 0 0rem rgba(0, 0, 0, 0) !important;
 }
-  
+
+.section-title {
+  text-align: center;
+  padding-bottom: 30px; padding-top: 50px;
+}
+
+.section-title h2 {
+  font-size: 32px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+.section-title h2::after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: #555555;
+  bottom: 0;
+  left: calc(50% - 25px);
+}
+ 
 
 </style>
+
+<script type="text/javascript">
+
+	function moyoFormCheck() {
+		var checkSubmit = confirm("작성된 정보로 모여를 신청합니다.");
+		if(checkSubmit == true) {
+			document.moyoFrm.submit();
+		}
+	}
+	
+	function emailSelect(obj) {
+        var emailAdd = document.moyoFrm.email2;
+        emailAdd.value = obj.value;
+
+        if(emailAdd.value == "") {
+            /*
+            select에서 직접입력을 선택하면
+            readOnly속성을 비활성화하고, 입력된 내용을 비워준다.
+            */
+            emailAdd.readOnly = false;
+        }
+        else {
+            /*
+            특정 도메인을 선택하면 
+            선택한 도메인을 입력하고, readOnly속성은 활성화한다.
+            */
+            emailAdd.readOnly = true;
+        }
+    }
+
+    function phoneFocus(num, obj, nextObj){
+        var nextobj = document.getElementsByName(nextObj)[0];
+        if(obj.value.length >= num) {
+            nextobj.focus();
+        }
+    }
+
+</script>
+
 </head>
 <body>
 
 	<div class="container">
+		<div class="section-title">
+		    <h2>모 여 !</h2>
+	    </div>
 		<div class="input-form-background row">
 			<div class="input-form col-md-12 mx-auto">
 				<div class="input-form-wrap">
@@ -114,21 +187,40 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 					<h3>신청할 모여 정보</h3>
 					
 					<div id="moyoInfoWrap">
-						<img class="productImg" src="../resources/images/list/2.jpg">
+						<c:if test="${empty moyoDTO.m_sfile }">
+							<img class="productImg" src="../resources/images/list/${moyoDTO.m_idx }.jpg">
+						</c:if>
+						<c:if test="${not empty moyoDTO.m_sfile }">
+							<img class="productImg" src="../resources/images/list/${moyoDTO.m_sfile }.jpg">
+						</c:if>
+<!-- 						<img class="productImg" src="../resources/images/list/2.jpg"> -->
+						
+						<fmt:parseDate value="${moyoDTO.m_start }" var="strmstart" pattern="yyyy-MM-dd HH:mm:ss"/>
+						<fmt:formatDate value="${strmstart }" var="frmmstart" pattern="yyyy. MM. dd"/>
+						<fmt:parseDate value="${moyoDTO.m_end }" var="strmend" pattern="yyyy-MM-dd HH:mm:ss"/>
+						<fmt:formatDate value="${strmend }" var="frmmend" pattern="yyyy. MM. dd"/>
+						<fmt:parseDate value="${moyoDTO.m_dday }" var="strmdday" pattern="yyyy-MM-dd HH:mm:ss"/>
+						
 						<div id="moyoInfo">
-							<h3>컨버스 팝업스토어 in 가산</h3>
-							<h6>모집기간</h6> 2021.08.01 - 2021.08.03 <br />&mdash;
-							<h6>모임일자</h6> 2021년 08월 05일 목요일 <br />&mdash;
-							<h6>모일장소</h6> 서울시 금천구 가산동 426-5 월드메르디앙 앞 <br />&mdash;
-							<h6>판매자 공지사항</h6> 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다.  <br />
+							<h3>${moyoDTO.m_name }</h3>
+							<h6>모집기간</h6> ${frmmstart } - ${frmmend } <br />&mdash;
+							<h6>모임일자</h6> <fmt:formatDate value="${strmdday }" pattern="yyyy년 MM월 dd일 E요일"/> <br />&mdash;
+							<h6>모일장소</h6> ${moyoDTO.m_addr } <br />&mdash;
+							<h6>판매자 공지사항</h6> ${moyoDTO.m_desc }  <br />
 						</div>
+<!-- 							<h3>컨버스 팝업스토어 in 가산</h3> -->
+<!-- 							<h6>모집기간</h6> 2021.08.01 - 2021.08.03 <br />&mdash; -->
+<!-- 							<h6>모임일자</h6> 2021년 08월 05일 목요일 <br />&mdash; -->
+<!-- 							<h6>모일장소</h6> 서울시 금천구 가산동 426-5 월드메르디앙 앞 <br />&mdash; -->
+<!-- 							<h6>판매자 공지사항</h6> 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다.  <br /> -->
 					</div>
 				</div>
 			</div>
 			<div class="input-form col-md-12 mx-auto">
 				<div class="input-form-wrap">
 					<h3>신청자 정보</h3>
-					<form name="moyoFrm" id="moyoFrm" action="#" method="post" > 
+					<form name="moyoFrm" id="moyoFrm" action="../movingcloset/moyoJoin.do" method="post" > 
+						<input type="hidden" value="${moyoDTO.m_idx }" name="m_idx">
 						<table class="table table-bordered">
 							<colgroup>
 								<col width="20%"/>
@@ -139,7 +231,7 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 									<td class="text-left"
 										style="vertical-align:middle;">이름</td>
 									<td>
-										<input type="text" name="title" class="form-control" style="width: 230px;" required/>
+										<input type="text" name="username" class="form-control" style="width: 230px;" required/>
 									</td>
 								</tr>
 								<tr>
@@ -148,7 +240,7 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 									<td class="form-inline">
 										<select name="mobile1" class="form-control" 
 										onchange="phoneFocus(3, this, 'mobile2');" style="width:80px;" required>
-											<option value=" "> </option>
+<!-- 											<option value=" "> </option> -->
 											<option value="010">010</option>
 											<option value="011">011</option>
 											<option value="016">016</option>
@@ -183,8 +275,8 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 									<td class="text-left"
 										style="vertical-align:middle;">방문예정시간</td>
 									<td class="form-inline">
-										<input type="number" name="moyoHour" class="form-control" min="0" max="24" value="00" /> &nbsp;시&nbsp;&nbsp;
-										<input type="number" name="moyoMinute" class="form-control" min="0" max="59" value="00" /> &nbsp;분
+										<input type="number" name="moyoHour" class="form-control" min="10" max="22" value="10" /> &nbsp;시&nbsp;&nbsp;
+										<input type="number" name="moyoMinute" class="form-control" min="0" max="50" value="00" step="10" /> &nbsp;분
 									</td>
 								</tr>
 							</tbody>
@@ -212,7 +304,7 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 						</div>
 
 						<button class="btn btn-primary btn-lg btn-block" id="moyoSubmitBtn"
-							type="submit">모여!</button>
+							type="button" onclick="moyoFormCheck();">모여!</button>
 					</div>
 				</div>
 			</div>
