@@ -1,14 +1,20 @@
 package movingcloset.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -32,6 +38,7 @@ import movingcloset.command.CommandImpl;
 import movingcloset.command.IdcheckCommand;
 import movingcloset.command.RegisterActionCommand;
 import mybatis.MemberDTO;
+import mybatis.MybatisMemberImpl;
 
 /**
  * Handles requests for the application home page.
@@ -193,15 +200,13 @@ public class HomeController {
 	}
 
 	// 아이디 중복확인
-	@RequestMapping(value = "/movingcloset/idcheck.do")
+	@RequestMapping(value = "/movingcloset/idcheck.do",produces = "application/json")
 	public String idcheck(Model model, HttpServletRequest req) {
 
-		model.addAttribute("req", req);
+			model.addAttribute("req", req);
+			command = idcheckCommand;
+			command.execute(model);
 
-		command = idcheckCommand;
-		command.execute(model);
-		
-		
 		return "idCheckForm";
 	}
 

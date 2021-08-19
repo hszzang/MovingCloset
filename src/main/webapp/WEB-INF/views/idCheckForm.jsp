@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%
-String DBid = (String)session.getAttribute("DBid");
+int DBid = (Integer)session.getAttribute("DBid");
 
 %>
 <!DOCTYPE html>
@@ -65,7 +65,7 @@ form {
 </style>
 <script type="text/javascript">
 	function idUse(f) {
-		<%if (DBid == null) {%> 
+		<%if (DBid == 0) {%> 
 		opener.document.registFrm.user_id.value = document.overlapFrm.user_id.value;
 	
 			self.close();
@@ -83,7 +83,7 @@ form {
 <body>
 
 	<c:choose>
-		<c:when test="${DBid eq null }">
+		<c:when test="${DBid eq 0 }">
 			<div class="container" style="" align="center">
 				<div class="input-form-background row">
 					<div class="input-form col-md-12 mx-auto">
