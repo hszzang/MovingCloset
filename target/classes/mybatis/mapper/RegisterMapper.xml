@@ -19,6 +19,16 @@
 	<select id="idcheck" resultType="int" parameterType="String">
 		select count(*) from member where userid = #{userid}
 	</select>
+	
+	<select id="findId" resultType="java.lang.String">
+		SELECT userid FROM member 
+		WHERE name=#{0} AND email=#{1}
+	</select>
+
+	<select id="findPwEmail" resultType="java.lang.String">
+		SELECT email FROM member 
+		WHERE userid=#{0} AND email=#{1}
+	</select>
 
 
 </mapper>
