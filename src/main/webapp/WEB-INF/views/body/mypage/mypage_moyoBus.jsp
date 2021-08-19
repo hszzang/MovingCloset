@@ -121,7 +121,7 @@
                 </div>
                 <div class="result_bus">
                     <div class="bus_loc">
-                        <img src="/resources/images/mypage/bus.png" id="bus">
+                        <img src="../resources/images/mypage/bus.png" id="bus">
                         <span class="bus_name">
                             01번 버스 가는중..
                         </span>

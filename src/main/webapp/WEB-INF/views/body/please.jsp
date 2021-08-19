@@ -42,29 +42,34 @@
 			border:none;
 			/* width:80%;  */
             height:auto;
-			float:right; margin-top:100px;
+			margin-top:100px;
+			padding-top:100px;
+		}
+		
+		.BtnTop{
+			justify-content:center;
 		}
 		.tablink {
             background-color: white;
-            padding: 8px 30px !important;
-            width: 25%;
+            height:50px;
+            width: 200px;
             font-size: 14px;
             color: gray;
             border: 1px solid lightgray;
-            float: right;
+            border-radius:10px;
+            
         }
 		.tablink:focus{outline:none;}
         .tablink:hover {
             background-color:white; color:#FF6C2F;
-            border:#FF6C2F solid 1px;
+            border:#FF6C2F solid 2px;
         }
 		
         .tabcontent{
             border:none;
-            width:80%; height:auto;
+            width:100%; height:auto;
             margin:2% 10% 5% 5%;
             display: block;
-            float: left;
         }
         #Expired{ display:none; }
         
@@ -175,8 +180,11 @@
 </head>
 <body>
 <div class="container">
-<button class="tablink" onclick="openPage('Expired', this, 'white')" >마감한 쪼르기</button>
-     	<button class="tablink" onclick="openPage('onGoing', this, 'white')" id="default">진행중인 쪼르기</button>
+	<div class="row BtnTop">
+		<button class="tablink" onclick="openPage('Expired', this, 'white')" >마감한 쪼르기</button>
+		&nbsp;&nbsp;
+	   	<button class="tablink" onclick="openPage('onGoing', this, 'white')" id="default">진행중인 쪼르기</button>
+	</div>
          
 		<!-- 진행중인 쪼르기 -->
         <div id="onGoing" class="tabcontent">
@@ -226,17 +234,17 @@
         		</div>
         	</div> <!-- 1 끝 -->
         	
-        	<div class="outDiv">
+        	<!-- <div class="outDiv">
         		<div class="innerDiv">
-        			<!-- <div class="plzTitleDiv">
+        			<div class="plzTitleDiv">
         				<span class="plzTitle">쪼르기상품</span>
-        			</div> -->
+        			</div>
         			<hr />	
         			<div class="plzProduct">
         				<span class="plzImgs">
-                            <!-- <span id="mainImg"> -->
+                            <span id="mainImg">
                                 <img class="plzImg" src="../resources/images/please/p2.jpg"/>
-                            <!-- </span> -->
+                            </span>
         				</span>
         				
          			<span class="plzInfo">
@@ -247,11 +255,11 @@
          						S20WME-DJ12
          					</div>
          					<div class="plzOriPrice"><strike>599,000</strike></div>
-         					<!-- <div class="plzNowPrice"> -->
+         					<div class="plzNowPrice">
          						<span class="plzPercent"><em>40%</em></span>
          						<span class="plzPrice">359,s00</span>
          						<span class="plzWon">원</span>	
-         					<!-- </div> -->
+         					</div>
          				</div>
          				<div class="plzDownDiv">
          					<div class="until">마감까지</div><br />
@@ -270,19 +278,19 @@
          			</span>
         			</div>
         		</div>
-        	</div> <!-- 2 끝 -->
+        	</div> 2 끝
         	
         	<div class="outDiv">
         		<div class="innerDiv">
-        			<!-- <div class="plzTitleDiv">
+        			<div class="plzTitleDiv">
         				<span class="plzTitle">쪼르기상품</span>
-        			</div> -->
+        			</div>
         			<hr />	
         			<div class="plzProduct">
         				<span class="plzImgs">
-                            <!-- <span id="mainImg"> -->
+                            <span id="mainImg">
                                 <img class="plzImg" src="../resources/images/please/p3.jpg"/>
-                            <!-- </span> -->
+                            </span>
         				</span>
         				
          			<span class="plzInfo">
@@ -292,11 +300,11 @@
          						에디트 아웃포켓형 숏다운 자켓_MS <br />
          						S20WMP-DJ86</div>
          					<div class="plzOriPrice"><strike>439,000</strike></div>
-         					<!-- <div class="plzNowPrice"> -->
+         					<div class="plzNowPrice">
          						<span class="plzPercent"><em>40%</em></span>
          						<span class="plzPrice">263,400</span>
          						<span class="plzWon">원</span>	
-         					<!-- </div> -->
+         					</div>
          				</div>
          				<div class="plzDownDiv">
          					<div class="until">마감까지</div><br />
@@ -315,19 +323,19 @@
          			</span>
         			</div>
         		</div>
-        	</div> <!-- 3 끝 -->
+        	</div> 3 끝
         	
         	<div class="outDiv">
         		<div class="innerDiv">
-        			<!-- <div class="plzTitleDiv">
+        			<div class="plzTitleDiv">
         				<span class="plzTitle">쪼르기상품</span>
-        			</div> -->
+        			</div>
         			<hr />	
         			<div class="plzProduct">
         				<span class="plzImgs">
-                            <!-- <span id="mainImg"> -->
+                            <span id="mainImg">
                                 <img class="plzImg" src="../resources/images/please/p4.jpg"/>
-                            <!-- </span> -->
+                            </span>
         				</span>
         				
          			<span class="plzInfo">
@@ -337,11 +345,11 @@
          						FLAK SHIRT / MULTI MADRAS <br />
          						1179095</div>
          					<div class="plzOriPrice"><strike>298,000</strike></div>
-         					<!-- <div class="plzNowPrice"> -->
+         					<div class="plzNowPrice">
          						<span class="plzPercent"><em>50%</em></span>
          						<span class="plzPrice">149,000</span>
          						<span class="plzWon">원</span>	
-         					<!-- </div> -->
+         					</div>
          				</div>
          				<div class="plzDownDiv">
          					<div class="until">마감까지</div><br />
@@ -360,19 +368,19 @@
          			</span>
         			</div>
         		</div>
-        	</div> <!-- 4 끝 -->
+        	</div> 4 끝
         	
         	<div class="outDiv">
         		<div class="innerDiv">
-        			<!-- <div class="plzTitleDiv">
+        			<div class="plzTitleDiv">
         				<span class="plzTitle">쪼르기상품</span>
-        			</div> -->
+        			</div>
         			<hr />	
         			<div class="plzProduct">
         				<span class="plzImgs">
-                            <!-- <span id="mainImg"> -->
+                            <span id="mainImg">
                                 <img class="plzImg" src="../resources/images/please/p5.jpg"/>
-                            <!-- </span> -->
+                            </span>
         				</span>
         				
          			<span class="plzInfo">
@@ -383,11 +391,11 @@
          						1175028
          					</div>
          					<div class="plzOriPrice"><strike>1,431,000</strike></div>
-         					<!-- <div class="plzNowPrice"> -->
+         					<div class="plzNowPrice">
          						<span class="plzPercent"><em>22%</em></span>
          						<span class="plzPrice">1,113,000</span>
          						<span class="plzWon">원</span>	
-         					<!-- </div> -->
+         					</div>
          				</div>
          				<div class="plzDownDiv">
          					<div class="until">마감까지</div><br />
@@ -406,19 +414,19 @@
          			</span>
         			</div>
         		</div>
-        	</div> <!-- 5 끝 -->
+        	</div> 5 끝
         	
         	<div class="outDiv">
         		<div class="innerDiv">
-        			<!-- <div class="plzTitleDiv">
+        			<div class="plzTitleDiv">
         				<span class="plzTitle">쪼르기상품</span>
-        			</div> -->
+        			</div>
         			<hr />	
         			<div class="plzProduct">
         				<span class="plzImgs">
-                            <!-- <span id="mainImg"> -->
+                            <span id="mainImg">
                                 <img class="plzImg" src="../resources/images/please/p6.jpg"/>
-                            <!-- </span> -->
+                            </span>
         				</span>
         				
          			<span class="plzInfo">
@@ -428,11 +436,11 @@
          						아크네 모크 라이더 가죽 자켓 <br />
          						1AZ166 900</div>
          					<div class="plzOriPrice"><strike>2,133,000</strike></div>
-         					<!-- <div class="plzNowPrice"> -->
+         					<div class="plzNowPrice">
          						<span class="plzPercent"><em>29%</em></span>
          						<span class="plzPrice">1,523,000</span>
          						<span class="plzWon">원</span>	
-         					<!-- </div> -->
+         					</div>
          				</div>
          				<div class="plzDownDiv">
          					<div class="until">마감까지</div><br />
@@ -451,7 +459,7 @@
          			</span>
         			</div>
         		</div>
-        	</div> <!-- 6 끝 -->
+        	</div> --> <!-- 6 끝 -->
         
         </div>	
         <!-- 진행중 쪼르기 끝 -->   

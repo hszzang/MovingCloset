@@ -113,12 +113,6 @@ public class HomeController {
 		return "body/kakaologin";
 	}
 	
-	//쪼르깅
-	@RequestMapping(value="/movingcloset/myplease2.do", method=RequestMethod.GET)
-	public String myPlease2(Locale locale, Model model) {
-		return "body/myPlease2";
-	}
-	
 	//메인
 	@RequestMapping(value="/movingcloset/main.do", method=RequestMethod.GET)
 	public String main(Locale locale, Model model) {
