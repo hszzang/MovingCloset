@@ -20,5 +20,8 @@
 		select count(*) from member where userid = #{userid}
 	</select>
 
+	<select id="login" resultType="string" parameterType="map">
+		select userid from member where userid= #{userid} and userpass= #{userpass}
+	</select>
 
 </mapper>

@@ -7,5 +7,6 @@ public interface MybatisMemberImpl {
 
 	public int register(MemberDTO memberDTO) ;
 	public int idcheck(String userid);
+	public String login(String userid, String userpass);
 	
 }

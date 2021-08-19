@@ -102,7 +102,7 @@ Kakao.Auth.createLoginButton({
 			<div class="col-md-6 col-lg-4">
 				<div class="login-wrap p-0">
 					<img src="../resources/images/MovingClosetLogoBlack.png" id="loginLogo" />
-					<form name="loginForm" action="./login.memb" onsubmit="return loginValidate(this);">
+					<form name="loginForm" action="./loginAction.do" onsubmit="return loginValidate(this);" method="POST">
 					
 						<div class="form-group">
 <%-- 							<input type="text" name="userid" value="<%=loginId %>"  class="form-control" placeholder="Enter ID" required> --%>

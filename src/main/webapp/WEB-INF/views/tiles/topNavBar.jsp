@@ -227,7 +227,7 @@
 			&nbsp;
 			<a href=""><i class="material-icons" id="icon">shopping_basket</i></a>
 			&nbsp;
-			<a href=""><i class="material-icons" id="icon">person</i></a>
+			<a href="../movingcloset/login.do"><i class="material-icons" id="icon">person</i></a>
 		</div>
 	</div>
 
