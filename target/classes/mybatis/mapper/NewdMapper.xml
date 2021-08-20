@@ -13,7 +13,7 @@
 	</select>
 	
 	
-	<!-- 뉴디리스트 -->
+	<!-- 뉴디리스트 이거 없어도 됨 리스트는.. ?-->
 	<select id="getNewdList" resultType="mybatis.NewdDTO" parameterType="java.util.ArrayList">
 		select * from product where p_brand in (select n_brand from newD)
 	</select>
