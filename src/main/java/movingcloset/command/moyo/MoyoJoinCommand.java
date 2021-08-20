@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +46,10 @@ public class MoyoJoinCommand implements CommandImpl {
 				+ "-" + req.getParameter("mobile2") + "-" + req.getParameter("mobile3"));
 		moyoUseDTO.setMu_time(req.getParameter("moyoHour") + ":" + req.getParameter("moyoMinute"));
 		
-		//로그인 id정보 얻어오기(임시로 hszzang 넣어두었습니다.)
-		moyoUseDTO.setUserid("hszzang");
+		HttpSession session = req.getSession();
+		String siteUserInfo = (String)session.getAttribute("siteUserInfo");
+		
+		moyoUseDTO.setUserid(siteUserInfo);
 		
 		int result = sqlSession
 				.getMapper(MybatisMoyoImpl.class).moyoFormDataInsert(moyoUseDTO);

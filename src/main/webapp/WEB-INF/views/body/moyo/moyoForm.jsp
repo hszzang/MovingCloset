@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>모여! 신청폼 :: MovingCloset</title>
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -93,7 +93,7 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 
 #moyoSubmitBtn {
 	background-color: #ff6c2f; color: white;
-	border: 0;
+	border: 0; height: 60px;
 }
 
 .custom-control-input:checked ~ .custom-control-label::before {
@@ -132,15 +132,40 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
   left: calc(50% - 25px);
 }
  
+#fillMoyoInfoWrap {margin-bottom: -30px; margin-right: 30px; font-weight: bold;}
 
 </style>
 
 <script type="text/javascript">
 
+	function checkLogin() {
+		if(${empty siteUserInfo}) {
+			alert("로그인 후 이용해주세요.");
+			location.href="../movingcloset/login.do";
+		}
+	}
+
 	function moyoFormCheck() {
-		var checkSubmit = confirm("작성된 정보로 모여를 신청합니다.");
-		if(checkSubmit == true) {
-			document.moyoFrm.submit();
+		
+		if(document.moyoFrm.username.value == ""
+				|| document.moyoFrm.mobile1.value == "" 
+				|| document.moyoFrm.mobile2.value == "" 
+				|| document.moyoFrm.mobile3.value == "" 
+				|| document.moyoFrm.email1.value == "" 
+				|| document.moyoFrm.email2.value == "") {
+			alert("신청자 정보를 모두 입력해주세요.");
+		}
+		else if(document.moyoFrm.personalAgree.checked == false) {
+			alert("개인정보수집약관에 동의해주세요.");
+		}
+		else if(document.moyoFrm.cancelAgree.checked == false) {
+			alert("노쇼 약관에 동의해주세요.");
+		}
+		else {
+			var checkSubmit = confirm("작성된 정보로 모여를 신청합니다.");
+			if(checkSubmit == true) {
+				document.moyoFrm.submit();
+			}
 		}
 	}
 	
@@ -170,11 +195,31 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
             nextobj.focus();
         }
     }
+    
+	function fillMoyoInfos(chkbox) {
+		
+		if(chkbox.checked == true) {
+			
+			var emailArr = "${memberDTO.email }".split("@");
+			document.moyoFrm.username.value = "${memberDTO.name }";
+			document.moyoFrm.mobile1.value = "${memberDTO.phone }".substring(0, 3);
+			document.moyoFrm.mobile2.value = "${memberDTO.phone }".substring(4, 8);
+			document.moyoFrm.mobile3.value = "${memberDTO.phone }".substring(9, 13);
+			document.moyoFrm.email1.value = emailArr[0];
+			document.moyoFrm.email2.value = emailArr[1];
+		}
+		else if(chkbox.checked == false) {
+			document.moyoFrm.username.value = "";
+			document.moyoFrm.mobile2.value = "";
+			document.moyoFrm.mobile3.value = "";
+			document.moyoFrm.email1.value = "";
+		}
+	}
 
 </script>
 
 </head>
-<body>
+<body onload="checkLogin();">
 
 	<div class="container">
 		<div class="section-title">
@@ -219,7 +264,13 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 			<div class="input-form col-md-12 mx-auto">
 				<div class="input-form-wrap">
 					<h3>신청자 정보</h3>
-					<form name="moyoFrm" id="moyoFrm" action="../movingcloset/moyoJoin.do" method="post" > 
+					<div class="custom-control custom-checkbox" id="fillMoyoInfoWrap" align="right">
+						<input type="checkbox" class="custom-control-input" id="fillMoyoInfo" name="fillMoyoInfo" onClick="fillMoyoInfos(this);" required> 
+						<label class="custom-control-label"
+							for="fillMoyoInfo">기존 정보로 입력하기</label>
+					</div>
+					
+					<form name="moyoFrm" id="moyoFrm" action="../movingcloset/moyoJoin.do" method="post"> 
 						<input type="hidden" value="${moyoDTO.m_idx }" name="m_idx">
 						<table class="table table-bordered">
 							<colgroup>
@@ -291,14 +342,14 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 						<textarea rows="6" name="content" class="form-control" style="resize:none;"
 							placeholder="개인정보수집약관" readonly></textarea>
 						<div class="custom-control custom-checkbox mb-4 mt-2">
-							<input type="checkbox" class="custom-control-input" id="personalAgree" required> 
+							<input type="checkbox" class="custom-control-input" id="personalAgree" name="personalAgree" required> 
 							<label class="custom-control-label"
 								for="personalAgree">개인정보 수집 및 이용에 동의합니다.</label>
 						</div>
 						<textarea rows="6" name="content" class="form-control" style="resize:none;"
 							placeholder="노쇼약관노쇼약관" readonly></textarea>
 						<div class="custom-control custom-checkbox mb-5 mt-2">
-							<input type="checkbox" class="custom-control-input" id="cancelAgree" required> 
+							<input type="checkbox" class="custom-control-input" id="cancelAgree" name="cancelAgree" required> 
 							<label class="custom-control-label"
 								for="cancelAgree">무단 취소 시 부여되는 경고사항에 대해 동의합니다.</label>
 						</div>

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import movingcloset.command.CommandImpl;
+import mybatis.MemberDTO;
 import mybatis.MoyoDTO;
 import mybatis.MybatisMoyoImpl;
 
@@ -41,6 +43,17 @@ public class MoyoFormCommand implements CommandImpl {
 				.getMapper(MybatisMoyoImpl.class).getMoyoData(m_idx);
 		
 		model.addAttribute("moyoDTO", moyoDTO);
+		
+		HttpSession session = req.getSession();
+		String userid = (String)session.getAttribute("siteUserInfo");
+		
+		if(userid != null) {
+			MemberDTO memberDTO = sqlSession
+					.getMapper(MybatisMoyoImpl.class).getMemberData(userid);
+			model.addAttribute("memberDTO", memberDTO);
+			System.out.println(memberDTO);
+		}
+		
 		
 		System.out.println(moyoDTO);
 	}
