@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>모여! 신청폼 :: MovingCloset</title>
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -137,6 +137,13 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 
 <script type="text/javascript">
 
+	function checkLogin() {
+		if(${empty siteUserInfo}) {
+			alert("로그인 후 이용해주세요.");
+			location.href="../movingcloset/login.do";
+		}
+	}
+
 	function moyoFormCheck() {
 		var checkSubmit = confirm("작성된 정보로 모여를 신청합니다.");
 		if(checkSubmit == true) {
@@ -174,7 +181,7 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 </script>
 
 </head>
-<body>
+<body onload="checkLogin();">
 
 	<div class="container">
 		<div class="section-title">

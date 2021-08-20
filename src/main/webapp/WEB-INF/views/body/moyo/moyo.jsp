@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 <!-- <link rel="stylesheet" href="../resources/css/bootstrap.css" /> -->
 <!-- <script src="../resources/jquery/jquery-3.6.0.js"></script> -->
-<title>Insert title here</title>
+<title>모여! :: MovingCloset</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script
@@ -395,10 +395,9 @@
 			<div class="col-8">
 				<form action="" name="moyoAddrFrm" method="post">
 					<div class="row input-group form-inline" id="inputLocation">
-						<input type="hidden" name="nowLat" value="${nowLat }" /> <input
-							type="hidden" name="nowLon" value="${nowLon }" /> <input
-							type="hidden" name="myAddr" class="wantGetLatLon"
-							value="${myAddr }" />
+						<input type="hidden" name="nowLat" value="${nowLat }" /> 
+						<input type="hidden" name="nowLon" value="${nowLon }" /> 
+						<input type="hidden" name="myAddr" class="wantGetLatLon" value="${myAddr }" />
 						<button type="button" class="form-control"
 							onclick="getAddressLatLon();">
 							<i class="material-icons">home</i>
@@ -559,8 +558,9 @@
 							if(addrStr == "") {
 								addrStr = document.getElementsByClassName("wantGetLatLon")[1].value;
 							}
-							else {
-								alert("정확한 주소를 입력해주세요.");
+							if(${empty siteUserInfo }) {
+								alert("로그인 후 이용해주세요.");
+								location.href="../movingcloset/login.do";
 							}
 							
 							console.log(addrStr);
