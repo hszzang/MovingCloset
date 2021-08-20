@@ -20,6 +20,9 @@ public interface MybatisMoyoImpl {
 	
 	//모여폼에 모여데이터 가져오기
 	public MoyoDTO getMoyoData(String m_idx);
+	
+	//모여폼에 기존 회원정보 가져오기
+	public MemberDTO getMemberData(String userid);
 
 	//모여폼 제출 데이터 insert
 	public int moyoFormDataInsert(MoyoUseDTO moyoUseDTO);
