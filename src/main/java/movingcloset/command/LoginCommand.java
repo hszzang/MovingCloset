@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import movingcloset.util.CookieManager;
+import mybatis.MemberDTO;
 import mybatis.MybatisMemberImpl;
 
 @Service
@@ -29,22 +30,18 @@ public class LoginCommand implements CommandImpl{
 		HttpSession session = req.getSession();
 		HttpServletResponse resp = (HttpServletResponse)paramMap.get("resp");
 		
-		// 파라미터로 전달된 id, pass를 받아 login() 메소드 호출
-		String userid  = sqlSession.getMapper(MybatisMemberImpl.class).login(req.getParameter("userid"), req.getParameter("userpw"));
-		String rememberid = req.getParameter("remember_id");
-
-		System.out.println("커맨드 userid "+userid);
 		
-		if(userid == null) {
-			session.setAttribute("LoginNG","아이디/패스워드가 틀렸습니다.");
-			System.out.println("땡");
+		// 파라미터로 전달된 id, pass를 받아 login() 메소드 호출
+		MemberDTO memberDTO  = sqlSession.getMapper(MybatisMemberImpl.class).login(req.getParameter("userid"),req.getParameter("userpw"));
+		String rememberid = req.getParameter("remember_id");
+		
+		try {
+			String userid = memberDTO.getUserid();
 			
-
-		}else if(userid.equals(req.getParameter("userid"))) {
 			// 로그인에 성공한 경우 세션영역에 속성을 저장한다
-			System.out.println("컨트롤러 userid "+userid);
 			session.setAttribute("siteUserInfo", userid);
-			
+			session.setAttribute("username", memberDTO.getName());
+			session.removeAttribute("LoginNG");
 			
 			if(rememberid != null && rememberid.equals("Y")) {
 				// 쿠키명 : loginId, 쿠키값 : 입력한 아이디, 유효시간 : 30일
@@ -52,7 +49,14 @@ public class LoginCommand implements CommandImpl{
 			}else {
 				CookieManager.deleteCookie(resp, "loginId");
 			}
+				
 			
+			
+		}catch (NullPointerException e) {
+			e.printStackTrace();
+			session.setAttribute("LoginNG","아이디/패스워드가 틀렸습니다.");
+		}catch (Exception e2) {
+			e2.printStackTrace();
 		}
 		
 

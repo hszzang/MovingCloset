@@ -36,8 +36,8 @@
 		WHERE userid=#{1} AND email=#{2}
 	</update>
 
-	<select id="login" resultType="string" >
-		select userid from member where userid= #{0} and userpass= #{1}
+	<select id="login" resultType="mybatis.MemberDTO" >
+		select * from member where userid= #{0} and userpass= #{1}
 	</select>
 
 </mapper>

@@ -114,11 +114,11 @@ public class HomeController {
 		command = loginCommand;
 		command.execute(model);
 		
-		if(session.getAttribute("LoginNG")==null) {
-			return "main";
-		}else {
+		/*
+		 * if(session.getAttribute("LoginNG")==null) { return "main"; }else {
+		 */
 			return "body/login";			
-		}
+			/* } */
 		
 		
 	}
@@ -127,10 +127,11 @@ public class HomeController {
 	@RequestMapping("/movingcloset/logout.do")
 	public String logout(Model model, HttpSession session) {
 		
-		session.removeAttribute("");
+		session.removeAttribute("siteUserInfo");
+		session.removeAttribute("username");
+
 		
-		
-		return "";
+		return "body/login";
 	}
 	
 	

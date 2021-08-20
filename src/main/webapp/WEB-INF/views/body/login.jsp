@@ -103,6 +103,20 @@ Kakao.Auth.createLoginButton({
 	}
 	
 }
+
+
+
+function logout(){
+	var result = confirm("로그아웃 하시겠습니까?");
+	if(result){
+		location.href = "../movingcloset/logout.do";
+	}else{
+		location.href = "#";
+	}
+	
+}
+
+
 </script>
 
 
@@ -134,8 +148,8 @@ Kakao.Auth.createLoginButton({
 					%>
 					<form name="loginForm" action="./loginAction.do" onsubmit="return loginValidate(this);" method="POST">
 					
-						<div class="form-group">
-=							<input type="text" name="userid" value="${siteUserInfo }"  class="form-control" placeholder="Enter ID" required> 
+						<div class="form-group" >
+							<input type="text" name="userid" value="${siteUserInfo }"  class="form-control" placeholder="Enter ID" required> 
 							<!-- <input type="text" name="userid"  class="form-control" placeholder="Enter ID" required> -->
 						</div>
 						      
@@ -190,11 +204,12 @@ Kakao.Auth.createLoginButton({
 					
 					<% }else{ %>
 					
-					<div class="form-group">
-=						<span>${siteUserInfo }님 반갑습니다.</span>
+					
+					<div class="form-group" style="text-align: center;font-size: 30px;font-weight: bold;">
+						<span>${username }님 반갑습니다.</span>
 					</div>
 					<div class="form-group">
-						<button type="submit" class="form-control btn btn-dark submit px-3">LOG OUT</button>
+						<button type="button" class="form-control btn btn-dark submit px-3" onclick="logout();">LOG OUT</button>
 					</div>
 					
 					<%} %>
@@ -203,6 +218,7 @@ Kakao.Auth.createLoginButton({
 		</div>
 	</div>
 <script type="text/javascript">
+
 
 var naverLogin = new naver.LoginWithNaverId(
 		{
