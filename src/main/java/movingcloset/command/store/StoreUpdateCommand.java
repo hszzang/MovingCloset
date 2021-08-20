@@ -20,7 +20,7 @@ import mybatis.ProductDTO;
 public class StoreUpdateCommand implements CommandImpl {
 
 		public StoreUpdateCommand() {
-			//System.out.println("스토어리스트 커맨드 호출");
+			//System.out.println("스토어 커맨드 호출");
 		}
 		
 		@Autowired
@@ -29,25 +29,34 @@ public class StoreUpdateCommand implements CommandImpl {
 		@Override
 		public void execute(Model model) {
 			
-			System.out.println("StoreListCommand 호출");
+			ProductDTO updated = new ProductDTO();
 			
-			ProductDTO productDTO = new ProductDTO();
-			System.out.println("StoreListCommand 호출2");
+			Map<String, Object> paramMap = model.asMap();
+			HttpServletRequest req = (HttpServletRequest)paramMap.get("req");
 			
-			/*
-			ProductDTO productDTO = sqlSession.getMapper(MybatisProductImpl.class).getProductDTO();
-			model.addAttribute("storeList", productDTO);
-			 */
+			ProductDTO productDTO = (ProductDTO)paramMap.get("productDTO");
 			
-			List<ProductDTO> storeList = sqlSession.getMapper(MybatisProductImpl.class).getStoreList(productDTO);
-			//System.out.println(storeList);
+			String p_idx = req.getParameter("p_idx");
+			String p_brand = req.getParameter("p_brand");
+			String p_name = req.getParameter("p_name");
+			String p_code = req.getParameter("p_code");
+			int p_price = Integer.parseInt(req.getParameter("p_price"));
 			
-			model.addAttribute("storeList", storeList);
-			System.out.println("StoreListCommand 호출3");
+			//String p_ofile = productDTO.getP_ofile();
+			//String p_sfile = productDTO.getP_sfile();
 			
-			//Map<String, Object> paramMap = ((Model) storeList).asMap();
-			//HttpServletRequest req = (HttpServletRequest)paramMap.get("req");
+			productDTO.setP_idx(p_idx); 
+			productDTO.setP_brand(p_brand);
+			productDTO.setP_name(p_name);
+			productDTO.setP_code(p_code);
+			productDTO.setP_price(p_price);
 			
-			//int totalRecordCount = sqlSession.getMapper(MybatisProductImpl.class).getTotalCount();
+			sqlSession.getMapper(MybatisProductImpl.class).updateProduct(productDTO);
+
+			model.addAttribute("p_idx", p_idx);
+			model.addAttribute("productDTO", productDTO);
+			//model.addAttribute("updated", updated);
+			System.out.println("StoreUpdateCommand 완료");
+			
 		}
 }

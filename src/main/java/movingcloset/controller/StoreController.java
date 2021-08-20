@@ -25,8 +25,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import movingcloset.command.CommandImpl;
+import movingcloset.command.store.StoreDetailCommand;
 import movingcloset.command.store.StoreInsertCommand;
 import movingcloset.command.store.StoreListCommand;
+import movingcloset.command.store.StoreUpdateCommand;
 import mybatis.MybatisProductImpl;
 import mybatis.ProductDTO;
 
@@ -39,13 +41,15 @@ public class StoreController {
 	StoreListCommand storelistCommand;
 	@Autowired
 	StoreInsertCommand storeInsertCommand;
+	@Autowired
+	StoreDetailCommand storeDetailCommand;
+	@Autowired
+	StoreUpdateCommand storeUpdateCommand;
 	
 	// 스토어 리스트
 	@RequestMapping(value="/movingcloset/store.do", method=RequestMethod.GET)
 	public String storeList(Model model, HttpServletRequest req, ProductDTO productDTO) {
-	//public String storeList(Locale locale, Model model) {
-		
-		//model.addAttribute("storeList", storeList);
+	//public String storeList(Locale locale, Model model) {		
 		
 		model.addAttribute("req", req);
 		command = storelistCommand;
@@ -54,8 +58,16 @@ public class StoreController {
 		return "body/store/store_list";
 	}
 	
+	// 스토어 상세
 	@RequestMapping(value="/store/detail.do", method=RequestMethod.GET)
-	public String storedetail(Locale locale, Model model) {
+	public String storedetail(Model model, HttpServletRequest req, ProductDTO productDTO) {
+	//public String storedetail(Locale locale, Model model) {
+		
+		System.out.println("콘트롤러에서 " + productDTO.getP_idx());
+		
+		model.addAttribute("req", req);
+		command = storeDetailCommand;
+		command.execute(model);
 		
 		return "body/store/store_detail";
 	}
@@ -71,7 +83,7 @@ public class StoreController {
 	@RequestMapping("/store/insert.do")
 	public String insert(Locale locale, Model model) {
 		System.out.println("insert 들어옴");
-		return "body/store/insert";
+		return "body/store/store_insert";
 	}
 	
 	public static String getUuid() {
@@ -92,7 +104,6 @@ public class StoreController {
 		resp.setContentType("text/html; charset=utf-8");
 		
 		PrintWriter pw = resp.getWriter();
-		//pw.print("/upload 디렉토리의 물리적 경로: " + path);
 		
 		Map returnObj = new HashMap();
 		
@@ -102,9 +113,6 @@ public class StoreController {
 			MultipartFile mfile = null;
 			String fileName = "";
 			List resultList = new ArrayList();
-			
-			//String title = req.getParameter("title");
-			//System.out.println("title = " + title);
 			
 			File directory = new File(path);
 			if(!directory.isDirectory()) {
@@ -172,15 +180,7 @@ public class StoreController {
 
 		productDTO.setP_ofile(p_ofile);
 		productDTO.setP_sfile(p_sfile);
-		
-		// 뷰에서 전송된 폼 값을 저장한 커맨드 객체를 model에 저장
-		//model.addAttribute("p_ofile", p_ofile);
-		//model.addAttribute("p_sfile", p_sfile);
-		//model.addAttribute("productDTO", productDTO);
-		System.out.println("콘트롤러에서productDTO.name = " + productDTO.getP_name());
-		System.out.println("콘트롤러에서productDTO.ofile = " + productDTO.getP_ofile());
-		System.out.println("콘트롤러에서productDTO.ofile = " + productDTO.getP_sfile());
-				
+	
 		
 		model.addAttribute("productDTO", productDTO);
 		model.addAttribute("req", req);
@@ -195,11 +195,111 @@ public class StoreController {
 		}
 	
 
-	// 상품 업로드
+	// 상품 수정
 	@RequestMapping("/store/update.do")
-	public String upload(Locale locale, Model model) {
-		System.out.println("upload 들어옴");
-		return "body/store/update";
+	public String update(Model model, HttpServletRequest req, ProductDTO productDTO) {
+//		public String update(Locale locale, Model model, ProductDTO productDTO) {
+
+		String p_idx = productDTO.getP_idx();
+		model.addAttribute("p_idx", p_idx);
+		
+		model.addAttribute("req", req);
+		model.addAttribute("model", model);
+		command = storeDetailCommand;
+		command.execute(model);
+		
+		return "body/store/store_update";
 	}
 	
+	@RequestMapping(value="/store/updateAction.do", method=RequestMethod.POST)
+	public String updateAction(Model model, MultipartHttpServletRequest req, HttpServletResponse resp, ProductDTO productDTO) throws IOException {
+		
+		String path = req.getSession().getServletContext().getRealPath("/resources/upload");
+		resp.setContentType("text/html; charset=utf-8");
+		
+		PrintWriter pw = resp.getWriter();
+		
+		Map returnObj = new HashMap();
+		
+		try {
+			Iterator itr = req.getFileNames();
+			
+			MultipartFile mfile = null;
+			String fileName = "";
+			List resultList = new ArrayList();
+			
+			File directory = new File(path);
+			if(!directory.isDirectory()) {
+				directory.mkdirs();
+			}
+			while(itr.hasNext()) {
+				fileName = (String)itr.next();
+				mfile = req.getFile(fileName);
+				System.out.println("mfile = " + mfile);
+				String ofile = new String(mfile.getOriginalFilename().getBytes(),"UTF-8");
+				
+				if("".equals(ofile)) {
+					continue;
+				}
+				
+				String ext = ofile.substring(ofile.lastIndexOf('.'));
+				String sfile = getUuid() + ext;
+				File serverFullName = new File(path + File.separator + sfile);
+				mfile.transferTo(serverFullName);
+				
+				Map file = new HashMap();
+				file.put("ofile", ofile);
+				System.out.println(ofile);
+				file.put("sfile", sfile);
+				System.out.println(sfile);
+				file.put("serverFullName", serverFullName);
+				System.out.println(serverFullName);
+				//file.put("title", title);
+				
+				resultList.add(file);
+				
+			}
+			
+			returnObj.put("files", resultList);
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println(returnObj);
+		model.addAttribute("returnObj", returnObj);
+		// returnObj(맵)에 있는 files(resultlist(배열리스트))에서 ofile과 sfile을 꺼내오기^^...
+		
+		System.out.println(returnObj.containsKey("files")); // true 
+		//Object temp = returnObj.get("files");
+		List<String> temp = (List<String>) returnObj.get("files");
+		System.out.println("temp: " + temp);
+		
+		Object temp2 = temp.get(0);
+		System.out.println("temp2 : " + temp2);
+		
+		Object tempA = ((Map) temp2).get("ofile");
+		System.out.println("tempA : " + tempA);
+		String p_ofile = tempA.toString();
+		System.out.println("ofile: " + p_ofile);
+		
+		Object tempB = ((Map) temp2).get("sfile");
+		System.out.println("tempB : " + tempB);
+		String p_sfile = tempB.toString();
+		System.out.println("sfile: " + p_sfile);
+		
+		productDTO.setP_ofile(p_ofile);
+		productDTO.setP_sfile(p_sfile);
+		
+		model.addAttribute("productDTO", productDTO);
+		model.addAttribute("req", req);
+		
+		command = storeUpdateCommand; 
+		command.execute(model);
+		
+		return "/store/detail.do?p_idx={p_idx}";
+	}
 }

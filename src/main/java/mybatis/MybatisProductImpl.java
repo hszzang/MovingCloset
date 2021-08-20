@@ -15,7 +15,6 @@ public interface MybatisProductImpl {
 	public int getTotalCount();
 	
 	public void insertProduct(ProductDTO productDTO);
-	
 	/*
 	public int insertProduct(
 							@Param("p_idx") String p_idx,
@@ -27,13 +26,24 @@ public interface MybatisProductImpl {
 							@Param("p_sfile") String p_sfile
 							);
 	*/
+	
+	public ProductDTO getStoreDetail(@Param("p_idx") String p_idx);
+	
+	//public ProductDTO updateSelect(@Param("p_idx") String p_idx);
+	/*
+	public ProductDTO updateProduct(
+									@Param("p_name") String p_name,
+									@Param("p_code") String p_code,
+									@Param("p_price") int p_price,
+									@Param("p_brand") String p_brand,
+									@Param("p_ofile")String p_ofile, 
+									@Param("p_sfile") String p_sfile,
+									@Param("p_idx") String p_idx
+									);
+	*/
 	public void updateProduct(ProductDTO productDTO);
+	
 	public void deleteProduct(ProductDTO productDTO);
-	//public ArrayList<ProductDTO> getStoreList();
+
 	
-	//public int insertProduct(String parameter, String parameter2, String parameter3, String parameter4,
-	//		String parameter5);
-	
-	
-	//public ProductDTO view();
 }
