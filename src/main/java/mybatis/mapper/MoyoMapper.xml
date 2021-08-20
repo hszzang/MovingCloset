@@ -35,6 +35,10 @@
 		SELECT * FROM moyo WHERE m_idx=#{0}
 	</select>
 	
+	<select id="getMemberData" resultType="mybatis.MemberDTO">
+		SELECT * FROM member WHERE userid=#{0}
+	</select>
+	
 	<insert id="moyoFormDataInsert" parameterType="mybatis.MoyoDTO">
 		INSERT INTO moyo_use 
 		VALUES (#{m_idx}, #{userid}, #{mu_name}, #{mu_phone}, #{mu_email}, #{mu_time}, sysdate)
