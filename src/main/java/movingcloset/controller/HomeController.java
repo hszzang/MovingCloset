@@ -107,9 +107,10 @@ public class HomeController {
 	
 	// 로그인 처리
 	@RequestMapping(value="/movingcloset/loginAction.do",method=RequestMethod.POST)
-	public String loginAction(Model model, HttpServletRequest req,HttpSession session) {
+	public String loginAction(Model model, HttpServletRequest req,HttpSession session,HttpServletResponse resp) {
 
 		model.addAttribute("req",req);
+		model.addAttribute("resp",resp);
 		command = loginCommand;
 		command.execute(model);
 		
