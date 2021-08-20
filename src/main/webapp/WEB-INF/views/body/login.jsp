@@ -137,11 +137,13 @@ function logout(){
 						String cookieCheck = "";
 						// 쿠키명이 loginId 인 쿠키값을 읽어온다.
 						String loginId =CookieManager.readCookie(request, "loginId");
-					
+						System.out.println("쿠키들어왔나 "+loginId);
+						request.setAttribute("loginId", loginId);
 						// 빈값이 아니면
 						if(!loginId.equals("")){
 							// 체크용 변수에 checked를 할당
 							cookieCheck = "checked";
+							request.setAttribute("cookieCheck", cookieCheck);
 							
 						}
 					
@@ -149,7 +151,7 @@ function logout(){
 					<form name="loginForm" action="./loginAction.do" onsubmit="return loginValidate(this);" method="POST">
 					
 						<div class="form-group" >
-							<input type="text" name="userid" value="${siteUserInfo }"  class="form-control" placeholder="Enter ID" required> 
+							<input type="text" name="userid" value="${loginId }"  class="form-control" placeholder="Enter ID" required> 
 							<!-- <input type="text" name="userid"  class="form-control" placeholder="Enter ID" required> -->
 						</div>
 						      
@@ -213,6 +215,7 @@ function logout(){
 					</div>
 					
 					<%} %>
+					
 				</div>
 			</div>
 		</div>
