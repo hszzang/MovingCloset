@@ -385,8 +385,6 @@
 </head>
 <body>
 
-	<!-- movingcloset geolocation api key : AIzaSyCuUkjkCmZ7UirvN0Vhs0Q3VmgcIbEl_N0 -->
-
 	<div class="container">
 
 		<div class="section-title">
