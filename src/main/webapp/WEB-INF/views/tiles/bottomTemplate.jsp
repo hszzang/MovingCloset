@@ -9,7 +9,6 @@
 #footerRow{
 	background-color: #212529;
 	height: 20%; color: white;
-	width: 100%;
 	font-size:13px;	
 	padding:3% 15% 5% 15%;
 	line-height: 3em;
@@ -19,9 +18,9 @@
 }
 </style>
 
-<div class="Footer" style="margin-right: -30px;">
+<div class="Footer" >
 		<div class="row" id="footerRow">
-		
+
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				
 				<a href="../movingcloset/introduce.do"> 회사소개 </a>&nbsp;&nbsp;|&nbsp;&nbsp;
