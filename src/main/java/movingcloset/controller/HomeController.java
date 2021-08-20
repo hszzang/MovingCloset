@@ -107,17 +107,18 @@ public class HomeController {
 	
 	// 로그인 처리
 	@RequestMapping(value="/movingcloset/loginAction.do",method=RequestMethod.POST)
-	public String loginAction(Model model, HttpServletRequest req,HttpSession session) {
+	public String loginAction(Model model, HttpServletRequest req,HttpSession session,HttpServletResponse resp) {
 
 		model.addAttribute("req",req);
+		model.addAttribute("resp",resp);
 		command = loginCommand;
 		command.execute(model);
 		
-		if(session.getAttribute("LoginNG")==null) {
-			return "main";
-		}else {
+		/*
+		 * if(session.getAttribute("LoginNG")==null) { return "main"; }else {
+		 */
 			return "body/login";			
-		}
+			/* } */
 		
 		
 	}
@@ -126,10 +127,11 @@ public class HomeController {
 	@RequestMapping("/movingcloset/logout.do")
 	public String logout(Model model, HttpSession session) {
 		
-		session.removeAttribute("");
+		session.removeAttribute("siteUserInfo");
+		session.removeAttribute("username");
+
 		
-		
-		return "";
+		return "body/login";
 	}
 	
 	

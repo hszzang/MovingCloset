@@ -205,6 +205,16 @@
 			});
 		});
 		
+		function logout(){
+			var result = confirm("로그아웃 하시겠습니까?");
+			if(result){
+				location.href = "../movingcloset/logout.do";
+			}else{
+				location.href = "#";
+			}
+			
+		}
+		
     </script>
 	<div class="nav-menu">
 		<a class="large-logo" href="#" id="logo">Moving Closet<a>
@@ -219,7 +229,15 @@
 			&nbsp;
 			<a href=""><i class="material-icons" id="icon">shopping_basket</i></a>
 			&nbsp;
-			<a href="../movingcloset/login.do"><i class="material-icons" id="icon">person</i></a>
+			
+			<c:choose>
+				<c:when test="${sessionScope.siteUserInfo != null}">
+					<a href="#" onclick="logout();"><i class="material-icons" id="icon">exit_to_app</i></a>
+				</c:when>
+				<c:otherwise>  
+					<a href="../movingcloset/login.do"><i class="material-icons" id="icon">person</i></a>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
 
