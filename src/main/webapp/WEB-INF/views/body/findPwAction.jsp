@@ -83,8 +83,8 @@
 
 			<div class="input-form col-md-12 mx-auto">
 				<div class="input-form-wrap" style="text-align:center;padding-top:100px;padding-bottom:80px;">
-					<h3><span id="paramId">${param.user_id} </span> 님 회원가입이 완료되었습니다.</h3><br />
-					<h3><strong>Moving Closet</strong> 을 찾아주셔서 감사합니다.</h3><br />
+					<h3><span id="paramId">${findPwEmail} </span></h3><br />
+					<h3>위 주소로 임시비밀번호가 발급되었습니다.</h3><br />
 					<h3>즐거운 쇼핑하시기 바랍니다.</h3>	
                     <br><br /><br />
 					<button type="button" class="btn btn-primary" id="mainbtn" onclick="location.href='./main.do';">홈페이지</button>

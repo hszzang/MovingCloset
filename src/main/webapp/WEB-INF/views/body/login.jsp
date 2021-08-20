@@ -147,7 +147,7 @@ Kakao.Auth.createLoginButton({
 					<p id="others" class="w-100 text-center">&mdash; Others &mdash;</p>
 					<div class="memberMore d-flex text-center">
 						<a href="./RegistMember.jsp" class="px-2 py-2 mr-md-1 rounded">회원가입</a>
-						<a href="./ForgotIdPw.jsp" class="px-2 py-2 ml-md-1 rounded">아이디/비밀번호찾기</a>
+						<a href="../movingcloset/findIdPw.do" class="px-2 py-2 ml-md-1 rounded">아이디/비밀번호찾기</a>
 					</div>
 				</div>
 			</div>
@@ -158,8 +158,8 @@ Kakao.Auth.createLoginButton({
 var naverLogin = new naver.LoginWithNaverId(
 		{
 			clientId: "8dUO8AkoujmRhyEgT8yz", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
-			callbackUrl: "http://localhost:8082/movingcloset/movingcloset/login.do", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
-			isPopup: false,
+			callbackUrl: "http://localhost:8082/movingcloset/movingcloset/register.do", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
+			isPopup: false,  
 			callbackHandle: true
 		}
 	);	
