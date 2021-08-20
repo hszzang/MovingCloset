@@ -35,6 +35,8 @@ public class LoginCommand implements CommandImpl{
 		MemberDTO memberDTO  = sqlSession.getMapper(MybatisMemberImpl.class).login(req.getParameter("userid"),req.getParameter("userpw"));
 		String rememberid = req.getParameter("remember_id");
 		
+		System.out.println("command remember_id : "+rememberid);
+		
 		try {
 			String userid = memberDTO.getUserid();
 			
@@ -46,6 +48,8 @@ public class LoginCommand implements CommandImpl{
 			if(rememberid != null && rememberid.equals("Y")) {
 				// 쿠키명 : loginId, 쿠키값 : 입력한 아이디, 유효시간 : 30일
 				CookieManager.makeCookie(resp, "loginId", userid, 86400*30*30);
+				System.out.println("cookie "+rememberid);
+				
 			}else {
 				CookieManager.deleteCookie(resp, "loginId");
 			}
