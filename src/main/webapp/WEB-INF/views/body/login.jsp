@@ -202,7 +202,7 @@ function logout(){
 						<a href="../movingcloset/findIdPw.do" class="px-2 py-2 ml-md-1 rounded">아이디/비밀번호찾기</a>
 					</div>
 					
-					<% }else{ %>
+					<% }else{ %>  
 					
 					
 					<div class="form-group" style="text-align: center;font-size: 30px;font-weight: bold;">
