@@ -443,8 +443,8 @@
 									<td class="text-left" style="vertical-align:middle;"><span class="red">*</span>비밀번호
 									</td>
 									<td>
-										<input type="text" name="pass1" class="form-control" style="width: 250px;"
-											required placeholder="비밀번호를 입력해주세요." value="ALStd1995@"/>
+										<input type="password" name="pass1" class="form-control" style="width: 250px;"
+											required placeholder="비밀번호를 입력해주세요." value=""/>
 									</td>
 								</tr>
 
@@ -461,8 +461,8 @@
 									<td class="text-left" style="vertical-align:middle;"><span class="red">*</span>비밀번호
 										확인</td>
 									<td>
-										<input type="text" name="pass2" class="form-control" style="width: 250px;"
-											required placeholder="비밀번호를 입력해주세요." value="ALStd1995@"/>
+										<input type="password" name="pass2" class="form-control" style="width: 250px;"
+											required placeholder="비밀번호를 입력해주세요." value=""/>
 									</td>
 								</tr>
 
@@ -470,7 +470,7 @@
 									<td><span class="red">*</span> 이름</td>
 									<td class="form-inline">
 										<input type="text" class="form-control" name="name" style="width: 250px;"
-											required placeholder="이름을 입력해주세요." value="민세원"/>
+											required placeholder="이름을 입력해주세요." value=""/>
 										
 	
 									</td>
@@ -490,7 +490,7 @@
 									</td>
 									<td class="form-inline">
 										<input type="text" name="postcode" class="form-control" style="width: 250px;"
-											required placeholder="우편번호" value="08505"/>&nbsp;&nbsp;&nbsp;&nbsp;
+											required placeholder="우편번호" value=""/>&nbsp;&nbsp;&nbsp;&nbsp;
 										<button type="button" id="postBtn" onclick="zipcodeFind();"
 											style="width: 120px;height: 40px;">우편번호</button>
 									</td>
@@ -501,9 +501,9 @@
 									<td class="text-left" style="vertical-align:middle;"></td>
 									<td>
 										<input type="text" name="addr1" class="form-control" style="width: 500px;"
-											required placeholder="주소를 입력해주세요." value="서울 금천구 가산디지털2로 123"/>&nbsp;&nbsp;&nbsp;&nbsp;
+											required placeholder="주소를 입력해주세요." value=""/>&nbsp;&nbsp;&nbsp;&nbsp;
 										<input type="text" name="addr2" class="form-control" style="width: 500px;"
-											required placeholder="상세주소를 입력해주세요." value="413호"/>
+											required placeholder="상세주소를 입력해주세요." value=""/>
 
 									</td>
 								</tr>
@@ -523,10 +523,10 @@
 											<option value="019">019</option>
 										</select>
 										&nbsp;&nbsp;-&nbsp;&nbsp;
-										<input type="text" class="form-control" name="mobile2" value="1111" maxlength="4"
+										<input type="text" class="form-control" name="mobile2" value="" maxlength="4"
 											onkeyup="commonFocusMove(this, 4,'mobile3');" style="width:100px;" required />
 										&nbsp;&nbsp;-&nbsp;&nbsp;
-										<input type="text" class="form-control" name="mobile3" value="1111" maxlength="4"
+										<input type="text" class="form-control" name="mobile3" value="" maxlength="4"
 											style="width:100px;" onkeyup="commonFocusMove(this, 4,'email1');" required />
 									</td>
 								</tr>
@@ -534,10 +534,10 @@
 									<td class="text-left" style="vertical-align:middle;"><span
 											class="red">*</span>이메일&nbsp;&nbsp;&nbsp;</td>
 									<td class="form-inline">
-										<input type="text" class="form-control" name="email1" value="minsw626"
+										<input type="text" class="form-control" name="email1" value=""
 											style="width:30%;" required />
 										&nbsp;@&nbsp;
-										<input type="text" class="form-control" name="email2" value="naver.com"
+										<input type="text" class="form-control" name="email2" value=""
 											style="width:30%;" required />&nbsp;&nbsp;
 										<select name="email_domain" class="form-control"
 											onChange="inputEmail(this.form);" style="width:30%;">
@@ -554,9 +554,9 @@
 									<td class="text-left" style="vertical-align:middle;"><span
 											style="padding-left: 13px;">관심 태그</span></td>
 									<td class="form-inline" style="padding-bottom: 0px;">
-										<input type="checkbox" name="dandy" value="dandy" class="form-control" checked/>
+										<input type="checkbox" name="dandy" value="dandy" class="form-control" />
 										&nbsp;댄디&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="checkbox" name="classic"  value="classic" class="form-control" checked/>
+										<input type="checkbox" name="classic"  value="classic" class="form-control" />
 										&nbsp;클래식&nbsp;&nbsp;&nbsp;&nbsp;
 										<input type="checkbox" name="casual"  value="casual" class="form-control" />
 										&nbsp;캐주얼&nbsp;&nbsp;&nbsp;&nbsp;
@@ -603,7 +603,7 @@
 - 귀하의 개인정보를 다음과 같이 보관하며, 수집, 이용 및 제공목적이 달성된 경우 
 [개인정보 보호법] 제21조에 따라 처리합니다.  </textarea>
 						<div class="custom-control custom-checkbox mb-4 mt-2">
-							<input type="checkbox" class="custom-control-input" id="personalAgree" required checked>
+							<input type="checkbox" class="custom-control-input" id="personalAgree" required >
 							<label class="custom-control-label" for="personalAgree">개인정보 수집 및 이용에 동의합니다.</label>
 						</div>
 						<textarea rows="6" name="content" class="form-control" style="resize:none;"
@@ -661,7 +661,7 @@
 2. 회사는 구매자에게 상품을 공급받은 사실을 재화 등을 공급받은 날(배송완료일)로부터 3영업일 이내에 통보하여 주도록 요청합니다.
 3. 회사는 구매자가 재화 등을 공급받고 [구매결정]항목을 클릭할 경우 그 익일(토요일, 공휴일 제외)에 판매회원에게 결제대금을 지급하고, 배송완료일로부터 7일 이내에 [구매결정]을 클릭하지 않는 경우에는 7일이 경과한 날로부터 2영업일 이내에 판매회원에게 결제대금을 지급할 수 있습니다. 다만, 회사가 판매회원에게 결제대금을 지급하기 이전에 구매자가 취소, 반품, 교환 또는 환불의 의사를 표시한 경우에는 그 지급을 보류합니다.</textarea>
 						<div class="custom-control custom-checkbox mb-5 mt-2">
-							<input type="checkbox" class="custom-control-input" id="cancelAgree" required checked>
+							<input type="checkbox" class="custom-control-input" id="cancelAgree" required >
 							<label class="custom-control-label" for="cancelAgree">구매 서비스 이용에 대해 동의합니다.</label>
 						</div>
 

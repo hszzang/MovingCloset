@@ -78,23 +78,18 @@
 
 <body>
 
-	<img alt="" src="../resources/images/login/registerComplete.png" width="100%" style="margin-top: 150px;">
-	<div class="container" style="width: 50%;" align="center" id="regicon">
-
-			<div class="input-form col-md-12 mx-auto">
-				<div class="input-form-wrap" style="text-align:center;padding-top:100px;padding-bottom:80px;">
-					<h3><span id="paramId">${param.user_id} </span> 님 회원가입이 완료되었습니다.</h3><br />
-					<h3><strong>Moving Closet</strong> 을 찾아주셔서 감사합니다.</h3><br />
-					<h3>즐거운 쇼핑하시기 바랍니다.</h3>	
-                    <br><br /><br />
-					<button type="button" class="btn btn-primary" id="mainbtn" onclick="location.href='./main.do';">홈페이지</button>
-				</div>
+	<img alt="배경사진" src="../resources/images/login/registerComplete.png" width="100%" style="margin-top: 115px;">
+	<div class="container" style="width: 50%;padding-bottom:0px;" align="center" id="regicon" >
+		<div class="input-form col-md-12 mx-auto">
+			<div class="input-form-wrap" style="text-align:center;padding-top:100px;padding-bottom:80px;">
+				<h3><span id="paramId">${param.user_id}</span> 님 회원가입이 완료되었습니다.</h3><br />
+				<h3><strong>Moving Closet</strong> 을 찾아주셔서 감사합니다.</h3><br />
+				<h3>즐거운 쇼핑하시기 바랍니다.</h3>	
+                   <br><br /><br />
+				<button type="button" class="btn btn-primary" id="mainbtn" onclick="location.href='./main.do';">홈페이지</button>
 			</div>
-
-
-		
+		</div>
 	</div>
-
 
 </body>
 </html>

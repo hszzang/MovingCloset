@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -102,7 +103,7 @@ Kakao.Auth.createLoginButton({
 			<div class="col-md-6 col-lg-4">
 				<div class="login-wrap p-0">
 					<img src="../resources/images/MovingClosetLogoBlack.png" id="loginLogo" />
-					<form name="loginForm" action="./login.memb" onsubmit="return loginValidate(this);">
+					<form name="loginForm" action="./loginAction.do" onsubmit="return loginValidate(this);" method="POST">
 					
 						<div class="form-group">
 <%-- 							<input type="text" name="userid" value="<%=loginId %>"  class="form-control" placeholder="Enter ID" required> --%>
@@ -112,6 +113,13 @@ Kakao.Auth.createLoginButton({
 						<div class="form-group">
 							<input id="password-field" name="userpw" type="password" class="form-control" placeholder="Enter Password" required>
 						</div>
+						
+						<c:if test="${LoginNG != null }">
+							<div style="text-align: center; color:red; font-weight: bold;">
+								<span>${LoginNG }</span>
+							</div>	
+							<br />					
+						</c:if>
 						
 						<div class="form-group">
 							<button type="submit" class="form-control btn btn-dark submit px-3">LOG IN</button>
