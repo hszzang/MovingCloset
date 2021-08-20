@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -114,10 +114,11 @@ Kakao.Auth.createLoginButton({
 							<input id="password-field" name="userpw" type="password" class="form-control" placeholder="Enter Password" required>
 						</div>
 						
-						<c:if test="${LoginNG not null }">
-							<div>
+						<c:if test="${LoginNG != null }">
+							<div style="text-align: center; color:red; font-weight: bold;">
 								<span>${LoginNG }</span>
-							</div>						
+							</div>	
+							<br />					
 						</c:if>
 						
 						<div class="form-group">
