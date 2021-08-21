@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html>
@@ -423,20 +424,13 @@
 									</td>
 								</tr>
 								<tr>
-									<td class="text-left" style="vertical-align:middle;"><span class="red">*</span>아이디
+									<td class="text-left" style="vertical-align:middle;" value=${data.id }><span class="red">*</span>아이디
 									</td>
 									<td class="form-inline">
 										<input type="text" name="user_id" class="form-control" style="width: 250px;"
 											required placeholder="아이디를 입력해주세요." />&nbsp;&nbsp;&nbsp;&nbsp;
 										<button type="button" id="checkid" onclick="idCheck(this.form);"
 											style="width: 120px;height: 40px;">중복확인</button>
-									</td>
-
-								</tr>
-								<tr>
-									<td></td>
-									<td colspan="2">
-										<span class="id-text"></span>
 									</td>
 								</tr>
 								<tr>
@@ -449,8 +443,8 @@
 									<td class="text-left" style="vertical-align:middle;"><span class="red">*</span>비밀번호
 									</td>
 									<td>
-										<input type="text" name="pass1" class="form-control" style="width: 250px;"
-											required placeholder="비밀번호를 입력해주세요." value="ALStd1995@"/>
+										<input type="password" name="pass1" class="form-control" style="width: 250px;"
+											required placeholder="비밀번호를 입력해주세요." value=""/>
 									</td>
 								</tr>
 
@@ -467,8 +461,8 @@
 									<td class="text-left" style="vertical-align:middle;"><span class="red">*</span>비밀번호
 										확인</td>
 									<td>
-										<input type="text" name="pass2" class="form-control" style="width: 250px;"
-											required placeholder="비밀번호를 입력해주세요." value="ALStd1995@"/>
+										<input type="password" name="pass2" class="form-control" style="width: 250px;"
+											required placeholder="비밀번호를 입력해주세요." value=""/>
 									</td>
 								</tr>
 
@@ -476,7 +470,7 @@
 									<td><span class="red">*</span> 이름</td>
 									<td class="form-inline">
 										<input type="text" class="form-control" name="name" style="width: 250px;"
-											required placeholder="이름을 입력해주세요." value="민세원"/>
+											required placeholder="이름을 입력해주세요." value=""/>
 										
 	
 									</td>
@@ -496,7 +490,7 @@
 									</td>
 									<td class="form-inline">
 										<input type="text" name="postcode" class="form-control" style="width: 250px;"
-											required placeholder="우편번호" value="08505"/>&nbsp;&nbsp;&nbsp;&nbsp;
+											required placeholder="우편번호" value=""/>&nbsp;&nbsp;&nbsp;&nbsp;
 										<button type="button" id="postBtn" onclick="zipcodeFind();"
 											style="width: 120px;height: 40px;">우편번호</button>
 									</td>
@@ -507,9 +501,9 @@
 									<td class="text-left" style="vertical-align:middle;"></td>
 									<td>
 										<input type="text" name="addr1" class="form-control" style="width: 500px;"
-											required placeholder="주소를 입력해주세요." value="서울 금천구 가산디지털2로 123"/>&nbsp;&nbsp;&nbsp;&nbsp;
+											required placeholder="주소를 입력해주세요." value=""/>&nbsp;&nbsp;&nbsp;&nbsp;
 										<input type="text" name="addr2" class="form-control" style="width: 500px;"
-											required placeholder="상세주소를 입력해주세요." value="413호"/>
+											required placeholder="상세주소를 입력해주세요." value=""/>
 
 									</td>
 								</tr>
@@ -529,10 +523,10 @@
 											<option value="019">019</option>
 										</select>
 										&nbsp;&nbsp;-&nbsp;&nbsp;
-										<input type="text" class="form-control" name="mobile2" value="1111" maxlength="4"
+										<input type="text" class="form-control" name="mobile2" value="" maxlength="4"
 											onkeyup="commonFocusMove(this, 4,'mobile3');" style="width:100px;" required />
 										&nbsp;&nbsp;-&nbsp;&nbsp;
-										<input type="text" class="form-control" name="mobile3" value="1111" maxlength="4"
+										<input type="text" class="form-control" name="mobile3" value="" maxlength="4"
 											style="width:100px;" onkeyup="commonFocusMove(this, 4,'email1');" required />
 									</td>
 								</tr>
@@ -540,10 +534,10 @@
 									<td class="text-left" style="vertical-align:middle;"><span
 											class="red">*</span>이메일&nbsp;&nbsp;&nbsp;</td>
 									<td class="form-inline">
-										<input type="text" class="form-control" name="email1" value="minsw626"
+										<input type="text" class="form-control" name="email1" value=""
 											style="width:30%;" required />
 										&nbsp;@&nbsp;
-										<input type="text" class="form-control" name="email2" value="naver.com"
+										<input type="text" class="form-control" name="email2" value=""
 											style="width:30%;" required />&nbsp;&nbsp;
 										<select name="email_domain" class="form-control"
 											onChange="inputEmail(this.form);" style="width:30%;">
@@ -560,9 +554,9 @@
 									<td class="text-left" style="vertical-align:middle;"><span
 											style="padding-left: 13px;">관심 태그</span></td>
 									<td class="form-inline" style="padding-bottom: 0px;">
-										<input type="checkbox" name="dandy" value="dandy" class="form-control" checked/>
+										<input type="checkbox" name="dandy" value="dandy" class="form-control" />
 										&nbsp;댄디&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="checkbox" name="classic"  value="classic" class="form-control" checked/>
+										<input type="checkbox" name="classic"  value="classic" class="form-control" />
 										&nbsp;클래식&nbsp;&nbsp;&nbsp;&nbsp;
 										<input type="checkbox" name="casual"  value="casual" class="form-control" />
 										&nbsp;캐주얼&nbsp;&nbsp;&nbsp;&nbsp;
@@ -609,7 +603,7 @@
 - 귀하의 개인정보를 다음과 같이 보관하며, 수집, 이용 및 제공목적이 달성된 경우 
 [개인정보 보호법] 제21조에 따라 처리합니다.  </textarea>
 						<div class="custom-control custom-checkbox mb-4 mt-2">
-							<input type="checkbox" class="custom-control-input" id="personalAgree" required checked>
+							<input type="checkbox" class="custom-control-input" id="personalAgree" required >
 							<label class="custom-control-label" for="personalAgree">개인정보 수집 및 이용에 동의합니다.</label>
 						</div>
 						<textarea rows="6" name="content" class="form-control" style="resize:none;"
@@ -667,7 +661,7 @@
 2. 회사는 구매자에게 상품을 공급받은 사실을 재화 등을 공급받은 날(배송완료일)로부터 3영업일 이내에 통보하여 주도록 요청합니다.
 3. 회사는 구매자가 재화 등을 공급받고 [구매결정]항목을 클릭할 경우 그 익일(토요일, 공휴일 제외)에 판매회원에게 결제대금을 지급하고, 배송완료일로부터 7일 이내에 [구매결정]을 클릭하지 않는 경우에는 7일이 경과한 날로부터 2영업일 이내에 판매회원에게 결제대금을 지급할 수 있습니다. 다만, 회사가 판매회원에게 결제대금을 지급하기 이전에 구매자가 취소, 반품, 교환 또는 환불의 의사를 표시한 경우에는 그 지급을 보류합니다.</textarea>
 						<div class="custom-control custom-checkbox mb-5 mt-2">
-							<input type="checkbox" class="custom-control-input" id="cancelAgree" required checked>
+							<input type="checkbox" class="custom-control-input" id="cancelAgree" required >
 							<label class="custom-control-label" for="cancelAgree">구매 서비스 이용에 대해 동의합니다.</label>
 						</div>
 
@@ -679,7 +673,136 @@
 			</div>
 		</div>
 	</div>
+<script type="text/javascript">
+//csrf를 막기위한 체크값 생성함수
+function generate_state() {
+    $mt = microtime();
+    $rand = mt_rand();
+    return md5($mt . $rand);
+}
+ 
+$p['state'] = generate_state();
+ 
+$p['client_id'] = '8dUO8AkoujmRhyEgT8yz';
+$p['client_secret'] = 'ajIGhcnSWA';
+$p['response_type'] = 'code';
+$p['redirect_url'] = 'http://localhost:8082/movingcloset/movingcloset/register.do'; //여기서는 현재 파일을 그대로 이용
+//네이버 로그인 등록시 입력한 주소입니다. 틀리면 작동하지 않습니다.
+ 
+//  
+$url = '<a href="https://nid.naver.com/oauth2.0/authorize?client_id='.urlencode(" target="_blank">https://nid.naver.com/oauth2.0/authorize?client_id='.urlencode(</a>$p['client_id']).'&response_type=code&redirect_uri='.urlencode($p['redirect_url']).'&state='.$p['state'];
+ 
+//code는 로그인이 성공하고 나면 redirect_url에 인자로 돌려주는 값입니다.
+//이 값이 있어야 access_token을 요청할 수 있습니다.
+if(!$_GET['code']) {
+    header('Location: ' . $url);
+}
+//위 요청을 하게되면 네이버 로그인창이 뜹니다. (정보동의 과정이 나올수도 있습니다)
+ 
+//이 라인은 네이버 로그인창에서 로그인이 끝나고 나서 redirect_url에 code를 전송했을때
+//실행됩니다.
+if($_GET['code'])
+{
+    $p['code'] = $_GET['code'];
+}
+ 
+//access_token을 요청하는 주소. 위 검증코드가 있어야 실행됩니다.
+$url2 = '<a href="https://nid.naver.com/oauth2.0/token?client_id='.urlencode(" target="_blank">https://nid.naver.com/oauth2.0/token?client_id='.urlencode(</a>$p['client_id']).'&client_secret='.urlencode($p['client_secret']).'&grant_type=authorization_code&state='.$p['state'].'&code='.$p['code'];
+ 
+$json = file_get_contents($url2);
+$data = json_decode($json);
+ 
+echo $data->access_token;
 
+//네이버 API 예제 - 회원프로필 조회
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Map;
+
+
+public class ApiExamMemberProfile {
+
+
+ public static void main(String[] args) {
+     String token = "AAAAONgW-jgpzTy4yloiMq5N3MVnKlT30absTkPrPNkaI_E4A-x8ZJExAHKfROmBfZtSMUUXg2Xt3Z-V6QT1h9ioly8"; // 네이버 로그인 접근 토큰;
+     String header = "Bearer " + token; // Bearer 다음에 공백 추가
+
+
+     String apiURL = "https://openapi.naver.com/v1/nid/me";
+
+
+     Map<String, String> requestHeaders = new HashMap<>();
+     requestHeaders.put("Authorization", header);
+     String responseBody = get(apiURL,requestHeaders);
+
+
+     System.out.println(responseBody);
+ }
+
+
+ private static String get(String apiUrl, Map<String, String> requestHeaders){
+     HttpURLConnection con = connect(apiUrl);
+     try {
+         con.setRequestMethod("GET");
+         for(Map.Entry<String, String> header :requestHeaders.entrySet()) {
+             con.setRequestProperty(header.getKey(), header.getValue());
+         }
+
+
+         int responseCode = con.getResponseCode();
+         if (responseCode == HttpURLConnection.HTTP_OK) { // 정상 호출
+             return readBody(con.getInputStream());
+         } else { // 에러 발생
+             return readBody(con.getErrorStream());
+         }
+     } catch (IOException e) {
+         throw new RuntimeException("API 요청과 응답 실패", e);
+     } finally {
+         con.disconnect();
+     }
+ }
+
+
+ private static HttpURLConnection connect(String apiUrl){
+     try {
+         URL url = new URL(apiUrl);
+         return (HttpURLConnection)url.openConnection();
+     } catch (MalformedURLException e) {
+         throw new RuntimeException("API URL이 잘못되었습니다. : " + apiUrl, e);
+     } catch (IOException e) {
+         throw new RuntimeException("연결이 실패했습니다. : " + apiUrl, e);
+     }
+ }
+
+
+ private static String readBody(InputStream body){
+     InputStreamReader streamReader = new InputStreamReader(body);
+
+
+     try (BufferedReader lineReader = new BufferedReader(streamReader)) {
+         StringBuilder responseBody = new StringBuilder();
+
+
+         String line;
+         while ((line = lineReader.readLine()) != null) {
+             responseBody.append(line);
+         }
+
+
+         return responseBody.toString();
+     } catch (IOException e) {
+         throw new RuntimeException("API 응답을 읽는데 실패했습니다.", e);
+     }
+ }
+}
+
+
+
+
+
+</script>
 </body>
 
 </html>

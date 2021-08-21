@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-<title>Insert title here</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -147,8 +141,6 @@
 	
 
 	</style>
-</head>
-
 	<script>
 
 		$(document).on('scroll', function(){
@@ -213,6 +205,16 @@
 			});
 		});
 		
+		function logout(){
+			var result = confirm("로그아웃 하시겠습니까?");
+			if(result){
+				location.href = "../movingcloset/logout.do";
+			}else{
+				location.href = "#";
+			}
+			
+		}
+		
     </script>
 	 <div class="nav-menu">
 		<a class="large-logo" href="#" id="logo">Moving Closet</a>
@@ -227,7 +229,15 @@
 			&nbsp;
 			<a href=""><i class="material-icons" id="icon">shopping_basket</i></a>
 			&nbsp;
-			<a href=""><i class="material-icons" id="icon">person</i></a>
+			
+			<c:choose>
+				<c:when test="${sessionScope.siteUserInfo != null}">
+					<a href="#" onclick="logout();"><i class="material-icons" id="icon">exit_to_app</i></a>
+				</c:when>
+				<c:otherwise>  
+					<a href="../movingcloset/login.do"><i class="material-icons" id="icon">person</i></a>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
 
@@ -343,4 +353,3 @@
  
  
 
-</html>	
