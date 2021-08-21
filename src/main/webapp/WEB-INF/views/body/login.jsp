@@ -224,25 +224,37 @@ function logout(){
 			</div>
 		</div>
 	</div>
-<script type="text/javascript">
-
-
-	var naver_id_login = new naver_id_login("8dUO8AkoujmRhyEgT8yz", "http://localhost:8082/movingcloset/movingcloset/register.do");
-	var state = naver_id_login.getUniqState();
-	naver_id_login.setButton("white", 2,40);
-	naver_id_login.setDomain("http://localhost:8082/");
-	naver_id_login.setState(state);
-	naver_id_login.setPopup();
-	naver_id_login.init_naver_id_login();
-
-	// 인증 요청문 형식
-	var url ="https://nid.naver.com/oauth2.0/authorize?client_id=8dUO8AkoujmRhyEgT8yz&response_type=code&redirect_uri=http://localhost:8082/movingcloset/movingcloset/register.do&state="+state;
-			
-
-
 	
-	
-	
-	
-</script>
+
+
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+  
+  
+  
+  
+  <%
+    String clientId = "8dUO8AkoujmRhyEgT8yz";//애플리케이션 클라이언트 아이디값";
+    String redirectURI = URLEncoder.encode("http://localhost:8082/movingcloset/movingcloset/register.do", "UTF-8");
+    SecureRandom random = new SecureRandom();
+    String state = new BigInteger(130, random).toString();
+    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+    apiURL += "&client_id=" + clientId;
+    apiURL += "&redirect_uri=" + redirectURI;
+    apiURL += "&state=" + state;
+    session.setAttribute("state", state);
+ %>
+
+
+
+
+
+
+
+
+
+
+
 </body>

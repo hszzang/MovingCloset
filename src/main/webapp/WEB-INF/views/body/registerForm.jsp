@@ -675,40 +675,8 @@
 			</div>
 		</div>
 	</div>
-<script type="text/javascript">
-
-var naver_id_login = new naver_id_login("8dUO8AkoujmRhyEgT8yz", "http://localhost:8082/movingcloset/movingcloset/register.do");
-// 접근 토큰 값 출력
-alert(naver_id_login.oauthParams.access_token);
-// 네이버 사용자 프로필 조회
-naver_id_login.get_naver_userprofile("naverSignInCallback()");
-// 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
-function naverSignInCallback() {
-  alert(naver_id_login.getProfileData('email'));
-  alert(naver_id_login.getProfileData('id'));
-  alert(naver_id_login.getProfileData('age'));
-  
-}
-
-//콜백 응답에서 state 파라미터의 값을 가져옴
-var state = request.queryParams("state");
-var code = request.queryParams("code");
-
-// 세션 또는 별도의 저장 공간에서 상태 토큰을 가져옴
-var storedState = sessioni.getAttribute("state");
 
 
-if( !state.euals( storedState ) ) {
-    return RESPONSE_UNAUTHORIZED; //401 unauthorized
-} else {
-    Return RESPONSE_SUCCESS; //200 success
-}
-
-var tokenUrl = 'https://nid.naver.com/oauth2.0/token?client_id=8dUO8AkoujmRhyEgT8yz&client_secret=ajIGhcnSWA&grant_type=authorization_code&state="+storedState+"&code="+code+"';
-
-
-
-</script>
 </body>
 
 </html>

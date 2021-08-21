@@ -87,17 +87,10 @@ public class RegisterActionCommand implements CommandImpl{
 		
 		int result = sqlSession.getMapper(MybatisMemberImpl.class).register(memberDTO); // 세션영역에 저장된 VO객체로 부터 아이디를 얻어와 파라미터로 사용
 		System.out.println("입력결과"+result);
-
-		
-		String state = generateState();
-		session.setAttribute("state", state);
 		
 		
 	}
 	
-	public String generateState() {
-		SecureRandom random = new SecureRandom();
-		return new BigInteger(130, random).toString(32);
-	}
+	
 
 }
