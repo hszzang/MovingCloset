@@ -141,6 +141,11 @@
 			};
 			reader.readAsDataURL(event.target.files[0]);
 		}
+		function delProduct(p_idx){
+			if(confirm("정말 삭제하겠습니까?")){
+				location.href="/movingcloset/store/delete.do?p_idx=" + p_idx;
+			}
+		}
 	</script>
 <title>Store</title>
 </head>
@@ -182,10 +187,7 @@
 					<input id="image" type="file" class="form-control" name="ofile" accept="image/*" onchange="setThumbnail(event);"
 						style="width:350px;height:40px;margin-bottom:10px;"  />
 						<input type="submit" id="productUpdate" style="width:350px;height:40px;background-color:black;color:white;" value="수정">
-						<input type="submit" id="productDelete" value="상품삭제">						
-						<!--  
-						<button type="button" class="product" id="productDelete" onclick="javascript:location.href='/movingcloset/store/delete.do';">상품삭제</button>
-						-->
+						<button type="button" class="product" id="productDelete" onclick="delProduct(${p_idx});">상품삭제</button>
 					<br>
 				</div>
 			</div>

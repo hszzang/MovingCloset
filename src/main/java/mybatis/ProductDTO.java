@@ -20,7 +20,7 @@ public class ProductDTO {
 	private String p_brand;
 	private String p_ofile;
 	private String p_sfile;
-	
+	private String p_flag;
 
 	private MultipartFile uploadFile;
 
