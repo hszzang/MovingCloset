@@ -1,4 +1,4 @@
-package movingcloset.command;
+package movingcloset.command.store;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import movingcloset.command.CommandImpl;
 import mybatis.MybatisProductImpl;
 import mybatis.ProductDTO;
+
+import movingcloset.util.PagingUtil;
 
 @Service
 public class StoreListCommand implements CommandImpl {
@@ -28,25 +31,18 @@ public class StoreListCommand implements CommandImpl {
 		@Override
 		public void execute(Model model) {
 			
-			System.out.println("StoreListCommand 호출");
-			
 			ProductDTO productDTO = new ProductDTO();
-			System.out.println("StoreListCommand 호출2");
-			
-			/*
-			ProductDTO productDTO = sqlSession.getMapper(MybatisProductImpl.class).getProductDTO();
-			model.addAttribute("storeList", productDTO);
-			 */
 			
 			List<ProductDTO> storeList = sqlSession.getMapper(MybatisProductImpl.class).getStoreList(productDTO);
-			//System.out.println(storeList);
+
+			int totalProduct = sqlSession.getMapper(MybatisProductImpl.class).getTotalCount(); 
+			System.out.println(totalProduct);
 			
 			model.addAttribute("storeList", storeList);
-			System.out.println("StoreListCommand 호출3");
 			
-			//Map<String, Object> paramMap = ((Model) storeList).asMap();
-			//HttpServletRequest req = (HttpServletRequest)paramMap.get("req");
-			
-			//int totalRecordCount = sqlSession.getMapper(MybatisProductImpl.class).getTotalCount();
 		}
+
+
+		
+		
 }
