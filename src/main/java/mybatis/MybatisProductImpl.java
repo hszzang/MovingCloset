@@ -1,6 +1,5 @@
 package mybatis;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -28,6 +27,8 @@ public interface MybatisProductImpl {
 	*/
 	
 	public ProductDTO getStoreDetail(@Param("p_idx") String p_idx);
+
+	public ProductDetailDTO getProductDetail(@Param("p_code") String p_code);
 	
 	//public ProductDTO updateSelect(@Param("p_idx") String p_idx);
 	/*

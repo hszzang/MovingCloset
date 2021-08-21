@@ -169,10 +169,8 @@ public class StoreController {
 		String p_sfile = tempB.toString();
 		System.out.println("sfile: " + p_sfile);
 		
-
 		productDTO.setP_ofile(p_ofile);
 		productDTO.setP_sfile(p_sfile);
-	
 		
 		model.addAttribute("productDTO", productDTO);
 		model.addAttribute("req", req);
@@ -298,7 +296,7 @@ public class StoreController {
 	
 	// 상품 제거
 		@RequestMapping("/store/delete.do")
-		public String delete(Model model, HttpServletRequest req, HttpSession session) {
+		public String delete(Model model, HttpServletRequest req) {
 //			public String delete(Locale locale, Model model) {
 			System.out.println("delete 들어옴");
 			
@@ -313,8 +311,23 @@ public class StoreController {
 	// 스토어 상세페이지에서 리뷰쓰기 버튼
 	@RequestMapping("/store/reviewPage.do")
 	public String review(Locale locale, Model model) {
-		System.out.println("컨트롤러 들어옴");
+		System.out.println("리뷰 컨트롤러 들어옴");
 		return "reviewPage";
 	}
+	
+	@RequestMapping("/store/reviewAction.do")
+	public String reviewAction(Locale locale, Model model, HttpServletRequest req) {
+		System.out.println("리뷰액션 컨트롤러 들어옴");
+		
+		model.addAttribute("req", req);
+		model.addAttribute("model", model);
+		
+		command = storeDeleteCommand;
+		command.execute(model);
+		
+		return "reviewPage";
+	}
+	
+	
 	
 }
