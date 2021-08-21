@@ -12,29 +12,51 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   	
   	<script>
-	  	window.onload = function() {
-	        $("onGoing").show();
-	        $("Expired").hide();
-	    }
-		function openPage(pageName,elmnt,color) {
-		  var i, tabcontent, tablinks;
-		  tabcontent = document.getElementsByClassName("tabcontent");
-		  for (i = 0; i < tabcontent.length; i++) {
-		    tabcontent[i].style.display = "none";
-		  }
-		  tablinks = document.getElementsByClassName("tablink");
-		  for (i = 0; i < tablinks.length; i++) {
-		    tablinks[i].style.backgroundColor = "";
-		  }
-		  document.getElementById(pageName).style.display = "block";
-		  elmnt.style.backgroundColor = color;
-		  
-		}
 		
-		document.getElementById("default").click();
+		/*카운트다운*/
+		var countDownDate = new Date("Aug 31, 2021 15:37:25").getTime();
+
+		// Update the count down every 1 second
+		var x = setInterval(function() {
+		
+			// Get today's date and time
+			var now = new Date().getTime();
+			    
+			// Find the distance between now and the count down date
+			var distance = countDownDate - now;
+			    
+			// Time calculations for days, hours, minutes and seconds
+			var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+			var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+			var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+			var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+			    
+			// Output the result in an element with id="demo"
+			document.getElementById("time").innerHTML = days + "일 " + hours + "시간 "
+			+ minutes + "분 " + seconds + "초";
+			document.getElementById("time2").innerHTML = days + "일 " + hours + "시간 "
+			+ minutes + "분 " + seconds + "초";
+			document.getElementById("time3").innerHTML = days + "일 " + hours + "시간 "
+			+ minutes + "분 " + seconds + "초";
+			document.getElementById("time4").innerHTML = days + "일 " + hours + "시간 "
+			+ minutes + "분 " + seconds + "초";
+			document.getElementById("time5").innerHTML = days + "일 " + hours + "시간 "
+			+ minutes + "분 " + seconds + "초";
+		    
+			// If the count down is over, write some text 
+			if (distance < 0) {
+			  clearInterval(x);
+			  document.getElementById("time").innerHTML = "마감되었습니다";
+			}
+		}, 1000);
+		
+
+		
+		
+		
   	</script>
   	
     <style>
@@ -42,28 +64,10 @@
 			border:none;
 			/* width:80%;  */
             height:auto;
-			margin-top:100px;
-			padding-top:100px;
+			margin-top:50px;
+			padding-top:50px;
 		}
 		
-		.BtnTop{
-			justify-content:center;
-		}
-		.tablink {
-            background-color: white;
-            height:50px;
-            width: 200px;
-            font-size: 14px;
-            color: gray;
-            border: 1px solid lightgray;
-            border-radius:10px;
-            
-        }
-		.tablink:focus{outline:none;}
-        .tablink:hover {
-            background-color:white; color:#FF6C2F;
-            border:#FF6C2F solid 2px;
-        }
 		
         .tabcontent{
             border:none;
@@ -76,12 +80,20 @@
 		.outDiv{
 			width:90%; height:auto;
 			border:none;
-			margin-bottom:1%; padding:0;
+			margin-bottom:20px;
 		}
 		.innerDiv{
 			width:100%; height:auto;
-			/*border:#FF6C2F solid 1px;*/
-			border:lightgray solid 1px;
+			border:#A52A2A solid 1px;
+			/* border:lightgray solid 1px; */
+			border-radius:10px;
+			padding:3%;
+		}
+		.innerDiv2{
+			width:100%; height:auto;
+			border:#274069 solid 1px;
+			/* border:lightgray solid 1px; */
+			border-radius:10px;
 			padding:3%;
 		}
 
@@ -130,8 +142,17 @@
 		
 		.plzDownDiv{
 			width:100%; height:55%; margin:0;
-			border:lightgray solid 1px; 
-			padding-left:1%; padding-top:1%;
+			border: solid 1px #800000; 
+			background-color:#800000;
+			border-radius:10px;
+			padding-left:1%; padding-top:1%; padding-bottom:1%;
+		}
+		.plzDownDiv2{
+			width:100%; height:55%; margin:0;
+			border: solid 1px #274069; 
+			background-color:#274069;
+			border-radius:10px;
+			padding-left:1%; padding-top:1%; padding-bottom:1%;
 		}
 		.plzRemainingTime{
 			padding:50px; margin-left:5%; display:inline; align-content: center;
@@ -150,18 +171,24 @@
 			color:gray; font-size:10pt; font-weight:lighter;
 			margin:1% 0 0 5%;
 		}
-		.progress{ width:80%; margin:7% 7% 0 7%; }
 		.plzAchivementRate{ 
 			float:right; margin-right:15%;
 			font-size:12pt; font-weight:bold;
 		}
 		.pleaseBtn{
 			width:100%; height:50px;
-			border:none; background-color:#FF6C2F; color:white;
+			border: solid 1px #FF6C2F;
+			background-color: white;
+			color: #FF6C2F;
 			font-size:14pt; font-weight:bold;
+			border-radius:5px;
+			margin-bottom:10px;
+			margin-top:5px;
 		}
-		.pleaseBtn:focus{outline:none;}
-		
+		.pleaseBtn:hover{
+			color: white;
+			background-color: #FF6C2F;
+		}
 		
 		
         @media only screen and (max-width:1000px){
@@ -176,116 +203,240 @@
         #lists{ margin-left:15%;}
         }
         
+        .badge{
+        	margin-left:10px;
+        }
+        
+        #time{
+        	text-align:center;
+        	font-size:30pt;
+        	font-family: Noto Sans Korean;
+        	margin-top:10px;
+        	color:white;
+        }
+        #time2, #time3, #time4, #time5{
+        	text-align:center;
+        	font-size:30pt;
+        	font-family: Noto Sans Korean;
+        	margin-top:10px;
+        	color:white;
+        }
+        
+        .progress-info{
+        	padding-top:5px;
+        	text-align:center;
+        	color:white;
+        }
+        
+        /* 마감임박 */
+        .deadTitle{
+			padding-top:30px;
+			padding-bottom:30px;
+			padding-left:55px;
+		}
+        
+        .deadline {
+		  height: 20px;
+		  
+		}
+		
+		.deadline span {
+		  position: relative;
+		  font-weight:bold;
+		  top: 10px;
+		  margin-right: -5px;
+		  display: inline-block;
+		  animation: bounce 0.3s ease infinite alternate;
+		  font-size: 30px;
+		  color: #A52A2A;
+		  /* text-shadow: 0 1px 0 #ccc, 0 2px 0 #ccc, 0 3px 0 #ccc, 0 4px 0 #ccc,
+		    0 5px 0 #ccc, 0 6px 0 transparent, 0 7px 0 transparent, 0 8px 0 transparent,
+		    0 9px 0 transparent, 0 5px 5px rgba(0, 0, 0, 0.4); */
+		}
+		
+		.deadline span:nth-child(2) {
+		  animation-delay: 0.1s;
+		}
+		.deadline span:nth-child(3) {
+		  animation-delay: 0.2s;
+		}
+		.deadline span:nth-child(4) {
+		  animation-delay: 0.3s;
+		}
+		.deadline span:nth-child(5) {
+		  animation-delay: 0.4s;
+		}
+		.deadline span:nth-child(6) {
+		  animation-delay: 0.5s;
+		}
+		.deadline span:nth-child(7) {
+		  animation-delay: 0.6s;
+		}
+		.deadline span:nth-child(8) {
+		  animation-delay: 0.7s;
+		}
+		
+		@keyframes bounce {
+		  100% {
+		    top: 0px;
+		  
+		  }
+		}
+		
+		/* 진행중 */
+		.ingTitle{
+			padding-top:30px;
+			padding-bottom:10px;
+		}
+		
+		.ing {
+		  position: relative;
+		  text-transform: uppercase;
+		  letter-spacing: 6px;
+		  font-size: 25pt;
+		  font-weight:bold;
+		  text-decoration: none;
+		  color: white;
+		  display: inline-block;
+		  background-size: 120% 100%;
+		  -webkit-background-clip: text;
+		  -webkit-text-fill-color: transparent;
+		  -moz-background-clip: text;
+		  -moz-text-fill-color: transparent;
+		  -ms-background-clip: text;
+		  -ms-text-fill-color: transparent;
+		  background-clip: text;
+		  text-fill-color: transparent;
+		  background-image: linear-gradient(45deg, #274069, #274069, #274069, #274069);
+		  animation: 1.0s shake infinite alternate;
+		}
+		
+		@keyframes shake {
+		  0% {
+		    transform: skewX(-15deg);
+		  }
+		  5% {
+		    transform: skewX(15deg);
+		  }
+		  10% {
+		    transform: skewX(-15deg);
+		  }
+		  15% {
+		    transform: skewX(15deg);
+		  }
+		  20% {
+		    transform: skewX(0deg);
+		  }
+		  100% {
+		    transform: skewX(0deg);
+		  }
+		}
+        
+        /* 구분선 */
+        hr{
+        	width:1000px;
+        	text-align:center;
+        	margin-right:30px;
+        }
+        
+        
     </style>
 </head>
 <body>
 <div class="container">
-	<div class="row BtnTop">
-		<button class="tablink" onclick="openPage('Expired', this, 'white')" >마감한 쪼르기</button>
-		&nbsp;&nbsp;
-	   	<button class="tablink" onclick="openPage('onGoing', this, 'white')" id="default">진행중인 쪼르기</button>
+	<div class="deadTitle">
+		<h1 class="deadline">
+			<span>마</span>
+			<span>감</span>
+			<span>임</span>
+			<span>박</span>
+			<span>!</span>
+		</h1>
 	</div>
-         
-		<!-- 진행중인 쪼르기 -->
-        <div id="onGoing" class="tabcontent">
-
-			<div class="outDiv">
-        		<div class="innerDiv">
-        			<!-- <div class="plzTitleDiv">
-        				<span class="plzTitle">쪼르기상품</span>
-        			</div> -->
-        			<hr />	
-        			<div class="plzProduct">
-        				<span class="plzImgs">
-                            <!-- <span id="mainImg"> -->
-                                <img class="plzImg" src="../resources/images/please/p1.jpg"/>
-                            <!-- </span> -->
-        				</span>
-        				
-         			<span class="plzInfo">
-         				<div class="plzUpperDiv">
-         					<div class="plzBrand">TEN C</div>
-         					<div class="plzPName">
-         						TEN C_ARCTIC PARKA <br />
-         						17CTCUC03075003780 888 BLUE</div>
-         					<div class="plzOriPrice"><strike>1,180,000</strike></div>
-         					<!-- <div class="plzNowPrice"> -->
-         						<span class="plzPercent"><em>34%</em></span>
-         						<span class="plzPrice">778,800</span>
-         						<span class="plzWon">원</span>	
-         					<!-- </div> -->
-         				</div>
-         				<div class="plzDownDiv">
-         					<div class="until">마감까지</div><br />
-         					<div class="plzRemainingTime">
-         						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
-         						<span class="expNum">12</span><span class="expWord">시</span>
-         						<span class="expNum">35</span><span class="expWord">분</span>
-         						<span class="expNum">20</span><span class="expWord">초</span>
-         					</div>
-         					 <div class="progress">
-									<div class="progress-bar bg-warning" style="width:70%">70%</div>
+	<!-- 진행중인 쪼르기 -->
+	<div id="onGoing" class="tabcontent">
+		<div class="outDiv">
+       		<div class="innerDiv">
+       			<div class="plzProduct">
+       				<span class="plzImgs">
+                           <!-- <span id="mainImg"> -->
+                               <img class="plzImg" src="../resources/images/please/p1.jpg"/>
+                           <!-- </span> -->
+       				</span>
+       				
+        			<span class="plzInfo">
+        				<div class="plzUpperDiv">
+        					<div class="plzBrand">TEN C</div>
+        					<div class="plzPName">
+        						TEN C_ARCTIC PARKA <br />
+        						17CTCUC03075003780 888 BLUE</div>
+        					<div class="plzOriPrice"><strike>1,180,000</strike></div>
+        					<!-- <div class="plzNowPrice"> -->
+        						<span class="plzPercent"><em>34%</em></span>
+        						<span class="plzPrice">778,800</span>
+        						<span class="plzWon">원</span>	
+        					<!-- </div> -->
+        				</div>
+        				<div class="plzDownDiv">
+        					<span class="badge badge-warning HotTime">
+        						모집중!
+        					</span>
+							<div class="CountDown" id="time"></div>
+							<div class="progress" style="width:95%; height:20px; margin-left:10px;">
+								<div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width:70%; height:20px"></div>
 							</div>
-							<span class="plzAchivementRate">490 / 700 달성</span>
-         				</div>
-         				<button class="pleaseBtn">쪼르기 !</button>
-         			</span>
-        			</div>
-        		</div>
-        	</div> <!-- 1 끝 -->
-        	
-        	<!-- <div class="outDiv">
-        		<div class="innerDiv">
-        			<div class="plzTitleDiv">
-        				<span class="plzTitle">쪼르기상품</span>
-        			</div>
-        			<hr />	
-        			<div class="plzProduct">
-        				<span class="plzImgs">
-                            <span id="mainImg">
-                                <img class="plzImg" src="../resources/images/please/p2.jpg"/>
-                            </span>
-        				</span>
-        				
-         			<span class="plzInfo">
-         				<div class="plzUpperDiv">
-         					<div class="plzBrand">SnowPeak Apparel</div>
-         					<div class="plzPName">
-         						블랙 멀티캠 롱다운 자켓_CA <br />
-         						S20WME-DJ12
-         					</div>
-         					<div class="plzOriPrice"><strike>599,000</strike></div>
-         					<div class="plzNowPrice">
-         						<span class="plzPercent"><em>40%</em></span>
-         						<span class="plzPrice">359,s00</span>
-         						<span class="plzWon">원</span>	
-         					</div>
-         				</div>
-         				<div class="plzDownDiv">
-         					<div class="until">마감까지</div><br />
-         					<div class="plzRemainingTime">
-         						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
-         						<span class="expNum">12</span><span class="expWord">시</span>
-         						<span class="expNum">35</span><span class="expWord">분</span>
-         						<span class="expNum">20</span><span class="expWord">초</span>
-         					</div>
-         					 <div class="progress">
-									<div class="progress-bar bg-warning" style="width:70%">70%</div>
+								<div class="progress-info"><b>70 / 100(명)</b></div>
+        				</div>
+        				<button class="pleaseBtn">쪼르기</button>
+        			</span>
+       			</div>
+       		</div>
+       	</div>
+       	<hr style="width:90%; margin-left:0; border: solid 1px #000000; background-color:#000000; margin-top:100px; margin-bottom:50px;" >
+        <div class="ingTitle">	
+        	<h1 class="ing">진행중</h1>
+        </div>	
+       	<div class="outDiv">
+       		<div class="innerDiv2">
+       			<div class="plzProduct">
+       				<span class="plzImgs">
+                           <span id="mainImg">
+                               <img class="plzImg" src="../resources/images/please/p2.jpg"/>
+                           </span>
+       				</span>
+       				
+        			<span class="plzInfo">
+        				<div class="plzUpperDiv">
+        					<div class="plzBrand">SnowPeak Apparel</div>
+        					<div class="plzPName">
+        						블랙 멀티캠 롱다운 자켓_CA <br />
+        						S20WME-DJ12
+        					</div>
+        					<div class="plzOriPrice"><strike>599,000</strike></div>
+        					<div class="plzNowPrice">
+        						<span class="plzPercent"><em>40%</em></span>
+        						<span class="plzPrice">359,000</span>
+        						<span class="plzWon">원</span>	
+        					</div>
+        				</div>
+        				<div class="plzDownDiv2">
+	       					<span class="badge badge-warning HotTime">
+	       						모집중!
+	       					</span>
+							<div class="CountDown" id="time2"></div>
+							<div class="progress" style="width:95%; height:20px; margin-left:10px;">
+								<div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width:40%; height:20px"></div>
 							</div>
-							<span class="plzAchivementRate">490 / 700 달성</span>
-         				</div>
-         				<button class="pleaseBtn">쪼르기 !</button>
-         			</span>
-        			</div>
-        		</div>
-        	</div> 2 끝
+								<div class="progress-info"><b>40 / 100(명)</b></div>
+       					</div>
+        				<button class="pleaseBtn">쪼르기</button>
+        			</span>
+       			</div>
+       		</div>
+       	</div>
         	
         	<div class="outDiv">
-        		<div class="innerDiv">
-        			<div class="plzTitleDiv">
-        				<span class="plzTitle">쪼르기상품</span>
-        			</div>
-        			<hr />	
+        		<div class="innerDiv2">
         			<div class="plzProduct">
         				<span class="plzImgs">
                             <span id="mainImg">
@@ -306,31 +457,24 @@
          						<span class="plzWon">원</span>	
          					</div>
          				</div>
-         				<div class="plzDownDiv">
-         					<div class="until">마감까지</div><br />
-         					<div class="plzRemainingTime">
-         						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
-         						<span class="expNum">12</span><span class="expWord">시</span>
-         						<span class="expNum">35</span><span class="expWord">분</span>
-         						<span class="expNum">20</span><span class="expWord">초</span>
-         					</div>
-         					 <div class="progress">
-									<div class="progress-bar bg-warning" style="width:70%">70%</div>
+         				<div class="plzDownDiv2">
+	       					<span class="badge badge-warning HotTime">
+	       						모집중!
+	       					</span>
+							<div class="CountDown" id="time3"></div>
+							<div class="progress" style="width:95%; height:20px; margin-left:10px;">
+								<div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width:50%; height:20px"></div>
 							</div>
-							<span class="plzAchivementRate">490 / 700 달성</span>
-         				</div>
-         				<button class="pleaseBtn">쪼르기 !</button>
+								<div class="progress-info"><b>50 / 100(명)</b></div>
+       					</div>
+         				<button class="pleaseBtn">쪼르기</button>
          			</span>
         			</div>
         		</div>
-        	</div> 3 끝
+        	</div>
         	
         	<div class="outDiv">
-        		<div class="innerDiv">
-        			<div class="plzTitleDiv">
-        				<span class="plzTitle">쪼르기상품</span>
-        			</div>
-        			<hr />	
+        		<div class="innerDiv2">
         			<div class="plzProduct">
         				<span class="plzImgs">
                             <span id="mainImg">
@@ -351,31 +495,24 @@
          						<span class="plzWon">원</span>	
          					</div>
          				</div>
-         				<div class="plzDownDiv">
-         					<div class="until">마감까지</div><br />
-         					<div class="plzRemainingTime">
-         						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
-         						<span class="expNum">12</span><span class="expWord">시</span>
-         						<span class="expNum">35</span><span class="expWord">분</span>
-         						<span class="expNum">20</span><span class="expWord">초</span>
-         					</div>
-         					 <div class="progress">
-									<div class="progress-bar bg-warning" style="width:70%">70%</div>
+         				<div class="plzDownDiv2">
+	       					<span class="badge badge-warning HotTime">
+	       						모집중!
+	       					</span>
+							<div class="CountDown" id="time4"></div>
+							<div class="progress" style="width:95%; height:20px; margin-left:10px;">
+								<div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width:20%; height:20px"></div>
 							</div>
-							<span class="plzAchivementRate">490 / 700 달성</span>
-         				</div>
-         				<button class="pleaseBtn">쪼르기 !</button>
+								<div class="progress-info"><b>20 / 100(명)</b></div>
+       					</div>
+         				<button class="pleaseBtn">쪼르기</button>
          			</span>
         			</div>
         		</div>
-        	</div> 4 끝
+        	</div>
         	
         	<div class="outDiv">
-        		<div class="innerDiv">
-        			<div class="plzTitleDiv">
-        				<span class="plzTitle">쪼르기상품</span>
-        			</div>
-        			<hr />	
+        		<div class="innerDiv2">
         			<div class="plzProduct">
         				<span class="plzImgs">
                             <span id="mainImg">
@@ -397,26 +534,23 @@
          						<span class="plzWon">원</span>	
          					</div>
          				</div>
-         				<div class="plzDownDiv">
-         					<div class="until">마감까지</div><br />
-         					<div class="plzRemainingTime">
-         						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
-         						<span class="expNum">12</span><span class="expWord">시</span>
-         						<span class="expNum">35</span><span class="expWord">분</span>
-         						<span class="expNum">20</span><span class="expWord">초</span>
-         					</div>
-         					 <div class="progress">
-									<div class="progress-bar bg-warning" style="width:70%">70%</div>
+         				<div class="plzDownDiv2">
+	       					<span class="badge badge-warning HotTime">
+	       						모집중!
+	       					</span>
+							<div class="CountDown" id="time5"></div>
+							<div class="progress" style="width:95%; height:20px; margin-left:10px;">
+								<div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width:45%; height:20px"></div>
 							</div>
-							<span class="plzAchivementRate">490 / 700 달성</span>
-         				</div>
-         				<button class="pleaseBtn">쪼르기 !</button>
+								<div class="progress-info"><b>45 / 100(명)</b></div>
+       					</div>
+         				<button class="pleaseBtn">쪼르기</button>
          			</span>
         			</div>
         		</div>
-        	</div> 5 끝
+        	</div>
         	
-        	<div class="outDiv">
+        	<!-- <div class="outDiv">
         		<div class="innerDiv">
         			<div class="plzTitleDiv">
         				<span class="plzTitle">쪼르기상품</span>
@@ -459,7 +593,7 @@
          			</span>
         			</div>
         		</div>
-        	</div> --> <!-- 6 끝 -->
+        	</div> -->
         
         </div>	
         <!-- 진행중 쪼르기 끝 -->   
