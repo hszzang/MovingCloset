@@ -142,8 +142,8 @@ List<ProductDTO> storeList = (List)session.getAttribute("storeList");
                 
 					 <c:forEach items="${storeList }" var="product">	
 						<span class="products">
-							<!-- <a href="/movingcloset/store/detail.do?p_idx=${product.p_idx }"><img class="img" src="../resources/upload/${product.p_sfile }> -->
-							<a href="/movingcloset/store/detail.do?p_idx=${product.p_idx }"><img class="img" src="../resources/images/list/1.jpg"></a>
+							<!-- <a href="/movingcloset/store/detail.do?p_idx=${product.p_idx }"><img class="img" src="../resources/images/list/1.jpg" }> -->
+							<a href="/movingcloset/store/detail.do?p_idx=${product.p_idx }"><img class="img" src="../resources/upload/${product.p_sfile }"></a>
 							<!-- src="../Uploads/${row.sfile }"  -->
                             <!--<a href="/movingcloset/store/detail.do"><img class="img" src="${dto.sfile }"></a> -->
                             <div class="brand">${product.p_brand }</div>
@@ -532,7 +532,6 @@ List<ProductDTO> storeList = (List)session.getAttribute("storeList");
             </div>
             <div style="text-align:right;">
             	<button type="button" class="product" id="productInsert" onclick="javascript:location.href='/movingcloset/store/insert.do';">상품추가</button>
-            	<button type="button" class="product" id="productUpload" onclick="javascript:location.href='/movingcloset/store/update.do';">상품수정</button>
             </div>
         </form>
     </div>

@@ -21,6 +21,11 @@ public class ProductDTO {
 	private String p_ofile;
 	private String p_sfile;
 	
+
 	private MultipartFile uploadFile;
+
+	//현지니가test로 추가욤
+	private String p_img;
+
 
 }

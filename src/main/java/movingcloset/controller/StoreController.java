@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import movingcloset.command.CommandImpl;
+import movingcloset.command.store.StoreDeleteCommand;
 import movingcloset.command.store.StoreDetailCommand;
 import movingcloset.command.store.StoreInsertCommand;
 import movingcloset.command.store.StoreListCommand;
@@ -45,6 +46,8 @@ public class StoreController {
 	StoreDetailCommand storeDetailCommand;
 	@Autowired
 	StoreUpdateCommand storeUpdateCommand;
+	@Autowired
+	StoreDeleteCommand storeDeleteCommand;
 	
 	// 스토어 리스트
 	@RequestMapping(value="/movingcloset/store.do", method=RequestMethod.GET)
@@ -63,20 +66,11 @@ public class StoreController {
 	public String storedetail(Model model, HttpServletRequest req, ProductDTO productDTO) {
 	//public String storedetail(Locale locale, Model model) {
 		
-		System.out.println("콘트롤러에서 " + productDTO.getP_idx());
-		
 		model.addAttribute("req", req);
 		command = storeDetailCommand;
 		command.execute(model);
 		
 		return "body/store/store_detail";
-	}
-	
-	// 스토어 상세페이지에서 리뷰쓰기 버튼
-	@RequestMapping("/store/reviewPage.do")
-	public String review(Locale locale, Model model) {
-		System.out.println("컨트롤러 들어옴");
-		return "reviewPage";
 	}
 	
 	// 상품 추가
@@ -194,7 +188,6 @@ public class StoreController {
 		return "redirect:/movingcloset/store.do";
 		}
 	
-
 	// 상품 수정
 	@RequestMapping("/store/update.do")
 	public String update(Model model, HttpServletRequest req, ProductDTO productDTO) {
@@ -205,6 +198,7 @@ public class StoreController {
 		
 		model.addAttribute("req", req);
 		model.addAttribute("model", model);
+		
 		command = storeDetailCommand;
 		command.execute(model);
 		
@@ -300,6 +294,33 @@ public class StoreController {
 		command = storeUpdateCommand; 
 		command.execute(model);
 		
-		return "/store/detail.do?p_idx={p_idx}";
+		return "body/store/store_detail?p_idx={p_idx}";
+		//return "/store/detail.do?p_idx={p_idx}";
 	}
+	
+	// 상품 제거
+		@RequestMapping("/store/delete.do")
+		public String delete(Model model, HttpServletRequest req, ProductDTO productDTO) {
+//			public String delete(Locale locale, Model model) {
+			System.out.println("delete 들어옴");
+			
+			String p_idx = productDTO.getP_idx();
+			model.addAttribute("p_idx", p_idx);
+			
+			model.addAttribute("req", req);
+			model.addAttribute("model", model);
+			
+			command = storeDeleteCommand;
+			command.execute(model);
+			
+			return "redirect:/movingcloset/store.do";
+		}
+	
+	// 스토어 상세페이지에서 리뷰쓰기 버튼
+	@RequestMapping("/store/reviewPage.do")
+	public String review(Locale locale, Model model) {
+		System.out.println("컨트롤러 들어옴");
+		return "reviewPage";
+	}
+	
 }

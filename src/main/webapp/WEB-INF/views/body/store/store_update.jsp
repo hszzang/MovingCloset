@@ -122,6 +122,10 @@
     .updiv{
     	bottom-margin:30px;
     }
+    #productDelete{
+   		width:350px; height:40px; margin-top:10px;
+   		border:orangered solid 1px; background-color:white; color:orangered;
+    }
 	</style>
 	<script>
 		function setThumbnail(event){
@@ -177,7 +181,11 @@
 					<div id="price" class="updiv"><input class="update" name="p_price" value="${storeDetail.p_price }" /> </div>
 					<input id="image" type="file" class="form-control" name="ofile" accept="image/*" onchange="setThumbnail(event);"
 						style="width:350px;height:40px;margin-bottom:10px;"  />
-						<input type="submit" style="width:350px;height:40px;background-color:black;color:white;" value="수정">
+						<input type="submit" id="productUpdate" style="width:350px;height:40px;background-color:black;color:white;" value="수정">
+						<input type="submit" id="productDelete" value="상품삭제">						
+						<!--  
+						<button type="button" class="product" id="productDelete" onclick="javascript:location.href='/movingcloset/store/delete.do';">상품삭제</button>
+						-->
 					<br>
 				</div>
 			</div>

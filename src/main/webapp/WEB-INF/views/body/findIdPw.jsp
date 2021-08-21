@@ -18,6 +18,11 @@
 	#othersP {margin: 40px 0;}
 	.social a {color: black;}
 	.social a:hover{color: black;}
+	.formwrap button {color: white; background-color: #ff6c2f; }
+	.formwrap .form-control:focus {
+		border-color: #FFFFFF;
+		box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px #ff6c2f;
+	}
 	.section-title {
 		text-align: center;
 		padding-bottom: 50px;
@@ -111,7 +116,7 @@ function findPwVali(fn){
 						<input name="email" type="text" class="form-control" placeholder="가입한 이메일" required>
 					</div>
 					<div class="form-group">
-						<button type="submit" class="form-control btn btn-dark submit px-3">아이디찾기</button>
+						<button type="submit" class="form-control btn submit px-3">아이디찾기</button>
 					</div>
 				</form>
 				
@@ -129,7 +134,7 @@ function findPwVali(fn){
 						<input name="email" type="text" class="form-control" placeholder="가입한 이메일" required>
 					</div>
 					<div class="form-group">
-						<button type="submit" class="form-control btn btn-dark submit px-3">비밀번호찾기</button>
+						<button type="submit" class="form-control btn submit px-3">비밀번호찾기</button>
 					</div>
 				</form>
 			</div>

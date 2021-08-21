@@ -8,7 +8,7 @@
 
 	<!-- 리스트 (최근순) -->
 	<select id="getStoreList" resultType="mybatis.ProductDTO" parameterType="java.util.ArrayList" >
-		SELECT * FROM product order by p_idx desc
+		SELECT * FROM product WHERE p_idx<![CDATA[>]]>117 ORDER BY p_idx DESC
 		<!-- SELECT * FROM product where p_idx<![CDATA[<=]]>43 -->
 		<!-- SELECT * FROM product where p_idx<![CDATA[<=]]>23 -->
 	</select>
@@ -44,6 +44,10 @@
 		UPDATE product SET p_name=#{p_name}, p_code=#{p_code}, p_price=#{p_price}, p_brand=#{p_brand}, p_ofile=#{p_ofile}, p_sfile=#{p_sfile} WHERE p_idx=#{p_idx}
 	</update>
 	
+	<delete id="deleteProduct">
+		DELETE FROM product WHERE p_idx=#{p_idx}
+	</delete>
 
+	
 
 </mapper>

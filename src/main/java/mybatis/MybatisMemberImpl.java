@@ -7,6 +7,7 @@ public interface MybatisMemberImpl {
 
 	public int register(MemberDTO memberDTO) ;
 	public int idcheck(String userid);
+	public MemberDTO login(String userid, String userpw);
 	
 	//아이디 찾기
 	public String findId(String name, String email);

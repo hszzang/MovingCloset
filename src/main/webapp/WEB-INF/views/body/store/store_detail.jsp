@@ -202,7 +202,7 @@
     .container{
     	width:990px;
     }
-    #productUpload{
+    #productUpdate{
     
     }
 	</style>
@@ -281,7 +281,7 @@
 				</div>
 			</div>
 			<div style="text-align:right;">
-				<button type="button" class="product" id="productUpload" onclick="javascript:location.href='/movingcloset/store/update.do?p_idx=${storeDetail.p_idx }';">상품수정</button>	
+				<button type="button" class="product" id="productUpdate" onclick="javascript:location.href='/movingcloset/store/update.do?p_idx=${storeDetail.p_idx }';">상품수정</button>	
 			</div>
 		</form>
 	</div>

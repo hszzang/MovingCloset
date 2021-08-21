@@ -43,7 +43,7 @@ public interface MybatisProductImpl {
 	*/
 	public void updateProduct(ProductDTO productDTO);
 	
-	public void deleteProduct(ProductDTO productDTO);
+	public void deleteProduct(@Param("p_idx") String p_idx);
 
 	
 }
