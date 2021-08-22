@@ -35,7 +35,7 @@
 		$('#btnReview').click(function(){
 
 			var child;
-			child = window.open("./reviewPage.do", "reviewpopup", "height:500px, width:250px");
+			child = window.open("./reviewPage.do", "reviewpopup", "height:400px, width:200px");
 		});
 
 	});
@@ -248,6 +248,10 @@
 						<div class="col-11">
 							<select name="size" id="sizeNum" style="border: solid lightgray 1px; border-radius:2px; padding:3px;">
 								<option value=""diabled select hidden>사이즈</option>
+									<c:forEach items="${sizes }" var="size">
+										<option value="${size}">${size}</option>
+									</c:forEach>
+								<!--  
 								<option value="220">220</option>
 								<option value="230">230</option>
 								<option value="240">240</option>
@@ -255,6 +259,7 @@
 								<option value="260">260</option>
 								<option value="270">270</option>
 								<option value="280">280</option>
+								-->
 							</select>
 						</div>
 					</div>
@@ -301,6 +306,8 @@
 				<button id="btnReview" >리뷰 쓰기</button>
 			</div>
 		</div>
+
+<!-- 댓글 시작 ------------------------------------------------------------------------------------------------ -->
 
 		<table class="table table-hover" style="text-align: center;">
 			<thead>
@@ -416,7 +423,9 @@
 			</div>
 			<br />
 		</div>
-
+		
+<!-- 댓글 끝 ------------------------------------------------------------------------------------------------ -->
+	
 	<!-- The Modal -->
 	<div id="myModal" class="modal">
 		<span class="close">&times;</span>

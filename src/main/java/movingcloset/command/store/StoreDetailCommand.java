@@ -15,7 +15,7 @@ import org.springframework.ui.Model;
 import movingcloset.command.CommandImpl;
 import mybatis.MybatisProductImpl;
 import mybatis.ProductDTO;
-
+import mybatis.ProductDetailDTO;
 import movingcloset.util.PagingUtil;
 
 @Service
@@ -34,27 +34,28 @@ public class StoreDetailCommand implements CommandImpl {
 			System.out.println("StoreDetailCommand 호출");
 			
 			ProductDTO storeDetail = new ProductDTO();
+			ProductDetailDTO productDetail = new ProductDetailDTO();
 			
 			Map<String, Object> paramMap = model.asMap();
 			HttpServletRequest req = (HttpServletRequest)paramMap.get("req");
 			//HttpServletRequest dto = (HttpServletRequest)paramMap.get("productDTO");
 			
-			System.out.println("StoreDetailCommand 호출2");
 			String p_idx = req.getParameter("p_idx");
-			
-			System.out.println("커맨드에서 " + p_idx);
 			storeDetail = sqlSession.getMapper(MybatisProductImpl.class).getStoreDetail(p_idx);
+
 			
-			System.out.println("보냈니?" + storeDetail.getP_idx());
-			System.out.println(storeDetail.getP_brand());
-			System.out.println(storeDetail.getP_name());
-			System.out.println(storeDetail.getP_code());
-			System.out.println(storeDetail.getP_price());
-			System.out.println(storeDetail.getP_ofile());
-			System.out.println(storeDetail.getP_sfile());
+			String p_code = storeDetail.getP_code();
+			productDetail = sqlSession.getMapper(MybatisProductImpl.class).getProductDetail(p_code);
+			
+			String p_size = productDetail.getPd_size();
+			String [] sizes = p_size.split(",");
 			
 			model.addAttribute("storeDetail", storeDetail);
-			System.out.println("StoreDetailCommand 호출3");
+			
+			model.addAttribute("productDetail", productDetail);
+			model.addAttribute("sizes", sizes);
+			
+			System.out.println("StoreDetailCommand 호출 완료");
 			
 			
 		}
