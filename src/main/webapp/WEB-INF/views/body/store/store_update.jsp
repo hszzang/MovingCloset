@@ -33,7 +33,7 @@
 		font-size: 1em;
 	}
 	#brandName{ display: inline; }
-	#prodName {font-size:1.5em;}
+	#prodName {font-size:1em;}
 	#prodCount{text-align:right; vertical-align:center;}
 	
 	#sizeNum{ width:100%; height:40px; font-size:1em;}
@@ -141,9 +141,38 @@
 			};
 			reader.readAsDataURL(event.target.files[0]);
 		}
+		
 		function delProduct(p_idx){
 			if(confirm("정말 삭제하겠습니까?")){
 				location.href="/movingcloset/store/delete.do?p_idx=" + p_idx;
+			}
+		}
+		
+		function checkValidate(f){
+			if(f.p_brand.value == ""){
+				alert("브랜드를 입력하세요.");
+				f.p_brand.focus();
+				return false;
+			}
+			if(f.p_name.value ==""){
+				alert("상품명을 입력하세요.");
+				f.p_name.focus();
+				return false;
+			}
+			if(f.p_code.value ==""){
+				alert("상품코드를 입력하세요.");
+				f.p_code.focus();
+				return false;
+			}
+			if(f.p_price.value == ""){
+				alert("상품가격을 입력하세요.");
+				f.p_price.focus();
+				return false;
+			}
+			if(f.p_ofile.value == ""){
+				alert("상품사진을 첨부하세요.");
+				f.p_ofile.focus();
+				return false;
 			}
 		}
 	</script>
@@ -184,41 +213,70 @@
 					<div id="prodName" class="updiv"><input class="update" name="p_name" value="${storeDetail.p_name }" /></div>
 					<div id="code" class="updiv"><input class="update" name="p_code" value="${storeDetail.p_code }" /> </div>
 					<div id="price" class="updiv"><input class="update" name="p_price" value="${storeDetail.p_price }" /> </div>
-					<input id="image" type="file" class="form-control" name="ofile" accept="image/*" onchange="setThumbnail(event);"
-						style="width:350px;height:40px;margin-bottom:10px;"  />
+					<input id="image" type="file" class="form-control" name="ofile" accept="image/*" value="${storeDetail.p_ofile }"
+						onchange="setThumbnail(event);" style="width:350px;height:40px;margin-bottom:10px;"  />
+					<div class="row">
+						<div class="col-11">
+						<table>
+							<thead>
+								<tr>
+									<th style="width:50%;text-align:center;">사이즈</th>
+									<th style="width:50%;text-align:center;">재고량</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${sizes }" var="size" varStatus="status">
+									<tr>
+										<td style="text-align:center;">${size }</td>
+										<td style="text-align:center;">
+											<button class="btn" id="plus" onclick="plusminus(this.id);"><i class="fa fa-plus"></i></button>
+											<input type="text" id="quantity" value="${stocks[status.index] }" style="border:none; width:50px; background-color: none;text-align:center;">
+											<button class="btn" id="minus" onclick="plusminus(this.id);"><i class="fa fa-minus"></i></button>
+										</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+						<!--  
+							<select name="size" id="sizeNum" style="border: solid lightgray 1px; border-radius:2px; padding:3px;width:40%;">
+								<option diabled select hidden>사이즈</option>
+									<c:forEach items="${sizes }" var="size">
+										<option value="${size}">${size}</option>										
+									</c:forEach>
+							</select>
+									<!-- 
+									<option value="220">220</option>
+									<option value="230">230</option>
+									<option value="240">240</option>
+									<option value="250">250</option>
+									<option value="260">260</option>
+									<option value="270">270</option>
+									<option value="280">280</option>
+									 -->
+							<!--  
+							<div class="col-8" style="width:45%;display:inline;">
+								<button class="btn" id="plus" onclick="plusminus(this.id);"><i class="fa fa-plus"></i></button>
+								<input type="text" id="quantity" value="1" style="border:none; width:50px; background-color: none;text-align:center;">
+								<button class="btn" id="minus" onclick="plusminus(this.id);"><i class="fa fa-minus"></i></button>
+							</div>
+							-->
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<!-- 
+						<div class="col-4" style="vertical-align:center; text-align:right; padding-top:5px;">
+							<span id="prodCount">수량</span>
+						</div>
+						 -->
+					</div>
 						<input type="submit" id="productUpdate" style="width:350px;height:40px;background-color:black;color:white;" value="수정">
 						<button type="button" class="product" id="productDelete" onclick="delProduct(${p_idx});">상품삭제</button>
-					<br>
 				</div>
 			</div>
 		</form>
 	
 					<!-- 
-					<div class="row">
-						<div class="col-11">
-							<select name="size" id="sizeNum" style="border: solid lightgray 1px; border-radius:2px; padding:3px;">
-								<option value=""diabled select hidden>사이즈</option>
-								<option value="220">220</option>
-								<option value="230">230</option>
-								<option value="240">240</option>
-								<option value="250">250</option>
-								<option value="260">260</option>
-								<option value="270">270</option>
-								<option value="280">280</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="row">
-						<div class="col-4" style="vertical-align:center; text-align:right; padding-top:5px;">
-							<span id="prodCount">수량</span>
-						</div>
-						<div class="col-8">
-							<button class="btn" id="plus" onclick="plusminus(this.id);"><i class="fa fa-plus"></i></button>
-							<input type="text" id="quantity" value="1" style="border:none; width:50px; background-color: none;text-align:center;">
-							<button class="btn" id="minus" onclick="plusminus(this.id);"><i class="fa fa-minus"></i></button>
-						</div>
-					</div>
 					<hr />
 					<br>
 					<div>
