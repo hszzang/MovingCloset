@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html>
@@ -13,6 +12,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+	
 	<style>
 		.input-form-background {
 			padding-top: 50px;
@@ -466,14 +467,24 @@
 									</td>
 								</tr>
 
+									
 								<tr>
 									<td><span class="red">*</span> 이름</td>
+									<%if(session.getAttribute("sessionName") != null) { %>
+									<td class="form-inline">
+										<input type="text" class="form-control" name="name" style="width: 250px;"
+											required value="${sessionName }"/>
+										
+	
+									</td>
+									<% }else{ %>
 									<td class="form-inline">
 										<input type="text" class="form-control" name="name" style="width: 250px;"
 											required placeholder="이름을 입력해주세요." value=""/>
 										
 	
 									</td>
+									<%} %>
 								</tr>
 
 								<tr>
@@ -504,13 +515,25 @@
 											required placeholder="주소를 입력해주세요." value=""/>&nbsp;&nbsp;&nbsp;&nbsp;
 										<input type="text" name="addr2" class="form-control" style="width: 500px;"
 											required placeholder="상세주소를 입력해주세요." value=""/>
-
 									</td>
 								</tr>
 
 								<tr>
 									<td class="text-left" style="vertical-align:middle;"><span class="red">*</span>전화번호
 									</td>
+									
+									<%if(session.getAttribute("sessionPhone1") != null){ %>
+									<td class="form-inline">
+										<input type="text" class="form-control" name="mobile1" value="${sessionPhone1 }" maxlength="4"
+											style="width:100px;" required />
+										&nbsp;&nbsp;-&nbsp;&nbsp;
+										<input type="text" class="form-control" name="mobile2" value="${sessionPhone2 }" maxlength="4"
+											 style="width:100px;" required />
+										&nbsp;&nbsp;-&nbsp;&nbsp;
+										<input type="text" class="form-control" name="mobile3" value="${sessionPhone3 }" maxlength="4"
+											style="width:100px;" required />
+									</td>
+									<%}else{ %>
 									<td class="form-inline">
 										<select name="mobile1" class="form-control"
 											onchange="commonFocusMove(this, 3,'mobile2');" style="width:100px;" required>
@@ -529,25 +552,40 @@
 										<input type="text" class="form-control" name="mobile3" value="" maxlength="4"
 											style="width:100px;" onkeyup="commonFocusMove(this, 4,'email1');" required />
 									</td>
-								</tr>
+									
+									<% } %>
+									
+								</tr>  
 								<tr>
 									<td class="text-left" style="vertical-align:middle;"><span
 											class="red">*</span>이메일&nbsp;&nbsp;&nbsp;</td>
-									<td class="form-inline">
-										<input type="text" class="form-control" name="email1" value=""
-											style="width:30%;" required />
-										&nbsp;@&nbsp;
-										<input type="text" class="form-control" name="email2" value=""
-											style="width:30%;" required />&nbsp;&nbsp;
-										<select name="email_domain" class="form-control"
-											onChange="inputEmail(this.form);" style="width:30%;">
-											<option value="1" selected>- 직접입력 -</option>
-											<option value="naver.com">naver.com</option>
-											<option value="daum.net">daum.net</option>
-											<option value="gmail.com">gmail.com</option>
-											<option value="nate.com">nate.com</option>
-										</select>
-									</td>
+											
+									<%if(session.getAttribute("sessionEmail1") != null){ %>
+										<td class="form-inline">
+											<input type="text" class="form-control" name="email1" value="${sessionEmail1 }"
+												style="width:30%;" required />
+											&nbsp;@&nbsp;
+											<input type="text" class="form-control" name="email2" value="${sessionEmail2 }"
+												style="width:30%;" required />
+										</td>
+									<%}else{ %>
+										<td class="form-inline">
+											<input type="text" class="form-control" name="email1" value=""
+												style="width:30%;" required />
+											&nbsp;@&nbsp;
+											<input type="text" class="form-control" name="email2" value=""
+												style="width:30%;" required />&nbsp;&nbsp;
+											<select name="email_domain" class="form-control"
+												onChange="inputEmail(this.form);" style="width:30%;">
+												<option value="1" selected>- 직접입력 -</option>
+												<option value="naver.com">naver.com</option>
+												<option value="daum.net">daum.net</option>
+												<option value="gmail.com">gmail.com</option>
+												<option value="nate.com">nate.com</option>
+											</select>
+										</td>
+						
+									<% } %>		
 
 								</tr>
 								<tr>
@@ -673,136 +711,8 @@
 			</div>
 		</div>
 	</div>
-<script type="text/javascript">
-//csrf를 막기위한 체크값 생성함수
-function generate_state() {
-    $mt = microtime();
-    $rand = mt_rand();
-    return md5($mt . $rand);
-}
- 
-$p['state'] = generate_state();
- 
-$p['client_id'] = '8dUO8AkoujmRhyEgT8yz';
-$p['client_secret'] = 'ajIGhcnSWA';
-$p['response_type'] = 'code';
-$p['redirect_url'] = 'http://localhost:8082/movingcloset/movingcloset/register.do'; //여기서는 현재 파일을 그대로 이용
-//네이버 로그인 등록시 입력한 주소입니다. 틀리면 작동하지 않습니다.
- 
-//  
-$url = '<a href="https://nid.naver.com/oauth2.0/authorize?client_id='.urlencode(" target="_blank">https://nid.naver.com/oauth2.0/authorize?client_id='.urlencode(</a>$p['client_id']).'&response_type=code&redirect_uri='.urlencode($p['redirect_url']).'&state='.$p['state'];
- 
-//code는 로그인이 성공하고 나면 redirect_url에 인자로 돌려주는 값입니다.
-//이 값이 있어야 access_token을 요청할 수 있습니다.
-if(!$_GET['code']) {
-    header('Location: ' . $url);
-}
-//위 요청을 하게되면 네이버 로그인창이 뜹니다. (정보동의 과정이 나올수도 있습니다)
- 
-//이 라인은 네이버 로그인창에서 로그인이 끝나고 나서 redirect_url에 code를 전송했을때
-//실행됩니다.
-if($_GET['code'])
-{
-    $p['code'] = $_GET['code'];
-}
- 
-//access_token을 요청하는 주소. 위 검증코드가 있어야 실행됩니다.
-$url2 = '<a href="https://nid.naver.com/oauth2.0/token?client_id='.urlencode(" target="_blank">https://nid.naver.com/oauth2.0/token?client_id='.urlencode(</a>$p['client_id']).'&client_secret='.urlencode($p['client_secret']).'&grant_type=authorization_code&state='.$p['state'].'&code='.$p['code'];
- 
-$json = file_get_contents($url2);
-$data = json_decode($json);
- 
-echo $data->access_token;
-
-//네이버 API 예제 - 회원프로필 조회
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Map;
 
 
-public class ApiExamMemberProfile {
-
-
- public static void main(String[] args) {
-     String token = "AAAAONgW-jgpzTy4yloiMq5N3MVnKlT30absTkPrPNkaI_E4A-x8ZJExAHKfROmBfZtSMUUXg2Xt3Z-V6QT1h9ioly8"; // 네이버 로그인 접근 토큰;
-     String header = "Bearer " + token; // Bearer 다음에 공백 추가
-
-
-     String apiURL = "https://openapi.naver.com/v1/nid/me";
-
-
-     Map<String, String> requestHeaders = new HashMap<>();
-     requestHeaders.put("Authorization", header);
-     String responseBody = get(apiURL,requestHeaders);
-
-
-     System.out.println(responseBody);
- }
-
-
- private static String get(String apiUrl, Map<String, String> requestHeaders){
-     HttpURLConnection con = connect(apiUrl);
-     try {
-         con.setRequestMethod("GET");
-         for(Map.Entry<String, String> header :requestHeaders.entrySet()) {
-             con.setRequestProperty(header.getKey(), header.getValue());
-         }
-
-
-         int responseCode = con.getResponseCode();
-         if (responseCode == HttpURLConnection.HTTP_OK) { // 정상 호출
-             return readBody(con.getInputStream());
-         } else { // 에러 발생
-             return readBody(con.getErrorStream());
-         }
-     } catch (IOException e) {
-         throw new RuntimeException("API 요청과 응답 실패", e);
-     } finally {
-         con.disconnect();
-     }
- }
-
-
- private static HttpURLConnection connect(String apiUrl){
-     try {
-         URL url = new URL(apiUrl);
-         return (HttpURLConnection)url.openConnection();
-     } catch (MalformedURLException e) {
-         throw new RuntimeException("API URL이 잘못되었습니다. : " + apiUrl, e);
-     } catch (IOException e) {
-         throw new RuntimeException("연결이 실패했습니다. : " + apiUrl, e);
-     }
- }
-
-
- private static String readBody(InputStream body){
-     InputStreamReader streamReader = new InputStreamReader(body);
-
-
-     try (BufferedReader lineReader = new BufferedReader(streamReader)) {
-         StringBuilder responseBody = new StringBuilder();
-
-
-         String line;
-         while ((line = lineReader.readLine()) != null) {
-             responseBody.append(line);
-         }
-
-
-         return responseBody.toString();
-     } catch (IOException e) {
-         throw new RuntimeException("API 응답을 읽는데 실패했습니다.", e);
-     }
- }
-}
-
-
-
-
-
-</script>
 </body>
 
 </html>

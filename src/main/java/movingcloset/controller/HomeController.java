@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +31,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.client.RestTemplate;
@@ -36,6 +40,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.project.movingcloset.NaverLoginBO;
 
 import movingcloset.command.CommandImpl;
 import movingcloset.command.FindIdCommand;
@@ -54,7 +60,18 @@ import mybatis.MybatisMemberImpl;
 public class HomeController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
+	/* NaverLoginBO */ 
+	private NaverLoginBO naverLoginBO; 
+	private String apiResult = null; 
+	
+	
+	@Autowired 
+	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
+		this.naverLoginBO = naverLoginBO; 
+	}
 
+	
 	CommandImpl command = null;
 
 	@Autowired
@@ -71,6 +88,12 @@ public class HomeController {
 
 	@Autowired
 	FindPwCommand findPwCommand;
+	
+	
+	
+	
+	
+	
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -98,9 +121,13 @@ public class HomeController {
 
 
 	// 로그인
-	@RequestMapping(value = "/movingcloset/login.do")
-	public String login() {
-
+	@RequestMapping(value = "/movingcloset/login.do",method = { RequestMethod.GET, RequestMethod.POST })
+	public String login(Model model, HttpSession session) {
+		
+		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session); 
+		System.out.println("네이버:" + naverAuthUrl); 
+		model.addAttribute("url", naverAuthUrl); 
+		
 		return "body/login";
 	}
 	
@@ -114,11 +141,9 @@ public class HomeController {
 		command = loginCommand;
 		command.execute(model);
 		
-		/*
-		 * if(session.getAttribute("LoginNG")==null) { return "main"; }else {
-		 */
-			return "body/login";			
-			/* } */
+		
+		return "body/login";			
+		
 		
 		
 	}
@@ -135,6 +160,78 @@ public class HomeController {
 	}
 	
 	
+	
+	//네이버 로그인 성공시 callback호출 메소드 
+	@RequestMapping(value = "/movingcloset/callback.do", method = { RequestMethod.GET, RequestMethod.POST }) 
+	public String callback(Model model, @RequestParam String code, 
+			@RequestParam String state, HttpSession session) throws IOException, ParseException {
+		System.out.println("여기는 callback"); 
+		OAuth2AccessToken oauthToken; 
+		oauthToken = naverLoginBO.getAccessToken(session, code, state); 
+		//1. 로그인 사용자 정보를 읽어온다. 
+		apiResult = naverLoginBO.getUserProfile(oauthToken); 
+		//String형식의 json데이터 
+		/** apiResult json 구조 
+		{"resultcode":"00", 
+		"message":"success", 
+		"response":{
+		"id":"33666449",
+		"nickname":"shinn****",
+		"age":"20-29",
+		"gender":"M",
+		"email":"sh@naver.com",
+		"name":"\uc2e0\ubc94\ud638"}} **/ 
+		
+		//2. String형식인 apiResult를 json형태로 바꿈 
+		JSONParser parser = new JSONParser(); 
+		Object obj = parser.parse(apiResult); 
+		JSONObject jsonObj = (JSONObject) obj; 
+		
+		//3. 데이터 파싱 
+		//Top레벨 단계 _response 파싱 
+		JSONObject response_obj = (JSONObject)jsonObj.get("response"); 
+		System.out.println("response_obj : "+response_obj);
+		
+		
+		//response의 nickname값 파싱 
+		String phone = (String)response_obj.get("mobile"); 
+		String email = (String)response_obj.get("email"); 
+		String name = (String)response_obj.get("name"); 
+		
+		
+		String[] phoneAll = phone.split("-");
+		String phone1 = phoneAll[0];
+		String phone2 = phoneAll[1];
+		String phone3 = phoneAll[2];
+		
+		
+		String[] emailAll = email.split("@");
+		String email1 = emailAll[0];
+		String email2 = emailAll[1];
+		
+		
+		System.out.println(phone+" , "+email+" , "+name); 
+		//4.파싱 닉네임 세션으로 저장 
+		session.setAttribute("sessionPhone1",phone1); 
+		session.setAttribute("sessionPhone2",phone2); 
+		session.setAttribute("sessionPhone3",phone3); 
+		session.setAttribute("sessionEmail1",email1); 
+		session.setAttribute("sessionEmail2",email2); 
+		session.setAttribute("sessionName",name); 
+		
+		
+		//세션 생성 
+		model.addAttribute("result", apiResult); 
+		return "body/registerForm"; 
+	} 
+	
+	//로그아웃
+	@RequestMapping(value = "/movingcloset/naverlogout.do", method = { RequestMethod.GET, RequestMethod.POST }) 
+	public String logout(HttpSession session)throws IOException { 
+		System.out.println("여기는 logout"); 
+		session.invalidate(); 
+		return "body/login"; 
+	}
 	
 
 	// 카카오 로그인 테스트
