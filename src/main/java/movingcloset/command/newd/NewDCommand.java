@@ -31,15 +31,18 @@ public class NewDCommand implements CommandImpl {
 	@Override
 	public void execute(Model model) {
 		
-		System.out.println("newDCommand 호출");
-		
-		ProductDTO productDTO = new ProductDTO();
-		NewdDTO newdDTO = new NewdDTO();
-		
-		
-		//List<NewdDTO> newdList = sqlSession.getMapper(MybatisNewDImpl.class).getNewdList(newdDTO);
-		List<ProductDTO> newdList = sqlSession.getMapper(MybatisProductImpl.class).getStoreList(productDTO);
-		model.addAttribute("newdList", newdList);
+		/*
+		 * System.out.println("newDCommand 호출");
+		 * 
+		 * ProductDTO productDTO = new ProductDTO(); NewdDTO newdDTO = new NewdDTO();
+		 * 
+		 * 
+		 * //List<NewdDTO> newdList =
+		 * sqlSession.getMapper(MybatisNewDImpl.class).getNewdList(newdDTO);
+		 * List<ProductDTO> newdList =
+		 * sqlSession.getMapper(MybatisProductImpl.class).getStoreList(productDTO);
+		 * model.addAttribute("newdList", newdList);
+		 */
 		
 		
 		
