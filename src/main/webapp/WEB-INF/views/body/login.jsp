@@ -24,8 +24,8 @@
 
 </style>
 <script type="text/javascript">
+<!-- 
 Kakao.init('da11b86bdef1f386718451384468c246');
-
 Kakao.isInitialized();
 
 function loginWithKakao() {
@@ -56,7 +56,7 @@ function getInfo() {
         },
     })
 };
-
+ -->
 
 /* https://kauth.kakao.com/oauth/authorize?client_id=d22c6a95056d752c59d1e73f60101ab7&redirect_uri=http://localhost:8082/movingcloset/movingcloset/login.do&response_type=code
 
@@ -68,7 +68,7 @@ function getInfo() {
 
 
 
-Kakao.Auth.createLoginButton({
+<!-- Kakao.Auth.createLoginButton({
     container: '#kakao-login-btn',
     success: function(authObj) {
       Kakao.API.request({
@@ -90,7 +90,10 @@ Kakao.Auth.createLoginButton({
   })
   
   
-  function loginValidate(fn){
+	
+} -->
+
+ function loginValidate(fn){
 	if(!fn.userid.value){
 		alert("아이디를 입력하세요");
 		fn.user_id.focus();
@@ -100,10 +103,7 @@ Kakao.Auth.createLoginButton({
 		alert("패스워드를 입력하세요");
 		fn.user_pw.focus();
 		return false;
-	}
-	
 }
-
 
 
 function logout(){
@@ -179,7 +179,7 @@ function logout(){
 								</label>
 							</div>
 							<div class="w-50 text-md-right">
-								<a id="klogin" href="https://kauth.kakao.com/oauth/authorize?client_id=d22c6a95056d752c59d1e73f60101ab7&redirect_uri=http://localhost:8082/movingcloset/movingcloset/logintest.do&response_type=code">
+								<a id="klogin" href="https://kauth.kakao.com/oauth/authorize?client_id=d22c6a95056d752c59d1e73f60101ab7&redirect_uri=http://localhost:8082/movingcloset/movingcloset/kakaologin.do&response_type=code">
 									<img class="socialLogin" src="../resources/images/login/kakao_login_medium.png" alt="" />
 								</a>
 								<!-- <a id="naverIdLogin_loginButton" href="javascript:void(0)">
