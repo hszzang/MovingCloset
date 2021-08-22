@@ -470,12 +470,15 @@
 									
 								<tr>
 									<td><span class="red">*</span> 이름</td>
-									<%if(session.getAttribute("sessionName") != null) { %>
+									<%if(session.getAttribute("sessionName") != null || session.getAttribute("kakaoNickname") != null) { %>
 									<td class="form-inline">
+										<%if(session.getAttribute("sessionName") != null){ %>
 										<input type="text" class="form-control" name="name" style="width: 250px;"
 											required value="${sessionName }"/>
-										
-	
+										<%}else if(session.getAttribute("kakaoNickname")!=null){ %>
+										<input type="text" class="form-control" name="name" style="width: 250px;"
+											required value="${kakaoNickname }"/>
+										<% } %>
 									</td>
 									<% }else{ %>
 									<td class="form-inline">
@@ -560,7 +563,10 @@
 									<td class="text-left" style="vertical-align:middle;"><span
 											class="red">*</span>이메일&nbsp;&nbsp;&nbsp;</td>
 											
-									<%if(session.getAttribute("sessionEmail1") != null){ %>
+									<%if(session.getAttribute("sessionEmail1") != null || session.getAttribute("kakaoEmail1") != null){ %>
+										
+										<%if(session.getAttribute("sessionEmail1") != null){ %>
+										
 										<td class="form-inline">
 											<input type="text" class="form-control" name="email1" value="${sessionEmail1 }"
 												style="width:30%;" required />
@@ -568,6 +574,19 @@
 											<input type="text" class="form-control" name="email2" value="${sessionEmail2 }"
 												style="width:30%;" required />
 										</td>
+										
+										<%} else if(session.getAttribute("kakaoEmail1") != null){ %>
+										<td class="form-inline">
+											<input type="text" class="form-control" name="email1" value="${kakaoEmail1 }"
+												style="width:30%;" required />
+											&nbsp;@&nbsp;
+											<input type="text" class="form-control" name="email2" value="${kakaoEmail2 }"
+												style="width:30%;" required />
+										</td>
+										
+										
+										<%} %>
+										
 									<%}else{ %>
 										<td class="form-inline">
 											<input type="text" class="form-control" name="email1" value=""
