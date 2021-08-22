@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html>
@@ -468,14 +467,24 @@
 									</td>
 								</tr>
 
+									
 								<tr>
 									<td><span class="red">*</span> 이름</td>
+									<%if(session.getAttribute("sessionName") != null) { %>
+									<td class="form-inline">
+										<input type="text" class="form-control" name="name" style="width: 250px;"
+											required value="${sessionName }"/>
+										
+	
+									</td>
+									<% }else{ %>
 									<td class="form-inline">
 										<input type="text" class="form-control" name="name" style="width: 250px;"
 											required placeholder="이름을 입력해주세요." value=""/>
 										
 	
 									</td>
+									<%} %>
 								</tr>
 
 								<tr>
@@ -506,13 +515,25 @@
 											required placeholder="주소를 입력해주세요." value=""/>&nbsp;&nbsp;&nbsp;&nbsp;
 										<input type="text" name="addr2" class="form-control" style="width: 500px;"
 											required placeholder="상세주소를 입력해주세요." value=""/>
-
 									</td>
 								</tr>
 
 								<tr>
 									<td class="text-left" style="vertical-align:middle;"><span class="red">*</span>전화번호
 									</td>
+									
+									<%if(session.getAttribute("sessionPhone1") != null){ %>
+									<td class="form-inline">
+										<input type="text" class="form-control" name="mobile1" value="${sessionPhone1 }" maxlength="4"
+											style="width:100px;" required />
+										&nbsp;&nbsp;-&nbsp;&nbsp;
+										<input type="text" class="form-control" name="mobile2" value="${sessionPhone2 }" maxlength="4"
+											 style="width:100px;" required />
+										&nbsp;&nbsp;-&nbsp;&nbsp;
+										<input type="text" class="form-control" name="mobile3" value="${sessionPhone3 }" maxlength="4"
+											style="width:100px;" required />
+									</td>
+									<%}else{ %>
 									<td class="form-inline">
 										<select name="mobile1" class="form-control"
 											onchange="commonFocusMove(this, 3,'mobile2');" style="width:100px;" required>
@@ -531,25 +552,40 @@
 										<input type="text" class="form-control" name="mobile3" value="" maxlength="4"
 											style="width:100px;" onkeyup="commonFocusMove(this, 4,'email1');" required />
 									</td>
-								</tr>
+									
+									<% } %>
+									
+								</tr>  
 								<tr>
 									<td class="text-left" style="vertical-align:middle;"><span
 											class="red">*</span>이메일&nbsp;&nbsp;&nbsp;</td>
-									<td class="form-inline">
-										<input type="text" class="form-control" name="email1" value=""
-											style="width:30%;" required />
-										&nbsp;@&nbsp;
-										<input type="text" class="form-control" name="email2" value=""
-											style="width:30%;" required />&nbsp;&nbsp;
-										<select name="email_domain" class="form-control"
-											onChange="inputEmail(this.form);" style="width:30%;">
-											<option value="1" selected>- 직접입력 -</option>
-											<option value="naver.com">naver.com</option>
-											<option value="daum.net">daum.net</option>
-											<option value="gmail.com">gmail.com</option>
-											<option value="nate.com">nate.com</option>
-										</select>
-									</td>
+											
+									<%if(session.getAttribute("sessionEmail1") != null){ %>
+										<td class="form-inline">
+											<input type="text" class="form-control" name="email1" value="${sessionEmail1 }"
+												style="width:30%;" required />
+											&nbsp;@&nbsp;
+											<input type="text" class="form-control" name="email2" value="${sessionEmail2 }"
+												style="width:30%;" required />
+										</td>
+									<%}else{ %>
+										<td class="form-inline">
+											<input type="text" class="form-control" name="email1" value=""
+												style="width:30%;" required />
+											&nbsp;@&nbsp;
+											<input type="text" class="form-control" name="email2" value=""
+												style="width:30%;" required />&nbsp;&nbsp;
+											<select name="email_domain" class="form-control"
+												onChange="inputEmail(this.form);" style="width:30%;">
+												<option value="1" selected>- 직접입력 -</option>
+												<option value="naver.com">naver.com</option>
+												<option value="daum.net">daum.net</option>
+												<option value="gmail.com">gmail.com</option>
+												<option value="nate.com">nate.com</option>
+											</select>
+										</td>
+						
+									<% } %>		
 
 								</tr>
 								<tr>

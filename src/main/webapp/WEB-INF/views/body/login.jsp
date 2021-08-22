@@ -186,18 +186,12 @@ function logout(){
 								          <img class="socialLogin" src="../resources/images/login/naver_login.png" alt="" />
 								</a> -->
 								
-								  <div id="naver_id_login"></div>
-								  <!-- //네이버아이디로로그인 버튼 노출 영역 -->
+							<div id="naver_id_login" style="text-align:center">
+								<a href="${url}"> 
+									<img class="socialLogin" src="../resources/images/login/naver_login.png" alt="" />
+								</a>
+							</div>
 
-								<ul>
-
-									<li onclick="naverLogout(); return false;">
-								      <a href="javascript:void(0)">
-								          <span>네이버 로그아웃</span>
-								      </a>
-									</li>
-								</ul>
-								
 							</div>
 						</div>
 						
@@ -218,6 +212,8 @@ function logout(){
 						<button type="button" class="form-control btn btn-dark submit px-3" onclick="logout();">LOG OUT</button>
 					</div>
 					
+					<h3><a href="./naverlogout.do">로그아웃</a></h3>
+
 					<%} %>
 					
 				</div>
@@ -225,34 +221,6 @@ function logout(){
 		</div>
 	</div>
 	
-
-
-<%@ page import="java.net.URLEncoder" %>
-<%@ page import="java.security.SecureRandom" %>
-<%@ page import="java.math.BigInteger" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-  
-  
-  
-  
-  <%
-    String clientId = "8dUO8AkoujmRhyEgT8yz";//애플리케이션 클라이언트 아이디값";
-    String redirectURI = URLEncoder.encode("http://localhost:8082/movingcloset/movingcloset/register.do", "UTF-8");
-    SecureRandom random = new SecureRandom();
-    String state = new BigInteger(130, random).toString();
-    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
-    apiURL += "&client_id=" + clientId;
-    apiURL += "&redirect_uri=" + redirectURI;
-    apiURL += "&state=" + state;
-    session.setAttribute("state", state);
- %>
-
-
-
-
-
-
-
 
 
 
