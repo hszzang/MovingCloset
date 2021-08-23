@@ -42,7 +42,7 @@ public class NewDCommand implements CommandImpl {
 		System.out.println(totalProduct);
 		
 		model.addAttribute("newdList", newdList);
-		
+		 
 		
 		
 	}
