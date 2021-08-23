@@ -30,6 +30,7 @@ import movingcloset.command.store.StoreInsertCommand;
 import movingcloset.command.store.StoreListCommand;
 import movingcloset.command.store.StoreUpdateCommand;
 import mybatis.ProductDTO;
+import mybatis.ProductDetailDTO;
 
 @Controller
 public class StoreController {
@@ -46,6 +47,7 @@ public class StoreController {
 	StoreUpdateCommand storeUpdateCommand;
 	@Autowired
 	StoreDeleteCommand storeDeleteCommand;
+
 	
 	// 스토어 리스트
 	@RequestMapping(value="/movingcloset/store.do", method=RequestMethod.GET)
@@ -186,7 +188,7 @@ public class StoreController {
 	
 	// 상품 수정
 	@RequestMapping("/store/update.do")
-	public String update(Model model, HttpServletRequest req, ProductDTO productDTO) {
+	public String update(Model model, HttpServletRequest req, ProductDTO productDTO, ProductDetailDTO detailDTO) {
 //		public String update(Locale locale, Model model, ProductDTO productDTO) {
 
 		String p_idx = productDTO.getP_idx();
@@ -295,23 +297,27 @@ public class StoreController {
 	}
 	
 	// 상품 제거
-		@RequestMapping("/store/delete.do")
-		public String delete(Model model, HttpServletRequest req) {
-//			public String delete(Locale locale, Model model) {
-			System.out.println("delete 들어옴");
+	@RequestMapping("/store/delete.do")
+	public String delete(Model model, HttpServletRequest req) {
+//		public String delete(Locale locale, Model model) {
+		System.out.println("delete 들어옴");
 			
-			model.addAttribute("req", req);
-			model.addAttribute("model", model);
+		model.addAttribute("req", req);
+		model.addAttribute("model", model);
 			
-			command = storeDeleteCommand;
-			command.execute(model);
-			return "redirect:/movingcloset/store.do";
-		}
+		command = storeDeleteCommand;
+		command.execute(model);
+		return "redirect:/movingcloset/store.do";
+	}
+	
+	
 	
 	// 스토어 상세페이지에서 리뷰쓰기 버튼
 	@RequestMapping("/store/reviewPage.do")
 	public String review(Locale locale, Model model) {
 		System.out.println("리뷰 컨트롤러 들어옴");
+		
+		// 리뷰인서트커맨드로 리뷰쓰는 걸로???
 		return "reviewPage";
 	}
 	

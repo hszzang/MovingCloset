@@ -17,8 +17,6 @@
 </head>
 <script>
 
-
-
     $( document ).ready(function() {
         $( ".star_rating a" ).click(function() {
             $(this).parent().children("a").removeClass("on");

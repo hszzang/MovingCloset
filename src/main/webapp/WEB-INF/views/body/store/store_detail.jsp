@@ -24,21 +24,18 @@
 				num.value = parseInt(num.value) - 1;
 			}
 		}
-		
 		if(id=="plus"){ 
 			num.value = parseInt(num.value) + 1;
-		}
-		
+		}		
 	}
 
 	$(function(){
 		$('#btnReview').click(function(){
-
 			var child;
 			child = window.open("./reviewPage.do", "reviewpopup", "height:400px, width:200px");
 		});
-
 	});
+	
 </script>
 
 <style>
@@ -280,7 +277,7 @@
 						<button id="btnBuy" style="width:92%;"><a href="#" style="color:white;">구매하기</a> </button>
 					</div><br> 
 					<div>
-						<span><button style="width: 45%;" id="basket"><a href="#">장바구니</a></button></span>
+						<span><button style="width: 45%;border:black solid 1px;" id="basket" onclick="location.href='#';">장바구니</button></span>
 						<span><button style="width: 45%;" id="wish" onclick="location.href='#';">위시리스트 <i class="fa fa-heart" style="color: red;"></i></button></span>
 					</div>
 				</div>
@@ -320,11 +317,33 @@
 					<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
 				</th>
 				<th style="width: 40%;">한줄평</th>
-				<th style="width: 20%;">작성일</th>
+				<th style="width: 10%;">작성일</th>
+				<th style="width: 10%;">작성자</th>				
 				<th style="width: 250%;"></th>
 			</tr>
 			</thead>
 			<tbody>
+			<c:forEach items="${reviews }" var="review" >
+			<tr >
+				<td>
+				평점 <!-- 평점 수정 필요 ------------------------------------------------------------------>
+				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
+				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
+				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
+				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
+				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
+				</td>
+				
+				<td>${review.r_content }</td>
+				<td>${review.r_date }</td>
+				<td>${review.userid }</td>
+				<td>
+					<img class="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
+					style="width: 100px; height: auto;"/>
+				</td>
+			</tr>
+			</c:forEach>
+			<!--  
 			<tr >
 				<td>
 				평점 
@@ -341,6 +360,7 @@
 					style="width: 100px; height: auto;"/>
 				</td>
 			</tr>
+			
 			<tr >
 				<td>
 				평점 
@@ -357,6 +377,7 @@
 					style="width: 100px; height: auto;"/>
 				</td>
 			</tr>
+			
 			<tr >
 				<td>
 				평점 
@@ -373,6 +394,7 @@
 					style="width: 100px; height: auto;"/>
 				</td>
 			</tr>
+			
 			<tr >
 				<td>
 				평점 
@@ -389,23 +411,7 @@
 					style="width: 100px; height: auto;"/>
 				</td>
 			</tr>
-			<tr >
-				<td>
-				평점 
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				</td>
-				<td>신발이 예뻐요!</td>
-				<td>2021-07-31</td>
-				<td>
-					<img class="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
-					style="width: 100px; height: auto;"/>
-				</td>
-			</tr>
-
+			-->
 			</tbody>
 		</table>
 			<hr />
