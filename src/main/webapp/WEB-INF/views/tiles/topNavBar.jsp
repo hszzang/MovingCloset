@@ -205,15 +205,19 @@
 			});
 		});
 		
+
+		
 		function logout(){
+
 			var result = confirm("로그아웃 하시겠습니까?");
 			if(result){
-				location.href = "../movingcloset/logout.do";
+				location.href = "../../movingcloset/logout.do";
 			}else{
 				location.href = "#";
 			}
 			
 		}
+		
 		
     </script>
 	<div class="nav-menu">
@@ -232,7 +236,8 @@
 			
 			<c:choose>
 				<c:when test="${sessionScope.siteUserInfo != null}">
-					<a href="#" onclick="logout();"><i class="material-icons" id="icon">exit_to_app</i></a>
+					<a href="#" onclick="logout();"><i class="material-icons" id="icon">exit_to_app</i></a>&nbsp;
+					<a href="../movingcloset/mypage/coupon.do"><i class="material-icons" id="icon" onclick="infoclick();">info_outline</i></a>
 				</c:when>
 				<c:otherwise>  
 					<a href="../movingcloset/login.do"><i class="material-icons" id="icon">person</i></a>
@@ -290,7 +295,7 @@
 	<div class="nav-sub4" id="nav-sub">
 		<div class="nav-content container-fluid">
 			 <div class="contentLink d-flex justify-content-around">
-	            <a href="../movingcloset/store.do" id="sub-content">STORE</a>
+	            <a href="/movingcloset/movingcloset/store.do" id="sub-content">STORE</a>
 	        </div>
 		</div>
 	</div>

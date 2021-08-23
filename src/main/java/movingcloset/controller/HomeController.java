@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +31,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.client.RestTemplate;
@@ -36,6 +40,9 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.project.movingcloset.KakaoService;
+import com.project.movingcloset.NaverLoginBO;
 
 import movingcloset.command.CommandImpl;
 import movingcloset.command.FindIdCommand;
@@ -54,7 +61,21 @@ import mybatis.MybatisMemberImpl;
 public class HomeController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
+	/* NaverLoginBO */ 
+	private NaverLoginBO naverLoginBO; 
+	private String apiResult = null; 
+	
+	/* naver login api 연동 부분 */
+	@Autowired 
+	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
+		this.naverLoginBO = naverLoginBO; 
+	}
 
+	/* kakao login api 연동 부분 */
+    @Autowired
+    private KakaoService kakaoService;
+	
 	CommandImpl command = null;
 
 	@Autowired
@@ -71,6 +92,12 @@ public class HomeController {
 
 	@Autowired
 	FindPwCommand findPwCommand;
+	
+	
+	
+	
+	
+	
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -97,10 +124,14 @@ public class HomeController {
 	}
 
 
-	// 로그인
-	@RequestMapping(value = "/movingcloset/login.do")
-	public String login() {
-
+	// 로그인(일반+네이버api)
+	@RequestMapping(value = "/movingcloset/login.do",method = { RequestMethod.GET, RequestMethod.POST })
+	public String login(Model model, HttpSession session) {
+		
+		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session); 
+		System.out.println("네이버:" + naverAuthUrl); 
+		model.addAttribute("url", naverAuthUrl); 
+		
 		return "body/login";
 	}
 	
@@ -114,11 +145,9 @@ public class HomeController {
 		command = loginCommand;
 		command.execute(model);
 		
-		/*
-		 * if(session.getAttribute("LoginNG")==null) { return "main"; }else {
-		 */
-			return "body/login";			
-			/* } */
+		
+		return "body/login";			
+		
 		
 		
 	}
@@ -136,43 +165,127 @@ public class HomeController {
 	
 	
 	
+	//네이버 로그인 성공시 callback호출 메소드 
+	@RequestMapping(value = "/movingcloset/callback.do", method = { RequestMethod.GET, RequestMethod.POST }) 
+	public String callback(Model model, @RequestParam String code, 
+			@RequestParam String state, HttpSession session) throws IOException, ParseException {
+		System.out.println("여기는 callback"); 
+		OAuth2AccessToken oauthToken; 
+		oauthToken = naverLoginBO.getAccessToken(session, code, state); 
+		//1. 로그인 사용자 정보를 읽어온다. 
+		apiResult = naverLoginBO.getUserProfile(oauthToken); 
 
-	// 카카오 로그인 테스트
-	@GetMapping("/movingcloset/logintest.do")
-	public @ResponseBody String kakaologin(String code, HttpServletRequest req, Model model) {
-
-		// @ResponseBody를 붙이면 Data를 리턴해주는 컨트롤러 함수
-
-		// POST 방식으로 key=value 데이터를 요청 (카카오쪽으로)
-		// 라이브러리들
-		// Retrofit2 안드로이드에서 많이 쓰임
-		// OkHttp
-		// RestTemplate
-
-		RestTemplate rt = new RestTemplate();
-
-		// HttpHeader 오브젝트 생성
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-
-		// HttpBody 오브젝트 생성
-		MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>(null);
-		params.add("grant_type", "authorization_code");
-		params.add("client_id", "d22c6a95056d752c59d1e73f60101ab7");
-		params.add("redirect_uri", "http://localhost:8082/movingcloset/movingcloset/login.do");
-		params.add("code", code);
-
-		// HttpHeader와 HttpBody를 하나의 오브젝트에 담기
-		HttpEntity<MultiValueMap<String, String>> kakaoTokenRequest = new HttpEntity(params, headers);
-
-		// Http 요청하기 - Post방식으로 - 그리고 response 변수의 응답 받음.
-		ResponseEntity<String> response = rt.exchange("https://kauth.kakao.com/oauth/token", HttpMethod.POST,
-				kakaoTokenRequest, String.class);
-		model.addAttribute("kakaores", response);
-		model.addAttribute("kakaocode", code);
-
-		return "body/kakaologin";
+		//2. String형식인 apiResult를 json형태로 바꿈 
+		JSONParser parser = new JSONParser(); 
+		Object obj = parser.parse(apiResult); 
+		JSONObject jsonObj = (JSONObject) obj; 
+		
+		//3. 데이터 파싱 
+		//Top레벨 단계 _response 파싱 
+		JSONObject response_obj = (JSONObject)jsonObj.get("response"); 
+		System.out.println("response_obj : "+response_obj);
+		
+		
+		//response의 nickname값 파싱 
+		String phone = (String)response_obj.get("mobile"); 
+		String email = (String)response_obj.get("email"); 
+		String name = (String)response_obj.get("name"); 
+		
+		
+		String[] phoneAll = phone.split("-");
+		String phone1 = phoneAll[0];
+		String phone2 = phoneAll[1];
+		String phone3 = phoneAll[2];
+		
+		
+		String[] emailAll = email.split("@");
+		String email1 = emailAll[0];
+		String email2 = emailAll[1];
+		
+		
+		System.out.println(phone+" , "+email+" , "+name); 
+		//4.파싱 닉네임 세션으로 저장 
+		session.setAttribute("sessionPhone1",phone1); 
+		session.setAttribute("sessionPhone2",phone2); 
+		session.setAttribute("sessionPhone3",phone3); 
+		session.setAttribute("sessionEmail1",email1); 
+		session.setAttribute("sessionEmail2",email2); 
+		session.setAttribute("sessionName",name); 
+		
+		
+		//세션 생성 
+		model.addAttribute("result", apiResult); 
+		return "body/registerForm"; 
+	} 
+	
+	//로그아웃
+	@RequestMapping(value = "/movingcloset/naverlogout.do", method = { RequestMethod.GET, RequestMethod.POST }) 
+	public String logout(HttpSession session)throws IOException { 
+		System.out.println("여기는 logout"); 
+		session.invalidate(); 
+		return "body/login"; 
 	}
+	
+
+    @RequestMapping("/movingcloset/kakaologin.do")
+    public String kakaologin(@RequestParam(value = "code", required = false) String code, HttpSession session ) throws Exception{
+        System.out.println("#########" + code);
+        String access_Token = kakaoService.getAccessToken(code);
+        HashMap<String, Object> userInfo = kakaoService.getUserInfo(access_Token);
+        System.out.println("###access_Token#### : " + access_Token);
+        System.out.println("###userInfo#### : " + userInfo.get("email"));
+        System.out.println("###nickname#### : " + userInfo.get("nickname"));
+        
+        String kemail = (String) userInfo.get("email");
+        String[] kemailAll = kemail.split("@");
+        String kemail1 = kemailAll[0];
+        String kemail2 = kemailAll[1];
+        
+        
+        session.setAttribute("kakaoNickname", userInfo.get("nickname"));
+        session.setAttribute("kakaoEmail1", kemail1);
+        session.setAttribute("kakaoEmail2", kemail2);
+        
+        return "body/registerForm";
+    }
+	
+	
+	
+	/*
+	 * // 카카오 로그인 테스트
+	 * 
+	 * @GetMapping("/movingcloset/logintest.do") public @ResponseBody String
+	 * kakaologin(String code, HttpServletRequest req, Model model) {
+	 * 
+	 * // @ResponseBody를 붙이면 Data를 리턴해주는 컨트롤러 함수
+	 * 
+	 * // POST 방식으로 key=value 데이터를 요청 (카카오쪽으로) // 라이브러리들 // Retrofit2 안드로이드에서 많이 쓰임
+	 * // OkHttp // RestTemplate
+	 * 
+	 * RestTemplate rt = new RestTemplate();
+	 * 
+	 * // HttpHeader 오브젝트 생성 HttpHeaders headers = new HttpHeaders();
+	 * headers.add("Content-type",
+	 * "application/x-www-form-urlencoded;charset=utf-8");
+	 * 
+	 * // HttpBody 오브젝트 생성 MultiValueMap<String, String> params = new
+	 * LinkedMultiValueMap<String, String>(null); params.add("grant_type",
+	 * "authorization_code"); params.add("client_id",
+	 * "d22c6a95056d752c59d1e73f60101ab7"); params.add("redirect_uri",
+	 * "http://localhost:8082/movingcloset/movingcloset/login.do");
+	 * params.add("code", code);
+	 * 
+	 * // HttpHeader와 HttpBody를 하나의 오브젝트에 담기 HttpEntity<MultiValueMap<String,
+	 * String>> kakaoTokenRequest = new HttpEntity(params, headers);
+	 * 
+	 * // Http 요청하기 - Post방식으로 - 그리고 response 변수의 응답 받음. ResponseEntity<String>
+	 * response = rt.exchange("https://kauth.kakao.com/oauth/token",
+	 * HttpMethod.POST, kakaoTokenRequest, String.class);
+	 * model.addAttribute("kakaores", response); model.addAttribute("kakaocode",
+	 * code);
+	 * 
+	 * return "body/kakaologin"; }
+	 */
 
 	// 쪼르깅
 	@RequestMapping(value = "/movingcloset/myplease2.do", method = RequestMethod.GET)

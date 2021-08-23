@@ -407,8 +407,8 @@ html {
     </div>
     <br>
     <div style="padding-bottom: 5%;">
-        <button id="btnCancel" onclick="location.href='#';">취소</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button id="btnSubmit" type="submit" onclick="location.href='#';">등록</button>
+        <input id="btnSubmit" type="submit" onclick="location.href='#';">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button id="btnCancel" onclick="javascript:window.close();">취소</button>
     </div>
 
 </body>

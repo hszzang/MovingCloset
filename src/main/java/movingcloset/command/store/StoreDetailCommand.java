@@ -46,20 +46,20 @@ public class StoreDetailCommand implements CommandImpl {
 			
 			String p_code = storeDetail.getP_code();
 			productDetail = sqlSession.getMapper(MybatisProductImpl.class).getProductDetail(p_code);
-			
+			/*
 			String p_size = productDetail.getPd_size();
 			String[] sizes = p_size.split(",");
 			
 			String p_stock = productDetail.getPd_stock();
 			String[] stocks = p_stock.split(",");
-			
+			*/
 			List<ReviewDTO> reviews = sqlSession.getMapper(MybatisProductImpl.class).getReviews(p_code);
 			
 			model.addAttribute("storeDetail", storeDetail);
 			
-			model.addAttribute("productDetail", productDetail);
-			model.addAttribute("sizes", sizes);
-			model.addAttribute("stocks", stocks);
+			//model.addAttribute("productDetail", productDetail);
+			//model.addAttribute("sizes", sizes);
+			//model.addAttribute("stocks", stocks);
 			
 			model.addAttribute("reviews", reviews);
 			

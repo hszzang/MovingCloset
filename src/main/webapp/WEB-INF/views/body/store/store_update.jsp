@@ -123,7 +123,7 @@
     	bottom-margin:30px;
     }
     #productDelete{
-   		width:350px; height:40px; margin-top:10px;
+   		width:350px; height:40px; margin-top:10px; margin-bottom:10px;
    		border:orangered solid 1px; background-color:white; color:orangered;
     }
 	</style>
@@ -143,7 +143,7 @@
 		}
 		
 		function delProduct(p_idx){
-			if(confirm("정말 삭제하겠습니까?")){
+			if(confirm("정말 상품을 삭제하시겠습니까?")){
 				location.href="/movingcloset/store/delete.do?p_idx=" + p_idx;
 			}
 		}
@@ -209,6 +209,7 @@
 				</div>
 				
 				<div class="col-4" style="padding-left:3%; padding-top:5%;">
+					<h4>상품 수정</h4>
 					<div id="brandName" class="updiv"><input class="update" name="p_brand" value="${ storeDetail.p_brand}" /></div>
 					<div id="prodName" class="updiv"><input class="update" name="p_name" value="${storeDetail.p_name }" /></div>
 					<div id="code" class="updiv"><input class="update" name="p_code" value="${storeDetail.p_code }" /> </div>
@@ -272,25 +273,18 @@
 					</div>
 						<input type="submit" id="productUpdate" style="width:350px;height:40px;background-color:black;color:white;" value="수정">
 						<button type="button" class="product" id="productDelete" onclick="delProduct(${p_idx});">상품삭제</button>
+						<button type="reset" class="btn" style="border:lightgray solid 1px;width:80px;">리셋</button>
+						<button type="button" class="btn" style="border:lightgray solid 1px;width:120px;"
+							onclick="javascript:location.href='redirect:/store/detail.do?p_idx=${p_idx}';">돌아가기</button>
+						<button type="button" class="btn" style="border:lightgray solid 1px;width:120px;"
+							onclick="javascript:location.href='/movingcloset/store.do';">리스트가기</button>
 				</div>
 			</div>
 		</form>
 	
-					<!-- 
-					<hr />
-					<br>
-					<div>
-					
-					</div>
-					<br> 
-					<div>
-						<span><button style="width: 45%;" id="basket"><a href="#">장바구니</a></button></span>
-						<span><button style="width: 45%;" id="wish" onclick="location.href='#';">위시리스트 <i class="fa fa-heart" style="color: red;"></i></button></span>
-					</div>
-					 -->
-	</div><br /><br /><br />
+	</div><br /><br /><br /><br /><br />
 	
-	<hr>
+	<hr><br /><br /><br /><br /><br />
 
 </body>
 </html>
