@@ -82,7 +82,7 @@
 	<beans:bean id="sqlSession"
 		class="org.mybatis.spring.SqlSessionTemplate">
 		<beans:constructor-arg index="0" ref="sqlSessionFactory" />	
-	</beans:bean>
+	</beans:bean>   
 	 
 	 <!-- 파일업로드 빈  -->
 	 <beans:bean id="multipartResolver"

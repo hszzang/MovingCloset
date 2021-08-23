@@ -15,7 +15,6 @@ import mybatis.MybatisProductImpl;
 import mybatis.NewdDTO;
 import mybatis.ProductDTO;
 
-
 @Service
 public class NewDCommand implements CommandImpl {
 	
