@@ -211,7 +211,7 @@
 
 			var result = confirm("로그아웃 하시겠습니까?");
 			if(result){
-				location.href = "../../movingcloset/logout.do";
+				location.href = "../movingcloset/logout.do";
 			}else{
 				location.href = "#";
 			}
