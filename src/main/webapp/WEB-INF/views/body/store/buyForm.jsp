@@ -41,25 +41,25 @@ border-radius: 10px;
 box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 }
 
-#moyoFrm {
+#buyFrm {
 	margin: 4% 7%; width: 70%;
 }
 
-#moyoFrm *:not(input, select){
+#buyFrm *:not(input, select){
 	border: 0;
 }
 
 
-#moyoAgree {
+#buyAgree {
 	margin: 5%; margin-bottom: 8%;
 }
 
-#moyoFrm .form-control:focus, #moyoSubmitBtn:focus, #moyoAgree .form-control:focus{
+#buyFrm .form-control:focus, #buySubmitBtn:focus, #buyAgree .form-control:focus{
 	border-color: #FFFFFF;
 	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px #ff6c2f;
 }
 
-#moyoSubmitBtn {
+#buySubmitBtn {
 	background-color: #ff6c2f; color: white;
 	border: 0;
 }
@@ -132,19 +132,45 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 			}
 		}).open();
 	}
+	
+	function fillBuyInfos(chkbox) {
+		
+		if(chkbox.checked == true) {
+			
+			var emailArr = "${memberDTO.email }".split("@");
+			document.buyFrm.postcode.value = "${memberDTO.postcode }";
+			document.buyFrm.addr1.value = "${memberDTO.addr }";
+			document.buyFrm.mobile1.value = "${memberDTO.phone }".substring(0, 3);
+			document.buyFrm.mobile2.value = "${memberDTO.phone }".substring(4, 8);
+			document.buyFrm.mobile3.value = "${memberDTO.phone }".substring(9, 13);
+			document.buyFrm.email1.value = emailArr[0];
+			document.buyFrm.email2.value = emailArr[1];
+			document.buyFrm.username.value = "${memberDTO.name }";
+		}
+		else if(chkbox.checked == false) {
+			document.buyFrm.username.value = "";
+			document.buyFrm.mobile2.value = "";
+			document.buyFrm.mobile3.value = "";
+			document.buyFrm.email1.value = "";
+			document.buyFrm.postcode.value = "";
+			document.buyFrm.addr1.value = "";
+			document.buyFrm.addr2.value = "";
+			
+		}
+	}
 </script>
 </head>
 <body>
 	<div class="container">
 		<div class="input-form-background row">
-					<h5>구매상품 정보</h5>
+				<h5>구매상품 정보</h5>
 			<div class="input-form col-md-12 mx-auto">
 				<div class="container" id="goodsBox">
 					<div class="row">
 						<table class="table table-hover" id="goodsTable">
 							<thead class="goodsTitle">
 								<tr>
-								  <th>상품이미지</th>
+								  <th>상품이미지</th>	
 								  <th>상품명&nbsp;(상품코드)</th>
 								  <th>가격</th>
 								  <th>구매가</th>
@@ -167,10 +193,16 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 				</div>
 			</div>
 			<br />
-				<h5>구매자 정보</h5>
 			<div class="input-form col-md-12 mx-auto">
 				<div class="input-form-wrap">
-					<form name="moyoFrm" id="moyoFrm" action="#" method="post" > 
+					<h5>구매자 정보</h5>
+					<div class="custom-control custom-checkbox" id="fillBuyInfoWrap" align="right">
+						<input type="checkbox" class="custom-control-input" id="fillBuyInfo" name="fillBuyInfo" onClick="fillBuyInfos(this);" required> 
+						<label class="custom-control-label"
+							for="fillBuyInfo">기존 정보로 입력하기</label>
+					</div>
+				
+					<form name="buyFrm" id="buyFrm" action="#" method="post" > 
 						<table class="table table-bordered">
 							<colgroup>
 								<col width="20%"/>
@@ -223,7 +255,7 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 										<input type="text" name="addr1" class="form-control" style="width: 500px;"
 											required placeholder="주소를 입력해주세요." />&nbsp;&nbsp;&nbsp;&nbsp;
 										<input type="text" name="addr2" class="form-control" style="width: 500px;"
-											required placeholder="상세주소를 입력해주세요." />
+											 placeholder="상세주소를 입력해주세요." />
 									</td>
 								</tr>
 								<tr>
@@ -231,13 +263,13 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 									결제수단
 									</td>
 									<td class="d-flex align-items-center">
-										<input type="radio" name="1" />&nbsp;&nbsp;무통장
+										<label><input type="radio" name="1" checked />&nbsp;&nbsp;무통장</label>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="radio" name="1"/>&nbsp;&nbsp;카드결제
+										<label><input type="radio" name="1" />&nbsp;&nbsp;카드결제</label>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="radio" name="1"/>
+										<label><input type="radio" name="1" />
 										&nbsp;&nbsp;
-										<img src="../resources/images/buy/kakaoPay.png" class="kakaoPay" style="vertical-align:middle" />
+										<img src="../resources/images/buy/kakaoPay.png" class="kakaoPay" style="vertical-align:middle" /></label>
 									</td>
 								</tr>
 							</tbody>
@@ -248,7 +280,7 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 
 					<h3>약관동의</h3>
 
-					<div id="moyoAgree">
+					<div id="buyAgree">
 						<textarea rows="6" name="content" class="form-control" style="resize:none;"
 							placeholder="개인정보수집약관" readonly></textarea>
 						<div class="custom-control custom-checkbox mb-4 mt-2">
@@ -264,7 +296,7 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 								for="cancelAgree">무단 취소 시 부여되는 경고사항에 대해 동의합니다.</label>
 						</div>
 
-						<button class="btn btn-primary btn-lg btn-block" id="moyoSubmitBtn"
+						<button class="btn btn-primary btn-lg btn-block" id="buySubmitBtn"
 							type="submit">결제하기</button>
 					</div>
 				</div>
