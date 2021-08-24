@@ -211,7 +211,7 @@
 
 			var result = confirm("로그아웃 하시겠습니까?");
 			if(result){
-				location.href = "../../movingcloset/logout.do";
+				location.href = "../movingcloset/logout.do";
 			}else{
 				location.href = "#";
 			}
@@ -220,8 +220,8 @@
 		
 		
     </script>
-	<div class="nav-menu">
-		<a class="large-logo" href="#" id="logo">Moving Closet<a>
+	 <div class="nav-menu">
+		<a class="large-logo" href="#" id="logo">Moving Closet</a>
 		<a class="nav-link" id="nav-title1" href="javascript:void(0);">About</a>
 		<a class="nav-link" id="nav-title2" href="javascript:void(0);">MOYO</a>
 		<a class="nav-link" id="nav-title3" href="javascript:void(0);">NewD</a>
