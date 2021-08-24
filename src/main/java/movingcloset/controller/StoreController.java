@@ -30,6 +30,7 @@ import movingcloset.command.store.StoreDeleteCommand;
 import movingcloset.command.store.StoreDetailCommand;
 import movingcloset.command.store.StoreInsertCommand;
 import movingcloset.command.store.StoreListCommand;
+import movingcloset.command.store.StoreOrderCommand;
 import movingcloset.command.store.StoreUpdateCommand;
 import mybatis.ProductDTO;
 import mybatis.ProductDetailDTO;
@@ -53,6 +54,8 @@ public class StoreController {
 	ReviewInsertCommand reviewInsertCommand;
 	@Autowired
 	ReviewDeleteCommand reviewDeleteCommand;
+	@Autowired
+	StoreOrderCommand storeOrderCommand;
 	
 	// 스토어 리스트
 	@RequestMapping(value="/movingcloset/store.do", method=RequestMethod.GET)
@@ -97,7 +100,7 @@ public class StoreController {
 	
 	// 상품 추가 처리 - post방식으로 전송되므로 value, method 둘 다 명시
 	@RequestMapping(value="/store/insertAction.do", method=RequestMethod.POST)
-	public String insertAction(Model model, MultipartHttpServletRequest req, HttpServletResponse resp, ProductDTO productDTO) throws IOException {
+	public String insertAction(Model model, MultipartHttpServletRequest req, HttpServletResponse resp, ProductDTO productDTO, ProductDetailDTO detailDTO) throws IOException {
 		
 		String path = req.getSession().getServletContext().getRealPath("/resources/upload");
 		resp.setContentType("text/html; charset=utf-8");
@@ -180,7 +183,9 @@ public class StoreController {
 		productDTO.setP_sfile(p_sfile);
 		
 		model.addAttribute("productDTO", productDTO);
+		model.addAttribute("detailDTO", detailDTO);
 		model.addAttribute("req", req);
+		
 		command = storeInsertCommand; 
 		command.execute(model);
 			
@@ -291,6 +296,11 @@ public class StoreController {
 		productDTO.setP_ofile(p_ofile);
 		productDTO.setP_sfile(p_sfile);
 		
+		String[] sizes = req.getParameterValues("sizes");
+		String[] stocks = req.getParameterValues("stocks");
+		
+		model.addAttribute("sizes", sizes);
+		model.addAttribute("stocks", stocks);
 		model.addAttribute("productDTO", productDTO);
 		model.addAttribute("req", req);
 		

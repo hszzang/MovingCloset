@@ -13,12 +13,12 @@
 	</select>
 	
 	<!-- 정렬 높은 가격 순 -->
-	<select id="highToLow" resultType="mybatis.ProductDTO">
+	<select id="descPrice" resultType="mybatis.ProductDTO">
 		SELECT * FROM product order by p_price desc
 	</select>
 	
 	<!-- 정렬 낮은 가격 순 -->
-	<select id="lowToHigh" resultType="mybatis.ProductDTO">
+	<select id="ascPrice" resultType="mybatis.ProductDTO">
 		SELECT * FROM product order by p_price asc
 	</select>
 	
@@ -28,11 +28,15 @@
 	</select>
 	
 	<!-- 상품 입력 -->
-	<!--  <insert id="insertProduct" parameterType="mybatis.ProductDTO"> -->
 	<insert id="insertProduct" parameterType="mybatis.ProductDTO" >
-		INSERT INTO product(p_idx, p_name, p_code, p_price, p_brand, p_ofile, p_sfile)
+		INSERT INTO product(p_idx, p_name, p_code, p_price, p_brand, p_ofile, p_sfile, p_flag)
 		VALUES
-		(product_seq.nextval, #{p_name}, #{p_code}, #{p_price}, #{p_brand}, #{p_ofile}, #{p_sfile})
+		(product_seq.nextval, #{p_name}, #{p_code}, #{p_price}, #{p_brand}, #{p_ofile}, #{p_sfile}, #{p_flag})
+	</insert>
+	<!-- 디테일 입력 -->
+	<insert id="insertDetail" parameterType="mybatis.ProductDetailDTO">
+		INSERT INTO product_detail(p_code, pd_color, pd_size, pd_stock)
+		VALUES (#{p_code}, #{pd_color}, #{pd_size}, #{pd_stock})
 	</insert>
 	
 	<!-- product 에서 상세정보 가져오기 -->

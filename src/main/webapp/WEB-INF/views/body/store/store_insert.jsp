@@ -55,6 +55,26 @@
 			f.p_price.focus();
 			return false;
 		}
+		if(f.pd_color.value==""){
+			alert("색상을 입력하세요");
+			f.pd_color.focus();
+			return false;
+		}
+		if(f.p_flag.value==""){
+			alert("상품분류를 선택하세요");
+			f.p_flag.focus();
+			return false;
+		}
+		if(f.pd_size.value==""){
+			alert("사이즈를 입력하세요");
+			f.pd_size.focus();
+			return false;
+		}
+		if(f.pd_stock.value==""){
+			alert("재고량을 입력하세요");
+			f.pd_stock.focus();
+			return false;
+		}
 	}
 	
 	function setThumbnail(event){
@@ -104,11 +124,19 @@
 				
 				<div class="col-4" style="padding-left:3%; padding-top:5%;">
 					<h5>상품 등록</h5>
-					<div id="brandName" class="updiv"><input class="insert" name="p_brand" value="${ productDTO.p_brand}" /></div>
-					<div id="prodName" class="updiv"><input class="insert" name="p_name" value="${productDTO.p_name }" /></div>
-					<div id="code" class="updiv"><input class="insert" name="p_code" value="${productDTO.p_code }" /> </div>
-					<div id="price" class="updiv"><input class="insert" name="p_price" value="${productDTO.p_price }" /> </div>
-					<input id="image" type="file" class="form-control" name="ofile" accept="image/*" value="${productDTO.p_ofile }"
+					<div id="brandName" class="updiv"><input class="insert" name="p_brand" value="브랜드" /></div>
+					<div id="prodName" class="updiv"><input class="insert" name="p_name" value="상품명" /></div>
+					<div id="code" class="updiv"><input class="insert" name="p_code" value="상품코드" /> </div>
+					<div id="price" class="updiv"><input class="insert" name="p_price" value="상품가격" /> </div>
+					<div id="price" class="updiv"><input class="insert" name="pd_color" value="상품색상" /> </div>
+					<select name="p_flag" style="width:350px;height:40px;">
+						<option value="" diabled select hidden>제품분류</option>
+						<option value="의류">의류</option>
+						<option value="신발">신발</option>
+						<option value="가방">가방</option>
+						<option value="잡화">잡화</option>
+					</select>
+					<input id="image" type="file" class="form-control" name="ofile" accept="image/*" value="파일첨부"
 						onchange="setThumbnail(event);" style="width:350px;height:40px;margin-bottom:10px;"  />
 					<div class="row">
 						<div class="col-11">
@@ -120,131 +148,34 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${sizes }" var="size" varStatus="status">
 									<tr>
-										<td style="text-align:center;">${size }</td>
 										<td style="text-align:center;">
+											<input type="text" name="pd_size" 
+											   style="border:lightgray solid 1px; width:170px; background-color:none;text-align:center;">
+										</td>
+										<td style="text-align:center;">
+											<input type="text" name="pd_stock" 
+											   style="border:lightgray solid 1px; width:170px; background-color:none;text-align:center;">
+										<!--  
 											<button class="btn" id="plus" onclick="plusminus(this.id);"><i class="fa fa-plus"></i></button>
-											<input type="text" id="quantity" value="${stocks[status.index] }" style="border:none; width:50px; background-color: none;text-align:center;">
+											<input type="text" name="pd_stock" value="${stocks[status.index] }" style="border:none; width:50px; background-color: none;text-align:center;">
 											<button class="btn" id="minus" onclick="plusminus(this.id);"><i class="fa fa-minus"></i></button>
+										-->
 										</td>
 									</tr>
-								</c:forEach>
 							</tbody>
 						</table>
-						<!--  
-							<select name="size" id="sizeNum" style="border: solid lightgray 1px; border-radius:2px; padding:3px;width:40%;">
-								<option diabled select hidden>사이즈</option>
-									<c:forEach items="${sizes }" var="size">
-										<option value="${size}">${size}</option>										
-									</c:forEach>
-							</select>
-									<!-- 
-									<option value="220">220</option>
-									<option value="230">230</option>
-									<option value="240">240</option>
-									<option value="250">250</option>
-									<option value="260">260</option>
-									<option value="270">270</option>
-									<option value="280">280</option>
-									 -->
-							<!--  
-							<div class="col-8" style="width:45%;display:inline;">
-								<button class="btn" id="plus" onclick="plusminus(this.id);"><i class="fa fa-plus"></i></button>
-								<input type="text" id="quantity" value="1" style="border:none; width:50px; background-color: none;text-align:center;">
-								<button class="btn" id="minus" onclick="plusminus(this.id);"><i class="fa fa-minus"></i></button>
-							</div>
-							-->
+
 						</div>
 					</div>
 					<br>
-					<div class="row">
-						<!-- 
-						<div class="col-4" style="vertical-align:center; text-align:right; padding-top:5px;">
-							<span id="prodCount">수량</span>
-						</div>
-						 -->
-					</div>
-						<input type="submit" id="productInsert" style="width:350px;height:40px;background-color:black;color:white;" value="등록">
-						<button type="button" class="product" id="productDelete" onclick="delProduct(${p_idx});">상품삭제</button>
-						<button type="reset" class="btn" style="border:lightgray solid 1px;width:80px;">리셋</button>
-						<button type="button" class="btn" style="border:lightgray solid 1px;width:120px;"
-							onclick="javascript:location.href='redirect:/store/detail.do?p_idx=${p_idx}';">돌아가기</button>
-						<button type="button" class="btn" style="border:lightgray solid 1px;width:120px;"
-							onclick="javascript:location.href='/movingcloset/store.do';">리스트가기</button>
+						<input type="submit" id="productInsert" style="width:350px;height:40px;background-color:black;color:white;margin-bottom:10px;" value="등록">
+						<button type="reset" class="btn" style="border:lightgray solid 1px;width:350px;height:40px;margin-bottom:10px;">리셋</button>
+						<button type="button" class="btn" style="border:lightgray solid 1px;width:350px;height:40px;"
+							onclick="javascript:location.href='/movingcloset/store.do';">돌아가기</button>
 				</div>
 			</div>
-		<!--  
-		<input type="hidden" value="${productDTO.p_idx }" name="p_idx">
-		<table class="table table-bordered">
-		<colgroup>
-			<col width="20%"/>
-			<col width="*"/>
-		</colgroup>
-		<tbody>
-			<tr>
-				<th class="text-center" 
-					style="vertical-align:middle;">브랜드</th>
-				<td>
-					<input type="text" class="form-control" 
-					style="width:200px;" name="p_brand"></input>
-				</td>
-			</tr>	
-			<tr>
-				<th class="text-center" 
-					style="vertical-align:middle;">상품명</th>
-				<td>
-					<input type="text" class="form-control" 
-						style="width:200px;" name="p_name"  />
-				</td>
-			</tr>
-			<tr>
-				<th class="text-center" 
-					style="vertical-align:middle;">상품코드</th>
-				<td>
-					<input type="text" class="form-control" 
-					style="width:200px;" name="p_code"></input>
-				</td>
-			</tr>	
-			<tr>
-				<th class="text-center" 
-					style="vertical-align:middle;">상품 가격</th>
-				<td>
-					<input type="text" class="form-control" 
-						style="width:200px;" name="p_price"  />
-				</td>
-			</tr>
-			<tr>
-				<th class="text-center" 
-					style="vertical-align:middle;">분류</th>
-				<td>
-					<select name="p_flag" style="width:200px;">
-						<option value="clothes">의류</option>
-						<option value="shoes">신발</option>
-						<option value="bags">가방</option>
-						<option value="etc">잡화</option>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<th class="text-center" 
-					style="vertical-align:middle;">사진첨부</th>
-				<td>
-					<input type="file" class="form-control" 
-						style="width:200px;" name="ofile"  />
-				</td>
-			</tr>
-		</tbody>
-		</table>
-		
-		<div class="row text-center" style="margin-left:70%;">
-			
-			<button type="submit" class="btn btn-danger">업로드</button>
-			<button type="reset" class="btn">Reset</button>
-			<button type="button" class="btn btn-warning" 
-				onclick="javascript:location.href='/movingcloset/store.do';">리스트보기</button>
-		</div>
-		-->
+
 	</form> 
 </div>
 	

@@ -13,7 +13,11 @@ public interface MybatisProductImpl {
 	public List<ProductDTO> getStoreList(ProductDTO productDTO);
 	public int getTotalCount();
 	
+	public List<ProductDTO> descPrice(ProductDTO productDTO);
+	public List<ProductDTO> ascPrice(ProductDTO productDTO);
+	
 	public void insertProduct(ProductDTO productDTO);
+	public void insertDetail(ProductDetailDTO detailDTO);
 	/*
 	public int insertProduct(
 							@Param("p_idx") String p_idx,

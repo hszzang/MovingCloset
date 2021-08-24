@@ -224,7 +224,7 @@
 		<form name="updateFrm" method="post" enctype="multipart/form-data" 
 			action="<c:url value="/store/update.do" />">
 			<div class="row" style="height: 600px;">
-				<input type="hidden" name="idx" value="${storeDetail.p_idx }"/>	
+				<input type="hidden" name="p_idx" value="${storeDetail.p_idx }"/>	
 				<div class="col-8 d-flex justify-content-center" >
 					<div id="image_container">
 						<img src="../resources/upload/${storeDetail.p_sfile }" alt="상품이미지" id="p_image"  />
@@ -259,18 +259,11 @@
 						<div class="col-11">
 							<select name="size" id="sizeNum" style="border: solid lightgray 1px; border-radius:2px; padding:3px;">
 								<option value=""diabled select hidden>사이즈</option>
-								<!--  
-									<c:forEach items="${sizes }" var="size">
-										<option value="${size}">${size}</option>
+									<c:forEach items="${sizes }" var="size" >
+										<option value="${size}">${size}
+											<!-- varStatus="status"  <input type="hidden" value="${stocks[status.index] }"/>	 -->
+										</option>
 									</c:forEach>
-								<option value="220">220</option>
-								<option value="230">230</option>
-								<option value="240">240</option>
-								<option value="250">250</option>
-								<option value="260">260</option>
-								<option value="270">270</option>
-								<option value="280">280</option>
-								-->
 							</select>
 						</div>
 					</div>
@@ -366,75 +359,7 @@
 					</td>
 				</tr>
 			</c:forEach>
-			<!--  
-			<tr >
-				<td>
-				평점 
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				</td>
-				<td>신발이 예뻐요!</td>
-				<td>2021-07-31</td>
-				<td>
-					<img class="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
-					style="width: 100px; height: auto;"/>
-				</td>
-			</tr>
 			
-			<tr >
-				<td>
-				평점 
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				</td>
-				<td>신발이 예뻐요!</td>
-				<td>2021-07-31</td>
-				<td>
-					<img class="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
-					style="width: 100px; height: auto;"/>
-				</td>
-			</tr>
-			
-			<tr >
-				<td>
-				평점 
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				</td>
-				<td>신발이 예뻐요!</td>
-				<td>2021-07-31</td>
-				<td>
-					<img class="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
-					style="width: 100px; height: auto;"/>
-				</td>
-			</tr>
-			
-			<tr >
-				<td>
-				평점 
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				</td>
-				<td>신발이 예뻐요!</td>
-				<td>2021-07-31</td>
-				<td>
-					<img class="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
-					style="width: 100px; height: auto;"/>
-				</td>
-			</tr>
-			-->
 			</tbody>
 		</table>
 			<hr />
