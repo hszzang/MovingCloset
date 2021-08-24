@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class MypageController {
 
-	@RequestMapping(value="/movingcloset/mypage/coupon.do", method=RequestMethod.GET)
+	@RequestMapping(value="/mypage/coupon.do", method=RequestMethod.GET)
 	public String mypageCoupon (Locale locale, Model model) {
 		
 		return "body/mypage/mypage_coupon";

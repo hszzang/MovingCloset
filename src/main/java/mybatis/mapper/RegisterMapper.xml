@@ -19,6 +19,17 @@
 	<select id="idcheck" resultType="int" parameterType="String">
 		select count(*) from member where userid = #{userid}
 	</select>
+ 
+
+	<update id="loginbrandUpdate" parameterType="String" > 
+		update member
+		set loginbrand = #{1}
+		where email = #{0}
+	</update>
+
+	<select id="emailcheck" resultType="mybatis.MemberDTO">
+		select * from member where email = #{0}
+	</select>
 	
 	<select id="findId" resultType="java.lang.String">
 		SELECT userid FROM member 

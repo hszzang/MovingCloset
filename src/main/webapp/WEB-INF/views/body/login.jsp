@@ -109,7 +109,8 @@ function getInfo() {
 function logout(){
 	var result = confirm("로그아웃 하시겠습니까?");
 	if(result){
-		location.href = "../movingcloset/logout.do";
+		alert("14563132132");
+		location.href = "./movingcloset/logout.do";
 	}else{
 		location.href = "#";
 	}
@@ -178,19 +179,22 @@ function logout(){
 								<span class="checkmark"></span>Remember Me
 								</label>
 							</div>
-							<div class="w-50 text-md-right">
-								<a id="klogin" href="https://kauth.kakao.com/oauth/authorize?client_id=d22c6a95056d752c59d1e73f60101ab7&redirect_uri=http://localhost:8082/movingcloset/movingcloset/kakaologin.do&response_type=code">
-									<img class="socialLogin" src="../resources/images/login/kakao_login_medium.png" alt="" />
-								</a>
+							<div class="w-50 text-md-right" >
+							
+								<div style="float:left;padding-right:20px;" >
+									<a id="klogin" href="https://kauth.kakao.com/oauth/authorize?client_id=d22c6a95056d752c59d1e73f60101ab7&redirect_uri=http://localhost:8082/movingcloset/movingcloset/kakaologin.do&response_type=code&loginbrand=K">
+										<img class="socialLogin" src="../resources/images/login/kakao_login_medium.png" alt="" />
+									</a>								
+								</div>
 								<!-- <a id="naverIdLogin_loginButton" href="javascript:void(0)">
 								          <img class="socialLogin" src="../resources/images/login/naver_login.png" alt="" />
 								</a> -->
 								
-							<div id="naver_id_login" style="text-align:center">
-								<a href="${url}"> 
-									<img class="socialLogin" src="../resources/images/login/naver_login.png" alt="" />
-								</a>
-							</div>
+								<div id="naver_id_login" style="text-align:center;float:left;">
+									<a href="${url}"> 
+										<img class="socialLogin" src="../resources/images/login/naver_login.png" alt="" />
+									</a>
+								</div>
 
 							</div>
 						</div>
@@ -206,14 +210,12 @@ function logout(){
 					
 					
 					<div class="form-group" style="text-align: center;font-size: 30px;font-weight: bold;">
-						<span>${username }님 반갑습니다.</span>
+						<span>${sessionScope.username }님 반갑습니다.</span>
 					</div>
 					<div class="form-group">
 						<button type="button" class="form-control btn btn-dark submit px-3" onclick="logout();">LOG OUT</button>
 					</div>
 					
-					<h3><a href="./naverlogout.do">로그아웃</a></h3>
-
 					<%} %>
 					
 				</div>
