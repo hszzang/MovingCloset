@@ -18,34 +18,11 @@ public interface MybatisProductImpl {
 	
 	public void insertProduct(ProductDTO productDTO);
 	public void insertDetail(ProductDetailDTO detailDTO);
-	/*
-	public int insertProduct(
-							@Param("p_idx") String p_idx,
-							@Param("p_brand") String p_brand,
-							@Param("p_name") String p_name,
-							@Param("p_code") String p_code,
-							@Param("p_price") String p_price,
-							@Param("p_ofile")String p_ofile, 
-							@Param("p_sfile") String p_sfile
-							);
-	*/
-	
+
 	public ProductDTO getStoreDetail(String p_idx);
 
 	public ProductDetailDTO getProductDetail(String p_code);
 	
-	//public ProductDTO updateSelect(@Param("p_idx") String p_idx);
-	/*
-	public ProductDTO updateProduct(
-									@Param("p_name") String p_name,
-									@Param("p_code") String p_code,
-									@Param("p_price") int p_price,
-									@Param("p_brand") String p_brand,
-									@Param("p_ofile")String p_ofile, 
-									@Param("p_sfile") String p_sfile,
-									@Param("p_idx") String p_idx
-									);
-	*/
 	public void updateProduct(ProductDTO productDTO);
 	public void updateDetail(ProductDetailDTO productDetailDTO);
 	
