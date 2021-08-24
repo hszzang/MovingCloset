@@ -295,7 +295,7 @@
 	<div class="nav-sub4" id="nav-sub">
 		<div class="nav-content container-fluid">
 			 <div class="contentLink d-flex justify-content-around">
-	            <a href="../movingcloset/store.do" id="sub-content">STORE</a>
+	            <a href="/movingcloset/movingcloset/store.do" id="sub-content">STORE</a>
 	        </div>
 		</div>
 	</div>
