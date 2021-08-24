@@ -36,17 +36,41 @@
 		(product_seq.nextval, #{p_name}, #{p_code}, #{p_price}, #{p_brand}, #{p_ofile}, #{p_sfile})
 	</insert>
 	
+	<!-- product 에서 상세정보 가져오기 -->
 	<select id="getStoreDetail" resultType="mybatis.ProductDTO">
-		SELECT * FROM product where p_idx=#{p_idx}
+		SELECT * FROM product WHERE p_idx=#{p_idx}
 	</select>
 	
+	<!-- product_detail 에서 상세정보 사이즈 가져오기 -->
+	<select id="getProductDetail" resultType="mybatis.ProductDetailDTO">
+		SELECT * FROM product_detail WHERE p_code=#{p_code}
+	</select>
+	
+	<!-- 상품 수정 -->
 	<update id="updateProduct" parameterType="mybatis.ProductDTO" >
 		UPDATE product SET p_name=#{p_name}, p_code=#{p_code}, p_price=#{p_price}, p_brand=#{p_brand}, p_ofile=#{p_ofile}, p_sfile=#{p_sfile} WHERE p_idx=#{p_idx}
 	</update>
 	
+	<update id="updateDetail" parameterType="mybatis.ProductDetailDTO">
+		UPDATE product_detail SET pd_color=#{pd_color}, pd_size=#{pd_size}, pd_stock=#{pd_stock} WHERE p_code=#{p_code}
+	</update>
+	
+	<!-- 상품 삭제 -->
 	<delete id="deleteProduct">
 		DELETE FROM product WHERE p_idx=#{p_idx}
 	</delete>
+
+	<!-- 리뷰들 불러오기 -->
+	<select id="getReviews" resultType="mybatis.ReviewDTO">
+		SELECT * FROM review WHERE p_code=#{p_code}
+	</select>
+	
+	<!-- 리뷰쓰기 -->
+	<insert id="insertReview" parameterType="mybatis.ProductDTO" >
+		INSERT INTO review(p_code, p_rate, r_content, userid, r_date, r_ofile, r_sfile, r_idx)
+		VALUES
+		(#{p_code}, #{p_rate}, #{r_content}, #{userid}, #{r_date}, #{r_ofile}, #{r_sfile}, review_seq.nextval)
+	</insert>
 
 	
 

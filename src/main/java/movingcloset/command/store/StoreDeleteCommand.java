@@ -36,19 +36,15 @@ public class StoreDeleteCommand implements CommandImpl {
 			
 			Map<String, Object> paramMap = model.asMap();
 			HttpServletRequest req = (HttpServletRequest)paramMap.get("req");
-			//HttpServletRequest dto = (HttpServletRequest)paramMap.get("productDTO");
 			
-			System.out.println("StoreDeleteCommand 호출2");
 			String p_idx = req.getParameter("p_idx");
-			System.out.println(p_idx);
 			
 			sqlSession.getMapper(MybatisProductImpl.class).deleteProduct(p_idx);
 			
-			System.out.println("StoreDeleteCommand 호출3");
 			List<ProductDTO> storeList = sqlSession.getMapper(MybatisProductImpl.class).getStoreList(productDTO);
 			
 			System.out.println("StoreDeleteCommand 완료");
-			//model.addAttribute("productDTO", productDTO);
+			
 			model.addAttribute("storeList", storeList);
 			
 			
