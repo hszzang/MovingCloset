@@ -1,4 +1,4 @@
-package com.project.movingcloset;
+package movingcloset.controller;
 
 import java.util.Locale;
 
