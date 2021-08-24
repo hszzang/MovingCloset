@@ -24,10 +24,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import movingcloset.command.CommandImpl;
+import movingcloset.command.store.ReviewDeleteCommand;
+import movingcloset.command.store.ReviewInsertCommand;
 import movingcloset.command.store.StoreDeleteCommand;
 import movingcloset.command.store.StoreDetailCommand;
 import movingcloset.command.store.StoreInsertCommand;
 import movingcloset.command.store.StoreListCommand;
+import movingcloset.command.store.StoreOrderCommand;
 import movingcloset.command.store.StoreUpdateCommand;
 import mybatis.ProductDTO;
 import mybatis.ProductDetailDTO;
@@ -47,7 +50,12 @@ public class StoreController {
 	StoreUpdateCommand storeUpdateCommand;
 	@Autowired
 	StoreDeleteCommand storeDeleteCommand;
-
+	@Autowired
+	ReviewInsertCommand reviewInsertCommand;
+	@Autowired
+	ReviewDeleteCommand reviewDeleteCommand;
+	@Autowired
+	StoreOrderCommand storeOrderCommand;
 	
 	// 스토어 리스트
 	@RequestMapping(value="/movingcloset/store.do", method=RequestMethod.GET)
@@ -92,7 +100,7 @@ public class StoreController {
 	
 	// 상품 추가 처리 - post방식으로 전송되므로 value, method 둘 다 명시
 	@RequestMapping(value="/store/insertAction.do", method=RequestMethod.POST)
-	public String insertAction(Model model, MultipartHttpServletRequest req, HttpServletResponse resp, ProductDTO productDTO) throws IOException {
+	public String insertAction(Model model, MultipartHttpServletRequest req, HttpServletResponse resp, ProductDTO productDTO, ProductDetailDTO detailDTO) throws IOException {
 		
 		String path = req.getSession().getServletContext().getRealPath("/resources/upload");
 		resp.setContentType("text/html; charset=utf-8");
@@ -175,7 +183,9 @@ public class StoreController {
 		productDTO.setP_sfile(p_sfile);
 		
 		model.addAttribute("productDTO", productDTO);
+		model.addAttribute("detailDTO", detailDTO);
 		model.addAttribute("req", req);
+		
 		command = storeInsertCommand; 
 		command.execute(model);
 			
@@ -286,14 +296,18 @@ public class StoreController {
 		productDTO.setP_ofile(p_ofile);
 		productDTO.setP_sfile(p_sfile);
 		
+		String[] sizes = req.getParameterValues("sizes");
+		String[] stocks = req.getParameterValues("stocks");
+		
+		model.addAttribute("sizes", sizes);
+		model.addAttribute("stocks", stocks);
 		model.addAttribute("productDTO", productDTO);
 		model.addAttribute("req", req);
 		
 		command = storeUpdateCommand; 
 		command.execute(model);
 		
-		return "body/store/store_detail?p_idx={p_idx}";
-		//return "/store/detail.do?p_idx={p_idx}";
+		return "redirect:/store/detail.do?p_idx=" + req.getParameter("p_idx");
 	}
 	
 	// 상품 제거
@@ -312,7 +326,7 @@ public class StoreController {
 	
 	
 	
-	// 스토어 상세페이지에서 리뷰쓰기 버튼
+	// 스토어 상세페이지 리뷰 팝업
 	@RequestMapping("/store/reviewPage.do")
 	public String review(Locale locale, Model model) {
 		System.out.println("리뷰 컨트롤러 들어옴");
@@ -321,17 +335,37 @@ public class StoreController {
 		return "reviewPage";
 	}
 	
-	@RequestMapping("/store/reviewAction.do")
-	public String reviewAction(Locale locale, Model model, HttpServletRequest req) {
-		System.out.println("리뷰액션 컨트롤러 들어옴");
+	// 리뷰쓰기
+	@RequestMapping("/store/insertReview.do")
+	public String insertReview(Locale locale, Model model, HttpServletRequest req) {
+		System.out.println("리뷰쓰기 컨트롤러 들어옴");
 		
 		model.addAttribute("req", req);
 		model.addAttribute("model", model);
 		
-		command = storeDeleteCommand;
+		command = reviewInsertCommand;
 		command.execute(model);
 		
+		// 해당 상세 페이지로 돌아가는 걸로.
 		return "reviewPage";
+	}
+	
+	// 리뷰삭제
+	@RequestMapping("/store/deleteReview.do")
+	public String deleteReview(Model model, HttpServletRequest req) {
+	
+		System.out.println("delete 들어옴");
+		
+		
+		model.addAttribute("req", req);
+		model.addAttribute("model", model);
+			
+		command = reviewDeleteCommand;
+		command.execute(model);
+		
+		// 해당 상세 페이지로 돌아가는 걸로.
+		return "redirect:/store/detail.do?p_idx=" + req.getParameter("p_idx");
+		
 	}
 	
 	
