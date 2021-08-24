@@ -479,32 +479,32 @@
 						            '    </div>' +    
 						            '</div>'
 							}
-							<c:forEach items="${moyoList}" var="scmlist">
+							<c:forEach items="${moyoList}" var="iwlist">
 							,
 							{
-								title: '${scmlist.m_name}', 
-								latlng: new kakao.maps.LatLng(${scmlist.m_lat }, ${scmlist.m_lon }),
+								title: '${iwlist.m_name}', 
+								latlng: new kakao.maps.LatLng(${iwlist.m_lat }, ${iwlist.m_lon }),
 								content: 
 									'<div class="kakaowrap">' + 
 						            '    <div class="kakaoinfo">' + 
 						            '        <div class="kakaotitle">' + 
-						            '            ${scmlist.m_name}' + 
-// 						            '            <div class="kakaoclose" onclick="closeOverlay()" title="닫기"></div>' + 
+						            '            ${iwlist.m_name}' + 
 						            '        </div>' + 
 						            '        <div class="kakaobody">' + 
 						            '        	<div class="kakaoimg">' +
-						            '				<c:if test="${empty scmlist.m_sfile }">' +
-									'					<img src="../resources/images/list/${scmlist.m_idx}.jpg">' +
+						            '				<c:if test="${empty iwlist.m_sfile }">' +
+									'					<img src="../resources/images/list/${iwlist.m_idx}.jpg">' +
 									'				</c:if>' +
-									'				<c:if test="${not empty scmlist.m_sfile }">' +
-									'					<img src="../resources/upload/${scmlist.m_sfile }">' +
+									'				<c:if test="${not empty iwlist.m_sfile }">' +
+									'					<img src="../resources/upload/${iwlist.m_sfile }">' +
 									'				</c:if>' +
-// 						            '               <img src="https://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
 						            '           </div>' + 
-						            '        	<div class="kakaodesc">' + 
-						            '           	<div class="kakaoellipsis">${scmlist.m_addr}</div>' + 
-						            '           	<div class="kakaojibun kakaoellipsis">${scmlist.m_dday}</div>' + 
-						            '           	<div class="kakaodetail" id="moyoMapWindow${scmlist.m_idx}">상세보기</div>' + 
+						            '        	<div class="kakaodesc">' +
+						            '           	<div class="kakaoellipsis">${iwlist.m_addr}</div>' + 
+						            '				<fmt:parseDate value="${iwlist.m_dday }" var="infoWindowMDday" pattern="yyyy-MM-dd HH:mm:ss" />' +
+						            '				<fmt:formatDate value="${infoWindowMDday }" var="infoWindowMDday" pattern="yyyy-MM-dd" />' +
+						            '           	<div class="kakaojibun kakaoellipsis">${infoWindowMDday }</div>' + 
+						            '           	<div class="kakaodetail" id="moyoMapWindow${iwlist.m_idx}">상세보기</div>' + 
 						            '        	</div>' + 
 						            '        </div>' + 
 						            '    </div>' +    
@@ -554,11 +554,14 @@
 
 						function getAddressLatLon() {
 							
-							var addrStr = document.getElementsByClassName("wantGetLatLon")[0].value;
-							if(addrStr == "") {
-								addrStr = document.getElementsByClassName("wantGetLatLon")[1].value;
+							var addrStr = document.getElementsByClassName("wantGetLatLon")[1].value;
+							if(addrStr == "" && ${not empty siteUserInfo }) {
+								addrStr = document.getElementsByClassName("wantGetLatLon")[0].value;
+								if(addrStr == "") {
+									location.reload();
+								}
 							}
-							if(${empty siteUserInfo }) {
+							if(addrStr == "" && ${empty siteUserInfo }) {
 								alert("로그인 후 이용해주세요.");
 								location.href="../movingcloset/login.do";
 							}
