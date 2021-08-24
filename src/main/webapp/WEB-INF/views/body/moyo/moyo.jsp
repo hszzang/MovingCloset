@@ -497,7 +497,7 @@
 									'					<img src="../resources/images/list/${scmlist.m_idx}.jpg">' +
 									'				</c:if>' +
 									'				<c:if test="${not empty scmlist.m_sfile }">' +
-									'					<img src="../resources/images/list/${scmlist.m_sfile }.jpg">' +
+									'					<img src="../resources/upload/${scmlist.m_sfile }">' +
 									'				</c:if>' +
 // 						            '               <img src="https://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
 						            '           </div>' + 
@@ -601,7 +601,7 @@
 								</c:if>
 								<c:if test="${not empty mlist.m_sfile }">
 									<img class="simpleImg"
-										src="../resources/images/list/${mlist.m_sfile }.jpg">
+										src="../resources/upload/${mlist.m_sfile }">
 								</c:if>
 							</div>
 							<div>

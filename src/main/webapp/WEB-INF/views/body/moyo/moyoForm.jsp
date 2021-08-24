@@ -147,6 +147,9 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 
 	function moyoFormCheck() {
 		
+		var personalAgreeChk = document.getElementById("personalAgree");
+		var cancelAgreeChk = document.getElementById("cancelAgree");
+		
 		if(document.moyoFrm.username.value == ""
 				|| document.moyoFrm.mobile1.value == "" 
 				|| document.moyoFrm.mobile2.value == "" 
@@ -155,10 +158,10 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 				|| document.moyoFrm.email2.value == "") {
 			alert("신청자 정보를 모두 입력해주세요.");
 		}
-		else if(document.moyoFrm.personalAgree.checked == false) {
+		else if(personalAgreeChk.checked == false) {
 			alert("개인정보수집약관에 동의해주세요.");
 		}
-		else if(document.moyoFrm.cancelAgree.checked == false) {
+		else if(cancelAgreeChk.checked == false) {
 			alert("노쇼 약관에 동의해주세요.");
 		}
 		else {
@@ -236,9 +239,8 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 							<img class="productImg" src="../resources/images/list/${moyoDTO.m_idx }.jpg">
 						</c:if>
 						<c:if test="${not empty moyoDTO.m_sfile }">
-							<img class="productImg" src="../resources/images/list/${moyoDTO.m_sfile }.jpg">
+							<img class="productImg" src="../resources/upload/${moyoDTO.m_sfile }">
 						</c:if>
-<!-- 						<img class="productImg" src="../resources/images/list/2.jpg"> -->
 						
 						<fmt:parseDate value="${moyoDTO.m_start }" var="strmstart" pattern="yyyy-MM-dd HH:mm:ss"/>
 						<fmt:formatDate value="${strmstart }" var="frmmstart" pattern="yyyy. MM. dd"/>
