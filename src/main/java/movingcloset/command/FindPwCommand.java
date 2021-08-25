@@ -65,7 +65,6 @@ public class FindPwCommand implements CommandImpl{
 				e.printStackTrace();
 			}
 			
-//		String newPw = new MailSendUtil().sendNewPw(findPwEmail);
 			int changeNewPw = sqlSession.getMapper(MybatisMemberImpl.class).changeNewPw(newPassword, userid, email);
 		}
 		model.addAttribute("findPwEmail", findPwEmail);

@@ -8,18 +8,17 @@
 
 	<!-- 리스트 (최근순) -->
 	<select id="getStoreList" resultType="mybatis.ProductDTO" parameterType="java.util.ArrayList" >
-		SELECT * FROM product WHERE p_idx<![CDATA[>]]>117 ORDER BY p_idx DESC
-		<!-- SELECT * FROM product where p_idx<![CDATA[<=]]>43 -->
-		<!-- SELECT * FROM product where p_idx<![CDATA[<=]]>23 -->
+		SELECT * FROM product ORDER BY p_idx DESC
+		<!-- SELECT * FROM product WHERE p_idx<![CDATA[>]]>117 ORDER BY p_idx DESC  -->
 	</select>
 	
 	<!-- 정렬 높은 가격 순 -->
-	<select id="highToLow" resultType="mybatis.ProductDTO">
+	<select id="descPrice" resultType="mybatis.ProductDTO">
 		SELECT * FROM product order by p_price desc
 	</select>
 	
 	<!-- 정렬 낮은 가격 순 -->
-	<select id="lowToHigh" resultType="mybatis.ProductDTO">
+	<select id="ascPrice" resultType="mybatis.ProductDTO">
 		SELECT * FROM product order by p_price asc
 	</select>
 	
@@ -29,11 +28,15 @@
 	</select>
 	
 	<!-- 상품 입력 -->
-	<!--  <insert id="insertProduct" parameterType="mybatis.ProductDTO"> -->
 	<insert id="insertProduct" parameterType="mybatis.ProductDTO" >
-		INSERT INTO product(p_idx, p_name, p_code, p_price, p_brand, p_ofile, p_sfile)
+		INSERT INTO product(p_idx, p_name, p_code, p_price, p_brand, p_ofile, p_sfile, p_flag)
 		VALUES
-		(product_seq.nextval, #{p_name}, #{p_code}, #{p_price}, #{p_brand}, #{p_ofile}, #{p_sfile})
+		(product_seq.nextval, #{p_name}, #{p_code}, #{p_price}, #{p_brand}, #{p_ofile}, #{p_sfile}, #{p_flag})
+	</insert>
+	<!-- 디테일 입력 -->
+	<insert id="insertDetail" parameterType="mybatis.ProductDetailDTO">
+		INSERT INTO product_detail(p_code, pd_color, pd_size, pd_stock)
+		VALUES (#{p_code}, #{pd_color}, #{pd_size}, #{pd_stock})
 	</insert>
 	
 	<!-- product 에서 상세정보 가져오기 -->
@@ -51,14 +54,41 @@
 		UPDATE product SET p_name=#{p_name}, p_code=#{p_code}, p_price=#{p_price}, p_brand=#{p_brand}, p_ofile=#{p_ofile}, p_sfile=#{p_sfile} WHERE p_idx=#{p_idx}
 	</update>
 	
+	<update id="updateDetail" parameterType="mybatis.ProductDetailDTO">
+		UPDATE product_detail SET pd_color=#{pd_color}, pd_size=#{pd_size}, pd_stock=#{pd_stock} WHERE p_code=#{p_code}
+	</update>
+	
+	<!-- 상품 삭제 -->
 	<delete id="deleteProduct">
 		DELETE FROM product WHERE p_idx=#{p_idx}
 	</delete>
 
-	<insert id="insertReview" parameterType="mybatis.ProductDTO" >
+	<!-- 리뷰들 불러오기 -->
+	<select id="getReviews" resultType="mybatis.ReviewDTO">
+		SELECT * FROM review WHERE p_code=#{p_code}
+	</select>
+	
+	<!-- 리뷰쓰기 -->
+	<insert id="insertReview" parameterType="mybatis.ReviewDTO" >
 		INSERT INTO review(p_code, p_rate, r_content, userid, r_date, r_ofile, r_sfile, r_idx)
 		VALUES
 		(#{p_code}, #{p_rate}, #{r_content}, #{userid}, #{r_date}, #{r_ofile}, #{r_sfile}, review_seq.nextval)
 	</insert>
-
+	
+	<!-- 리뷰 수정 -->
+	<update id="updateReview" parameterType="mybatis.ReviewDTO">
+		UPDATE review 
+		SET p_rate=#{p_rate}, r_content=#{r_content}, r_date=#{sysdate}, r_ofile=#{r_ofile}, r_sfile=#{r_sfile}
+		WHERE p_code=#{p_code}, r_code=#{r_code} AND userid=#{userid}
+	</update>
+	
+	<!-- 리뷰 삭제 -->
+	<delete id="deleteReview">
+		<!--  DELETE FROM review WHERE p_code=#{p_code}, r_code=#{r_code} AND userid=#{userid} -->
+		DELETE FROM review WHERE r_idx=#{0}
+	</delete>
+	<select id="getPidx" >
+		SELECT p_idx FROM product WHERE p_code=#{0}
+	</select>
+	
 </mapper>

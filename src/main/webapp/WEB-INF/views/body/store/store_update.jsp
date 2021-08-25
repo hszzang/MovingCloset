@@ -33,7 +33,7 @@
 		font-size: 1em;
 	}
 	#brandName{ display: inline; }
-	#prodName {font-size:1.5em;}
+	#prodName {font-size:1em;}
 	#prodCount{text-align:right; vertical-align:center;}
 	
 	#sizeNum{ width:100%; height:40px; font-size:1em;}
@@ -123,7 +123,7 @@
     	bottom-margin:30px;
     }
     #productDelete{
-   		width:350px; height:40px; margin-top:10px;
+   		width:350px; height:40px; margin-top:10px; margin-bottom:10px;
    		border:orangered solid 1px; background-color:white; color:orangered;
     }
 	</style>
@@ -141,12 +141,79 @@
 			};
 			reader.readAsDataURL(event.target.files[0]);
 		}
+		
 		function delProduct(p_idx){
-			if(confirm("정말 삭제하겠습니까?")){
+			if(confirm("정말 상품을 삭제하시겠습니까?")){
 				location.href="/movingcloset/store/delete.do?p_idx=" + p_idx;
 			}
 		}
+		
+		function checkValidate(f){
+			if(f.p_brand.value == ""){
+				alert("브랜드를 입력하세요.");
+				f.p_brand.focus();
+				return false;
+			}
+			if(f.p_name.value ==""){
+				alert("상품명을 입력하세요.");
+				f.p_name.focus();
+				return false;
+			}
+			if(f.p_code.value ==""){
+				alert("상품코드를 입력하세요.");
+				f.p_code.focus();
+				return false;
+			}
+			if(f.p_price.value == ""){
+				alert("상품가격을 입력하세요.");
+				f.p_price.focus();
+				return false;
+			}
+			if(f.p_ofile.value == ""){
+				alert("상품사진을 첨부하세요.");
+				f.p_ofile.focus();
+				return false;
+			}
+		}
+		/*
+		function plusminus(${status.count}){
+			//console.log("넘어온 값 "+id);
+			var num = document.getElementsByClass("quantity");
+
+			if(id=="minus"){ 
+				if(num.value <= 1){
+					num.value = 1;
+				}else{
+					num.value = parseInt(num.value) - 1;
+				}
+			}
+			if(id=="plus"){ 
+				num.value = parseInt(num.value) + 1;
+			}		
+		} 
+		*/
 	</script>
+	<script>
+		var arr1 = new Array();
+		<c:forEach items="${sizes}" var="size">
+			arr1.push("${size}");
+		</c:forEach>
+		console.log(arr1);
+	</script>
+	
+	<script>
+		var arr2 = new Array();
+		<c:forEach items="${stocks}" var="stock">
+			arr2.push("${stock}");
+		</c:forEach>
+		console.log(arr2);
+		
+		var test1 = '<c:out value="${size}"/>';
+		console.log(test1);
+		var test2 = '<c:out value="${list}"/>';
+		console.log(test2);
+	</script>
+	
 <title>Store</title>
 </head>
 <body>
@@ -180,59 +247,67 @@
 				</div>
 				
 				<div class="col-4" style="padding-left:3%; padding-top:5%;">
+					<h4>상품 수정</h4>
 					<div id="brandName" class="updiv"><input class="update" name="p_brand" value="${ storeDetail.p_brand}" /></div>
 					<div id="prodName" class="updiv"><input class="update" name="p_name" value="${storeDetail.p_name }" /></div>
 					<div id="code" class="updiv"><input class="update" name="p_code" value="${storeDetail.p_code }" /> </div>
 					<div id="price" class="updiv"><input class="update" name="p_price" value="${storeDetail.p_price }" /> </div>
-					<input id="image" type="file" class="form-control" name="ofile" accept="image/*" onchange="setThumbnail(event);"
-						style="width:350px;height:40px;margin-bottom:10px;"  />
+					<div id="color" class="updiv"><input class="update" name="pd_color" value="${productDetail.pd_color }" /> </div>					
+					<div id="flag" class="updiv"><input class="update" name="p_flag" value="${storeDetail.p_flag }" /> </div>
+					<input id="image" type="file" class="form-control" name="ofile" accept="image/*" value="${storeDetail.p_ofile }"
+						onchange="setThumbnail(event);" style="width:350px;height:40px;margin-bottom:10px;"  />
+					<div class="row">
+						<div class="col-11">
+						<table style="width:100%;">
+							<thead>
+								<tr>
+									<th style="width:50%;text-align:center;">사이즈</th>
+									<th style="width:50%;text-align:center;">재고량</th>
+								</tr>
+							</thead>
+							<tbody>
+								
+								<c:forEach items="${sizes }" var="size" varStatus="status">
+									<tr>
+										<td style="text-align:center;">${size }
+										<input type="hidden" name="sizes" value="${sizes[status.index] }" />
+										</td>
+										<td style="text-align:center;">
+											<input type="text" id="quantity" name="stocks" value="${stocks[status.index] }" 
+											style="border:lightgray solid 1px; width:100px; background-color:none;text-align:center;" />
+										</td>
+									</tr>
+								</c:forEach>
+										<!--  
+											<button type="button" class="btn" class="plus" onclick="plusminus(${status.count});"><i class="fa fa-plus"></i></button>
+											<input type="text" class="quantity" name="stocks" value="${stocks[status.index] }" style="border:none; width:50px; background-color: none;text-align:center;">
+											<button type="button" class="btn" class="minus" onclick="plusminus(${status.count});"><i class="fa fa-minus"></i></button>
+										-->	
+							</tbody>
+						</table>
+
+							 <!--  
+							<div class="col-8" style="width:45%;display:inline;">
+								<button class="btn" id="plus" onclick="plusminus(this.id);"><i class="fa fa-plus"></i></button>
+								<input type="text" id="quantity" value="1" style="border:none; width:50px; background-color: none;text-align:center;">
+								<button class="btn" id="minus" onclick="plusminus(this.id);"><i class="fa fa-minus"></i></button>
+							</div>
+							-->
+						</div>
+					</div>
+					<br>
 						<input type="submit" id="productUpdate" style="width:350px;height:40px;background-color:black;color:white;" value="수정">
 						<button type="button" class="product" id="productDelete" onclick="delProduct(${p_idx});">상품삭제</button>
-					<br>
+						<button type="button" class="btn" style="border:lightgray solid 1px;width:350px;"
+							onclick="javascript:location.href='/movingcloset/store/detail.do?p_idx=${p_idx}';">돌아가기</button>
+				
 				</div>
 			</div>
 		</form>
 	
-					<!-- 
-					<div class="row">
-						<div class="col-11">
-							<select name="size" id="sizeNum" style="border: solid lightgray 1px; border-radius:2px; padding:3px;">
-								<option value=""diabled select hidden>사이즈</option>
-								<option value="220">220</option>
-								<option value="230">230</option>
-								<option value="240">240</option>
-								<option value="250">250</option>
-								<option value="260">260</option>
-								<option value="270">270</option>
-								<option value="280">280</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="row">
-						<div class="col-4" style="vertical-align:center; text-align:right; padding-top:5px;">
-							<span id="prodCount">수량</span>
-						</div>
-						<div class="col-8">
-							<button class="btn" id="plus" onclick="plusminus(this.id);"><i class="fa fa-plus"></i></button>
-							<input type="text" id="quantity" value="1" style="border:none; width:50px; background-color: none;text-align:center;">
-							<button class="btn" id="minus" onclick="plusminus(this.id);"><i class="fa fa-minus"></i></button>
-						</div>
-					</div>
-					<hr />
-					<br>
-					<div>
-					
-					</div>
-					<br> 
-					<div>
-						<span><button style="width: 45%;" id="basket"><a href="#">장바구니</a></button></span>
-						<span><button style="width: 45%;" id="wish" onclick="location.href='#';">위시리스트 <i class="fa fa-heart" style="color: red;"></i></button></span>
-					</div>
-					 -->
-	</div><br /><br /><br />
+	</div><br /><br /><br /><br /><br />
 	
-	<hr>
+	<hr><br /><br /><br /><br /><br />
 
 </body>
 </html>

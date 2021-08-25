@@ -12,18 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import movingcloset.command.CommandImpl;
 import mybatis.MybatisProductImpl;
 import mybatis.ProductDTO;
-
+import movingcloset.command.CommandImpl;
 import movingcloset.util.PagingUtil;
 
 @Service
 public class StoreListCommand implements CommandImpl {
 
-		public StoreListCommand() {
-			//System.out.println("스토어리스트 커맨드 호출");
-		}
+		public StoreListCommand() {}
 		
 		@Autowired
 		private SqlSession sqlSession;
@@ -33,16 +30,14 @@ public class StoreListCommand implements CommandImpl {
 			
 			ProductDTO productDTO = new ProductDTO();
 			
+			Map<String, Object> paramMap = model.asMap();
+			HttpServletRequest req = (HttpServletRequest)paramMap.get("req");
+			
 			List<ProductDTO> storeList = sqlSession.getMapper(MybatisProductImpl.class).getStoreList(productDTO);
-
-			int totalProduct = sqlSession.getMapper(MybatisProductImpl.class).getTotalCount(); 
-			System.out.println(totalProduct);
 			
 			model.addAttribute("storeList", storeList);
 			
 		}
-
-
 		
 		
 }

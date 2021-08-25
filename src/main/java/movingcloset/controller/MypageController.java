@@ -1,4 +1,4 @@
-package com.project.movingcloset;
+package movingcloset.controller;
 
 import java.util.Locale;
 
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class MypageController {
 
-	@RequestMapping(value="/mypage/coupon.do", method=RequestMethod.GET)
+	@RequestMapping(value="/movingcloset/mypage/coupon.do", method=RequestMethod.GET)
 	public String mypageCoupon (Locale locale, Model model) {
 		
 		return "body/mypage/mypage_coupon";
@@ -53,7 +53,7 @@ public class MypageController {
 	@RequestMapping(value="/movingcloset/mypage/review.do", method=RequestMethod.GET)
 	public String mypageReview (Locale locale, Model model) {
 		
-		return "body/mypage/mypage_review";   
+		return "body/mypage/mypage_review";
 	}
 	
 }

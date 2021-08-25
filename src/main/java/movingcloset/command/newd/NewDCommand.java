@@ -15,7 +15,6 @@ import mybatis.MybatisProductImpl;
 import mybatis.NewdDTO;
 import mybatis.ProductDTO;
 
-
 @Service
 public class NewDCommand implements CommandImpl {
 	
@@ -34,13 +33,15 @@ public class NewDCommand implements CommandImpl {
 		System.out.println("newDCommand 호출");
 		
 		ProductDTO productDTO = new ProductDTO();
-		NewdDTO newdDTO = new NewdDTO();
-		
 		
 		//List<NewdDTO> newdList = sqlSession.getMapper(MybatisNewDImpl.class).getNewdList(newdDTO);
-		List<ProductDTO> newdList = sqlSession.getMapper(MybatisProductImpl.class).getStoreList(productDTO);
-		model.addAttribute("newdList", newdList);
+		List<ProductDTO> newdList = sqlSession.getMapper(MybatisNewDImpl.class).getNewdList(productDTO);
 		
+		int totalProduct = sqlSession.getMapper(MybatisProductImpl.class).getTotalCount(); 
+		System.out.println(totalProduct);
+		
+		model.addAttribute("newdList", newdList);
+		 
 		
 		
 	}
