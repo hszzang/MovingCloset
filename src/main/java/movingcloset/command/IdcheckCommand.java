@@ -20,8 +20,7 @@ public class IdcheckCommand implements CommandImpl{
 	
 	@Override
 	public void execute(Model model) {
-		
-		Map<String, Object> paramMap = model.asMap();
+						Map<String, Object> paramMap = model.asMap();
 		HttpServletRequest req = (HttpServletRequest)paramMap.get("req");
 
 		String userid = req.getParameter("user_id");

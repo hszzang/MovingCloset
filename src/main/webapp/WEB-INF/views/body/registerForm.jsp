@@ -118,7 +118,10 @@
 		input::-moz-placeholder {font-style: italic;font-size: 12px;}
 	</style>
 
+
 	<script>
+
+
 
 		//아이디 검증을 위한 전역변수
 		var idObj;
@@ -129,8 +132,13 @@
 			count=0;
 		}
 		
+		
+		
+		
+		
  		function idCheck(fn) {
 			
+
 			if (!idCapsule()) {
 				idObj.value = "";
 				idObj.focus();
@@ -186,6 +194,9 @@
 			
 		};
 		 */
+		
+		
+		
 		
 		
 		function loginValdidate(fn) {
@@ -401,7 +412,6 @@
 					<h3>회원가입</h3>
 					<form name="registFrm" id="registFrm" action="./registerAction.do" method="POST"
 						onsubmit="return loginValdidate(this);">
-						<input type="hidden" value="${loginbrand }" name="loginbrand">
 						<table class="table table-bordered">
 							<colgroup>
 								<col width="20%" />
@@ -415,7 +425,7 @@
 									</td>
 								</tr>
 								<tr>
-									<td class="text-left" style="vertical-align:middle;"><span class="red">*</span>아이디
+									<td class="text-left" style="vertical-align:middle;" value=${data.id }><span class="red">*</span>아이디
 									</td>
 									<td class="form-inline">
 										<input type="text" name="user_id" class="form-control" style="width: 250px;"
