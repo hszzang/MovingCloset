@@ -24,74 +24,7 @@
 
 </style>
 <script type="text/javascript">
-<!-- 
-Kakao.init('da11b86bdef1f386718451384468c246');
-Kakao.isInitialized();
 
-function loginWithKakao() {
-    Kakao.Auth.login({
-        success: function (authObj) {
-            
-            Kakao.Auth.setAccessToken(authObj.access_token);
-            getInfo();
-        },
-        fail: function (err) {
-            alert(JSON.stringify(err))
-        }
-    })
-}
-function getInfo() {
-	Kakao.API.request({
-        url: '/v2/user/me',
-        success: function (res) {
-        var email = res.kakao_account.email;
-        console.log(res);
-            console.log(email);
-         location.href='kakaoForm?userId='+email; 
-        },
-        fail: function (error) {
-            alert(
-
-                '카카오로그인에 실패했습니다 확인하세요 : ' + JSON.stringify(error))
-        },
-    })
-};
- -->
-
-/* https://kauth.kakao.com/oauth/authorize?client_id=d22c6a95056d752c59d1e73f60101ab7&redirect_uri=http://localhost:8082/movingcloset/movingcloset/login.do&response_type=code
-
-		
-카카오 인증완료 코드값 : TOkMZ1uxb_SYYYla41a0vrYVnpZ-ZEh4jNl7AyZ_sk-S4iS0bSf8UjsdOjYy4ZVRO1EBXwopb7kAAAF7SZ564g
-*/	
-
-
-
-
-
-<!-- Kakao.Auth.createLoginButton({
-    container: '#kakao-login-btn',
-    success: function(authObj) {
-      Kakao.API.request({
-        url: 'http://localhost:8082/movingcloset/movingcloset/login.do',
-        success: function(res) {
-          alert(JSON.stringify(res))
-        },
-        fail: function(error) {
-          alert(
-            'login success, but failed to request user information: ' +
-              JSON.stringify(error)
-          )
-        },
-      })
-    },
-    fail: function(err) {
-      alert('failed to login: ' + JSON.stringify(err))
-    },
-  })
-  
-  
-	
-} -->
 
  function loginValidate(fn){
 	if(!fn.userid.value){
@@ -149,7 +82,6 @@ function logout(){
 					
 					%>
 					<form name="loginForm" action="./loginAction.do" onsubmit="return loginValidate(this);" method="POST">
-					
 						<div class="form-group" >
 							<input type="text" name="userid" value="${loginId }"  class="form-control" placeholder="Enter ID" required> 
 							<!-- <input type="text" name="userid"  class="form-control" placeholder="Enter ID" required> -->
@@ -179,13 +111,13 @@ function logout(){
 								</label>
 							</div>
 							<div class="w-50 text-md-right">
-								<div style="float:left; padding-right: 20px;">
-									<a id="klogin" href="https://kauth.kakao.com/oauth/authorize?client_id=d22c6a95056d752c59d1e73f60101ab7&redirect_uri=http://localhost:8081/movingcloset/movingcloset/kakaologin.do&response_type=code">
+								<div style="float:left;padding-right:20px;" >
+									<a id="klogin" href="https://kauth.kakao.com/oauth/authorize?client_id=d22c6a95056d752c59d1e73f60101ab7&redirect_uri=http://localhost:8082/movingcloset/movingcloset/kakaologin.do&response_type=code">
 										<img class="socialLogin" src="../resources/images/login/kakao_login_medium.png" alt="" />
 									</a>								
 								</div>
 								
-								<div id="naver_id_login" style="text-align:center">
+								<div id="naver_id_login" style="text-align:center;float:left;">
 									<a href="${url}"> 
 										<img class="socialLogin" src="../resources/images/login/naver_login.png" alt="" />
 									</a>
@@ -210,7 +142,6 @@ function logout(){
 					<div class="form-group">
 						<button type="button" class="form-control btn btn-dark submit px-3" onclick="logout();">LOG OUT</button>
 					</div>
-					
 					
 
 					<%} %>
