@@ -124,13 +124,11 @@ function logout(){
 							<div class="w-50 text-md-right" >
 							
 								<div style="float:left;padding-right:20px;" >
-									<a id="klogin" href="https://kauth.kakao.com/oauth/authorize?client_id=d22c6a95056d752c59d1e73f60101ab7&redirect_uri=http://localhost:8081/movingcloset/movingcloset/kakaologin.do&response_type=code&loginbrand=K">
+									<a id="klogin" href="https://kauth.kakao.com/oauth/authorize?client_id=d22c6a95056d752c59d1e73f60101ab7&redirect_uri=http://localhost:8081/movingcloset/movingcloset/kakaologin.do&response_type=code">
 										<img class="socialLogin" src="../resources/images/login/kakao_login_medium.png" alt="" />
 									</a>								
 								</div>
-								<!-- <a id="naverIdLogin_loginButton" href="javascript:void(0)">
-								          <img class="socialLogin" src="../resources/images/login/naver_login.png" alt="" />
-								</a> -->
+
 								
 								<div id="naver_id_login" style="text-align:center;float:left;">
 									<a href="${url}"> 
@@ -144,7 +142,7 @@ function logout(){
 					</form>
 					<p id="others" class="w-100 text-center">&mdash; Others &mdash;</p>
 					<div class="memberMore d-flex text-center">
-						<a href="./RegistMember.jsp" class="px-2 py-2 mr-md-1 rounded">회원가입</a>
+						<a href="./register.do" class="px-2 py-2 mr-md-1 rounded">회원가입</a>
 						<a href="../movingcloset/findIdPw.do" class="px-2 py-2 ml-md-1 rounded">아이디/비밀번호찾기</a>
 					</div>
 					

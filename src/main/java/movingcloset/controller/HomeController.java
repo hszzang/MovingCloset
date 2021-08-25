@@ -131,7 +131,6 @@ public class HomeController {
 	public String login(Model model, HttpSession session) {
 		
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session); 
-		naverAuthUrl = naverAuthUrl+"&loginbrand=N";
 		System.out.println("네이버:" + naverAuthUrl); 
 		model.addAttribute("url", naverAuthUrl); 
 		
@@ -228,12 +227,14 @@ public class HomeController {
 		//세션 생성 
 		model.addAttribute("result", apiResult); 
 	
-
+		request.setAttribute("loginbrand", "naver");
         request.setAttribute("email", email);
         model.addAttribute("request",request);
+		
 		/*
 		 * command = emailCheckCommand; command.execute(model);
 		 */
+		
         
 		if(session.getAttribute("siteUserInfo") != null) {
 			return "body/login";
@@ -246,7 +247,7 @@ public class HomeController {
 	
 
 	
-
+	// 카카오 로그인
     @RequestMapping("/movingcloset/kakaologin.do")
     public String kakaologin(@RequestParam(value = "code", required = false) String code, HttpSession session, Model model, HttpServletRequest request ) throws Exception{
         System.out.println("#########" + code);
@@ -268,15 +269,19 @@ public class HomeController {
         
         
         request.setAttribute("email", kemail);
+        request.setAttribute("loginbrand", "kakao");
         model.addAttribute("request",request);
+		
 		/*
 		 * command = emailCheckCommand; command.execute(model);
 		 */
+		
         
 		if(session.getAttribute("siteUserInfo") != null) {
 			return "body/login";
 			
 		}else {
+		
 			return "body/registerForm";
 			
 		}
@@ -301,8 +306,8 @@ public class HomeController {
 
 	// 회원가입 화면으로 이동
 	@RequestMapping(value = "/movingcloset/register.do")
-	public String register() {
-
+	public String register(HttpServletRequest request) {
+		request.setAttribute("loginbrand", "normal");
 		return "body/registerForm";
 	}
 

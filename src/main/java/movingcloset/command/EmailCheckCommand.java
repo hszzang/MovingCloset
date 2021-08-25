@@ -25,9 +25,11 @@ public class EmailCheckCommand implements CommandImpl{
 		Map<String, Object> paramMap = model.asMap();
 		HttpServletRequest request = (HttpServletRequest)paramMap.get("request");
 		String email = (String) request.getAttribute("email");
+		String loginbrand = (String) request.getAttribute("loginbrand");
+		
 		MemberDTO memberDTO = sqlSession.getMapper(MybatisMemberImpl.class).emailcheck(email);
 		
-		//System.out.println("email : "+memberDTO.getEmail());
+		System.out.println("email : "+memberDTO.getEmail());
 		System.out.println("name : "+memberDTO.getName());
 		HttpSession session = request.getSession();
 		
