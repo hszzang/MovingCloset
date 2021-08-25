@@ -1,140 +1,318 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <!-- <link rel="stylesheet" href="../resources/css/bootstrap.css" /> -->
 <!-- <script src="../resources/jquery/jquery-3.6.0.js"></script> -->
-<title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<title>모여! :: MovingCloset</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
 
 <!-- geocoder를 사용하기 위해 api key 뒤에 &libraries=services 를 붙여준다.-->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=88444ee8320d4b09aa47995c55b34d58&libraries=services"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=88444ee8320d4b09aa47995c55b34d58&libraries=services"></script>
 
 <style>
+.container {
+	margin-top: 95px;
+	margin-bottom: 10px;
+}
 
-	.container {
-		margin-top: 95px;
-		margin-bottom: 30px;
-	}
-	.container .row {
-		padding:10px;
-		padding-left: 15px;
-		padding-right: 15px;
-	}
-	#findMoyoBtn {
-		background-color: white; color: #ff6c2f;
-		border: #ff6c2f 1px solid;
-	}
-	.moyoSimple {
-		width:100%; height: 30%;
-		cursor: pointer; vertical-align: top;
-	}
-	#moyoList {
-		height: 665px;
-		overflow-y: auto;
-	}
-	#moyoList .row {
-		padding-top: 15px; padding-bottom: 25px;
-		border-bottom: #ff6c2f solid 1px;
-	}
-	.simpleImg {
-		width: 100%; height: 170px;
-		object-fit:cover; margin-bottom: 7px;	
-	}
-	.form-control:focus {
-		border-color: #FFFFFF;
-		box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px #ff6c2f;
-	}
-	.moyoMax {
-		font-weight: bold; font-size: 1.25em;
-	}
-	.badge {
-		background-color: white; color: #ff6c2f; 
-		border: #ff6c2f 1px solid;
-	}
-	.moyoDetail {
-		padding: 10px 0;
-	}
+.container .row {
+	padding: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
 
-	.moyoDetail h6 {
-		font-weight: 1.1em; margin-top: 10px;
-	}
+.wrapMoyoForm {
+	margin-top: 30px;
+	padding-top: 15px;
+	margin-bottom: 40px;
+	/* 		border-top: 1px solid lightgray; */
+	/* 		border-top-width: 60%;	 */
+}
 
-	.moyoDetail .moyoFormBtn {
-		background-color: #ff6c2f; color: white; 
-	}
-	
-	.section-title {
-	  text-align: center;
-	  padding-bottom: 30px; padding-top: 50px;
-	}
-	
-	.section-title h2 {
-	  font-size: 32px;
-	  font-weight: bold;
-	  text-transform: uppercase;
-	  margin-bottom: 20px;
-	  padding-bottom: 20px;
-	  position: relative;
-	}
-	
-	.section-title h2::after {
-	  content: '';
-	  position: absolute;
-	  display: block;
-	  width: 50px;
-	  height: 3px;
-	  background: #555555;
-	  bottom: 0;
-	  left: calc(50% - 25px);
-	}
-	
-	#inputLocation {
-		width: 100%;
-		padding-right: 0;
-		margin-right: 0;
-	}
-	
-	#inputLocation .form-control:focus {
-		border-color: #FFFFFF;
-		box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px #ff6c2f;
-	}
-	
+#findMoyoBtn {
+	background-color: white;
+	color: #ff6c2f;
+	border: #ff6c2f 1px solid;
+}
+
+.moyoSimple {
+	width: 100%;
+	height: 30%;
+	cursor: pointer;
+	vertical-align: top;
+}
+
+#moyoList {
+	height: 665px;
+	overflow-y: auto;
+}
+
+#moyoList .row {
+	padding-top: 15px;
+	padding-bottom: 25px;
+	border-bottom: #ff6c2f solid 1px;
+}
+
+.simpleImg {
+	width: 100%;
+	height: 170px;
+	object-fit: cover;
+	margin-bottom: 7px;
+}
+
+.form-control:focus {
+	border-color: #FFFFFF;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px #ff6c2f;
+}
+
+.moyoMax {
+	font-weight: bold;
+	font-size: 1.25em;
+}
+
+.badge {
+	background-color: white;
+	color: #ff6c2f;
+	border: #ff6c2f 1px solid;
+}
+
+.moyoDetail {
+	padding: 10px 0;
+}
+
+.moyoDetail h6 {
+	font-weight: 1.1em;
+	margin-top: 10px;
+}
+
+.moyoDetail .moyoFormBtn {
+	background-color: #ff6c2f;
+	color: white;
+}
+
+.section-title {
+	text-align: center;
+	padding-bottom: 10px;
+	padding-top: 50px;
+}
+
+.section-title h2 {
+	font-size: 32px;
+	font-weight: bold;
+	text-transform: uppercase;
+	margin-bottom: 10px;
+	padding-bottom: 20px;
+	position: relative;
+}
+
+.section-title h2::after {
+	content: '';
+	position: absolute;
+	display: block;
+	width: 50px;
+	height: 3px;
+	background: #555555;
+	bottom: 0;
+	left: calc(50% - 25px);
+}
+
+#inputLocation {
+	width: 100%;
+	padding-right: 0;
+	margin-right: 0;
+}
+
+#inputLocation .form-control:focus {
+	border-color: #FFFFFF;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px #ff6c2f;
+}
+
+.kakaowrap {
+	position: static;
+	left: 0;
+	bottom: 40px;
+	width: 250px;
+	height: 125px;
+	margin-left: -145px;
+	text-align: left;
+	overflow: visible;
+	font-size: 12px;
+	font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+	line-height: 1.5;
+}
+
+.kakaowrap * {
+	padding: 0;
+	margin: 0;
+}
+
+.kakaowrap .kakaoinfo {
+	width: 295px;
+	height: 125px;
+	border-radius: 5px;
+	border-bottom: 2px solid #ccc;
+	margin-top: -3px;
+	border-right: 1px solid #ccc;
+	overflow: hidden;
+	background: #fff;
+}
+
+.kakaowrap .kakaoinfo:nth-child(1) {
+	border: 0;
+	box-shadow: 0px 1px 2px #888;
+}
+
+.kakaoinfo .kakaotitle {
+	padding: 5px 0 0 10px;
+	height: 30px;
+	background: #eee;
+	border-bottom: 1px solid #ddd;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.kakaoinfo .kakaobody {
+	position: relative;
+	overflow: hidden;
+}
+
+.kakaoinfo .kakaodesc {
+	position: relative;
+	margin: 13px 0 0 90px;
+	height: 75px;
+}
+
+.kakaodesc .kakaoellipsis {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.kakaodesc .kakaojibun {
+	font-size: 11px;
+	color: #888;
+	margin-top: -2px;
+}
+
+.kakaoinfo .kakaoimg {
+	position: absolute;
+	top: 6px;
+	left: 5px;
+	width: 73px;
+	height: 71px;
+	border: 1px solid #ddd;
+	color: #888;
+	overflow: hidden;
+}
+
+.kakaoinfo .kakaoimg img {
+	width: 73px;
+	height: 70px;
+	object-fit: cover;
+}
+
+.kakaodesc .kakaodetail {
+	color: #ff6c2f;
+	cursor: pointer;
+}
+
+.centerkakaowrap {
+	position: static;
+	left: 0;
+	bottom: 40px;
+	width: 50px;
+	height: 40px;
+	margin-left: 0px;
+	text-align: left;
+	overflow: visible;
+	font-size: 12px;
+	font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+	line-height: 1.5;
+}
+
+.centerkakaowrap * {
+	padding: 0;
+	margin: 0;
+}
+
+.centerkakaowrap .centerkakaoinfo {
+	width: 150px;
+	height: 40px;
+	border-radius: 5px;
+	border-bottom: 2px solid #ccc;
+	margin-top: -5px;
+	border-right: 1px solid #ccc;
+	overflow: hidden;
+	background: #fff;
+}
+
+.centerkakaowrap .centerkakaoinfo:nth-child(1) {
+	border: 0;
+	box-shadow: 0px 1px 2px #888;
+}
+
+.centerkakaoinfo .centerkakaotitle {
+	padding: 5px 0 0 10px;
+	height: 30px;
+	background: #eee;
+	border-bottom: 1px solid #ddd;
+	font-size: 18px;
+	font-weight: bold;
+}
 </style>
+
 <script> 
 
 	$(document).ready(function(){
 		$('.moyoDetail').hide();
-		// $(".moyoSimple").click(function(){
-		// 	$(".moyoDetail").slideToggle("slow");
 
-		// });
 		$(".moyoRow").click(function(){
 			$(".moyoDetail").slideToggle("slow");
-
-			// $("#moyoList").css("overflow-y", "hidden");
-			// $(".moyoRow").not(this).css("display", "none");
 			
 			if($(".moyoDetail").is(":hidden")){
-				// $("#moyoList").css("overflow-y", "scroll");
 				$(".moyoRow").not(this).slideDown("fast");
+				$("#countMoyos").slideDown("fast");
 				$(".moyoToggleArrow").text('keyboard_arrow_down');
 			} 
 			else {
-				// $("#moyoList").css("overflow-y", "hidden");
 				$(".moyoRow").not(this).slideUp("fast");
+				$("#countMoyos").slideUp("fast");
 				$(".moyoToggleArrow").text('keyboard_arrow_up');
-				// $(".moyoRow").not(this).css("display", "none");
 			}
 		});
+		<c:forEach items="${moyoList}" var="jmlist">
+			$(document).on("click", "#moyoMapWindow${jmlist.m_idx}", function(){
+				$(".moyoDetail").slideToggle("slow");
+				
+				if($(".moyoDetail").is(":hidden")){
+					$(".moyoRow").not("#moyoRow-${jmlist.m_idx }").slideDown("fast");
+					$("#countMoyos").slideDown("fast");
+					$(".moyoToggleArrow").text('keyboard_arrow_down');
+				} 
+				else {
+					$(".moyoRow").not("#moyoRow-${jmlist.m_idx }").slideUp("fast");
+					$("#countMoyos").slideUp("fast");
+					$(".moyoToggleArrow").text('keyboard_arrow_up');
+				}
+			});
+		</c:forEach>
 	});
 	
 // 	var nowLat, nowLon;
@@ -181,8 +359,6 @@
 
 		document.moyoAddrFrm.submit();
 		
-// 		panTo();
-		
 	}
 
 	//위치를 찾지 못했을 때의 콜백메소드
@@ -209,34 +385,36 @@
 </head>
 <body>
 
-<!-- movingcloset geolocation api key : AIzaSyCuUkjkCmZ7UirvN0Vhs0Q3VmgcIbEl_N0 -->
-
 	<div class="container">
-	
+
 		<div class="section-title">
-		    <h2>모 여 !</h2>
-	    </div>
-		<div class="row">
+			<h2>모 여 !</h2>
+		</div>
+		<hr />
+		<div class="row wrapMoyoForm">
 			<div class="col-8">
-				<form action="" name="moyoAddrFrm">
-				<div class="row input-group form-inline" id="inputLocation">
-					<input type="hidden" name="nowLat" value="${nowLat }" />
-					<input type="hidden" name="nowLon" value="${nowLon }" />
-					<input type="hidden" name="myAddr" class="wantGetLatLon" value="${myAddr }" />
-					<button type="button" class="form-control" onclick="getAddressLatLon();">
-			        	<i class="material-icons">home</i>
-			        </button>
-					<button type="button" class="form-control" onclick="getNowLocation();">
-			        	<i class="material-icons">my_location</i>
-			        </button>
-					<!-- 가입 시 입력한 주소가 기본값으로 들어감 -->
-					<input type="text" placeholder="주소를 입력하세요" class="form-control wantGetLatLon" 
-						style="width:330px;" />
-					<button type="button" class="form-control" id="findMoyoBtn" onclick="getAddressLatLon();">모여 찾기</button>
-				</div>
+				<form action="" name="moyoAddrFrm" method="post">
+					<div class="row input-group form-inline" id="inputLocation">
+						<input type="hidden" name="nowLat" value="${nowLat }" /> 
+						<input type="hidden" name="nowLon" value="${nowLon }" /> 
+						<input type="hidden" name="myAddr" class="wantGetLatLon" value="${myAddr }" />
+						<button type="button" class="form-control"
+							onclick="getAddressLatLon();">
+							<i class="material-icons">home</i>
+						</button>
+						<button type="button" class="form-control"
+							onclick="getNowLocation();">
+							<i class="material-icons">my_location</i>
+						</button>
+						<!-- 가입 시 입력한 주소가 기본값으로 들어감 -->
+						<input type="text" placeholder="주소를 입력하세요"
+							class="form-control wantGetLatLon" style="width: 330px;" />
+						<button type="button" class="form-control" id="findMoyoBtn"
+							onclick="getAddressLatLon();">모여 찾기</button>
+					</div>
 				</form>
 				<div class="row">
-					<div id="map" style="width:800px;height:600px;"></div>
+					<div id="map" style="width: 800px; height: 600px;"></div>
 					<script>
 					
 						var centerLat = document.moyoAddrFrm.nowLat.value;
@@ -268,7 +446,7 @@
 						    // 이동할 위도 경도 위치를 생성합니다 
 						    var moveLatLon = new kakao.maps.LatLng(nowLat, nowLon);
 						    
-						    // 지도 중심을 부드럽게 이동시킵니다
+							// 지도 중심을 부드럽게 이동시킵니다
 						    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
 						    map.panTo(moveLatLon);       
 						    
@@ -292,32 +470,47 @@
 							{
 								title: '중심 위치', 
 								latlng: mapOption.center,
-								content: '중심 위치입니다.',
+								content: 
+									'<div class="centerkakaowrap">' + 
+						            '    <div class="centerkakaoinfo">' + 
+						            '        <div class="centerkakaotitle">' + 
+						            '           중심 위치' + 
+						            '        </div>' + 
+						            '    </div>' +    
+						            '</div>'
 							}
-							<c:forEach items="${moyoList}" var="scmlist">
+							<c:forEach items="${moyoList}" var="iwlist">
 							,
 							{
-								title: '${scmlist.m_name}', 
-								latlng: new kakao.maps.LatLng(${scmlist.m_lat }, ${scmlist.m_lon }),
-								content: '${scmlist.m_name}'
-							}
+								title: '${iwlist.m_name}', 
+								latlng: new kakao.maps.LatLng(${iwlist.m_lat }, ${iwlist.m_lon }),
+								content: 
+									'<div class="kakaowrap">' + 
+						            '    <div class="kakaoinfo">' + 
+						            '        <div class="kakaotitle">' + 
+						            '            ${iwlist.m_name}' + 
+						            '        </div>' + 
+						            '        <div class="kakaobody">' + 
+						            '        	<div class="kakaoimg">' +
+						            '				<c:if test="${empty iwlist.m_sfile }">' +
+									'					<img src="../resources/images/list/${iwlist.m_idx}.jpg">' +
+									'				</c:if>' +
+									'				<c:if test="${not empty iwlist.m_sfile }">' +
+									'					<img src="../resources/upload/${iwlist.m_sfile }">' +
+									'				</c:if>' +
+						            '           </div>' + 
+						            '        	<div class="kakaodesc">' +
+						            '           	<div class="kakaoellipsis">${iwlist.m_addr}</div>' + 
+						            '				<fmt:parseDate value="${iwlist.m_dday }" var="infoWindowMDday" pattern="yyyy-MM-dd HH:mm:ss" />' +
+						            '				<fmt:formatDate value="${infoWindowMDday }" var="infoWindowMDday" pattern="yyyy-MM-dd" />' +
+						            '           	<div class="kakaojibun kakaoellipsis">${infoWindowMDday }</div>' + 
+						            '           	<div class="kakaodetail" id="moyoMapWindow${iwlist.m_idx}">상세보기</div>' + 
+						            '        	</div>' + 
+						            '        </div>' + 
+						            '    </div>' +    
+						            '</div>'
+							}	
 							</c:forEach>
-							
-// 							{
-// 								title: '안양천앞', 
-// 								latlng: new kakao.maps.LatLng(37.478838, 126.876454),
-// 								content: '중심 위치입니다4.'
-// 							},
-// 							{
-// 								title: '5번출구앞', 
-// 								latlng: new kakao.maps.LatLng(37.479660, 126.881949),
-// 								content: '중심 위치입니다3.'
-// 							},
-// 							{
-// 								title: '맥도날드앞', 
-// 								latlng: new kakao.maps.LatLng(37.479927, 126.881119),
-// 								content: '중심 위치입니다2.'
-// 							}
 						];
 						
 						
@@ -361,12 +554,16 @@
 
 						function getAddressLatLon() {
 							
-							var addrStr = document.getElementsByClassName("wantGetLatLon")[0].value;
-							if(addrStr == "") {
-								addrStr = document.getElementsByClassName("wantGetLatLon")[1].value;
+							var addrStr = document.getElementsByClassName("wantGetLatLon")[1].value;
+							if(addrStr == "" && ${not empty siteUserInfo }) {
+								addrStr = document.getElementsByClassName("wantGetLatLon")[0].value;
+								if(addrStr == "") {
+									location.reload();
+								}
 							}
-							else {
-								alert("올바른 주소를 입력해주세요.")	
+							if(addrStr == "" && ${empty siteUserInfo }) {
+								alert("로그인 후 이용해주세요.");
+								location.href="../movingcloset/login.do";
 							}
 							
 							console.log(addrStr);
@@ -392,52 +589,95 @@
 				</div>
 			</div>
 			<div id="moyoList" class="col-4">
-			<c:forEach items="${moyoList }" var="mlist">
-				<div class="row moyoRow" id="moyoRow-${mlist.m_idx }">
-					<div class="moyoSimple">
-						<div style="text-align: right;"><i class="material-icons moyoToggleArrow">keyboard_arrow_down</i></div>
-						<div>
-							<c:if test="${empty mlist.m_sfile }">
-								<img class="simpleImg" src="../resources/images/list/2.jpg"></a>
-							</c:if>
-							<c:if test="${not empty mlist.m_sfile }">
-								<img class="simpleImg" src="../resources/images/list/${mlist.m_sfile }.jpg"></a>
-							</c:if>
-						</div>
-						<div>
-<%-- 							<fmt:parseDate value="${mlist.m_dday }" var="strmdday" pattern="yyyy-MM-dd HH:mm:ss"/> --%>
-							<h5><span class="badge">D-2</span> ${mlist.m_name }</h5>
-							<fmt:parseDate value="${mlist.m_dday }" var="strmdday" pattern="yyyy-MM-dd HH:mm:ss"/>
-							<fmt:formatDate value="${strmdday }" pattern="yyyy년 MM월 dd일"/>에 모여 !
+				<h5 id="countMoyos">주변에서 ${fn:length(moyoList)}개의 모여가 진행중입니다.</h5>
+				<hr />
+				<c:forEach items="${moyoList }" var="mlist">
+					<div class="row moyoRow" id="moyoRow-${mlist.m_idx }">
+						<div class="moyoSimple">
+							<div style="text-align: right;">
+								<i class="material-icons moyoToggleArrow">keyboard_arrow_down</i>
+							</div>
+							<div>
+								<c:if test="${empty mlist.m_sfile }">
+									<img class="simpleImg"
+										src="../resources/images/list/${mlist.m_idx }.jpg">
+								</c:if>
+								<c:if test="${not empty mlist.m_sfile }">
+									<img class="simpleImg"
+										src="../resources/upload/${mlist.m_sfile }">
+								</c:if>
+							</div>
+							<div>
+<% 
+// String ndate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+// System.out.println(ndate);
+%>
+<%-- 								<c:set var="ndate" value="<%=ndate %>" /> --%>
+<%-- 								<fmt:parseDate value="${ndate }" var="nowDate" --%>
+<%-- 									pattern="yyyy-MM-dd" /> --%>
 
-							<h6 style="text-align: right;">모일 인원수 <span class="moyoMax">${mlist.m_goal }</span> 명</h6>
-							
-							<c:forEach var="usercount" items="${countMoyoUser }">
-								<c:if test="${mlist.m_idx eq usercount.key }">
-									<c:set var="achievementRate" value="${usercount.value / mlist.m_goal * 100}" />
-								</c:if>
-								<c:if test="${mlist.m_idx ne usercount.key }">
-									<c:set var="achievementRate" value="50" />
-								</c:if>
-							</c:forEach>
-							<div style="font-size: 0.75em; margin-top: -15px;">달성률</div>
-							<div class="progress">
-								<div class="progress-bar bg-warning" style="width:${achievementRate}%; color:white;">${achievementRate }%</div>
-<!-- 								<div class="progress-bar bg-warning" style="width:70%; color:white;">70%</div> -->
+								<fmt:parseDate value="${mlist.m_start }" var="strmstart"
+									pattern="yyyy-MM-dd HH:mm:ss" />
+								<fmt:formatDate value="${strmstart }" var="frmmstart"
+									pattern="yyyy-MM-dd" />
+								<fmt:parseDate value="${mlist.m_end }" var="strmend"
+									pattern="yyyy-MM-dd HH:mm:ss" />
+								<fmt:formatDate value="${strmend }" var="frmmend"
+									pattern="yyyy-MM-dd" />
+<%-- 								<fmt:parseNumber var="endDate_N" --%>
+<%-- 									value="${frmmend / (1000*60*60*24)}" integerOnly="true" /> --%>
+<%-- 								<fmt:parseNumber var="nowDate_N" --%>
+<%-- 									value="${nowDate / (1000*60*60*24)}" integerOnly="true" /> --%>
+
+
+<%-- 								<c:if test="${endDate_N - nowDate_N lt 3}"> --%>
+									<h5>
+<%-- 										<span class="badge">D-2</span> ${mlist.m_name } --%>
+										${mlist.m_name }
+									</h5>
+<%-- 								</c:if> --%>
+								<fmt:parseDate value="${mlist.m_dday }" var="strmdday"
+									pattern="yyyy-MM-dd HH:mm:ss" />
+								<fmt:formatDate value="${strmdday }" pattern="yyyy년 MM월 dd일" />
+								에 모여 !
+
+								<h6 style="text-align: right;">
+									모일 인원수 <span class="moyoMax">${mlist.m_goal }</span> 명
+								</h6>
+
+								<c:forEach var="usercount" items="${countMoyoUser }">
+									<c:if test="${mlist.m_idx eq usercount.key }">
+										<c:set var="achievementRate"
+											value="${usercount.value / mlist.m_goal * 100}" />
+									</c:if>
+								</c:forEach>
+								<div style="font-size: 0.75em; margin-top: -15px;">달성률</div>
+								<div class="progress">
+									<div class="progress-bar bg-warning"
+										style="width:${achievementRate}%; color:white;">${achievementRate }%</div>
+									<!-- 								<div class="progress-bar bg-warning" style="width:70%; color:white;">70%</div> -->
+								</div>
+							</div>
+							<div class="moyoDetail">
+								<button type="button" class="form-control moyoFormBtn"
+									onclick="javascript:location.href='../movingcloset/moyoForm.do?m_idx=${mlist.m_idx}';">모여
+									!</button>
+
+								<h6>📌 모집기간</h6>${frmmstart }
+								- ${frmmend } <br />&mdash;
+								<h6>📌 모임일자</h6>
+								<fmt:formatDate value="${strmdday }" pattern="yyyy년 MM월 dd일 E요일" />
+								<br />&mdash;
+								<h6>📌 모일장소</h6>
+								${mlist.m_addr } <br />&mdash;
+								<h6>📌 판매자 공지사항</h6>
+								${mlist.m_desc } <br />&mdash;
 							</div>
 						</div>
-						<div class="moyoDetail">
-							<button type="button" class="form-control moyoFormBtn" >모여 !</button>
-							<h6>📌 모집기간</h6> ${mlist.m_start } - ${mlist.m_end } <br />&mdash;
-							<h6>📌 모임일자</h6><fmt:formatDate value="${strmdday }" pattern="yyyy년 MM월 dd일 E요일"/><br />&mdash;
-							<h6>📌 모일장소</h6> ${mlist.m_addr } <br />&mdash;
-							<h6>📌 판매자 공지사항</h6> ${mlist.m_desc }  <br />&mdash;
-						</div>
 					</div>
-				</div>
-			</c:forEach>
-			<c:if test="${empty moyoList }">
-				주변에 모여가 없습니다 💀
+				</c:forEach>
+				<c:if test="${empty moyoList }">
+				💀 주변에 모여가 없습니다 💀
 			</c:if>
 				<!-- <div class="row">
 					<div class="moyoSimple">
@@ -448,6 +688,7 @@
 				</div> -->
 			</div>
 		</div>
+		<hr />
 	</div>
 
 </body>

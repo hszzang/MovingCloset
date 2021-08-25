@@ -3,7 +3,10 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- 
+ <!--  
+ 혜수야 안녕 나야나 첫번째 매퍼를 구경왔단다~~ 홧탱~
+  		> 아주 귀요밍이 방문해줬군요~~~ 하튜
+ -->
 <mapper namespace="mybatis.MybatisMoyoImpl">
 	
 	<select id="getMyAddr" resultType="String">
@@ -17,20 +20,30 @@
 		ORDER BY m_dday DESC
 	</select>
 	
-	<resultMap type="HashMap" id="countMoyoUser">
-		<id column="m_idx" property="usernum" />
+<!-- 		<id column="m_idx" property="usernum" /> -->
+	<resultMap type="java.util.HashMap" id="countMoyoUser">
+		<result column="m_idx" property="m_idx" javaType="java.lang.String" />
+		<result column="usernum" property="usernum" javaType="java.lang.String" />
 	</resultMap>
 	
-	<select id="countMoyoUser" resultMap="countMoyoUser"
-		parameterType="list">
-		SELECT m_idx, count(*) usernum
-		FROM moyo_use WHERE
-		<foreach collection="list" item="item" separator="or">
-			 m_idx = #{item}
-		</foreach>
-		GROUP BY m_idx
+	<select id="countMoyoUser" resultType="int">
+		SELECT count(*)
+		FROM moyo_use 
+		WHERE m_idx = #{0}
 	</select>
-
+	
+	<select id="getMoyoData" resultType="mybatis.MoyoDTO">
+		SELECT * FROM moyo WHERE m_idx=#{0}
+	</select>
+	
+	<select id="getMemberData" resultType="mybatis.MemberDTO">
+		SELECT * FROM member WHERE userid=#{0}
+	</select>
+	
+	<insert id="moyoFormDataInsert" parameterType="mybatis.MoyoDTO">
+		INSERT INTO moyo_use 
+		VALUES (#{m_idx}, #{userid}, #{mu_name}, #{mu_phone}, #{mu_email}, #{mu_time}, sysdate)
+	</insert>
 
 </mapper>
  

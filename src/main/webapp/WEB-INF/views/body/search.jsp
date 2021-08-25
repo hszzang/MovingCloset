@@ -170,7 +170,7 @@
                             </div>
                         </span>       
 
-
+<!--
                         <span class="products">
                             <a href="https://www.29cm.co.kr/product/950775"><img class="img" src="../resources/images/list/2.jpg"></a>
                             <div class="brand">Adidas</div>
@@ -324,7 +324,7 @@
                                 <label class="heart">♡</label>
                             </div>
                         </span>  
-                        
+   -->                       
                 
                 		        
             </div>

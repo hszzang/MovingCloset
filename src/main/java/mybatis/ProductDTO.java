@@ -2,6 +2,8 @@ package mybatis;
 
 import java.io.File;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -11,13 +13,19 @@ public class ProductDTO {
 	
 	//private File upload;
 	
-	private int p_idx;
+	private String p_idx;
 	private String p_name;
 	private String p_code;
 	private int p_price;
 	private String p_brand;
 	private String p_ofile;
 	private String p_sfile;
-	
+	private String p_flag;
+
+	private MultipartFile uploadFile;
+
+	//현지니가test로 추가욤
+	private String p_img;
+
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,32 +52,35 @@ public class MoyoCommand implements CommandImpl {
 		model.addAttribute("nowLat", nowLat);
 		model.addAttribute("nowLon", nowLon);
 		
+		HttpSession session = req.getSession();
+		String siteUserInfo = (String)session.getAttribute("siteUserInfo");
 		
-		//로그인기능 구현 후 추가
-//		String myAddr = sqlSession
-//				.getMapper(MybatisMoyoImpl.class).getMyAddr("현재로그인아이디");
-//		model.addAttribute("myAddr", myAddr);
+		if(siteUserInfo != null) {
+			System.out.println("현재 로그인 아이디 :" + siteUserInfo);
+
+			String myAddr = sqlSession
+					.getMapper(MybatisMoyoImpl.class).getMyAddr(siteUserInfo);
+			model.addAttribute("myAddr", myAddr);
+		}
 		
 		ArrayList<MoyoDTO> moyoList = sqlSession
 				.getMapper(MybatisMoyoImpl.class).getMoyoList(nowLat, nowLon);
 		
 		model.addAttribute("moyoList", moyoList);
 		
-		ArrayList<String> moyoIdxList = new ArrayList<String>();
-		for(MoyoDTO m : moyoList) {
-			moyoIdxList.add(m.getM_idx());
-		}
-		
 		if(!moyoList.isEmpty()) {
 			
-			HashMap<String, Integer> countMoyoUser = sqlSession
-					.getMapper(MybatisMoyoImpl.class).countMoyoUser(moyoIdxList);
+			HashMap<String, Integer> countMoyoUser = new HashMap<String, Integer>();
+			for(MoyoDTO m : moyoList) {
+				countMoyoUser.put(m.getM_idx(), sqlSession
+						.getMapper(MybatisMoyoImpl.class).countMoyoUser(m.getM_idx()));
+			}
 			
 			System.out.println(countMoyoUser);
 			model.addAttribute("countMoyoUser", countMoyoUser);
 		}
 		
 		
-		System.out.println(moyoList);
+//		System.out.println(moyoList);
 	}
 }

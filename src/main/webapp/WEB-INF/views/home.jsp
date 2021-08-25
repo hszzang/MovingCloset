@@ -13,6 +13,8 @@
    <li>
       <a href="./store/detail.do">상품 상세페이지</a>
       <a href="./store/detail2.do">상품 상세페이지2</a>
+      <a href="./store/buy.do">구매폼</a>
+      
 
       <a href="./movingcloset/store.do">storelist</a>
       <a href="./movingcloset/search.do">검색</a>
@@ -35,7 +37,7 @@
       <a href="./movingcloset/login.do">로그인</a>      
       
 <!--       <a href="./project/myplease.do">내쪼르기리스트(ver.1)</a> -->
-      <a href="./movingcloset/myplease2.do">내쪼르기리스트(ver.2)</a>
+      <a href="./movingcloset/please.do">쪼르기</a>
       <a href="./movingcloset/event_main.do">이벤트페이지(메인 ver.1.0)</a>
       <a href="./movingcloset/coupon_main.do">쿠폰페이지(메인 ver.1.0)</a>
       <a href="./movingcloset/basket.do">장바구니(메인 ver.1.0)</a>

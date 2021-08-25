@@ -24,21 +24,24 @@
 				num.value = parseInt(num.value) - 1;
 			}
 		}
-		
 		if(id=="plus"){ 
 			num.value = parseInt(num.value) + 1;
-		}
-		
+		}		
 	}
 
 	$(function(){
 		$('#btnReview').click(function(){
-
 			var child;
-			child = window.open("./reviewPage.do", "reviewpopup", "height:500px, width:250px");
+			child = window.open("./reviewPage.do", "reviewpopup", "height:400px, width:200px");
 		});
-
 	});
+	
+	function delReview(r_idx, p_idx){
+		if(confirm("정말 리뷰를 삭제하시겠습니까?")){
+			location.href="/movingcloset/store/deleteReview.do?r_idx=" + r_idx +"&p_idx=" + p_idx;
+		}
+	}
+	
 </script>
 
 <style>
@@ -202,79 +205,99 @@
     .container{
     	width:990px;
     }
+    #productUpdate{
     
+    }
+    .delBtn{
+    	width:35px; height:25px; font-size:5pt; 
+    	background-color:black; color:white; border:none; border-radius:1px;
+    	display:inline;
+    }
+    #p_image{
+    	width:500px; height:570px;
+    }
 	</style>
 <title>Store</title>
 </head>
 <body>
-	<div class="container" style="margin-top:5%;margin-bottom:3%;">
-		<div class="row" style="height: 600px;">
-			<div class="col-8 d-flex justify-content-center" >
-				<div class="col-6" style="padding:0;display:block;height:300px;">
-					<span class="a">
-						<img src="../resources/images/details/1.1.png" alt="상품이미지" class='img' class="rounded"/>
-					</span>
-					<span class="a">
-						<img src="../resources/images/details/1.2.png" alt="상품이미지" class='img' class="rounded"/>
-					</span>
-				</div>
-				<div class="col-6" style="padding:0;display:block;height:300px;">
-					<span class="a">
-						<img src="../resources/images/details/1.3.png" alt="상품이미지" class='img' class="rounded"/>
-					</span>
-					<span class="a">
-						<img src="../resources/images/details/1.4.png" alt="상품이미지" class='img' class="rounded"/>
-					</span>
+	<div class="container" style="margin-top:10%;margin-bottom:3%;">
+		<form name="updateFrm" method="post" enctype="multipart/form-data" 
+			action="<c:url value="/store/update.do" />">
+			<div class="row" style="height: 600px;">
+				<input type="hidden" name="p_idx" value="${storeDetail.p_idx }"/>	
+				<div class="col-8 d-flex justify-content-center" >
+					<div id="image_container">
+						<img src="../resources/upload/${storeDetail.p_sfile }" alt="상품이미지" id="p_image"  />
+					</div>
+				<!--  
+					<div class="col-6" style="padding:0;display:block;height:300px;">
+						<span class="a">
+							<img src="../resources/images/details/1.1.png" alt="상품이미지" class='img' class="rounded"/>
+						</span>
+						<span class="a">
+							<img src="../resources/images/details/1.2.png" alt="상품이미지" class='img' class="rounded"/>
+						</span>
+					</div>
+					<div class="col-6" style="padding:0;display:block;height:300px;">
+						<span class="a">
+							<img src="../resources/images/details/1.3.png" alt="상품이미지" class='img' class="rounded"/>
+						</span>
+						<span class="a">
+							<img src="../resources/images/details/1.4.png" alt="상품이미지" class='img' class="rounded"/>
+						</span>
+					</div>
+					-->
 				</div>
 				
-			</div>
-			
-			<div class="col-4" style="padding-left:3%; padding-top:5%;">
-				<div id="brandName">Converse</div>
-				<div id="prodName">척 70 클래식 로우 화이트</div>&nbsp;&nbsp;&nbsp;
-				<div id="price">&nbsp;85,000원</div>
-				<br>
-
-				<div class="row">
-					<div class="col-11">
-						<select name="size" id="sizeNum" style="border: solid lightgray 1px; border-radius:2px; padding:3px;">
-							<option value=""diabled select hidden>사이즈</option>
-							<option value="220">220</option>
-							<option value="230">230</option>
-							<option value="240">240</option>
-							<option value="250">250</option>
-							<option value="260">260</option>
-							<option value="270">270</option>
-							<option value="280">280</option>
-						</select>
-					</div>
-				</div>
-				<br>
-				<div class="row">
-					<div class="col-4" style="vertical-align:center; text-align:right; padding-top:5px;">
-						<span id="prodCount">수량</span>
-					</div>
-					<div class="col-8">
-						<button class="btn" id="plus" onclick="plusminus(this.id);"><i class="fa fa-plus"></i></button>
-						<input type="text" id="quantity" value="1" style="border:none; width:50px; background-color: none;text-align:center;">
-						<button class="btn" id="minus" onclick="plusminus(this.id);"><i class="fa fa-minus"></i></button>
-					</div>
-				</div>
-				<hr />
-				<br>
-				<div>
-					<button id="btnBuy" style="width:92%;"><a href="#" style="color:white;">구매하기</a> </button>
-				</div><br> 
-				<div>
-					<span><button style="width: 45%;" id="basket"><a href="#">장바구니</a></button></span>
-					<span><button style="width: 45%;" id="wish" onclick="location.href='#';">위시리스트 <i class="fa fa-heart" style="color: red;"></i></button></span>
-				</div>
-			</div>
-			
-		</div>
-	</div><br /><br /><br />
+				<div class="col-4" style="padding-left:3%; padding-top:5%;">
+					<div id="brandName">${ storeDetail.p_brand}</div>
+					<div id="prodName">${storeDetail.p_name }</div>&nbsp;&nbsp;&nbsp;
+					<div id="price">&nbsp;${storeDetail.p_price }원</div>
+					<br>
 	
+					<div class="row">
+						<div class="col-11">
+							<select name="size" id="sizeNum" style="border: solid lightgray 1px; border-radius:2px; padding:3px;">
+								<option value=""diabled select hidden>사이즈</option>
+									<c:forEach items="${sizes }" var="size" >
+										<option value="${size}">${size}
+											<!-- varStatus="status"  <input type="hidden" value="${stocks[status.index] }"/>	 -->
+										</option>
+									</c:forEach>
+							</select>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-4" style="vertical-align:center; text-align:right; padding-top:5px;">
+							<span id="prodCount">수량</span>
+						</div>
+						<div class="col-8">
+							<button type="button" class="btn" id="plus" onclick="plusminus(this.id);"><i class="fa fa-plus"></i></button>
+							<input type="text" id="quantity" value="1" style="border:none; width:50px; background-color: none;text-align:center;">
+							<button type="button" class="btn" id="minus" onclick="plusminus(this.id);"><i class="fa fa-minus"></i></button>
+						</div>
+					</div>
+					<hr />
+					<br>
+					<div>
+						<button id="btnBuy" style="width:92%;"><a href="#" style="color:white;">구매하기</a> </button>
+					</div><br> 
+					<div>
+						<span><button style="width: 45%;border:black solid 1px;" id="basket" onclick="location.href='#';">장바구니</button></span>
+						<span><button style="width: 45%;" id="wish" onclick="location.href='#';">위시리스트 <i class="fa fa-heart" style="color: red;"></i></button></span>
+					</div>
+				</div>
+			</div>
+			<div style="text-align:right;">
+				<button type="button" class="product" id="productUpdate" onclick="javascript:location.href='/movingcloset/store/update.do?p_idx=${storeDetail.p_idx }';">상품수정</button>	
+			</div>
+		</form>
+	</div>
+	<br /><br /><br />
 	<hr>
+
+
 
 	<div class="container">
 		<h4>평균 평점 : <span>5.0</span></h4>
@@ -288,6 +311,8 @@
 			</div>
 		</div>
 
+<!-- 댓글 시작 ------------------------------------------------------------------------------------------------ -->
+	
 		<table class="table table-hover" style="text-align: center;">
 			<thead>
 			<tr>
@@ -299,92 +324,42 @@
 					<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
 				</th>
 				<th style="width: 40%;">한줄평</th>
-				<th style="width: 20%;">작성일</th>
+				<th style="width: 10%;">작성일</th>
+				<th style="width: 10%;">작성자</th>				
 				<th style="width: 250%;"></th>
 			</tr>
 			</thead>
 			<tbody>
-			<tr >
-				<td>
-				평점 
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				</td>
-				<td>신발이 예뻐요!</td>
-				<td>2021-07-31</td>
-				<td>
-					<img class="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
-					style="width: 100px; height: auto;"/>
-				</td>
-			</tr>
-			<tr >
-				<td>
-				평점 
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				</td>
-				<td>신발이 예뻐요!</td>
-				<td>2021-07-31</td>
-				<td>
-					<img class="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
-					style="width: 100px; height: auto;"/>
-				</td>
-			</tr>
-			<tr >
-				<td>
-				평점 
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				</td>
-				<td>신발이 예뻐요!</td>
-				<td>2021-07-31</td>
-				<td>
-					<img class="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
-					style="width: 100px; height: auto;"/>
-				</td>
-			</tr>
-			<tr >
-				<td>
-				평점 
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				</td>
-				<td>신발이 예뻐요!</td>
-				<td>2021-07-31</td>
-				<td>
-					<img class="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
-					style="width: 100px; height: auto;"/>
-				</td>
-			</tr>
-			<tr >
-				<td>
-				평점 
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-				</td>
-				<td>신발이 예뻐요!</td>
-				<td>2021-07-31</td>
-				<td>
-					<img class="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
-					style="width: 100px; height: auto;"/>
-				</td>
-			</tr>
-
+			<c:forEach items="${reviews }" var="review"  >
+				<tr >
+					<td>
+					평점 <!-- 평점 수정 필요 ------------------------------------------------------------------>
+					<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
+					<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
+					<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
+					<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
+					<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
+					</td>
+					
+					<td>${review.r_content }
+						<c:if test="${sessionScope.siteUserInfo != null}">
+							<button class="delBtn" onclick="delReview(${review.r_idx}, ${storeDetail.p_idx });">삭제</button>
+						</c:if>
+					</td>
+					<td>${review.r_date }</td>
+					<td>
+						${review.userid }
+						<input type="hidden" name="r_idx" value="${review.r_idx }"/>
+						<input type="hidden" name="p_code" value="${review.p_code }"/>
+						<input type="hidden" name="p_idx" value="${storeDetail.p_idx }"/>
+					</td>
+					<td>
+						<img class="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
+						style="width: 100px; height: auto;"/>
+					</td>
+				</tr>
+			</c:forEach>
+			
 			</tbody>
 		</table>
 			<hr />
@@ -402,7 +377,9 @@
 			</div>
 			<br />
 		</div>
-
+		
+<!-- 댓글 끝 ------------------------------------------------------------------------------------------------ -->
+	
 	<!-- The Modal -->
 	<div id="myModal" class="modal">
 		<span class="close">&times;</span>
