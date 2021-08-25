@@ -10,15 +10,25 @@
 <mapper namespace="mybatis.MybatisMemberImpl">
 
   	<insert id="register" parameterType="mybatis.MemberDTO" >
-		INSERT INTO member (USERID, USERPASS, EMAIL, PHONE, TAG, POSTCODE, ADDR, NAME, BIRTH, REGIDATE) 
+		INSERT INTO member (USERID, USERPASS, EMAIL, PHONE, TAG, POSTCODE, ADDR, NAME, BIRTH, REGIDATE, LOGINBRAND) 
 		VALUES
-		(#{userid}, #{userpass} ,#{email},#{phone},#{tag},#{postcode},#{addr},#{name},#{birth},sysdate  )
+		(#{userid}, #{userpass} ,#{email},#{phone},#{tag},#{postcode},#{addr},#{name},#{birth},sysdate , #{loginbrand}  )
 	
 	</insert>
 
 	<select id="idcheck" resultType="int" parameterType="String">
 		select count(*) from member where userid = #{userid}
 	</select>
+	
+	<select id="membercheck" resultType="int">
+		select count(*) from member where email = #{0} and loginbrand=#{1}
+	</select>
+	
+	<select id="memberInfo" resultType="mybatis.MemberDTO">
+		select * from member where email = #{0} and loginbrand=#{1}
+	</select>
+	
+	
 	
 	<select id="findId" resultType="java.lang.String">
 		SELECT userid FROM member 

@@ -417,6 +417,8 @@
 								<col width="20%" />
 								<col width="*" />
 							</colgroup>
+							<input type="hid den" value="${loginbrand }" name="loginbrand">
+							
 							<tbody>
 								<tr style="text-align: right;">
 									<td colspan="2">
