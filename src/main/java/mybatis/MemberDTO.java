@@ -16,7 +16,6 @@ public class MemberDTO {
 	private String name ;
 	private String birth ;
 	private java.sql.Date regidate;
-	private String loginbrand;
 	
 	
 	
