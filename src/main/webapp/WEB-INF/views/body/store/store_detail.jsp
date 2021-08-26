@@ -13,6 +13,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script>
+
+
 	function plusminus(id){
 		//console.log("넘어온 값 "+id);
 		var num = document.getElementById("quantity");
@@ -31,8 +33,16 @@
 
 	$(function(){
 		$('#btnReview').click(function(){
-			var child;
-			child = window.open("./reviewPage.do", "reviewpopup", "height:400px, width:200px");
+			
+			if(${empty siteUserInfo}) {
+				alert("로그인 후 이용해주세요.");
+				location.href="../movingcloset/login.do";
+			}else{
+				var p_idx = "<c:out value='${storeDetail.p_idx}'/>";
+				var child;
+				child = window.open("./reviewPage.do?p_idx="+p_idx, "reviewpopup", "height:400px, width:200px");				
+			}
+		
 		});
 	});
 	
@@ -307,7 +317,7 @@
 					<label for="photocheck" style="font-size:1em;">포토리뷰</label>
 			</div>
 			<div class="d-flex ml-auto">
-				<button id="btnReview" >리뷰 쓰기</button>
+				<button id="btnReview">리뷰 쓰기</button>
 			</div>
 		</div>
 
@@ -354,7 +364,7 @@
 						<input type="hidden" name="p_idx" value="${storeDetail.p_idx }"/>
 					</td>
 					<td>
-						<img class="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
+						<img class="myImg" src="../resources/upload/${review.r_sfile }" alt="상품이미지"
 						style="width: 100px; height: auto;"/>
 					</td>
 				</tr>
