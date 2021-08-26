@@ -188,7 +188,7 @@
 	            				<p>${product.p_price}</p>
 	              					<div class="portfolio-links">
 	                					<a href="../resources/assets/img/newdd/${product.p_img}" data-gall="portfolioGallery" class="venobox"><i class="bx bx-plus"></i></a>
-	                					<a href="/movingcloset/store/detail.do"><i class="bx bx-link"></i></a>
+	                					<a href="/movingcloset/store/detail.do?p_idx=${product.p_idx}"><i class="bx bx-link"></i></a>
 	              					</div>
 	            		</div>
 	          	</div>

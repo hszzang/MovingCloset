@@ -78,9 +78,8 @@
 
 <body>
 
-	<img alt="배경사진" src="../resources/images/login/registerComplete.png" width="100%" style="margin-top: 115px;">
 	<div class="container" style="width: 50%;padding-bottom:0px;" align="center" id="regicon" >
-		<div class="input-form col-md-12 mx-auto">
+		<div class="input-form ">
 			<div class="input-form-wrap" style="text-align:center;padding-top:100px;padding-bottom:80px;">
 				<h3><span id="paramId">${param.user_id}</span> 님 회원가입이 완료되었습니다.</h3><br />
 				<h3><strong>Moving Closet</strong> 을 찾아주셔서 감사합니다.</h3><br />
