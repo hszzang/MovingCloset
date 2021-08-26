@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import movingcloset.command.CommandImpl;
 import movingcloset.command.store.ReviewDeleteCommand;
 import movingcloset.command.store.ReviewInsertCommand;
+import movingcloset.command.store.ReviewListCommand;
 import movingcloset.command.store.StoreDeleteCommand;
 import movingcloset.command.store.StoreDetailCommand;
 import movingcloset.command.store.StoreInsertCommand;
@@ -56,7 +57,9 @@ public class StoreController {
 	ReviewDeleteCommand reviewDeleteCommand;
 	@Autowired
 	StoreOrderCommand storeOrderCommand;
-	 
+	@Autowired
+	ReviewListCommand reviewListCommand;
+
 	// 스토어 리스트
 	@RequestMapping(value="/movingcloset/store.do", method=RequestMethod.GET)
 	public String storeList(Model model, HttpServletRequest req, ProductDTO productDTO) {
@@ -327,10 +330,15 @@ public class StoreController {
 	
 	// 스토어 상세페이지 리뷰 팝업
 	@RequestMapping("/store/reviewPage.do")
-	public String review(Locale locale, Model model) {
+	public String review(Model model, HttpServletRequest req) {
 		System.out.println("리뷰 컨트롤러 들어옴");
+		System.out.println("리뷰 컨트롤러 : "+req.getParameter("p_idx"));
 		
-		// 리뷰인서트커맨드로 리뷰쓰는 걸로???
+		
+		model.addAttribute("req", req);
+		command = reviewListCommand;
+		command.execute(model);
+		
 		return "reviewPage";
 	}
 	
@@ -338,7 +346,7 @@ public class StoreController {
 	@RequestMapping("/store/insertReview.do")
 	public String insertReview(Locale locale, Model model, HttpServletRequest req) {
 		System.out.println("리뷰쓰기 컨트롤러 들어옴");
-		
+		// 리뷰인서트커맨드로 리뷰쓰는 걸로???
 		model.addAttribute("req", req);
 		model.addAttribute("model", model);
 		

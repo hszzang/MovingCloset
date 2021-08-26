@@ -38,6 +38,7 @@ public interface MybatisProductImpl {
 	public void insertReview(ReviewDTO reviewDTO);
 	public void updateReview(ReviewDTO reviewDTO);
 	public void deleteReview(String r_idx);
+	public ProductAndDetailDTO reviewList(String p_idx);
 	
 	public String getPidx(String p_code);
 	

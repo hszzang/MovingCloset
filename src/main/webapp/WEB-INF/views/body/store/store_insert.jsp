@@ -124,11 +124,11 @@
 				
 				<div class="col-4" style="padding-left:3%; padding-top:5%;">
 					<h5>상품 등록</h5>
-					<div id="brandName" class="updiv"><input class="insert" name="p_brand" value="브랜드" /></div>
-					<div id="prodName" class="updiv"><input class="insert" name="p_name" value="상품명" /></div>
-					<div id="code" class="updiv"><input class="insert" name="p_code" value="상품코드" /> </div>
-					<div id="price" class="updiv"><input class="insert" name="p_price" value="상품가격" /> </div>
-					<div id="price" class="updiv"><input class="insert" name="pd_color" value="상품색상" /> </div>
+					<div id="brandName" class="updiv"><input class="insert" name="p_brand" placeholder="브랜드" /></div>
+					<div id="prodName" class="updiv"><input class="insert" name="p_name" placeholder="상품명" /></div>
+					<div id="code" class="updiv"><input class="insert" name="p_code" placeholder="상품코드" /> </div>
+					<div id="price" class="updiv"><input class="insert" name="p_price" placeholder="상품가격" /> </div>
+					<div id="price" class="updiv"><input class="insert" name="pd_color" placeholder="상품색상" /> </div>
 					<select name="p_flag" style="width:350px;height:40px;">
 						<option value="" diabled select hidden>제품분류</option>
 						<option value="의류">의류</option>
