@@ -19,8 +19,13 @@
 			object-fit:cover; border-radius: 6px;}
 #others{margin-top:25%;}
 #klogin:hover{
-	text-decoration: none;
-}
+	text-decoration: none;}
+input.form-control:focus {
+	border-color: #FFFFFF;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px #ff6c2f;}
+
+
+
 
 </style>
 <script type="text/javascript">

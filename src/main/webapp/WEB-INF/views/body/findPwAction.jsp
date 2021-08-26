@@ -79,10 +79,9 @@
 
 <body>
 
-	<img alt="" src="../resources/images/login/registerComplete.png" width="100%" style="margin-top: 150px;">
 	<div class="container" style="width: 50%;" align="center" id="regicon">
 
-			<div class="input-form col-md-12 mx-auto">
+			<div class="input-form ">
 				<div class="input-form-wrap" style="text-align:center;padding-top:100px;padding-bottom:80px;">
 					<c:if test="${empty findPwEmail }">
 						<h3>[&nbsp;<span id="paramId">${findPwEmail} </span>&nbsp;]</h3><br />
