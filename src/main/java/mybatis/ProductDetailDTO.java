@@ -11,3 +11,4 @@ public class ProductDetailDTO {
 	private String pd_stock;
 
 }
+	

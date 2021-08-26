@@ -2,7 +2,6 @@ package mybatis;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,40 +12,26 @@ public interface MybatisProductImpl {
 	public List<ProductDTO> getStoreList(ProductDTO productDTO);
 	public int getTotalCount();
 	
+	public List<ProductDTO> descPrice(ProductDTO productDTO);
+	public List<ProductDTO> ascPrice(ProductDTO productDTO);
+	
 	public void insertProduct(ProductDTO productDTO);
-	/*
-	public int insertProduct(
-							@Param("p_idx") String p_idx,
-							@Param("p_brand") String p_brand,
-							@Param("p_name") String p_name,
-							@Param("p_code") String p_code,
-							@Param("p_price") String p_price,
-							@Param("p_ofile")String p_ofile, 
-							@Param("p_sfile") String p_sfile
-							);
-	*/
-	
-	public ProductDTO getStoreDetail(@Param("p_idx") String p_idx);
+	public void insertDetail(ProductDetailDTO detailDTO);
 
-	public ProductDetailDTO getProductDetail(@Param("p_code") String p_code);
+	public ProductDTO getStoreDetail(String p_idx);
+
+	public ProductDetailDTO getProductDetail(String p_code);
 	
-	//public ProductDTO updateSelect(@Param("p_idx") String p_idx);
-	/*
-	public ProductDTO updateProduct(
-									@Param("p_name") String p_name,
-									@Param("p_code") String p_code,
-									@Param("p_price") int p_price,
-									@Param("p_brand") String p_brand,
-									@Param("p_ofile")String p_ofile, 
-									@Param("p_sfile") String p_sfile,
-									@Param("p_idx") String p_idx
-									);
-	*/
 	public void updateProduct(ProductDTO productDTO);
 	public void updateDetail(ProductDetailDTO productDetailDTO);
 	
-	public void deleteProduct(@Param("p_idx") String p_idx);
+	public void deleteProduct(String p_idx);
 	
-	public List<ReviewDTO> getReviews(@Param("p_code") String p_code);
+	public List<ReviewDTO> getReviews(String p_code);
+	public void insertReview(ReviewDTO reviewDTO);
+	public void updateReview(ReviewDTO reviewDTO);
+	public void deleteReview(String r_idx);
+	
+	public String getPidx(String p_code);
 	
 }

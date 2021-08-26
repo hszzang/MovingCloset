@@ -64,10 +64,10 @@ public class MoyoController {
 	}
 
 	// 조르기 목록
-	@RequestMapping(value="/movingcloset/pleaseList.do", method=RequestMethod.GET)
+	@RequestMapping(value="/movingcloset/please.do", method=RequestMethod.GET)
 	public String pleaseList() {
 		
-		return "body/moyo/pleaseList";
+		return "body/moyo/please";
 	}
 	
 	// 조르기 신청폼

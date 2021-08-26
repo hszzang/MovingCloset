@@ -46,24 +46,7 @@ public class NewDController {
 		
 	}
 	
-	/*
-	 * //디자이너리스트
-	 * 
-	 * @RequestMapping(value="/movingcloset/designer.do", method=RequestMethod.GET)
-	 * public String designerList(Model model, HttpServletRequest req, NewdDTO
-	 * newdDTO) {
-	 * 
-	 * 
-	 * model.addAttribute("req", req);
-	 * 
-	 * 
-	 * return "body/newD_main";
-	 * 
-	 * }
-	 */
-	
-	
-	
+
 	
 	/*
 	 * //뉴디리스트
@@ -80,5 +63,5 @@ public class NewDController {
 	 * }
 	 */
 	
-	
 }
+

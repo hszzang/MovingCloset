@@ -149,9 +149,8 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 							<img class="productImg" src="../resources/images/list/${moyoDTO.m_idx }.jpg">
 						</c:if>
 						<c:if test="${not empty moyoDTO.m_sfile }">
-							<img class="productImg" src="../resources/images/list/${moyoDTO.m_sfile }.jpg">
+							<img class="productImg" src="../resources/upload/${moyoDTO.m_sfile }">
 						</c:if>
-<!-- 						<img class="productImg" src="../resources/images/list/2.jpg"> -->
 						
 						<fmt:parseDate value="${moyoDTO.m_start }" var="strmstart" pattern="yyyy-MM-dd HH:mm:ss"/>
 						<fmt:formatDate value="${strmstart }" var="frmmstart" pattern="yyyy. MM. dd"/>
