@@ -2,6 +2,7 @@ package movingcloset.command.newd;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -17,28 +18,28 @@ import mybatis.ProductDTO;
 
 
 @Service
-public class NewDCommand implements CommandImpl {
+public class DesignerCommand implements CommandImpl {
 	
-	public NewDCommand() {
-		System.out.println("뉴디커맨드 호출");
+	public DesignerCommand() {
+		System.out.println("디자이너커맨드 호출");
 	}
 	
 	@Autowired
 	private SqlSession sqlSession;
 	
+	////////////////////////작성전 복붙만해둠
+	
 	@Override
 	public void execute(Model model) {
 		
-		System.out.println("newDCommand 호출");
+		System.out.println("designerCommand 호출");
 		
-		ProductDTO productDTO = new ProductDTO();
+		NewdDTO newdDTO = new NewdDTO();
 		
-		List<ProductDTO> newdList = sqlSession.getMapper(MybatisNewDImpl.class).getNewdList(productDTO);
+		ArrayList<NewdDTO> designerList = sqlSession.getMapper(MybatisNewDImpl.class).getDesignerList(newdDTO);
 		
-		int totalProduct = sqlSession.getMapper(MybatisProductImpl.class).getTotalCount(); 
-		System.out.println(totalProduct);
-		
-		model.addAttribute("newdList", newdList);
+		System.out.println(designerList.get(0));
+		model.addAttribute("designerList", designerList);
 		 
 		
 		
