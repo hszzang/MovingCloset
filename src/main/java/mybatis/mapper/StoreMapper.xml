@@ -7,10 +7,93 @@
 <mapper namespace="mybatis.MybatisProductImpl">
 
 	<!-- 리스트 (최근순) -->
-	<select id="getStoreList" resultType="mybatis.ProductDTO" parameterType="java.util.ArrayList" >
-		SELECT * FROM product ORDER BY p_idx DESC
-		<!-- SELECT * FROM product WHERE p_idx<![CDATA[>]]>117 ORDER BY p_idx DESC  -->
+	<select id="getStoreList" parameterType="int" resultType="mybatis.ProductDTO">
+		SELECT * FROM product 
+		WHERE p_idx<![CDATA[>=]]>#{defaultShow}
+		ORDER BY p_idx DESC
 	</select>
+	
+	<select id="getPagedList" parameterType="int" resultType="mybatis.ProductDTO">
+		SELECT * FROM product 
+		WHERE p_idx BETWEEN #{start} AND #{end}
+		ORDER BY p_idx DESC
+	</select>
+	<!--  
+		WHERE p_idx<![CDATA[>=]]>#{start}
+	
+	
+		SELECT * FROM (
+			SELECT ROWNUM AS idx, product.* FROM product ORDER BY p_idx DESC
+		)
+		WHERE idx BETWEEN #{start} AND #{end}
+		
+		SELECT a.*, rownum FROM product a
+		WHERE rownum BETWEEN #{start} AND #{end}
+		ORDER BY rownum DESC
+	
+	SELECT * FROM (SELECT ROWNUM AS NUM, NOTICE.* FROM NOTICE)
+	WHERE NUM BETWEEN 5 AND 9;
+
+		WHERE rownum <![CDATA[>]]>#{start} AND rownum<![CDATA[<=]]>#{end}
+
+		WHERE rownum <![CDATA[>]]>178 AND rownum<![CDATA[<=]]>237
+	
+		SELECT * FROM (
+			SELECT Tb.*, rownum rNum FROM (
+				SELECT * FROM myboard
+				<if test="searchTxt != null">
+					WHERE 
+					<foreach collection="searchTxt" item="str" open="(" close=")"
+						separator="or">
+						${searchField} like '%'||#{str}||'%'
+					</foreach>
+				</if>
+				 ORDER BY idx DESC
+			) Tb
+		) 
+		WHERE rNum<![CDATA[>=]]>#{start} AND rNum<![CDATA[<=]]>#{end}
+	-->	
+		<!--  
+		SELECT *
+        FROM (
+        SELECT ROW_NUMBER() OVER(ORDER by userCode DESC) AS
+        row_num
+        ,userCode
+        ,userName
+        FROM testTable
+        )
+        WHERE row_num BETWEEN 0 AND 10;
+		
+		SELECT * FROM product 
+		WHERE p_idx<![CDATA[<]]>#{pageTo} AND p_idx<![CDATA[>=]]>#{pageFrom}
+		ORDER BY p_idx DESC
+		
+		SELECT * FROM product 
+		WHERE 
+		ORDER BY p_idx DESC
+		
+		SELECT * FROM (
+			SELECT Tb.*, ROWNUM rNum FROM(
+				SELECT * FROM product 
+				ORDER BY p_idx DESC
+			) Tb 
+		)WHERE rNum<![CDATA[>]]>#{pageNow} AND rNum<![CDATA[<]]>#{pageNow+60} 
+		-->
+	
+	<!-- 
+	AND rNum <![CDATA[<]]>#{pageNow + 1}
+	
+	WHERE rNum<![CDATA[>=]]>#{start} AND rNum<![CDATA[<=]]>#{end}
+	
+	SELECT *
+	FROM
+	(
+	SELECT ROW_NUMBER() OVER(ORDER BY ..) AS ROW_NUM,
+	...
+	)
+	WHERE ROW_NUM BETWEEN (#{pageNumber} - 1) * (#{rowsPerPage} + 1) AND (#{pageNumber} * #{rowsPerPage})
+
+	 -->
 	
 	<!-- 정렬 높은 가격 순 -->
 	<select id="descPrice" resultType="mybatis.ProductDTO">

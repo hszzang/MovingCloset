@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-
+ 
 import movingcloset.command.CommandImpl;
 import movingcloset.command.store.ReviewDeleteCommand;
 import movingcloset.command.store.ReviewInsertCommand;
@@ -35,7 +35,7 @@ import movingcloset.command.store.StoreOrderCommand;
 import movingcloset.command.store.StoreUpdateCommand;
 import mybatis.ProductDTO;
 import mybatis.ProductDetailDTO;
-
+ 
 @Controller
 public class StoreController {
 	
@@ -59,22 +59,18 @@ public class StoreController {
 	StoreOrderCommand storeOrderCommand;
 	@Autowired
 	ReviewListCommand reviewListCommand;
-	
-	
-	
-	
+
 	// 스토어 리스트
 	@RequestMapping(value="/movingcloset/store.do", method=RequestMethod.GET)
 	public String storeList(Model model, HttpServletRequest req, ProductDTO productDTO) {
 	//public String storeList(Locale locale, Model model) {		
-		
+
 		model.addAttribute("req", req);
 		command = storelistCommand;
 		command.execute(model);
 		
 		return "body/store/store_list";
 	}
-	
 	// 스토어 상세
 	@RequestMapping(value="/store/detail.do", method=RequestMethod.GET)
 	public String storedetail(Model model, HttpServletRequest req, ProductDTO productDTO) {
@@ -366,7 +362,6 @@ public class StoreController {
 	public String deleteReview(Model model, HttpServletRequest req) {
 	
 		System.out.println("delete 들어옴");
-		
 		
 		model.addAttribute("req", req);
 		model.addAttribute("model", model);

@@ -1,7 +1,9 @@
 package mybatis;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -10,6 +12,11 @@ public interface MybatisProductImpl {
 	// 스토어 리스트 불러오기
 	public ProductDTO getProductDTO();
 	public List<ProductDTO> getStoreList(ProductDTO productDTO);
+	//public List<ProductDTO> getPagedList(int start, int end);
+	public List<ProductDTO> getPagedList(@Param("start")int start,
+										@Param("end") int end);
+	//public List<ProductDTO> getPagedList(Map<Integer, Integer> range);
+	public List<ProductDTO> getPagedList();
 	public int getTotalCount();
 	
 	public List<ProductDTO> descPrice(ProductDTO productDTO);
