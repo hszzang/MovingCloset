@@ -45,11 +45,11 @@ import com.project.movingcloset.KakaoService;
 import com.project.movingcloset.NaverLoginBO;
 
 import movingcloset.command.CommandImpl;
-import movingcloset.command.EmailCheckCommand;
 import movingcloset.command.FindIdCommand;
 import movingcloset.command.FindPwCommand;
 import movingcloset.command.IdcheckCommand;
 import movingcloset.command.LoginCommand;
+import movingcloset.command.MemberCheckCommand;
 import movingcloset.command.RegisterActionCommand;
 import mybatis.MemberDTO;
 
@@ -96,7 +96,7 @@ public class HomeController {
 	
 	
 	@Autowired
-	EmailCheckCommand emailCheckCommand;
+	MemberCheckCommand memberCheckCommand;
 	
 	
 	
@@ -153,15 +153,6 @@ public class HomeController {
 		
 		
 	}
-	
-	/*
-	 * //로그아웃
-	 * 
-	 * @RequestMapping(value = "/movingcloset/naverlogout.do", method = {
-	 * RequestMethod.GET, RequestMethod.POST }) public String logout(HttpSession
-	 * session)throws IOException { System.out.println("여기는 logout");
-	 * session.invalidate(); return "body/login"; }
-	 */
 	
 		
 	@RequestMapping("/movingcloset/logout.do")
@@ -224,32 +215,37 @@ public class HomeController {
 		session.setAttribute("sessionName",name); 
 		
 		
+		request.setAttribute("loginbrand", "naver");
+		request.setAttribute("emailAll", email);
+		
 		//세션 생성 
 		model.addAttribute("result", apiResult); 
-	
-		request.setAttribute("loginbrand", "naver");
-        request.setAttribute("email", email);
-        model.addAttribute("request",request);
+		model.addAttribute("req",request);
+
+		command = memberCheckCommand;
+		command.execute(model);
 		
-		/*
-		 * command = emailCheckCommand; command.execute(model);
-		 */
-		
-        
-		if(session.getAttribute("siteUserInfo") != null) {
-			return "body/login";
-			
+		if((Integer)session.getAttribute("membercheck")==0) {
+			return "body/registerForm"; 			
 		}else {
-			return "body/registerForm";
-			
+			return "body/login";
 		}
+		
+		
 	} 
 	
-
+	//로그아웃
+	@RequestMapping(value = "/movingcloset/naverlogout.do", method = { RequestMethod.GET, RequestMethod.POST }) 
+	public String logout(HttpSession session)throws IOException { 
+		System.out.println("여기는 logout"); 
+		session.invalidate(); 
+		return "body/login"; 
+	}
 	
-	// 카카오 로그인
+
     @RequestMapping("/movingcloset/kakaologin.do")
-    public String kakaologin(@RequestParam(value = "code", required = false) String code, HttpSession session, Model model, HttpServletRequest request ) throws Exception{
+    public String kakaologin(@RequestParam(value = "code", required = false) String code, 
+    		HttpSession session , HttpServletRequest request, Model model) throws Exception{
         System.out.println("#########" + code);
         String access_Token = kakaoService.getAccessToken(code);
         HashMap<String, Object> userInfo = kakaoService.getUserInfo(access_Token);
@@ -268,25 +264,21 @@ public class HomeController {
         session.setAttribute("kakaoEmail2", kemail2);
         
         
-        request.setAttribute("email", kemail);
+        
         request.setAttribute("loginbrand", "kakao");
-        model.addAttribute("request",request);
+		request.setAttribute("emailAll", kemail);
 		
-		/*
-		 * command = emailCheckCommand; command.execute(model);
-		 */
+		model.addAttribute("req",request);
 		
-        
-		if(session.getAttribute("siteUserInfo") != null) {
-			return "body/login";
-			
+		command = memberCheckCommand;
+		command.execute(model);
+		
+		if((Integer)session.getAttribute("membercheck")==0) {
+			return "body/registerForm"; 			
 		}else {
-		
-			return "body/registerForm";
-			
+			return "body/login";
 		}
-        
-        
+    
     }
 	
 	
@@ -306,8 +298,8 @@ public class HomeController {
 
 	// 회원가입 화면으로 이동
 	@RequestMapping(value = "/movingcloset/register.do")
-	public String register(HttpServletRequest request) {
-		request.setAttribute("loginbrand", "normal");
+	public String register(HttpSession session) {
+		session.setAttribute("loginbrand", "normal");
 		return "body/registerForm";
 	}
 
@@ -315,7 +307,7 @@ public class HomeController {
 	@RequestMapping(value = "/movingcloset/registerAction.do", method = RequestMethod.POST)
 	public String registerAction(Model model, HttpServletRequest req) {
 
-		model.addAttribute("req",req);    
+		model.addAttribute("req",req);
 		command = registerActionCommand;
 		command.execute(model);
 

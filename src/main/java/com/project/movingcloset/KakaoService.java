@@ -31,14 +31,14 @@ public class KakaoService {
             //    POST 요청을 위해 기본값이 false인 setDoOutput을 true로
 
             conn.setRequestMethod("POST");
-            conn.setDoOutput(true);
+            conn.setDoOutput(true);  
 
             //    POST 요청에 필요로 요구하는 파라미터 스트림을 통해 전송
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=d22c6a95056d752c59d1e73f60101ab7");  //본인이 발급받은 key
-            sb.append("&redirect_uri=http://localhost:8081/movingcloset/movingcloset/kakaologin.do");     // 본인이 설정해 놓은 경로
+            sb.append("&redirect_uri=http://localhost:8082/movingcloset/movingcloset/kakaologin.do");     // 본인이 설정해 놓은 경로
             sb.append("&code=" + authorize_code);
             bw.write(sb.toString());
             bw.flush();

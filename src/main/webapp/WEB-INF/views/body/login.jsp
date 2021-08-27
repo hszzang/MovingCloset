@@ -26,15 +26,6 @@
 <script type="text/javascript">
 
 
-/* https://kauth.kakao.com/oauth/authorize?client_id=d22c6a95056d752c59d1e73f60101ab7&redirect_uri=http://localhost:8082/movingcloset/movingcloset/login.do&response_type=code
-
-		
-카카오 인증완료 코드값 : TOkMZ1uxb_SYYYla41a0vrYVnpZ-ZEh4jNl7AyZ_sk-S4iS0bSf8UjsdOjYy4ZVRO1EBXwopb7kAAAF7SZ564g
-*/	
-
-
-
-
  function loginValidate(fn){
 	if(!fn.userid.value){
 		alert("아이디를 입력하세요");
@@ -91,7 +82,6 @@ function logout(){
 					
 					%>
 					<form name="loginForm" action="./loginAction.do" onsubmit="return loginValidate(this);" method="POST">
-					
 						<div class="form-group" >
 							<input type="text" name="userid" value="${loginId }"  class="form-control" placeholder="Enter ID" required> 
 							<!-- <input type="text" name="userid"  class="form-control" placeholder="Enter ID" required> -->
@@ -120,14 +110,12 @@ function logout(){
 								<span class="checkmark"></span>Remember Me
 								</label>
 							</div>
-							<div class="w-50 text-md-right" >
-							
+							<div class="w-50 text-md-right">
 								<div style="float:left;padding-right:20px;" >
-									<a id="klogin" href="https://kauth.kakao.com/oauth/authorize?client_id=d22c6a95056d752c59d1e73f60101ab7&redirect_uri=http://localhost:8081/movingcloset/movingcloset/kakaologin.do&response_type=code">
+									<a id="klogin" href="https://kauth.kakao.com/oauth/authorize?client_id=d22c6a95056d752c59d1e73f60101ab7&redirect_uri=http://localhost:8082/movingcloset/movingcloset/kakaologin.do&response_type=code">
 										<img class="socialLogin" src="../resources/images/login/kakao_login_medium.png" alt="" />
 									</a>								
 								</div>
-
 								
 								<div id="naver_id_login" style="text-align:center;float:left;">
 									<a href="${url}"> 
@@ -149,12 +137,13 @@ function logout(){
 					
 					
 					<div class="form-group" style="text-align: center;font-size: 30px;font-weight: bold;">
-						<span>${sessionScope.username }님 반갑습니다.</span>
+						<span>${username }님 반갑습니다.</span>
 					</div>
 					<div class="form-group">
 						<button type="button" class="form-control btn btn-dark submit px-3" onclick="logout();">LOG OUT</button>
 					</div>
 					
+
 					<%} %>
 					
 				</div>

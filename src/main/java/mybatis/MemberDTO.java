@@ -19,5 +19,4 @@ public class MemberDTO {
 	private String loginbrand;
 	
 	
-	
 }

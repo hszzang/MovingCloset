@@ -51,10 +51,6 @@ public class RegisterActionCommand implements CommandImpl{
 		String mobile1 = req.getParameter("mobile1");
 		String mobile2 = req.getParameter("mobile2");
 		String mobile3 = req.getParameter("mobile3");
-		String loginbrand = req.getParameter("loginbrand");
-		
-		System.out.println("loginbrand : "+loginbrand);
-		
 				
 		String tag1 = req.getParameter("dandy"); 
 		String tag2 = req.getParameter("classic"); 
@@ -64,7 +60,10 @@ public class RegisterActionCommand implements CommandImpl{
 		String tag6 = req.getParameter("street"); 
 		String tag7 = req.getParameter("vintage"); 
 		String tag8 = req.getParameter("lovely");
-		 
+		String loginbrand = req.getParameter("loginbrand"); 
+	
+		
+		
 		if(tag1 == null) {tag1 = "null";} else {tag1 = "dandy";}
 		if(tag2 == null) {tag2 = "null";} else {tag2 = "classic";}
 		if(tag3 == null) {tag3 = "null";} else {tag3 = "casual";}
@@ -84,6 +83,7 @@ public class RegisterActionCommand implements CommandImpl{
 		memberDTO.setPhone(mobile1 + "-" + mobile2 + "-" + mobile3);
 		memberDTO.setTag(tag1+","+tag2+","+tag3+","+tag4+","+tag5+","+tag6+","+tag7+","+tag8);
 		memberDTO.setLoginbrand(loginbrand);
+		
 
 		System.out.println("회원가입 커맨드 호출됨");
 
