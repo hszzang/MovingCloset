@@ -1,6 +1,7 @@
 package mybatis;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -16,6 +17,9 @@ public interface MybatisNewDImpl {
 	public List<ProductDTO> getNewdList(ProductDTO productDTO);
 	public int getTotalCount();
 	
-
+	
+	
+	public ArrayList<NewdDTO> getDesignerList(NewdDTO newdDTO);
+	
 	
 }
