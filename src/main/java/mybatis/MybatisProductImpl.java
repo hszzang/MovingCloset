@@ -42,4 +42,7 @@ public interface MybatisProductImpl {
 	
 	public String getPidx(String p_code);
 	
+	public BuyAndGroupDTO buyReview(String userid, String p_code);
+	
+	
 }

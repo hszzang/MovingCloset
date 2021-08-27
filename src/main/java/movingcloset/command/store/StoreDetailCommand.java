@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import mybatis.BuyAndGroupDTO;
 import mybatis.MybatisProductImpl;
 import mybatis.ProductDTO;
 import movingcloset.command.CommandImpl;
@@ -34,9 +35,13 @@ public class StoreDetailCommand implements CommandImpl {
 			
 			ProductDTO storeDetail = new ProductDTO();
 			ProductDetailDTO productDetail = new ProductDetailDTO();
+			BuyAndGroupDTO buyAndGroupDTO = new BuyAndGroupDTO();
+			  
 			
 			Map<String, Object> paramMap = model.asMap();
 			HttpServletRequest req = (HttpServletRequest)paramMap.get("req");
+			HttpSession session = req.getSession();
+			
 			
 			String p_idx = req.getParameter("p_idx");
 			storeDetail = sqlSession.getMapper(MybatisProductImpl.class).getStoreDetail(p_idx);
@@ -54,6 +59,16 @@ public class StoreDetailCommand implements CommandImpl {
 			
 			List<ReviewDTO> reviews = sqlSession.getMapper(MybatisProductImpl.class).getReviews(p_code);
 			
+			String userid = (String) session.getAttribute("siteUserInfo");
+			if(userid != null) {
+				
+				buyAndGroupDTO = sqlSession.getMapper(MybatisProductImpl.class).buyReview(userid,p_code);
+				model.addAttribute("buyAndGroupDTO",buyAndGroupDTO);
+				
+			}
+			
+			
+			
 			model.addAttribute("storeDetail", storeDetail);
 			
 			model.addAttribute("productDetail", productDetail);
@@ -63,6 +78,7 @@ public class StoreDetailCommand implements CommandImpl {
 			//model.addAttribute("stocks", p_stock);
 			
 			model.addAttribute("reviews", reviews);
+
 			
 			System.out.println("StoreDetailCommand 호출 완료");
 			

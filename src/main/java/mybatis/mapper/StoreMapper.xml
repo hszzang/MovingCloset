@@ -181,6 +181,17 @@
    	 	ON p.p_code = pd.p_code WHERE p_idx = #{p_idx}
 	</select>
 	
+	<!-- 구매내역과 리뷰페이지 버튼 보임/숨김 처리 연결 -->
+	
+	<select id="buyReview" resultType="mybatis.BuyAndGroupDTO">
+	SELECT distinct bg.p_code as p_code, userid
+	FROM product_detail P
+	    INNER JOIN buy_group bg
+	    ON P.p_code = bg.p_code
+	    INNER JOIN buy b
+	    ON bg.b_idx = b.b_idx
+	WHERE userid = #{0} and bg.p_code = #{1}
+	</select>
 	
 	
 	

@@ -316,9 +316,16 @@
 				<input type="checkbox" name="photocheck" id="photocheck" value="photocheck" class="form-check-input" style="zoom: 1.5;">
 					<label for="photocheck" style="font-size:1em;">포토리뷰</label>
 			</div>
-			<div class="d-flex ml-auto">
-				<button id="btnReview">리뷰 쓰기</button>
-			</div>
+			
+			<!-- 해당 상품을 구매한 내역이 있을때만 리뷰 쓰기 버튼 보이게 처리
+				userid와 p_code 필요!
+			 -->
+			<c:if test="${siteUserInfo != null && buyAndGroupDTO.p_code != null}"  >
+				<div class="d-flex ml-auto">
+					<button id="btnReview">리뷰 쓰기</button>
+				</div>			
+			</c:if>
+		
 		</div>
 
 <!-- 댓글 시작 ------------------------------------------------------------------------------------------------ -->
