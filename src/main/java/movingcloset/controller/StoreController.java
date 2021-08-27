@@ -31,7 +31,6 @@ import movingcloset.command.store.StoreDeleteCommand;
 import movingcloset.command.store.StoreDetailCommand;
 import movingcloset.command.store.StoreInsertCommand;
 import movingcloset.command.store.StoreListCommand;
-import movingcloset.command.store.StoreOrderCommand;
 import movingcloset.command.store.StoreUpdateCommand;
 import mybatis.ProductDTO;
 import mybatis.ProductDetailDTO;
@@ -56,8 +55,6 @@ public class StoreController {
 	@Autowired
 	ReviewDeleteCommand reviewDeleteCommand;
 	@Autowired
-	StoreOrderCommand storeOrderCommand;
-	@Autowired
 	ReviewListCommand reviewListCommand;
 
 	// 스토어 리스트
@@ -71,6 +68,7 @@ public class StoreController {
 		
 		return "body/store/store_list";
 	}
+	
 	// 스토어 상세
 	@RequestMapping(value="/store/detail.do", method=RequestMethod.GET)
 	public String storedetail(Model model, HttpServletRequest req, ProductDTO productDTO) {
