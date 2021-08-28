@@ -10,7 +10,7 @@
 		SELECT * FROM product WHERE p_idx=#{p_idx}
 	</select>
 	
-	<!-- 리스트 (최근순) -->
+	<!-- 리스트 (전체최근순) -->
 	<select id="getStoreList" parameterType="int" resultType="mybatis.ProductDTO">
 		SELECT * FROM product 
 		ORDER BY p_idx DESC
@@ -18,19 +18,60 @@
 	</select>
 	<!-- 페이징 적용된 리스트 + 신상품/가격정렬 + 플래그 분류 적용 -->
 	<select id="getPagedList" parameterType="int" resultType="mybatis.ProductDTO">
-		SELECT * FROM product 
-		WHERE p_idx BETWEEN #{start} AND #{end}
 		<choose>
 			<when test='flag == null or flag=="all"'>
+				SELECT * FROM product 
+				WHERE p_idx BETWEEN #{start} AND #{end}
 			</when>
-			<otherwise>
-				AND p_flag=#{flag}
+			<when test='flag=="신발" '> <!--  더미데이터 60개 이상이면 -->
+				SELECT * FROM
+					(SELECT * FROM product
+						WHERE p_flag=#{flag}
+						AND
+						p_idx BETWEEN #{start} AND #{end}
+						ORDER BY p_idx DESC
+					)
+				WHERE rownum BETWEEN 1 AND 60		
+			<!--  더미데이터 60개 이상이면..? -->
+			<!--  
+			<when test='flag=="신발" and order!=null'> 
+				SELECT
+			    ROW_NUMBER() OVER(ORDER BY p_price #{order}) 
+			    row_num,
+			    p_idx,p_name,p_code,p_price,p_brand,p_ofile,p_sfile,p_flag
+				FROM
+			    product WHERE p_flag=#{flag}
+			
+				SELECT * FROM 
+				 (
+				  SELECT * FROM product
+				  WHERE p_flag=#{flag}
+				  ORDER BY p_idx DESC
+				 )
+				WHERE ROWNUM BETWEEN 1 AND 60;
+			
+			</when>
+			
+				SELECT * FROM 
+				 (
+				  SELECT * FROM product
+				  WHERE p_flag=#{flag}
+				  ORDER BY p_idx DESC
+				 )
+				WHERE ROWNUM BETWEEN 1 AND 60;
+			
+			-->	
+			</when>
+			<otherwise> <!--  더미데이터 60개 미만이면?? -->
+				SELECT * FROM
+					(SELECT * FROM product
+						WHERE p_flag=#{flag}
+						ORDER BY p_idx DESC
+					)
+				WHERE rownum BETWEEN #{start} AND #{end}		
 			</otherwise>
 		</choose>
 		<choose>
-			<when test='order == null or order=="idx"'>
-				ORDER BY p_idx DESC
-			</when>
 			<when test='order=="asc"'>
 				ORDER BY p_price ASC
 			</when>
@@ -41,12 +82,18 @@
 				ORDER BY p_idx DESC
 			</otherwise>
 		</choose>
-	
 	</select>
 	
-	<!-- 페이징 위한 총 갯수 카운트 -->
-	<select id="getTotalCount" resultType="int">
-		SELECT COUNT(*) FROM product
+<!-- 페이징 위한 갯수 카운트 플래그 없으면 모든 상품, 플래그 있으면 해당 플래그 상품만 -->
+	<select id="getCount" parameterType="String" resultType="int">
+		<choose>
+			<when test='flag==null or flag=="all"'>
+				SELECT COUNT(*) FROM product			
+			</when>
+			<otherwise>
+				SELECT COUNT(*) FROM product WHERE p_flag=#{flag}
+			</otherwise>
+		</choose>
 	</select>
 		
 	<!-- 정렬 높은 가격 순 -->
@@ -104,10 +151,19 @@
 	
 	<!-- 리뷰쓰기 -->
 	<insert id="insertReview" parameterType="mybatis.ReviewDTO" >
-		INSERT INTO review(p_code, p_rate, r_content, userid, r_date, r_ofile, r_sfile, r_idx)
+		INSERT INTO review(p_code, r_rate, r_content, userid, r_date, r_ofile, r_sfile, r_idx, rt_fabric, rt_fit, rt_size, rt_finish)
 		VALUES
-		(#{p_code}, #{p_rate}, #{r_content}, #{userid}, #{r_date}, #{r_ofile}, #{r_sfile}, review_seq.nextval)
+		(#{p_code}, #{r_rate}, #{r_content}, #{userid}, sysdate, #{r_ofile}, #{r_sfile}, review_seq.nextval, #{rt_fabric}, #{rt_fit}, #{rt_size}, #{rt_finish})
 	</insert>
+
+	<!-- 리뷰쓰기(첨부파일 없음) -->
+	<insert id="insertReviewNoFile" parameterType="mybatis.ReviewDTO" >
+		INSERT INTO review(p_code, r_rate, r_content, userid, r_date, r_idx, rt_fabric, rt_fit, rt_size, rt_finish)
+		VALUES
+		(#{p_code}, #{r_rate}, #{r_content}, #{userid}, sysdate, review_seq.nextval, #{rt_fabric}, #{rt_fit}, #{rt_size}, #{rt_finish})
+	</insert>
+
+	
 	
 	<!-- 리뷰 수정 -->
 	<update id="updateReview" parameterType="mybatis.ReviewDTO">
@@ -144,6 +200,8 @@
 	WHERE userid = #{0} and bg.p_code = #{1}
 	</select>
 	
+	
+
 	
 	
 </mapper>
