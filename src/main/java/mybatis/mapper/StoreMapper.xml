@@ -153,10 +153,19 @@
 	
 	<!-- 리뷰쓰기 -->
 	<insert id="insertReview" parameterType="mybatis.ReviewDTO" >
-		INSERT INTO review(p_code, p_rate, r_content, userid, r_date, r_ofile, r_sfile, r_idx)
+		INSERT INTO review(p_code, r_rate, r_content, userid, r_date, r_ofile, r_sfile, r_idx, rt_fabric, rt_fit, rt_size, rt_finish)
 		VALUES
-		(#{p_code}, #{p_rate}, #{r_content}, #{userid}, #{r_date}, #{r_ofile}, #{r_sfile}, review_seq.nextval)
+		(#{p_code}, #{r_rate}, #{r_content}, #{userid}, sysdate, #{r_ofile}, #{r_sfile}, review_seq.nextval, #{rt_fabric}, #{rt_fit}, #{rt_size}, #{rt_finish})
 	</insert>
+
+	<!-- 리뷰쓰기(첨부파일 없음) -->
+	<insert id="insertReviewNoFile" parameterType="mybatis.ReviewDTO" >
+		INSERT INTO review(p_code, r_rate, r_content, userid, r_date, r_idx, rt_fabric, rt_fit, rt_size, rt_finish)
+		VALUES
+		(#{p_code}, #{r_rate}, #{r_content}, #{userid}, sysdate, review_seq.nextval, #{rt_fabric}, #{rt_fit}, #{rt_size}, #{rt_finish})
+	</insert>
+
+	
 	
 	<!-- 리뷰 수정 -->
 	<update id="updateReview" parameterType="mybatis.ReviewDTO">
@@ -193,6 +202,8 @@
 	WHERE userid = #{0} and bg.p_code = #{1}
 	</select>
 	
+	
+
 	
 	
 </mapper>

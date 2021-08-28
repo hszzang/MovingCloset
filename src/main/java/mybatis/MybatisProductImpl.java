@@ -35,7 +35,8 @@ public interface MybatisProductImpl {
 	public void deleteProduct(String p_idx);
 	
 	public List<ReviewDTO> getReviews(String p_code);
-	public void insertReview(ReviewDTO reviewDTO);
+	public int insertReview(ReviewDTO reviewDTO);
+	public int insertReviewNoFile(ReviewDTO reviewDTO);
 	public void updateReview(ReviewDTO reviewDTO);
 	public void deleteReview(String r_idx);
 	public ProductAndDetailDTO reviewList(String p_idx);
@@ -44,5 +45,6 @@ public interface MybatisProductImpl {
 	
 	public BuyAndGroupDTO buyReview(String userid, String p_code);
 	
-	
+
+
 }
