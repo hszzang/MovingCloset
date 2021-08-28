@@ -103,8 +103,17 @@
         
     </style>
     <script>
-    function selectSubmit(obj){ 
-    	obj.submit(); //obj자체가 form이다.
+    function selectOrder(order){ 
+    	//obj.submit(); //obj자체가 form이다.
+    	//var page = parseInt(val);
+    	var order = order.value;
+    	location.href="/movingcloset/movingcloset/store.do?flag=${flag}&order="+order+"&pageShow=${pageC}";	
+	}
+    
+    function selectPage(page){ 
+    	//obj.submit(); //obj자체가 form이다.
+    	var page = page.value;
+    	location.href="/movingcloset/movingcloset/store.do?flag=${flag}&order=${order}&pageShow="+page;
 	}
     
     function flagSubmit(val){
@@ -126,7 +135,7 @@
     		*/
     		left.disabled= "false";
     		page = page - 1;
-    		location.href="/movingcloset/movingcloset/store.do?pageShow="+page;
+    		location.href="/movingcloset/movingcloset/store.do?flag=${flag}&order=${order}&pageShow="+page;
     	}
     }
     
@@ -144,7 +153,7 @@
     		*/
     		right.disabled="false";
     		page = page + 1;
-    		location.href="/movingcloset/movingcloset/store.do?pageShow="+page;
+    		location.href="/movingcloset/movingcloset/store.do?flag=${flag}&order=${order}&pageShow="+page;
     	}
     }
     
@@ -159,7 +168,7 @@
         
             <div id="list">
 	                <div id="filter">
-		            	<form action="/movingcloset/movingcloset/store.do" method="get" >
+		            	<form action="/movingcloset/movingcloset/store.do?flag=${flag }&order=${order }&pageShow=${pageC }" method="get" >
 		                    <span id="filterBtn">
 		                        <button type="submit" class="btn btn-dark" name="flag" value="all" onClick="flagSubmit(this.form.value)">전체</button>
 		                        <button type="submit" class="btn btn-dark" name="flag" value="의류" onClick="flagSubmit(this.form.value)">의류</button>
@@ -168,7 +177,7 @@
 		                        <button type="submit" class="btn btn-dark" name="flag" value="잡화" onClick="flagSubmit(this.form.value)">잡화</button>
 		                    </span>
 		                    <span id="filterDropdown">
-			                        <select name="order" id="order" onchange="selectSubmit(this.form)">
+			                        <select name="order" id="order" onchange="selectOrder(this)">
 			                        	<option value="" diabled select hidden>정렬</option>
 			                            <option value="idx" >신상품순</option>
 			                            <option value="asc">낮은가격순</option>
@@ -204,8 +213,8 @@
 
             </div>
             <div id="pages">
-            	<form action="/movingcloset/movingcloset/store.do" method="get" >
-	            	<select name="pageShow" id="pageSel" onchange="selectSubmit(this.form)">
+            	<form action="/movingcloset/movingcloset/store.do?flag=${flag }&order=${order }&pageShow=${pageC }" method="get" >
+	            	<select name="pageShow" id="pageSel" onchange="selectPage(this)">
 	            		<option value="" diabled select hidden >${pageC }</option>
 		            		<c:forEach  items="${pages }" var="page" >
 		            			<option value="${page }">${page }</option>

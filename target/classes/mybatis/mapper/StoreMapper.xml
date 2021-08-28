@@ -6,25 +6,103 @@
   
 <mapper namespace="mybatis.MybatisProductImpl">
 
-	<!-- 리스트 (최근순) -->
-	<select id="getStoreList" resultType="mybatis.ProductDTO" parameterType="java.util.ArrayList" >
-		SELECT * FROM product ORDER BY p_idx DESC
-		<!-- SELECT * FROM product WHERE p_idx<![CDATA[>]]>117 ORDER BY p_idx DESC  -->
+	<select id="getProductDTO" resultType="mybatis.ProductDTO">
+		SELECT * FROM product WHERE p_idx=#{p_idx}
 	</select>
 	
+	<!-- 리스트 (전체최근순) -->
+	<select id="getStoreList" parameterType="int" resultType="mybatis.ProductDTO">
+		SELECT * FROM product 
+		ORDER BY p_idx DESC
+		<!-- WHERE p_idx<![CDATA[>=]]>#{defaultShow} -->
+	</select>
+	<!-- 페이징 적용된 리스트 + 신상품/가격정렬 + 플래그 분류 적용 -->
+	<select id="getPagedList" parameterType="int" resultType="mybatis.ProductDTO">
+		<choose>
+			<when test='flag == null or flag=="all"'>
+				SELECT * FROM product 
+				WHERE p_idx BETWEEN #{start} AND #{end}
+			</when>
+			<when test='flag=="신발" '> <!--  더미데이터 60개 이상이면 -->
+				SELECT * FROM
+					(SELECT * FROM product
+						WHERE p_flag=#{flag}
+						AND
+						p_idx BETWEEN #{start} AND #{end}
+						ORDER BY p_idx DESC
+					)
+				WHERE rownum BETWEEN 1 AND 60		
+			<!--  더미데이터 60개 이상이면..? -->
+			<!--  
+			<when test='flag=="신발" and order!=null'> 
+				SELECT
+			    ROW_NUMBER() OVER(ORDER BY p_price #{order}) 
+			    row_num,
+			    p_idx,p_name,p_code,p_price,p_brand,p_ofile,p_sfile,p_flag
+				FROM
+			    product WHERE p_flag=#{flag}
+			
+				SELECT * FROM 
+				 (
+				  SELECT * FROM product
+				  WHERE p_flag=#{flag}
+				  ORDER BY p_idx DESC
+				 )
+				WHERE ROWNUM BETWEEN 1 AND 60;
+			
+			</when>
+			
+				SELECT * FROM 
+				 (
+				  SELECT * FROM product
+				  WHERE p_flag=#{flag}
+				  ORDER BY p_idx DESC
+				 )
+				WHERE ROWNUM BETWEEN 1 AND 60;
+			
+			-->	
+			</when>
+			<otherwise> <!--  더미데이터 60개 미만이면?? -->
+				SELECT * FROM
+					(SELECT * FROM product
+						WHERE p_flag=#{flag}
+						ORDER BY p_idx DESC
+					)
+				WHERE rownum BETWEEN #{start} AND #{end}		
+			</otherwise>
+		</choose>
+		<choose>
+			<when test='order=="asc"'>
+				ORDER BY p_price ASC
+			</when>
+			<when test='order=="desc"'>
+				ORDER BY p_price DESC
+			</when>
+			<otherwise>
+				ORDER BY p_idx DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+<!-- 페이징 위한 갯수 카운트 플래그 없으면 모든 상품, 플래그 있으면 해당 플래그 상품만 -->
+	<select id="getCount" parameterType="String" resultType="int">
+		<choose>
+			<when test='flag==null or flag=="all"'>
+				SELECT COUNT(*) FROM product			
+			</when>
+			<otherwise>
+				SELECT COUNT(*) FROM product WHERE p_flag=#{flag}
+			</otherwise>
+		</choose>
+	</select>
+		
 	<!-- 정렬 높은 가격 순 -->
 	<select id="descPrice" resultType="mybatis.ProductDTO">
-		SELECT * FROM product order by p_price desc
+		SELECT * FROM product ORDER BY p_price DESC
 	</select>
-	
 	<!-- 정렬 낮은 가격 순 -->
 	<select id="ascPrice" resultType="mybatis.ProductDTO">
-		SELECT * FROM product order by p_price asc
-	</select>
-	
-	<!-- 페이징 위한 총 갯수 카운트 -->
-	<select id="getTotalCount" resultType="int">
-		SELECT COUNT(*) from product
+		SELECT * FROM product ORDER BY p_price ASC
 	</select>
 	
 	<!-- 상품 입력 -->
@@ -43,7 +121,6 @@
 	<select id="getStoreDetail" resultType="mybatis.ProductDTO">
 		SELECT * FROM product WHERE p_idx=#{p_idx}
 	</select>
-	
 	<!-- product_detail 에서 상세정보 사이즈 가져오기 -->
 	<select id="getProductDetail" resultType="mybatis.ProductDetailDTO">
 		SELECT * FROM product_detail WHERE p_code=#{p_code}
@@ -53,7 +130,7 @@
 	<update id="updateProduct" parameterType="mybatis.ProductDTO" >
 		UPDATE product SET p_name=#{p_name}, p_code=#{p_code}, p_price=#{p_price}, p_brand=#{p_brand}, p_ofile=#{p_ofile}, p_sfile=#{p_sfile} WHERE p_idx=#{p_idx}
 	</update>
-	
+	<!-- 디테일 수정 -->
 	<update id="updateDetail" parameterType="mybatis.ProductDetailDTO">
 		UPDATE product_detail SET pd_color=#{pd_color}, pd_size=#{pd_size}, pd_stock=#{pd_stock} WHERE p_code=#{p_code}
 	</update>
@@ -61,6 +138,10 @@
 	<!-- 상품 삭제 -->
 	<delete id="deleteProduct">
 		DELETE FROM product WHERE p_idx=#{p_idx}
+	</delete>
+	<!-- 디테잏 삭제 -->
+	<delete id="deleteDetail">
+		DELETE FROM product_detail WHERE p_code=#{p_code}
 	</delete>
 
 	<!-- 리뷰들 불러오기 -->
@@ -90,5 +171,26 @@
 	<select id="getPidx" >
 		SELECT p_idx FROM product WHERE p_code=#{0}
 	</select>
+	
+	
+	<!-- 리뷰 페이지 진입시 띄울 정보 가져오기 -->
+	<select id="reviewList" resultType="mybatis.ProductAndDetailDTO">
+	 	SELECT * FROM product p INNER JOIN product_detail pd
+   	 	ON p.p_code = pd.p_code WHERE p_idx = #{p_idx}
+	</select>
+	
+	<!-- 구매내역과 리뷰페이지 버튼 보임/숨김 처리 연결 -->
+	
+	<select id="buyReview" resultType="mybatis.BuyAndGroupDTO">
+	SELECT distinct bg.p_code as p_code, userid
+	FROM product_detail P
+	    INNER JOIN buy_group bg
+	    ON P.p_code = bg.p_code
+	    INNER JOIN buy b
+	    ON bg.b_idx = b.b_idx
+	WHERE userid = #{0} and bg.p_code = #{1}
+	</select>
+	
+	
 	
 </mapper>
