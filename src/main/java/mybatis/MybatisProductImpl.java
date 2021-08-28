@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface MybatisProductImpl {
 	// 특정 상품 불러오기
-	public ProductDTO getProductDTO(String p_idx);;
+	public ProductDTO getProductDTO(String p_idx);;  
 	
 	// 스토어 리스트 불러오기
 	public List<ProductDTO> getStoreList(ProductDTO productDTO);

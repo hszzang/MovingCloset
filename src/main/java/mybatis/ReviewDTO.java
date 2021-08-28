@@ -18,7 +18,7 @@ public class ReviewDTO {
 	private String rt_fabric;
 	private String rt_fit;
 	private String rt_size;
-	private String rt_finish;
+	private String rt_finish;  
 
 	
 	

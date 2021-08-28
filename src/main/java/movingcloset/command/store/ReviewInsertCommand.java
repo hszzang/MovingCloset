@@ -156,7 +156,7 @@ public class ReviewInsertCommand implements CommandImpl {
 				model.addAttribute("reviewDTO", reviewDTO);
 				if(result==1) {
 					session.setAttribute("complete","OK");				
-				}
+				}  
 
 				
 				
