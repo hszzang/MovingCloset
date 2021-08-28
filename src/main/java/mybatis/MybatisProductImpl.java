@@ -13,17 +13,25 @@ public interface MybatisProductImpl {
 	
 	// 스토어 리스트 불러오기
 	public List<ProductDTO> getStoreList(ProductDTO productDTO);
+	//public List<ProductDTO> getOrderedList(@Param("order") String order,
+	//									@Param("flag") String flag);
 	// 페이징처리한 리스트 불러오기
-	//public List<ProductDTO> getPagedList(int start, int end);
-	public List<ProductDTO> getPagedList(@Param("start")int start,
-										@Param("end") int end,
+	public List<ProductDTO> getPagedList(@Param("flag") String flag,
 										@Param("order") String order,
-										@Param("flag") String flag);
+										@Param("start")int start,
+										@Param("end") int end);
+	/*
+	public List<ProductDTO> getPagedList(List<ProductDTO> list,
+										@Param("start")int start,
+										@Param("end") int end
+										);
+	*/
 	//public List<ProductDTO> getPagedList(Map<Integer, Integer> range);
 	//public List<ProductDTO> getPagedList();
 	
 	// 페이징 위한 상품 수 카운트
-	public int getTotalCount();
+	public int getCount(@Param("flag") String flag);
+	//public int getCount(List<ProductDTO> list);
 	
 	// 가격정렬
 	public List<ProductDTO> descPrice(ProductDTO productDTO);
