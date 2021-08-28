@@ -25,8 +25,6 @@ public class NewDCommand implements CommandImpl {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	////////////////////////작성전 복붙만해둠
-	
 	@Override
 	public void execute(Model model) {
 		
@@ -34,7 +32,6 @@ public class NewDCommand implements CommandImpl {
 		
 		ProductDTO productDTO = new ProductDTO();
 		
-		//List<NewdDTO> newdList = sqlSession.getMapper(MybatisNewDImpl.class).getNewdList(newdDTO);
 		List<ProductDTO> newdList = sqlSession.getMapper(MybatisNewDImpl.class).getNewdList(productDTO);
 		
 		int totalProduct = sqlSession.getMapper(MybatisProductImpl.class).getTotalCount(); 

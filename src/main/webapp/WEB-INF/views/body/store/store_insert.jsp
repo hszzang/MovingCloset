@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 	<style>
 	.container{
-		margin:200px 0 100px 0;
+		margin:200px 0 200px 0;
 	}
 	#brandName ,#shoes ,#prodCount ,#price {
 		font-size: 1em;
@@ -172,7 +172,7 @@
 						<input type="submit" id="productInsert" style="width:350px;height:40px;background-color:black;color:white;margin-bottom:10px;" value="등록">
 						<button type="reset" class="btn" style="border:lightgray solid 1px;width:350px;height:40px;margin-bottom:10px;">리셋</button>
 						<button type="button" class="btn" style="border:lightgray solid 1px;width:350px;height:40px;"
-							onclick="javascript:location.href='/movingcloset/store.do';">돌아가기</button>
+							onclick="javascript:location.href='/movingcloset/movingcloset/store.do';">돌아가기</button>
 				</div>
 			</div>
 

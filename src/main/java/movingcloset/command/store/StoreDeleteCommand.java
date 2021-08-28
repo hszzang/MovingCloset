@@ -38,14 +38,16 @@ public class StoreDeleteCommand implements CommandImpl {
 			HttpServletRequest req = (HttpServletRequest)paramMap.get("req");
 			
 			String p_idx = req.getParameter("p_idx");
+			productDTO = sqlSession.getMapper(MybatisProductImpl.class).getProductDTO(p_idx);
 			
+			sqlSession.getMapper(MybatisProductImpl.class).deleteDetail(productDTO.getP_code());
 			sqlSession.getMapper(MybatisProductImpl.class).deleteProduct(p_idx);
 			
-			List<ProductDTO> storeList = sqlSession.getMapper(MybatisProductImpl.class).getStoreList(productDTO);
+			//List<ProductDTO> storeList = sqlSession.getMapper(MybatisProductImpl.class).getStoreList(productDTO);
 			
 			System.out.println("StoreDeleteCommand 완료");
 			
-			model.addAttribute("storeList", storeList);
+			//model.addAttribute("storeList", storeList);
 			
 			
 		}

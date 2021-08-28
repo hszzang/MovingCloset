@@ -24,8 +24,9 @@ public class ProductDTO {
 
 	private MultipartFile uploadFile;
 
-	//현지니가test로 추가욤
-	private String p_img;
+	/*
+	 * 현지니가test로 추가욤 private String p_img;
+	 */
 
 
 }
