@@ -350,12 +350,10 @@
 			<c:forEach items="${reviews }" var="review"  >
 				<tr >
 					<td>
-					평점 <!-- 평점 수정 필요 ------------------------------------------------------------------>
-					<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-					<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-					<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-					<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-					<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
+					평점 <!-- 평점 수정했습니다!------>
+						<c:forEach begin="1" end="${review.r_rate }" step="1">
+							<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>					
+						</c:forEach>
 					</td>
 					
 					<td>${review.r_content }
@@ -371,8 +369,17 @@
 						<input type="hidden" name="p_idx" value="${storeDetail.p_idx }"/>
 					</td>
 					<td>
-						<img class="myImg" src="../resources/upload/${review.r_sfile }" alt="상품이미지"
-						style="width: 100px; height: auto;"/>
+					
+					<c:choose>
+						<c:when test="${review.r_sfile eq null }">
+							
+						</c:when>
+						<c:otherwise>
+							<img class="myImg" src="../resources/upload/${review.r_sfile }" alt="상품이미지"
+							style="width: 100px; height: auto;"/>						
+						</c:otherwise>
+					</c:choose>
+					
 					</td>
 				</tr>
 			</c:forEach>

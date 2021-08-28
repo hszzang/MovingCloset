@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface MybatisProductImpl {
 	// 특정 상품 불러오기
-	public ProductDTO getProductDTO(String p_idx);;
+	public ProductDTO getProductDTO(String p_idx);;  
 	
 	// 스토어 리스트 불러오기
 	public List<ProductDTO> getStoreList(ProductDTO productDTO);
@@ -55,7 +55,8 @@ public interface MybatisProductImpl {
 	
 	// 리뷰들~!
 	public List<ReviewDTO> getReviews(String p_code);
-	public void insertReview(ReviewDTO reviewDTO);
+	public int insertReview(ReviewDTO reviewDTO);
+	public int insertReviewNoFile(ReviewDTO reviewDTO);
 	public void updateReview(ReviewDTO reviewDTO);
 	public void deleteReview(String r_idx);
 	public ProductAndDetailDTO reviewList(String p_idx);
@@ -64,5 +65,6 @@ public interface MybatisProductImpl {
 	
 	public BuyAndGroupDTO buyReview(String userid, String p_code);
 	
-	
+
+
 }
