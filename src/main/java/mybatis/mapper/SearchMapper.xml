@@ -4,11 +4,63 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="mybatis.MybatisProductImpl">
+<mapper namespace="mybatis.MybatisSearchImpl">
 
-	<select id="searchProducts">
+	<select id="searchProducts" resultType="mybatis.ProductDTO">
+		<if test='keyword=="color"'>
+			SELECT p.*
+			from product p, product_detail d
+			WHERE p.p_code=d.p_code AND pd_color=#{search}
+		</if>
 		
+			SELECT * FROM (
+			SELECT ROW_NUMBER() OVER(ORDER BY p_idx) NUM, A.*
+			FROM product A
+		<choose>
+			<!--  FROM product A  -->
+			<when test='keyword=="brand"'>
+				WHERE p_brand=#{search}
+			</when>
+		<!--  
+			<when test='keyword=="color"'>
+				WHERE p_code=#{search}
+			</when>
+		-->
+		<!--  
+			<when test='keyword=="tag"'>
+				WHERE * IN (#{search})
+			</when>
+		-->
+			<otherwise>
+				WHERE p_name LIKE '%'||#{search}||'%' 
+				<!-- 
+				WHERE p_name IN (#{search})
+				
+				SELECT * FROM product
+				WHERE p_name LIKE '%샌들%';     
+				 -->
+			</otherwise>
+		</choose>
+		)
+		<choose>
+			<when test='order=="asc"'>
+				ORDER BY p_price ASC
+			</when>
+			<when test='order=="desc"'>
+				ORDER BY p_price DESC
+			</when>
+			<otherwise>
+				ORDER BY p_idx DESC
+			</otherwise>
+		</choose>
 	</select>
 	
+	<select id="getDetailDTO" resultType="String">
+		SELECT p_code FROM product_detail
+		WHERE pd_color=#{search}
+	</select>
+	<select id="getProductDTO" resultType="mybatis.ProductDTO">
+		SELECT * FROM
+	</select>
 
 </mapper>
