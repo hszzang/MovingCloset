@@ -47,21 +47,24 @@
         	display:inline;
     	}
     	*/
-    	.fBtns{
+    	.radiobtn{
     		border:none; background-color:white;
     		font-weight:lighter;	
     	}
-    	.fBtns input[type="radio"]{
+    	.radiobtn:checked{
 		    display:none;
 		}
-		.fBtns input[type="radio"] + label {
-			font-size:1.3em; font-weight:lighter;
-		}	
-		.fBtns input[type="radio"]:checked + label {
-		    font-weight:bold;
+		.radiobtn{
+			font-size:1.3em; font-weight:light;
+			display:none;
 		}
+		/*	
+		.fBtns:checked + .filterLbl{
+		    font-weight:900;
+		}
+		*/
     	.filterLbl{
-    		font-size:1.3em; font-weight:lighter;
+    		font-size:1.3em; font-weight:100;
     		margin-left:6%;
     	}
     	#ul1{
@@ -88,9 +91,9 @@
             border:none; padding:0;
             display:inline-block;
         }
-        .img{ width:260px; height:300px; }
+        .pImg{ width:260px; height:300px; }
         .brand{ font-size: 10pt; font-color:darkgray; font-weight:bolder;}
-        a{ text-decoration: none; color:black;}
+        .pAs{ text-decoration: none; color:black;}
         .name{ font-size: 11pt; }
         .origPrice{ 
             font-size:10pt; 
@@ -134,11 +137,41 @@
     </style>
     <script>
     function selectOrder(order){ 
-    	//obj.submit(); //obj자체가 form이다.
-    	//var page = parseInt(val);
     	var order = order.value;
     	location.href="/movingcloset/movingcloset/search.do?search=${search }&keyword=${keyword }&order="+order;	
 	}
+
+	function clickPb(btn) {
+		
+		console.log(btn);
+		if(btn.checked == true) {
+			if(btn.value == "product") {
+				document.getElementsByClassName("filterLbl")[0].style.fontWeight = "500";
+				document.getElementsByClassName("filterLbl")[1].style.fontWeight = "100";
+				document.getElementsByClassName("filterLbl")[2].style.fontWeight = "100";
+				document.getElementsByClassName("filterLbl")[3].style.fontWeight = "100";
+			}
+			else if(btn.value == "brand") {
+				document.getElementsByClassName("filterLbl")[0].style.fontWeight = "100";
+				document.getElementsByClassName("filterLbl")[1].style.fontWeight = "500";
+				document.getElementsByClassName("filterLbl")[2].style.fontWeight = "100";
+				document.getElementsByClassName("filterLbl")[3].style.fontWeight = "100";
+			}
+			else if(btn.value == "color") {
+				document.getElementsByClassName("filterLbl")[0].style.fontWeight = "100";
+				document.getElementsByClassName("filterLbl")[1].style.fontWeight = "100";
+				document.getElementsByClassName("filterLbl")[2].style.fontWeight = "500";
+				document.getElementsByClassName("filterLbl")[3].style.fontWeight = "100";
+			}
+			else if(btn.value == "flag") {
+				document.getElementsByClassName("filterLbl")[0].style.fontWeight = "100";
+				document.getElementsByClassName("filterLbl")[1].style.fontWeight = "100";
+				document.getElementsByClassName("filterLbl")[2].style.fontWeight = "100";
+				document.getElementsByClassName("filterLbl")[3].style.fontWeight = "500";
+			}
+		}
+	}
+	
     </script>
 </head>
 <body>
@@ -152,15 +185,19 @@
                 	<form action="/movingcloset/movingcloset/search.do?search=${search }&keyword=${keyword }&order=${order }" method="get">
 	                	 <div id="searchSpan">
 	 							<input type="text" id="searchIn" name="search" placeholder="Search.."/>
-	 							<button type="input" id="searchBtn"><i id="searchIcon" class="fas fa-search"></i></button>
+	 							<button type="submit" id="searchBtn"><i id="searchIcon" class="fas fa-search"></i></button>
 			                <hr id="ul1" />
 	                    </div>
 			            <br />
 	                    <div id="filterBtn">
-							<span><label class="filterLbl" for="pb"><input type="radio" class="fBtns" id="pb" name="keyword" value="product" >PRODUCT</label></span>
-							<span><label class="filterLbl" for="bb"><input type="radio" class="fBtns" id="bb" name="keyword" value="brand" >BRAND</label></span>
-							<span><label class="filterLbl" for="cb"><input type="radio" class="fBtns" id="cb" name="keyword" value="color" >COLOR</label></span>
-							<span><label class="filterLbl" for="tb"><input type="radio" class="fBtns" id="tb" name="keyword" value="flag" >TAG</label></span>
+<!-- 							<span><label class="filterLbl" for="pb" id="lpb"><input type="radio" id="pb" name="keyword" value="product"  onclick="clickPb();" />PRODUCT</label></span> -->
+<!-- 							<span><label class="filterLbl" for="bb" id="lbb"><input type="radio" id="bb" name="keyword" value="brand" onclick="clickBb();" />BRAND</label></span> -->
+<!-- 							<span><label class="filterLbl" for="cb" id="lcb"><input type="radio" id="cb" name="keyword" value="color"  onclick="clickCb();" />COLOR</label></span> -->
+<!-- 							<span><label class="filterLbl" for="tb" id="ltb"><input type="radio" id="tb" name="keyword" value="flag"  onclick="clickTb();" />TAG</label></span> -->
+							<span><label class="filterLbl"><input type="radio" name="keyword" checked value="product" class="radiobtn" onclick="clickPb(this);" />PRODUCT</label></span>
+							<span><label class="filterLbl"><input type="radio" name="keyword" value="brand" class="radiobtn" onclick="clickPb(this);" />BRAND</label></span>
+							<span><label class="filterLbl"><input type="radio" name="keyword" value="color"  class="radiobtn" onclick="clickPb(this);" />COLOR</label></span>
+							<span><label class="filterLbl"><input type="radio" name="keyword" value="flag"  class="radiobtn" onclick="clickPb(this);" />TAG</label></span>
 	                    </div>
 	                    <br /><hr />
 	                    <span id="filterDropdown">
@@ -181,7 +218,7 @@
 						
 					 <c:forEach items="${searchList }" var="product">	
 						<span class="products">
-							<a href="/movingcloset/store/detail.do?p_idx=${product.p_idx }"><img class="img" src="../resources/upload/${product.p_sfile }"></a>
+							<a class="pAs" href="/movingcloset/store/detail.do?p_idx=${product.p_idx }"><img class="pImg" src="../resources/upload/${product.p_sfile }"></a>
                             <div class="brand">${product.p_brand }</div>
                             <div class="name"><label>${product.p_name }</label></div>
                             <div class="price">

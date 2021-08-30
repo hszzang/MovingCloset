@@ -7,19 +7,22 @@
 <mapper namespace="mybatis.MybatisSearchImpl">
 
 	<select id="searchProducts" resultType="mybatis.ProductDTO">
-		<if test='keyword=="color"'>
+		<choose>
+		<when test='keyword=="color"'>
 			SELECT p.*
 			from product p, product_detail d
 			WHERE p.p_code=d.p_code AND pd_color=#{search}
-		</if>
-		
+		</when>
+		<otherwise>
 			SELECT * FROM (
 			SELECT ROW_NUMBER() OVER(ORDER BY p_idx) NUM, A.*
 			FROM product A
+		</otherwise>
+		</choose>	
 		<choose>
 			<!--  FROM product A  -->
 			<when test='keyword=="brand"'>
-				WHERE p_brand=#{search}
+				WHERE p_brand=#{search} )
 			</when>
 		<!--  
 			<when test='keyword=="color"'>
@@ -31,17 +34,16 @@
 				WHERE * IN (#{search})
 			</when>
 		-->
-			<otherwise>
-				WHERE p_name LIKE '%'||#{search}||'%' 
+			<when test='keyword=="product" or keyword==null'>
+				WHERE p_name LIKE '%'||#{search}||'%'  )
 				<!-- 
 				WHERE p_name IN (#{search})
 				
 				SELECT * FROM product
 				WHERE p_name LIKE '%샌들%';     
 				 -->
-			</otherwise>
+			</when>
 		</choose>
-		)
 		<choose>
 			<when test='order=="asc"'>
 				ORDER BY p_price ASC
@@ -55,6 +57,15 @@
 		</choose>
 	</select>
 	
+	<select id="getColors">
+		SELECT distinct pd_color from product_detail
+	</select>
+	<select id="getTags">
+		SELECT p_tags from product
+	</select>
+	
+	
+	
 	<select id="getDetailDTO" resultType="String">
 		SELECT p_code FROM product_detail
 		WHERE pd_color=#{search}
@@ -62,5 +73,4 @@
 	<select id="getProductDTO" resultType="mybatis.ProductDTO">
 		SELECT * FROM
 	</select>
-
 </mapper>
