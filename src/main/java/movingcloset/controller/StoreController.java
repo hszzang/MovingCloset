@@ -29,6 +29,7 @@ import movingcloset.command.CommandImpl;
 import movingcloset.command.store.ReviewDeleteCommand;
 import movingcloset.command.store.ReviewInsertCommand;
 import movingcloset.command.store.ReviewListCommand;
+import movingcloset.command.store.ReviewUpdateCommand;
 import movingcloset.command.store.StoreDeleteCommand;
 import movingcloset.command.store.StoreDetailCommand;
 import movingcloset.command.store.StoreInsertCommand;
@@ -59,6 +60,8 @@ public class StoreController {
 	ReviewDeleteCommand reviewDeleteCommand;
 	@Autowired
 	ReviewListCommand reviewListCommand;
+	@Autowired
+	ReviewUpdateCommand reviewUpdateCommand;
 
 	// 스토어 리스트
 	@RequestMapping(value="/movingcloset/store.do", method=RequestMethod.GET)
@@ -381,11 +384,24 @@ public class StoreController {
 		
 	}
 	
-	@RequestMapping(value="/movingcloset/store/reviewComplete.do")
-	public String reviewComplete() {
-		
-		return "reviewComplete";
+
+	@RequestMapping("/store/updateReview.do")
+	public String updateReview(Model model, HttpServletRequest req) {
+		model.addAttribute("req",req);
+		command = reviewUpdateCommand;
+		command.execute(model);
+
+		return "body/store/review_Update";
 	}
+
+	/*
+	 * @RequestMapping("/store/updateReviewAction.do") public String
+	 * updateReviewAction(Model model, HttpServletRequest req) {
+	 * model.addAttribute("req",req); command = reviewUpdateCommand;
+	 * command.execute(model);
+	 * 
+	 * return "redirect:/store/detail.do?p_idx="+req.getParameter("p_idx"); }
+	 */
 	
 	
 	// 리뷰삭제

@@ -52,6 +52,39 @@
 		}
 	}
 	
+	function reviewUpdate(rid,content,sfile){
+	
+		var htmls = "";
+		htmls += '<div name="r_content" id="rid'+rid+'">';
+		htmls += '<textarea name="reviewText" class="text100" cols="30" rows="10" placeholder="최대 100자 까지 등록 가능합니다." >'+content+'</textarea>';
+		htmls += '<div style="text-align: right; padding-right: 5%;">';
+		htmls += '<span id="counter" style="font-size: 20px;font-weight: normal; color: gray;">0/100</span>';
+		htmls += '</div>';
+		htmls += '<button onclick="">확인</button>';
+		htmls += '<button onclick="javascript:history.back();">취소</button>';
+		htmls += '</div>';
+
+		$('#rid'+rid).replaceWith(htmls);
+		$('#rid'+rid+'#reviewText').focus();
+		
+	}
+	
+    $( document ).ready(function() {
+    	
+	    $('.text100').keyup(function (e){
+	        var content = $(this).val();
+	        $('#counter').html(content.length+" / 100");    //글자수 실시간 카운팅
+	    
+	        if (content.length > 100){
+	            alert("최대 100자까지 입력 가능합니다.");
+	            $(this).val(content.substring(0, 100));
+	            $('#counter').html("100 / 100");
+	        }
+	    });
+    
+	});
+
+	
 </script>
 
 <style>
@@ -226,6 +259,11 @@
     #p_image{
     	width:500px; height:570px;
     }
+    
+    #newR_content{
+    	display:none;
+    }
+    
 	</style>
 <title>Store</title>
 </head>
@@ -329,7 +367,7 @@
 		</div>
 
 <!-- 댓글 시작 ------------------------------------------------------------------------------------------------ -->
-	
+		<form action="" name="reviewUpdate">
 		<table class="table table-hover" style="text-align: center;">
 			<thead>
 			<tr>
@@ -347,7 +385,7 @@
 			</tr>
 			</thead>
 			<tbody>
-			<c:forEach items="${reviews }" var="review"  >
+			<c:forEach items="${reviews }" var="review" >
 				<tr >
 					<td>
 					평점 <!-- 평점 수정했습니다!------>
@@ -356,11 +394,17 @@
 						</c:forEach>
 					</td>
 					
-					<td>${review.r_content }
-						<c:if test="${sessionScope.siteUserInfo != null}">
-							<button class="delBtn" onclick="delReview(${review.r_idx}, ${storeDetail.p_idx });">삭제</button>
-						</c:if>
+					<td>
+						<div name="r_content" >
+							${review.r_content }
+							<c:if test="${sessionScope.siteUserInfo != null && siteUserInfo eq review.userid }">
+								<button class="delBtn" onclick="delReview(${review.r_idx}, ${storeDetail.p_idx });">삭제</button>
+								<button onclick="reviewUpdate(${review.r_idx},${review.r_content },${review.r_sfile });">수정</button>
+							</c:if>
+						</div>
+
 					</td>
+					
 					<td>${review.r_date }</td>
 					<td>
 						${review.userid }
@@ -386,6 +430,8 @@
 			
 			</tbody>
 		</table>
+		
+		</form>
 			<hr />
 			<div id="pages">
 			    <select name="pageSel" id="pageSel" placeholder="1">
@@ -422,7 +468,7 @@
 		</div>
 	</div>
 
-	<script>
+<!-- 	<script>
 		// Get the modal
 		var modal = document.getElementById("myModal");
 		
@@ -442,7 +488,7 @@
 		span.onclick = function() { 
 		  modal.style.display = "none";
 		}
-	</script>
+	</script> -->
 
 </body>
 </html>
