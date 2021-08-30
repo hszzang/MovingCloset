@@ -19,6 +19,29 @@
 
 	<!-- 페이징 적용된 리스트 + 신상품/가격정렬 + 플래그 분류 적용 -->
 	<select id="getPagedList" resultType="mybatis.ProductDTO">  
+				SELECT * FROM ( 		
+				SELECT Tb.*, ROWNUM rNum FROM ( 
+				      SELECT * FROM product
+				      WHERE p_flag=#{flag}
+						ORDER BY #{order}
+						)Tb
+				    ) 
+				WHERE rNum BETWEEN #{start} AND #{end}
+	</select>	
+	<!-- 
+	SELECT * FROM ( 		
+				    SELECT Tb.*, ROWNUM rNum FROM ( 
+				        SELECT * FROM product
+				        	WHERE p_flag=#{flag}
+							ORDER BY #{order}
+						)Tb
+				    ) 
+				WHERE rNum BETWEEN #{start} AND #{end}
+		
+	
+	 -->
+	
+		<!--  
 		SELECT * FROM (
 				    SELECT ROW_NUMBER() OVER(ORDER BY p_idx) NUM, A.*
 				    FROM product A 
@@ -44,7 +67,11 @@
 				 )
 				WHERE 
 				NUM BETWEEN #{start} AND #{end}
-	</select>	
+		-->
+
+			
+
+		
 	<!-- 
 		<choose>
 			<when test='flag == null or flag=="all"'>
