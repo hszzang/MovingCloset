@@ -42,6 +42,7 @@ public class StoreListCommand implements CommandImpl {
 			// 정렬 기준
 			String order = req.getParameter("order");
 			System.out.println("order : " + order);
+
 			// paging값 pageReq
 			String pageReq = req.getParameter("pageShow");
 			System.out.println("몇 페이지? pageReq: " + pageReq);
@@ -78,7 +79,7 @@ public class StoreListCommand implements CommandImpl {
 			System.out.println("end : " + end);
 			
 			//List<ProductDTO> storeList = sqlSession.getMapper(MybatisProductImpl.class).getStoreList(productDTO);		
-			List<ProductDTO> pagedList = sqlSession.getMapper(MybatisProductImpl.class).getPagedList(flag,order, start, end);
+			List<ProductDTO> pagedList = sqlSession.getMapper(MybatisProductImpl.class).getPagedList(flag, order, start, end);
 
 			//model.addAttribute("storeList", storeList);
 			model.addAttribute("pagedList", pagedList);
@@ -88,6 +89,7 @@ public class StoreListCommand implements CommandImpl {
 			model.addAttribute("pages", pages);
 			model.addAttribute("start", startP);
 			model.addAttribute("pageEnd", endP);
+			model.addAttribute("order", order);
 			
 		}
 		

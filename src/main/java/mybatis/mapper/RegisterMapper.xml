@@ -49,5 +49,13 @@
 	<select id="login" resultType="mybatis.MemberDTO" >
 		select * from member where userid= #{0} and userpass= #{1}
 	</select>
+	
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="memberOut" parameterType="String" >
+		DELETE FROM member WHERE userid=#{0}
+	</delete>
+	
+
 
 </mapper>

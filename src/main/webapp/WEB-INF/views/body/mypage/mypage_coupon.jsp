@@ -13,11 +13,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../resources/css/mypage.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <style>
@@ -66,8 +61,9 @@
 		    <div class="col-lg-3">
 		        <div class="list-group list-group-flush">
 		            <div class="list-group-item list-group-item-action main">MyPage</div>
-		            <div class="list-group-item list-group-item-action profile">
-		                <i class="material-icons" style="font-size:36px; color:black">account_circle</i>
+		            <div class="list-group-item list-group-item-action profile d-flex align-content-center">
+		                <i class="material-icons" style="font-size:36px; color:black">account_circle</i>&nbsp;
+		                <span class="userName" ><b style="font-size:20px; color:#ff6c2f">${sessionScope.username }</b> 고객님</span>
 		            </div>
 		            <div class="list-group-item list-group-item-action category">쇼핑정보</div>
 		            <a href="./coupon.do" class="list-group-item list-group-item-action">쿠폰함</a>
@@ -75,7 +71,7 @@
 		        </div>
 		        <div class="list-group list-group-flush">
 		            <div class="list-group-item list-group-item-action category">활동정보</div>
-		            <a href="./please.do" class="list-group-item list-group-item-action">조르기</a>
+		            <a href="./please.do" class="list-group-item list-group-item-action">쪼르기</a>
 		            <a href="./zzim.do" class="list-group-item list-group-item-action">찜한상품</a>
 		        </div>
 		        <div class="list-group list-group-flush">

@@ -12,6 +12,10 @@ public interface MybatisSearchImpl {
 											@Param("search") String search,
 											@Param("order") String order);
 	
+	public List<String> getColors();
+	public List<String> getTags();
+	
+	
 	public String getDetailDTO(String pd_color);
 	
 }
