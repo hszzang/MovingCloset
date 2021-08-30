@@ -13,6 +13,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script>
+
+
 	function plusminus(id){
 		//console.log("넘어온 값 "+id);
 		var num = document.getElementById("quantity");
@@ -31,8 +33,16 @@
 
 	$(function(){
 		$('#btnReview').click(function(){
-			var child;
-			child = window.open("./reviewPage.do", "reviewpopup", "height:400px, width:200px");
+			
+			if(${empty siteUserInfo}) {
+				alert("로그인 후 이용해주세요.");
+				location.href="../movingcloset/login.do";
+			}else{
+				var p_idx = "<c:out value='${storeDetail.p_idx}'/>";
+				var child;
+				child = window.open("./reviewPage.do?p_idx="+p_idx, "reviewpopup", "height:400px, width:200px");				
+			}
+		
 		});
 	});
 	
@@ -306,9 +316,16 @@
 				<input type="checkbox" name="photocheck" id="photocheck" value="photocheck" class="form-check-input" style="zoom: 1.5;">
 					<label for="photocheck" style="font-size:1em;">포토리뷰</label>
 			</div>
-			<div class="d-flex ml-auto">
-				<button id="btnReview" >리뷰 쓰기</button>
-			</div>
+			
+			<!-- 해당 상품을 구매한 내역이 있을때만 리뷰 쓰기 버튼 보이게 처리
+				userid와 p_code 필요!
+			 -->
+			<c:if test="${siteUserInfo != null && buyAndGroupDTO.p_code != null}"  >
+				<div class="d-flex ml-auto">
+					<button id="btnReview">리뷰 쓰기</button>
+				</div>			
+			</c:if>
+		
 		</div>
 
 <!-- 댓글 시작 ------------------------------------------------------------------------------------------------ -->
@@ -333,12 +350,10 @@
 			<c:forEach items="${reviews }" var="review"  >
 				<tr >
 					<td>
-					평점 <!-- 평점 수정 필요 ------------------------------------------------------------------>
-					<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-					<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-					<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-					<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
-					<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>
+					평점 <!-- 평점 수정했습니다!------>
+						<c:forEach begin="1" end="${review.r_rate }" step="1">
+							<i class="fa fa-star" style="color:#FF6C2F; font-size:14pt;"></i>					
+						</c:forEach>
 					</td>
 					
 					<td>${review.r_content }
@@ -354,8 +369,17 @@
 						<input type="hidden" name="p_idx" value="${storeDetail.p_idx }"/>
 					</td>
 					<td>
-						<img class="myImg" src="../resources/images/feet-1840619_640.jpg" alt="상품이미지"
-						style="width: 100px; height: auto;"/>
+					
+					<c:choose>
+						<c:when test="${review.r_sfile eq null }">
+							
+						</c:when>
+						<c:otherwise>
+							<img class="myImg" src="../resources/upload/${review.r_sfile }" alt="상품이미지"
+							style="width: 100px; height: auto;"/>						
+						</c:otherwise>
+					</c:choose>
+					
 					</td>
 				</tr>
 			</c:forEach>

@@ -51,6 +51,7 @@ import movingcloset.command.IdcheckCommand;
 import movingcloset.command.LoginCommand;
 import movingcloset.command.MemberCheckCommand;
 import movingcloset.command.RegisterActionCommand;
+import movingcloset.command.search.SearchCommand;
 import mybatis.MemberDTO;
 
 import mybatis.MybatisMemberImpl;
@@ -98,7 +99,8 @@ public class HomeController {
 	@Autowired
 	MemberCheckCommand memberCheckCommand;
 	
-	
+	@Autowired
+	SearchCommand searchCommand;
 	
 	
 	/**
@@ -120,8 +122,12 @@ public class HomeController {
 
 	// 검색페이지
 	@RequestMapping(value = "/movingcloset/search.do", method = RequestMethod.GET)
-	public String searchPage(Locale locale, Model model) {
+	public String searchPage(Locale locale, Model model, HttpServletRequest req) {
 
+		model.addAttribute("req", req);
+		command = searchCommand;
+		command.execute(model);
+		
 		return "body/search";
 	}
 

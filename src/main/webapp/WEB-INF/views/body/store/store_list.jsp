@@ -19,43 +19,37 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     
     <style>
-    	#wrapper{margin-top:200px; margin-bottom:100px; padding:0 2% 0 2%;}
+    	.container{width:100%; height:auto; margin:200px 0 100px 0; }
         #list{
             border:black;
-            width:85%; height:auto;
-            margin:0 7% 0 8%; padding-left:3%;
-            display: inline; float: left;
+            width:100%; height:auto; margin-left:3%; padding:0%;   
         }
 
         #filter{
-            width:100%; height:50px;
-            border:none;
-            padding: 5px 0 0 0;
+            width:100%; height:50px; border:none;
+            text-align:center;
             margin:100px 0 100px 0;
         }
         #filterBtn{
-            display:inline;
-            margin-left:37.5%;
+            display:inline; text-align:center;
             font-size:12pt;
         }
         #filterDropdown{
-            margin-left:85%;
+            margin-left:82%; text-align:right;
             display:inline;
         }
         #order{
             width:150px; height:50px;
-            text-align: center;
-            border: none;
+            text-align: center; border: none;
         }
 		#order:focus{outline:none;}
 		
         .products{
-            width: 350px; height:450px;
-            border:solid white 1px;
-            padding: 5px 25px 10px 25px;
+            width: 274px; height:420px;
+            border:none; padding: 0;
             display:inline-block;
         }
-        .img{ width:300px; height:300px; }
+        .img{ width:250px; height:290px; }
         .brand{ font-size: 10pt; font-color:darkgray; font-weight:bolder;}
         a{ text-decoration: none; color:black;}
         .name{ font-size: 11pt; }
@@ -73,27 +67,27 @@
 
         #pages{
         	text-align:right;
-			margin: 50px 10% 100px 75%;
+			margin: 50px 0% 100px 81%;
 			display:inline-block;
         }
         #pageSel{
-        	width:80px; height:40px;
+        	width:70px; height:40px;
         	border:lightgray solid 1px;
-        	text-align:center; font-size:11pt;
+        	text-align:center; font-size:11pt; display:inline;
         }
         #pgTotal{
         	color:gray; font-size: 10pt; 
-        	margin:0 10px 0 10px;
+        	margin:0 10px 0 10px;display:inline;
         }
         .pageMove{
-        	width:40px; height:40px;
+        	width:40px; height:40px; display:inline;
         	border:none; padding:0;
         	color:white; font-size:10pt; font-weight:bold;}
         .pageMove:focus{outline:none;}
-        #pmL{background-color:gray;}
-        #pmR{background-color:black;}
+        #pmL{background-color:black; display:inline;}
+        #pmR{background-color:black; display:inline;}
 
-		.product{width:100px; height:40px; background-color:black; color:white; }
+		#productInsert{width:100px; height:40px; background-color:black; color:white; }
 
         @media only screen and (max-width:1000px){
 
@@ -109,41 +103,96 @@
         
     </style>
     <script>
+    function selectOrder(order){ 
+    	//obj.submit(); //obj자체가 form이다.
+    	//var page = parseInt(val);
+    	var order = order.value;
+    	location.href="/movingcloset/movingcloset/store.do?flag=${flag}&order="+order+"&pageShow=${pageC}";	
+	}
+    
+    function selectPage(page){ 
+    	//obj.submit(); //obj자체가 form이다.
+    	var page = page.value;
+    	location.href="/movingcloset/movingcloset/store.do?flag=${flag}&order=${order}&pageShow="+page;
+	}
+    
+    function flagSubmit(val){
+    	var flag = val;
+    	flag.submit();
+    }
+    
+    function lpBtn(page){
+    	var left = document.getElementById("pmL");
+    	if(page <= ${start}){
+    		/*
+    		left.style.background = 'gray';
+    		*/
+    		left.disabled="true";
+    	}	
+    	else{
+    		/*
+    		left.style.background = 'black';
+    		*/
+    		left.disabled= "false";
+    		page = page - 1;
+    		location.href="/movingcloset/movingcloset/store.do?flag=${flag}&order=${order}&pageShow="+page;
+    	}
+    }
+    
+    function rpBtn(page){
+    	var right = document.getElementById("pmR");
+    	if(page >= ${pageEnd}){
+    		/*
+    		right.style.backgroundColor = "gray";
+    		*/
+    		right.disabled="true";
+    	}	
+    	else{
+    		/*
+    		right.style.backgroundColor = "black";
+    		*/
+    		right.disabled="false";
+    		page = page + 1;
+    		location.href="/movingcloset/movingcloset/store.do?flag=${flag}&order=${order}&pageShow="+page;
+    	}
+    }
     
     </script>
+    
 </head>
 <body>
-    <div id="wrapper">
-    <div style="text-align:center;">
-    	<h2>Store</h2>
-    </div>
-        <form action="">
+    <div class="container">
+	    <div style="text-align:center;margin-left:5%;">
+	    	<h2>Store</h2>
+	    </div>
+        
             <div id="list">
-                <div id="filter">
-                    <span id="filterBtn">
-                        <button type="button" class="btn btn-dark" id="all" name="all">전체</button>
-                        <button type="button" class="btn btn-dark" id="clothes" name="clothes">의류</button>
-                        <button type="button" class="btn btn-dark" id="shoes" name="shoes">신발</button>
-                        <button type="button" class="btn btn-dark" id="bags" name="bags">가방</button>
-                        <button type="button" class="btn btn-dark" id="etc" name="etc">잡화</button>
-                    </span>
-                    <span id="filterDropdown">
-                    	<form action="<c:url value="/movingcloset/ostore.do" />" method="post" name="orderFrm">
-	                        <select name="order" id="order"  >
-	                            <option value="new" >신상품순</option>
-	                            <option value="best" >베스트순</option>
-	                            <option value="lowprice">낮은가격순</option>
-	                            <option value="highprice">높은가격순</option>
-	                        </select>
-                        </form>
-                            <!-- 
-                            <option value="discount">높은할인순</option>
-                            <option value="interest">높은관심순</option>
-                             -->
-                    </span>
-                </div>
+	                <div id="filter">
+		            	<form action="/movingcloset/movingcloset/store.do?flag=${flag }&order=${order }&pageShow=${pageC }" method="get" >
+		                    <span id="filterBtn">
+		                        <button type="submit" class="btn btn-dark" name="flag" value="all" onClick="flagSubmit(this.form.value)">전체</button>
+		                        <button type="submit" class="btn btn-dark" name="flag" value="의류" onClick="flagSubmit(this.form.value)">의류</button>
+		                        <button type="submit" class="btn btn-dark" name="flag" value="신발" onClick="flagSubmit(this.form.value)">신발</button>
+		                        <button type="submit" class="btn btn-dark" name="flag" value="가방" onClick="flagSubmit(this.form.value)">가방</button>
+		                        <button type="submit" class="btn btn-dark" name="flag" value="잡화" onClick="flagSubmit(this.form.value)">잡화</button>
+		                    </span>
+		                    <span id="filterDropdown">
+			                        <select name="order" id="order" onchange="selectOrder(this)">
+			                        	<option value="" diabled select hidden>정렬</option>
+			                            <option value="idx" >신상품순</option>
+			                            <option value="asc">낮은가격순</option>
+			                            <option value="desc">높은가격순</option>
+			                        </select>
+		                            <!-- 
+			                        <option value="best" >베스트순</option>
+		                            <option value="discount">높은할인순</option>
+		                            <option value="interest">높은관심순</option>
+		                             -->
+		                    </span>
+		                </form>      
+	                </div>
                 
-					 <c:forEach items="${storeList }" var="product">	
+					 <c:forEach items="${pagedList }" var="product">	
 						<span class="products">
 							<a href="/movingcloset/store/detail.do?p_idx=${product.p_idx }"><img class="img" src="../resources/upload/${product.p_sfile }"></a>
                             <div class="brand">${product.p_brand }</div>
@@ -164,22 +213,22 @@
 
             </div>
             <div id="pages">
-            	<select name="pageSel" id="pageSel" placeholder="1">
-					<option value="pageNum">1</option>
-					<option value="pageNum">2</option>
-					<option value="pageNum">3</option>
-					<option value="pageNum">4</option>
-					<option value="pageNum">5</option>
-			    </select>
-			    <span id="pgTotal">of 5</span>
-			    <button class="pageMove" id="pmL"> < </button>
-			    <button class="pageMove" id="pmR"> > </button>
+            	<form action="/movingcloset/movingcloset/store.do?flag=${flag }&order=${order }&pageShow=${pageC }" method="get" >
+	            	<select name="pageShow" id="pageSel" onchange="selectPage(this)">
+	            		<option value="" diabled select hidden >${pageC }</option>
+		            		<c:forEach  items="${pages }" var="page" >
+		            			<option value="${page }">${page }</option>
+		            		</c:forEach>
+			    	</select>
+			    	
+				    <span id="pgTotal">of ${pageEnd }</span>
+				    <button type="button" class="pageMove" id="pmL" onclick="lpBtn(${pageC })"> < </button>
+				    <button type="button" class="pageMove" id="pmR" onclick="rpBtn(${pageC })"> > </button>
+			    </form>
             </div>
             <div style="text-align:right;">
-            	<button type="button" class="product" id="productInsert" onclick="javascript:location.href='/movingcloset/store/insert.do';">상품추가</button>
-
+            	<button type="button" id="productInsert" onclick="javascript:location.href='/movingcloset/store/insert.do';">상품추가</button>
             </div>
-        </form>
     </div>
 </body>
 </html>

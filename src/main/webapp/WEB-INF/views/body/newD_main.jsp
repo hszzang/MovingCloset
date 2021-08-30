@@ -54,7 +54,7 @@
 
 <section id="portfolio" class="portfolio">
   	<div class="container" data-aos="fade-up">
-		<br><br><br>
+		<br><br>
 	    <div class="section-title">
 	    <h2>New Designer</h2>
 	    </div>
@@ -67,215 +67,46 @@
     		<li data-target="#demo" data-slide-to="3"></li>
     		<li data-target="#demo" data-slide-to="4"></li>
   		</ul>
+  		
+  		
   
   		<div class="carousel-inner">
-    		<div class="carousel-item active">
-    		
-			<!-- ======= About Section ======= -->
-			<section id="about" class="about">
-				<div class="container" data-aos="fade-up">
-			
-			    <div class="row">
-			    	<div class="col-lg-6">
-			        	<img src="../resources/assets/img/about1.jpg" class="img-fluid" alt="">
-			    	</div>
-			    	<div class="col-lg-6 pt-6 pt-lg-0 content" align="left">
-			        	<h1>﻿Jini Kim</h1>
-			        	<br/>
-			        	<p>﻿
-						세계 속 트랜드를 이끌 MovingCloset의<br/>
-						디자이너 Jini Kim을 소개합니다.<br/>
-						드디어 소개하는 New Designer Service 첫 주자는<br/>
-						실력과 재능을 겸비한 우리나라의 샛별 디자이너 Jini kim.<br/>
-						우리나라에 Jini Kim의 Style Selection을 선보이기에 앞서<br/>
-						미국과 유럽에서 저명한 평가를 받은 New Designer 입니다.<br/>
-						모던한 스타일과 트랜디한 감각을 포커싱하여<br/>
-						신드롬을 불러일으킨 Jini Kim<br/>
-						패션업계에서 주목하는 샛별의 제품들을<br/>
-						MovingCloset에서 먼저 만나볼 수 있답니다.<br/>
-						한 눈에 보이는 제품이 있다면 재빨리 구매하세요.<br/>
-						이달의 패션 주인공은 바로 당신입니다.<br/><br/>
-						<ul>
-							<li><i class="icofont-rounded-right"></i> <strong>Style:</strong> Modern, Black, Trendy</li>
-							<li><i class="icofont-rounded-right"></i> <strong>Off-line Shop:</strong> MovingCloset Only</li>
-						</ul>
-			        	</p>
-			       </div>
-			    </div>
-			
-			   	</div>
-			</section><!-- End About Section -->
-
-				<div class="carousel-caption">
+  		
+			<c:forEach items="${designerList }" var="newd">
+	    		<div class="carousel-item active">
+	
+				<!-- ======= About Section ======= -->
+				<section id="about" class="about">
+					<div class="container" data-aos="fade-up">
 				
-				</div>   
-			</div>
-    	
-  
-  
-			<div class="carousel-item">
-    		<!-- ======= About Section ======= -->
-			<section id="about" class="about">
-			    <div class="container" data-aos="fade-up">
-			    	<div class="row">
-			    		<div class="col-lg-6">
-			        		<img src="../resources/assets/img/about4.jpg" class="img-fluid" alt="">
-			       		</div>
-			       		<div class="col-lg-6 pt-6 pt-lg-0 content" align="left">
-			        	<h1>﻿John Park</h1>
-			        	<br/>
-			        	<p>
-			         ﻿
-						세계 속 트랜드를 이끌 MovingCloset의<br/>
-						디자이너 Jini Kim을 소개합니다.<br/>
-						드디어 소개하는 New Designer Service 첫 주자는<br/>
-						실력과 재능을 겸비한 우리나라의 샛별 디자이너 Jini kim.<br/>
-						우리나라에 Jini Kim의 Style Selection을 선보이기에 앞서<br/>
-						미국과 유럽에서 저명한 평가를 받은 New Designer 입니다.<br/>
-						모던한 스타일과 트랜디한 감각을 포커싱하여<br/>
-						신드롬을 불러일으킨 Jini Kim<br/>
-						패션업계에서 주목하는 샛별의 제품들을<br/>
-						MovingCloset에서 먼저 만나볼 수 있답니다.<br/>
-						한 눈에 보이는 제품이 있다면 재빨리 구매하세요.<br/>
-						이달의 패션 주인공은 바로 당신입니다.<br/><br/>
-						<ul>
-							<li><i class="icofont-rounded-right"></i> <strong>Style:</strong> Modern, Black, Trendy</li>
-							<li><i class="icofont-rounded-right"></i> <strong>Off-line Shop:</strong> MovingCloset Only</li>
-						</ul>
-			        	</p>
-			       		</div>
-			    	</div>
+				    <div class="row">
+				    	<div class="col-lg-6">
+				        	<img src="../resources/assets/img/about1.jpg" class="img-fluid" alt="">
+				    	</div>
+				    	<div class="col-lg-6 pt-6 pt-lg-0 content" align="left">
+				        	<h1>﻿${newd.newd_name }</h1>
+				        	<br/>
+				        	<p>﻿
+							${newd.newd_contents }
+							<ul>
+								<li><i class="icofont-rounded-right"></i> <strong>Style:</strong> ${newd.newd_style }</li>
+								<li><i class="icofont-rounded-right"></i> <strong>Off-line Shop:</strong> MovingCloset Only</li>
+							</ul>
+				        	</p>
+				       </div>
+				    </div>
+				
+				   	</div>
+				</section><!-- End About Section -->
+				
+					<div class="carousel-caption">
+					
+					</div>
+					
 				</div>
-			</section><!-- End About Section -->
-  
-			    <div class="carousel-caption">
-			    
-			    </div>   
-		    </div>
-		   
-    		<div class="carousel-item">
-      		<!-- ======= About Section ======= -->
-			<section id="about" class="about">
-			    <div class="container" data-aos="fade-up">
-			    	<div class="row">
-			    		<div class="col-lg-6">
-			        		<img src="../resources/assets/img/about3.jpg" class="img-fluid" alt="">
-			       		</div>
-			       		<div class="col-lg-6 pt-6 pt-lg-0 content" align="left">
-			        	<h1>﻿Sally Kang</h1>
-			        	<br/>
-			        	<p>
-			         ﻿
-						세계 속 트랜드를 이끌 MovingCloset의<br/>
-						디자이너 Jini Kim을 소개합니다.<br/>
-						드디어 소개하는 New Designer Service 첫 주자는<br/>
-						실력과 재능을 겸비한 우리나라의 샛별 디자이너 Jini kim.<br/>
-						우리나라에 Jini Kim의 Style Selection을 선보이기에 앞서<br/>
-						미국과 유럽에서 저명한 평가를 받은 New Designer 입니다.<br/>
-						모던한 스타일과 트랜디한 감각을 포커싱하여<br/>
-						신드롬을 불러일으킨 Jini Kim<br/>
-						패션업계에서 주목하는 샛별의 제품들을<br/>
-						MovingCloset에서 먼저 만나볼 수 있답니다.<br/>
-						한 눈에 보이는 제품이 있다면 재빨리 구매하세요.<br/>
-						이달의 패션 주인공은 바로 당신입니다.<br/><br/>
-						<ul>
-							<li><i class="icofont-rounded-right"></i> <strong>Style:</strong> Modern, Black, Trendy</li>
-							<li><i class="icofont-rounded-right"></i> <strong>Off-line Shop:</strong> MovingCloset Only</li>
-						</ul>
-			        	</p>
-			       		</div>
-			    	</div>
-				</div>
-			</section><!-- End About Section -->
-      				<div class="carousel-caption">
-       				
-      				</div>   
-    		</div>
-    		
-    		
-    		
-<!--  -->
-    		<div class="carousel-item">
-      		<!-- ======= About Section ======= -->
-			<section id="about" class="about">
-			    <div class="container" data-aos="fade-up">
-			    	<div class="row">
-			    		<div class="col-lg-6">
-			        		<img src="../resources/assets/img/about2.jpg" class="img-fluid" alt="">
-			       		</div>
-			       		<div class="col-lg-6 pt-6 pt-lg-0 content" align="left">
-			        	<h1>﻿Sophia Jung</h1>
-			        	<br/>
-			        	<p>
-			         ﻿
-						세계 속 트랜드를 이끌 MovingCloset의<br/>
-						디자이너 Jini Kim을 소개합니다.<br/>
-						드디어 소개하는 New Designer Service 첫 주자는<br/>
-						실력과 재능을 겸비한 우리나라의 샛별 디자이너 Jini kim.<br/>
-						우리나라에 Jini Kim의 Style Selection을 선보이기에 앞서<br/>
-						미국과 유럽에서 저명한 평가를 받은 New Designer 입니다.<br/>
-						모던한 스타일과 트랜디한 감각을 포커싱하여<br/>
-						신드롬을 불러일으킨 Jini Kim<br/>
-						패션업계에서 주목하는 샛별의 제품들을<br/>
-						MovingCloset에서 먼저 만나볼 수 있답니다.<br/>
-						한 눈에 보이는 제품이 있다면 재빨리 구매하세요.<br/>
-						이달의 패션 주인공은 바로 당신입니다.<br/><br/>
-						<ul>
-							<li><i class="icofont-rounded-right"></i> <strong>Style:</strong> Modern, Black, Trendy</li>
-							<li><i class="icofont-rounded-right"></i> <strong>Off-line Shop:</strong> MovingCloset Only</li>
-						</ul>
-			        	</p>
-			       		</div>
-			    	</div>
-				</div>
-			</section><!-- End About Section -->
-      				<div class="carousel-caption">
-       				
-      				</div>   
-    		</div>
-    		
-    		<div class="carousel-item">
-      		<!-- ======= About Section ======= -->
-			<section id="about" class="about">
-			    <div class="container" data-aos="fade-up">
-			    	<div class="row">
-			    		<div class="col-lg-6">
-			        		<img src="../resources/assets/img/about5.jpg" class="img-fluid" alt="">
-			       		</div>
-			       		<div class="col-lg-6 pt-6 pt-lg-0 content" align="left">
-			        	<h1>﻿Kelly Min</h1>
-			        	<br/>
-			        	<p>
-			         ﻿
-						세계 속 트랜드를 이끌 MovingCloset의<br/>
-						디자이너 Jini Kim을 소개합니다.<br/>
-						드디어 소개하는 New Designer Service 첫 주자는<br/>
-						실력과 재능을 겸비한 우리나라의 샛별 디자이너 Jini kim.<br/>
-						우리나라에 Jini Kim의 Style Selection을 선보이기에 앞서<br/>
-						미국과 유럽에서 저명한 평가를 받은 New Designer 입니다.<br/>
-						모던한 스타일과 트랜디한 감각을 포커싱하여<br/>
-						신드롬을 불러일으킨 Jini Kim<br/>
-						패션업계에서 주목하는 샛별의 제품들을<br/>
-						MovingCloset에서 먼저 만나볼 수 있답니다.<br/>
-						한 눈에 보이는 제품이 있다면 재빨리 구매하세요.<br/>
-						이달의 패션 주인공은 바로 당신입니다.<br/><br/>
-						<ul>
-							<li><i class="icofont-rounded-right"></i> <strong>Style:</strong> Modern, Black, Trendy</li>
-							<li><i class="icofont-rounded-right"></i> <strong>Off-line Shop:</strong> MovingCloset Only</li>
-						</ul>
-			        	</p>
-			       		</div>
-			    	</div>
-				</div>
-			</section><!-- End About Section -->
-      				<div class="carousel-caption">
-       				
-      				</div>   
-    		</div>
-
-
-<!--  -->
-    		
+			</c:forEach>
+			
+			
     		
     		
  		</div>
@@ -287,11 +118,14 @@
 	  	<a class="carousel-control-next" href="#demo" data-slide="next">
 	    	<span class="carousel-control-next-icon"></span>
 	  	</a>
-
-
     </div>
       
-	<br/><br/>
+	
+	
+	
+	
+	
+	
     <div class="row" data-aos="fade-up" data-aos-delay="100">
         <div class="col-lg-12 d-flex justify-content-center">
         	<ul id="portfolio-flters">
@@ -314,14 +148,14 @@
 	    	<!-- 링크(상세보기페이지로이동)버튼 -->
 	    	<div class="col-lg-4 col-md-6 portfolio-item filter-${product.p_brand }">
 	        	<div class="portfolio-wrap">
-	        		<img src="../resources/assets/img/newdd/${product.p_img}" class="img-fluid" alt="">
+	        		<img src="../resources/assets/img/newdd/${product.p_sfile}" class="img-fluid" alt="">
 	            		<div class="portfolio-info">
 	            		
 	              			<h4>${product.p_name }</h4>
 	            				<p>${product.p_price}</p>
 	              					<div class="portfolio-links">
-	                					<a href="../resources/assets/img/newdd/${product.p_img}" data-gall="portfolioGallery" class="venobox"><i class="bx bx-plus"></i></a>
-	                					<a href="/movingcloset/store/detail.do"><i class="bx bx-link"></i></a>
+	                					<a href="../resources/assets/img/newdd/${product.p_sfile}" data-gall="portfolioGallery" class="venobox"><i class="bx bx-plus"></i></a>
+	                					<a href="/movingcloset/store/detail.do?p_idx=${product.p_idx}"><i class="bx bx-link"></i></a>
 	              					</div>
 	            		</div>
 	          	</div>

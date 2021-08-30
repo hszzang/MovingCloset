@@ -9,6 +9,17 @@
 	<select id="androidLogin" resultType="mybatis.MemberDTO">
 		SELECT * FROM member WHERE userid=#{0} AND userpass=#{1}
 	</select>
+	
+	<select id="andGetMyMoyoList" resultType="mybatis.MoyoDTO">
+		SELECT * FROM moyo WHERE m_idx 
+		IN (SELECT m_idx FROM moyo_use WHERE userid=#{0})
+		ORDER BY m_idx DESC
+	</select>
+
+	<select id="andGetMyMoyoInfo" resultType="mybatis.MoyoUseDTO">
+		SELECT * FROM moyo_use WHERE m_idx=#{0} AND userid=#{1}
+		ORDER BY m_idx DESC
+	</select>
 
 
 </mapper>

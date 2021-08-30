@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import movingcloset.command.CommandImpl;
+import movingcloset.command.newd.DesignerCommand;
 import movingcloset.command.newd.NewDCommand;
 import mybatis.NewdDTO;
 import mybatis.ProductDTO;
@@ -24,6 +25,8 @@ public class NewDController {
 	@Autowired
 	NewDCommand newDCommand;
 	
+	@Autowired
+	DesignerCommand designerCommand;
 	
 	
 	//뉴디리스트
@@ -35,13 +38,15 @@ public class NewDController {
 		command = newDCommand;
 		command.execute(model);
 		
+		
+		command = designerCommand;
+		command.execute(model);
+		
 		return "body/newD_main";
 		
 	}
 	
-}
 
-	
 	
 	/*
 	 * //뉴디리스트
@@ -58,5 +63,5 @@ public class NewDController {
 	 * }
 	 */
 	
-	
+}
 

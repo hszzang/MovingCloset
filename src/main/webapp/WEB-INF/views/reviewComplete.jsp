@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,7 +80,7 @@
 	<div class="container" style="width: 50%;padding-bottom:0px;" align="center" id="regicon" >
 		<div class="input-form ">
 			<div class="input-form-wrap" style="text-align:center;padding-top:100px;padding-bottom:80px;">
-				<h3><span id="paramId">${param.user_id}</span> 님 회원가입이 완료되었습니다.</h3><br />
+				<h3>리뷰 작성이 완료되었습니다.</h3><br />
 				<h3><strong>Moving Closet</strong> 을 찾아주셔서 감사합니다.</h3><br />
 				<h3>즐거운 쇼핑하시기 바랍니다.</h3>	
                    <br><br /><br />
