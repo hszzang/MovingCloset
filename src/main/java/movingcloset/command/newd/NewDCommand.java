@@ -34,8 +34,7 @@ public class NewDCommand implements CommandImpl {
 		
 		List<ProductDTO> newdList = sqlSession.getMapper(MybatisNewDImpl.class).getNewdList(productDTO);
 		
-		int totalProduct = sqlSession.getMapper(MybatisProductImpl.class).getTotalCount(); 
-		System.out.println(totalProduct);
+		
 		
 		model.addAttribute("newdList", newdList);
 		 

@@ -9,8 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../resources/css/bootstrap.css" />
-<script src="../resources/jquery/jquery-3.6.0.js" ></script>
+
 
 <title>NewDesiner</title>
 <meta content="" name="description">
@@ -26,6 +25,9 @@
 <link href="../resources/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
 <link href="../resources/assets/vendor/venobox/venobox.css" rel="stylesheet">
 <link href="../resources/assets/vendor/aos/aos.css" rel="stylesheet">
+
+
+
 
 <!-- Template Main CSS File -->
 <link href="../resources/assets/css/style.css" rel="stylesheet">
@@ -276,15 +278,21 @@
 
  		</div>
   	</div>
-  		`
+  		
 	  	<a class="carousel-control-prev" href="#demo" data-slide="prev">
 	    	<span class="carousel-control-prev-icon"></span>
 	  	</a>
 	  	<a class="carousel-control-next" href="#demo" data-slide="next">
 	    	<span class="carousel-control-next-icon"></span>
 	  	</a>
+	  	
+	  	
+	  	
+	  	
+	  	
     </div>
       
+	
 	
 	
 	
@@ -352,6 +360,7 @@
 <script src="../resources/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
 <script src="../resources/assets/vendor/venobox/venobox.min.js"></script>
 <script src="../resources/assets/vendor/aos/aos.js"></script>
+
 
 
 <!-- Template Main JS File -->
