@@ -43,11 +43,7 @@ public class MemberCheckCommand implements CommandImpl{
 			session.setAttribute("username", memberDTO.getName());
 		}
 		
-		
 		session.setAttribute("membercheck", result);
-		
-		
-		
 		
 	}
 	
