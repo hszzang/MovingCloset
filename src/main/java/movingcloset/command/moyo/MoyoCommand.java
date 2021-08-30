@@ -74,6 +74,9 @@ public class MoyoCommand implements CommandImpl {
 			for(MoyoDTO m : moyoList) {
 				countMoyoUser.put(m.getM_idx(), sqlSession
 						.getMapper(MybatisMoyoImpl.class).countMoyoUser(m.getM_idx()));
+				String query = sqlSession.getConfiguration().getMappedStatement("countMoyoUser")
+						.getBoundSql(m.getM_idx()).getSql();
+				System.out.println("moyoQuery = " + query);
 			}
 			
 			System.out.println(countMoyoUser);

@@ -45,9 +45,7 @@ public class StoreListCommand implements CommandImpl {
 			// paging값 pageReq
 			String pageReq = req.getParameter("pageShow");
 			System.out.println("몇 페이지? pageReq: " + pageReq);
-			
-			//List<ProductDTO> orderedList = sqlSession.getMapper(MybatisProductImpl.class).getOrderedList(order, flag);
-			
+						
 			// 페이지 선택
 			if(pageReq == null) {
 				pageC = 1;
@@ -57,6 +55,7 @@ public class StoreListCommand implements CommandImpl {
 			System.out.println("요청 페이지 번호 pageC : " + pageC);
 			// 불러올 상품의 총 갯수 -> 플래그 없으면 전체 / 있으면 해당 플래그의 상품만.. 
 			int totalRecordCount = sqlSession.getMapper(MybatisProductImpl.class).getCount(flag);
+			//int totalRecordCount = sqlSession.getMapper(MybatisProductImpl.class).getCount(flag);
 			System.out.println("불러내는 상품 갯수: " + totalRecordCount);
 			// 한 페이지당 보여주는 상품 갯수 단위 60개!
 			int show = 60;

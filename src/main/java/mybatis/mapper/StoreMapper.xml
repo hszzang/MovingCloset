@@ -16,14 +16,135 @@
 		ORDER BY p_idx DESC
 		<!-- WHERE p_idx<![CDATA[>=]]>#{defaultShow} -->
 	</select>
+
 	<!-- 페이징 적용된 리스트 + 신상품/가격정렬 + 플래그 분류 적용 -->
-	<select id="getPagedList" parameterType="int" resultType="mybatis.ProductDTO">
+	<select id="getPagedList" resultType="mybatis.ProductDTO">  
+		SELECT * FROM (
+				    SELECT ROW_NUMBER() OVER(ORDER BY p_idx) NUM, A.*
+				    FROM product A 
+					<choose>
+						<when test='flag == null or flag=="all"'>
+							WHERE p_flag !='뉴디'
+						</when>
+						<when test='flag!=null'>
+							 WHERE p_flag=#{flag}
+						</when>
+					</choose>
+					<choose>
+					<when test='order=="asc"'>
+						ORDER BY p_price ASC
+					</when>
+					<when test='order=="desc"'>
+						ORDER BY p_price DESC
+					</when>
+					<otherwise>
+						ORDER BY p_idx DESC
+					</otherwise>
+				</choose>
+				 )
+				WHERE 
+				NUM BETWEEN #{start} AND #{end}
+	</select>	
+	<!-- 
 		<choose>
 			<when test='flag == null or flag=="all"'>
-				SELECT * FROM product 
-				WHERE p_idx BETWEEN #{start} AND #{end}
+				SELECT * FROM (
+				    SELECT ROW_NUMBER() OVER(ORDER BY p_idx) NUM, A.*
+				    FROM product A 
+				    WHERE p_flag !='뉴디'
+				    ORDER BY p_idx DESC
+				    )
+				WHERE 
+				NUM BETWEEN #{start} AND #{end}
 			</when>
-			<when test='flag=="신발" '> <!--  더미데이터 60개 이상이면 -->
+			<when test='flag!=null'>
+				SELECT * FROM (
+				    SELECT ROW_NUMBER() OVER(ORDER BY p_idx) NUM, A.*
+				    FROM product A 
+				    WHERE p_flag=#{flag}
+				    ORDER BY p_idx DESC
+				    )
+				WHERE 
+				NUM BETWEEN #{start} AND #{end}
+			</when>
+		</choose>
+		 -->
+	<!-- 
+			SELECT * FROM (
+				SELECT Tb.*, ROWNUM rNum FROM(
+					SELECT * FROM product
+				<choose>
+					<when test='flag == null or flag=="all"'>
+						WHERE p_flag!='뉴디'
+					</when>
+					<when test='flag!=null'>
+						WHERE p_flag=#{flag}
+					</when>
+				</choose>
+				<choose>
+					<when test='order!=null'>
+						ORDER BY #{order}
+					</when>
+					<otherwise>
+						ORDER BY p_idx DESC
+					</otherwise>
+				</choose>
+				)Tb
+			)
+			WHERE rNum BETWEEN #{start} AND #{end}	
+	
+		<choose>
+			<when test='flag == null or flag=="all"'>
+				SELECT * FROM ( 		
+				    SELECT Tb.*, ROWNUM rNum FROM ( 
+				        SELECT * FROM product
+				        	WHERE p_flag!='뉴디'
+							ORDER BY #{order}
+						)Tb
+				    ) 
+					WHERE rNum BETWEEN #{start} AND #{end}	
+			</when>
+			<when test='flag!=null'>
+				SELECT * FROM ( 		
+				    SELECT Tb.*, ROWNUM rNum FROM ( 
+				        SELECT * FROM product
+				        	WHERE p_flag=#{flag}
+							ORDER BY #{order}
+						)Tb
+				    ) 
+				WHERE rNum BETWEEN #{start} AND #{end}
+			</when>
+		</choose>
+	 -->
+		<!--  
+		<choose>
+			<when test='order=="asc"'>
+				ORDER BY p_price ASC
+			</when>
+			<when test='order=="desc"'>
+				ORDER BY p_price DESC
+			</when>
+			<otherwise>
+				ORDER BY p_idx DESC
+			</otherwise>
+		</choose>
+		-->
+			<!-- 
+				SELECT * FROM product 
+				WHERE p_flag!='뉴디'
+				AND 
+				p_idx BETWEEN #{start} AND #{end}
+				
+				SELECT
+				ROW_NUMBER() OVER(ORDER BY p_idx DESC) 
+				rNum,
+				p_idx,p_name,p_code,p_price,p_brand,p_ofile,p_sfile,p_flag
+				FROM product 
+				WHERE p_flag!='뉴디' 
+				AND
+				rownum BETWEEN 1 AND 60 ;
+			 -->
+			<!--  
 				SELECT * FROM
 					(SELECT * FROM product
 						WHERE p_flag=#{flag}
@@ -31,9 +152,8 @@
 						p_idx BETWEEN #{start} AND #{end}
 						ORDER BY p_idx DESC
 					)
-				WHERE rownum BETWEEN 1 AND 60		
-			<!--  더미데이터 60개 이상이면..? -->
-			<!--  
+				WHERE rownum BETWEEN 1 AND 60	
+					
 			<when test='flag=="신발" and order!=null'> 
 				SELECT
 			    ROW_NUMBER() OVER(ORDER BY p_price #{order}) 
@@ -60,9 +180,8 @@
 				 )
 				WHERE ROWNUM BETWEEN 1 AND 60;
 			
-			-->	
 			</when>
-			<otherwise> <!--  더미데이터 60개 미만이면?? -->
+			<otherwise> 
 				SELECT * FROM
 					(SELECT * FROM product
 						WHERE p_flag=#{flag}
@@ -70,25 +189,14 @@
 					)
 				WHERE rownum BETWEEN #{start} AND #{end}		
 			</otherwise>
-		</choose>
-		<choose>
-			<when test='order=="asc"'>
-				ORDER BY p_price ASC
-			</when>
-			<when test='order=="desc"'>
-				ORDER BY p_price DESC
-			</when>
-			<otherwise>
-				ORDER BY p_idx DESC
-			</otherwise>
-		</choose>
-	</select>
+			-->	
+
 	
 <!-- 페이징 위한 갯수 카운트 플래그 없으면 모든 상품, 플래그 있으면 해당 플래그 상품만 -->
 	<select id="getCount" parameterType="String" resultType="int">
 		<choose>
 			<when test='flag==null or flag=="all"'>
-				SELECT COUNT(*) FROM product			
+				SELECT COUNT(*) FROM product WHERE p_flag!='뉴디'
 			</when>
 			<otherwise>
 				SELECT COUNT(*) FROM product WHERE p_flag=#{flag}
