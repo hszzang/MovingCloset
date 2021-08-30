@@ -87,28 +87,28 @@ public class AndroidController {
 		return returnMap;
 	}
 
-	// 안드로이드 모여목록 불러오기
+	// 안드로이드 모여목록 불러오기(위치기반)
 	@RequestMapping(value = "/android/AndMoyoList.do", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public Map<String, Object> andMoyoList(HttpServletRequest req) {
 		
 		System.out.println("AndMoyoList 호출");
-//		System.out.println(req.getParameter("userid") + " / " + req.getParameter("userpass"));
-//		
+		System.out.println("요청된 중심 위도/경도" + req.getParameter("latitude") + " / " + req.getParameter("longitude"));
+		
 		Map<String, Object> returnMap = new HashMap<String, Object>();
-//		
-//		MemberDTO memberDTO = sqlSession.getMapper(MybatisAndroidImpl.class)
-//				.androidLogin(req.getParameter("userid"), req.getParameter("userpass"));
-//		
-//		if(memberDTO == null) {
-//			//회원정보 불일치로 로그인에 실패한 경우.. 결과만 0으로 내려준다.
-//			returnMap.put("isLogin", 0);
-//		}
-//		else {
-//			//로그인에 성공하면 결과는 1, 해당 회원의 정보를 객체로 내려준다.
-//			returnMap.put("memberDTO", memberDTO);
-//			returnMap.put("isLogin", 1);
-//		}
+		
+		ArrayList<MoyoDTO> moyoList = sqlSession.getMapper(MybatisAndroidImpl.class)
+				.andGetMoyoList(req.getParameter("latitude"), req.getParameter("longitude"));
+		
+		if(moyoList == null) {
+			//회원정보 불일치로 로그인에 실패한 경우.. 결과만 0으로 내려준다.
+			returnMap.put("isMoyo", 0);
+		}
+		else {
+			//로그인에 성공하면 결과는 1, 해당 회원의 정보를 객체로 내려준다.
+			returnMap.put("moyoList", moyoList);
+			returnMap.put("isMoyo", moyoList.size());
+		}
 		
 		return returnMap;
 	}

@@ -13,6 +13,7 @@ public interface MybatisAndroidImpl {
 	public MemberDTO androidLogin(String userid, String userpass);
 	
 	//안드로이드 모여리스트 가져오기
+	public ArrayList<MoyoDTO> andGetMoyoList(String latitude, String longitude);
 	
 	//안드로이드 내 모여리스트 보기
 	public ArrayList<MoyoDTO> andGetMyMoyoList(String userid);
