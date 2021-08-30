@@ -82,7 +82,9 @@
 		
 		reader.onload = function(event){
 			var before = document.getElementById("r_image");
-			before.remove();
+			if(before != null){
+				before.remove();				
+			}
 			
 			var img = document.createElement("img");
 			img.setAttribute("src", event.target.result);

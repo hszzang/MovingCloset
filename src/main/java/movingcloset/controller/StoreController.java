@@ -383,13 +383,21 @@ public class StoreController {
 	}
 	
 
-	@RequestMapping("/store/updateReview.do")
-	public String updateReview(Model model, HttpServletRequest req) {
+	@RequestMapping(value="/store/updateReview.do", method=RequestMethod.POST)
+	public String updateReview(Model model, MultipartHttpServletRequest req, HttpServletResponse resp,
+			HttpSession session,ReviewDTO reviewDTO) throws IOException{
+		model.addAttribute("reviewDTO",reviewDTO);
 		model.addAttribute("req",req);
+		model.addAttribute("resp",resp);
+		
+		System.out.println("리뷰r_idx : "+req.getParameter("r_idx"));
+		System.out.println("리뷰수정 파일여부 : "+req.getParameter("ofileCheck"));
+		
 		command = reviewUpdateCommand;
 		command.execute(model);
+		
 
-		return "body/store/review_Update";
+		return "redirect:/store/detail.do?p_idx=" + req.getParameter("p_idx");
 	}
 
 	/*
