@@ -47,8 +47,11 @@ import movingcloset.command.LoginCommand;
 import movingcloset.command.RegisterActionCommand;
 import movingcloset.command.android.AndLoginCommand;
 import mybatis.MemberDTO;
+import mybatis.MoyoDTO;
+import mybatis.MoyoUseDTO;
 import mybatis.MybatisAndroidImpl;
 import mybatis.MybatisMemberImpl;
+import mybatis.MybatisMoyoImpl;
 
 @Controller
 public class AndroidController {
@@ -84,5 +87,64 @@ public class AndroidController {
 		return returnMap;
 	}
 
+	// 안드로이드 모여목록 불러오기
+	@RequestMapping(value = "/android/AndMoyoList.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public Map<String, Object> andMoyoList(HttpServletRequest req) {
+		
+		System.out.println("AndMoyoList 호출");
+//		System.out.println(req.getParameter("userid") + " / " + req.getParameter("userpass"));
+//		
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+//		
+//		MemberDTO memberDTO = sqlSession.getMapper(MybatisAndroidImpl.class)
+//				.androidLogin(req.getParameter("userid"), req.getParameter("userpass"));
+//		
+//		if(memberDTO == null) {
+//			//회원정보 불일치로 로그인에 실패한 경우.. 결과만 0으로 내려준다.
+//			returnMap.put("isLogin", 0);
+//		}
+//		else {
+//			//로그인에 성공하면 결과는 1, 해당 회원의 정보를 객체로 내려준다.
+//			returnMap.put("memberDTO", memberDTO);
+//			returnMap.put("isLogin", 1);
+//		}
+		
+		return returnMap;
+	}
+	
+	// 안드로이드 내 모여목록 가져오기
+	@RequestMapping(value = "/android/AndMyMoyoList.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public Map<String, Object> andMyMoyoList(HttpServletRequest req) {
+		
+		System.out.println("AndMyMoyoList 호출");
+		String loginID = req.getParameter("userid");
+		
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		
+		ArrayList<MoyoDTO> myMoyoList = sqlSession.getMapper(MybatisAndroidImpl.class)
+				.andGetMyMoyoList(loginID);
+		
+		if(myMoyoList == null) {
+			returnMap.put("isMoyo", 0);
+		}
+		else {
+//			System.out.println(myMoyoList);
+			
+			ArrayList<MoyoUseDTO> myMoyoInfo = new ArrayList<MoyoUseDTO>();
+			for(MoyoDTO m : myMoyoList) {
+				myMoyoInfo.add(sqlSession
+						.getMapper(MybatisAndroidImpl.class).andGetMyMoyoInfo(m.getM_idx(), loginID));
+			}
+			
+			returnMap.put("myMoyoList", myMoyoList);
+			returnMap.put("myMoyoInfo", myMoyoInfo);
+			returnMap.put("isMoyo", myMoyoList.size());
+		}
+		
+		return returnMap;
+	}
+	
 
 }
