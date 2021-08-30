@@ -35,7 +35,6 @@ public class NewDCommand implements CommandImpl {
 		List<ProductDTO> newdList = sqlSession.getMapper(MybatisNewDImpl.class).getNewdList(productDTO);
 		
 		
-		
 		model.addAttribute("newdList", newdList);
 		 
 		

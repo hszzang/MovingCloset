@@ -229,7 +229,7 @@
 		<a class="nav-link" id="nav-title5" href="javascript:void(0);">Events&nbsp;|&nbsp;Coupons</a>
 		<a class="nav-link" id="nav-title6" href="javascript:void(0);">CS center</a>
 		<div id="icons">
-			<a href=""><i class="material-icons" id="icon">search</i></a>
+			<a href="/movingcloset/movingcloset/search.do"><i class="material-icons" id="icon">search</i></a>
 			&nbsp;
 			<a href=""><i class="material-icons" id="icon">shopping_basket</i></a>
 			&nbsp;
@@ -237,7 +237,7 @@
 			<c:choose>
 				<c:when test="${sessionScope.siteUserInfo != null}">
 					<a href="#" onclick="logout();"><i class="material-icons" id="icon">exit_to_app</i></a>&nbsp;
-					<a href="../movingcloset/mypage/coupon.do"><i class="material-icons" id="icon" onclick="infoclick();">info_outline</i></a>
+					<a href="../mypage/coupon.do"><i class="material-icons" id="icon" onclick="infoclick();">info_outline</i></a>
 				</c:when>
 				<c:otherwise>  
 					<a href="../movingcloset/login.do"><i class="material-icons" id="icon">person</i></a>

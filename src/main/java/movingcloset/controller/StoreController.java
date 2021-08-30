@@ -31,10 +31,10 @@ import movingcloset.command.store.StoreDeleteCommand;
 import movingcloset.command.store.StoreDetailCommand;
 import movingcloset.command.store.StoreInsertCommand;
 import movingcloset.command.store.StoreListCommand;
-import movingcloset.command.store.StoreOrderCommand;
 import movingcloset.command.store.StoreUpdateCommand;
 import mybatis.ProductDTO;
 import mybatis.ProductDetailDTO;
+import mybatis.ReviewDTO;
  
 @Controller
 public class StoreController {
@@ -56,8 +56,6 @@ public class StoreController {
 	@Autowired
 	ReviewDeleteCommand reviewDeleteCommand;
 	@Autowired
-	StoreOrderCommand storeOrderCommand;
-	@Autowired
 	ReviewListCommand reviewListCommand;
 
 	// 스토어 리스트
@@ -71,6 +69,7 @@ public class StoreController {
 		
 		return "body/store/store_list";
 	}
+	
 	// 스토어 상세
 	@RequestMapping(value="/store/detail.do", method=RequestMethod.GET)
 	public String storedetail(Model model, HttpServletRequest req, ProductDTO productDTO) {
@@ -343,19 +342,49 @@ public class StoreController {
 	}
 	
 	// 리뷰쓰기
-	@RequestMapping("/store/insertReview.do")
-	public String insertReview(Locale locale, Model model, HttpServletRequest req) {
+	@RequestMapping(value="/movingcloset/store/insertReview.do", method=RequestMethod.POST)
+	public void insertReview( Model model, MultipartHttpServletRequest req, 
+			HttpServletResponse resp, ReviewDTO reviewDTO, HttpSession session) throws IOException {
 		System.out.println("리뷰쓰기 컨트롤러 들어옴");
 		// 리뷰인서트커맨드로 리뷰쓰는 걸로???
+		System.out.println("리뷰insert입니다.");
+		System.out.println("한줄평 : "+req.getParameter("reviewText"));
+		
 		model.addAttribute("req", req);
-		model.addAttribute("model", model);
+		model.addAttribute("resp",resp);
+		model.addAttribute("reviewDTO",reviewDTO);
 		
 		command = reviewInsertCommand;
 		command.execute(model);
 		
-		// 해당 상세 페이지로 돌아가는 걸로.
-		return "reviewPage";
+		if(session.getAttribute("complete")=="OK") {
+			resp.setContentType("text/html; charset=UTF-8");
+			 
+			PrintWriter out = resp.getWriter();
+			 
+			out.println("<script> "
+					+ "var check = confirm('리뷰가 성공적으로 등록 되었습니다'); "
+					+ " if(check) {"
+					+ " window.close();"
+					+ " }else{"
+					+ " window.close();"
+					+ " }"
+					+ "</script>");
+			 
+			out.flush();
+
+
+
+		}
+		
 	}
+	
+	@RequestMapping(value="/movingcloset/store/reviewComplete.do")
+	public String reviewComplete() {
+		
+		return "reviewComplete";
+	}
+	
 	
 	// 리뷰삭제
 	@RequestMapping("/store/deleteReview.do")

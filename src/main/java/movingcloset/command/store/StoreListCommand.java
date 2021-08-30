@@ -30,70 +30,67 @@ public class StoreListCommand implements CommandImpl {
 		public void execute(Model model) {
 			
 			ProductDTO productDTO = new ProductDTO();
-			int pageC = 1;
+			int pageC = -1;
 			
 			Map<String, Object> paramMap = model.asMap();
 			HttpServletRequest req = (HttpServletRequest)paramMap.get("req");
 			//int pageReq = Integer.parseInt(req.getParameter("pageShow"));
-			String pageReq = req.getParameter("pageShow");
-			System.out.println("첨 pageReq : " + pageReq);
 			
-			if(pageReq != null)
-				pageC = Integer.parseInt(pageReq);
-			/*
-			if("".equals(pageReq)) {
+			// 플래그 분류
+			String flag = req.getParameter("flag");
+			System.out.println("flag: " + flag);
+			// 정렬 기준
+			String order = req.getParameter("order");
+			System.out.println("order : " + order);
+
+			// paging값 pageReq
+			String pageReq = req.getParameter("pageShow");
+			System.out.println("몇 페이지? pageReq: " + pageReq);
+						
+			// 페이지 선택
+			if(pageReq == null) {
 				pageC = 1;
 			}
-			else if(pageReq != null) {
+			else if(pageReq != null)
 				pageC = Integer.parseInt(pageReq);
-			}
-			*/
-			System.out.println("다음 : " + pageC);
-			
-			// totalRecordCount: 상품 총 갯수
-			int totalRecordCount = sqlSession.getMapper(MybatisProductImpl.class).getTotalCount();
-			System.out.println("총 상품 갯수 : " + totalRecordCount);
-			
+			System.out.println("요청 페이지 번호 pageC : " + pageC);
+			// 불러올 상품의 총 갯수 -> 플래그 없으면 전체 / 있으면 해당 플래그의 상품만.. 
+			int totalRecordCount = sqlSession.getMapper(MybatisProductImpl.class).getCount(flag);
+			//int totalRecordCount = sqlSession.getMapper(MybatisProductImpl.class).getCount(flag);
+			System.out.println("불러내는 상품 갯수: " + totalRecordCount);
 			// 한 페이지당 보여주는 상품 갯수 단위 60개!
 			int show = 60;
-			
-			// 젤 처음에는 최신 60개
-			int defaultShow = totalRecordCount - show;
-			System.out.println("디폴트: " + defaultShow);
-			
 			// 페이지 갯수
 			int pagesNum = (int)(Math.ceil((double)totalRecordCount/show));
-			System.out.println("pageNum : " + pagesNum); // 
-			
+			// 셀렉트문으로 페이징을 하니깐 배열로 해서 forEach문으로 나열 ㄱㄱ
 			int[] pages = new int[pagesNum];
 			for(int i = 0; i < pagesNum; i++) {
 				pages[i] = i+1;
-				System.out.println(pages[i]); //
 			}
-			
 			// 페이징 시작과 끝
 			int startP = pages[0];
 			int endP = pages[pagesNum - 1]; // 마지막 페이징
-			System.out.println("페이징 ) " + startP + " 에서 시작해서, " + endP + " 에서 끝"); //
-			
 			// 한 페이지당 시작/끝 상품번호
 			int start = totalRecordCount - (show * pageC) + 1;
-			if(start < 0)
-				start=1;
+			if(start <= 0)
+				start = 1;
 			int end = totalRecordCount - (show * (pageC - 1));
-			
-			System.out.println("start : " +start);
+			System.out.println("start : " + start);
 			System.out.println("end : " + end);
 			
 			//List<ProductDTO> storeList = sqlSession.getMapper(MybatisProductImpl.class).getStoreList(productDTO);		
-			List<ProductDTO> pagedList = sqlSession.getMapper(MybatisProductImpl.class).getPagedList(start, end);
+			List<ProductDTO> pagedList = sqlSession.getMapper(MybatisProductImpl.class).getPagedList(flag, order, start, end);
 
 			//model.addAttribute("storeList", storeList);
 			model.addAttribute("pagedList", pagedList);
 			
+			model.addAttribute("flag", flag);
 			model.addAttribute("pageC", pageC);
 			model.addAttribute("pages", pages);
+			model.addAttribute("start", startP);
 			model.addAttribute("pageEnd", endP);
+			model.addAttribute("order", order);
+			
 		}
 		
 		

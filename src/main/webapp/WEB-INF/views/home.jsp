@@ -24,8 +24,7 @@
       <a href="./movingcloset/qnalist.do">FAQ/QnA</a>
       <a href="./movingcloset/qnadetail.do">질답상세</a>
 
-      <a href="./movingcloset/mypage/coupon.do">mypage</a>
-      <a href="./movingcloset/mypage.do">mypage</a>
+      <a href="./mypage/coupon.do">mypage</a>
 
       <a href="./movingcloset/newD.do">뉴디test</a>
       

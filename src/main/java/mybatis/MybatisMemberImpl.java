@@ -1,5 +1,6 @@
 package mybatis;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,5 +21,10 @@ public interface MybatisMemberImpl {
 	
 	//새로 생성한 임시비밀번호로 회원정보 변경
 	public int changeNewPw(String newPw, String userid, String email);
+	
+	//회원탈퇴
+	public int memberOut(String userid);
+	
+	
 	
 }

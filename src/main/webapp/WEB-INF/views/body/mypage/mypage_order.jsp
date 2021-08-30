@@ -58,8 +58,9 @@
             <div class="col-lg-3">
                 <div class="list-group list-group-flush">
 		            <div class="list-group-item list-group-item-action main">MyPage</div>
-		            <div class="list-group-item list-group-item-action profile">
-		                <i class="material-icons" style="font-size:36px; color:black">account_circle</i>
+		            <div class="list-group-item list-group-item-action profile d-flex align-content-center">
+		                <i class="material-icons" style="font-size:36px; color:black">account_circle</i>&nbsp;
+		                <span class="userName" ><b style="font-size:20px; color:#ff6c2f">${sessionScope.username }</b> 고객님</span>
 		            </div>
 		            <div class="list-group-item list-group-item-action category">쇼핑정보</div>
 		            <a href="./coupon.do" class="list-group-item list-group-item-action">쿠폰함</a>
