@@ -14,6 +14,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script>
 
+	$( document ).ready(function() {
+		
+	    $('.text100').keyup(function (e){
+	        var content = $(this).val();
+	        $('#counter').html(content.length+" / 100");    //글자수 실시간 카운팅
+	    
+	        if (content.length > 100){
+	            alert("최대 100자까지 입력 가능합니다.");
+	            $(this).val(content.substring(0, 100));
+	            $('#counter').html("100 / 100");
+	        }
+	    });
+	
+	});
 
 	function plusminus(id){
 		//console.log("넘어온 값 "+id);
@@ -52,11 +66,13 @@
 		}
 	}
 	
-	function reviewUpdate(rid,content,sfile){
+ 	function rUpdate(rid){
 	
+		console.log(rid);
+		
 		var htmls = "";
-		htmls += '<div name="r_content" id="rid'+rid+'">';
-		htmls += '<textarea name="reviewText" class="text100" cols="30" rows="10" placeholder="최대 100자 까지 등록 가능합니다." >'+content+'</textarea>';
+		htmls += '<div class="r_content" id="rid'+rid+'">';
+		htmls += '<textarea maxlength="100"; style="resize: none;width:300px;height:50px;" name="reviewText" class="text100" cols="30" rows="10" placeholder="최대 100자 까지 등록 가능합니다." ></textarea>';
 		htmls += '<div style="text-align: right; padding-right: 5%;">';
 		htmls += '<span id="counter" style="font-size: 20px;font-weight: normal; color: gray;">0/100</span>';
 		htmls += '</div>';
@@ -64,27 +80,10 @@
 		htmls += '<button onclick="javascript:history.back();">취소</button>';
 		htmls += '</div>';
 
-		$('#rid'+rid).replaceWith(htmls);
-		$('#rid'+rid+'#reviewText').focus();
+		document.getElementById("rid"+rid).innerHTML = htmls;
 		
 	}
-	
-    $( document ).ready(function() {
-    	
-	    $('.text100').keyup(function (e){
-	        var content = $(this).val();
-	        $('#counter').html(content.length+" / 100");    //글자수 실시간 카운팅
-	    
-	        if (content.length > 100){
-	            alert("최대 100자까지 입력 가능합니다.");
-	            $(this).val(content.substring(0, 100));
-	            $('#counter').html("100 / 100");
-	        }
-	    });
-    
-	});
 
-	
 </script>
 
 <style>
@@ -395,11 +394,11 @@
 					</td>
 					
 					<td>
-						<div name="r_content" >
+						<div class="r_content" id="rid${review.r_idx }">
 							${review.r_content }
 							<c:if test="${sessionScope.siteUserInfo != null && siteUserInfo eq review.userid }">
-								<button class="delBtn" onclick="delReview(${review.r_idx}, ${storeDetail.p_idx });">삭제</button>
-								<button onclick="reviewUpdate(${review.r_idx},${review.r_content },${review.r_sfile });">수정</button>
+								<button type="button" class="delBtn" onclick="delReview(${review.r_idx}, ${storeDetail.p_idx });">삭제</button>
+								<button type="button" onclick="rUpdate(${review.r_idx});">수정</button>
 							</c:if>
 						</div>
 
