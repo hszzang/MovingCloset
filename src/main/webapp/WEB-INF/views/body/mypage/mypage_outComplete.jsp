@@ -65,7 +65,7 @@
 	<div class="container" style="width: 50%;padding-bottom:0px; margin-top:50px;" align="center" >
 		<div class="input-form ">
 			<div class="input-form-wrap" style="text-align:center;padding-top:100px;padding-bottom:80px;">
-				<h3><strong>Moving Closet</strong> <br /> 탈퇴가 완료되었습니다.</h3><br />
+				<h3><strong>Moving Closet</strong><br />탈퇴가 완료되었습니다.</h3><br />
                    <br>
 				<button type="button" class="btn btn-primary" id="mainbtn" onclick="location.href='./main.do';">홈페이지</button>
 			</div>

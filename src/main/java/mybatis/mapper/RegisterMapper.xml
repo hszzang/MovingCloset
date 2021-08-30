@@ -55,9 +55,7 @@
 	<delete id="memberOut" parameterType="String" >
 		DELETE FROM member WHERE userid=#{0}
 	</delete>
-	<!-- 탈퇴
 	
-	insert -->
-	
+
 
 </mapper>

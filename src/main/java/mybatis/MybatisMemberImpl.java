@@ -26,4 +26,5 @@ public interface MybatisMemberImpl {
 	public int memberOut(String userid);
 	
 	
+	
 }

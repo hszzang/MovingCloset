@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import movingcloset.command.CommandImpl;
+import movingcloset.command.LoginCommand;
 import movingcloset.command.MemberOutCommand;
 import movingcloset.command.RegisterActionCommand;
 import mybatis.MemberDTO;
@@ -29,11 +30,8 @@ public class MypageController {
 	MemberOutCommand memberOutCommand;
 	
 	
-	
-	
-	
 	@RequestMapping(value="/mypage/coupon.do", method=RequestMethod.GET)
-	public String mypageCoupon (Locale locale, Model model) {
+	public String mypageCoupon (Model model, HttpServletRequest req) {
 		
 		return "body/mypage/mypage_coupon";
 	}
