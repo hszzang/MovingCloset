@@ -1,5 +1,7 @@
 package movingcloset.command.search;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,20 +31,18 @@ public class SearchCommand implements CommandImpl {
 		ProductDTO productDTO = new ProductDTO();
 		ProductDetailDTO detailDTO = new ProductDetailDTO();
 		String keyword, search;
+		List<String> colorList;
 		
 		Map<String, Object> paramMap = model.asMap();
 		HttpServletRequest req = (HttpServletRequest)paramMap.get("req");
 		
 		keyword = req.getParameter("keyword");
-		/*
-		if(keyword==null)
-			keyword=" ";
-		else if(keyword=="color") {
-			String p_code = sqlSession.getMapper(MybatisSearchImpl.class).getDetailDTO(keyword);
-		}
-		*/
 		System.out.println("keyword: " + keyword);
 		
+		if(keyword == "color") {
+			colorList = sqlSession.getMapper(MybatisSearchImpl.class).getColors();
+		}
+			
 		search = req.getParameter("search");
 		System.out.println("search: " + search);
 		if(search==null)
