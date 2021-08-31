@@ -10,6 +10,17 @@
 		SELECT * FROM member WHERE userid=#{0} AND userpass=#{1}
 	</select>
 	
+	<select id="androidMoyoBusLogin" resultType="mybatis.MoyoBusDTO">
+		SELECT * FROM moyo_bus WHERE busid=#{0} AND buspass=#{1}
+	</select>
+	
+	<select id="andGetMoyoList" resultType="mybatis.MoyoDTO">
+		SELECT * FROM MOYO 
+		WHERE distance_wgs84(#{0}, #{1}, m_lat, m_lon) <![CDATA[<=]]> 1
+		AND m_status='진행'
+		ORDER BY m_dday DESC
+	</select>
+	
 	<select id="andGetMyMoyoList" resultType="mybatis.MoyoDTO">
 		SELECT * FROM moyo WHERE m_idx 
 		IN (SELECT m_idx FROM moyo_use WHERE userid=#{0})
@@ -19,6 +30,10 @@
 	<select id="andGetMyMoyoInfo" resultType="mybatis.MoyoUseDTO">
 		SELECT * FROM moyo_use WHERE m_idx=#{0} AND userid=#{1}
 		ORDER BY m_idx DESC
+	</select>
+	
+	<select id="andGetMoyoInfo" resultType="mybatis.MoyoDTO">
+		SELECT * FROM moyo WHERE m_idx=#{0}
 	</select>
 
 
