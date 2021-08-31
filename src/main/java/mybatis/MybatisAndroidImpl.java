@@ -12,6 +12,9 @@ public interface MybatisAndroidImpl {
 	//안드로이드 로그인하기
 	public MemberDTO androidLogin(String userid, String userpass);
 	
+	//안드로이드 모여버스 로그인하기
+	public MoyoBusDTO androidMoyoBusLogin(String userid, String userpass);
+	
 	//안드로이드 모여리스트 가져오기
 	public ArrayList<MoyoDTO> andGetMoyoList(String latitude, String longitude);
 	
@@ -20,6 +23,9 @@ public interface MybatisAndroidImpl {
 	
 	//안드로이드 내 모여 신청 정보 보기
 	public MoyoUseDTO andGetMyMoyoInfo(String m_idx, String userid);
+	
+	//안드로이드 모여 정보 불러오기
+	public MoyoDTO andGetMoyoInfo(String m_idx);
 	
 	
 

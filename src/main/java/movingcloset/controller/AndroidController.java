@@ -47,6 +47,7 @@ import movingcloset.command.LoginCommand;
 import movingcloset.command.RegisterActionCommand;
 import movingcloset.command.android.AndLoginCommand;
 import mybatis.MemberDTO;
+import mybatis.MoyoBusDTO;
 import mybatis.MoyoDTO;
 import mybatis.MoyoUseDTO;
 import mybatis.MybatisAndroidImpl;
@@ -67,21 +68,49 @@ public class AndroidController {
 	public Map<String, Object> andLogin(HttpServletRequest req) {
 		
 		System.out.println("androidLogin 호출");
-		System.out.println(req.getParameter("userid") + " / " + req.getParameter("userpass"));
+		System.out.println(req.getParameter("userid") + " / " + req.getParameter("userpass") + " / " + req.getParameter("logincate"));
 
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		
-		MemberDTO memberDTO = sqlSession.getMapper(MybatisAndroidImpl.class)
-				.androidLogin(req.getParameter("userid"), req.getParameter("userpass"));
+		String loginCate = req.getParameter("logincate");
 		
-		if(memberDTO == null) {
-			//회원정보 불일치로 로그인에 실패한 경우.. 결과만 0으로 내려준다.
-			returnMap.put("isLogin", 0);
+		if(loginCate.equals("member")) {
+			
+			MemberDTO memberDTO = sqlSession.getMapper(MybatisAndroidImpl.class)
+					.androidLogin(req.getParameter("userid"), req.getParameter("userpass"));
+			
+			if(memberDTO == null) {
+				//회원정보 불일치로 로그인에 실패한 경우.. 결과만 0으로 내려준다.
+				returnMap.put("isLogin", 0);
+			}
+			else {
+				//로그인에 성공하면 결과는 1, 해당 회원의 정보를 객체로 내려준다.
+				returnMap.put("memberDTO", memberDTO);
+				returnMap.put("isLogin", 1);
+			}
+		}
+		else if(loginCate.equals("moyobus")) {
+		
+			MoyoBusDTO moyoBusDTO = sqlSession.getMapper(MybatisAndroidImpl.class)
+					.androidMoyoBusLogin(req.getParameter("userid"), req.getParameter("userpass"));
+			
+			
+			if(moyoBusDTO == null) {
+				//회원정보 불일치로 로그인에 실패한 경우.. 결과만 0으로 내려준다.
+				returnMap.put("isLogin", 0);
+			}
+			else {
+				MoyoDTO moyoDTO = sqlSession.getMapper(MybatisAndroidImpl.class)
+						.andGetMoyoInfo(moyoBusDTO.getM_idx());
+				
+				//로그인에 성공하면 결과는 1, 해당 회원의 정보를 객체로 내려준다.
+				returnMap.put("isLogin", 1);
+				returnMap.put("moyoBusDTO", moyoBusDTO);
+				returnMap.put("moyoDTO", moyoDTO);
+			}
 		}
 		else {
-			//로그인에 성공하면 결과는 1, 해당 회원의 정보를 객체로 내려준다.
-			returnMap.put("memberDTO", memberDTO);
-			returnMap.put("isLogin", 1);
+			returnMap.put("isLogin", 0);
 		}
 		
 		return returnMap;
