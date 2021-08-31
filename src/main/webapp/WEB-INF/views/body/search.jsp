@@ -19,7 +19,7 @@
         #list{
             border:none;
             width:100%; height:auto;
-            margin-bottom:200px; padding:0;
+            margin-left:3%; margin-bottom:200px; padding:0;
             display:inline; float:left;
         }
 
@@ -27,9 +27,7 @@
             width:80%; height:350px; border:none;
             padding:0; margin:0 15% 0 10%;
         }
-        #searchSpan{
-        	display:inline;
-        }
+        #searchSpan{ display:inline; }
     	#searchIn{
     		width:70%; height:80px;
     		border: none; margin-left:10%;
@@ -51,13 +49,8 @@
     		border:none; background-color:white;
     		font-weight:lighter;	
     	}
-    	.radiobtn:checked{
-		    display:none;
-		}
-		.radiobtn{
-			font-size:1.3em; font-weight:light;
-			display:none;
-		}
+    	.radiobtn:checked{ display:none; }
+		.radiobtn{ font-size:1.3em; font-weight:light; display:none; }
 		/*	
 		.fBtns:checked + .filterLbl{
 		    font-weight:900;
@@ -67,23 +60,29 @@
     		font-size:1.3em; font-weight:100;
     		margin-left:6%;
     	}
-    	#ul1{
-    	
-    	}
+
         #filterBtn{
             display:inline;
             margin-left:50px;
             font-size:20pt;
         }
-        #filterDropdown{
-            margin-left:80%;
-            display:inline;
-        }
+        
+        #filterDropdown{ display:inline; margin:auto; padding:auto;}
+		#colorView{
+			width:100%; height:auto; color:gray; margin-left:20%; font-size:10pt; text-align:center;
+		}
+		.colorpicks{ text-decoration:none; color:gray; }
+		.colorpicks:hover{ text-decoration:none; color:black; }
+		
+		#tagView{
+			width:100%; height:auto; color:gray; margin-left:25%; font-size:10pt; text-align:center;
+		}
+		.tagpicks{ text-decoration:none; color:gray; }
+		.tagpicks:hover{ text-decoration:none; color:black; }
+		
         #order{
-        	float:right;
-            width:150px; height:35px;
-            text-align: center;
-            border: white;
+        	float:right; text-align: center;
+            width:150px; height:35px; border: none;
         }
 		
         .products{
@@ -150,28 +149,36 @@
 				document.getElementsByClassName("filterLbl")[1].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[2].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[3].style.fontWeight = "100";
+				document.getElementById("colorView").style.display="none";
+				document.getElementById("tagView").style.display="none";
 			}
 			else if(btn.value == "brand") {
 				document.getElementsByClassName("filterLbl")[0].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[1].style.fontWeight = "500";
 				document.getElementsByClassName("filterLbl")[2].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[3].style.fontWeight = "100";
+				document.getElementById("colorView").style.display="none";
+				document.getElementById("tagView").style.display="none";
 			}
 			else if(btn.value == "color") {
 				document.getElementsByClassName("filterLbl")[0].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[1].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[2].style.fontWeight = "500";
 				document.getElementsByClassName("filterLbl")[3].style.fontWeight = "100";
+				document.getElementById("colorView").style.display="inline";
+				document.getElementById("tagView").style.display="none";
 			}
-			else if(btn.value == "flag") {
+			else if(btn.value == "tag") {
 				document.getElementsByClassName("filterLbl")[0].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[1].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[2].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[3].style.fontWeight = "500";
+				document.getElementById("colorView").style.display="none";
+				document.getElementById("tagView").style.display="inline";
 			}
 		}
 	}
-	
+
     </script>
 </head>
 <body>
@@ -184,24 +191,30 @@
                 <div id="filter">
                 	<form action="/movingcloset/movingcloset/search.do?search=${search }&keyword=${keyword }&order=${order }" method="get">
 	                	 <div id="searchSpan">
-	 							<input type="text" id="searchIn" name="search" placeholder="Search.."/>
+	 							<input type="text" id="searchIn" name="search" placeholder="Search.."  /> <!-- value="${searchW }" -->
 	 							<button type="submit" id="searchBtn"><i id="searchIcon" class="fas fa-search"></i></button>
 			                <hr id="ul1" />
 	                    </div>
 			            <br />
 	                    <div id="filterBtn">
-<!-- 							<span><label class="filterLbl" for="pb" id="lpb"><input type="radio" id="pb" name="keyword" value="product"  onclick="clickPb();" />PRODUCT</label></span> -->
-<!-- 							<span><label class="filterLbl" for="bb" id="lbb"><input type="radio" id="bb" name="keyword" value="brand" onclick="clickBb();" />BRAND</label></span> -->
-<!-- 							<span><label class="filterLbl" for="cb" id="lcb"><input type="radio" id="cb" name="keyword" value="color"  onclick="clickCb();" />COLOR</label></span> -->
-<!-- 							<span><label class="filterLbl" for="tb" id="ltb"><input type="radio" id="tb" name="keyword" value="flag"  onclick="clickTb();" />TAG</label></span> -->
 							<span><label class="filterLbl"><input type="radio" name="keyword" checked value="product" class="radiobtn" onclick="clickPb(this);" />PRODUCT</label></span>
 							<span><label class="filterLbl"><input type="radio" name="keyword" value="brand" class="radiobtn" onclick="clickPb(this);" />BRAND</label></span>
 							<span><label class="filterLbl"><input type="radio" name="keyword" value="color"  class="radiobtn" onclick="clickPb(this);" />COLOR</label></span>
-							<span><label class="filterLbl"><input type="radio" name="keyword" value="flag"  class="radiobtn" onclick="clickPb(this);" />TAG</label></span>
+							<span><label class="filterLbl"><input type="radio" name="keyword" value="tag"  class="radiobtn" onclick="clickPb(this);" />TAG</label></span>
 	                    </div>
 	                    <br /><hr />
-	                    <span id="filterDropdown">
-	                        <select id="order" name="order" onchange="selectOrder(this)">
+	                    <div id="filterDropdown" style="display:inline;margin:auto;text-align:center">
+			                <span id="colorView" style="display:none;">
+									<c:forEach items="${viewColors }" var="color">
+										<a class="colorpicks" href="/movingcloset/movingcloset/search.do?color=${color }&search=${search }&keyword=${keyword }&order=${order }">${color }</a>&nbsp;&nbsp;
+									</c:forEach>
+			                </span>
+			                <span id="tagView" style="display:none;">
+									<c:forEach items="${viewTags }" var="tag">
+										<a class="tagpicks" href="/movingcloset/movingcloset/search.do?tag=${tag }&search=${search }&keyword=${keyword }&order=${order }">${tag }</a>&nbsp;&nbsp;
+									</c:forEach>
+			                </span>
+	                        <select id="order" name="order" onchange="selectOrder(this)" style="display:inline;">
 	                        	<option value="" diabled select hidden>정렬</option>
 		                            <option value="idx" >신상품순</option>
 		                            <option value="asc">낮은가격순</option>
@@ -212,10 +225,11 @@
 	                            <option value="discount">높은할인순</option>
 	                            <option value="interest">높은관심순</option>
 	                        --> 
-	                    </span>
+	                    </div>
+	                    <br /><br />
  					</form>
                 </div>
-						
+
 					 <c:forEach items="${searchList }" var="product">	
 						<span class="products">
 							<a class="pAs" href="/movingcloset/store/detail.do?p_idx=${product.p_idx }"><img class="pImg" src="../resources/upload/${product.p_sfile }"></a>
