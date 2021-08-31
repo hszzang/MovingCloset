@@ -14,7 +14,7 @@ public class ProductAndDetailDTO {
 	
 	private String p_idx;
 	private String p_name;
-	private int p_price;
+	private String p_price;
 	private String p_brand;
 	private String p_ofile;
 	private String p_sfile;
