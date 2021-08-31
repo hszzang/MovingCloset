@@ -14,7 +14,6 @@
 	<select id="getStoreList" parameterType="int" resultType="mybatis.ProductDTO">
 		SELECT * FROM product 
 		ORDER BY p_idx DESC
-		<!-- WHERE p_idx<![CDATA[>=]]>#{defaultShow} -->
 	</select>
 
 	<!-- 페이징 적용된 리스트 + 신상품/가격정렬 + 플래그 분류 적용 -->
@@ -57,15 +56,6 @@
 				SELECT COUNT(*) FROM product WHERE p_flag=#{flag}
 			</otherwise>
 		</choose>
-	</select>
-		
-	<!-- 정렬 높은 가격 순 -->
-	<select id="descPrice" resultType="mybatis.ProductDTO">
-		SELECT * FROM product ORDER BY p_price DESC
-	</select>
-	<!-- 정렬 낮은 가격 순 -->
-	<select id="ascPrice" resultType="mybatis.ProductDTO">
-		SELECT * FROM product ORDER BY p_price ASC
 	</select>
 	
 	<!-- 상품 입력 -->
@@ -128,11 +118,19 @@
 
 	
 	
-	<!-- 리뷰 수정 -->
+	<!-- 리뷰 수정(한줄평, 사진) -->
 	<update id="updateReview" parameterType="mybatis.ReviewDTO">
 		UPDATE review 
-		SET p_rate=#{p_rate}, r_content=#{r_content}, r_date=#{sysdate}, r_ofile=#{r_ofile}, r_sfile=#{r_sfile}
-		WHERE p_code=#{p_code}, r_code=#{r_code} AND userid=#{userid}
+		SET r_content=#{r_content}, r_ofile=#{r_ofile}, r_sfile=#{r_sfile}
+		WHERE p_code=#{p_code} AND r_idx=#{r_idx} AND userid=#{userid}
+	</update>
+
+	<!-- 리뷰 수정(한줄평
+	) -->
+	<update id="updateReviewNoFile" parameterType="mybatis.ReviewDTO">
+		UPDATE review 
+		SET r_content=#{r_content}
+		WHERE p_code=#{p_code} AND r_idx=#{r_idx} AND userid=#{userid}
 	</update>
 	
 	<!-- 리뷰 삭제 -->

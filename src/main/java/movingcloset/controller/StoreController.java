@@ -27,6 +27,7 @@ import movingcloset.command.CommandImpl;
 import movingcloset.command.store.ReviewDeleteCommand;
 import movingcloset.command.store.ReviewInsertCommand;
 import movingcloset.command.store.ReviewListCommand;
+import movingcloset.command.store.ReviewUpdateCommand;
 import movingcloset.command.store.StoreDeleteCommand;
 import movingcloset.command.store.StoreDetailCommand;
 import movingcloset.command.store.StoreInsertCommand;
@@ -57,6 +58,8 @@ public class StoreController {
 	ReviewDeleteCommand reviewDeleteCommand;
 	@Autowired
 	ReviewListCommand reviewListCommand;
+	@Autowired
+	ReviewUpdateCommand reviewUpdateCommand;
 
 	// 스토어 리스트
 	@RequestMapping(value="/movingcloset/store.do", method=RequestMethod.GET)
@@ -162,21 +165,17 @@ public class StoreController {
 		model.addAttribute("returnObj", returnObj);
 		// returnObj(맵)에 있는 files(resultlist(배열리스트))에서 ofile과 sfile을 꺼내오기^^...
 		
-		System.out.println(returnObj.containsKey("files")); // true 
+		//System.out.println(returnObj.containsKey("files")); // true 
 		//Object temp = returnObj.get("files");
 		List<String> temp = (List<String>) returnObj.get("files");
-		System.out.println("temp: " + temp);
 		
 		Object temp2 = temp.get(0);
-		System.out.println("temp2 : " + temp2);
 		
 		Object tempA = ((Map) temp2).get("ofile");
-		System.out.println("tempA : " + tempA);
 		String p_ofile = tempA.toString();
 		System.out.println("ofile: " + p_ofile);
 		
 		Object tempB = ((Map) temp2).get("sfile");
-		System.out.println("tempB : " + tempB);
 		String p_sfile = tempB.toString();
 		System.out.println("sfile: " + p_sfile);
 		
@@ -276,21 +275,17 @@ public class StoreController {
 		model.addAttribute("returnObj", returnObj);
 		// returnObj(맵)에 있는 files(resultlist(배열리스트))에서 ofile과 sfile을 꺼내오기^^...
 		
-		System.out.println(returnObj.containsKey("files")); // true 
+		//System.out.println(returnObj.containsKey("files")); // true 
 		//Object temp = returnObj.get("files");
 		List<String> temp = (List<String>) returnObj.get("files");
-		System.out.println("temp: " + temp);
 		
 		Object temp2 = temp.get(0);
-		System.out.println("temp2 : " + temp2);
 		
 		Object tempA = ((Map) temp2).get("ofile");
-		System.out.println("tempA : " + tempA);
 		String p_ofile = tempA.toString();
 		System.out.println("ofile: " + p_ofile);
 		
 		Object tempB = ((Map) temp2).get("sfile");
-		System.out.println("tempB : " + tempB);
 		String p_sfile = tempB.toString();
 		System.out.println("sfile: " + p_sfile);
 		
@@ -379,11 +374,24 @@ public class StoreController {
 		
 	}
 	
-	@RequestMapping(value="/movingcloset/store/reviewComplete.do")
-	public String reviewComplete() {
+
+	@RequestMapping(value="/store/updateReview.do", method=RequestMethod.POST)
+	public String updateReview(Model model, MultipartHttpServletRequest req, HttpServletResponse resp,
+			HttpSession session,ReviewDTO reviewDTO) throws IOException{
+		model.addAttribute("reviewDTO",reviewDTO);
+		model.addAttribute("req",req);
+		model.addAttribute("resp",resp);
 		
-		return "reviewComplete";
+		System.out.println("리뷰r_idx : "+req.getParameter("r_idx"));
+		System.out.println("리뷰수정 파일여부 : "+req.getParameter("ofileCheck"));
+		
+		command = reviewUpdateCommand;
+		command.execute(model);
+		
+
+		return "redirect:/store/detail.do?p_idx=" + req.getParameter("p_idx");
 	}
+
 	
 	
 	// 리뷰삭제
