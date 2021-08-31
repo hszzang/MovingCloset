@@ -128,11 +128,19 @@
 
 	
 	
-	<!-- 리뷰 수정 -->
+	<!-- 리뷰 수정(한줄평, 사진) -->
 	<update id="updateReview" parameterType="mybatis.ReviewDTO">
 		UPDATE review 
-		SET p_rate=#{p_rate}, r_content=#{r_content}, r_date=#{sysdate}, r_ofile=#{r_ofile}, r_sfile=#{r_sfile}
-		WHERE p_code=#{p_code}, r_code=#{r_code} AND userid=#{userid}
+		SET r_content=#{r_content}, r_ofile=#{r_ofile}, r_sfile=#{r_sfile}
+		WHERE p_code=#{p_code} AND r_idx=#{r_idx} AND userid=#{userid}
+	</update>
+
+	<!-- 리뷰 수정(한줄평
+	) -->
+	<update id="updateReviewNoFile" parameterType="mybatis.ReviewDTO">
+		UPDATE review 
+		SET r_content=#{r_content}
+		WHERE p_code=#{p_code} AND r_idx=#{r_idx} AND userid=#{userid}
 	</update>
 	
 	<!-- 리뷰 삭제 -->
