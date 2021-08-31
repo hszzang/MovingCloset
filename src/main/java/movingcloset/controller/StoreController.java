@@ -400,14 +400,6 @@ public class StoreController {
 		return "redirect:/store/detail.do?p_idx=" + req.getParameter("p_idx");
 	}
 
-	/*
-	 * @RequestMapping("/store/updateReviewAction.do") public String
-	 * updateReviewAction(Model model, HttpServletRequest req) {
-	 * model.addAttribute("req",req); command = reviewUpdateCommand;
-	 * command.execute(model);
-	 * 
-	 * return "redirect:/store/detail.do?p_idx="+req.getParameter("p_idx"); }
-	 */
 	
 	
 	// 리뷰삭제

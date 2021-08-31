@@ -100,10 +100,20 @@
 		document.getElementById("rid"+rid).innerHTML = htmls;
 		document.getElementById("photo"+rid).innerHTML = photoHtml;
 		document.getElementById("btnDiv"+rid).innerHTML = buttonHtml;
-		document.reviewUpdate.action = '../store/updateReview.do?r_idx='+rid+'';
+		
+		document.reviewUpdate.action = '../store/updateReview.do?r_idx='+rid+'';			
+		
 		
 	}
 
+
+ 	function textCheck(){	
+		if(document.reviewUpdate.r_content.value == ""){
+			alert("한줄평을 작성해주세요.");
+			return false;
+		}
+ 	}
+ 	
 </script>
 
 <style>
@@ -392,7 +402,7 @@
 		</div>
 
 <!-- 댓글 시작 ------------------------------------------------------------------------------------------------ -->
-		<form action="" name="reviewUpdate" method="POST" enctype="multipart/form-data">
+		<form action="" name="reviewUpdate" method="POST" onsubmit="return textCheck();" enctype="multipart/form-data">
 		<input type="hidden" name="ofileCheck" /> 
 		<table class="table table-hover" style="text-align: center;">
 			<thead>
