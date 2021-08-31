@@ -165,21 +165,17 @@ public class StoreController {
 		model.addAttribute("returnObj", returnObj);
 		// returnObj(맵)에 있는 files(resultlist(배열리스트))에서 ofile과 sfile을 꺼내오기^^...
 		
-		System.out.println(returnObj.containsKey("files")); // true 
+		//System.out.println(returnObj.containsKey("files")); // true 
 		//Object temp = returnObj.get("files");
 		List<String> temp = (List<String>) returnObj.get("files");
-		System.out.println("temp: " + temp);
 		
 		Object temp2 = temp.get(0);
-		System.out.println("temp2 : " + temp2);
 		
 		Object tempA = ((Map) temp2).get("ofile");
-		System.out.println("tempA : " + tempA);
 		String p_ofile = tempA.toString();
 		System.out.println("ofile: " + p_ofile);
 		
 		Object tempB = ((Map) temp2).get("sfile");
-		System.out.println("tempB : " + tempB);
 		String p_sfile = tempB.toString();
 		System.out.println("sfile: " + p_sfile);
 		
@@ -279,21 +275,17 @@ public class StoreController {
 		model.addAttribute("returnObj", returnObj);
 		// returnObj(맵)에 있는 files(resultlist(배열리스트))에서 ofile과 sfile을 꺼내오기^^...
 		
-		System.out.println(returnObj.containsKey("files")); // true 
+		//System.out.println(returnObj.containsKey("files")); // true 
 		//Object temp = returnObj.get("files");
 		List<String> temp = (List<String>) returnObj.get("files");
-		System.out.println("temp: " + temp);
 		
 		Object temp2 = temp.get(0);
-		System.out.println("temp2 : " + temp2);
 		
 		Object tempA = ((Map) temp2).get("ofile");
-		System.out.println("tempA : " + tempA);
 		String p_ofile = tempA.toString();
 		System.out.println("ofile: " + p_ofile);
 		
 		Object tempB = ((Map) temp2).get("sfile");
-		System.out.println("tempB : " + tempB);
 		String p_sfile = tempB.toString();
 		System.out.println("sfile: " + p_sfile);
 		
