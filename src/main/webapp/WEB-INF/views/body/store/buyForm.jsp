@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -163,144 +165,146 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 <body>
 	<div class="container">
 		<div class="input-form-background row">
-				<h5>구매상품 정보</h5>
-			<div class="input-form col-md-12 mx-auto">
-				<div class="container" id="goodsBox">
-					<div class="row">
-						<table class="table table-hover" id="goodsTable">
-							<thead class="goodsTitle">
-								<tr>
-								  <th>상품이미지</th>	
-								  <th>상품명&nbsp;(상품코드)</th>
-								  <th>가격</th>
-								  <th>구매가</th>
-								  <th>수량</th>
-								  <th>사이즈</th>
-								</tr>
-						    </thead>
-						    <tbody>
-						    	<tr id="goods">
-						    		<td><img class="goodsImg" src="../resources/images/list/2.jpg" /></td>
-						    		<td style="vertical-align:middle;">컨버스<br />(abcd1234abcd)</td>
-						    		<td style="vertical-align:middle; color:grey;"><del>79000</del></td>
-						    		<td style="vertical-align:middle;">59000</td>
-						    		<td style="vertical-align:middle;">1</td>
-						    		<td style="vertical-align:middle;">260</td>
-						    	</tr>
-						    </tbody>
-						</table>
+			<h5>구매상품 정보</h5>
+			<form name="buyFrm" id="buyFrm" action="#" method="post" > 
+				<div class="input-form col-md-12 mx-auto">
+					<div class="container" id="goodsBox">
+						<div class="row">
+							<table class="table table-hover" id="goodsTable">
+								<thead class="goodsTitle">
+									<tr>
+									  <th>상품이미지</th>	
+									  <th>브랜드</th>
+									  <th>상품명&nbsp;(상품코드)</th>
+									  <th>가격</th>
+									  <th>구매가</th>
+									  <th>수량</th>
+									  <th>사이즈</th>
+									</tr>
+							    </thead>
+							    <tbody>
+						    		<fmt:parseNumber value="${productAndDetailDTO.p_price}" var="p_priceNum"/>
+							    	<tr id="goods">
+							    		<td><img class="goodsImg" src="../resources/upload/${productDTO.p_sfile }" /></td>
+							    		<td style="vertical-align:middle;">${productAndDetailDTO.p_brand }</td>
+							    		<td style="vertical-align:middle;">${productAndDetailDTO.p_name }<br />(${productAndDetailDTO.p_code })</td>
+							    		<td style="vertical-align:middle; color:grey;"><del>${productAndDetailDTO.p_price }</del></td>
+							    		<td style="vertical-align:middle;">${p_priceNum*0.8 }</td>
+							    		<td style="vertical-align:middle;">${bd_count }</td>
+							    		<td style="vertical-align:middle;">${productAndDetailDTO.pd_size }</td>
+							    	</tr>
+							    </tbody>
+							</table>
+						</div>
 					</div>
 				</div>
-			</div>
-			<br />
-			<div class="input-form col-md-12 mx-auto">
-				<div class="input-form-wrap">
-					<h5>구매자 정보</h5>
-					<div class="custom-control custom-checkbox" id="fillBuyInfoWrap" align="right">
-						<input type="checkbox" class="custom-control-input" id="fillBuyInfo" name="fillBuyInfo" onClick="fillBuyInfos(this);" required> 
-						<label class="custom-control-label"
-							for="fillBuyInfo">기존 정보로 입력하기</label>
-					</div>
-				
-					<form name="buyFrm" id="buyFrm" action="#" method="post" > 
-						<table class="table table-bordered">
-							<colgroup>
-								<col width="20%"/>
-								<col width="*"/>
-							</colgroup>
-							<tbody>
-								<tr>
-									<td class="text-left"
-										style="vertical-align:middle;">이름</td>
-									<td>
-										<input type="text" name="title" class="form-control" style="width: 230px;" required/>
-									</td>
-								</tr>
-								<tr>
-									<td class="text-left"
-										style="vertical-align:middle;">전화번호</td>
-									<td class="form-inline">
-										<select name="mobile1" class="form-control" 
-										onchange="phoneFocus(3, this, 'mobile2');" style="width:80px;" required>
-											<option value=" "> </option>
-											<option value="010">010</option>
-											<option value="011">011</option>
-											<option value="016">016</option>
-											<option value="017">017</option>
-											<option value="018">018</option>
-											<option value="019">019</option>
-										</select>
-										&nbsp;&nbsp;-&nbsp;&nbsp;
-										<input type="text" class="form-control" name="mobile2" value="" 
-										maxlength="4" onkeyup="phoneFocus(4, this, 'mobile3');" style="width:100px;" required/>
-										&nbsp;&nbsp;-&nbsp;&nbsp;
-										<input type="text" class="form-control" name="mobile3"  value="" 
-										maxlength="4" style="width:100px;" required/>
-									</td>
-								</tr>
-								<tr>
-									<td class="text-left"
-										style="vertical-align:middle;">주소
-									</td>
-										<td class="form-inline">
-										<input type="text" name="postcode" class="form-control" style="width: 250px;"
-											required placeholder="우편번호" />&nbsp;&nbsp;&nbsp;&nbsp;
-										<button type="button" id="postBtn" onclick="zipcodeFind();"
-											style="width: 120px;height: 40px;">우편번호</button>
-									</td>
-								</tr>
-								<tr>
-									<td class="text-left" style="vertical-align:middle;"></td>
-									<td>
-										<input type="text" name="addr1" class="form-control" style="width: 500px;"
-											required placeholder="주소를 입력해주세요." />&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="text" name="addr2" class="form-control" style="width: 500px;"
-											 placeholder="상세주소를 입력해주세요." />
-									</td>
-								</tr>
-								<tr>
-									<td class="text-left"  style="vertical-align:middle">
-									결제수단
-									</td>
-									<td class="d-flex align-items-center">
-										<label><input type="radio" name="1" checked />&nbsp;&nbsp;무통장</label>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<label><input type="radio" name="1" />&nbsp;&nbsp;카드결제</label>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<label><input type="radio" name="1" />
-										&nbsp;&nbsp;
-										<img src="../resources/images/buy/kakaoPay.png" class="kakaoPay" style="vertical-align:middle" /></label>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</form>
+				<br />
+				<div class="input-form col-md-12 mx-auto">
+					<div class="input-form-wrap">
+						<h5>구매자 정보</h5>
+						<div class="custom-control custom-checkbox" id="fillBuyInfoWrap" align="right">
+							<input type="checkbox" class="custom-control-input" id="fillBuyInfo" name="fillBuyInfo" onClick="fillBuyInfos(this);" required> 
+							<label class="custom-control-label"
+								for="fillBuyInfo">기존 정보로 입력하기</label>
+						</div>
 					
-					<hr class="mt-4 mb-5">
-
-					<h3>약관동의</h3>
-
-					<div id="buyAgree">
-						<textarea rows="6" name="content" class="form-control" style="resize:none;"
-							placeholder="개인정보수집약관" readonly></textarea>
-						<div class="custom-control custom-checkbox mb-4 mt-2">
-							<input type="checkbox" class="custom-control-input" id="personalAgree" required> 
-							<label class="custom-control-label"
-								for="personalAgree">개인정보 수집 및 이용에 동의합니다.</label>
+							<table class="table table-bordered">
+								<colgroup>
+									<col width="20%"/>
+									<col width="*"/>
+								</colgroup>
+								<tbody>
+									<tr>
+										<td class="text-left"
+											style="vertical-align:middle;">이름</td>
+										<td>
+											<input type="text" name="username" class="form-control" style="width: 230px;" required/>
+										</td>
+									</tr>
+									<tr>
+										<td class="text-left"
+											style="vertical-align:middle;">전화번호</td>
+										<td class="form-inline">
+											<select name="mobile1" class="form-control" 
+											onchange="phoneFocus(3, this, 'mobile2');" style="width:80px;" required>
+												<option value=" "> </option>
+												<option value="010">010</option>
+												<option value="011">011</option>
+												<option value="016">016</option>
+												<option value="017">017</option>
+												<option value="018">018</option>
+												<option value="019">019</option>
+											</select>
+											&nbsp;&nbsp;-&nbsp;&nbsp;
+											<input type="text" class="form-control" name="mobile2" value="" 
+											maxlength="4" onkeyup="phoneFocus(4, this, 'mobile3');" style="width:100px;" required/>
+											&nbsp;&nbsp;-&nbsp;&nbsp;
+											<input type="text" class="form-control" name="mobile3"  value="" 
+											maxlength="4" style="width:100px;" required/>
+										</td>
+									</tr>
+									<tr>
+										<td class="text-left"
+											style="vertical-align:middle;">주소
+										</td>
+											<td class="form-inline">
+											<input type="text" name="postcode" class="form-control" style="width: 250px;"
+												required placeholder="우편번호" />&nbsp;&nbsp;&nbsp;&nbsp;
+											<button type="button" id="postBtn" onclick="zipcodeFind();"
+												style="width: 120px;height: 40px;">우편번호</button>
+										</td>
+									</tr>
+									<tr>
+										<td class="text-left" style="vertical-align:middle;"></td>
+										<td>
+											<input type="text" name="addr1" class="form-control" style="width: 500px;"
+												required placeholder="주소를 입력해주세요." />&nbsp;&nbsp;&nbsp;&nbsp;
+											<input type="text" name="addr2" class="form-control" style="width: 500px;"
+												 placeholder="상세주소를 입력해주세요." />
+										</td>
+									</tr>
+									<tr>
+										<td class="text-left"  style="vertical-align:middle">
+										결제수단
+										</td>
+										<td class="d-flex align-items-center">
+											<label><input type="radio" name="payment" checked />&nbsp;&nbsp;무통장</label>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<label><input type="radio" name="payment" />&nbsp;&nbsp;카드결제</label>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<label><input type="radio" name="payment" />
+											&nbsp;&nbsp;
+											<img src="../resources/images/buy/kakaoPay.png" class="kakaoPay" style="vertical-align:middle" /></label>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						<hr class="mt-4 mb-5">
+	
+						<h3>약관동의</h3>
+	
+						<div id="buyAgree">
+							<textarea rows="6" name="content" class="form-control" style="resize:none;"
+								placeholder="개인정보수집약관" readonly></textarea>
+							<div class="custom-control custom-checkbox mb-4 mt-2">
+								<input type="checkbox" class="custom-control-input" id="personalAgree" required> 
+								<label class="custom-control-label"
+									for="personalAgree">개인정보 수집 및 이용에 동의합니다.</label>
+							</div>
+							<textarea rows="6" name="content" class="form-control" style="resize:none;"
+								placeholder="노쇼약관노쇼약관" readonly></textarea>
+							<div class="custom-control custom-checkbox mb-5 mt-2">
+								<input type="checkbox" class="custom-control-input" id="cancelAgree" required> 
+								<label class="custom-control-label"
+									for="cancelAgree">무단 취소 시 부여되는 경고사항에 대해 동의합니다.</label>
+							</div>
+	
+							<button class="btn btn-primary btn-lg btn-block" id="buySubmitBtn"
+								type="submit">결제하기</button>
 						</div>
-						<textarea rows="6" name="content" class="form-control" style="resize:none;"
-							placeholder="노쇼약관노쇼약관" readonly></textarea>
-						<div class="custom-control custom-checkbox mb-5 mt-2">
-							<input type="checkbox" class="custom-control-input" id="cancelAgree" required> 
-							<label class="custom-control-label"
-								for="cancelAgree">무단 취소 시 부여되는 경고사항에 대해 동의합니다.</label>
-						</div>
-
-						<button class="btn btn-primary btn-lg btn-block" id="buySubmitBtn"
-							type="submit">결제하기</button>
 					</div>
 				</div>
-			</div>
+			</form>
 		</div>
 	</div>
 </body>

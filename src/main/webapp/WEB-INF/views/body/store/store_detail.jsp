@@ -44,6 +44,8 @@
 			}
 		
 		});
+		
+		
 	});
 	
 	function delReview(r_idx, p_idx){
@@ -85,15 +87,15 @@
 		photoHtml += '<div id="photo'+rid+'">';
 		photoHtml += '<i class="fa fa-camera" id="photoIcon"></i>';
 		photoHtml += '<input id="btnPhoto" type="file" class="form-control" name="ofile" accept="image/*" ';
-		photoHtml += 'onchange="setThumbnail(event,'+rid+');" />	';
-		photoHtml += '</div>';
-		photoHtml += '<br />';
+		photoHtml += 'onchange="setThumbnail(event,'+rid+');" /> ';
+		photoHtml += '</div>';  
+		photoHtml += '<br />';  
 		photoHtml += '<div id="image_container">';
 		photoHtml += '</div>';
 	
 		var buttonHtml = "";  
 		buttonHtml += '<div id="btnDiv'+rid+'">';
-		buttonHtml += '<button class="btnstyle" type="submit" >확인</button>';
+		buttonHtml += '<button class="btnstyle" type="button" onclick="textCheck();" >확인</button>';
 		buttonHtml += '<button class="btnstyle" type="button" onclick="javascript:history.back();">취소</button>';
 		buttonHtml += '</div>';
 		
@@ -103,7 +105,7 @@
 		
 		document.reviewUpdate.action = '../store/updateReview.do?r_idx='+rid+'';			
 		
-		
+		  
 	}
 
 
@@ -111,8 +113,26 @@
 		if(document.reviewUpdate.r_content.value == ""){
 			alert("한줄평을 작성해주세요.");
 			return false;
+		}else{
+			document.reviewUpdate.submit();
+		}   
+ 	}  
+ 	
+ 	function buyCheck(){			
+ 		var frm = document.detailFrm;
+ 		
+		if(${empty siteUserInfo}) {
+			alert("로그인 후 이용해주세요.");
+			frm.action="../movingcloset/login.do";
+			
+		}else{
+			frm.submit();
+
 		}
+		
  	}
+ 	
+
  	
 </script>
 
@@ -298,19 +318,26 @@
     #newR_content{
     	display:none;
     }
+    .info, .info:focus{
+    	border:none;
+    	outline:none;
+    	
+    }
+    
     
 	</style>
 <title>Store</title>
 </head>
 <body>
 	<div class="container" style="margin-top:10%;margin-bottom:3%;">
-		<form name="updateFrm" method="post" enctype="multipart/form-data" 
-			action="<c:url value="/store/update.do" />">
+		<form name="detailFrm" method="POST"  enctype="multipart/form-data"
+			action="../store/buy.do">
 			<div class="row" style="height: 600px;">
 				<input type="hidden" name="p_idx" value="${storeDetail.p_idx }"/>	
+				<input type="hidden" name="code" value="${storeDetail.p_code }"/>	
 				<div class="col-8 d-flex justify-content-center" >
 					<div id="image_container">
-						<img src="../resources/upload/${storeDetail.p_sfile }" alt="상품이미지" id="p_image"  />
+						<img src="../resources/upload/${storeDetail.p_sfile }" alt="상품이미지" id="p_image" />
 					</div>
 				<!--  
 					<div class="col-6" style="padding:0;display:block;height:300px;">
@@ -333,9 +360,9 @@
 				</div>
 				
 				<div class="col-4" style="padding-left:3%; padding-top:5%;">
-					<div id="brandName">${ storeDetail.p_brand}</div>
-					<div id="prodName">${storeDetail.p_name }</div>&nbsp;&nbsp;&nbsp;
-					<div id="price">&nbsp;${storeDetail.p_price }원</div>
+					<div id="brandName" ><input class="info" type="text" name="p_brand" value="${ storeDetail.p_brand}" readonly/></div>
+					<div id="prodName"><input class="info" type="text" name="p_name" value="${storeDetail.p_name }" readonly/></div>
+					<div id="price" ><input class="info" type="text" name="p_price" value="${storeDetail.p_price } 원" readonly/></div>
 					<br>
 	
 					<div class="row">
@@ -357,18 +384,18 @@
 						</div>
 						<div class="col-8">
 							<button type="button" class="btn" id="plus" onclick="plusminus(this.id);"><i class="fa fa-plus"></i></button>
-							<input type="text" id="quantity" value="1" style="border:none; width:50px; background-color: none;text-align:center;" />
+							<input type="text" id="quantity" value="1" name="bd_count" style="border:none; width:50px; background-color: none;text-align:center;" />
 							<button type="button" class="btn" id="minus" onclick="plusminus(this.id);"><i class="fa fa-minus"></i></button>
 						</div>
 					</div>
 					<hr />
 					<br>
 					<div>
-						<button id="btnBuy" style="width:92%;"><a href="#" style="color:white;">구매하기</a></button>
+						<button type="button" id="btnBuy" style="width:92%;" onclick="buyCheck();">구매하기</button>
 					</div><br> 
 					<div>
-						<span><button style="width: 45%;border:black solid 1px;" id="basket" onclick="location.href='#';">장바구니</button></span>
-						<span><button style="width: 45%;" id="wish" onclick="location.href='#';">위시리스트 <i class="fa fa-heart" style="color: red;"></i></button></span>
+						<span><button type="button" style="width: 45%;border:black solid 1px;" id="basket" onclick="location.href='#';">장바구니</button></span>
+						<span><button type="button" style="width: 45%;" id="wish" onclick="location.href='#';">위시리스트 <i class="fa fa-heart" style="color: red;"></i></button></span>
 					</div>
 				</div>
 			</div>
@@ -402,7 +429,7 @@
 		</div>
 
 <!-- 댓글 시작 ------------------------------------------------------------------------------------------------ -->
-		<form action="" name="reviewUpdate" method="POST" onsubmit="return textCheck();" enctype="multipart/form-data">
+		<form action="" name="reviewUpdate" method="POST"  enctype="multipart/form-data">
 		<input type="hidden" name="ofileCheck" /> 
 		<table class="table table-hover" style="text-align: center;">
 			<thead>

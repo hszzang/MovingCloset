@@ -194,7 +194,7 @@
                 
 					 <c:forEach items="${pagedList }" var="product">	
 						<span class="products">
-							<a href="/movingcloset/store/detail.do?p_idx=${product.p_idx }"><img class="img" src="../resources/upload/${product.p_sfile }"></a>
+							<a href="/movingcloset/store/detail.do?p_idx=${product.p_idx }&p_code=${product.p_code}"><img class="img" src="../resources/upload/${product.p_sfile }"></a>
                             <div class="brand">${product.p_brand }</div>
                             <div class="name"><label>${product.p_name }</label></div>
                             <div class="price">

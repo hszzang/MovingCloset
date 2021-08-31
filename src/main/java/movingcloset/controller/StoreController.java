@@ -18,21 +18,25 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
  
 import movingcloset.command.CommandImpl;
+import movingcloset.command.GetMemberProductCommand;
 import movingcloset.command.store.ReviewDeleteCommand;
 import movingcloset.command.store.ReviewInsertCommand;
 import movingcloset.command.store.ReviewListCommand;
 import movingcloset.command.store.ReviewUpdateCommand;
+import movingcloset.command.store.StoreBuyCommand;
 import movingcloset.command.store.StoreDeleteCommand;
 import movingcloset.command.store.StoreDetailCommand;
 import movingcloset.command.store.StoreInsertCommand;
 import movingcloset.command.store.StoreListCommand;
 import movingcloset.command.store.StoreUpdateCommand;
+import mybatis.BuyAndGroupDTO;
 import mybatis.ProductDTO;
 import mybatis.ProductDetailDTO;
 import mybatis.ReviewDTO;
@@ -60,7 +64,12 @@ public class StoreController {
 	ReviewListCommand reviewListCommand;
 	@Autowired
 	ReviewUpdateCommand reviewUpdateCommand;
-
+	@Autowired
+	StoreBuyCommand storeBuyCommand;
+	@Autowired
+	GetMemberProductCommand getMemberProductCommand;
+	
+	
 	// 스토어 리스트
 	@RequestMapping(value="/movingcloset/store.do", method=RequestMethod.GET)
 	public String storeList(Model model, HttpServletRequest req, ProductDTO productDTO) {
@@ -417,6 +426,32 @@ public class StoreController {
 		// 해당 상세 페이지로 돌아가는 걸로.
 		return "redirect:/store/detail.do?p_idx=" + req.getParameter("p_idx");
 		
+	}
+	
+	// 구매폼으로 이동
+	@RequestMapping(value="/store/buy.do", method=RequestMethod.POST)
+	public String buy(Model model, HttpServletRequest req) {
+		
+		model.addAttribute("req",req);
+		command = getMemberProductCommand;
+		command.execute(model);
+		
+		return "body/store/buyForm";
+	}
+	
+	
+	
+	// 상품 구매하기
+	@RequestMapping("/store/buyProduct.do")
+	public String buyProduct(Model model, HttpServletRequest req, BuyAndGroupDTO buyAndGroupDTO) {
+		
+		model.addAttribute("req",req);
+		model.addAttribute("buyAndGroupDTO",buyAndGroupDTO);
+		
+		command = storeBuyCommand;
+		command.execute(model);
+		
+		return "";
 	}
 	
 	
