@@ -58,6 +58,7 @@ public class StoreBuyCommand implements CommandImpl{
 		String email2 = req.getParameter("email2");
 		String bd_count = req.getParameter("bd_count");
 		String p_code = req.getParameter("p_code");
+		String bd_size = req.getParameter("bd_size");
 		
 		BuyAndGroupDTO buyAndGroupDTO = new BuyAndGroupDTO();
 		
@@ -69,6 +70,7 @@ public class StoreBuyCommand implements CommandImpl{
 		buyAndGroupDTO.setEmail(email1+"@"+email2);
 		buyAndGroupDTO.setBd_count(bd_count);
 		buyAndGroupDTO.setP_code(p_code);
+		buyAndGroupDTO.setBd_size(bd_size);
 		
 		
 		if(userid != null) {
