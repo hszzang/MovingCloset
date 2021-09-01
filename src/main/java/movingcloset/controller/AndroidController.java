@@ -175,5 +175,28 @@ public class AndroidController {
 		return returnMap;
 	}
 	
+	// 안드로이드 모여버스 위치 가져오기(안드에서 DB로)
+	@RequestMapping(value = "/android/AndMoyoBusLocation.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public Map<String, Object> andMoyoBusLocation(HttpServletRequest req) {
+		
+		System.out.println("AndMoyoBusLocation 호출");
+		String latitude = req.getParameter("latitude");
+		String longitude = req.getParameter("longitude");
+		String mb_addr = req.getParameter("mb_addr");
+		String busid = req.getParameter("busid");
+		
+		//안드로이드에서 가져온 정보로 moyo_bus 테이블의 위도, 경도, 주소를 업데이트
+		
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		
+		int result = sqlSession.getMapper(MybatisAndroidImpl.class)
+				.andUpdateMoyoBus(latitude, longitude, mb_addr, busid);
+		
+		returnMap.put("isMoyoBus", result);
+		
+		return returnMap;
+	}
+	
 
 }
