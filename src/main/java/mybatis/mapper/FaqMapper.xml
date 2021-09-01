@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mybatis.MybatisFAQImpl">
+	
+	<select id="getFaqDTO" resultType="mybatis.FaqDTO">
+		SELECT * FROM FAQ
+	</select>
+	
+	<select id="getFaqList" resultType="mybatis.FaqDTO" parameterType="java.util.List">
+		select faq_idx, faq_cate, faq_title, faq_contents from FAQ
+	</select>
+	
+	<select id="getFaqDetail" resultType="mybatis.FaqDTO" parameterType="hashmap">
+		SELECT faq_idx, faq_title, faq_contents, faq_postdate
+		FROM FAQ WHERE faq_idx = #{faq_idx}
+	</select>
+	
+	
+
+	
+
+	
+
+</mapper>

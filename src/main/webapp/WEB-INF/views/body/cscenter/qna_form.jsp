@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Help</title>
+    <title>일대일문의 :: MovingCloset</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
@@ -19,7 +19,8 @@
         #whole{
         	width:1000px; height:800px;
         	border: solid black 1px;
-        	margin: 100px 20% 200px 20%;
+        	margin-top: 200px;
+        	margin-bottom: 10px;
         	padding: 1% 1% 0 1%;
         }
         #title{
@@ -81,6 +82,7 @@
    
 </head>
 <body>
+<div class="container">
     <div id="whole">
 	    <div style="width : 950px; height: 750px;">
 	    	<span id="title">1:1문의하기</span>
@@ -118,7 +120,7 @@
 		  					<tr>
 		                        <td>첨부파일</td>
 		                        <td>
-									<button id="fileBtn"/>
+									<button id="fileBtn">
 										<span style="color:white; padding:0; margin:0;">
 											+
 										</span>
@@ -140,5 +142,6 @@
 	
 
     </div>
+</div>
 </body>
 </html>

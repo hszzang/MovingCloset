@@ -16,9 +16,8 @@
 	
 	<!-- 게시물 상세정보 -->
 	<select id="getNotiDetail" resultType="mybatis.NoticeDTO" parameterType="hashmap">
-	SELECT noti_idx, noti_title, noti_contents, noti_postdate
-	FROM notice WHERE noti_idx = #{noti_idx}
-	
+		SELECT noti_idx, noti_title, noti_contents, noti_postdate
+		FROM notice WHERE noti_idx = #{noti_idx}
 	</select>
 
 	
