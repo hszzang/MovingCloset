@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>MovingCloset</title>
 
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 <script>
 		
 		/*카운트다운*/
@@ -78,7 +80,16 @@
 
 } 
 
-
+#footerRow{
+	background-color: #212529;
+	height: 20%; color: white;
+	font-size:13px;	
+	padding:3% 15% 5% 15%;
+	line-height: 3em;
+}
+#footerRow a {
+	color: white; height: 10px;
+}
 
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -158,7 +169,7 @@
 	    	<div class="container-fluid px-0">
 	    		<div class="row no-gutters">
 	    		
-	    			<!-- 첫번째부분 -->
+	    			<!-- 스토어/뉴디 연결 -->
 	    			<div class="col-md-12 blog-wrap">
 	    				<div class="row no-gutters align-items-center">
 	    					<div class="col-md-6">
@@ -190,7 +201,7 @@
 	    			
 	    			
 	    			
-	    			<!-- 두번째부분 -->
+	    			<!-- 조르기 -->
 	    			<div class="col-md-12 blog-wrap bg-darken">
 	    				<div class="row no-gutters align-items-center">
 	    					<div class="col-md-6 d-flex justify-content-center align-items-center order-md-last js-fullheight">
@@ -214,28 +225,26 @@
 	    			</div>
 	    			
 	    			
-	    			<!-- 세번째부분 -->
 	    			<div class="col-md-12 blog-wrap">
 	    				<div class="row no-gutters align-items-center">
-	    					<div class="col-md-6 img js-fullheight" style="background-image: url(../resources/main/images/image_5.jpg);">
+	    					<div class="col-md-6 img js-fullheight" style="background-image: url(../resources/main/images/image_9.jpg);">
 	    						
 	    					</div>
 	    					<div class="col-md-6">
 	    						<div class="text p-md-5 p-4 ftco-animate">
 	    							<div class="icon d-flex align-items-center mb-5">
-	    								<div class="img" style="background-image: url(../resources/main/images/letter.jpg);"></div>
+	    								<div class="img" style="background-image: url(../resources/main/images/bus.jpg);"></div>
 	    								<div class="position pl-3">
-	    									<h4 class="mb-0">Apply for store entry</h4>
+	    									<h4 class="mb-0">I LIKE THE MOYO BUS</h4>
+	    									
 	    								</div>
 	    							</div>
-	    							<h2 class="mb-4"><a href="https://docs.google.com/forms/d/e/1FAIpQLScshnBPRPHU_e6PrzpVhhjieqepsr_FScM-BS9A1-d0l3syTw/viewform">MovingCloset Parter</a></h2>
-	    							<p>
-	    							업계 최저 수수료와 트렌디함을 즐기는 쇼퍼들이 모여있는 이 곳<br>
-	    							새로운 쇼핑플랫폼인 MovingCloset의 파트너가 되어주세요.<br>
-	    							MovingCloset은 모든 디자이너분들의 성장 파트너입니다.<br> 
-	    							
+	    							<h2 class="mb-4"><a href="../movingcloset/moyo.do">Shopping wherever you want, MOYO!</a></h2>
+	    							<p>내가 원하는 브랜드의 제품을 직접 착용해보고 사고 싶은데, <br> 어디로 가야할까? 멀리가지 말고 모여주세요. <br>
+	    							내가 있는 곳, 내가 가고 싶은 곳에 위치한 모여버스에서<br>
+	    							새롭고 즐거운 쇼핑이 가능합니다. 
 	    							</p>
-	    							<p class="mb-0 mt-4"><a href="https://docs.google.com/forms/d/e/1FAIpQLScshnBPRPHU_e6PrzpVhhjieqepsr_FScM-BS9A1-d0l3syTw/viewform" class="btn btn-primary">입점신청 <span class="ion-ios-arrow-forward"></span></a></p>
+	    							<p class="mb-0 mt-4"><a href="../movingcloset/moyo.do" class="btn btn-primary">MOYO 바로가기 <span class="ion-ios-arrow-forward"></span></a></p>
 	    						</div>
 	    					</div>
 	    				</div>
@@ -312,27 +321,38 @@
 	    					</div>
 	    				</div>
 	    			</div>
+	    			
+	    			
+	    			
+	    			<!-- 입점신청 -->
 	    			<div class="col-md-12 blog-wrap">
 	    				<div class="row no-gutters align-items-center">
-	    					<div class="col-md-6 img js-fullheight" style="background-image: url(../resources/main/images/image_9.jpg);">
+	    					<div class="col-md-6 img js-fullheight" style="background-image: url(../resources/main/images/image_5.jpg);">
 	    						
 	    					</div>
 	    					<div class="col-md-6">
 	    						<div class="text p-md-5 p-4 ftco-animate">
 	    							<div class="icon d-flex align-items-center mb-5">
-	    								<div class="img" style="background-image: url(../resources/main/images/person_3.jpg);"></div>
+	    								<div class="img" style="background-image: url(../resources/main/images/letter.jpg);"></div>
 	    								<div class="position pl-3">
-	    									<h4 class="mb-0">Jamie Jonson</h4>
-	    									<span>fashion.com</span>
+	    									<h4 class="mb-0">Apply for store entry</h4>
 	    								</div>
 	    							</div>
-	    							<h2 class="mb-4"><a href="blog-single.html">Make Peace With Your Broken Pieces</a></h2>
-	    							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
-	    							<p class="mb-0 mt-4"><a href="#" class="btn btn-primary">Read more <span class="ion-ios-arrow-forward"></span></a></p>
+	    							<h2 class="mb-4"><a href="https://docs.google.com/forms/d/e/1FAIpQLScshnBPRPHU_e6PrzpVhhjieqepsr_FScM-BS9A1-d0l3syTw/viewform">MovingCloset Parter</a></h2>
+	    							<p>
+	    							업계 최저 수수료와 트렌디함을 즐기는 쇼퍼들이 모여있는 이 곳<br>
+	    							새로운 쇼핑플랫폼인 MovingCloset의 파트너가 되어주세요.<br>
+	    							MovingCloset은 모든 디자이너분들의 성장 파트너입니다.<br> 
+	    							
+	    							</p>
+	    							<p class="mb-0 mt-4"><a href="https://docs.google.com/forms/d/e/1FAIpQLScshnBPRPHU_e6PrzpVhhjieqepsr_FScM-BS9A1-d0l3syTw/viewform" class="btn btn-primary">입점신청 <span class="ion-ios-arrow-forward"></span></a></p>
 	    						</div>
 	    					</div>
 	    				</div>
 	    			</div>
+	    			
+	    			
+	    			
 
 	    			
 	    			
@@ -345,20 +365,7 @@
 	    </section>
 
       
-      <footer class="ftco-footer ftco-section img">
-	    	<div class="overlay"></div>
-	      <div class="container">
-	        
-	        <div class="row">
-	          <div class="col-md-12 text-center">
-
-	            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-	  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This website is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="../movingcloset/introduce.do" target="_blank">MovingCloset</a>
-	  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-	          </div>
-	        </div>
-	      </div>
-	    </footer>
+    
 	    
 	    
 
