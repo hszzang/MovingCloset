@@ -607,8 +607,7 @@
 					<div id="registerAgree">
 						<textarea rows="6" name="content" class="form-control" style="resize:none;"
 							placeholder="개인정보수집약관" readonly
-							>본인은 귀사에 이력서를 제출함에 따라 [개인정보 보호법] 제15조 및 제17조에 
-따라 아래의 내용으로 개인정보를 수집, 이용 및 제공하는데 동의합니다. 
+							>[개인정보 보호법] 제15조 및 제17조에 따라 아래의 내용으로 개인정보를 수집, 이용 및 제공하는데 동의합니다. 
 							
 □ 개인정보의 수집 및 이용에 관한 사항
 - 수집하는 개인정보 항목 

@@ -123,10 +123,15 @@
  		
 		if(${empty siteUserInfo}) {
 			alert("로그인 후 이용해주세요.");
-			frm.action="../movingcloset/login.do";
+			location.href="../movingcloset/login.do";
 			
 		}else{
-			frm.submit();
+			if(frm.size.value==""){
+				alert("상품의 사이즈를 선택해주세요.");
+				return false;
+			}else{
+				frm.submit();				
+			}
 
 		}
 		
