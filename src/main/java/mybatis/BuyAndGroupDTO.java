@@ -8,8 +8,8 @@ public class BuyAndGroupDTO {
 	private String  b_idx;
 	private String  b_totalpay;
 	private java.sql.Date  b_date;
-	private String  b_buyer;
-	private String  b_phone;
+	private String  b_buyer; 
+	private String  b_phone; 
 	private String  b_postcode;
 	private String  b_addr;
 	private String  b_payment;
@@ -20,5 +20,6 @@ public class BuyAndGroupDTO {
 	private String  cou_code;
 	private String  bd_count;
 	private String  bd_size;
+	private String 	email;
 
 }
