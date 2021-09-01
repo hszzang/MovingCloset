@@ -326,7 +326,7 @@
     
     
 	</style>
-<title>Store</title>
+<title>Store 상세보기 :: MovingCloset</title>
 </head>
 <body>
 	<div class="container" style="margin-top:10%;margin-bottom:3%;">
@@ -399,9 +399,9 @@
 					</div>
 				</div>
 			</div>
-			<div style="text-align:right;">
-				<button type="button" class="product" id="productUpdate" onclick="javascript:location.href='/movingcloset/store/update.do?p_idx=${storeDetail.p_idx }';">상품수정</button>	
-			</div>
+<!-- 			<div style="text-align:right;"> -->
+<%-- 				<button type="button" class="product" id="productUpdate" onclick="javascript:location.href='/movingcloset/store/update.do?p_idx=${storeDetail.p_idx }';">상품수정</button>	 --%>
+<!-- 			</div> -->
 		</form>
 	</div>
 	<br /><br /><br />

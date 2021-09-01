@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../resources/css/bootstrap.css" />
 <script src="../resources/jquery/jquery-3.6.0.js" ></script>
-<title>Insert title here</title>
+<title>채용정보 :: MovingCloset</title>
 
 
 
