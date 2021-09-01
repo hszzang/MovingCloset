@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<%@page import="mybatis.NoticeDTO"%>
+<%@page import="mybatis.FaqDTO"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -53,11 +53,11 @@
 <div class="container">
 
     <div id="divNotice">
-		<div class="title"><c:out value="${noticeDTO.noti_title }"/></div>
+		<div class="title"><c:out value="${faqDTO.faq_title }"/></div>
 		<hr />
-	    <div class="date"><fmt:formatDate value="${noticeDTO.noti_postdate}" pattern="yyyy-MM-dd" /></div>
+	    <div class="date"><fmt:formatDate value="${faqDTO.faq_postdate}" pattern="yyyy-MM-dd" /></div>
 		<div class="notice">
-			${noticeDTO.noti_contents }
+			${faqDTO.faq_contents }
 		</div>
 		
 		<span style="float:right;">
