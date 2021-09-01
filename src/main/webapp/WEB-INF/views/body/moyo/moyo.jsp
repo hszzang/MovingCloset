@@ -42,8 +42,6 @@
 	margin-top: 30px;
 	padding-top: 15px;
 	margin-bottom: 40px;
-	/* 		border-top: 1px solid lightgray; */
-	/* 		border-top-width: 60%;	 */
 }
 
 #findMoyoBtn {
