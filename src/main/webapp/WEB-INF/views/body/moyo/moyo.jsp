@@ -28,7 +28,7 @@
 
 <style>
 .container {
-	margin-top: 95px;
+	margin-top: 100px;
 	margin-bottom: 10px;
 }
 
@@ -42,8 +42,6 @@
 	margin-top: 30px;
 	padding-top: 15px;
 	margin-bottom: 40px;
-	/* 		border-top: 1px solid lightgray; */
-	/* 		border-top-width: 60%;	 */
 }
 
 #findMoyoBtn {
