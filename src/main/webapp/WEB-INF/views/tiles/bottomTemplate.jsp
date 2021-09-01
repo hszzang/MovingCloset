@@ -12,6 +12,7 @@
 	font-size:13px;	
 	padding:3% 15% 5% 15%;
 	line-height: 3em;
+	margin-right:0px;
 }
 #footerRow a {
 	color: white; height: 10px;
