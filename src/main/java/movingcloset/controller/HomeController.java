@@ -1,12 +1,10 @@
 package movingcloset.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,28 +16,12 @@ import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.project.movingcloset.KakaoService;
 import com.project.movingcloset.NaverLoginBO;
@@ -52,21 +34,18 @@ import movingcloset.command.LoginCommand;
 import movingcloset.command.MemberCheckCommand;
 import movingcloset.command.RegisterActionCommand;
 import movingcloset.command.search.SearchCommand;
-import mybatis.MemberDTO;
 
-import mybatis.MybatisMemberImpl;
 
-/**
- * Handles requests for the application home page.
- */
 @Controller
 public class HomeController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
+
 	/* NaverLoginBO */ 
 	private NaverLoginBO naverLoginBO; 
 	private String apiResult = null; 
+	
+	CommandImpl command = null;
 	
 	/* naver login api 연동 부분 */
 	@Autowired 
@@ -77,46 +56,31 @@ public class HomeController {
 	/* kakao login api 연동 부분 */
     @Autowired
     private KakaoService kakaoService;
-	
-	CommandImpl command = null;
 
 	@Autowired
 	RegisterActionCommand registerActionCommand;
-
 	@Autowired
 	IdcheckCommand idcheckCommand;
-	
 	@Autowired
 	LoginCommand loginCommand;
-	
 	@Autowired
 	FindIdCommand findIdCommand;
-
 	@Autowired
 	FindPwCommand findPwCommand;
-	
-	
 	@Autowired
 	MemberCheckCommand memberCheckCommand;
-	
 	@Autowired
 	SearchCommand searchCommand;
 	
-	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
+		
 		logger.info("Welcome home! The client locale is {}.", locale);
-
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-
 		String formattedDate = dateFormat.format(date);
-
 		model.addAttribute("serverTime", formattedDate);
-
+		
 		return "home";
 	}
 
@@ -143,75 +107,60 @@ public class HomeController {
 		return "body/login";
 	}
 	
-	
 	// 로그인 처리
 	@RequestMapping(value="/movingcloset/loginAction.do",method=RequestMethod.POST)
 	public String loginAction(Model model, HttpServletRequest req,HttpSession session,HttpServletResponse resp) {
-
+		
 		model.addAttribute("req",req);
 		model.addAttribute("resp",resp);
 		command = loginCommand;
 		command.execute(model);
 		
-		
 		return "body/login";			
-		
-		
-		
 	}
-	
 		
+	// 로그아웃
 	@RequestMapping("/movingcloset/logout.do")
-	public String logout(Model model, HttpSession session) {
+	public String logout(Model model, HttpSession session) throws IOException{
 		
 		session.removeAttribute("siteUserInfo");
 		session.removeAttribute("username");
 		session.removeAttribute("DBPass");
 
-		
+		session.invalidate(); 
+				
 		return "body/login";
 	}
-	
-	
 	
 	//네이버 로그인 성공시 callback호출 메소드 
 	@RequestMapping(value = "/movingcloset/callback.do", method = { RequestMethod.GET, RequestMethod.POST }) 
 	public String callback(Model model, @RequestParam String code, 
 			@RequestParam String state, HttpSession session, HttpServletRequest request) throws IOException, ParseException {
+		
 		System.out.println("여기는 callback"); 
 		OAuth2AccessToken oauthToken; 
 		oauthToken = naverLoginBO.getAccessToken(session, code, state); 
 		//1. 로그인 사용자 정보를 읽어온다. 
 		apiResult = naverLoginBO.getUserProfile(oauthToken); 
-
 		//2. String형식인 apiResult를 json형태로 바꿈 
 		JSONParser parser = new JSONParser(); 
 		Object obj = parser.parse(apiResult); 
 		JSONObject jsonObj = (JSONObject) obj; 
-		
 		//3. 데이터 파싱 
 		//Top레벨 단계 _response 파싱 
 		JSONObject response_obj = (JSONObject)jsonObj.get("response"); 
 		System.out.println("response_obj : "+response_obj);
-		
-		
 		//response의 nickname값 파싱 
 		String phone = (String)response_obj.get("mobile"); 
 		String email = (String)response_obj.get("email"); 
 		String name = (String)response_obj.get("name"); 
-		
-		
 		String[] phoneAll = phone.split("-");
 		String phone1 = phoneAll[0];
 		String phone2 = phoneAll[1];
 		String phone3 = phoneAll[2];
-		
-		
 		String[] emailAll = email.split("@");
 		String email1 = emailAll[0];
 		String email2 = emailAll[1];
-		
-		
 		System.out.println(phone+" , "+email+" , "+name); 
 		//4.파싱 닉네임 세션으로 저장 
 		session.setAttribute("sessionPhone1",phone1); 
@@ -221,10 +170,8 @@ public class HomeController {
 		session.setAttribute("sessionEmail2",email2); 
 		session.setAttribute("sessionName",name); 
 		
-		
 		request.setAttribute("loginbrand", "naver");
 		request.setAttribute("emailAll", email);
-		
 		//세션 생성 
 		model.addAttribute("result", apiResult); 
 		model.addAttribute("req",request);
@@ -237,22 +184,12 @@ public class HomeController {
 		}else {
 			return "body/login";
 		}
-		
-		
 	} 
 	
-	//로그아웃
-	@RequestMapping(value = "/movingcloset/naverlogout.do", method = { RequestMethod.GET, RequestMethod.POST }) 
-	public String logout(HttpSession session)throws IOException { 
-		System.out.println("여기는 logout"); 
-		session.invalidate(); 
-		return "body/login"; 
-	}
-	
-
     @RequestMapping("/movingcloset/kakaologin.do")
     public String kakaologin(@RequestParam(value = "code", required = false) String code, 
     		HttpSession session , HttpServletRequest request, Model model) throws Exception{
+    	
         System.out.println("#########" + code);
         String access_Token = kakaoService.getAccessToken(code);
         HashMap<String, Object> userInfo = kakaoService.getUserInfo(access_Token);
@@ -265,12 +202,9 @@ public class HomeController {
         String kemail1 = kemailAll[0];
         String kemail2 = kemailAll[1];
         
-        
         session.setAttribute("kakaoNickname", userInfo.get("nickname"));
         session.setAttribute("kakaoEmail1", kemail1);
         session.setAttribute("kakaoEmail2", kemail2);
-        
-        
         
         request.setAttribute("loginbrand", "kakao");
 		request.setAttribute("emailAll", kemail);
@@ -285,11 +219,7 @@ public class HomeController {
 		}else {
 			return "body/login";
 		}
-    
     }
-	
-	
-
 
 	// 쪼르깅
 	@RequestMapping(value = "/movingcloset/myplease2.do", method = RequestMethod.GET)
@@ -306,37 +236,45 @@ public class HomeController {
 	// 회원가입 화면으로 이동
 	@RequestMapping(value = "/movingcloset/register.do")
 	public String register(HttpSession session) {
+		
 		session.setAttribute("loginbrand", "normal");
+		
 		return "body/registerForm";
 	}
 
 	// 회원가입 처리
 	@RequestMapping(value = "/movingcloset/registerAction.do", method = RequestMethod.POST)
-	public String registerAction(Model model, HttpServletRequest req) {
-
+	public String registerAction(Model model, HttpServletRequest req, HttpSession session,HttpServletResponse response) throws IOException {
+		
 		model.addAttribute("req",req);
 		command = registerActionCommand;
 		command.execute(model);
-
-		return "body/registerComplete";
+		String returnString = "";
+		String loginbrand = (String)session.getAttribute("loginbrand");
+		
+		
+		if((Integer)session.getAttribute("DBid")==1) {
+			model.addAttribute("msg", "아이디 중복확인을 해주세요.");
+			model.addAttribute("url", "../movingcloset/register.do?loginbrand="+loginbrand);
+			returnString = "alert";
+		}else {
+			returnString = "body/registerComplete";
+		}
+		
+		return returnString;
 	}
 
 	// 아이디 중복확인
 	@RequestMapping(value = "/movingcloset/idcheck.do",produces = "application/json")
 	public String idcheck(Model model, HttpServletRequest req) {
-
-			model.addAttribute("req", req);
-			command = idcheckCommand;
-			command.execute(model);
-
+		
+		model.addAttribute("req", req);
+		command = idcheckCommand;
+		command.execute(model);
+		
 		return "idCheckForm";
 	}
 
-	
-	
-	
-	
-	
 	// 아이디/비밀번호찾기
 	@RequestMapping(value = "/movingcloset/findIdPw.do", method = RequestMethod.GET)
 	public String findIdPw(Model model, HttpServletRequest req) {
@@ -382,5 +320,8 @@ public class HomeController {
 	public String rules_loc(Locale locale, Model model) {
 		return "body/rules_loc";
 	}
+	
+
+	
 
 }

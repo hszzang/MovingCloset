@@ -86,11 +86,18 @@ public class RegisterActionCommand implements CommandImpl{
 		
 
 		System.out.println("회원가입 커맨드 호출됨");
-
-
 		
-		int result = sqlSession.getMapper(MybatisMemberImpl.class).register(memberDTO); // 세션영역에 저장된 VO객체로 부터 아이디를 얻어와 파라미터로 사용
-		System.out.println("입력결과"+result);
+		
+		int result1 = sqlSession.getMapper(MybatisMemberImpl.class).idcheck(userId);
+		
+		if(result1==1) {
+			session.setAttribute("DBid", result1);			
+		}else {
+			int result2 = sqlSession.getMapper(MybatisMemberImpl.class).register(memberDTO); // 세션영역에 저장된 VO객체로 부터 아이디를 얻어와 파라미터로 사용
+			System.out.println("입력결과"+result2);
+			
+		}
+
 		
 		
 	}

@@ -5,43 +5,33 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="mybatis.MybatisSearchImpl">
-
-	<select id="searchProducts" resultType="mybatis.ProductDTO">
-		<if test='keyword=="color"'>
-			SELECT p.*
-			from product p, product_detail d
-			WHERE p.p_code=d.p_code AND pd_color=#{search}
-		</if>
-		
-			SELECT * FROM (
-			SELECT ROW_NUMBER() OVER(ORDER BY p_idx) NUM, A.*
-			FROM product A
+	<select id="searchProducts" parameterType="java.util.ArrayList" resultType="mybatis.ProductDTO">
 		<choose>
-			<!--  FROM product A  -->
-			<when test='keyword=="brand"'>
-				WHERE p_brand=#{search}
-			</when>
-		<!--  
 			<when test='keyword=="color"'>
-				WHERE p_code=#{search}
+				SELECT p.*
+				from product p, product_detail d
+				WHERE p.p_code=d.p_code 
+				AND pd_color LIKE '%'||#{search}||'%'
 			</when>
-		-->
-		<!--  
+		<otherwise>
+			SELECT * FROM (
+				SELECT ROW_NUMBER() OVER(ORDER BY p_idx) NUM, A.*
+				FROM product A
+		</otherwise>
+		</choose>	
+		<choose>
+			<when test='keyword=="brand"'>
+				WHERE p_brand=#{search} )
+			</when>  
 			<when test='keyword=="tag"'>
-				WHERE * IN (#{search})
+				WHERE p_tag LIKE '%'||#{search}||'%'  )
 			</when>
-		-->
-			<otherwise>
+			<when test='keyword=="product" or keyword==null'>
 				WHERE p_name LIKE '%'||#{search}||'%' 
-				<!-- 
-				WHERE p_name IN (#{search})
-				
-				SELECT * FROM product
-				WHERE p_name LIKE '%샌들%';     
-				 -->
-			</otherwise>
+				OR p_brand LIKE '%'||#{search}||'%' 
+				OR p_flag LIKE '%'||#{search}||'%' )
+			</when>
 		</choose>
-		)
 		<choose>
 			<when test='order=="asc"'>
 				ORDER BY p_price ASC
@@ -53,14 +43,16 @@
 				ORDER BY p_idx DESC
 			</otherwise>
 		</choose>
+
+		
 	</select>
 	
-	<select id="getDetailDTO" resultType="String">
-		SELECT p_code FROM product_detail
-		WHERE pd_color=#{search}
+	<select id="getColors" resultType="String">
+		SELECT DISTINCT pd_color from product_detail
 	</select>
-	<select id="getProductDTO" resultType="mybatis.ProductDTO">
-		SELECT * FROM
+	
+	<select id="getTags" resultType="String">
+		SELECT DISTINCT p_tag from product
 	</select>
-
+	
 </mapper>

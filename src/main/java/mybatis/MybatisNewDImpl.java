@@ -15,7 +15,6 @@ public interface MybatisNewDImpl {
 	public NewdDTO getNewdDTO();
 	//public List<ProductDTO> getStoreList(ProductDTO productDTO);
 	public List<ProductDTO> getNewdList(ProductDTO productDTO);
-	public int getTotalCount();
 	
 	
 	

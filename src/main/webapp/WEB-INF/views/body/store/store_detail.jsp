@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 
 <!DOCTYPE html>
 <html>
@@ -13,7 +14,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script>
-
 
 	function plusminus(id){
 		//console.log("넘어온 값 "+id);
@@ -44,6 +44,8 @@
 			}
 		
 		});
+		
+		
 	});
 	
 	function delReview(r_idx, p_idx){
@@ -52,6 +54,91 @@
 		}
 	}
 	
+	function setThumbnail(event,rid){
+		var reader = new FileReader();
+		
+		reader.onload = function(event){
+			var before = document.getElementById("r_image"+rid);
+			if(before != null){
+				before.remove();			
+			}
+			
+			var img = document.createElement("img");
+			img.setAttribute("src", event.target.result);
+			img.style.display ='none';
+			img.setAttribute("id","r_image"+rid);
+			document.querySelector("div#image_container").appendChild(img);
+			document.reviewUpdate.ofileCheck.value="fileOK";
+			
+		};
+		reader.readAsDataURL(event.target.files[0]);
+	}
+	
+ 	function rUpdate(rid){
+	
+ 		console.log(rid);
+ 		
+		var htmls = "";
+		htmls += '<div class="r_content" id="rid'+rid+'">';
+		htmls += '<textarea maxlength="100"; style="resize: none;width:350px;height:50px;" name="r_content" class="text100" cols="30" rows="10" placeholder="최대 100자 까지 등록 가능합니다." ></textarea>';
+		htmls += '</div>';
+
+		var photoHtml = "";
+		photoHtml += '<div id="photo'+rid+'">';
+		photoHtml += '<i class="fa fa-camera" id="photoIcon"></i>';
+		photoHtml += '<input id="btnPhoto" type="file" class="form-control" name="ofile" accept="image/*" ';
+		photoHtml += 'onchange="setThumbnail(event,'+rid+');" /> ';
+		photoHtml += '</div>';  
+		photoHtml += '<br />';  
+		photoHtml += '<div id="image_container">';
+		photoHtml += '</div>';
+	
+		var buttonHtml = "";  
+		buttonHtml += '<div id="btnDiv'+rid+'">';
+		buttonHtml += '<button class="btnstyle" type="button" onclick="textCheck();" >확인</button>';
+		buttonHtml += '<button class="btnstyle" type="button" onclick="javascript:history.back();">취소</button>';
+		buttonHtml += '</div>';
+		
+		document.getElementById("rid"+rid).innerHTML = htmls;
+		document.getElementById("photo"+rid).innerHTML = photoHtml;
+		document.getElementById("btnDiv"+rid).innerHTML = buttonHtml;
+		
+		document.reviewUpdate.action = '../store/updateReview.do?r_idx='+rid+'';			
+		
+		  
+	}
+
+
+ 	function textCheck(){	
+		if(document.reviewUpdate.r_content.value == ""){
+			alert("한줄평을 작성해주세요.");
+			return false;
+		}else{
+			document.reviewUpdate.submit();
+		}   
+ 	}  
+ 	
+ 	function buyCheck(){			
+ 		var frm = document.detailFrm;
+ 		
+		if(${empty siteUserInfo}) {
+			alert("로그인 후 이용해주세요.");
+			location.href="../movingcloset/login.do";
+			
+		}else{
+			if(frm.size.value==""){
+				alert("상품의 사이즈를 선택해주세요.");
+				return false;
+			}else{
+				frm.submit();				
+			}
+
+		}
+		
+ 	}
+ 	
+
+ 	
 </script>
 
 <style>
@@ -223,21 +310,39 @@
     	background-color:black; color:white; border:none; border-radius:1px;
     	display:inline;
     }
+    .btnstyle{
+        width:35px; height:25px; font-size:5pt; 
+    	background-color:black; color:white; border:none; border-radius:1px;
+    	display:inline;
+    }
+    
     #p_image{
     	width:500px; height:570px;
     }
+    
+    #newR_content{
+    	display:none;
+    }
+    .info, .info:focus{
+    	border:none;
+    	outline:none;
+    	
+    }
+    
+    
 	</style>
-<title>Store</title>
+<title>Store 상세보기 :: MovingCloset</title>
 </head>
 <body>
 	<div class="container" style="margin-top:10%;margin-bottom:3%;">
-		<form name="updateFrm" method="post" enctype="multipart/form-data" 
-			action="<c:url value="/store/update.do" />">
+		<form name="detailFrm" method="POST"  enctype="multipart/form-data"
+			action="../store/buy.do">
 			<div class="row" style="height: 600px;">
 				<input type="hidden" name="p_idx" value="${storeDetail.p_idx }"/>	
+				<input type="hidden" name="code" value="${storeDetail.p_code }"/>	
 				<div class="col-8 d-flex justify-content-center" >
 					<div id="image_container">
-						<img src="../resources/upload/${storeDetail.p_sfile }" alt="상품이미지" id="p_image"  />
+						<img src="../resources/upload/${storeDetail.p_sfile }" alt="상품이미지" id="p_image" />
 					</div>
 				<!--  
 					<div class="col-6" style="padding:0;display:block;height:300px;">
@@ -260,9 +365,9 @@
 				</div>
 				
 				<div class="col-4" style="padding-left:3%; padding-top:5%;">
-					<div id="brandName">${ storeDetail.p_brand}</div>
-					<div id="prodName">${storeDetail.p_name }</div>&nbsp;&nbsp;&nbsp;
-					<div id="price">&nbsp;${storeDetail.p_price }원</div>
+					<div id="brandName" ><input class="info" type="text" name="p_brand" value="${ storeDetail.p_brand}" readonly/></div>
+					<div id="prodName"><input class="info" type="text" name="p_name" value="${storeDetail.p_name }" readonly/></div>
+					<div id="price" ><input class="info" type="text" name="p_price" value="${storeDetail.p_price } 원" readonly/></div>
 					<br>
 	
 					<div class="row">
@@ -284,24 +389,24 @@
 						</div>
 						<div class="col-8">
 							<button type="button" class="btn" id="plus" onclick="plusminus(this.id);"><i class="fa fa-plus"></i></button>
-							<input type="text" id="quantity" value="1" style="border:none; width:50px; background-color: none;text-align:center;">
+							<input type="text" id="quantity" value="1" name="bd_count" style="border:none; width:50px; background-color: none;text-align:center;" />
 							<button type="button" class="btn" id="minus" onclick="plusminus(this.id);"><i class="fa fa-minus"></i></button>
 						</div>
 					</div>
 					<hr />
 					<br>
 					<div>
-						<button id="btnBuy" style="width:92%;"><a href="#" style="color:white;">구매하기</a> </button>
+						<button type="button" id="btnBuy" style="width:92%;" onclick="buyCheck();">구매하기</button>
 					</div><br> 
 					<div>
-						<span><button style="width: 45%;border:black solid 1px;" id="basket" onclick="location.href='#';">장바구니</button></span>
-						<span><button style="width: 45%;" id="wish" onclick="location.href='#';">위시리스트 <i class="fa fa-heart" style="color: red;"></i></button></span>
+						<span><button type="button" style="width: 45%;border:black solid 1px;" id="basket" onclick="location.href='#';">장바구니</button></span>
+						<span><button type="button" style="width: 45%;" id="wish" onclick="location.href='#';">위시리스트 <i class="fa fa-heart" style="color: red;"></i></button></span>
 					</div>
 				</div>
 			</div>
-			<div style="text-align:right;">
-				<button type="button" class="product" id="productUpdate" onclick="javascript:location.href='/movingcloset/store/update.do?p_idx=${storeDetail.p_idx }';">상품수정</button>	
-			</div>
+<!-- 			<div style="text-align:right;"> -->
+<%-- 				<button type="button" class="product" id="productUpdate" onclick="javascript:location.href='/movingcloset/store/update.do?p_idx=${storeDetail.p_idx }';">상품수정</button>	 --%>
+<!-- 			</div> -->
 		</form>
 	</div>
 	<br /><br /><br />
@@ -313,7 +418,7 @@
 		<h4>평균 평점 : <span>5.0</span></h4>
 		<div class="row" style="padding: 1%; padding-left:5%;">
 			<div class="d-flex mr-auto" >
-				<input type="checkbox" name="photocheck" id="photocheck" value="photocheck" class="form-check-input" style="zoom: 1.5;">
+				<input type="checkbox" name="photocheck" id="photocheck" value="photocheck" class="form-check-input" style="zoom: 1.5;"/>
 					<label for="photocheck" style="font-size:1em;">포토리뷰</label>
 			</div>
 			
@@ -329,7 +434,8 @@
 		</div>
 
 <!-- 댓글 시작 ------------------------------------------------------------------------------------------------ -->
-	
+		<form action="" name="reviewUpdate" method="POST"  enctype="multipart/form-data">
+		<input type="hidden" name="ofileCheck" /> 
 		<table class="table table-hover" style="text-align: center;">
 			<thead>
 			<tr>
@@ -343,11 +449,13 @@
 				<th style="width: 40%;">한줄평</th>
 				<th style="width: 10%;">작성일</th>
 				<th style="width: 10%;">작성자</th>				
-				<th style="width: 250%;"></th>
+				<th style="width: 20%;">사진</th>
+				<th style="width: 20%;"></th>
 			</tr>
 			</thead>
 			<tbody>
-			<c:forEach items="${reviews }" var="review"  >
+			
+			<c:forEach items="${reviews }" var="review" >
 				<tr >
 					<td>
 					평점 <!-- 평점 수정했습니다!------>
@@ -356,36 +464,48 @@
 						</c:forEach>
 					</td>
 					
-					<td>${review.r_content }
-						<c:if test="${sessionScope.siteUserInfo != null}">
-							<button class="delBtn" onclick="delReview(${review.r_idx}, ${storeDetail.p_idx });">삭제</button>
-						</c:if>
+					<td>
+						<div class="r_content" id="rid${review.r_idx }">
+							${review.r_content }
+						</div>
+
 					</td>
+					
 					<td>${review.r_date }</td>
 					<td>
 						${review.userid }
-						<input type="hidden" name="r_idx" value="${review.r_idx }"/>
+						<%-- <input type="hidden" name="r_idx" value="${review.r_idx }"/> --%>
 						<input type="hidden" name="p_code" value="${review.p_code }"/>
 						<input type="hidden" name="p_idx" value="${storeDetail.p_idx }"/>
 					</td>
 					<td>
-					
-					<c:choose>
-						<c:when test="${review.r_sfile eq null }">
-							
-						</c:when>
-						<c:otherwise>
-							<img class="myImg" src="../resources/upload/${review.r_sfile }" alt="상품이미지"
-							style="width: 100px; height: auto;"/>						
-						</c:otherwise>
-					</c:choose>
-					
+					<div id="photo${review.r_idx }">
+						<c:choose>  
+							<c:when test="${review.r_sfile eq null }">
+							</c:when>
+							<c:otherwise>
+								<img class="myImg" id="r_image${review.r_idx }" name="ofile" src="../resources/upload/${review.r_sfile }" alt="상품이미지"
+								style="width: 100px; height: auto;"/>	
+													
+							</c:otherwise>
+						</c:choose>
+					</div>
+					</td>
+					<td>
+						<div id="btnDiv${review.r_idx }">  
+						<c:if test="${sessionScope.siteUserInfo != null && siteUserInfo eq review.userid }">
+							<button type="button" class="btnstyle" onclick="rUpdate(${review.r_idx});">수정</button>
+							<button type="button" class="delBtn" onclick="delReview(${review.r_idx}, ${storeDetail.p_idx });">삭제</button>
+						</c:if>
+						</div>					
 					</td>
 				</tr>
+				
 			</c:forEach>
-			
 			</tbody>
 		</table>
+		
+		</form>
 			<hr />
 			<div id="pages">
 			    <select name="pageSel" id="pageSel" placeholder="1">
@@ -422,7 +542,7 @@
 		</div>
 	</div>
 
-	<script>
+<!-- 	<script>
 		// Get the modal
 		var modal = document.getElementById("myModal");
 		
@@ -442,7 +562,7 @@
 		span.onclick = function() { 
 		  modal.style.display = "none";
 		}
-	</script>
+	</script> -->
 
 </body>
 </html>

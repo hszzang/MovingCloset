@@ -3,7 +3,6 @@ package movingcloset.command.store;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -11,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -24,8 +22,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import movingcloset.command.CommandImpl;
 import mybatis.MybatisProductImpl;
-import mybatis.ProductDTO;
-import mybatis.ProductDetailDTO;
 import mybatis.ReviewDTO;
 
 @Service

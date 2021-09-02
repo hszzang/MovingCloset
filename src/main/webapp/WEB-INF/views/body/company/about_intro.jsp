@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../resources/css/bootstrap.css" />
 <script src="../resources/jquery/jquery-3.6.0.js" ></script>
-<title>about_intro</title>
+<title>회사 소개 :: MovingCloset</title>
  <meta content="" name="description">
  <meta content="" name="keywords">
 

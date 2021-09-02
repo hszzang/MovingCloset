@@ -42,6 +42,7 @@ public class StoreListCommand implements CommandImpl {
 			// 정렬 기준
 			String order = req.getParameter("order");
 			System.out.println("order : " + order);
+
 			// paging값 pageReq
 			String pageReq = req.getParameter("pageShow");
 			System.out.println("몇 페이지? pageReq: " + pageReq);
@@ -55,7 +56,6 @@ public class StoreListCommand implements CommandImpl {
 			System.out.println("요청 페이지 번호 pageC : " + pageC);
 			// 불러올 상품의 총 갯수 -> 플래그 없으면 전체 / 있으면 해당 플래그의 상품만.. 
 			int totalRecordCount = sqlSession.getMapper(MybatisProductImpl.class).getCount(flag);
-			//int totalRecordCount = sqlSession.getMapper(MybatisProductImpl.class).getCount(flag);
 			System.out.println("불러내는 상품 갯수: " + totalRecordCount);
 			// 한 페이지당 보여주는 상품 갯수 단위 60개!
 			int show = 60;
@@ -78,7 +78,7 @@ public class StoreListCommand implements CommandImpl {
 			System.out.println("end : " + end);
 			
 			//List<ProductDTO> storeList = sqlSession.getMapper(MybatisProductImpl.class).getStoreList(productDTO);		
-			List<ProductDTO> pagedList = sqlSession.getMapper(MybatisProductImpl.class).getPagedList(flag,order, start, end);
+			List<ProductDTO> pagedList = sqlSession.getMapper(MybatisProductImpl.class).getPagedList(flag, order, start, end);
 
 			//model.addAttribute("storeList", storeList);
 			model.addAttribute("pagedList", pagedList);
@@ -88,6 +88,7 @@ public class StoreListCommand implements CommandImpl {
 			model.addAttribute("pages", pages);
 			model.addAttribute("start", startP);
 			model.addAttribute("pageEnd", endP);
+			model.addAttribute("order", order);
 			
 		}
 		

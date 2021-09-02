@@ -230,6 +230,7 @@
 		<a class="nav-link" id="nav-title6" href="../movingcloset/notice.do">CS center</a>
 		<div id="icons">
 			<a href="./search.do"><i class="material-icons" id="icon">search</i></a>
+			<a href="/movingcloset/movingcloset/search.do"><i class="material-icons" id="icon">search</i></a>
 			&nbsp;
 			<a href=""><i class="material-icons" id="icon">shopping_basket</i></a>
 			&nbsp;

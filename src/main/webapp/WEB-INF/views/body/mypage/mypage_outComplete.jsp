@@ -59,7 +59,7 @@
 
 
 </style>
-<title>Insert title here</title>
+<title>마이페이지 - 회원탈퇴 :: MovingCloset</title>
 </head>
 <body>
 	<div class="container" style="width: 50%;padding-bottom:0px; margin-top:50px;" align="center" >
