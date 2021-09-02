@@ -21,6 +21,7 @@ import movingcloset.command.MemberEditCommand;
 import movingcloset.command.MemberOutCommand;
 import movingcloset.command.RegisterActionCommand;
 import movingcloset.command.cscenter.QnaCommand;
+import movingcloset.command.mypage.MypageMoyoBusCommand;
 import mybatis.MemberDTO;
 import mybatis.MybatisMemberImpl;
 import mybatis.QnaDTO;
@@ -32,12 +33,16 @@ public class MypageController {
 	
 	@Autowired
 	MemberOutCommand memberOutCommand;
-	
+
 	@Autowired
 	MemberEditCommand memberEditCommand;
 	
 	@Autowired
 	QnaCommand qnaCommand;
+
+  @Autowired
+	MypageMoyoBusCommand mypageMoyoBusCommand;
+
 	
 	
 	@RequestMapping(value="movingcloset/mypage_coupon.do", method=RequestMethod.GET)
@@ -80,7 +85,6 @@ public class MypageController {
 	}
 	
 	
-	
 	@RequestMapping(value="/movingcloset/passCheckPage.do", method=RequestMethod.GET)
 	public String mypagePassCheckPage(Model model, HttpServletRequest request) {
 		return "passCheck";
@@ -98,8 +102,12 @@ public class MypageController {
 	}
 	
 	
-	@RequestMapping(value="movingcloset/mypage_bus.do", method=RequestMethod.GET)
-	public String mypageBus (Locale locale, Model model) {
+	@RequestMapping(value="/movingcloset/mypage_bus.do", method=RequestMethod.GET)
+	public String mypageBus (HttpServletRequest req, Model model) {
+		
+		model.addAttribute("req", req);
+		command = mypageMoyoBusCommand;
+		command.execute(model);
 		
 		return "body/mypage/mypage_moyoBus";
 	}

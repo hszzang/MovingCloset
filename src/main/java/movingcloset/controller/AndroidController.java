@@ -45,7 +45,6 @@ import movingcloset.command.FindPwCommand;
 import movingcloset.command.IdcheckCommand;
 import movingcloset.command.LoginCommand;
 import movingcloset.command.RegisterActionCommand;
-import movingcloset.command.android.AndLoginCommand;
 import mybatis.MemberDTO;
 import mybatis.MoyoBusDTO;
 import mybatis.MoyoDTO;
@@ -184,6 +183,7 @@ public class AndroidController {
 		String latitude = req.getParameter("latitude");
 		String longitude = req.getParameter("longitude");
 		String mb_addr = req.getParameter("mb_addr");
+		String mb_status = req.getParameter("mb_status");
 		String busid = req.getParameter("busid");
 		
 		//안드로이드에서 가져온 정보로 moyo_bus 테이블의 위도, 경도, 주소를 업데이트
@@ -191,7 +191,7 @@ public class AndroidController {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		
 		int result = sqlSession.getMapper(MybatisAndroidImpl.class)
-				.andUpdateMoyoBus(latitude, longitude, mb_addr, busid);
+				.andUpdateMoyoBus(latitude, longitude, mb_addr, mb_status, busid);
 		
 		returnMap.put("isMoyoBus", result);
 		
