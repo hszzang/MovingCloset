@@ -24,6 +24,7 @@
 	        $("Notice").show();
 	        $("Events").hide();
 	    }
+		
 		function openPage(pageName,elmnt,color) {
 		  var i, tabcontent, tablinks;
 		  tabcontent = document.getElementsByClassName("tabcontent");
@@ -39,7 +40,22 @@
 		  elmnt.style.color= white;
 		}
 		
+		
 		document.getElementById("defaultOpen").click();
+		
+		function directQNA(){
+			
+			if(${empty siteUserInfo}){
+				alert("로그인 후 이용해주시기 바랍니다.");
+				location.href="./login.do";
+			}else{
+				location.href="/movingcloset/movingcloset/question.do";
+			
+			}
+			
+		}
+		
+		
 	</script>
 	
     <style>
@@ -106,6 +122,7 @@
         #gotoqna{
         	display:inline; float:left;
         	width:200px; height:40px; background-color:black;
+        	color:white;
         }
         #gotoqna:focus{outline:none;}
         
@@ -143,9 +160,9 @@
     		</div>
 
 			<div class="tabs">
-				<button class="tablink" onclick="openPage('Notice', this, 'black')" id="defaultOpen">공지사항</button>
+				<button class="tablink" onclick="openPage('Notice', this, 'black');" id="defaultOpen">공지사항</button>
 				
-				<button class="tablink" onclick="openPage('FAQ', this, 'black')" >자주 묻는 질문</button>
+				<button class="tablink" onclick="openPage('FAQ', this, 'black');" >자주 묻는 질문</button>
 
 			</div>
 			<div style="clear:both;"></div>
@@ -213,9 +230,7 @@
 	            </table>
 	            
 	            <br />
-    		<button id="gotoqna">
-    			<a href="/movingcloset/movingcloset/question.do" style="text-decoration:none;color:white;">1:1문의하러 가기</a>
-    		</button>
+    		<button id="gotoqna" type="button" onclick="directQNA();">1:1문의하러 가기</button>
 			
 	        </div>
 	        	

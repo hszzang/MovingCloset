@@ -242,12 +242,25 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 							    </thead>
 							    <tbody>
 						    		<fmt:parseNumber value="${productAndDetailDTO.p_price}" var="p_priceNum"/>
+						    		<c:if test="${productAndDetailDTO.cou_per != null }">
+							    		<fmt:parseNumber value="${productAndDetailDTO.cou_per}" var="cou_perNum"/>						    		
+						    		</c:if>
+							    	
 							    	<tr id="goods">
 							    		<td><img class="goodsImg" src="../resources/upload/${productDTO.p_sfile }" /></td>
 							    		<td style="vertical-align:middle;">${productAndDetailDTO.p_brand }</td>
 							    		<td style="vertical-align:middle;">${productAndDetailDTO.p_name }<br />(${productAndDetailDTO.p_code })</td>
 							    		<td style="vertical-align:middle; color:gray;"><del>${productAndDetailDTO.p_price }</del></td>
-							    		<td style="vertical-align:middle;">${p_priceNum*0.8 }</td>
+							    		
+							    		<c:choose>
+							    			<c:when test="${productAndDetailDTO.cou_per != null }">
+									    		<td style="vertical-align:middle;">${p_priceNum*cou_perNum }</td>							    			
+							    			</c:when>
+							    			<c:otherwise>
+							    				<td style="vertical-align:middle;">${p_priceNum }</td>
+							    			</c:otherwise>
+							    		</c:choose>
+							    		
 							    		<td style="vertical-align:middle;">${bd_count }</td>
 							    		<td style="vertical-align:middle;">${productAndDetailDTO.pd_size }</td>
 							    	</tr>
@@ -258,6 +271,17 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 				</div>
 				<br />
 				<div class="input-form col-md-12 mx-auto">
+			    	<input type="hidden" name="bd_count" value="${bd_count }"/>
+			    	<input type="hidden" name="bd_size" value="${productAndDetailDTO.pd_size }"/>
+ 					<c:choose>
+		    			<c:when test="${productAndDetailDTO.cou_per != null }">
+							<input type="hidden" name="b_totalpay" value="${p_priceNum*cou_perNum }"/>		    			
+						</c:when>
+		    			<c:otherwise>
+							<input type="hidden" name="b_totalpay" value="${p_priceNum }"/>		    			
+		    			</c:otherwise>
+		    		</c:choose>
+			    	
 					<div class="input-form-wrap">
 						<h3 style="text-align:left;padding-top:25px;">구매자 정보</h3>
 						<div class="custom-control custom-checkbox" id="fillBuyInfoWrap" align="right">
