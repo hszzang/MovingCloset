@@ -11,11 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import movingcloset.command.CommandImpl;
 import movingcloset.command.LoginCommand;
+import movingcloset.command.MemberEditCommand;
 import movingcloset.command.MemberOutCommand;
 import movingcloset.command.RegisterActionCommand;
 import mybatis.MemberDTO;
@@ -29,38 +31,75 @@ public class MypageController {
 	@Autowired
 	MemberOutCommand memberOutCommand;
 	
+	@Autowired
+	MemberEditCommand memberEditCommand;
 	
-	@RequestMapping(value="/mypage/coupon.do", method=RequestMethod.GET)
+	
+	@RequestMapping(value="movingcloset/mypage_coupon.do", method=RequestMethod.GET)
 	public String mypageCoupon (Model model, HttpServletRequest req) {
 		
 		return "body/mypage/mypage_coupon";
 	}
-	@RequestMapping(value="/mypage/order.do", method=RequestMethod.GET)
+	@RequestMapping(value="movingcloset/mypage_order.do", method=RequestMethod.GET)
 	public String mypageOrder (Locale locale, Model model) {
 		
 		return "body/mypage/mypage_order";
 	}
-	@RequestMapping(value="/mypage/please.do", method=RequestMethod.GET)
+	@RequestMapping(value="movingcloset/mypage_please.do", method=RequestMethod.GET)
 	public String mypagePlease (Locale locale, Model model) {
 		
 		return "body/mypage/mypage_please";
 	}
-	@RequestMapping(value="/mypage/zzim.do", method=RequestMethod.GET)
+	@RequestMapping(value="movingcloset/mypage_zzim.do", method=RequestMethod.GET)
 	public String mypageZzim (Locale locale, Model model) {
 		
 		return "body/mypage/mypage_zzim";
 	}
-	@RequestMapping(value="/mypage/manage.do", method=RequestMethod.GET)
-	public String mypageManage (Locale locale, Model model) {
+	
+	
+	
+	@RequestMapping(value="movingcloset/mypage_manage.do", method=RequestMethod.GET)
+	public String mypageManage (Model model, HttpServletRequest request) {
+
+		return "body/mypage/mypage_manage";
+	}
+	@RequestMapping(value="movingcloset/mypage_manageAction.do", method=RequestMethod.POST)
+	public String mypageManageAction (Model model, HttpServletRequest request) {
+		
+		model.addAttribute("request", request);
+		command = memberEditCommand;
+		command.execute(model);
+		
 		
 		return "body/mypage/mypage_manage";
 	}
-	@RequestMapping(value="/mypage/bus.do", method=RequestMethod.GET)
+	
+	
+	
+	@RequestMapping(value="/movingcloset/passCheckPage.do", method=RequestMethod.GET)
+	public String mypagePassCheckPage(Model model, HttpServletRequest request) {
+		return "passCheck";
+	}
+
+	@RequestMapping(value="/movingcloset/passcheck.do", method=RequestMethod.GET)
+	public String mypagePassCheck(Model model, HttpServletRequest request) {
+		request.setAttribute("passcheck", "OK");
+		model.addAttribute("request",request);
+		
+		command = memberEditCommand;
+		command.execute(model);
+		
+		return "passCheck";
+	}
+	
+	
+	@RequestMapping(value="movingcloset/mypage_bus.do", method=RequestMethod.GET)
 	public String mypageBus (Locale locale, Model model) {
 		
 		return "body/mypage/mypage_moyoBus";
 	}
-	@RequestMapping(value="/mypage/out.do", method=RequestMethod.GET)
+	
+	@RequestMapping(value="movingcloset/mypage_out.do", method=RequestMethod.GET)
 	public String mypageOut (Locale locale, Model model) {
 		
 		return "body/mypage/mypage_out";
@@ -93,7 +132,7 @@ public class MypageController {
 	}
 	*/
 	
-	@RequestMapping(value="/mypage/memberOut.do", method=RequestMethod.GET)
+	@RequestMapping(value="movingcloset/mypage_memberOut.do", method=RequestMethod.GET)
 	public String mypageMemberOut (Model model, HttpServletRequest request) {
 		
 		model.addAttribute("request",request);
@@ -103,12 +142,12 @@ public class MypageController {
 		
 		return "body/mypage/mypage_outComplete";
 	}	
-	@RequestMapping(value="/mypage/myqna.do", method=RequestMethod.GET)
+	@RequestMapping(value="movingcloset/mypage_myqna.do", method=RequestMethod.GET)
 	public String mypageQna (Locale locale, Model model) {
 		
 		return "body/mypage/mypage_myqna";
 	}
-	@RequestMapping(value="/mypage/review.do", method=RequestMethod.GET)
+	@RequestMapping(value="movingcloset/mypage_review.do", method=RequestMethod.GET)
 	public String mypageReview (Locale locale, Model model) {
 		
 		return "body/mypage/mypage_review";

@@ -125,6 +125,8 @@ public class HomeController {
 		
 		session.removeAttribute("siteUserInfo");
 		session.removeAttribute("username");
+		session.removeAttribute("DBPass");
+
 		session.invalidate(); 
 				
 		return "body/login";
