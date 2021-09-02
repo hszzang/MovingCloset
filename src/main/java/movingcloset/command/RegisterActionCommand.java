@@ -60,7 +60,10 @@ public class RegisterActionCommand implements CommandImpl{
 		String tag6 = req.getParameter("street"); 
 		String tag7 = req.getParameter("vintage"); 
 		String tag8 = req.getParameter("lovely");
-		 
+		String loginbrand = req.getParameter("loginbrand"); 
+	
+		
+		
 		if(tag1 == null) {tag1 = "null";} else {tag1 = "dandy";}
 		if(tag2 == null) {tag2 = "null";} else {tag2 = "classic";}
 		if(tag3 == null) {tag3 = "null";} else {tag3 = "casual";}
@@ -79,14 +82,22 @@ public class RegisterActionCommand implements CommandImpl{
 		memberDTO.setEmail(email1 + "@" + email2);
 		memberDTO.setPhone(mobile1 + "-" + mobile2 + "-" + mobile3);
 		memberDTO.setTag(tag1+","+tag2+","+tag3+","+tag4+","+tag5+","+tag6+","+tag7+","+tag8);
-
+		memberDTO.setLoginbrand(loginbrand);
+		
 
 		System.out.println("회원가입 커맨드 호출됨");
-
-
 		
-		int result = sqlSession.getMapper(MybatisMemberImpl.class).register(memberDTO); // 세션영역에 저장된 VO객체로 부터 아이디를 얻어와 파라미터로 사용
-		System.out.println("입력결과"+result);
+		
+		int result1 = sqlSession.getMapper(MybatisMemberImpl.class).idcheck(userId);
+		
+		if(result1==1) {
+			session.setAttribute("DBid", result1);			
+		}else {
+			int result2 = sqlSession.getMapper(MybatisMemberImpl.class).register(memberDTO); // 세션영역에 저장된 VO객체로 부터 아이디를 얻어와 파라미터로 사용
+			System.out.println("입력결과"+result2);
+			
+		}
+
 		
 		
 	}

@@ -10,6 +10,7 @@
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+<title>로그인 :: MovingCloset</title>
 <style>
 
 .container{padding-top: 5%; margin-bottom: 6%;}
@@ -19,79 +20,17 @@
 			object-fit:cover; border-radius: 6px;}
 #others{margin-top:25%;}
 #klogin:hover{
-	text-decoration: none;
-}
+	text-decoration: none;}
+input.form-control:focus {
+	border-color: #FFFFFF;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px #ff6c2f;}
+
+
+
 
 </style>
 <script type="text/javascript">
-<!-- 
-Kakao.init('da11b86bdef1f386718451384468c246');
-Kakao.isInitialized();
 
-function loginWithKakao() {
-    Kakao.Auth.login({
-        success: function (authObj) {
-            
-            Kakao.Auth.setAccessToken(authObj.access_token);
-            getInfo();
-        },
-        fail: function (err) {
-            alert(JSON.stringify(err))
-        }
-    })
-}
-function getInfo() {
-	Kakao.API.request({
-        url: '/v2/user/me',
-        success: function (res) {
-        var email = res.kakao_account.email;
-        console.log(res);
-            console.log(email);
-         location.href='kakaoForm?userId='+email; 
-        },
-        fail: function (error) {
-            alert(
-
-                '카카오로그인에 실패했습니다 확인하세요 : ' + JSON.stringify(error))
-        },
-    })
-};
- -->
-
-/* https://kauth.kakao.com/oauth/authorize?client_id=d22c6a95056d752c59d1e73f60101ab7&redirect_uri=http://localhost:8082/movingcloset/movingcloset/login.do&response_type=code
-
-		
-카카오 인증완료 코드값 : TOkMZ1uxb_SYYYla41a0vrYVnpZ-ZEh4jNl7AyZ_sk-S4iS0bSf8UjsdOjYy4ZVRO1EBXwopb7kAAAF7SZ564g
-*/	
-
-
-
-
-
-<!-- Kakao.Auth.createLoginButton({
-    container: '#kakao-login-btn',
-    success: function(authObj) {
-      Kakao.API.request({
-        url: 'http://localhost:8082/movingcloset/movingcloset/login.do',
-        success: function(res) {
-          alert(JSON.stringify(res))
-        },
-        fail: function(error) {
-          alert(
-            'login success, but failed to request user information: ' +
-              JSON.stringify(error)
-          )
-        },
-      })
-    },
-    fail: function(err) {
-      alert('failed to login: ' + JSON.stringify(err))
-    },
-  })
-  
-  
-	
-} -->
 
  function loginValidate(fn){
 	if(!fn.userid.value){
@@ -149,7 +88,6 @@ function logout(){
 					
 					%>
 					<form name="loginForm" action="./loginAction.do" onsubmit="return loginValidate(this);" method="POST">
-					
 						<div class="form-group" >
 							<input type="text" name="userid" value="${loginId }"  class="form-control" placeholder="Enter ID" required> 
 							<!-- <input type="text" name="userid"  class="form-control" placeholder="Enter ID" required> -->
@@ -179,18 +117,17 @@ function logout(){
 								</label>
 							</div>
 							<div class="w-50 text-md-right">
-								<a id="klogin" href="https://kauth.kakao.com/oauth/authorize?client_id=d22c6a95056d752c59d1e73f60101ab7&redirect_uri=http://localhost:8082/movingcloset/movingcloset/kakaologin.do&response_type=code">
-									<img class="socialLogin" src="../resources/images/login/kakao_login_medium.png" alt="" />
-								</a>
-								<!-- <a id="naverIdLogin_loginButton" href="javascript:void(0)">
-								          <img class="socialLogin" src="../resources/images/login/naver_login.png" alt="" />
-								</a> -->
+								<div style="float:left;padding-right:20px;" >
+									<a id="klogin" href="https://kauth.kakao.com/oauth/authorize?client_id=d22c6a95056d752c59d1e73f60101ab7&redirect_uri=http://localhost:8082/movingcloset/movingcloset/kakaologin.do&response_type=code">
+										<img class="socialLogin" src="../resources/images/login/kakao_login_medium.png" alt="" />
+									</a>								
+								</div>
 								
-							<div id="naver_id_login" style="text-align:center">
-								<a href="${url}"> 
-									<img class="socialLogin" src="../resources/images/login/naver_login.png" alt="" />
-								</a>
-							</div>
+								<div id="naver_id_login" style="text-align:center;float:left;">
+									<a href="${url}"> 
+										<img class="socialLogin" src="../resources/images/login/naver_login.png" alt="" />
+									</a>
+								</div>
 
 							</div>
 						</div>
@@ -198,7 +135,7 @@ function logout(){
 					</form>
 					<p id="others" class="w-100 text-center">&mdash; Others &mdash;</p>
 					<div class="memberMore d-flex text-center">
-						<a href="./RegistMember.jsp" class="px-2 py-2 mr-md-1 rounded">회원가입</a>
+						<a href="./register.do" class="px-2 py-2 mr-md-1 rounded">회원가입</a>
 						<a href="../movingcloset/findIdPw.do" class="px-2 py-2 ml-md-1 rounded">아이디/비밀번호찾기</a>
 					</div>
 					
@@ -212,7 +149,6 @@ function logout(){
 						<button type="button" class="form-control btn btn-dark submit px-3" onclick="logout();">LOG OUT</button>
 					</div>
 					
-					<h3><a href="./naverlogout.do">로그아웃</a></h3>
 
 					<%} %>
 					

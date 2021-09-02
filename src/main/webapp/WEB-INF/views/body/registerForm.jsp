@@ -155,48 +155,7 @@
 					"idover", "width=600,height=400");
 			}
 		} 
-		
-		
-/* 		function check_id() {
-			
-			var idCheck = 0;
-			
-			var inputed = $('input#user_id').val();
-			
-			$.ajax({
-			
-				data : inputed,
-				url : "registerForm",
-				type:"POST",
-				dataType : "JSON",
-				contentType : "application/json; charset=UTF-8",
-				success : function(data){
-					var result = JSON.parse(data);
-					
-					if(result.check > 0){
-						$(".id-text").css("text-align","center");
-						$(".id-text").css("color","#ff0000");
-						$(".id-text").text("이미 사용 중인 아이디입니다.");
-						$("button#registerSubmitBtn").attr("disabled","true");
-					}else if(result.check ==0){
-						$(".id-text").css("text-align","center");
-						$(".id-text").css("color","#4B89DC");
-						$(".id-text").text("사용 가능한 아이디입니다.");
-						$("button#registerSubmitBtn").removeAttr("disabled");
-					} 
-					
-					
-				}
-				
-			});
-			
-			
-			
-		};
-		 */
-		
-		
-		
+	
 		
 		
 		function loginValdidate(fn) {
@@ -417,6 +376,8 @@
 								<col width="20%" />
 								<col width="*" />
 							</colgroup>
+							<input type="hidden" value="${loginbrand }" name="loginbrand">
+							
 							<tbody>
 								<tr style="text-align: right;">
 									<td colspan="2">
@@ -646,13 +607,11 @@
 					<div id="registerAgree">
 						<textarea rows="6" name="content" class="form-control" style="resize:none;"
 							placeholder="개인정보수집약관" readonly
-							>본인은 귀사에 이력서를 제출함에 따라 [개인정보 보호법] 제15조 및 제17조에 
-따라 아래의 내용으로 개인정보를 수집, 이용 및 제공하는데 동의합니다. 
+							>[개인정보 보호법] 제15조 및 제17조에 따라 아래의 내용으로 개인정보를 수집, 이용 및 제공하는데 동의합니다. 
 							
 □ 개인정보의 수집 및 이용에 관한 사항
-- 수집하는 개인정보 항목 (이력서 양식 내용 일체) 
-: 성명, 주민등록번호, 전화번호, 주소, 이메일, 가족관계, 학력사항, 
-경력사항, 자격사항 등과 그 外 이력서 기재 내용 일체
+- 수집하는 개인정보 항목 
+: 성명, 전화번호, 주소, 이메일 등과 그 外 
 - 개인정보의 이용 목적 : 수집된 개인정보를 사업장 신규 채용 서류 심사 및 인사서
 류로 활용하며, 목적 외의 용도로는 사용하지 않습니다. 
 

@@ -6,6 +6,53 @@
 <head>
 <meta charset="UTF-8">
 <title>MovingCloset</title>
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<script>
+		
+		/*카운트다운*/
+		var countDownDate = new Date("Sep 8, 2021 15:37:25").getTime();
+
+		// Update the count down every 1 second
+		var x = setInterval(function() {
+		
+			// Get today's date and time
+			var now = new Date().getTime();
+			    
+			// Find the distance between now and the count down date
+			var distance = countDownDate - now;
+			    
+			// Time calculations for days, hours, minutes and seconds
+			var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+			var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+			var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+			var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+			    
+			// Output the result in an element with id="demo"
+			document.getElementById("time").innerHTML = days + "일 " + hours + "시간 "
+			+ minutes + "분 " + seconds + "초";
+			document.getElementById("time2").innerHTML = days + "일 " + hours + "시간 "
+			+ minutes + "분 " + seconds + "초";
+			document.getElementById("time3").innerHTML = days + "일 " + hours + "시간 "
+			+ minutes + "분 " + seconds + "초";
+			document.getElementById("time4").innerHTML = days + "일 " + hours + "시간 "
+			+ minutes + "분 " + seconds + "초";
+			document.getElementById("time5").innerHTML = days + "일 " + hours + "시간 "
+			+ minutes + "분 " + seconds + "초";
+		    
+			// If the count down is over, write some text 
+			if (distance < 0) {
+			  clearInterval(x);
+			  document.getElementById("time").innerHTML = "마감되었습니다";
+			}
+		}, 1000);
+		
+
+		
+		
+		
+  	</script>
 <style type="text/css">
 .submenu{
 	font-size:45px;
@@ -33,7 +80,17 @@
 
 } 
 
-
+#footerRow{
+	background-color: #212529;
+	height: 20%; color: white;
+	font-size:13px;	
+	padding:3% 15% 5% 15%;
+	line-height: 3em;
+	margin-right:0px;
+}
+#footerRow a {
+	color: white; height: 10px;
+}
 
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -74,10 +131,10 @@
             <div class="col-md-12 text-center">
               <h1 class="mb-4"><a href="#" class="logo">Moving Closet</a></h1>
               <ul >
-                <li><a href="./moyo.do"><span class="submenu">모여</span></a></li>
-                <li><a href="./newD.do"><span class="submenu">New D</span></a></li>
-                <li><a href="./store.do"><span class="submenu">STORE</span></a></li>
-                <li><a href="./event_main.do"><span class="submenu">Event</span></a></li>
+                <li><a href="../movingcloset/moyo.do"><span class="submenu">모여</span></a></li>
+                <li><a href="../movingcloset/newD.do"><span class="submenu">New D</span></a></li>
+                <li><a href="../movingcloset/store.do"><span class="submenu">STORE</span></a></li>
+                <li><a href="../movingcloset/event_main.do"><span class="submenu">Event</span></a></li>
               </ul>
             </div>
           </div>
@@ -112,95 +169,93 @@
 	    <section class="ftco-section ftco-no-pb ftco-no-pt">
 	    	<div class="container-fluid px-0">
 	    		<div class="row no-gutters">
+	    		
+	    			<!-- 스토어/뉴디 연결 -->
 	    			<div class="col-md-12 blog-wrap">
 	    				<div class="row no-gutters align-items-center">
-	    					<div class="col-md-6 img js-fullheight" style="background-image: url(../resources/main/images/image_1.jpg);">
-	    						
+	    					<div class="col-md-6">
+	    						<div class="text p-md-5 p-4 ftco-animate">
+	    							
+	    							<h2 class="mb-4"><a href="../movingcloset/store.do">All the brands you're looking for are here, click!</a></h2>
+	    							<p>우리집 앞에서 유명브랜드 쇼핑을 할 수 있을까?<br> 쇼핑의 시작은 바로 지금 MovingCloset 입니다.<br> 평소 즐겨입던 브랜드의 제품들을 만나보세요.<br/>
+	    							 사이트에서 바로 구매할수도, 집 앞에서 받아볼 수도 있답니다.<br>
+	    							 당신이 찾는 모든 브랜드 MovingCloset과 함께합니다.</p>
+	    							 
+	    							<p class="mb-0 mt-4"><a href="../movingcloset/store.do" class="btn btn-primary">Store 바로가기 <span class="ion-ios-arrow-forward"></span></a></p>
+	    						</div>
 	    					</div>
 	    					<div class="col-md-6">
 	    						<div class="text p-md-5 p-4 ftco-animate">
-	    							<div class="icon d-flex align-items-center mb-5">
-	    								<div class="img" style="background-image: url(../resources/main/images/person_1.jpg);"></div>
-	    								<div class="position pl-3">
-	    									<h4 class="mb-0">Jamie Jonson</h4>
-	    									<span>fashion.com</span>
-	    								</div>
-	    							</div>
-	    							<h2 class="mb-4"><a href="blog-single.html">Make Peace With Your Broken Pieces</a></h2>
-	    							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
-	    							<p class="mb-0 mt-4"><a href="#" class="btn btn-primary">Read more <span class="ion-ios-arrow-forward"></span></a></p>
+	    							
+	    							<h2 class="mb-4"><a href="../movingcloset/newD.do">Do you want new designer merchandise?</a></h2>
+	    							<p>나만의 특별한 감성적인 제품을 찾고 싶다면<br>
+	    							MovingCloset NewDesigner 를 주목해주세요.<br>
+	    							지금까지 만나보지 못했던 트렌디한 제품들을<br>
+	    							합리적인 가격에 만나볼 수 있답니다.<br>
+	    							망설임은 구매를 늦추는 것 뿐! MovingCloset에서 만나보세요.
+	    							</p>
+	    							<p class="mb-0 mt-4"><a href="../movingcloset/newD.do" class="btn btn-primary">NewD 바로가기 <span class="ion-ios-arrow-forward"></span></a></p>
 	    						</div>
 	    					</div>
 	    				</div>
 	    			</div>
-	    			<div class="col-md-12 blog-wrap">
-	    				<div class="row no-gutters align-items-center">
-	    					<div class="col-md-6 img js-fullheight" style="background-image: url(../resources/main/images/image_2.jpg);">
-	    						
-	    					</div>
-	    					<div class="col-md-6">
-	    						<div class="text p-md-5 p-4 ftco-animate">
-	    							<div class="icon d-flex align-items-center mb-5">
-	    								<div class="img" style="background-image: url(../resources/main/images/person_2.jpg);"></div>
-	    								<div class="position pl-3">
-	    									<h4 class="mb-0">Jamie Jonson</h4>
-	    									<span>fashion.com</span>
-	    								</div>
-	    							</div>
-	    							<h2 class="mb-4"><a href="blog-single.html">Make Peace With Your Broken Pieces</a></h2>
-	    							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
-	    							<p class="mb-0 mt-4"><a href="#" class="btn btn-primary">Read more <span class="ion-ios-arrow-forward"></span></a></p>
-	    						</div>
-	    					</div>
-	    				</div>
-	    			</div>
+	    			
+	    			
+	    			
+	    			<!-- 조르기 -->
 	    			<div class="col-md-12 blog-wrap bg-darken">
 	    				<div class="row no-gutters align-items-center">
 	    					<div class="col-md-6 d-flex justify-content-center align-items-center order-md-last js-fullheight">
-	    						<div class="img" style="background-image: url(../resources/main/images/image_4.jpg);"></div>
+	    						<div class="img" style="background-image: url(../resources/main/images/blue2.jpg);"></div>
 	    					</div>
 	    					<div class="col-md-6">
 	    						<div class="text p-md-5 p-4 ftco-animate">
 	    							<div class="icon d-flex align-items-center mb-5">
-	    								<div class="img" style="background-image: url(../resources/main/images/person_2.jpg);"></div>
+	    								<div class="img" style="background-image: url(../resources/main/images/please.jpeg);"></div>
 	    								<div class="position pl-3">
-	    									<h4 class="mb-0">Jamie Jonson</h4>
-	    									<span>fashion.com</span>
+	    									<h4 class="mb-0">My Products!</h4>
+	    									
 	    								</div>
 	    							</div>
-	    							<h2 class="mb-4"><a href="blog-single.html">Make Peace With Your Broken Pieces</a></h2>
-	    							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
-	    							<p class="mb-0 mt-4"><a href="#" class="btn btn-primary">Read more <span class="ion-ios-arrow-forward"></span></a></p>
+	    							<h2 class="mb-4"><a href="../movingcloset/please.do" target="_blank"><div class="CountDown" id="time"></div></a></h2>
+	    							<p>여럿이 모이면 더 싸다! MovingCloset만의 특별한 이벤트<br> Please, My Products! 함께 모여서 위시리스트 득템하세요.<br>마감임박인 제품 먼저 구경하러 가보실까요?</p>
+	    							<p class="mb-0 mt-4"><a href="../movingcloset/please.do" target="_blank" class="btn btn-primary">조르기 바로가기 <span class="ion-ios-arrow-forward"></span></a></p>
 	    						</div>
 	    					</div>
 	    				</div>
 	    			</div>
+	    			
+	    			
 	    			<div class="col-md-12 blog-wrap">
 	    				<div class="row no-gutters align-items-center">
-	    					<div class="col-md-6 img js-fullheight" style="background-image: url(../resources/main/images/image_5.jpg);">
+	    					<div class="col-md-6 img js-fullheight" style="background-image: url(../resources/main/images/image_9.jpg);">
 	    						
 	    					</div>
 	    					<div class="col-md-6">
 	    						<div class="text p-md-5 p-4 ftco-animate">
 	    							<div class="icon d-flex align-items-center mb-5">
-	    								<div class="img" style="background-image: url(../resources/main/images/person_2.jpg);"></div>
+	    								<div class="img" style="background-image: url(../resources/main/images/bus.jpg);"></div>
 	    								<div class="position pl-3">
-	    									<h4 class="mb-0">Jamie Jonson</h4>
-	    									<span>fashion.com</span>
+	    									<h4 class="mb-0">I LIKE THE MOYO BUS</h4>
+	    									
 	    								</div>
 	    							</div>
-	    							<h2 class="mb-4"><a href="blog-single.html">Make Peace With Your Broken Pieces</a></h2>
-	    							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
-	    							<p class="mb-0 mt-4"><a href="#" class="btn btn-primary">Read more <span class="ion-ios-arrow-forward"></span></a></p>
+	    							<h2 class="mb-4"><a href="../movingcloset/moyo.do">Shopping wherever you want, MOYO!</a></h2>
+	    							<p>내가 원하는 브랜드의 제품을 직접 착용해보고 사고 싶은데, <br> 어디로 가야할까? 멀리가지 말고 모여주세요. <br>
+	    							내가 있는 곳, 내가 가고 싶은 곳에 위치한 모여버스에서<br>
+	    							새롭고 즐거운 쇼핑이 가능합니다. 
+	    							</p>
+	    							<p class="mb-0 mt-4"><a href="../movingcloset/moyo.do" class="btn btn-primary">MOYO 바로가기 <span class="ion-ios-arrow-forward"></span></a></p>
 	    						</div>
 	    					</div>
 	    				</div>
 	    			</div>
+	    			
+	    			
+	    			<!-- 네번째부분 -->
 	    			<div class="col-md-12 blog-wrap">
 	    				<div class="row no-gutters align-items-center">
-	    					<div class="col-md-6 img js-fullheight" style="background-image: url(../resources/main/images/image_6.jpg);">
-	    						
-	    					</div>
+	    					
 	    					<div class="col-md-6">
 	    						<div class="text p-md-5 p-4 ftco-animate">
 	    							<div class="icon d-flex align-items-center mb-5">
@@ -215,8 +270,15 @@
 	    							<p class="mb-0 mt-4"><a href="#" class="btn btn-primary">Read more <span class="ion-ios-arrow-forward"></span></a></p>
 	    						</div>
 	    					</div>
+	    					<div class="col-md-6 img js-fullheight" style="background-image: url(../resources/main/images/image_6.jpg);">
+	    						
+	    					</div>
 	    				</div>
 	    			</div>
+	    			
+	    			
+	    			
+	    			
 	    			<div class="col-md-12 blog-wrap">
 	    				<div class="row no-gutters align-items-center">
 	    					<div class="col-md-6 img js-fullheight" style="background-image: url(../resources/main/images/image_7.jpg);">
@@ -240,194 +302,107 @@
 	    			</div>
 	    			<div class="col-md-12 blog-wrap">
 	    				<div class="row no-gutters align-items-center">
+	    					
+	    					<div class="col-md-6">
+	    						<div class="text p-md-5 p-4 ftco-animate">
+	    							<div class="icon d-flex align-items-center mb-5">
+	    								<div class="img" style="background-image: url(../resources/main/images/person_3.jpg);"></div>
+	    								<div class="position pl-3">
+	    									<h4 class="mb-0">Jamie Jonson</h4>
+	    									<span>fashion.com</span>
+	    								</div>
+	    							</div>
+	    							<h2 class="mb-4"><a href="blog-single.html">Make Peace With Your Broken Pieces</a></h2>
+	    							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
+	    							<p class="mb-0 mt-4"><a href="#" class="btn btn-primary">Read more <span class="ion-ios-arrow-forward"></span></a></p>
+	    						</div>
+	    					</div>
 	    					<div class="col-md-6 img js-fullheight" style="background-image: url(../resources/main/images/image_8.jpg);">
 	    						
 	    					</div>
-	    					<div class="col-md-6">
-	    						<div class="text p-md-5 p-4 ftco-animate">
-	    							<div class="icon d-flex align-items-center mb-5">
-	    								<div class="img" style="background-image: url(../resources/main/images/person_3.jpg);"></div>
-	    								<div class="position pl-3">
-	    									<h4 class="mb-0">Jamie Jonson</h4>
-	    									<span>fashion.com</span>
-	    								</div>
-	    							</div>
-	    							<h2 class="mb-4"><a href="blog-single.html">Make Peace With Your Broken Pieces</a></h2>
-	    							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
-	    							<p class="mb-0 mt-4"><a href="#" class="btn btn-primary">Read more <span class="ion-ios-arrow-forward"></span></a></p>
-	    						</div>
-	    					</div>
 	    				</div>
 	    			</div>
+	    			
+	    			
+	    			
+	    			<!-- 입점신청 -->
 	    			<div class="col-md-12 blog-wrap">
 	    				<div class="row no-gutters align-items-center">
-	    					<div class="col-md-6 img js-fullheight" style="background-image: url(../resources/main/images/image_9.jpg);">
+	    					<div class="col-md-6 img js-fullheight" style="background-image: url(../resources/main/images/image_5.jpg);">
 	    						
 	    					</div>
 	    					<div class="col-md-6">
 	    						<div class="text p-md-5 p-4 ftco-animate">
 	    							<div class="icon d-flex align-items-center mb-5">
-	    								<div class="img" style="background-image: url(../resources/main/images/person_3.jpg);"></div>
+	    								<div class="img" style="background-image: url(../resources/main/images/letter.jpg);"></div>
 	    								<div class="position pl-3">
-	    									<h4 class="mb-0">Jamie Jonson</h4>
-	    									<span>fashion.com</span>
+	    									<h4 class="mb-0">Apply for store entry</h4>
 	    								</div>
 	    							</div>
-	    							<h2 class="mb-4"><a href="blog-single.html">Make Peace With Your Broken Pieces</a></h2>
-	    							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
-	    							<p class="mb-0 mt-4"><a href="#" class="btn btn-primary">Read more <span class="ion-ios-arrow-forward"></span></a></p>
+	    							<h2 class="mb-4"><a href="https://docs.google.com/forms/d/e/1FAIpQLScshnBPRPHU_e6PrzpVhhjieqepsr_FScM-BS9A1-d0l3syTw/viewform">MovingCloset Parter</a></h2>
+	    							<p>
+	    							업계 최저 수수료와 트렌디함을 즐기는 쇼퍼들이 모여있는 이 곳<br>
+	    							새로운 쇼핑플랫폼인 MovingCloset의 파트너가 되어주세요.<br>
+	    							MovingCloset은 모든 디자이너분들의 성장 파트너입니다.<br> 
+	    							
+	    							</p>
+	    							<p class="mb-0 mt-4"><a href="https://docs.google.com/forms/d/e/1FAIpQLScshnBPRPHU_e6PrzpVhhjieqepsr_FScM-BS9A1-d0l3syTw/viewform" class="btn btn-primary">입점신청 <span class="ion-ios-arrow-forward"></span></a></p>
 	    						</div>
 	    					</div>
 	    				</div>
 	    			</div>
+	    			
+	    			
+	    			
 
-	    			<div class="col-md-12 blog-wrap">
-	    				<div class="row no-gutters align-items-center">
-	    					<div class="col-md-6 img js-fullheight" style="background-image: url(../resources/main/images/image_10.jpg);">
-	    						
-	    					</div>
-	    					<div class="col-md-6">
-	    						<div class="text p-md-5 p-4 ftco-animate">
-	    							<div class="icon d-flex align-items-center mb-5">
-	    								<div class="img" style="background-image: url(../resources/main/images/person_3.jpg);"></div>
-	    								<div class="position pl-3">
-	    									<h4 class="mb-0">Jamie Jonson</h4>
-	    									<span>fashion.com</span>
-	    								</div>
-	    							</div>
-	    							<h2 class="mb-4"><a href="blog-single.html">Make Peace With Your Broken Pieces</a></h2>
-	    							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
-	    							<p class="mb-0 mt-4"><a href="#" class="btn btn-primary">Read more <span class="ion-ios-arrow-forward"></span></a></p>
-	    						</div>
-	    					</div>
-	    				</div>
-	    			</div>
-
-	    			<div class="col-md-12 blog-wrap bg-darken">
-	    				<div class="row no-gutters align-items-center">
-	    					<div class="col-md-6 d-flex justify-content-center align-items-center order-md-last js-fullheight">
-	    						<div class="img" style="background-image: url(../resources/main/images/image_11.jpg);"></div>
-	    					</div>
-	    					<div class="col-md-6">
-	    						<div class="text p-md-5 p-4 ftco-animate">
-	    							<div class="icon d-flex align-items-center mb-5">
-	    								<div class="img" style="background-image: url(../resources/main/images/person_2.jpg);"></div>
-	    								<div class="position pl-3">
-	    									<h4 class="mb-0">Jamie Jonson</h4>
-	    									<span>fashion.com</span>
-	    								</div>
-	    							</div>
-	    							<h2 class="mb-4"><a href="blog-single.html">Make Peace With Your Broken Pieces</a></h2>
-	    							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
-	    							<p class="mb-0 mt-4"><a href="#" class="btn btn-primary">Read more <span class="ion-ios-arrow-forward"></span></a></p>
-	    						</div>
-	    					</div>
-	    				</div>
-	    			</div>
-
-	    			<div class="col-md-12 blog-wrap">
-	    				<div class="row no-gutters align-items-center">
-	    					<div class="col-md-6 img js-fullheight" style="background-image: url(../resources/main/images/image_12.jpg);">
-	    						
-	    					</div>
-	    					<div class="col-md-6">
-	    						<div class="text p-md-5 p-4 ftco-animate">
-	    							<div class="icon d-flex align-items-center mb-5">
-	    								<div class="img" style="background-image: url(../resources/main/images/person_3.jpg);"></div>
-	    								<div class="position pl-3">
-	    									<h4 class="mb-0">Jamie Jonson</h4>
-	    									<span>fashion.com</span>
-	    								</div>
-	    							</div>
-	    							<h2 class="mb-4"><a href="blog-single.html">Make Peace With Your Broken Pieces</a></h2>
-	    							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
-	    							<p class="mb-0 mt-4"><a href="#" class="btn btn-primary">Read more <span class="ion-ios-arrow-forward"></span></a></p>
-	    						</div>
-	    					</div>
-	    				</div>
-	    			</div>
+	    			
+	    			
+	    			
+	    			
+	    			
+	    			
 	    		</div>
 	    	</div>
 	    </section>
 
-      
-      <footer class="ftco-footer ftco-section img">
-	    	<div class="overlay"></div>
-	      <div class="container">
-	        <div class="row mb-5">
-	          <div class="col-lg-3">
-	            <div class="ftco-footer-widget mb-4">
-	              <h2 class="ftco-heading-2 logo"><a href="index.html">Erase</a></h2>
-	              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-	              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-	                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-	                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-	                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-	              </ul>
-	            </div>
-	          </div>
-	          <div class="col-lg-4">
-	            <div class="ftco-footer-widget mb-4">
-	              <h2 class="ftco-heading-2">Recent Blog</h2>
-	              <div class="block-21 mb-4 d-flex">
-	                <a class="blog-img mr-4" style="background-image: url(../resources/main/images/image_1.jpg);"></a>
-	                <div class="text">
-	                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
-	                  <div class="meta">
-	                    <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
-	                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-	                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-	                  </div>
-	                </div>
-	              </div>
-	              <div class="block-21 mb-4 d-flex">
-	                <a class="blog-img mr-4" style="background-image: url(../resources/main/images/image_2.jpg);"></a>
-	                <div class="text">
-	                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
-	                  <div class="meta">
-	                    <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
-	                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-	                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-	                  </div>
-	                </div>
-	              </div>
-	            </div>
-	          </div>
-	          <div class="col-lg-2">
-	             <div class="ftco-footer-widget mb-4 ml-md-4">
-	              <h2 class="ftco-heading-2">Site Links</h2>
-	              <ul class="list-unstyled">
-	                <li><a href="#" class="py-2 d-block">Home</a></li>
-	                <li><a href="#" class="py-2 d-block">About</a></li>
-	                <li><a href="#" class="py-2 d-block">Model</a></li>
-	                <li><a href="#" class="py-2 d-block">Services</a></li>
-	                <li><a href="#" class="py-2 d-block">Blog</a></li>
-	              </ul>
-	            </div>
-	          </div>
-	          <div class="col-lg-3">
-	            <div class="ftco-footer-widget mb-4">
-	            	<h2 class="ftco-heading-2">Have a Questions?</h2>
-	            	<div class="block-23 mb-3">
-		              <ul>
-		                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-		                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-		                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
-		              </ul>
-		            </div>
-	            </div>
-	          </div>
-	        </div>
-	        <div class="row">
-	          <div class="col-md-12 text-center">
+      <div class="Footer" >
+	<div class="row" id="footerRow">
 
-	            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-	  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-	  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-	          </div>
-	        </div>
-	      </div>
-	    </footer>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			
+			<a href="../movingcloset/introduce.do"> 회사소개 </a>&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="../movingcloset/terms.do"> 이용약관 </a>&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="../movingcloset/privacy.do"> 개인정보처리방침 </a>&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="../movingcloset/rules_loc.do"> 위치정보이용약관 </a>&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href='https://www.ftc.go.kr/'> 사업자정보확인 </a>&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="../movingcloset/recruit.do"> 인재채용 </a>&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="https://forms.gle/Xn98gS7ELfe5cMLh9" target="_blank"> 입점신청 </a>&nbsp;&nbsp;|&nbsp;&nbsp;
+	<!-- 		<a href="">자주묻는질문</a>&nbsp;|&nbsp; -->
+			 
+			
+			<i class="material-icons" style="margin-top: 8px;">file_download</i><a href=""><strong >APP 다운로드</strong></a> <br />
+	
+		<br/>
+		<div class="col-8">
+			<img alt="" src="../resources/images/MovingClosetLogoWhite.png" style="width: 250px;">
+			(주)무빙클로젯 <br />
+			대표이사 : 강혜수 &nbsp;&nbsp;사업자등록번호 : 111-22-33333 &nbsp;&nbsp;통신판매업신고 : 2021-서울-00000<br />
+			호스팅사업자 : (주)무빙클로젯 &nbsp;&nbsp;주소 : 서울시 금천구 가산동 426-5 월드메르디앙 2차 413호 <br />
+			개인정보관리책임자 : 민세원(<a href="https://github.com/hszzang/MovingCloset/">https://github.com/hszzang/MovingCloset</a>)	 <br />
+			무빙클로젯은 통신판매중개자로서 통신판매 당사자가 아니며, 판매자가 등록한 상품정보 및 거래에 책임을 지지 않습니다.
+			<br/>Moving Closet © All Rights Reserved
+		</div>
+		<div class="col-4">
+			고객센터 1234-5678<br />
+			영업시간 AM 10:00 ~ PM 17:00 (주말 및 공휴일 휴무)<br />
+			점심시간 PM 12:30 ~ PM 13:30<br />
+			고객문의 <a href="https://github.com/hszzang/MovingCloset/">https://github.com/hszzang/MovingCloset </a> 
+		</div>
+	</div>
+</div>
+
+	    
+	    
 
       <!-- loader -->
       <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>

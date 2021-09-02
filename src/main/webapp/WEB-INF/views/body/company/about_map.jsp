@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <!-- <link rel="stylesheet" href="../resources/css/bootstrap.css" /> -->
 <!-- <script src="../resources/jquery/jquery-3.6.0.js"></script> -->
-<title>Insert title here</title>
+<title>오시는 길 :: MovingCloset</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -91,7 +91,8 @@
 				
 						var positions = [
 							{
-								title: '현재 위치', 
+								title: 'MovingCloset',
+								content: '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b style="padding-top: 5px; padding-bottom: 5px;">MovingCloset</b>',
 								latlng: mapOption.center
 							}
 						];

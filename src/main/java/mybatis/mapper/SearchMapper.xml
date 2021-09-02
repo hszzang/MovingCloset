@@ -4,11 +4,55 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="mybatis.MybatisProductImpl">
+<mapper namespace="mybatis.MybatisSearchImpl">
+	<select id="searchProducts" parameterType="java.util.ArrayList" resultType="mybatis.ProductDTO">
+		<choose>
+			<when test='keyword=="color"'>
+				SELECT p.*
+				from product p, product_detail d
+				WHERE p.p_code=d.p_code 
+				AND pd_color LIKE '%'||#{search}||'%'
+			</when>
+		<otherwise>
+			SELECT * FROM (
+				SELECT ROW_NUMBER() OVER(ORDER BY p_idx) NUM, A.*
+				FROM product A
+		</otherwise>
+		</choose>	
+		<choose>
+			<when test='keyword=="brand"'>
+				WHERE p_brand=#{search} )
+			</when>  
+			<when test='keyword=="tag"'>
+				WHERE p_tag LIKE '%'||#{search}||'%'  )
+			</when>
+			<when test='keyword=="product" or keyword==null'>
+				WHERE p_name LIKE '%'||#{search}||'%' 
+				OR p_brand LIKE '%'||#{search}||'%' 
+				OR p_flag LIKE '%'||#{search}||'%' )
+			</when>
+		</choose>
+		<choose>
+			<when test='order=="asc"'>
+				ORDER BY p_price ASC
+			</when>
+			<when test='order=="desc"'>
+				ORDER BY p_price DESC
+			</when>
+			<otherwise>
+				ORDER BY p_idx DESC
+			</otherwise>
+		</choose>
 
-	<select id="searchProducts">
 		
 	</select>
 	
-
+	<select id="getColors" resultType="String">
+		SELECT DISTINCT pd_color from product_detail
+	</select>
+	
+	<select id="getTags" resultType="String">
+		SELECT DISTINCT p_tag from product
+	</select>
+	
 </mapper>

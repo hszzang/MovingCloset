@@ -18,23 +18,29 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-
+ 
 import movingcloset.command.CommandImpl;
+import movingcloset.command.GetMemberProductCommand;
 import movingcloset.command.store.ReviewDeleteCommand;
 import movingcloset.command.store.ReviewInsertCommand;
+import movingcloset.command.store.ReviewListCommand;
+import movingcloset.command.store.ReviewUpdateCommand;
+import movingcloset.command.store.StoreBuyCommand;
 import movingcloset.command.store.StoreDeleteCommand;
 import movingcloset.command.store.StoreDetailCommand;
 import movingcloset.command.store.StoreInsertCommand;
 import movingcloset.command.store.StoreListCommand;
-import movingcloset.command.store.StoreOrderCommand;
 import movingcloset.command.store.StoreUpdateCommand;
+import mybatis.BuyAndGroupDTO;
 import mybatis.ProductDTO;
 import mybatis.ProductDetailDTO;
-
+import mybatis.ReviewDTO;
+ 
 @Controller
 public class StoreController {
 	
@@ -55,13 +61,20 @@ public class StoreController {
 	@Autowired
 	ReviewDeleteCommand reviewDeleteCommand;
 	@Autowired
-	StoreOrderCommand storeOrderCommand;
+	ReviewListCommand reviewListCommand;
+	@Autowired
+	ReviewUpdateCommand reviewUpdateCommand;
+	@Autowired
+	StoreBuyCommand storeBuyCommand;
+	@Autowired
+	GetMemberProductCommand getMemberProductCommand;
+	
 	
 	// 스토어 리스트
 	@RequestMapping(value="/movingcloset/store.do", method=RequestMethod.GET)
 	public String storeList(Model model, HttpServletRequest req, ProductDTO productDTO) {
 	//public String storeList(Locale locale, Model model) {		
-		
+
 		model.addAttribute("req", req);
 		command = storelistCommand;
 		command.execute(model);
@@ -161,21 +174,17 @@ public class StoreController {
 		model.addAttribute("returnObj", returnObj);
 		// returnObj(맵)에 있는 files(resultlist(배열리스트))에서 ofile과 sfile을 꺼내오기^^...
 		
-		System.out.println(returnObj.containsKey("files")); // true 
+		//System.out.println(returnObj.containsKey("files")); // true 
 		//Object temp = returnObj.get("files");
 		List<String> temp = (List<String>) returnObj.get("files");
-		System.out.println("temp: " + temp);
 		
 		Object temp2 = temp.get(0);
-		System.out.println("temp2 : " + temp2);
 		
 		Object tempA = ((Map) temp2).get("ofile");
-		System.out.println("tempA : " + tempA);
 		String p_ofile = tempA.toString();
 		System.out.println("ofile: " + p_ofile);
 		
 		Object tempB = ((Map) temp2).get("sfile");
-		System.out.println("tempB : " + tempB);
 		String p_sfile = tempB.toString();
 		System.out.println("sfile: " + p_sfile);
 		
@@ -275,21 +284,17 @@ public class StoreController {
 		model.addAttribute("returnObj", returnObj);
 		// returnObj(맵)에 있는 files(resultlist(배열리스트))에서 ofile과 sfile을 꺼내오기^^...
 		
-		System.out.println(returnObj.containsKey("files")); // true 
+		//System.out.println(returnObj.containsKey("files")); // true 
 		//Object temp = returnObj.get("files");
 		List<String> temp = (List<String>) returnObj.get("files");
-		System.out.println("temp: " + temp);
 		
 		Object temp2 = temp.get(0);
-		System.out.println("temp2 : " + temp2);
 		
 		Object tempA = ((Map) temp2).get("ofile");
-		System.out.println("tempA : " + tempA);
 		String p_ofile = tempA.toString();
 		System.out.println("ofile: " + p_ofile);
 		
 		Object tempB = ((Map) temp2).get("sfile");
-		System.out.println("tempB : " + tempB);
 		String p_sfile = tempB.toString();
 		System.out.println("sfile: " + p_sfile);
 		
@@ -328,34 +333,81 @@ public class StoreController {
 	
 	// 스토어 상세페이지 리뷰 팝업
 	@RequestMapping("/store/reviewPage.do")
-	public String review(Locale locale, Model model) {
+	public String review(Model model, HttpServletRequest req) {
 		System.out.println("리뷰 컨트롤러 들어옴");
+		System.out.println("리뷰 컨트롤러 : "+req.getParameter("p_idx"));
 		
-		// 리뷰인서트커맨드로 리뷰쓰는 걸로???
+		
+		model.addAttribute("req", req);
+		command = reviewListCommand;
+		command.execute(model);
+		
 		return "reviewPage";
 	}
 	
 	// 리뷰쓰기
-	@RequestMapping("/store/insertReview.do")
-	public String insertReview(Locale locale, Model model, HttpServletRequest req) {
+	@RequestMapping(value="/movingcloset/store/insertReview.do", method=RequestMethod.POST)
+	public void insertReview( Model model, MultipartHttpServletRequest req, 
+			HttpServletResponse resp, ReviewDTO reviewDTO, HttpSession session) throws IOException {
 		System.out.println("리뷰쓰기 컨트롤러 들어옴");
+		// 리뷰인서트커맨드로 리뷰쓰는 걸로???
+		System.out.println("리뷰insert입니다.");
+		System.out.println("한줄평 : "+req.getParameter("reviewText"));
 		
 		model.addAttribute("req", req);
-		model.addAttribute("model", model);
+		model.addAttribute("resp",resp);
+		model.addAttribute("reviewDTO",reviewDTO);
 		
 		command = reviewInsertCommand;
 		command.execute(model);
 		
-		// 해당 상세 페이지로 돌아가는 걸로.
-		return "reviewPage";
+		if(session.getAttribute("complete")=="OK") {
+			resp.setContentType("text/html; charset=UTF-8");
+			 
+			PrintWriter out = resp.getWriter();
+			 
+			out.println("<script> "
+					+ "var check = confirm('리뷰가 성공적으로 등록 되었습니다'); "
+					+ " if(check) {"
+					+ " window.close();"
+					+ " }else{"
+					+ " window.close();"
+					+ " }"
+					+ "</script>");
+			 
+			out.flush();
+
+
+
+		}
+		
 	}
+	
+
+	@RequestMapping(value="/store/updateReview.do", method=RequestMethod.POST)
+	public String updateReview(Model model, MultipartHttpServletRequest req, HttpServletResponse resp,
+			HttpSession session,ReviewDTO reviewDTO) throws IOException{
+		model.addAttribute("reviewDTO",reviewDTO);
+		model.addAttribute("req",req);
+		model.addAttribute("resp",resp);
+		
+		System.out.println("리뷰r_idx : "+req.getParameter("r_idx"));
+		System.out.println("리뷰수정 파일여부 : "+req.getParameter("ofileCheck"));
+		
+		command = reviewUpdateCommand;
+		command.execute(model);
+		
+
+		return "redirect:/store/detail.do?p_idx=" + req.getParameter("p_idx");
+	}
+
+	
 	
 	// 리뷰삭제
 	@RequestMapping("/store/deleteReview.do")
 	public String deleteReview(Model model, HttpServletRequest req) {
 	
 		System.out.println("delete 들어옴");
-		
 		
 		model.addAttribute("req", req);
 		model.addAttribute("model", model);
@@ -366,6 +418,32 @@ public class StoreController {
 		// 해당 상세 페이지로 돌아가는 걸로.
 		return "redirect:/store/detail.do?p_idx=" + req.getParameter("p_idx");
 		
+	}
+	
+	// 구매폼으로 이동
+	@RequestMapping(value="/store/buy.do", method=RequestMethod.POST)
+	public String buy(Model model, HttpServletRequest req) {
+		
+		model.addAttribute("req",req);
+		command = getMemberProductCommand;
+		command.execute(model);
+		
+		return "body/store/buyForm";
+	}
+	
+	
+	
+	// 상품 구매하기
+	@RequestMapping("/store/buyProduct.do")
+	public String buyProduct(Model model, HttpServletRequest req, BuyAndGroupDTO buyAndGroupDTO) {
+		
+		model.addAttribute("req",req);
+		model.addAttribute("buyAndGroupDTO",buyAndGroupDTO);
+		
+		command = storeBuyCommand;
+		command.execute(model);
+		
+		return "";
 	}
 	
 	

@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
+<%@page import="mybatis.NoticeDTO"%>
+<%@page import="mybatis.FaqDTO"%>
+<%@page import="java.util.List"%>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +14,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>notice</title>
+    <title>CS Center :: MovingCloset</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -18,6 +24,7 @@
 	        $("Notice").show();
 	        $("Events").hide();
 	    }
+		
 		function openPage(pageName,elmnt,color) {
 		  var i, tabcontent, tablinks;
 		  tabcontent = document.getElementsByClassName("tabcontent");
@@ -33,7 +40,22 @@
 		  elmnt.style.color= white;
 		}
 		
+		
 		document.getElementById("defaultOpen").click();
+		
+		function directQNA(){
+			
+			if(${empty siteUserInfo}){
+				alert("로그인 후 이용해주시기 바랍니다.");
+				location.href="./login.do";
+			}else{
+				location.href="/movingcloset/movingcloset/question.do";
+			
+			}
+			
+		}
+		
+		
 	</script>
 	
     <style>
@@ -59,24 +81,19 @@
         .col { border-collapse: collapse; }
         .col-100 { width: 100%; }
         
-        /*a:link{ color:black; text-decoration:none; }*/
-        a:hover{ color:black; text-decoration:none; !important}
-        a:focus{ color:black; text-decoration:none; }
+        
         
         .tablink {
             background-color: white;
             padding: 8px 30px !important;
-            width: 33.3%;
+            width: 50%;
             font-size: 14px;
             color: gray;
             border: 1px solid gray; border-bottom:none;
             float: left;
         }
 		.tablink:focus{outline:none;}
-        .tablink:hover {
-        	border:black; 
-            background-color: black; color:white;
-        }
+        
         
 		#Events{ display:none; }
 		#FAQ{display:none;}
@@ -105,6 +122,7 @@
         #gotoqna{
         	display:inline; float:left;
         	width:200px; height:40px; background-color:black;
+        	color:white;
         }
         #gotoqna:focus{outline:none;}
         
@@ -127,29 +145,31 @@
         	color:white; font-size:10pt; font-weight:bold;}
         .pageMove:focus{outline:none;}
         #pmL{background-color:gray;}
-        #pmR{background-color:black;}
+        #pmR{background-color:gray;}
         
         select, input, textarea:focus{outline:none;}
     </style>
 </head>
 <body>
     <div id="wrapper">
-
-    		<hr />
+			<br/><br/><br/>
+    		
     		<div id="titleDiv">
     			<span id="title">CS Center</span>
-    			<span id="workTime">Mon - FRI / 9AM - 6PM</span>
+    			<span id="workTime">MON - FRI / 9AM - 6PM</span>
     		</div>
 
 			<div class="tabs">
-				<button class="tablink" onclick="openPage('Notice', this, 'black')" id="defaultOpen">공지사항</button>
-				<button class="tablink" onclick="openPage('Events', this, 'black')" >이벤트 당첨 안내</button>
-				<button class="tablink" onclick="openPage('FAQ', this, 'black')" >자주 묻는 질문</button>
+				<button class="tablink" onclick="openPage('Notice', this, 'black');" id="defaultOpen">공지사항</button>
+				
+				<button class="tablink" onclick="openPage('FAQ', this, 'black');" >자주 묻는 질문</button>
 
 			</div>
 			<div style="clear:both;"></div>
 		    <div id="noticeTable" style="width:100%; height:auto;">
 		    
+		    	<form method="post" action="notiList">
+		    	<input type="hidden" name="noti_idx" value="${notice.noti_idx }"/> 
 		    	<div id="Notice" class="tabcontent">
 				    <table class="col-100 col">
 				        <colgroup>
@@ -164,181 +184,23 @@
 				                <th>등록일</th>
 				            </tr>
 				        </thead>
+				        <c:forEach items="${notiList }" var="notice">
+				        <input type="hidden" name="noti_idx" value="${notice.noti_idx }"/>
 				        <tbody>
 				            <tr>
-				                <td>1</td>
+				                <td>${notice.noti_idx }</td>
 				                <td style="text-align:left;">
-				                    <a href="/movingcloset/movingcloset/noticedetail.do" style="text-decoration:none;color:black;">
-				                        공지사항 어쩌고저쩌고 블라블라 시끌시끌</a></td>
-				                <td>2021.08.01</td>
+				                    <a href='<c:url value='/movingcloset/noticedetail.do?noti_idx=${notice.noti_idx }'/>' style="text-decoration:none;color:black;">
+				                        ${notice.noti_title }</a></td>
+				                <td><fmt:formatDate value="${notice.noti_postdate}" pattern="yyyy-MM-dd" /></td>
 				            </tr>
-				            <tr>
-				                <td>2</td>
-				                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
-				                <td>2021.08.01</td>
-				            </tr>
-				            <tr>
-				                <td>3</td>
-				                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
-				                <td>2021.08.01</td>
-				            </tr>
-				            <tr>
-				                <td>4</td>
-				                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
-				                <td>2021.08.01</td>
-				            </tr>
-				            <tr>
-				                <td>5</td>
-				                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
-				                <td>2021.08.01</td>
-				            </tr>
-				            <tr>
-				                <td>6</td>
-				                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
-				                <td>2021.08.01</td>
-				            </tr>
-				            <tr>
-				                <td>7</td>
-				                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
-				                <td>2021.08.01</td>
-				            </tr>
-				            <tr>
-				                <td>8</td>
-				                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
-				                <td>2021.08.01</td>
-				            </tr>
-				            <tr>
-				                <td>9</td>
-				                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
-				                <td>2021.08.01</td>
-				            </tr>
-				            <tr>
-				                <td>10</td>
-				                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
-				                <td>2021.08.01</td>
-				            </tr>
-				            <tr>
-				                <td>11</td>
-				                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
-				                <td>2021.08.01</td>
-				            </tr>
-				            <tr>
-				                <td>12</td>
-				                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
-				                <td>2021.08.01</td>
-				            </tr>
-				            <tr>
-				                <td>13</td>
-				                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
-				                <td>2021.08.01</td>
-				            </tr>
-				            <tr>
-				                <td>14</td>
-				                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
-				                <td>2021.08.01</td>
-				            </tr>
-				            <tr>
-				                <td>15</td>
-				                <td style="text-align:left;">공지사항 어쩌고저쩌고 블라블라 시끌시끌</td>
-				                <td>2021.08.01</td>
-				            </tr>
+				            
 				        </tbody>
+				        </c:forEach>
 				    </table>
 				</div>
-	
-				<div id="Events" class="tabcontent">
-				    <table class="col-100 col">
-				        <colgroup>
-				            <col width="15%">
-				            <col width="70%">
-				            <col width="15%">
-				        </colgroup>
-				        <thead>
-				            <tr>
-				                <th>번호</th>
-				                <th style="text-align:left;">제목</th>
-				                <th>등록일</th>
-				            </tr>
-				        </thead>
-				        <tbody>
-				            <tr>
-				                <td>1</td>
-				                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
-				                <td>2021.08.01</td>
-				            </tr>
-				            <tr>
-				                <td>2</td>
-				                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
-				                <td>2021.08.01</td>
-				            </tr>
-				            <tr>
-				                <td>3</td>
-				                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
-				                <td>2021.08.01</td>
-				            </tr>
-				            <tr>
-				                <td>4</td>
-				                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
-				                <td>2021.08.01</td>
-				            </tr>
-				            <tr>
-				                <td>5</td>
-				                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
-				                <td>2021.08.01</td>
-				            </tr>
-				            <tr>
-				                <td>6</td>
-				                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
-				                <td>2021.08.01</td>
-				            </tr>
-				            <tr>
-				                <td>7</td>
-				                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
-				                <td>2021.08.01</td>
-				            </tr>
-				            <tr>
-				                <td>8</td>
-				                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
-				                <td>2021.08.01</td>
-				            </tr>
-				            <tr>
-				                <td>9</td>
-				                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
-				                <td>2021.08.01</td>
-				            </tr>
-				            <tr>
-				                <td>10</td>
-				                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
-				                <td>2021.08.01</td>
-				            </tr>
-				            <tr>
-				                <td>11</td>
-				                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
-				                <td>2021.08.01</td>
-				            </tr>
-				            <tr>
-				                <td>12</td>
-				                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
-				                <td>2021.08.01</td>
-				            </tr>
-				            <tr>
-				                <td>13</td>
-				                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
-				                <td>2021.08.01</td>
-				            </tr>
-				            <tr>
-				                <td>14</td>
-				                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
-				                <td>2021.08.01</td>
-				            </tr>
-				            <tr>
-				                <td>15</td>
-				                <td style="text-align:left;">이벤트 당첨 안내 ㄱㄱ</td>
-				                <td>2021.08.01</td>
-				            </tr>
-				        </tbody>
-				    </table>
-				</div>
+				</form>
+				
 	        	
 	        	<div id="FAQ" class="tabcontent">
 	            <table class="col-100 col">
@@ -354,55 +216,27 @@
 	                        <th>제목</th>
 	                    </tr>
 	                </thead>
+	                <c:forEach items="${faqList }" var="faq">
+				    <input type="hidden" name="faq_idx" value="${faq.faq_idx }"/>
 	                <tbody>
 	                    <tr>
-	                        <td>1</td>
-	                        <td>[주문]</td>
-	                        <td> FAQ 어쩌고저쩌고 블라블라 시끌시끌</td>
+	                        <td>${faq.faq_idx }</td>
+	                        <td>${faq.faq_cate }</td>
+	                        <td><a href='<c:url value='/movingcloset/faqdetail.do?faq_idx=${faq.faq_idx }'/>' style="text-decoration:none;color:black;">
+				                        ${faq.faq_title }</a></td>
 	                    </tr>
-	                    <tr>
-							<td>2</td>
-	                        <td>[배송]</td>
-	                        <td> FAQ 어쩌고저쩌고 블라블라 시끌시끌</td>
-	                    </tr>
-	                    <tr>
-	                        <td>3</td>
-	                        <td>[결제]</td>
-	                        <td> FAQ 어쩌고저쩌고 블라블라 시끌시끌</td>
-	                    </tr>
-	                    <tr>
-	                        <td>4</td>
-	                        <td>[교환/환불]</td>
-	                        <td>FAQ 어쩌고저쩌고 블라블라 시끌시끌</td>
-	                    </tr>
-	                    <tr>
-							<td>5</td>
-	                        <td>[기타]</td>
-	                        <td>FAQ 어쩌고저쩌고 블라블라 시끌시끌</td>
-	                    </tr>
-	                   
 	                </tbody>
+	                </c:forEach>
 	            </table>
+	            
+	            <br />
+    		<button id="gotoqna" type="button" onclick="directQNA();">1:1문의하러 가기</button>
+			
 	        </div>
 	        	
 	        	
     	</div>
-    		<br />
-    		<button id="gotoqna">
-    			<a href="/movingcloset/movingcloset/question.do" style="text-decoration:none;color:white;">1:1문의하러 가기</a>
-    		</button>
-			<div id="pages">
-			    <select name="pageSel" id="pageSel" placeholder="1">
-					<option value="pageNum">1</option>
-					<option value="pageNum">2</option>
-					<option value="pageNum">3</option>
-					<option value="pageNum">4</option>
-					<option value="pageNum">5</option>
-			    </select>
-			    <span id="pgTotal">of 5</span>
-			    <button class="pageMove" id="pmL"> < </button>
-			    <button class="pageMove" id="pmR"> > </button>
-			</div>
+    		
 	
     </div>
 </body>

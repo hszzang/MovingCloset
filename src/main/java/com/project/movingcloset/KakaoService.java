@@ -9,6 +9,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonElement;
@@ -31,7 +33,7 @@ public class KakaoService {
             //    POST 요청을 위해 기본값이 false인 setDoOutput을 true로
 
             conn.setRequestMethod("POST");
-            conn.setDoOutput(true);
+            conn.setDoOutput(true);  
 
             //    POST 요청에 필요로 요구하는 파라미터 스트림을 통해 전송
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
@@ -64,6 +66,8 @@ public class KakaoService {
             access_Token = element.getAsJsonObject().get("access_token").getAsString();
             refresh_Token = element.getAsJsonObject().get("refresh_token").getAsString();
 
+            
+           
             System.out.println("access_token : " + access_Token);
             System.out.println("refresh_token : " + refresh_Token);
 
