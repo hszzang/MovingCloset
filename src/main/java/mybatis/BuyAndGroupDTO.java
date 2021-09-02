@@ -17,9 +17,12 @@ public class BuyAndGroupDTO {
 	private String  userid;
 	private String  bd_idx;
 	private String  p_code;
-	private String  cou_code;
 	private String  bd_count;
 	private String  bd_size;
 	private String 	email;
+	private String  accountnumber;
 
+	private String  cou_code;
+	private String  cou_per;
+	
 }

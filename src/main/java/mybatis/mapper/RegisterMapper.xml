@@ -55,7 +55,20 @@
 	<delete id="memberOut" parameterType="String" >
 		DELETE FROM member WHERE userid=#{0}
 	</delete>
-	
+
+	<!-- 회원정보 수정 -->	
+	<update id="memberEdit">
+		UPDATE member 
+		SET email=#{0}, phone=#{1}
+		WHERE userid=#{2}
+	</update>
+
+
+	<!-- 회원 비밀번호 확인(회원 정보 수정하기) -->
+	<select id="memberPassCheck" resultType="int">
+		SELECT count(*) FROM MEMBER WHERE userpass=#{userpass}
+	</select>
+
 
 
 </mapper>

@@ -24,6 +24,7 @@
 	        $("Notice").show();
 	        $("Events").hide();
 	    }
+		
 		function openPage(pageName,elmnt,color) {
 		  var i, tabcontent, tablinks;
 		  tabcontent = document.getElementsByClassName("tabcontent");
@@ -38,6 +39,7 @@
 		  elmnt.style.backgroundColor = color;
 		  elmnt.style.color= white;
 		}
+		
 		
 		document.getElementById("defaultOpen").click();
 		
@@ -158,9 +160,9 @@
     		</div>
 
 			<div class="tabs">
-				<button class="tablink" onclick="openPage('Notice', this, 'black')" id="defaultOpen">공지사항</button>
+				<button class="tablink" onclick="openPage('Notice', this, 'black');" id="defaultOpen">공지사항</button>
 				
-				<button class="tablink" onclick="openPage('FAQ', this, 'black')" >자주 묻는 질문</button>
+				<button class="tablink" onclick="openPage('FAQ', this, 'black');" >자주 묻는 질문</button>
 
 			</div>
 			<div style="clear:both;"></div>

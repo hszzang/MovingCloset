@@ -1,12 +1,10 @@
 package movingcloset.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,28 +16,12 @@ import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.project.movingcloset.KakaoService;
 import com.project.movingcloset.NaverLoginBO;
@@ -52,18 +34,18 @@ import movingcloset.command.LoginCommand;
 import movingcloset.command.MemberCheckCommand;
 import movingcloset.command.RegisterActionCommand;
 import movingcloset.command.search.SearchCommand;
-import mybatis.MemberDTO;
 
-import mybatis.MybatisMemberImpl;
 
 @Controller
 public class HomeController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
+
 	/* NaverLoginBO */ 
 	private NaverLoginBO naverLoginBO; 
 	private String apiResult = null; 
+	
+	CommandImpl command = null;
 	
 	/* naver login api 연동 부분 */
 	@Autowired 
@@ -74,8 +56,6 @@ public class HomeController {
 	/* kakao login api 연동 부분 */
     @Autowired
     private KakaoService kakaoService;
-	
-	CommandImpl command = null;
 
 	@Autowired
 	RegisterActionCommand registerActionCommand;
@@ -139,14 +119,16 @@ public class HomeController {
 		return "body/login";			
 	}
 		
-	// 로그아웃(네이버 포함)
+	// 로그아웃
 	@RequestMapping("/movingcloset/logout.do")
-	public String logout(Model model, HttpSession session) {
+	public String logout(Model model, HttpSession session) throws IOException{
 		
 		session.removeAttribute("siteUserInfo");
 		session.removeAttribute("username");
+		session.removeAttribute("DBPass");
+
 		session.invalidate(); 
-		
+				
 		return "body/login";
 	}
 	
@@ -342,5 +324,8 @@ public class HomeController {
 	public String rules_loc(Locale locale, Model model) {
 		return "body/rules_loc";
 	}
+	
+
+	
 
 }
