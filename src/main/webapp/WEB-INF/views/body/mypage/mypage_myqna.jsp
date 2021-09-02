@@ -109,6 +109,7 @@
                                 <th width="15%">작성일</th>
                             </tr>
                         </thead>
+                        <tbody>
                         <c:choose>
                             <c:when test="${empty boardLists }">
                                 <tr>
@@ -134,6 +135,7 @@
                                 </c:forEach>
                             </c:otherwise>
                         </c:choose>
+                        </tbody>
                     </table>
                 </div>
             </div>

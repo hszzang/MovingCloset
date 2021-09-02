@@ -40,6 +40,20 @@
 		}
 		
 		document.getElementById("defaultOpen").click();
+		
+		function directQNA(){
+			
+			if(${empty siteUserInfo}){
+				alert("로그인 후 이용해주시기 바랍니다.");
+				location.href="./login.do";
+			}else{
+				location.href="/movingcloset/movingcloset/question.do";
+			
+			}
+			
+		}
+		
+		
 	</script>
 	
     <style>
@@ -106,6 +120,7 @@
         #gotoqna{
         	display:inline; float:left;
         	width:200px; height:40px; background-color:black;
+        	color:white;
         }
         #gotoqna:focus{outline:none;}
         
@@ -213,9 +228,7 @@
 	            </table>
 	            
 	            <br />
-    		<button id="gotoqna">
-    			<a href="/movingcloset/movingcloset/question.do" style="text-decoration:none;color:white;">1:1문의하러 가기</a>
-    		</button>
+    		<button id="gotoqna" type="button" onclick="directQNA();">1:1문의하러 가기</button>
 			
 	        </div>
 	        	

@@ -21,7 +21,7 @@
         	width:100%; height:auto;
         	padding: 0;
         	margin-top: 200px;
-        	margin-bottom: 10px;
+        	margin-bottom: 100px;
         	border: solid black 1px;
         }
 		.title{

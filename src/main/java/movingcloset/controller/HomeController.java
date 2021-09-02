@@ -245,11 +245,15 @@ public class HomeController {
 		return "body/myPlease2";
 	}
 
+	
 	// 메인
 	@RequestMapping(value = "/movingcloset/main.do", method = RequestMethod.GET)
-	public String main(Locale locale, Model model) {
-		return "main";
+	public String main(Locale locale, Model model) { 
+		
+		return "main"; 
+		
 	}
+	
 
 	// 회원가입 화면으로 이동
 	@RequestMapping(value = "/movingcloset/register.do")
