@@ -13,5 +13,6 @@ public class MoyoBusDTO {
 	private String mb_addr;
 	private String mb_num;
 	private String mb_status;
+	private String mb_lastupdate;
 
 }

@@ -20,10 +20,6 @@ import mybatis.MybatisMoyoImpl;
 @Service
 public class MoyoCommand implements CommandImpl {
 	
-	public MoyoCommand() {
-		System.out.println("모여커맨드 호출");
-	}
-
 	@Autowired
 	private SqlSession sqlSession;
 	
@@ -82,8 +78,6 @@ public class MoyoCommand implements CommandImpl {
 			System.out.println(countMoyoUser);
 			model.addAttribute("countMoyoUser", countMoyoUser);
 		}
-		
-		
 //		System.out.println(moyoList);
 	}
 }
