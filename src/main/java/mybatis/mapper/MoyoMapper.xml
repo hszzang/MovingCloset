@@ -45,8 +45,16 @@
 		VALUES (#{m_idx}, #{userid}, #{mu_name}, #{mu_phone}, #{mu_email}, #{mu_time}, sysdate)
 	</insert>
 	
-	<select id="getMyMoyoUse">
+	<select id="getMyMoyoUse" resultType="mybatis.MoyoUseDTO">
+		SELECT * FROM moyo_use WHERE userid=#{0}
+	</select>
 	
+	<select id="getMyMoyoList" resultType="mybatis.MoyoDTO">
+		SELECT * FROM moyo WHERE m_idx=#{0}
+	</select>
+	
+	<select id="getMyMoyoBus" resultType="mybatis.MoyoBusDTO">
+		SELECT * FROM moyo_bus WHERE m_idx=#{0}
 	</select>
 
 </mapper>

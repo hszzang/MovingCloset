@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -122,7 +125,8 @@
                     </p>
                 </div>
                 <div class="result_bus">
-                    <div class="bus_loc">
+                <c:forEach items="${moyoUseList }" var="list">
+                	<div class="bus_loc">
                         <img src="../resources/images/mypage/bus.png" id="bus">
                         <span class="bus_name">
                             01번 버스 가는중..
@@ -134,6 +138,22 @@
                             삼성역 2호선
                         </span>
                     </div>
+                </c:forEach>
+                <c:if test="${empty moyoUseList }">
+                	신청한 모여가 없습니다!
+                </c:if>
+<!--                     <div class="bus_loc"> -->
+<!--                         <img src="../resources/images/mypage/bus.png" id="bus"> -->
+<!--                         <span class="bus_name"> -->
+<!--                             01번 버스 가는중.. -->
+<!--                         </span> -->
+<!--                         <span class="location"> -->
+<!--                             서울특별시 강남구 테헤란로 538 -->
+<!--                         </span> -->
+<!--                         <span class="landmark"> -->
+<!--                             삼성역 2호선 -->
+<!--                         </span> -->
+<!--                     </div> -->
                 </div>
             </div>
         </div>

@@ -1,6 +1,7 @@
 package movingcloset.command.mypage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import movingcloset.command.CommandImpl;
+import mybatis.MoyoBusDTO;
+import mybatis.MoyoDTO;
 import mybatis.MoyoUseDTO;
 import mybatis.MybatisMoyoImpl;
 
@@ -34,11 +37,22 @@ public class MypageMoyoBusCommand implements CommandImpl {
 		
 		ArrayList<MoyoUseDTO> moyoUseList = sqlSession
 				.getMapper(MybatisMoyoImpl.class).getMyMoyoUse(userid);
-
-
+		model.addAttribute("moyoUseList", moyoUseList);
 		
-		
-
+		HashMap<String, MoyoDTO> moyoList = new HashMap<String, MoyoDTO>();
+		HashMap<String, MoyoBusDTO> moyoBusList = new HashMap<String, MoyoBusDTO>();
+		if(!moyoUseList.isEmpty()) {
+			
+			for(MoyoUseDTO m : moyoUseList) {
+				
+				moyoList.put(m.getM_idx(), sqlSession
+						.getMapper(MybatisMoyoImpl.class).getMyMoyoList(m.getM_idx()));
+				moyoBusList.put(m.getM_idx(), sqlSession
+						.getMapper(MybatisMoyoImpl.class).getMyMoyoBus(m.getM_idx()));
+			}
+			
+			model.addAttribute("moyoList", moyoList);
+			model.addAttribute("moyoBusList", moyoBusList);
+		}
 	}
-
 }
