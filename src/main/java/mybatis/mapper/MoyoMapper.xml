@@ -46,7 +46,8 @@
 	</insert>
 	
 	<select id="getMyMoyoUse" resultType="mybatis.MoyoUseDTO">
-		SELECT * FROM moyo_use WHERE userid=#{0}
+		SELECT * FROM moyo_use
+		WHERE userid=#{0} ORDER BY mu_regidate DESC
 	</select>
 	
 	<select id="getMyMoyoList" resultType="mybatis.MoyoDTO">

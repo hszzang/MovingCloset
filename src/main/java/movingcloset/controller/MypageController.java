@@ -96,7 +96,7 @@ public class MypageController {
 	}
 	
 	
-	@RequestMapping(value="/mypage/bus.do", method=RequestMethod.GET)
+	@RequestMapping(value="/movingcloset/mypage_bus.do", method=RequestMethod.GET)
 	public String mypageBus (HttpServletRequest req, Model model) {
 		
 		model.addAttribute("req", req);
