@@ -1,5 +1,6 @@
 package movingcloset.command;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +12,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import mybatis.BuyAndGroupDTO;
+import mybatis.CouponAndUseDTO;
 import mybatis.MemberDTO;
+import mybatis.MybatisCompanyImpl;
+import mybatis.MybatisEventCouponImpl;
 import mybatis.MybatisMoyoImpl;
 import mybatis.MybatisProductImpl;
 import mybatis.ProductAndDetailDTO;
@@ -52,13 +56,15 @@ public class GetMemberProductCommand implements CommandImpl{
 					.getMapper(MybatisMoyoImpl.class).getMemberData(userid);
 			ProductDTO productDTO = sqlSession
 					.getMapper(MybatisProductImpl.class).getProductDTO(p_idx);
+			List<CouponAndUseDTO> couponAndUseDTO = sqlSession
+					.getMapper(MybatisEventCouponImpl.class).couponCheck(userid);
 			
 			
 			model.addAttribute("memberDTO", memberDTO);
 			model.addAttribute("productAndDetailDTO",productAndDetailDTO);
 			model.addAttribute("productDTO",productDTO);
 			model.addAttribute("bd_count",bd_count);
-			
+			model.addAttribute("couponAndUseDTO",couponAndUseDTO);
 			
 		}
 		

@@ -44,7 +44,7 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 }
 
 #buyFrm {
-	margin: 4% 7%; width: 70%;
+	margin: 4% 0%; width: 100%;
 }
 
 #buyFrm *:not(input, select){
@@ -133,6 +133,8 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 .red{
 	color:red;
 }
+
+
 </style>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -235,32 +237,17 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 									  <th>브랜드</th>
 									  <th>상품명&nbsp;(상품코드)</th>
 									  <th>가격</th>
-									  <th>구매가</th>
 									  <th>수량</th>
 									  <th>사이즈</th>
 									</tr>
 							    </thead>
 							    <tbody>
 						    		<fmt:parseNumber value="${productAndDetailDTO.p_price}" var="p_priceNum"/>
-						    		<c:if test="${productAndDetailDTO.cou_per != null }">
-							    		<fmt:parseNumber value="${productAndDetailDTO.cou_per}" var="cou_perNum"/>						    		
-						    		</c:if>
-							    	
 							    	<tr id="goods">
 							    		<td><img class="goodsImg" src="../resources/upload/${productDTO.p_sfile }" /></td>
 							    		<td style="vertical-align:middle;">${productAndDetailDTO.p_brand }</td>
 							    		<td style="vertical-align:middle;">${productAndDetailDTO.p_name }<br />(${productAndDetailDTO.p_code })</td>
-							    		<td style="vertical-align:middle; color:gray;"><del>${productAndDetailDTO.p_price }</del></td>
-							    		
-							    		<c:choose>
-							    			<c:when test="${productAndDetailDTO.cou_per != null }">
-									    		<td style="vertical-align:middle;">${p_priceNum*cou_perNum }</td>							    			
-							    			</c:when>
-							    			<c:otherwise>
-							    				<td style="vertical-align:middle;">${p_priceNum }</td>
-							    			</c:otherwise>
-							    		</c:choose>
-							    		
+							    		<td style="vertical-align:middle;">${productAndDetailDTO.p_price }</td>
 							    		<td style="vertical-align:middle;">${bd_count }</td>
 							    		<td style="vertical-align:middle;">${productAndDetailDTO.pd_size }</td>
 							    	</tr>
@@ -270,18 +257,63 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 					</div>
 				</div>
 				<br />
+				<div class="input-form">
+					<div class="container" id="goodsBox" >
+					<div class="row">
+					
+					<c:forEach items="${couponAndUseDTO }" var="couDTO">
+							<table class="table table-hover" id="goodsTable">
+								<thead class="goodsTitle">
+									<tr>
+										<th>쿠폰선택</th>
+									<c:if test="${couDTO.cou_sfile != null }">
+									  <th>쿠폰이미지</th>										
+									</c:if>
+										  <th>브랜드</th>
+										  <th>쿠폰명&nbsp;(쿠폰코드)</th>
+										  <th>쿠폰내용</th>
+										  <th>할인율</th>
+										  <th>쿠폰기한</th>
+										  <th>쿠폰사용여부</th>
+									</tr>
+							    </thead>
+							    <tbody>
+						    		<fmt:parseNumber value="${couDTO.cou_per}" var="p_priceNum"/>
+							    	<tr id="goods">
+							    		<td align="center" valign="middle">
+							    		<div style="margin:0 auto;">
+									    	<input type="checkbox" id="couponBox" name="cou_check"/>
+							    		</div>
+							    		</td>
+							    		<c:if test="${couDTO.cou_sfile != null }">
+							    		<td><img class="goodsImg" src="../resources/upload/${couDTO.cou_sfile }" /></td>
+							    		</c:if>
+							    		<td style="vertical-align:middle;">${couDTO.cou_brand }</td>
+							    		<td style="vertical-align:middle;">${couDTO.cou_name }<br />(${couDTO.cou_code })</td>
+							    		<td style="vertical-align:middle;">${couDTO.cou_content }</td>
+							    		<td style="vertical-align:middle;">${couDTO.cou_per }</td>
+							    		<td style="vertical-align:middle;">${couDTO.cou_start }&nbsp;-&nbsp;${couDTO.cou_end }</td>
+							    		<c:choose>
+							    			<c:when test="${couDTO.cou_use eq 'notuse'}">
+							    				<td style="vertical-align:middle;">사용가능</td>
+							    			</c:when>
+							    			<c:otherwise>
+							    				<td style="vertical-align:middle;">사용불가</td>
+							    			</c:otherwise>
+							    		</c:choose>
+							    	</tr>
+							    </tbody>
+							</table>
+					</c:forEach>
+						</div>
+					</div>
+					
+				</div>
+				<br />
 				<div class="input-form col-md-12 mx-auto">
 			    	<input type="hidden" name="bd_count" value="${bd_count }"/>
 			    	<input type="hidden" name="bd_size" value="${productAndDetailDTO.pd_size }"/>
- 					<c:choose>
-		    			<c:when test="${productAndDetailDTO.cou_per != null }">
-							<input type="hidden" name="b_totalpay" value="${p_priceNum*cou_perNum }"/>		    			
-						</c:when>
-		    			<c:otherwise>
-							<input type="hidden" name="b_totalpay" value="${p_priceNum }"/>		    			
-		    			</c:otherwise>
-		    		</c:choose>
-			    	
+
 					<div class="input-form-wrap">
 						<h3 style="text-align:left;padding-top:25px;">구매자 정보</h3>
 						<div class="custom-control custom-checkbox" id="fillBuyInfoWrap" align="right">
