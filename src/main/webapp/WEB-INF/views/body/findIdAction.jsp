@@ -81,35 +81,34 @@
 
 	<div class="container" style="width: 50%;" align="center" id="regicon">
 
-			<div class="input-form ">
-				<div class="input-form-wrap" style="text-align:center;padding-top:100px;padding-bottom:80px;">
-					<c:if test="${empty findUserId }">
-						<h3>입력한 정보에 해당하는 회원이 없습니다. </h3><br />
-						<h3>회원가입 후 <strong>Moving Closet</strong>만의 이벤트를 즐겨보세요!</h3>	
-	                    <br><br /><br />
-						<button type="button" class="btn btn-primary" id="mainbtn" onclick="location.href='../movingcloset/register.do';">회원가입</button>
-						
-						<div class="social d-flex justify-content-center">
-							<a href="../movingcloset/login.do" class="px-2 py-2 mr-md-1 rounded">로그인</a>
-							<a href="../movingcloset/findIdPw.do" class="px-2 py-2 ml-md-1 rounded">아이디/비밀번호찾기</a>
-						</div>
-						
-					</c:if>
-					<c:if test="${not empty findUserId }">
-						<h3>입력한 정보에 해당하는 아이디입니다.</h3><br />
-						<h3>[&nbsp;<span id="paramId">${findUserId}</span>&nbsp;]</h3><br />
-						<h3>로그인 후 <strong>Moving Closet</strong>을 이용해주세요.</h3>	
-	                    <br><br /><br />
-						<button type="button" class="btn btn-primary" id="mainbtn" onclick="location.href='../movingcloset/login.do';">로그인</button>
-					
-						<div class="social d-flex justify-content-center">
-							<a href="../movingcloset/findIdPw.do" class="px-2 py-2 ml-md-1 rounded">아이디/비밀번호찾기</a>
-							<a href="../movingcloset/register.do" class="px-2 py-2 ml-md-1 rounded">회원가입</a>
-						</div>
-						
-					</c:if>
+		<div class="input-form-wrap" style="text-align:center;margin-top:200px;padding-bottom:80px;">
+			<c:if test="${empty findUserId }">
+				<h3>입력한 정보에 해당하는 회원이 없습니다. </h3><br />
+				<h3>회원가입 후 <strong>Moving Closet</strong>만의 이벤트를 즐겨보세요!</h3>	
+                   <br><br /><br />
+				<button type="button" class="btn btn-primary" id="mainbtn" onclick="location.href='../movingcloset/register.do';">회원가입</button>
+				
+				<div class="social d-flex justify-content-center">
+					<a href="../movingcloset/login.do" class="px-2 py-2 mr-md-1 rounded">로그인</a>
+					<a href="../movingcloset/findIdPw.do" class="px-2 py-2 ml-md-1 rounded">아이디/비밀번호찾기</a>
 				</div>
-			</div>
+				
+			</c:if>
+			<c:if test="${not empty findUserId }">
+				<h3>입력한 정보에 해당하는 아이디입니다.</h3><br />
+				<h3>[&nbsp;<span id="paramId">${findUserId}</span>&nbsp;]</h3><br />
+				<h3>로그인 후 <strong>Moving Closet</strong>을 이용해주세요.</h3>	
+                   <br><br /><br />
+				<button type="button" class="btn btn-primary" id="mainbtn" onclick="location.href='../movingcloset/login.do';">로그인</button>
+			
+				<div class="social d-flex justify-content-center">
+					<a href="../movingcloset/findIdPw.do" class="px-2 py-2 ml-md-1 rounded">아이디/비밀번호찾기</a>
+					<a href="../movingcloset/register.do" class="px-2 py-2 ml-md-1 rounded">회원가입</a>
+				</div>
+				
+			</c:if>
+		</div>
+		
 
 		
 	</div>
