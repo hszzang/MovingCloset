@@ -12,6 +12,11 @@ public class CouponAndUseDTO {
 	private String cou_start; 
 	private String cou_end; 
 	private String ev_code; 
+	private String cou_brand;
+	private String cou_views;
+	private String cou_content;
+	private String cou_ofile;
+	private String cou_sfile;
 	
 	private String userid; 
 	private String cou_use;

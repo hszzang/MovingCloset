@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  
+<mapper namespace="mybatis.MybatisEventCouponImpl">
+
+	<!-- 회원의 쿠폰 조회 -->
+	<select id="couponCheck" resultType="mybatis.CouponAndUseDTO">
+		SELECT * FROM COUPON C
+		INNER JOIN COUPON_USE CU
+		ON C.COU_CODE = CU.COU_CODE
+		where userid = #{userid}
+	</select>
+
+</mapper>
