@@ -195,14 +195,14 @@
 				$('.nav-sub4').slideUp();
 				$('.nav-sub6').slideUp();
 			});
-			$('#nav-title6').click(function(){
+			/* $('#nav-title6').click(function(){
 				$('.nav-sub6').slideToggle();
 				$('.nav-sub1').slideUp();
 				$('.nav-sub2').slideUp();
 				$('.nav-sub3').slideUp();
 				$('.nav-sub4').slideUp();
 				$('.nav-sub5').slideUp();
-			});
+			}); */
 		});
 		
 
@@ -221,15 +221,15 @@
 		
     </script>
 	 <div class="nav-menu">
-		<a class="large-logo" href="#" id="logo">Moving Closet</a>
+		<a class="large-logo" href="./main.do" id="logo">Moving Closet</a>
 		<a class="nav-link" id="nav-title1" href="javascript:void(0);">About</a>
 		<a class="nav-link" id="nav-title2" href="javascript:void(0);">MOYO</a>
 		<a class="nav-link" id="nav-title3" href="javascript:void(0);">NewD</a>
 		<a class="nav-link" id="nav-title4" href="javascript:void(0);">STORE</a>
 		<a class="nav-link" id="nav-title5" href="javascript:void(0);">Events&nbsp;|&nbsp;Coupons</a>
-		<a class="nav-link" id="nav-title6" href="javascript:void(0);">CS center</a>
+		<a class="nav-link" id="nav-title6" href="../movingcloset/notice.do">CS center</a>
 		<div id="icons">
-			<a href=""><i class="material-icons" id="icon">search</i></a>
+			<a href="./search.do"><i class="material-icons" id="icon">search</i></a>
 			&nbsp;
 			<a href=""><i class="material-icons" id="icon">shopping_basket</i></a>
 			&nbsp;
@@ -237,7 +237,7 @@
 			<c:choose>
 				<c:when test="${sessionScope.siteUserInfo != null}">
 					<a href="#" onclick="logout();"><i class="material-icons" id="icon">exit_to_app</i></a>&nbsp;
-					<a href="../mypage/coupon.do"><i class="material-icons" id="icon" onclick="infoclick();">info_outline</i></a>
+					<a href="./mypage_coupon.do"><i class="material-icons" id="icon" onclick="infoclick();">info_outline</i></a>
 				</c:when>
 				<c:otherwise>  
 					<a href="../movingcloset/login.do"><i class="material-icons" id="icon">person</i></a>
@@ -285,10 +285,8 @@
 	</div>
 	<div class="nav-sub3" id="nav-sub">
 		<div class="nav-content container-fluid">
-			 <div class="contentLink d-flex justify-content-around">
+			 <div class="contentLink d-flex justify-content-center">
 	            <a href="../movingcloset/newD.do" id="sub-content">New Designer</a>
-	            <a href="" id="sub-content">New Designer</a>
-	            <a href="" id="sub-content">New Designer</a>
 	        </div>
 		</div>
 	</div>
@@ -302,12 +300,12 @@
 	<div class="nav-sub5" id="nav-sub">
 		<div class="nav-content container-fluid">
 			 <div class="contentLink d-flex justify-content-center">
-	            <a href="../movingcloset/event_main.do" id="sub-content" style="margin-right:30px">EVENT</a>
-	            <a href="../movingcloset/coupon_main.do" id="sub-content" style="margin-left:30px">COUPON</a>
+	            <a href="../movingcloset/event_main.do" id="sub-content" style="margin-right:120px">EVENT</a>
+	            <a href="../movingcloset/coupon_main.do" id="sub-content" style="margin-left:120px">COUPON</a>
 	        </div>
 		</div>
 	</div>
-	<div class="nav-sub6" id="nav-sub">
+	<!-- <div class="nav-sub6" id="nav-sub">
 		<div class="nav-content container-fluid">
 			 <div class="contentLink d-flex justify-content-around">
 	            <a href="../movingcloset/notice.do" id="sub-content">공지사항</a>
@@ -316,7 +314,7 @@
 	            <a href="../movingcloset/qnadetail.do" id="sub-content">Q&A</a>
 	        </div>
 		</div>
-	</div>
+	</div> -->
 	
 	 
 <!-- 	    <div id="wrapper"> -->
