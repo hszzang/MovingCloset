@@ -15,8 +15,10 @@ import movingcloset.command.cscenter.FaqCommand;
 import movingcloset.command.cscenter.FaqDetailCommand;
 import movingcloset.command.cscenter.NoticeCommand;
 import movingcloset.command.cscenter.NoticeDetailCommand;
+import movingcloset.command.cscenter.QnaDetailCommand;
 import mybatis.FaqDTO;
 import mybatis.NoticeDTO;
+import mybatis.QnaDTO;
 
 @Controller
 public class CSCenterController {
@@ -31,6 +33,8 @@ public class CSCenterController {
 	FaqCommand faqCommand;
 	@Autowired
 	FaqDetailCommand faqDetailCommand;
+	@Autowired
+	QnaDetailCommand qnaDetailCommand;
 	
 
 	
@@ -69,19 +73,26 @@ public class CSCenterController {
 		return "body/cscenter/faq_detail";
 	}
 	
-	 
-
 		
-	// FAQ랑 QnA
-	@RequestMapping(value="/movingcloset/qnalist.do", method=RequestMethod.GET)
-	public String qnaList(Locale locale, Model model) {
-				
-		return "body/cscenter/qna_list";
-	}
-	// QnA 상세
+	/*
+	 * // FAQ랑 QnA ------> 마이페이지에서 보이게 변경
+	 * 
+	 * @RequestMapping(value="/movingcloset/qnalist.do", method=RequestMethod.GET)
+	 * public String qnaList(Locale locale, Model model) {
+	 * 
+	 * return "body/cscenter/qna_list"; }
+	 */
+	
+	
+	// QnA상세보기
 	@RequestMapping(value="/movingcloset/qnadetail.do", method=RequestMethod.GET)
-	public String qnaDetail(Locale locale, Model model) {
-				
+	public String qnaDetail(HttpServletRequest req, Model model, QnaDTO qnaDTO) {
+		
+		model.addAttribute("req", req);
+		command = qnaDetailCommand;
+		command.execute(model);
+		
+		
 		return "body/cscenter/qna_detail";
 	}
 	// 질문 폼

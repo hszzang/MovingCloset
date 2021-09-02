@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@page import="mybatis.QnaDTO"%>
+<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,28 +93,19 @@
                         문의한 내역이 보여집니다.
                     </p>
                 </div>
-                    <table class="table">
-                        <tr>
-                            <td align="center">
-                                <select name="searchField">
-                                    <option value="date">기간별</option>
-                                </select>
-                            </td>
-                        </tr>
-                    </table>
+                    
                     <table class="table table-hover">
                         <thead class="thead-dark">
                             <tr>
-                                <th width="10%">번호</th>
+                                <th width="15%">번호</th>
                                 <th width="50%">제목</th>
                                 <th width="15%">작성자</th>
-                                <th width="10%">조회수</th>
-                                <th width="15%">작성일</th>
+                                <th width="20%">작성일</th>
                             </tr>
                         </thead>
                         <tbody>
                         <c:choose>
-                            <c:when test="${empty boardLists }">
+                            <c:when test="${empty qnaList }">
                                 <tr>
                                     <td colspan="6" align="center">
                                         등록된 문의내역이 없습니다.
@@ -119,18 +113,17 @@
                                 </tr>
                             </c:when>
                             <c:otherwise>
-                                <c:forEach items="${boardLists }" var="row" varStatus="loop">
+                                <c:forEach items="${qnaList }" var="qna" varStatus="loop">
                                 <tr>
-                                    <td width="10%">
+                                    <td width="15%">
                                         ${map.totalCount - (((map.pageNum-1) * map.pageSize)
                                             + loop.index) }	
                                     </td>
                                     <td width="50%" align="left">
-                                        <a href="../mvcboard/view.do?idx=${row.idx }">${row.title }</a>
+                                        <a href='<c:url value='/movingcloset/qnadetail.do?q_idx=${qna.q_idx }'/>'>${qna.q_title }</a>
                                     </td>
-                                    <td width="15%" align="left">${row.name }</td>
-                                    <td width="10%" align="left">${row.visitcount }</td>
-                                    <td width="15%" align="left">${row.postdate }</td>
+                                    <td width="15%" align="left">${qna.userid }</td>
+                                    <td width="20%" align="left"><fmt:formatDate value="${qna.q_date}" pattern="yyyy-MM-dd" /></td>
                                 </tr>
                                 </c:forEach>
                             </c:otherwise>
