@@ -53,10 +53,6 @@
 			}
 		}, 1000);
 		
-
-		
-		
-		
   	</script>
   	
     <style>
@@ -68,6 +64,30 @@
 			padding-top:50px;
 		}
 		
+		.section-title {
+			text-align: center;
+			padding-top: 50px;
+		}
+		
+		.section-title h2 {
+			font-size: 32px;
+			font-weight: bold;
+			text-transform: uppercase;
+			margin-bottom: 10px;
+			padding-bottom: 20px;
+			position: relative;
+		}
+		
+		.section-title h2::after {
+			content: '';
+			position: absolute;
+			display: block;
+			width: 50px;
+			height: 3px;
+			background: #555555;
+			bottom: 0;
+			left: calc(50% - 25px);
+		}
 		
         .tabcontent{
             border:none;
@@ -344,6 +364,9 @@
 </head>
 <body>
 <div class="container">
+	<div class="section-title">
+		<h2>쪼 르 기</h2>
+	</div>
 	<div class="deadTitle">
 		<h1 class="deadline">
 			<span>마</span>

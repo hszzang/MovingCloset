@@ -22,6 +22,7 @@ import movingcloset.command.MemberOutCommand;
 import movingcloset.command.RegisterActionCommand;
 import movingcloset.command.cscenter.QnaCommand;
 import movingcloset.command.mypage.MypageMoyoBusCommand;
+import movingcloset.command.mypage.MypagePleaseCommand;
 import mybatis.MemberDTO;
 import mybatis.MybatisMemberImpl;
 import mybatis.QnaDTO;
@@ -40,8 +41,11 @@ public class MypageController {
 	@Autowired
 	QnaCommand qnaCommand;
 
-  @Autowired
+    @Autowired
 	MypageMoyoBusCommand mypageMoyoBusCommand;
+    
+    @Autowired
+    MypagePleaseCommand mypagePleaseCommand;
 
 	
 	
@@ -56,7 +60,11 @@ public class MypageController {
 		return "body/mypage/mypage_order";
 	}
 	@RequestMapping(value="movingcloset/mypage_please.do", method=RequestMethod.GET)
-	public String mypagePlease (Locale locale, Model model) {
+	public String mypagePlease (Model model, HttpServletRequest req) {
+		
+		model.addAttribute("req", req);
+		command = mypagePleaseCommand;
+		command.execute(model);
 		
 		return "body/mypage/mypage_please";
 	}

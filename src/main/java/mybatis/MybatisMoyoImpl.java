@@ -27,6 +27,12 @@ public interface MybatisMoyoImpl {
 	//모여폼 제출 데이터 insert
 	public int moyoFormDataInsert(MoyoUseDTO moyoUseDTO);
 
+	//쪼르기 리스트 불러오기
+	public ArrayList<PleaseDTO> getPlzList();
+	
+	//쪼르기 상품정보 불러오기
+	public ArrayList<ProductDTO> getPlzProduct(String p_code);
+	
 	
 	
 	/****** 마이페이지 모여버스 ******/

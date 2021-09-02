@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -54,6 +55,60 @@
    border-top: solid 0.5px black;
    padding-top: 25px;
  }
+ 
+  .busImg{
+    width: 50px;
+    height: 80px;
+    margin-left: 50px;
+    margin-top: 4%;
+  } 
+  
+ .result_bus{
+   border-top: solid 0.5px black;
+   padding-top: 25px;
+ }
+ 
+ .bus_loc{
+    background-color: whitesmoke;
+    border-radius: 50px;
+    height: 150px; width: 100%;	
+    margin-top:10px;
+    vertical-align: middle;	
+    display: inline-flex;
+  }
+
+  .bus_name{
+    padding-left: 90px;
+  }
+
+  .location{
+    margin-left: 90px;
+  }
+
+  .landmark{
+    padding-left: 20px;
+    color: #FF6C2F;
+  }
+  
+  .moyoInfo {
+  	align-self: center; margin-left: 6%;
+  }
+  
+  .moyoInfo_title { font-weight: bold; font-size: 1.1em; }
+  .moyoInfo_detail { font-size: 0.8em; }
+  
+  .moyoBusInfo {
+  	margin-left: 11%;
+  	align-self: center; text-align: center;
+  }
+  
+  .moyoBusInfo_X {
+  	width: 100%; margin-left: 12%;
+  }
+  .moyoBusInfo_update {
+  	font-size: 0.8em;
+  }
+  
 </style>
 <body>
     <div class="container" id="maintain">
@@ -94,6 +149,65 @@
                     </p>
                 </div>
                 <div class="result">
+<%--                 <c:forEach items="${moyoUseList }" var="list"> --%>
+<!--                 	<div class="bus_loc"> -->
+<!--                         <img src="../resources/images/mypage/bus.png" class="busImg"> -->
+<!--                         <div class="moyoInfo"> -->
+<%--                         <c:forEach items="${moyoList }" var="moyoinfo"> --%>
+<%--                         	<c:if test="${list.m_idx eq moyoinfo.key }"> --%>
+<%--                         		<span class="moyoInfo_title">${moyoinfo.value.m_name }</span><br/> --%>
+                        		
+<%-- 		                        <fmt:parseDate value="${moyoinfo.value.m_dday }" var="m_dday" pattern="yyyy-MM-dd HH:mm:ss" /> --%>
+<%-- 								<fmt:formatDate value="${m_dday }" var="m_dday" pattern="yyyy-MM-dd" /> --%>
+<!-- 								<span class="moyoInfo_detail"> -->
+<%-- 	                        	모여 DAY : ${m_dday } --%>
+<%-- 	                        	<c:if test="${moyoinfo.value.m_status eq '진행' }"> --%>
+<!-- 	                        		(모집중) -->
+<%-- 	                        	</c:if> --%>
+<%-- 	                        	<c:if test="${moyoinfo.value.m_status eq '실패' }"> --%>
+<!-- 	                        		(진행실패) -->
+<%-- 	                        	</c:if> --%>
+<!-- 	                        	<br/> -->
+<%-- 	                        	${moyoinfo.value.m_addr }<br/> --%>
+<!-- 	                        	</span> -->
+<%--                         	</c:if> --%>
+<%--                         </c:forEach> --%>
+<!--                         </div> -->
+<!--                         <div class="moyoBusInfo"> -->
+<%--                         <c:set var="forLoop" value="false" /> --%>
+<%--                        	<c:forEach items="${moyoBusList }" var="moyobus"> --%>
+<%--                        		<c:if test="${not forLoop }"> --%>
+<%-- 	                        	<c:if test="${list.m_idx eq moyobus.key }"> --%>
+<%-- 		                        	<c:if test="${empty moyobus.value }"> --%>
+<!-- 		                        		<div class="moyoBusInfo_X">아직 버스가 배정되지 않았습니다.</div> -->
+<%-- 		                        		<c:set var="forLoop" value="true" /> --%>
+<%-- 		                        	</c:if> --%>
+<%-- 		                        	<c:if test="${not empty moyobus.value }"> --%>
+<%-- 		                        		${moyobus.value.mb_num } 버스 <b>${moyobus.value.mb_status }</b> <br/> --%>
+<%-- 		                        		${moyobus.value.mb_addr } <br/> --%>
+<%-- 		                        		<span class="moyoBusInfo_update">( 최종업데이트 : ${moyobus.value.mb_lastupdate } )</span> --%>
+<%-- 		                        	</c:if> --%>
+<%-- 	                        	</c:if> --%>
+<%--                        		</c:if> --%>
+<%--                         </c:forEach> --%>
+<!--                         </div> -->
+<!--                     </div> -->
+<%--                 </c:forEach> --%>
+<%--                 <c:if test="${empty moyoUseList }"> --%>
+<!--                 	신청한 모여가 없습니다! -->
+<%--                 </c:if> --%>
+<!--                     <div class="bus_loc"> -->
+<!--                         <img src="../resources/images/mypage/bus.png" id="bus"> -->
+<!--                         <span class="bus_name"> -->
+<!--                             01번 버스 가는중.. -->
+<!--                         </span> -->
+<!--                         <span class="location"> -->
+<!--                             서울특별시 강남구 테헤란로 538 -->
+<!--                         </span> -->
+<!--                         <span class="landmark"> -->
+<!--                             삼성역 2호선 -->
+<!--                         </span> -->
+<!--                     </div> -->
                     <p>보유한 쿠폰이 없습니다.</p>
                 </div>
             </div>

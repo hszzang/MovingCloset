@@ -278,7 +278,7 @@
 			 <div class="contentLink d-flex justify-content-around">
 	            <a href="../movingcloset/moyo.do" id="sub-content">모여</a>
 <!-- 	            <a href="../movingcloset/moyoForm.do" id="sub-content">모여신청</a> -->
-	            <a href="" id="sub-content">조르기</a>
+	            <a href="../movingcloset/please.do" id="sub-content">조르기</a>
 	            <a href="" id="sub-content">지난 모여&nbsp;/&nbsp;조르기</a>
 	        </div>
 		</div>
