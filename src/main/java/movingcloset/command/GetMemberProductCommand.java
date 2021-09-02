@@ -55,16 +55,16 @@ public class GetMemberProductCommand implements CommandImpl{
 			MemberDTO memberDTO = sqlSession
 					.getMapper(MybatisMoyoImpl.class).getMemberData(userid);
 			ProductDTO productDTO = sqlSession
-					.getMapper(MybatisProductImpl.class).getProductDTO(p_idx);
+					.getMapper(MybatisProductImpl.class).getProductDTO(p_idx);			
 			List<CouponAndUseDTO> couponAndUseDTO = sqlSession
 					.getMapper(MybatisEventCouponImpl.class).couponCheck(userid);
-			
 			
 			model.addAttribute("memberDTO", memberDTO);
 			model.addAttribute("productAndDetailDTO",productAndDetailDTO);
 			model.addAttribute("productDTO",productDTO);
 			model.addAttribute("bd_count",bd_count);
 			model.addAttribute("couponAndUseDTO",couponAndUseDTO);
+			
 			
 		}
 		

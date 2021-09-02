@@ -67,6 +67,8 @@ public interface MybatisProductImpl {
 	
 	public BuyAndGroupDTO buyReview(String userid, String p_code);
 	
+	public int insertBuyForm(BuyAndGroupDTO buyAndGroupDTO);
+	public int insertBuy_groupForm(BuyAndGroupDTO buyAndGroupDTO);
 
 
 }

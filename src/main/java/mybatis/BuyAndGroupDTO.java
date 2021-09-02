@@ -20,8 +20,11 @@ public class BuyAndGroupDTO {
 	private String  bd_count;
 	private String  bd_size;
 	private String 	email;
+	
+	//accountnumber null 가능
 	private String  accountnumber;
 
+	//cou_code null 가능
 	private String  cou_code;
 	private String  cou_per;
 	
