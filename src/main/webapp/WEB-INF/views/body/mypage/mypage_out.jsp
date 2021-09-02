@@ -116,7 +116,7 @@ function memberOut(frm){
                 <div class="jumbotron" id="jumbo">
                     <h3>회원탈퇴</h3>
                 </div>
-                <form name="memberOutForm" action="./memberOut.do" onsubmit="memberOut(this);">
+                <form name="memberOutForm" action="./mypage_memberOut.do" onsubmit="memberOut(this);">
                     <div class="form-check">
                         <div class="agree">
                             회원탈퇴사유
