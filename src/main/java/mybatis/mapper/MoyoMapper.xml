@@ -44,6 +44,10 @@
 		INSERT INTO moyo_use 
 		VALUES (#{m_idx}, #{userid}, #{mu_name}, #{mu_phone}, #{mu_email}, #{mu_time}, sysdate)
 	</insert>
+	
+	<select id="getMyMoyoUse">
+	
+	</select>
 
 </mapper>
  

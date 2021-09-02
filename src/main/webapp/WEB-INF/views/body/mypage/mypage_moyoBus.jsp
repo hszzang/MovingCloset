@@ -55,8 +55,7 @@
     width: 50px;
     height: 80px;
     margin-left: 50px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin-top: 4%;
   } 
   
  .result_bus{
@@ -67,6 +66,8 @@
  .bus_loc{
     background-color: whitesmoke;
     border-radius: 50px;
+    height: 150px;
+    vertical-align: middle;	
   }
 
   .bus_name{

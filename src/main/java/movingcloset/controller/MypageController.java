@@ -18,6 +18,7 @@ import movingcloset.command.CommandImpl;
 import movingcloset.command.LoginCommand;
 import movingcloset.command.MemberOutCommand;
 import movingcloset.command.RegisterActionCommand;
+import movingcloset.command.mypage.MypageMoyoBusCommand;
 import mybatis.MemberDTO;
 import mybatis.MybatisMemberImpl;
 
@@ -28,6 +29,9 @@ public class MypageController {
 	
 	@Autowired
 	MemberOutCommand memberOutCommand;
+	
+	@Autowired
+	MypageMoyoBusCommand mypageMoyoBusCommand;
 	
 	
 	@RequestMapping(value="/mypage/coupon.do", method=RequestMethod.GET)
@@ -56,7 +60,11 @@ public class MypageController {
 		return "body/mypage/mypage_manage";
 	}
 	@RequestMapping(value="/mypage/bus.do", method=RequestMethod.GET)
-	public String mypageBus (Locale locale, Model model) {
+	public String mypageBus (HttpServletRequest req, Model model) {
+		
+		model.addAttribute("req", req);
+		command = mypageMoyoBusCommand;
+		command.execute(model);
 		
 		return "body/mypage/mypage_moyoBus";
 	}
