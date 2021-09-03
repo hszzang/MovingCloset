@@ -122,7 +122,7 @@
 		                        </td>
 		                    </tr>
 		            </table>
-					<button id="modBtn"><a href="javascript:window.history.back();" style="text-decoration:none;color:white;">뒤로가기</a></button>
+					<button id="modBtn" onClick="history.back(); return false;" style="text-decoration:none;color:white;">뒤로가기</button>
 					<br/><br/>
 	        	</form>
 	        </div>
