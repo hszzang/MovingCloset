@@ -1,12 +1,9 @@
 package movingcloset.command.store;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +13,6 @@ import org.springframework.ui.Model;
 import mybatis.MybatisProductImpl;
 import mybatis.ProductDTO;
 import movingcloset.command.CommandImpl;
-import movingcloset.util.PagingUtil;
 
 @Service
 public class StoreListCommand implements CommandImpl {
@@ -38,6 +34,8 @@ public class StoreListCommand implements CommandImpl {
 			
 			// 플래그 분류
 			String flag = req.getParameter("flag");
+			if(flag==null)
+				flag="all";
 			System.out.println("flag: " + flag);
 			// 정렬 기준
 			String order = req.getParameter("order");
@@ -56,7 +54,7 @@ public class StoreListCommand implements CommandImpl {
 			System.out.println("요청 페이지 번호 pageC : " + pageC);
 			// 불러올 상품의 총 갯수 -> 플래그 없으면 전체 / 있으면 해당 플래그의 상품만.. 
 			int totalRecordCount = sqlSession.getMapper(MybatisProductImpl.class).getCount(flag);
-			System.out.println("불러내는 상품 갯수: " + totalRecordCount);
+			System.out.println("불러내는 상품 총 갯수: " + totalRecordCount);
 			// 한 페이지당 보여주는 상품 갯수 단위 60개!
 			int show = 60;
 			// 페이지 갯수
