@@ -31,4 +31,18 @@ public interface MybatisMoyoImpl {
 	public ArrayList<MoyoDTO> MoyoList();
 	//public ArrayList<String> MoyoList();
 	
+
+	
+	
+	/****** 마이페이지 모여버스 ******/
+	//내 모여신청내역(MoyoUse) 조회
+	public ArrayList<MoyoUseDTO> getMyMoyoUse(String userid);
+	
+	//내 모여신청내역(Moyo) 조회
+	public MoyoDTO getMyMoyoList(String m_idx);
+	
+	//내 모여신청내역(MoyoBus) 조회
+	public MoyoBusDTO getMyMoyoBus(String m_idx);
+
+
 }

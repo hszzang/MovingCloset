@@ -443,7 +443,7 @@ public class StoreController {
 		command = storeBuyCommand;
 		command.execute(model);
 		
-		return "";
+		return "body/store/payForm";
 	}
 	
 	

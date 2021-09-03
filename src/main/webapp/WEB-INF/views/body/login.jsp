@@ -10,6 +10,7 @@
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+<title>로그인 :: MovingCloset</title>
 <style>
 
 .container{padding-top: 5%; margin-bottom: 6%;}

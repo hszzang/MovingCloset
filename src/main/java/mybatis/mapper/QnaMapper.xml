@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mybatis.MybatisQNAImpl">
+	
+	<select id="getQnaDTO" resultType="mybatis.QnaDTO">
+		SELECT * FROM QNA
+	</select>
+	
+	<select id="getQnaList" resultType="mybatis.QnaDTO" parameterType="java.util.List">
+		select q_idx, q_title, userid, q_content, q_date from QNA where userid=#{userid} order by q_idx desc
+	</select>
+	
+	<select id="getQnaDetail" resultType="mybatis.QnaDTO" parameterType="hashmap">
+	select q_idx, q_cate, q_title, q_content from QNA where q_idx = #{q_idx}
+	</select>
+	
+	<insert id="insertQNA" parameterType="mybatis.QnaDTO">
+	insert into QNA (q_idx, q_cate, q_title, q_content, userid)
+	values
+	(QNA_seq.nextval, #{q_cate}, #{q_title}, #{q_content}, #{userid})
+	</insert>
+
+</mapper>

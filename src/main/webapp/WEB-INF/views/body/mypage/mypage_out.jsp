@@ -10,7 +10,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<title>Insert title here</title>
+<title>마이페이지 - 회원탈퇴 :: MovingCloset</title>
 </head>
 <style>
 #maintain{
@@ -85,38 +85,38 @@ function memberOut(frm){
 	<div class="container" id="maintain">
         <div class="row">
             <div class="col-lg-3">
-                <div class="list-group list-group-flush">
+		        <div class="list-group list-group-flush">
 		            <div class="list-group-item list-group-item-action main">MyPage</div>
 		            <div class="list-group-item list-group-item-action profile d-flex align-content-center">
 		                <i class="material-icons" style="font-size:36px; color:black">account_circle</i>&nbsp;
 		                <span class="userName" ><b style="font-size:20px; color:#ff6c2f">${sessionScope.username }</b> 고객님</span>
 		            </div>
 		            <div class="list-group-item list-group-item-action category">쇼핑정보</div>
-		            <a href="./coupon.do" class="list-group-item list-group-item-action">쿠폰함</a>
-		            <a href="./order.do" class="list-group-item list-group-item-action">주문내역</a>
+		            <a href="./mypage_coupon.do" class="list-group-item list-group-item-action">쿠폰함</a>
+		            <a href="./mypage_order.do" class="list-group-item list-group-item-action">주문내역</a>
 		        </div>
 		        <div class="list-group list-group-flush">
 		            <div class="list-group-item list-group-item-action category">활동정보</div>
-		            <a href="./please.do" class="list-group-item list-group-item-action">쪼르기</a>
-		            <a href="./zzim.do" class="list-group-item list-group-item-action">찜한상품</a>
+		            <a href="./mypage_please.do" class="list-group-item list-group-item-action">쪼르기</a>
+		            <a href="./mypage_zzim.do" class="list-group-item list-group-item-action">찜한상품</a>
 		        </div>
 		        <div class="list-group list-group-flush">
 		            <div class="list-group-item list-group-item-action category">나의정보</div>
-		            <a href="./manage.do" class="list-group-item list-group-item-action">회원정보관리</a>
-		            <a href="./bus.do" class="list-group-item list-group-item-action">모여버스</a>
-		            <a href="./out.do" class="list-group-item list-group-item-action">회원탈퇴</a>
+		            <a href="./mypage_manage.do" class="list-group-item list-group-item-action">회원정보관리</a>
+		            <a href="./mypage_bus.do" class="list-group-item list-group-item-action">모여버스</a>
+		            <a href="./mypage_out.do" class="list-group-item list-group-item-action">회원탈퇴</a>
 		        </div>
 		        <div class="list-group list-group-flush">
 		            <div class="list-group-item list-group-item-action category">문의/리뷰</div>
-		            <a href="./myqna.do" class="list-group-item list-group-item-action">문의내역</a>
-		            <a href="./review.do" class="list-group-item list-group-item-action">리뷰내역</a>
+		            <a href="./mypage_myqna.do" class="list-group-item list-group-item-action">문의내역</a>
+		            <a href="./mypage_review.do" class="list-group-item list-group-item-action">리뷰내역</a>
 		        </div>
-            </div>
+		    </div>
             <div class="col-lg-9">
                 <div class="jumbotron" id="jumbo">
                     <h3>회원탈퇴</h3>
                 </div>
-                <form name="memberOutForm" action="./memberOut.do" onsubmit="memberOut(this);">
+                <form name="memberOutForm" action="./mypage_memberOut.do" onsubmit="memberOut(this);">
                     <div class="form-check">
                         <div class="agree">
                             회원탈퇴사유

@@ -45,6 +45,14 @@
 		
 		});
 		
+/* 	 	$('#wish').bind("click",function() {
+ 			var src = ($("#wishImg").attr('src') === '../resources/images/heart4.png') 
+ 			? '../resources/images/heart3.png' 
+ 			: '../resources/images/heart4.png'; 
+ 			$("#wishImg").attr('src', src); 
+ 			
+	 	}); */
+		
 		
 	});
 	
@@ -123,15 +131,33 @@
  		
 		if(${empty siteUserInfo}) {
 			alert("로그인 후 이용해주세요.");
-			frm.action="../movingcloset/login.do";
+			location.href="../movingcloset/login.do";
 			
 		}else{
-			frm.submit();
+			if(frm.size.value==""){
+				alert("상품의 사이즈를 선택해주세요.");
+				return false;
+			}else{
+				frm.submit();				
+			}
 
 		}
 		
  	}
  	
+
+    function clickimg() {
+        if (document.getElementById("wishImg").getAttribute('src')=='../resources/images/heart4.png')
+        {
+            document.getElementById("wishImg").setAttribute('src') = '../resources/images/heart3.png';
+        }
+        else if (document.getElementById("wishImg").getAttribute('src') == '../resources/images/heart3.png')
+        {
+            document.getElementById("wishImg").src = '../resources/images/heart4.png';
+        }
+    }
+
+
 
  	
 </script>
@@ -326,7 +352,7 @@
     
     
 	</style>
-<title>Store</title>
+<title>Store 상세보기 :: MovingCloset</title>
 </head>
 <body>
 	<div class="container" style="margin-top:10%;margin-bottom:3%;">
@@ -394,14 +420,14 @@
 						<button type="button" id="btnBuy" style="width:92%;" onclick="buyCheck();">구매하기</button>
 					</div><br> 
 					<div>
-						<span><button type="button" style="width: 45%;border:black solid 1px;" id="basket" onclick="location.href='#';">장바구니</button></span>
-						<span><button type="button" style="width: 45%;" id="wish" onclick="location.href='#';">위시리스트 <i class="fa fa-heart" style="color: red;"></i></button></span>
+						<span><button type="button" style="width: 45%;height:60px;border:black solid 1px;" id="basket" onclick="location.href='#';">장바구니</button></span>
+						<span><button type="button" style="width: 45%;height:60px;" id="wish" onclick="clickimg();">위시리스트&nbsp;<img id="wishImg" src="../resources/images/heart4.png" alt="하트_회색" width="25"/></button></span>
 					</div>
 				</div>
 			</div>
-			<div style="text-align:right;">
-				<button type="button" class="product" id="productUpdate" onclick="javascript:location.href='/movingcloset/store/update.do?p_idx=${storeDetail.p_idx }';">상품수정</button>	
-			</div>
+<!-- 			<div style="text-align:right;"> -->
+<%-- 				<button type="button" class="product" id="productUpdate" onclick="javascript:location.href='/movingcloset/store/update.do?p_idx=${storeDetail.p_idx }';">상품수정</button>	 --%>
+<!-- 			</div> -->
 		</form>
 	</div>
 	<br /><br /><br />
@@ -465,6 +491,7 @@
 						</div>
 
 					</td>
+					
 					
 					<td>${review.r_date }</td>
 					<td>

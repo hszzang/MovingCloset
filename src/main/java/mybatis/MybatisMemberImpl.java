@@ -26,8 +26,16 @@ public interface MybatisMemberImpl {
 	
 	//회원탈퇴
 	public int memberOut(String userid);
-	
+
 	// 관리자모드 회원명단
 	public List<MemberDTO> getMemberList ();
+
+	//회원정보수정
+	public int memberEdit(String email,String phone,String userid);
+	
+	// 회원 비밀번호 확인(회원 정보 수정하기)
+	public int memberPassCheck(String userpass);
+	
+
 	
 }

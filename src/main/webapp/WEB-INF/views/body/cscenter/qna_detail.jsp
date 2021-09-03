@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
+<%@page import="mybatis.QnaDTO"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +11,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Help</title>
+    <title>일대일문의 :: MovingCloset</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
@@ -17,9 +20,10 @@
 
     <style>
         #whole{
-        	width:1000px; height:800px;
+        	width:100%; height:auto;
         	border: solid black 1px;
-        	margin: 100px 20% 200px 20%;
+        	margin-top: 200px;
+        	margin-bottom: 100px;
         	padding: 1% 1% 0 1%;
         }
         #title{
@@ -77,8 +81,8 @@
    
 </head>
 <body>
+<div class=container>
     <div id="whole">
-	    <div style="width : 950px; height: 750px;">
 	    	<span id="title">1:1문의</span>
 	        <div>
 	        	<form action="">
@@ -91,7 +95,7 @@
 		                        <td>유형</td>
 		                        <td>
 									<div>
-										기타
+										<c:out value="${qnaDTO.q_cate }"/>
 									</div>
 		                        </td>
 		                    </tr>
@@ -99,7 +103,7 @@
 								<td>제목</td>
 		                        <td>
 		                        	<div id="qTitle">
-		                        		궁금한게 있어용
+		                        		${qnaDTO.q_title }
 		                        	</div>
 								</td>
 		                    </tr>
@@ -107,11 +111,7 @@
 		                        <td>내용</td>
 		                        <td>
 		                        	<div id="qText">
-		                        		질문 있어요. <br />
-		                        		이건 어쩌고 저쩌구 하나요? <br />
-		                        		또 저건 왱알왱알 블라블라 할 수 있을까요? <br />
-		                        		노고가 많으십니다. <br />
-		                        		답변 기다릴게용 <br />
+		                        		${qnaDTO.q_content }
 		                        	</div>
 		                        </td>
 		                    </tr>
@@ -122,14 +122,13 @@
 		                        </td>
 		                    </tr>
 		            </table>
-					<button id="modBtn">수정하기</button>
+					<button id="modBtn" onClick="history.back(); return false;" style="text-decoration:none;color:white;">뒤로가기</button>
+					<br/><br/>
 	        	</form>
 	        </div>
-
-	
-	    </div>
 	
 
     </div>
+</div>
 </body>
 </html>

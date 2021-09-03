@@ -28,7 +28,7 @@
 
 <style>
 .container {
-	margin-top: 95px;
+	margin-top: 100px;
 	margin-bottom: 10px;
 }
 
@@ -42,8 +42,6 @@
 	margin-top: 30px;
 	padding-top: 15px;
 	margin-bottom: 40px;
-	/* 		border-top: 1px solid lightgray; */
-	/* 		border-top-width: 60%;	 */
 }
 
 #findMoyoBtn {
@@ -347,18 +345,10 @@
 	//위치를 찾았을 때의 콜백메소드
 	var showPosition = function (position) {
 		
-		//콜백된 매개변수를 통해 위도, 경도값을 얻어온다.
-// 		nowLat = position.coords.latitude;
-// 		nowLon = position.coords.longitude;
-		
-// 		console.log(position.coords.latitude);
-// 		console.log(nowLat);
-		
 		document.moyoAddrFrm.nowLat.value = position.coords.latitude;
 		document.moyoAddrFrm.nowLon.value = position.coords.longitude;
-
-		document.moyoAddrFrm.submit();
 		
+		document.moyoAddrFrm.submit();
 	}
 
 	//위치를 찾지 못했을 때의 콜백메소드
@@ -386,7 +376,6 @@
 <body>
 
 	<div class="container">
-
 		<div class="section-title">
 			<h2>모 여 !</h2>
 		</div>
@@ -579,7 +568,6 @@
 							        document.moyoAddrFrm.nowLon.value = result[0].x;
 							        
 							        document.moyoAddrFrm.submit();
-	
 							     }
 							});
 						}
@@ -608,10 +596,6 @@
 								</c:if>
 							</div>
 							<div>
-<% 
-// String ndate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-// System.out.println(ndate);
-%>
 <%-- 								<c:set var="ndate" value="<%=ndate %>" /> --%>
 <%-- 								<fmt:parseDate value="${ndate }" var="nowDate" --%>
 <%-- 									pattern="yyyy-MM-dd" /> --%>
@@ -679,13 +663,6 @@
 				<c:if test="${empty moyoList }">
 				💀 주변에 모여가 없습니다 💀
 			</c:if>
-				<!-- <div class="row">
-					<div class="moyoSimple">
-						<img class="simpleImg" src="../resources/images/list/5.jpg"></a>
-						Click to slide the panel down or up
-					</div>
-					<div class="moyoDetail">Hello world!</div>
-				</div> -->
 			</div>
 		</div>
 		<hr />

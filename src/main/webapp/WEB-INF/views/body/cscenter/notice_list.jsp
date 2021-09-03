@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@page import="mybatis.NoticeDTO"%>
+<%@page import="mybatis.FaqDTO"%>
 <%@page import="java.util.List"%>
 
 
@@ -13,7 +14,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>공지사항 :: MovingCloset</title>
+    <title>CS Center :: MovingCloset</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -23,6 +24,7 @@
 	        $("Notice").show();
 	        $("Events").hide();
 	    }
+		
 		function openPage(pageName,elmnt,color) {
 		  var i, tabcontent, tablinks;
 		  tabcontent = document.getElementsByClassName("tabcontent");
@@ -38,7 +40,22 @@
 		  elmnt.style.color= white;
 		}
 		
+		
 		document.getElementById("defaultOpen").click();
+		
+		function directQNA(){
+			
+			if(${empty siteUserInfo}){
+				alert("로그인 후 이용해주시기 바랍니다.");
+				location.href="./login.do";
+			}else{
+				location.href="/movingcloset/movingcloset/question.do";
+			
+			}
+			
+		}
+		
+		
 	</script>
 	
     <style>
@@ -64,9 +81,7 @@
         .col { border-collapse: collapse; }
         .col-100 { width: 100%; }
         
-        /*a:link{ color:black; text-decoration:none; }*/
-        a:hover{ color:black; text-decoration:none; !important}
-        a:focus{ color:black; text-decoration:none; }
+        
         
         .tablink {
             background-color: white;
@@ -78,10 +93,7 @@
             float: left;
         }
 		.tablink:focus{outline:none;}
-        .tablink:hover {
-        	border:black; 
-            background-color: black; color:white;
-        }
+        
         
 		#Events{ display:none; }
 		#FAQ{display:none;}
@@ -110,6 +122,7 @@
         #gotoqna{
         	display:inline; float:left;
         	width:200px; height:40px; background-color:black;
+        	color:white;
         }
         #gotoqna:focus{outline:none;}
         
@@ -147,9 +160,9 @@
     		</div>
 
 			<div class="tabs">
-				<button class="tablink" onclick="openPage('Notice', this, 'black')" id="defaultOpen">공지사항</button>
+				<button class="tablink" onclick="openPage('Notice', this, 'black');" id="defaultOpen">공지사항</button>
 				
-				<button class="tablink" onclick="openPage('FAQ', this, 'black')" >자주 묻는 질문</button>
+				<button class="tablink" onclick="openPage('FAQ', this, 'black');" >자주 묻는 질문</button>
 
 			</div>
 			<div style="clear:both;"></div>
@@ -187,7 +200,6 @@
 				    </table>
 				</div>
 				</form>
-	
 				
 	        	
 	        	<div id="FAQ" class="tabcontent">
@@ -204,52 +216,27 @@
 	                        <th>제목</th>
 	                    </tr>
 	                </thead>
+	                <c:forEach items="${faqList }" var="faq">
+				    <input type="hidden" name="faq_idx" value="${faq.faq_idx }"/>
 	                <tbody>
 	                    <tr>
-	                        <td>1</td>
-	                        <td>[주문]</td>
-	                        <td> FAQ 어쩌고저쩌고 블라블라 시끌시끌</td>
+	                        <td>${faq.faq_idx }</td>
+	                        <td>${faq.faq_cate }</td>
+	                        <td><a href='<c:url value='/movingcloset/faqdetail.do?faq_idx=${faq.faq_idx }'/>' style="text-decoration:none;color:black;">
+				                        ${faq.faq_title }</a></td>
 	                    </tr>
-	                    <tr>
-							<td>2</td>
-	                        <td>[배송]</td>
-	                        <td> FAQ 어쩌고저쩌고 블라블라 시끌시끌</td>
-	                    </tr>
-	                    <tr>
-	                        <td>3</td>
-	                        <td>[결제]</td>
-	                        <td> FAQ 어쩌고저쩌고 블라블라 시끌시끌</td>
-	                    </tr>
-	                    <tr>
-	                        <td>4</td>
-	                        <td>[교환/환불]</td>
-	                        <td>FAQ 어쩌고저쩌고 블라블라 시끌시끌</td>
-	                    </tr>
-	                    <tr>
-							<td>5</td>
-	                        <td>[기타]</td>
-	                        <td>FAQ 어쩌고저쩌고 블라블라 시끌시끌</td>
-	                    </tr>
-	                   
 	                </tbody>
+	                </c:forEach>
 	            </table>
+	            
+	            <br />
+    		<button id="gotoqna" type="button" onclick="directQNA();">1:1문의하러 가기</button>
+			
 	        </div>
 	        	
 	        	
     	</div>
-    		<br />
-    		<button id="gotoqna">
-    			<a href="/movingcloset/movingcloset/question.do" style="text-decoration:none;color:white;">1:1문의하러 가기</a>
-    		</button>
-			<div id="pages">
-			    <select name="pageSel" id="pageSel" placeholder="1">
-					<option value="pageNum">1</option>
-					
-			    </select>
-			    <span id="pgTotal">of 1</span>
-			    <button class="pageMove" id="pmL"> < </button>
-			    <button class="pageMove" id="pmR"> > </button>
-			</div>
+    		
 	
     </div>
 </body>
