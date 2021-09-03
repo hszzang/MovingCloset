@@ -45,13 +45,13 @@
 		
 		});
 		
-	 	$('#wish').bind("click",function() {
+/* 	 	$('#wish').bind("click",function() {
  			var src = ($("#wishImg").attr('src') === '../resources/images/heart4.png') 
  			? '../resources/images/heart3.png' 
  			: '../resources/images/heart4.png'; 
  			$("#wishImg").attr('src', src); 
  			
-	 	});
+	 	}); */
 		
 		
 	});
@@ -146,6 +146,16 @@
  	}
  	
 
+    function clickimg() {
+        if (document.getElementById("wishImg").getAttribute('src')=='../resources/images/heart4.png')
+        {
+            document.getElementById("wishImg").setAttribute('src') = '../resources/images/heart3.png';
+        }
+        else if (document.getElementById("wishImg").getAttribute('src') == '../resources/images/heart3.png')
+        {
+            document.getElementById("wishImg").src = '../resources/images/heart4.png';
+        }
+    }
 
 
 
@@ -411,7 +421,7 @@
 					</div><br> 
 					<div>
 						<span><button type="button" style="width: 45%;height:60px;border:black solid 1px;" id="basket" onclick="location.href='#';">장바구니</button></span>
-						<span><button type="button" style="width: 45%;height:60px;" id="wish">위시리스트&nbsp;<img id="wishImg" src="../resources/images/heart4.png" alt="하트_회색" width="25"/></button></span>
+						<span><button type="button" style="width: 45%;height:60px;" id="wish" onclick="clickimg();">위시리스트&nbsp;<img id="wishImg" src="../resources/images/heart4.png" alt="하트_회색" width="25"/></button></span>
 					</div>
 				</div>
 			</div>
@@ -481,6 +491,7 @@
 						</div>
 
 					</td>
+					
 					
 					<td>${review.r_date }</td>
 					<td>
