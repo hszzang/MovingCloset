@@ -91,7 +91,8 @@
 				
 						var positions = [
 							{
-								title: '현재 위치', 
+								title: 'MovingCloset',
+								content: '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b style="padding-top: 5px; padding-bottom: 5px;">MovingCloset</b>',
 								latlng: mapOption.center
 							}
 						];

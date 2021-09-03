@@ -20,8 +20,11 @@ import movingcloset.command.LoginCommand;
 import movingcloset.command.MemberEditCommand;
 import movingcloset.command.MemberOutCommand;
 import movingcloset.command.RegisterActionCommand;
+import movingcloset.command.cscenter.QnaCommand;
+import movingcloset.command.mypage.MypageMoyoBusCommand;
 import mybatis.MemberDTO;
 import mybatis.MybatisMemberImpl;
+import mybatis.QnaDTO;
 
 @Controller
 public class MypageController {
@@ -30,9 +33,16 @@ public class MypageController {
 	
 	@Autowired
 	MemberOutCommand memberOutCommand;
-	
+
 	@Autowired
 	MemberEditCommand memberEditCommand;
+	
+	@Autowired
+	QnaCommand qnaCommand;
+
+  @Autowired
+	MypageMoyoBusCommand mypageMoyoBusCommand;
+
 	
 	
 	@RequestMapping(value="movingcloset/mypage_coupon.do", method=RequestMethod.GET)
@@ -75,7 +85,6 @@ public class MypageController {
 	}
 	
 	
-	
 	@RequestMapping(value="/movingcloset/passCheckPage.do", method=RequestMethod.GET)
 	public String mypagePassCheckPage(Model model, HttpServletRequest request) {
 		return "passCheck";
@@ -93,8 +102,12 @@ public class MypageController {
 	}
 	
 	
-	@RequestMapping(value="movingcloset/mypage_bus.do", method=RequestMethod.GET)
-	public String mypageBus (Locale locale, Model model) {
+	@RequestMapping(value="/movingcloset/mypage_bus.do", method=RequestMethod.GET)
+	public String mypageBus (HttpServletRequest req, Model model) {
+		
+		model.addAttribute("req", req);
+		command = mypageMoyoBusCommand;
+		command.execute(model);
 		
 		return "body/mypage/mypage_moyoBus";
 	}
@@ -142,11 +155,28 @@ public class MypageController {
 		
 		return "body/mypage/mypage_outComplete";
 	}	
+	
+	
+	
+	
+	
+	
+	//현진쓰작업중
 	@RequestMapping(value="movingcloset/mypage_myqna.do", method=RequestMethod.GET)
-	public String mypageQna (Locale locale, Model model) {
+	public String mypageQna (HttpServletRequest request, Model model, QnaDTO qnaDTO) {
+		
+		model.addAttribute("request",request);
+		command = qnaCommand;
+		command.execute(model);
 		
 		return "body/mypage/mypage_myqna";
 	}
+	
+	
+	
+	
+	
+	
 	@RequestMapping(value="movingcloset/mypage_review.do", method=RequestMethod.GET)
 	public String mypageReview (Locale locale, Model model) {
 		

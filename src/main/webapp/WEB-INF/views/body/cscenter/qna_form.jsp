@@ -17,10 +17,10 @@
 
     <style>
         #whole{
-        	width:1000px; height:800px;
+        	width:100%; height:auto;
         	border: solid black 1px;
         	margin-top: 200px;
-        	margin-bottom: 10px;
+        	margin-bottom: 100px;
         	padding: 1% 1% 0 1%;
         }
         #title{
@@ -84,7 +84,7 @@
 <body>
 <div class="container">
     <div id="whole">
-	    <div style="width : 950px; height: 750px;">
+	   
 	    	<span id="title">1:1문의하기</span>
 	        <div>
 	        	<form action="">
@@ -134,11 +134,12 @@
 		                    </tr>
 		            </table>
 					<button id="sendBtn">보내기</button>
+					<br/><br/>
 	        	</form>
 	        </div>
 
 	
-	    </div>
+	   
 	
 
     </div>
