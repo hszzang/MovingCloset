@@ -57,7 +57,11 @@
         	width:98%; height:35px;
         	border:none;
         }
-        #qText{
+        #qCate{
+        	width:98%; height:35px;
+        	border:none;
+        }
+        #qContents{
         	width:98%; height:350px;
         	border:lightgray solid 1px;
         }
@@ -70,15 +74,32 @@
         }
         #fileBtn:focus{outline:none;}
         #info{ color:gray; font-size:11pt;}
-        #sendBtn{
+        #sendQna{
         	width:250px; height:40px;
         	margin:2% 36% 0 38%;
-        	border:none; background-color:darkgray;
+        	border:none; background-color:black;
         	color:white; font-size:15pt; font-weight:lighter;	
         }
-        #sendBtn:focus{outline:none;}
+        #sendQna:focus{outline:none;}
         select, input, textarea:focus{outline:none;}
     </style>
+    <script type="text/javascript">
+    
+    function directQnaList(){
+    	
+    	if(${empty siteUserInfo}){
+			alert("로그인 후 이용해주시기 바랍니다.");
+			location.href="./login.do";
+		}else{
+			var checkSubmit = confirm("1:1문의가 등록되었습니다..");
+			if(checkSubmit == true) {
+				document.qnaFrm.submit();
+				location.href="/movingcloset/movingcloset/mypage_myqna.do";
+			}
+			
+		}
+    }
+    </script>
    
 </head>
 <body>
@@ -87,7 +108,8 @@
 	   
 	    	<span id="title">1:1문의하기</span>
 	        <div>
-	        	<form action="">
+	        	<form name="qnaFrm" method="post"
+	        		action="../movingcloset/qnaWriteAction.do">
 		            <table class="col-100 col" id="tableFrm">
 		                <colgroup>
 		                    <col width="15%">
@@ -96,44 +118,23 @@
 		                    <tr>
 		                        <td>유형</td>
 		                        <td>
-			                        <select name="question" id="qSel" placeholder="문의 유형을 선택해주세요.">
-			                        	<option value="order">주문</option>
-	                        			<option value="delivery">배송</option>
-	                        			<option value="refund">교환/환불</option>
-				                        <option value="paty">결제</option>
-				                        <option value="etc">기타</option>
-			                        </select>
-		                        </td>
+		                        	<input type="text" id="q_cate" name="q_cate" /></td>
 		                    </tr>
 		                    <tr>
 								<td>제목</td>
 		                        <td>
-		                        	<input type="text" id="qTitle" /></td>
+		                        	<input type="text" id="q_title" name="q_title" /></td>
 		                    </tr>
 		                    <tr>
 		                        <td>내용</td>
 		                        <td>
-		                        	<textarea name="" id="qText" cols="30" rows="10" placeholder="의견을 입력해주세요.">
+		                        	<textarea name="q_content" id="q_content" cols="30" rows="10" placeholder="의견을 입력해주세요.">
 		                        	</textarea>
 		                        </td>
 		                    </tr>
-		  					<tr>
-		                        <td>첨부파일</td>
-		                        <td>
-									<button id="fileBtn">
-										<span style="color:white; padding:0; margin:0;">
-											+
-										</span>
-									</button>
-									
-									<div id="info">
-										• 용량은 각 20MB 이하, jpg, png, gif 파일만 첨부 가능합니다. <br />
-										• 이미지에 개인정보(주민번호 등)가 포함되지 않도록 주의해주세요.
-									</div>
-		                        </td>
-		                    </tr>
+		  					
 		            </table>
-					<button id="sendBtn">보내기</button>
+					<button id="sendQna" type="submit" onclick="directQnaList();">보내기</button>
 					<br/><br/>
 	        	</form>
 	        </div>

@@ -40,7 +40,7 @@ public class MypageController {
 	@Autowired
 	QnaCommand qnaCommand;
 
-  @Autowired
+	@Autowired
 	MypageMoyoBusCommand mypageMoyoBusCommand;
 
 	
@@ -163,9 +163,10 @@ public class MypageController {
 	
 	//현진쓰작업중
 	@RequestMapping(value="movingcloset/mypage_myqna.do", method=RequestMethod.GET)
-	public String mypageQna (HttpServletRequest request, Model model, QnaDTO qnaDTO) {
+	public String mypageQna (HttpServletRequest req, Model model, QnaDTO qnaDTO) {
 		
-		model.addAttribute("request",request);
+		System.out.println("마이페이지리뷰내역 컨트롤러호출");
+		model.addAttribute("req",req);
 		command = qnaCommand;
 		command.execute(model);
 		
