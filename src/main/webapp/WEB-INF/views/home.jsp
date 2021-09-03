@@ -53,7 +53,7 @@
 	<a href="./movingcloset/main.do">메인페이지 바로가기</a>
 	<a href="./movingcloset/register.do">회원가입 바로가기</a>
    
-   
+   <a href="./movingcloset/admin.do">관리자</a>
    
    
 </body>

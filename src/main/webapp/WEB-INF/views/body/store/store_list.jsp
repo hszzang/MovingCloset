@@ -1,8 +1,8 @@
-<%@page import="mybatis.ProductDTO"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page import="java.util.List"%>
+<%@page import="mybatis.ProductDTO"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,22 +20,68 @@
     
     <style>
     	.container{width:100%; height:auto; margin:200px 0 100px 0; }
+    	
+    	.section-title {
+			text-align: center;
+			padding-bottom: 10px;
+			padding-top: 50px;
+		}
+		.section-title h2 {
+			font-size: 32px;
+			font-weight: bold;
+			text-transform: uppercase;
+			margin-bottom: 10px;
+			padding-bottom: 20px;
+			position: relative;
+		}
+		.section-title h2::after {
+			content: '';
+			position: absolute;
+			display: block;
+			width: 50px;
+			height: 3px;
+			background: #555555;
+			bottom: 0;
+			left: calc(50% - 25px);
+		}
+    	
         #list{
             border:black;
-            width:100%; height:auto; margin-left:3%; padding:0%;   
+            width:100%; height:auto; padding:0%;   
         }
 
         #filter{
-            width:100%; height:50px; border:none;
+            width:80%; height:150px; border:none;
             text-align:center;
-            margin:100px 0 100px 0;
+            margin:50px 10% 100px 10%;
         }
+        
+        .radiobtn{
+    		border:none; background-color:white;
+    		font-weight:lighter;	
+    	}
+    	.radiobtn:checked{ display:none; }
+		.radiobtn{ font-size:1.3em; font-weight:light; display:none; }
+    	.filterLbl{
+    		font-size:1.3em; font-weight:100;
+    		margin-left:2%;
+    	}
+
+        #filterBtn{
+            display:inline;
+            margin:10px 0 10px 0;
+            font-size:20pt;
+        }
+        
+        
+        /*
         #filterBtn{
             display:inline; text-align:center;
             font-size:12pt;
         }
+        */
         #filterDropdown{
-            margin-left:82%; text-align:right;
+            margin-left:82%; margin-bottom:100px; text-align:right;
             display:inline;
         }
         #order{
@@ -51,7 +97,7 @@
         }
         .img{ width:250px; height:290px; }
         .brand{ font-size: 10pt; font-color:darkgray; font-weight:bolder;}
-        a{ text-decoration: none; color:black;}
+        .as{ text-decoration: none; color:black;}
         .name{ font-size: 11pt; }
         .origPrice{ 
             font-size:12pt; 
@@ -157,18 +203,84 @@
     	}
     }
     
+    
+function clickPb(btn) {
+		//var flag = btn;
+		//flag.submit();
+		
+		console.log(btn);
+		if(btn.checked == true) {
+			if(btn.value == "all") {
+				var flag = "all";
+				document.getElementsByClassName("filterLbl")[0].style.fontWeight = "500";
+				document.getElementsByClassName("filterLbl")[1].style.fontWeight = "100";
+				document.getElementsByClassName("filterLbl")[2].style.fontWeight = "100";
+				document.getElementsByClassName("filterLbl")[3].style.fontWeight = "100";
+				document.getElementsByClassName("filterLbl")[4].style.fontWeight = "100";
+				flag.submit();
+			}
+			else if(btn.value == "의류") {
+				var flag = "의류";
+				document.getElementsByClassName("filterLbl")[0].style.fontWeight = "100";
+				document.getElementsByClassName("filterLbl")[1].style.fontWeight = "500";
+				document.getElementsByClassName("filterLbl")[2].style.fontWeight = "100";
+				document.getElementsByClassName("filterLbl")[3].style.fontWeight = "100";
+				document.getElementsByClassName("filterLbl")[4].style.fontWeight = "100";
+				flag.submit();
+			}
+			else if(btn.value == "신발") {
+				var flag = "신발";
+				document.getElementsByClassName("filterLbl")[0].style.fontWeight = "100";
+				document.getElementsByClassName("filterLbl")[1].style.fontWeight = "100";
+				document.getElementsByClassName("filterLbl")[2].style.fontWeight = "500";
+				document.getElementsByClassName("filterLbl")[3].style.fontWeight = "100";
+				document.getElementsByClassName("filterLbl")[4].style.fontWeight = "100";
+				flag.submit();
+			}
+			else if(btn.value == "가방") {
+				var flag = "가방";
+				document.getElementsByClassName("filterLbl")[0].style.fontWeight = "100";
+				document.getElementsByClassName("filterLbl")[1].style.fontWeight = "100";
+				document.getElementsByClassName("filterLbl")[2].style.fontWeight = "100";
+				document.getElementsByClassName("filterLbl")[3].style.fontWeight = "500";
+				document.getElementsByClassName("filterLbl")[4].style.fontWeight = "100";
+				flag.submit();
+			}
+			else if(btn.value == "잡화") {
+				var flag = "잡화";
+				document.getElementsByClassName("filterLbl")[0].style.fontWeight = "100";
+				document.getElementsByClassName("filterLbl")[1].style.fontWeight = "100";
+				document.getElementsByClassName("filterLbl")[2].style.fontWeight = "100";
+				document.getElementsByClassName("filterLbl")[3].style.fontWeight = "100";
+				document.getElementsByClassName("filterLbl")[4].style.fontWeight = "500";
+				flag.submit();
+			}
+			
+		}
+	}
+    
     </script>
     
 </head>
 <body>
     <div class="container">
-	    <div style="text-align:center;margin-left:5%;">
-	    	<h2>Store</h2>
-	    </div>
+	    <div class="section-title">
+			<h2>STORE</h2>
+		</div>
         
             <div id="list">
 	                <div id="filter">
 		            	<form action="/movingcloset/movingcloset/store.do?flag=${flag }&order=${order }&pageShow=${pageC }" method="get" >
+		            		<hr /><br />
+		            		<div id="filterBtn">
+								<span><label class="filterLbl"><input type="radio" name="flag" checked value="all" class="radiobtn" onclick="clickPb(this);" />ALL</label></span>
+								<span><label class="filterLbl"><input type="radio" name="flag" value="의류" class="radiobtn" onclick="clickPb(this);" />CLOTHES</label></span>
+								<span><label class="filterLbl"><input type="radio" name="flag" value="신발" class="radiobtn" onclick="clickPb(this);" />SHOES</label></span>
+								<span><label class="filterLbl"><input type="radio" name="flag" value="가방"  class="radiobtn" onclick="clickPb(this);" />BAGS</label></span>
+								<span><label class="filterLbl"><input type="radio" name="flag" value="잡화"  class="radiobtn" onclick="clickPb(this);" />ETC</label></span>
+	                   		</div>
+	                   		<br /><hr />
+		            	<!-- 
 		                    <span id="filterBtn">
 		                        <button type="submit" class="btn btn-dark" name="flag" value="all" onClick="flagSubmit(this.form.value)">전체</button>
 		                        <button type="submit" class="btn btn-dark" name="flag" value="의류" onClick="flagSubmit(this.form.value)">의류</button>
@@ -176,6 +288,7 @@
 		                        <button type="submit" class="btn btn-dark" name="flag" value="가방" onClick="flagSubmit(this.form.value)">가방</button>
 		                        <button type="submit" class="btn btn-dark" name="flag" value="잡화" onClick="flagSubmit(this.form.value)">잡화</button>
 		                    </span>
+		                 -->
 		                    <span id="filterDropdown">
 			                        <select name="order" id="order" onchange="selectOrder(this)">
 			                        	<option value="" diabled select hidden>정렬</option>
@@ -194,7 +307,7 @@
                 
 					 <c:forEach items="${pagedList }" var="product">	
 						<span class="products">
-							<a href="/movingcloset/store/detail.do?p_idx=${product.p_idx }&p_code=${product.p_code}"><img class="img" src="../resources/upload/${product.p_sfile }"></a>
+							<a class="as" href="/movingcloset/store/detail.do?p_idx=${product.p_idx }&p_code=${product.p_code}"><img class="img" src="../resources/upload/${product.p_sfile }"></a>
                             <div class="brand">${product.p_brand }</div>
                             <div class="name"><label>${product.p_name }</label></div>
                             <div class="price">
@@ -226,9 +339,11 @@
 				    <button type="button" class="pageMove" id="pmR" onclick="rpBtn(${pageC })"> > </button>
 			    </form>
             </div>
+            <!-- 
             <div style="text-align:right;">
             	<button type="button" id="productInsert" onclick="javascript:location.href='/movingcloset/store/insert.do';">상품추가</button>
             </div>
+             -->
     </div>
 </body>
 </html>

@@ -1,5 +1,7 @@
 package mybatis;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,7 @@ public interface MybatisMemberImpl {
 	//회원탈퇴
 	public int memberOut(String userid);
 	
-	
+	// 관리자모드 회원명단
+	public List<MemberDTO> getMemberList ();
 	
 }

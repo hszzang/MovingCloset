@@ -338,5 +338,5 @@ public class HomeController {
 	public String rules_loc(Locale locale, Model model) {
 		return "body/rules_loc";
 	}
-
+	
 }

@@ -7,31 +7,63 @@
 <mapper namespace="mybatis.MybatisSearchImpl">
 	<select id="searchProducts" parameterType="java.util.ArrayList" resultType="mybatis.ProductDTO">
 		<choose>
-			<when test='keyword=="color"'>
+			<when test='sWords.size==1 and keyword=="color"'>
 				SELECT p.*
 				from product p, product_detail d
 				WHERE p.p_code=d.p_code 
-				AND pd_color LIKE '%'||#{search}||'%'
+				<foreach collection="sWords" item="item" separator=" " open=" " close=" " >
+					AND pd_color LIKE '%'||#{item}||'%'
+				</foreach>
+			</when>
+			<when test='sWords!=null and keyword=="brand"'>
+				SELECT * FROM (
+					SELECT Tb.*, rownum rNum FROM (
+						SELECT * FROM product
+							WHERE 
+						<foreach collection="sWords" item="item" separator="or" open=" " close=" " >
+							p_brand LIKE '%'||#{item}||'%' 
+						</foreach>
+						ORDER BY p_idx DESC
+					)Tb
+				)
+			</when>
+			<when test='sWords!=null and keyword=="tag"'>
+				SELECT * FROM (
+					SELECT Tb.*, rownum rNum FROM (
+						SELECT * FROM product
+							WHERE 
+						<foreach collection="sWords" item="item" separator="or" open=" " close=" " >
+							p_tag LIKE '%'||#{item}||'%' 
+						</foreach>
+						ORDER BY p_idx DESC
+					)Tb
+				)
+			</when>
+			<when test='sWords!=null and sWords.size>1'>
+				SELECT * FROM (
+					SELECT Tb.*, rownum rNum FROM (
+						SELECT * FROM product
+							WHERE 
+							<foreach collection="sWords" item="item" separator="AND" open=" " close=" " >
+								 p_name Like '%'||#{item}||'%'
+							</foreach>
+						ORDER BY p_idx DESC
+					)Tb
+				)
 			</when>
 		<otherwise>
 			SELECT * FROM (
-				SELECT ROW_NUMBER() OVER(ORDER BY p_idx) NUM, A.*
-				FROM product A
+					SELECT Tb.*, rownum rNum FROM (
+						SELECT * FROM product
+				<foreach collection="sWords" item="item" separator="AND" open=" " close=" " >
+						WHERE p_name Like '%'||#{item}||'%'
+				</foreach>
+						AND p_flag!='뉴디'
+						ORDER BY p_idx DESC
+					)Tb
+				)
 		</otherwise>
 		</choose>	
-		<choose>
-			<when test='keyword=="brand"'>
-				WHERE p_brand=#{search} )
-			</when>  
-			<when test='keyword=="tag"'>
-				WHERE p_tag LIKE '%'||#{search}||'%'  )
-			</when>
-			<when test='keyword=="product" or keyword==null'>
-				WHERE p_name LIKE '%'||#{search}||'%' 
-				OR p_brand LIKE '%'||#{search}||'%' 
-				OR p_flag LIKE '%'||#{search}||'%' )
-			</when>
-		</choose>
 		<choose>
 			<when test='order=="asc"'>
 				ORDER BY p_price ASC
@@ -56,3 +88,21 @@
 	</select>
 	
 </mapper>
+
+<!--  
+	<select id="searchProducts2" parameterType="java.util.ArrayList" resultType="mybatis.ProductDTO">
+
+			<if test='sWords!= null and sWords.size>1'>
+				SELECT * FROM (
+					SELECT Tb.*, rownum rNum FROM (
+						SELECT * FROM product
+							WHERE 
+							<foreach collection="sWords" item="item" separator="AND" open="(" close=")" >
+								 p_name Like '%'||#{item}||'%'
+							</foreach>
+						ORDER BY p_idx DESC
+					)Tb
+				)
+			</if>
+	</select>
+-->	

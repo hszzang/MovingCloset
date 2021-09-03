@@ -56,6 +56,9 @@
 		DELETE FROM member WHERE userid=#{0}
 	</delete>
 	
-
+	<!-- 관리자에서 회원 조회 -->
+	<select id="getMemberList" resultType="mybatis.MemberDTO">
+		SELECT * FROM member ORDER BY regidate DESC
+	</select>
 
 </mapper>

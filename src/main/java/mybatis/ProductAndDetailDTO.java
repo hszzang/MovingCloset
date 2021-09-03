@@ -19,6 +19,7 @@ public class ProductAndDetailDTO {
 	private String p_ofile;
 	private String p_sfile;
 	private String p_flag;
+	private String p_tag;
 
 	private MultipartFile uploadFile;
 	

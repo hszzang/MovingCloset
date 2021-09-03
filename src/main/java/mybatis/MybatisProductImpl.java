@@ -13,6 +13,11 @@ public interface MybatisProductImpl {
 	//public ProductDTO getProductDTO(String p_code);  
 	//public String getDetailDTO(String pd_color);
 	
+	// 관리자 모드용
+	public List<ProductAndDetailDTO> StoreList(@Param("start")int start,
+												@Param("end") int end);
+	public List<ProductDTO> NewDList();
+	
 	// 스토어 리스트 불러오기
 	public List<ProductDTO> getStoreList(ProductDTO productDTO);
 	//public List<ProductDTO> getOrderedList(@Param("order") String order,
@@ -33,6 +38,7 @@ public interface MybatisProductImpl {
 	
 	// 페이징 위한 상품 수 카운트
 	public int getCount(@Param("flag") String flag);
+	public int getNewDCount();
 	
 	// 가격정렬
 	public List<ProductDTO> descPrice(ProductDTO productDTO);

@@ -16,16 +16,43 @@
     <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
     <style>
     	.container{margin-top:200px; margin-bottom:200px;}
+    	
+    	.section-title {
+			text-align: center;
+			padding-bottom: 10px;
+			padding-top: 50px;
+		}
+		
+		.section-title h2 {
+			font-size: 32px;
+			font-weight: bold;
+			text-transform: uppercase;
+			margin-bottom: 10px;
+			padding-bottom: 20px;
+			position: relative;
+		}
+		
+		.section-title h2::after {
+			content: '';
+			position: absolute;
+			display: block;
+			width: 50px;
+			height: 3px;
+			background: #555555;
+			bottom: 0;
+			left: calc(50% - 25px);
+		}
+    	
         #list{
             border:none;
             width:100%; height:auto;
-            margin-left:3%; margin-bottom:200px; padding:0;
+            margin-bottom:200px; padding:0;
             display:inline; float:left;
         }
 
         #filter{
             width:80%; height:350px; border:none;
-            padding:0; margin:0 15% 0 10%;
+            padding:0; margin:0 10% 0 10%;
         }
         #searchSpan{ display:inline; }
     	#searchIn{
@@ -58,12 +85,12 @@
 		*/
     	.filterLbl{
     		font-size:1.3em; font-weight:100;
-    		margin-left:6%;
+    		margin-left:3%;
     	}
 
         #filterBtn{
             display:inline;
-            margin-left:50px;
+            margin-left:17%;
             font-size:20pt;
         }
         
@@ -84,6 +111,7 @@
         	float:right; text-align: center;
             width:150px; height:35px; border: none;
         }
+        order:focus{ display:none;}
 		
         .products{
             width: 274px; height:420px;
@@ -186,6 +214,9 @@
     <!--  
         <form action="">
         -->
+        <div class="section-title">
+			<h2>Search</h2>
+		</div>
             <div id="list">
             
                 <div id="filter">
