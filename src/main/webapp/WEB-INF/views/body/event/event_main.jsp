@@ -6,12 +6,44 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<link rel="stylesheet" href="../resources/css/event_main.css" />
+<link rel="stylesheet" href="../resources/css/event_main.css?after" />  
 
-<title>Insert title here</title>
+<title>EVENT :: MovingCloset</title>
+
+<style type="text/css">
+.sectiontitle {
+   text-align: center;
+   padding-bottom: 10px;
+   padding-top: 50px;
+}
+
+.sectiontitle h2 {
+   font-size: 32px;
+   font-weight: bold;
+   text-transform: uppercase;
+   margin-bottom: 10px;
+   padding-bottom: 20px;
+   position: relative;
+}
+
+.sectiontitle h2::after {
+   content: '';
+   position: absolute;
+   display: block;
+   width: 50px;
+   height: 3px;
+   background: #555555;
+   bottom: 0;
+   left: calc(50% - 25px);
+}
+</style>
 </head>
 <body>
 
+<div class="container">
+		<div class="sectiontitle" style="margin-top:150px;">
+	    	<h2>EVENT</h2>
+	    </div>
 <div class="section" style="margin-top: 80px;">
 	<input type="radio" name="slide" id="slide01" checked>
 	<input type="radio" name="slide" id="slide02">
@@ -103,6 +135,6 @@
 	</div>
 	
 </div>
-
+</div>
 </body>
 </html>

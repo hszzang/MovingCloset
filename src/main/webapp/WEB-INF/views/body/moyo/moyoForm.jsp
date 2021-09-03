@@ -41,7 +41,7 @@ align-items: center;
 border-radius: 10px;
 -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
 -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
 }
 
 

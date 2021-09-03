@@ -57,15 +57,19 @@ public class StoreDetailCommand implements CommandImpl {
 			String[] stocks = p_stock.split(",");
 			System.out.println(p_stock);
 			
-			List<ReviewDTO> reviews = sqlSession.getMapper(MybatisProductImpl.class).getReviews(p_code);
-			
-			String userid = (String) session.getAttribute("siteUserInfo");
-			if(userid != null) {
-				
-				buyAndGroupDTO = sqlSession.getMapper(MybatisProductImpl.class).buyReview(userid,p_code);
-				model.addAttribute("buyAndGroupDTO",buyAndGroupDTO);
-				
-			}
+			/*
+			 * List<ReviewDTO> reviews =
+			 * sqlSession.getMapper(MybatisProductImpl.class).getReviews(p_code);
+			 * 
+			 * String userid = (String) session.getAttribute("siteUserInfo"); if(userid !=
+			 * null) {
+			 * 
+			 * buyAndGroupDTO =
+			 * sqlSession.getMapper(MybatisProductImpl.class).buyReview(userid,p_code);
+			 * model.addAttribute("buyAndGroupDTO",buyAndGroupDTO);
+			 * 
+			 * } 잠시비활성화
+			 */
 			
 			
 			
@@ -77,7 +81,7 @@ public class StoreDetailCommand implements CommandImpl {
 			model.addAttribute("stocks", stocks);
 			//model.addAttribute("stocks", p_stock);
 			
-			model.addAttribute("reviews", reviews);
+			/* model.addAttribute("reviews", reviews); 잠시비활성화*/
 
 			
 			System.out.println("StoreDetailCommand 호출 완료");

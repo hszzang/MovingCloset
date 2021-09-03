@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ 
+<!--  
+
+select *
+from coupon
+where brand = **** and 타입 = ***
+order by 카테고리
+
+--> 
+<mapper namespace="mybatis.MybatisCouponImpl">
+
+<!-- 	<select id="getCouponList" resultType="mybatis.CouponDTO">
+		SELECT * FROM COUPON
+		<if test="cou_brand != null">
+			WHERE cou_brand = #{cou_brand}
+		</if>
+	</select> -->
+	
+	<select id="getCouponList" resultType="mybatis.CouponDTO">
+		SELECT * FROM COUPON
+		<where>
+			<if test="cou_brand != null">
+				cou_brand = #{cou_brand}
+			</if> 
+			<if test="cou_name != null">
+				AND cou_name LIKE '%'||#{cou_name}||'%'
+			</if>
+		</where>
+			<if test="cou_cate != null">
+				<choose>
+					<when test="cou_cate == 'cou_idx'">
+						ORDER BY cou_idx DESC
+					</when>
+					<when test="cou_cate == 'cou_per'">
+						ORDER BY cou_per DESC
+					</when>
+					<when test="cou_cate == 'cou_views'">
+						ORDER BY cou_views DESC
+					</when>
+				</choose>
+			</if>
+	</select>
+	
+	<insert id="couponDown">
+		INSERT INTO coupon_use (userid, cou_code) VALUES (#{userid}, #{cou_code})
+	</insert>
+	
+
+</mapper>
+ 
