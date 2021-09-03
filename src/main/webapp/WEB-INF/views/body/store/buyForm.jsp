@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,7 +45,7 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 }
 
 #buyFrm {
-	margin: 4% 7%; width: 70%;
+	margin: 4% 0%; width: 100%;
 }
 
 #buyFrm *:not(input, select){
@@ -66,16 +67,7 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 	border: 0;
 }
 
-.custom-control-input:checked ~ .custom-control-label::before {
-    border-color: #ff6c2f !important;
-    background-color: #ff6c2f !important;
-}
 
-.custom-control-input:focus ~ 
-          .custom-control-label::before {
-	border-color: #ff6c2f !important;
-	box-shadow: 0 0 0 0rem rgba(0, 0, 0, 0) !important;
-}
 
 .goodsImg{
 	width:100px; height:100px;
@@ -133,6 +125,17 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 .red{
 	color:red;
 }
+.custom-control-input:checked ~ .custom-control-label::before {
+    border-color: #ff6c2f !important;
+    background-color: #ff6c2f !important;
+}
+
+.custom-control-input:focus ~ 
+          .custom-control-label::before {
+	border-color: #ff6c2f !important;
+	box-shadow: 0 0 0 0rem rgba(0, 0, 0, 0) !important;
+}
+
 </style>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -216,6 +219,105 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 		
 	}
 	
+	
+	var totalSale = 0;
+	function couponChecked(idx,cou_per){
+	
+		var cb = document.getElementById("couponBox"+idx);
+		var originalPrice = document.getElementById("hidPrice").value;
+		var bd_count = document.getElementById("hidCount").value;
+		
+		originalPrice = parseInt(originalPrice)*parseInt(bd_count);
+		var percent = parseInt(cou_per);
+		var result = originalPrice*(1-(percent/100));
+		var resultString = result.toString();
+		var first = "";
+		if(resultString.length <= 4){
+			first = resultString.substr(0,1);
+		}else if(resultString.length <= 5){
+			first = resultString.substr(0,2);
+		}else if(resultString.length <= 6){
+			first = resultString.substr(0,3);
+		}
+		var last = resultString.substr(resultString.length-3,3);
+		
+		
+		var html = "";
+		html += '<table class="table" id="price"'+idx+' style="text-align:center;">';
+		html += '<thead>';
+		html += '<tr>';
+		html += '<th>가격</th>';
+		html += '<th>할인율</th>';
+		html += '<th>할인가격</th>';
+		html += '</tr>';
+		html += '</thead>';
+		html += '<tbody>';
+		html += '<tr>';
+		html += '<td style="vertical-align:middle;">'+originalPrice+'</td>';
+		html += '<td style="vertical-align:middle;">'+cou_per+'%</td>';
+		html += '<td style="vertical-align:middle;">'+first+","+last+'</td>';
+		html += '</tr>';
+		html += '</tbody>';
+		html += '</table>';
+		
+		
+		var totalhtml ="";
+
+		
+		
+		if(cb.checked==true){
+			document.getElementById("price"+idx).innerHTML = html;
+			totalSale += (originalPrice-result);
+			
+			var finaltotal = (originalPrice-totalSale);
+			var finalString = finaltotal.toString();
+			var one = "";
+			if(finalString.length <= 4){
+				one = finalString.substr(0,1);				
+			}else if(finalString.length <= 5){
+				one = finalString.substr(0,2);				
+			}else if(finalString.length <= 6){
+				one = finalString.substr(0,3);				
+			}
+			var two = finalString.substr(finalString.length-3,3);
+			
+			totalhtml += '<div id="resultPrice">';
+			totalhtml += '<input type="hidden" name="b_totalpay" value="'+finaltotal+'"/>';
+			totalhtml += '<h1>총 결제 금액</h1>';
+			totalhtml += '<br />';
+			totalhtml += '<h2>'+one+','+two+'</h2>';
+			totalhtml += '</div>';	
+			document.getElementById("resultPrice").innerHTML = totalhtml;
+		}else{
+			document.getElementById("price"+idx).innerHTML = "";
+			totalSale -= (originalPrice-result);
+			
+			var finaltotal = (originalPrice-totalSale);
+			var finalString = finaltotal.toString();
+			var one = "";
+			if(finalString.length <= 4){
+				one = finalString.substr(0,1);				
+			}else if(finalString.length <= 5){
+				one = finalString.substr(0,2);				
+			}else if(finalString.length <= 6){
+				one = finalString.substr(0,3);				
+			}
+			var two = finalString.substr(finalString.length-3,3);
+			
+			
+			
+			totalhtml += '<div id="resultPrice">';
+			totalhtml += '<input type="hidden" name="b_totalpay" value="'+finaltotal+'"/>';
+			totalhtml += '<h1>총 결제 금액</h1>';
+			totalhtml += '<br />';
+			totalhtml += '<h2>'+one+','+two+'</h2>';
+			totalhtml += '</div>';
+			document.getElementById("resultPrice").innerHTML = totalhtml;
+
+		}
+		
+	}
+	
 </script>
 </head>
 <body>
@@ -224,7 +326,7 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 			<h2>구매상품 정보</h2>
 		</div>
 		<div class="input-form-background" align="center">
-			<form name="buyFrm" id="buyFrm" action="/store/buyProduct.do" method="post" onsubmit="return validate(this.form);"> 
+			<form name="buyFrm" id="buyFrm" action="../store/buyProduct.do" method="post" onsubmit="return validate(this.form);"> 
 				<div class="input-form">
 					<div class="container" id="goodsBox" >
 						<div class="row">
@@ -235,31 +337,33 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 									  <th>브랜드</th>
 									  <th>상품명&nbsp;(상품코드)</th>
 									  <th>가격</th>
-									  <th>구매가</th>
 									  <th>수량</th>
 									  <th>사이즈</th>
 									</tr>
 							    </thead>
 							    <tbody>
 						    		<fmt:parseNumber value="${productAndDetailDTO.p_price}" var="p_priceNum"/>
-						    		<c:if test="${productAndDetailDTO.cou_per != null }">
-							    		<fmt:parseNumber value="${productAndDetailDTO.cou_per}" var="cou_perNum"/>						    		
-						    		</c:if>
-							    	
+						    		<fmt:parseNumber value="${bd_count}" var="bd_countNum"/>
+						    		<fmt:formatNumber var="priceValue" value="${p_priceNum*bd_countNum }"/>
+						    		
+						    		<c:set var = "length" value = "${fn:length(priceValue)}"/>
+						    		
+								    <c:set var = "pricefinalEnd" value = "${fn:substring(priceValue,length-3,length)}"/>
 							    	<tr id="goods">
 							    		<td><img class="goodsImg" src="../resources/upload/${productDTO.p_sfile }" /></td>
 							    		<td style="vertical-align:middle;">${productAndDetailDTO.p_brand }</td>
 							    		<td style="vertical-align:middle;">${productAndDetailDTO.p_name }<br />(${productAndDetailDTO.p_code })</td>
-							    		<td style="vertical-align:middle; color:gray;"><del>${productAndDetailDTO.p_price }</del></td>
-							    		
-							    		<c:choose>
-							    			<c:when test="${productAndDetailDTO.cou_per != null }">
-									    		<td style="vertical-align:middle;">${p_priceNum*cou_perNum }</td>							    			
+								    	<c:choose>
+							    			<c:when test="${length == 4 }">
+							    				<td style="vertical-align:middle;">${fn:substring(priceValue,0,1)}${pricefinalEnd }</td>
 							    			</c:when>
-							    			<c:otherwise>
-							    				<td style="vertical-align:middle;">${p_priceNum }</td>
-							    			</c:otherwise>
-							    		</c:choose>
+							    			<c:when test="${length == 5 }">
+							    				<td style="vertical-align:middle;">${fn:substring(priceValue,0,2)}${pricefinalEnd }</td>
+							    			</c:when>
+											<c:when test="${length == 6 }">
+							    				<td style="vertical-align:middle;">${fn:substring(priceValue,0,3)}${pricefinalEnd }</td>
+											</c:when>
+							    		</c:choose>	
 							    		
 							    		<td style="vertical-align:middle;">${bd_count }</td>
 							    		<td style="vertical-align:middle;">${productAndDetailDTO.pd_size }</td>
@@ -270,18 +374,82 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 					</div>
 				</div>
 				<br />
+				<input type="hidden" id="hidPrice" value="${productAndDetailDTO.p_price }"/>
+				<input type="hidden" id="hidCount" value="${bd_count }"/>
+				<input type="hidden" name="p_code" value="${productAndDetailDTO.p_code }"/>
+				<div class="input-form">
+					<div class="container" id="goodsBox" >
+					<div class="row">
+					
+					<c:forEach items="${couponAndUseDTO }" var="couDTO" varStatus="status">
+							<table class="table table-hover" id="goodsTable">
+								<thead class="goodsTitle">
+									<tr>
+										<th>쿠폰선택</th>
+									<c:if test="${couDTO.cou_sfile != null }">
+									  <th>쿠폰이미지</th>										
+									</c:if>
+										  <th>브랜드</th>
+										  <th>쿠폰명&nbsp;(쿠폰코드)</th>
+										  <th>쿠폰내용</th>
+										  <th>할인율</th>
+										  <th>쿠폰기한</th>
+										  
+									</tr>
+							    </thead>
+							    <tbody>
+						    		<fmt:parseNumber value="${couDTO.cou_per}" var="couPerNum"/>
+							    	<tr id="goods">
+							    		<td align="center" valign="middle">
+<%-- 								    		<div class="custom-control custom-checkbox">
+												<label class="custom-control-label"	for="couponBox">
+													<input type="checkbox" class="custom-control-input" id="couponBox${status.index }" name="cou_check${status.index }"> 
+												</label>
+											</div> --%>
+											<input type="checkbox" id="couponBox${status.index }" name="cou_check${status.index }" onclick="couponChecked(${status.index},${couDTO.cou_per });"> 
+											
+							    		</td>
+							    		<c:if test="${couDTO.cou_sfile != null }">
+							    		<td><img class="goodsImg" src="../resources/upload/${couDTO.cou_sfile }" /></td>
+							    		</c:if>
+							    		<td style="vertical-align:middle;">${couDTO.cou_brand }</td>
+							    		<td style="vertical-align:middle;">${couDTO.cou_name }<br />(${couDTO.cou_code })</td>
+							    		<td style="vertical-align:middle;">${couDTO.cou_content }</td>
+							    		<td style="vertical-align:middle;">${couDTO.cou_per }%</td>
+							    		<td style="vertical-align:middle;">${couDTO.cou_start }&nbsp;-&nbsp;${couDTO.cou_end }</td>
+							    		
+							    	</tr>
+							    </tbody>
+							</table>
+							<table class="table" id="price${status.index }" style="text-align:center;">
+
+							</table>
+						</c:forEach>
+						</div>
+					</div>
+				</div>
+				 <br />
+					<div id="resultPrice">
+						<input type="hidden" name="b_totalpay" value="${priceValue }"/>
+						<h1>총 결제 금액</h1>
+						<br />
+						<c:choose>
+			    			<c:when test="${length == 4 }">
+			    				<td style="vertical-align:middle;"><h2>${fn:substring(priceValue,0,1)}${pricefinalEnd }</h2></td>
+			    			</c:when>
+			    			<c:when test="${length == 5 }">
+			    				<td style="vertical-align:middle;"><h2>${fn:substring(priceValue,0,2)}${pricefinalEnd }</h2></td>
+			    			</c:when>
+							<c:when test="${length == 6 }">
+			    				<td style="vertical-align:middle;"><h2>${fn:substring(priceValue,0,3)}${pricefinalEnd }</h2></td>
+							</c:when>
+			    		</c:choose>	
+					</div>
+				<br />	
 				<div class="input-form col-md-12 mx-auto">
 			    	<input type="hidden" name="bd_count" value="${bd_count }"/>
 			    	<input type="hidden" name="bd_size" value="${productAndDetailDTO.pd_size }"/>
- 					<c:choose>
-		    			<c:when test="${productAndDetailDTO.cou_per != null }">
-							<input type="hidden" name="b_totalpay" value="${p_priceNum*cou_perNum }"/>		    			
-						</c:when>
-		    			<c:otherwise>
-							<input type="hidden" name="b_totalpay" value="${p_priceNum }"/>		    			
-		    			</c:otherwise>
-		    		</c:choose>
-			    	
+
 					<div class="input-form-wrap">
 						<h3 style="text-align:left;padding-top:25px;">구매자 정보</h3>
 						<div class="custom-control custom-checkbox" id="fillBuyInfoWrap" align="right">
@@ -362,11 +530,11 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 										결제수단
 										</td>
 										<td class="d-flex align-items-center">
-											<label><input type="radio" name="payment" checked />&nbsp;&nbsp;무통장</label>
+											<label><input type="radio" name="b_payment" checked value="무통장"/>&nbsp;&nbsp;무통장</label>
 											<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<label><input type="radio" name="payment" />&nbsp;&nbsp;카드결제</label>
+											<label><input type="radio" name="b_payment" />&nbsp;&nbsp;카드결제</label>
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<label><input type="radio" name="payment" />
+											<label><input type="radio" name="b_payment" />
 											&nbsp;&nbsp;
 											<img src="../resources/images/buy/kakaoPay.png" class="kakaoPay" style="vertical-align:middle" /></label> -->
 										</td>

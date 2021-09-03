@@ -15,7 +15,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script>
 	$(function(){
+
 		zzimList();
+			
 	});
 	
 	function zzimList() {
@@ -160,27 +162,11 @@
          }
       
       });
-      
-       /* $('#wish').bind("click",function() {
-          var src = ($("#wishImg").attr('src') === '../resources/images/heart4.png') 
-          ? '../resources/images/heart3.png'
-          : '../resources/images/heart4.png'; 
-          $("#wishImg").attr('src', src); 
-          
-       }); */
+
       
    });
    
-  /*   function clickimg() {
-        if (document.getElementById("wishImg").getAttribute('src')=='../resources/images/heart4.png')
-        {
-            document.getElementById("wishImg").setAttribute('src') = '../resources/images/heart3.png';
-        }
-        else if (document.getElementById("wishImg").getAttribute('src') == '../resources/images/heart3.png')
-        {
-            document.getElementById("wishImg").setAttribute('src') = '../resources/images/heart4.png';
-        }
-    } */
+
    
    function delReview(r_idx, p_idx){
       if(confirm("정말 리뷰를 삭제하시겠습니까?")){
@@ -216,6 +202,7 @@
       htmls += '<div class="r_content" id="rid'+rid+'">';
       htmls += '<textarea maxlength="100"; style="resize: none;width:350px;height:50px;" name="r_content" class="text100" cols="30" rows="10" placeholder="최대 100자 까지 등록 가능합니다." ></textarea>';
       htmls += '</div>';
+
 
       var photoHtml = "";
       photoHtml += '<div id="photo'+rid+'">';
@@ -274,8 +261,6 @@
 
 
 
-
-    
 </script>
 
 <style>
@@ -471,6 +456,7 @@
 <title>Store 상세보기 :: MovingCloset</title>
 </head>
 <body>
+
    <div class="container" style="margin-top:10%;margin-bottom:3%;">
       <form name="detailFrm" method="POST"  enctype="multipart/form-data"
          action="../store/buy.do">
@@ -606,6 +592,7 @@
                      ${review.r_content }
                   </div>
 
+
                </td>
                
                <td>${review.r_date }</td>
@@ -659,6 +646,8 @@
          <br />
       </div>
       
+
+		
 <!-- 댓글 끝 ------------------------------------------------------------------------------------------------ -->
    
    <!-- The Modal -->
