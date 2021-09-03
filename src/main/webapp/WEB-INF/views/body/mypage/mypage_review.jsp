@@ -101,42 +101,41 @@
                         </td>
                     </tr>
                 </table>
-                <table class="table table-hover">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th width="10%">번호</th>
-                            <th width="50%">제목</th>
-                            <th width="15%">작성자</th>
-                            <th width="10%">조회수</th>
-                            <th width="15%">작성일</th>
-                        </tr>
-                    </thead>
-                    <c:choose>
-                        <c:when test="${empty boardLists }">
-                            <tr>
-                                <td colspan="6" align="center">
-                                    등록된 리뷰내역이 없습니다.
-                                </td>
-                            </tr>
-                        </c:when>
-                        <c:otherwise>
-                            <c:forEach items="${boardLists }" var="row" varStatus="loop">
-                            <tr>
-                                <td width="10%">
-                                    ${map.totalCount - (((map.pageNum-1) * map.pageSize)
-                                        + loop.index) }	
-                                </td>
-                                <td width="50%" align="left">
-                                    <a href="../mvcboard/view.do?idx=${row.idx }">${row.title }</a>
-                                </td>
-                                <td width="15%" align="left">${row.name }</td>
-                                <td width="10%" align="left">${row.visitcount }</td>
-                                <td width="15%" align="left">${row.postdate }</td>
-                            </tr>
-                            </c:forEach>
-                        </c:otherwise>
-                    </c:choose>
-                </table>
+                <div id="noticeTable" style="width:100%; height:auto;">
+		    
+			    	<form method="post" action="notiList">
+			    		<input type="hidden" name="noti_idx" value="${notice.noti_idx }"/> 
+				    	<div id="Notice" class="tabcontent">
+						    <table class="col-100 col">
+						        <colgroup>
+						            <col width="15%">
+						            <col width="70%" >
+						            <col width="15%">
+						        </colgroup>
+						        <thead>
+						            <tr>
+						                <th>번호</th>
+						                <th style="text-align:left;">제목</th>
+						                <th>등록일</th>
+						            </tr>
+						        </thead>
+						        <c:forEach items="${notiList }" var="notice">
+						        <input type="hidden" name="noti_idx" value="${notice.noti_idx }"/>
+						        <tbody>
+						            <tr>
+						                <td>${notice.noti_idx }</td>
+						                <td style="text-align:left;">
+						                    <a href='<c:url value='/movingcloset/noticedetail.do?noti_idx=${notice.noti_idx }'/>' style="text-decoration:none;color:black;">
+						                        ${notice.noti_title }</a></td>
+						                <td><fmt:formatDate value="${notice.noti_postdate}" pattern="yyyy-MM-dd" /></td>
+						            </tr>
+						            
+						        </tbody>
+						        </c:forEach>
+						    </table>
+						</div>
+					</form>
+    			</div>
             </div>
         </div>
     </div>
