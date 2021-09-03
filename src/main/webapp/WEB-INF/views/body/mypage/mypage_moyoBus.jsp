@@ -89,25 +89,44 @@
   }
   
   .moyoInfo {
-  	align-self: center; margin-left: 6%;
+  	align-self: center; margin-left: 6%; width:35%;
   }
   
   .moyoInfo_title { font-weight: bold; font-size: 1.1em; }
   .moyoInfo_detail { font-size: 0.8em; }
   
   .moyoBusInfo {
-  	margin-left: 11%;
+  	width:45%; margin-left:-5%;
   	align-self: center; text-align: center;
   }
   
   .moyoBusInfo_X {
-  	width: 100%; margin-left: 12%;
+  	width: 100%;
   }
   .moyoBusInfo_update {
   	font-size: 0.8em;
   }
   
+  .userOption {
+  	align-self: center; text-align: right;
+  	color: black; cursor: pointer; margin-right:5px; 
+  }
+  
+  .userOption i {
+  	color:black;
+  }
+  
 </style>
+
+<script type="text/javascript">
+function moyoDelete(idx) {
+	var confirmCheck = confirm("해당 모여의 신청을 취소하시겠습니까?");
+	if(confirmCheck == true) {
+		alert("삭제가 완료되었습니다.");
+		location.href='../movingcloset/myPageMoyoDelete.do?m_idx='+idx;
+	}
+}
+</script>
 <body>
 	<div class="container" id="maintain">
         <div class="row">
@@ -189,32 +208,19 @@
                        		</c:if>
                         </c:forEach>
                         </div>
-<!--                         <span class="bus_name"> -->
-<!--                             01번 버스 가는중.. -->
-<!--                         </span> -->
-<!--                         <span class="location"> -->
-<!--                             서울특별시 강남구 테헤란로 538 -->
-<!--                         </span> -->
-<!--                         <span class="landmark"> -->
-<!--                             삼성역 2호선 -->
-<!--                         </span> -->
+                        <div class="userOption">
+	                        <a class="dropdown" data-toggle="dropdown"><i id="dropDown" class="material-icons">more_vert</i></a>
+							<div class="dropdown-menu dropdown-menu-right" >
+								<a onclick="commentEdit();" class="dropdown-item" >신청 정보 수정</a>
+								<a class="dropdown-item" 
+									onclick="moyoDelete(${list.m_idx});">신청 취소</a>
+							</div>
+                        </div>
                     </div>
                 </c:forEach>
                 <c:if test="${empty moyoUseList }">
                 	신청한 모여가 없습니다!
                 </c:if>
-<!--                     <div class="bus_loc"> -->
-<!--                         <img src="../resources/images/mypage/bus.png" id="bus"> -->
-<!--                         <span class="bus_name"> -->
-<!--                             01번 버스 가는중.. -->
-<!--                         </span> -->
-<!--                         <span class="location"> -->
-<!--                             서울특별시 강남구 테헤란로 538 -->
-<!--                         </span> -->
-<!--                         <span class="landmark"> -->
-<!--                             삼성역 2호선 -->
-<!--                         </span> -->
-<!--                     </div> -->
                 </div>
             </div>
         </div>

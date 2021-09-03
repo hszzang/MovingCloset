@@ -20,11 +20,6 @@
 		ORDER BY m_dday DESC
 	</select>
 	
-	<resultMap type="java.util.HashMap" id="countMoyoUser">
-		<result column="m_idx" property="m_idx" javaType="java.lang.String" />
-		<result column="usernum" property="usernum" javaType="java.lang.String" />
-	</resultMap>
-	
 	<select id="countMoyoUser" resultType="int">
 		SELECT count(*)
 		FROM moyo_use 
@@ -44,6 +39,7 @@
 		VALUES (#{m_idx}, #{userid}, #{mu_name}, #{mu_phone}, #{mu_email}, #{mu_time}, sysdate)
 	</insert>
 	
+	<!-- 쪼르기 -->
 	<select id="getPlzList" resultType="mybatis.PleaseDTO">
 		SELECT * FROM please 
 		WHERE plz_status='진행' ORDER BY plz_end
@@ -52,6 +48,14 @@
 	<select id="getPlzProduct" resultType="mybatis.ProductDTO">
 		SELECT * FROM product WHERE p_code=#{0}
 	</select>
+	
+	<select id="countPlzUser" resultType="int">
+		SELECT COUNT(*) FROM please_use WHERE plz_idx=#{0}
+	</select>
+	
+	<insert id="insertPlzJoin">
+		INSERT INTO please_use VALUES(#{0}, #{1})
+	</insert>
 	
 	
 	<!-- 마이페이지 모여버스 -->
@@ -66,6 +70,18 @@
 	
 	<select id="getMyMoyoBus" resultType="mybatis.MoyoBusDTO">
 		SELECT * FROM moyo_bus WHERE m_idx=#{0}
+	</select>
+	
+	
+	<!-- 마이페이지 쪼르기내역 -->
+	<select id="getMyPlzList" resultType="mybatis.PleaseDTO">
+		SELECT * FROM please 
+		WHERE plz_idx = (
+			SELECT plz_idx FROM please_use WHERE userid=#{0})
+	</select>
+	
+	<select id="getMyPlzProduct" resultType="mybatis.ProductDTO">
+		SELECT * FROM product WHERE p_code=#{0}
 	</select>
 
 </mapper>

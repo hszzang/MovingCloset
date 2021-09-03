@@ -50,17 +50,19 @@
     padding-bottom: 15px;
  }
  
-.result{
-   text-align: center;
+.result {
+  
    border-top: solid 0.5px black;
    padding-top: 25px;
  }
  
   .busImg{
-    width: 50px;
-    height: 80px;
+    width: 120px;
+    height: 120px;
     margin-left: 50px;
-    margin-top: 4%;
+    margin-top: 2%;
+    object-fit: cover;
+    border: 0.5px solid lightgray;
   } 
   
  .result_bus{
@@ -91,11 +93,11 @@
   }
   
   .moyoInfo {
-  	align-self: center; margin-left: 6%;
+  	align-self: center; margin-left: 4%;
   }
   
-  .moyoInfo_title { font-weight: bold; font-size: 1.1em; }
-  .moyoInfo_detail { font-size: 0.8em; }
+  .moyoInfo_title { font-weight: bold; font-size: 1.2em; }
+  .moyoInfo_detail { font-size: 0.9em; }
   
   .moyoBusInfo {
   	margin-left: 11%;
@@ -103,13 +105,37 @@
   }
   
   .moyoBusInfo_X {
-  	width: 100%; margin-left: 12%;
+  	width: 100%; margin-left: 12%; text-align: center;
   }
   .moyoBusInfo_update {
   	font-size: 0.8em;
   }
   
+  .plzStatus {
+  	font-weight: bold; color:#FF6C2F; font-size: 1.3em
+  }
+  
+  .userOption {
+  	align-self: center; width:15%; text-align: right;
+  	color: black; cursor: pointer;
+  }
+  
+  .userOption i {
+  	color:black;
+  }
+  
 </style>
+<script type="text/javascript">
+
+function plzDelete(idx) {
+	var confirmCheck = confirm("해당 상품에 대한 쪼르기 신청을 취소하시겠습니까?");
+	if(confirmCheck == true) {
+		alert("삭제가 완료되었습니다.");
+		location.href='../movingcloset/myPagePlzDelete.do?plz_idx='+idx;
+	}
+}
+
+</script>
 <body>
     <div class="container" id="maintain">
         <div class="row">
@@ -149,66 +175,53 @@
                     </p>
                 </div>
                 <div class="result">
-<%--                 <c:forEach items="${moyoUseList }" var="list"> --%>
-<!--                 	<div class="bus_loc"> -->
-<!--                         <img src="../resources/images/mypage/bus.png" class="busImg"> -->
-<!--                         <div class="moyoInfo"> -->
-<%--                         <c:forEach items="${moyoList }" var="moyoinfo"> --%>
-<%--                         	<c:if test="${list.m_idx eq moyoinfo.key }"> --%>
-<%--                         		<span class="moyoInfo_title">${moyoinfo.value.m_name }</span><br/> --%>
+                <c:forEach items="${myPlzProduct }" var="plzProduct" varStatus="plzLoop">
+                	<div class="bus_loc">
+                        <img src="../resources/upload/${plzProduct.p_sfile }" class="busImg">
+                        <div class="moyoInfo">
+								<span class="moyoInfo_detail">
+	                        	${plzProduct.p_brand }<br/>
+	                        	</span>
+                        		<span class="moyoInfo_title">
+                        			${plzProduct.p_name } ${plzProduct.p_code }
+	                        		<br/>${plzProduct.p_price } 원
+                        		</span><br/>
                         		
-<%-- 		                        <fmt:parseDate value="${moyoinfo.value.m_dday }" var="m_dday" pattern="yyyy-MM-dd HH:mm:ss" /> --%>
-<%-- 								<fmt:formatDate value="${m_dday }" var="m_dday" pattern="yyyy-MM-dd" /> --%>
-<!-- 								<span class="moyoInfo_detail"> -->
-<%-- 	                        	모여 DAY : ${m_dday } --%>
-<%-- 	                        	<c:if test="${moyoinfo.value.m_status eq '진행' }"> --%>
-<!-- 	                        		(모집중) -->
-<%-- 	                        	</c:if> --%>
-<%-- 	                        	<c:if test="${moyoinfo.value.m_status eq '실패' }"> --%>
-<!-- 	                        		(진행실패) -->
-<%-- 	                        	</c:if> --%>
-<!-- 	                        	<br/> -->
-<%-- 	                        	${moyoinfo.value.m_addr }<br/> --%>
-<!-- 	                        	</span> -->
-<%--                         	</c:if> --%>
-<%--                         </c:forEach> --%>
-<!--                         </div> -->
-<!--                         <div class="moyoBusInfo"> -->
-<%--                         <c:set var="forLoop" value="false" /> --%>
-<%--                        	<c:forEach items="${moyoBusList }" var="moyobus"> --%>
-<%--                        		<c:if test="${not forLoop }"> --%>
-<%-- 	                        	<c:if test="${list.m_idx eq moyobus.key }"> --%>
-<%-- 		                        	<c:if test="${empty moyobus.value }"> --%>
-<!-- 		                        		<div class="moyoBusInfo_X">아직 버스가 배정되지 않았습니다.</div> -->
-<%-- 		                        		<c:set var="forLoop" value="true" /> --%>
-<%-- 		                        	</c:if> --%>
-<%-- 		                        	<c:if test="${not empty moyobus.value }"> --%>
-<%-- 		                        		${moyobus.value.mb_num } 버스 <b>${moyobus.value.mb_status }</b> <br/> --%>
-<%-- 		                        		${moyobus.value.mb_addr } <br/> --%>
-<%-- 		                        		<span class="moyoBusInfo_update">( 최종업데이트 : ${moyobus.value.mb_lastupdate } )</span> --%>
-<%-- 		                        	</c:if> --%>
-<%-- 	                        	</c:if> --%>
-<%--                        		</c:if> --%>
-<%--                         </c:forEach> --%>
-<!--                         </div> -->
-<!--                     </div> -->
-<%--                 </c:forEach> --%>
-<%--                 <c:if test="${empty moyoUseList }"> --%>
-<!--                 	신청한 모여가 없습니다! -->
-<%--                 </c:if> --%>
-<!--                     <div class="bus_loc"> -->
-<!--                         <img src="../resources/images/mypage/bus.png" id="bus"> -->
-<!--                         <span class="bus_name"> -->
-<!--                             01번 버스 가는중.. -->
-<!--                         </span> -->
-<!--                         <span class="location"> -->
-<!--                             서울특별시 강남구 테헤란로 538 -->
-<!--                         </span> -->
-<!--                         <span class="landmark"> -->
-<!--                             삼성역 2호선 -->
-<!--                         </span> -->
-<!--                     </div> -->
-                    <p>보유한 쿠폰이 없습니다.</p>
+                        </div>
+                        <div class="moyoBusInfo">
+                        	<c:if test="${myPlzList[plzLoop.index].plz_status eq '진행' }">
+		                        <fmt:parseDate value="${myPlzList[plzLoop.index].plz_end }" var="m_dday" pattern="yyyy-MM-dd HH:mm:ss" />
+								<fmt:formatDate value="${m_dday }" var="m_dday" pattern="yyyy-MM-dd" />
+                        		<span class="plzStatus">모집중</span><br/>
+                        		( ${m_dday} 마감 )
+                        	</c:if>
+                        	<c:if test="${myPlzList[plzLoop.index].plz_status eq '성공' }">
+		                        <fmt:parseDate value="${myPlzList[plzLoop.index].plz_end }" var="m_dday" pattern="yyyy-MM-dd HH:mm:ss" />
+								<fmt:formatDate value="${m_dday }" var="m_dday" pattern="yyyy-MM-dd" />
+                        		<span class="plzStatus">성공!</span><br/>
+                        		( ${m_dday} 마감 )
+                        	</c:if>
+                        	<c:if test="${myPlzList[plzLoop.index].plz_status eq '실패' }">
+		                        <fmt:parseDate value="${myPlzList[plzLoop.index].plz_end }" var="m_dday" pattern="yyyy-MM-dd HH:mm:ss" />
+								<fmt:formatDate value="${m_dday }" var="m_dday" pattern="yyyy-MM-dd" />
+                        		<span class="plzStatus" style="color:gray;">실패</span><br/>
+                        		( ${m_dday} 마감 )
+                        	</c:if>
+<!--                        		<div class="moyoBusInfo_X">아직 버스가 배정되지 않았습니다.</div> -->
+                        </div>
+                        <div class="userOption">
+	                        <a class="dropdown" data-toggle="dropdown"><i id="dropDown" class="material-icons">more_vert</i></a>
+							<div class="dropdown-menu dropdown-menu-right" >
+<!-- 								<a onclick="commentEdit();" class="dropdown-item" >수정</a> -->
+								<a class="dropdown-item" 
+									onclick="plzDelete("${myPlzList[plzLoop.index].plz_idx }");">신청 취소</a>
+							</div>
+                        </div>
+                    </div>
+                </c:forEach>
+                <c:if test="${empty myPlzProduct }">
+                	신청한 쪼르기가 없습니다!
+                </c:if>
                 </div>
             </div>
         </div>

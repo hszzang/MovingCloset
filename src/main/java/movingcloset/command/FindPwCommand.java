@@ -15,8 +15,6 @@ import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import movingcloset.util.MailSendUtil;
-import movingcloset.util.MailVO;
 import mybatis.MybatisMemberImpl;
 
 @Service
@@ -56,9 +54,9 @@ public class FindPwCommand implements CommandImpl{
 				messageHelper.setTo("<"+ email +">");
 				messageHelper.setSubject("[MovingCloset] 임시 비밀번호를 발송하였습니다.");
 				messageHelper.setText(
-						"<div>MovingCloset 회원님의 임시 비밀번호를 발급드립니다.</h5><br/>"
-								+ "<h4>[" + newPassword + "]</h4><br/>"
-								+ "해당 비밀번호는 임시 비밀번호이므로, 로그인 후 비밀번호를 변경해주세요.</div>", true);
+						"<div><br/><h5>MovingCloset 회원님의 임시 비밀번호를 발급드립니다.</h5><br/><br/>"
+								+ "<h4>[ " + newPassword + " ]</h4><br/>"
+								+ "해당 비밀번호는 임시 비밀번호이므로, 로그인 후 비밀번호를 변경해주세요.<br/></div>", true);
 				mailSender.send(message);
 			}
 			catch (Exception e) {
@@ -68,7 +66,5 @@ public class FindPwCommand implements CommandImpl{
 			int changeNewPw = sqlSession.getMapper(MybatisMemberImpl.class).changeNewPw(newPassword, userid, email);
 		}
 		model.addAttribute("findPwEmail", findPwEmail);
-		System.out.println(findPwEmail);
-		
 	}
 }

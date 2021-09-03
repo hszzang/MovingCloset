@@ -1,23 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MovingCloset_Store</title>
+    <title>쪼르기 :: MovingCloset</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   	
   	<script>
-		
 		/*카운트다운*/
-		var countDownDate = new Date("Aug 31, 2021 15:37:25").getTime();
+		var countDownDate = [];
+		<c:forEach items="${plzList }" var="pList" varStatus="pListLoop">
+			countDownDate[${pListLoop.index }] = new Date("${pList.plz_end }").getTime();
+		</c:forEach>
 
 		// Update the count down every 1 second
 		var x = setInterval(function() {
@@ -26,32 +29,38 @@
 			var now = new Date().getTime();
 			    
 			// Find the distance between now and the count down date
-			var distance = countDownDate - now;
-			    
-			// Time calculations for days, hours, minutes and seconds
-			var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-			var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-			var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-			var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-			    
-			// Output the result in an element with id="demo"
-			document.getElementById("time").innerHTML = days + "일 " + hours + "시간 "
-			+ minutes + "분 " + seconds + "초";
-			document.getElementById("time2").innerHTML = days + "일 " + hours + "시간 "
-			+ minutes + "분 " + seconds + "초";
-			document.getElementById("time3").innerHTML = days + "일 " + hours + "시간 "
-			+ minutes + "분 " + seconds + "초";
-			document.getElementById("time4").innerHTML = days + "일 " + hours + "시간 "
-			+ minutes + "분 " + seconds + "초";
-			document.getElementById("time5").innerHTML = days + "일 " + hours + "시간 "
-			+ minutes + "분 " + seconds + "초";
-		    
-			// If the count down is over, write some text 
-			if (distance < 0) {
-			  clearInterval(x);
-			  document.getElementById("time").innerHTML = "마감되었습니다";
+			var distance = [];
+			var days = [];
+			var hours = [];
+			var minutes = [];
+			var seconds = [];
+			for(var i = 0; i < ${fn:length(plzList)}; i++) {
+				
+				distance[i] = countDownDate[i] - now;
+				
+				if(distance[i] < 0) {
+					clearInterval(x);
+					  document.getElementsByClassName("CountDown")[i].innerHTML = "마감되었습니다";
+				}
+				else {
+					days[i] = Math.floor(distance[i] / (1000 * 60 * 60 * 24));
+					hours[i] = Math.floor((distance[i] % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+					minutes[i] = Math.floor((distance[i] % (1000 * 60 * 60)) / (1000 * 60));
+					seconds[i] = Math.floor((distance[i] % (1000 * 60)) / 1000);
+					
+					document.getElementsByClassName("CountDown")[i].innerHTML = days[i] + "일 " + hours[i] + "시간 "
+																				+ minutes[i] + "분 " + seconds[i] + "초";
+				}
 			}
 		}, 1000);
+		
+		function clickPlzBtn(idx) {
+			var confirmCheck = confirm("해당 상품을 쪼르기 신청하시겠습니까?");
+			if(confirmCheck == true) {
+				alert("신청이 완료되었습니다.");
+				location.href='../movingcloset/pleaseJoin.do?plz_idx='+idx;
+			}
+		}
 		
   	</script>
   	
@@ -137,7 +146,7 @@
 			float:left; display:inline-block;
 		}
 		.plzImg{
-			width:95%; height:auto; margin:0 2% 0 2%;
+			width:90%; height:340px; object-fit: cover; margin:0 2% 0 2%;
 		}
 
 		.plzInfo{
@@ -147,18 +156,18 @@
 		}
 		
 		.plzUpperDiv{
-			width:100%; height:30%;
+			width:100%; height:25%;
 			border:none; 
 			padding-left:1%; margin:0;
 			margin-bottom: 1%;
 		}
-		.plzBrand{font-size:10pt; color:gray; display:block; }
-		.plzPName{font-size:12pt; font-weight:bold; display:block;}
+		.plzBrand{font-size:12pt; color:gray; display:block; }
+		.plzPName{font-size:16pt; font-weight:bold; display:block;}
 		.plzOriPrice{font-size:10pt; color:gray; font-weight:lighter; display:inline;}
-		.plzNowPrice{display:inline;}
+		.plzNowPrice{display:inline; text-align: right; display: block; margin-top: -2%; margin-right: 3%; border-bottom: 0.7px solid #ff6c2f; }
 		.plzPercent{color:#FF6C2F; display:inline; font-size:12pt;}
-		.plzPrice{color:#FF6C2F; font-size:14pt; font-weight:bold; display:inline;}
-	    .plzWon{color:black; font-weight:bold; display:inline;}
+		.plzPrice{color:#FF6C2F; font-size:20pt; font-weight:bold; display:inline; font-style: italic;}
+	    .plzWon{color:black; font-size:18pt; font-weight:bold; display:inline;}
 		
 		.plzDownDiv{
 			width:100%; height:55%; margin:0;
@@ -250,7 +259,6 @@
         
         /* 마감임박 */
         .deadTitle{
-			padding-top:30px;
 			padding-bottom:30px;
 			padding-left:55px;
 		}
@@ -376,6 +384,7 @@
 			<span>!</span>
 		</h1>
 	</div>
+	
 	<!-- 진행중인 쪼르기 -->
 	<div id="onGoing" class="tabcontent">
 		<div class="outDiv">
@@ -383,62 +392,65 @@
        			<div class="plzProduct">
        				<span class="plzImgs">
                            <!-- <span id="mainImg"> -->
-                               <img class="plzImg" src="../resources/images/please/p1.jpg"/>
+                               <img class="plzImg" src="../resources/upload/${plzProduct[0].p_sfile }"/>
                            <!-- </span> -->
        				</span>
        				
         			<span class="plzInfo">
         				<div class="plzUpperDiv">
-        					<div class="plzBrand">TEN C</div>
+        					<div class="plzBrand">${plzProduct[0].p_brand }</div>
         					<div class="plzPName">
-        						TEN C_ARCTIC PARKA <br />
-        						17CTCUC03075003780 888 BLUE</div>
-        					<div class="plzOriPrice"><strike>1,180,000</strike></div>
-        					<!-- <div class="plzNowPrice"> -->
-        						<span class="plzPercent"><em>34%</em></span>
-        						<span class="plzPrice">778,800</span>
+        						${plzProduct[0].p_name } ${plzProduct[0].p_code }</div>
+<%--         					<div class="plzOriPrice"><strike>${plzProduct[0].p_price }</strike></div> --%>
+        					<div class="plzNowPrice">
+<!--         						<span class="plzPercent"><em>34%</em></span> -->
+        						<span class="plzPrice"><fmt:formatNumber type="number" value="${plzProduct[0].p_price }" /></span>
         						<span class="plzWon">원</span>	
-        					<!-- </div> -->
+        					</div>
         				</div>
         				<div class="plzDownDiv">
         					<span class="badge badge-warning HotTime">
         						모집중!
         					</span>
 							<div class="CountDown" id="time"></div>
-							<div class="progress" style="width:95%; height:20px; margin-left:10px;">
-								<div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width:70%; height:20px"></div>
-							</div>
-								<div class="progress-info"><b>70 / 100(명)</b></div>
+							<c:forEach items="${countPlzUser }" var="countPlzUser">
+								<c:if test="${countPlzUser.key eq plzList[0].plz_idx }">
+								<div class="progress" style="width:95%; height:20px; margin-left:10px;">
+									<div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width:${countPlzUser.value / plzList[0].plz_goal * 100}%; height:20px"></div>
+								</div>
+								<div class="progress-info"><b>${countPlzUser.value } / ${plzList[0].plz_goal }(명)</b></div>
+								</c:if>
+							</c:forEach>
         				</div>
-        				<button class="pleaseBtn">쪼르기</button>
+        				<button class="pleaseBtn" onclick="clickPlzBtn(${plzList[0].plz_idx });">쪼르기</button>
         			</span>
        			</div>
        		</div>
        	</div>
-       	<hr style="width:90%; margin-left:0; border: solid 1px #000000; background-color:#000000; margin-top:100px; margin-bottom:50px;" >
+       	<hr style="width:90%; margin-left:0; border: solid 1px #000000; background-color:#000000; margin-top:50px; margin-bottom:40px;" >
         <div class="ingTitle">	
         	<h1 class="ing">진행중</h1>
         </div>	
+    		<c:forEach items="${plzProduct }" var="pInfo" varStatus="pInfoLoop" begin="1" >
        	<div class="outDiv">
        		<div class="innerDiv2">
        			<div class="plzProduct">
        				<span class="plzImgs">
                            <span id="mainImg">
-                               <img class="plzImg" src="../resources/images/please/p2.jpg"/>
+                               <img class="plzImg" src="../resources/upload/${pInfo.p_sfile }"/>
                            </span>
        				</span>
        				
         			<span class="plzInfo">
         				<div class="plzUpperDiv">
-        					<div class="plzBrand">SnowPeak Apparel</div>
+        					<div class="plzBrand">${pInfo.p_brand }</div>
         					<div class="plzPName">
-        						블랙 멀티캠 롱다운 자켓_CA <br />
-        						S20WME-DJ12
+        						${pInfo.p_name } ${pInfo.p_code }
         					</div>
-        					<div class="plzOriPrice"><strike>599,000</strike></div>
+<%--         					<div class="plzOriPrice"><strike>${pInfo.p_price }</strike></div> --%>
         					<div class="plzNowPrice">
-        						<span class="plzPercent"><em>40%</em></span>
-        						<span class="plzPrice">359,000</span>
+<!--         						<span class="plzPercent"><em>40%</em></span> -->
+        						<span class="plzPrice"><fmt:formatNumber type="number" value="${pInfo.p_price }" /></span>
         						<span class="plzWon">원</span>	
         					</div>
         				</div>
@@ -447,369 +459,25 @@
 	       						모집중!
 	       					</span>
 							<div class="CountDown" id="time2"></div>
+							<c:forEach items="${countPlzUser }" var="countPlzUser">
+								<c:if test="${countPlzUser.key eq plzList[pInfoLoop.index].plz_idx }">
+									<c:set var="achievementRate" value="${countPlzUser.value / plzList[pInfoLoop.index].plz_goal * 100}" />
+									<c:set var="countPlzUserVar" value="${countPlzUser.value }" />
+								</c:if>
+							</c:forEach>
 							<div class="progress" style="width:95%; height:20px; margin-left:10px;">
-								<div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width:40%; height:20px"></div>
+								<div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width:${achievementRate }%; height:20px"></div>
 							</div>
-								<div class="progress-info"><b>40 / 100(명)</b></div>
+							<div class="progress-info"><b>${countPlzUserVar } / ${plzList[pInfoLoop.index].plz_goal }(명)</b></div>
        					</div>
-        				<button class="pleaseBtn">쪼르기</button>
+        				<button class="pleaseBtn" onclick="clickPlzBtn(${plzList[pInfoLoop.index].plz_idx });">쪼르기</button>
         			</span>
        			</div>
        		</div>
        	</div>
-        	
-        	<div class="outDiv">
-        		<div class="innerDiv2">
-        			<div class="plzProduct">
-        				<span class="plzImgs">
-                            <span id="mainImg">
-                                <img class="plzImg" src="../resources/images/please/p3.jpg"/>
-                            </span>
-        				</span>
-        				
-         			<span class="plzInfo">
-         				<div class="plzUpperDiv">
-         					<div class="plzBrand">SnowPeak Apparel</div>
-         					<div class="plzPName">
-         						에디트 아웃포켓형 숏다운 자켓_MS <br />
-         						S20WMP-DJ86</div>
-         					<div class="plzOriPrice"><strike>439,000</strike></div>
-         					<div class="plzNowPrice">
-         						<span class="plzPercent"><em>40%</em></span>
-         						<span class="plzPrice">263,400</span>
-         						<span class="plzWon">원</span>	
-         					</div>
-         				</div>
-         				<div class="plzDownDiv2">
-	       					<span class="badge badge-warning HotTime">
-	       						모집중!
-	       					</span>
-							<div class="CountDown" id="time3"></div>
-							<div class="progress" style="width:95%; height:20px; margin-left:10px;">
-								<div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width:50%; height:20px"></div>
-							</div>
-								<div class="progress-info"><b>50 / 100(명)</b></div>
-       					</div>
-         				<button class="pleaseBtn">쪼르기</button>
-         			</span>
-        			</div>
-        		</div>
-        	</div>
-        	
-        	<div class="outDiv">
-        		<div class="innerDiv2">
-        			<div class="plzProduct">
-        				<span class="plzImgs">
-                            <span id="mainImg">
-                                <img class="plzImg" src="../resources/images/please/p4.jpg"/>
-                            </span>
-        				</span>
-        				
-         			<span class="plzInfo">
-         				<div class="plzUpperDiv">
-         					<div class="plzBrand">EASTLOGUE</div>
-         					<div class="plzPName">
-         						FLAK SHIRT / MULTI MADRAS <br />
-         						1179095</div>
-         					<div class="plzOriPrice"><strike>298,000</strike></div>
-         					<div class="plzNowPrice">
-         						<span class="plzPercent"><em>50%</em></span>
-         						<span class="plzPrice">149,000</span>
-         						<span class="plzWon">원</span>	
-         					</div>
-         				</div>
-         				<div class="plzDownDiv2">
-	       					<span class="badge badge-warning HotTime">
-	       						모집중!
-	       					</span>
-							<div class="CountDown" id="time4"></div>
-							<div class="progress" style="width:95%; height:20px; margin-left:10px;">
-								<div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width:20%; height:20px"></div>
-							</div>
-								<div class="progress-info"><b>20 / 100(명)</b></div>
-       					</div>
-         				<button class="pleaseBtn">쪼르기</button>
-         			</span>
-        			</div>
-        		</div>
-        	</div>
-        	
-        	<div class="outDiv">
-        		<div class="innerDiv2">
-        			<div class="plzProduct">
-        				<span class="plzImgs">
-                            <span id="mainImg">
-                                <img class="plzImg" src="../resources/images/please/p5.jpg"/>
-                            </span>
-        				</span>
-        				
-         			<span class="plzInfo">
-         				<div class="plzUpperDiv">
-         					<div class="plzBrand">BURBERRY</div>
-         					<div class="plzPName">
-         						버버리 8038569 패치워크 퀼팅 체크 자켓<br />
-         						1175028
-         					</div>
-         					<div class="plzOriPrice"><strike>1,431,000</strike></div>
-         					<div class="plzNowPrice">
-         						<span class="plzPercent"><em>22%</em></span>
-         						<span class="plzPrice">1,113,000</span>
-         						<span class="plzWon">원</span>	
-         					</div>
-         				</div>
-         				<div class="plzDownDiv2">
-	       					<span class="badge badge-warning HotTime">
-	       						모집중!
-	       					</span>
-							<div class="CountDown" id="time5"></div>
-							<div class="progress" style="width:95%; height:20px; margin-left:10px;">
-								<div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width:45%; height:20px"></div>
-							</div>
-								<div class="progress-info"><b>45 / 100(명)</b></div>
-       					</div>
-         				<button class="pleaseBtn">쪼르기</button>
-         			</span>
-        			</div>
-        		</div>
-        	</div>
-        	
-        	<!-- <div class="outDiv">
-        		<div class="innerDiv">
-        			<div class="plzTitleDiv">
-        				<span class="plzTitle">쪼르기상품</span>
-        			</div>
-        			<hr />	
-        			<div class="plzProduct">
-        				<span class="plzImgs">
-                            <span id="mainImg">
-                                <img class="plzImg" src="../resources/images/please/p6.jpg"/>
-                            </span>
-        				</span>
-        				
-         			<span class="plzInfo">
-         				<div class="plzUpperDiv">
-         					<div class="plzBrand">Acne Studios</div>
-         					<div class="plzPName">
-         						아크네 모크 라이더 가죽 자켓 <br />
-         						1AZ166 900</div>
-         					<div class="plzOriPrice"><strike>2,133,000</strike></div>
-         					<div class="plzNowPrice">
-         						<span class="plzPercent"><em>29%</em></span>
-         						<span class="plzPrice">1,523,000</span>
-         						<span class="plzWon">원</span>	
-         					</div>
-         				</div>
-         				<div class="plzDownDiv">
-         					<div class="until">마감까지</div><br />
-         					<div class="plzRemainingTime">
-         						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
-         						<span class="expNum">12</span><span class="expWord">시</span>
-         						<span class="expNum">35</span><span class="expWord">분</span>
-         						<span class="expNum">20</span><span class="expWord">초</span>
-         					</div>
-         					 <div class="progress">
-									<div class="progress-bar bg-warning" style="width:70%">70%</div>
-							</div>
-							<span class="plzAchivementRate">490 / 700 달성</span>
-         				</div>
-         				<button class="pleaseBtn">쪼르기 !</button>
-         			</span>
-        			</div>
-        		</div>
-        	</div> -->
+       		</c:forEach>
+    <!-- 진행중 쪼르기 끝 -->   
         
-        </div>	
-        <!-- 진행중 쪼르기 끝 -->   
-        
-        
-        
-        <!-- 마감한 쪼르기  -->    
-        <div id="Expired" class="tabcontent">
-        	
-        	<div class="outDiv">
-        		<div class="innerDiv">
-        			<!-- <div class="plzTitleDiv">
-        				<span class="plzTitle">쪼르기상품</span>
-        			</div> -->
-        			<hr />	
-        			<div class="plzProduct">
-        				<span class="plzImgs">
-                            <!-- <span id="mainImg"> -->
-                                <img class="plzImg" src="../resources/images/please/p7.jpg"/>
-                            <!-- </span> -->
-        				</span>
-        				
-         			<span class="plzInfo">
-         				<div class="plzUpperDiv">
-         					<div class="plzBrand">PRADA</div>
-         					<div class="plzPName">
-         						프라다 체크 코트 <br />
-         						P625NE 1XF9 F0008</div>
-         					<div class="plzOriPrice"><strike>3,983,000</strike></div>
-         					<!-- <div class="plzNowPrice"> -->
-         						<span class="plzPercent"><em>22%</em></span>
-         						<span class="plzPrice">3,098,000</span>
-         						<span class="plzWon">원</span>	
-         					<!-- </div> -->
-         				</div>
-         				<div class="plzDownDiv">
-         					<div class="until">마감까지</div><br />
-         					<div class="plzRemainingTime">
-         						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
-         						<span class="expNum">12</span><span class="expWord">시</span>
-         						<span class="expNum">35</span><span class="expWord">분</span>
-         						<span class="expNum">20</span><span class="expWord">초</span>
-         					</div>
-         					 <div class="progress">
-									<div class="progress-bar bg-warning" style="width:100%">100%</div>
-							</div>
-							<span class="plzAchivementRate">700 / 700 달성</span>
-         				</div>
-         				<button class="pleaseBtn">쪼르기 성공!</button>
-         			</span>
-        			</div>
-        		</div>
-        	</div> <!-- 1 끝 -->
-        	
-        	<div class="outDiv">
-        		<div class="innerDiv">
-        			<!-- <div class="plzTitleDiv">
-        				<span class="plzTitle">쪼르기상품</span>
-        			</div> -->
-        			<hr />	
-        			<div class="plzProduct">
-        				<span class="plzImgs">
-                            <!-- <span id="mainImg"> -->
-                                <img class="plzImg" src="../resources/images/please/p8.jpg"/>
-                            <!-- </span> -->
-        				</span>
-        				
-         			<span class="plzInfo">
-         				<div class="plzUpperDiv">
-         					<div class="plzBrand">TEN C</div>
-         					<div class="plzPName">
-         						TEN C_ARCTIC PARKA <br />
-         						17CTCUC03075003780 769 PURPLE PANSE</div>
-         					<div class="plzOriPrice"><strike>1,180,000</strike></div>
-         					<div class="plzNowPrice">
-         						<div class="plzPercent"><em>34%</em></div>
-         						<div class="plzPrice">778,000</div>
-         						<div class="plzWon">원</div>	
-         					</div>
-         				</div>
-         				<div class="plzDownDiv">
-         					<div class="until">마감까지</div><br />
-         					<div class="plzRemainingTime">
-         						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
-         						<span class="expNum">12</span><span class="expWord">시</span>
-         						<span class="expNum">35</span><span class="expWord">분</span>
-         						<span class="expNum">20</span><span class="expWord">초</span>
-         					</div>
-         					 <div class="progress">
-									<div class="progress-bar bg-warning" style="width:100%">100%</div>
-							</div>
-							<span class="plzAchivementRate">700 / 700 달성</span>
-         				</div>
-         				<button class="pleaseBtn">쪼르기 성공!</button>
-         			</span>
-        			</div>
-        		</div>
-        	</div> <!-- 2 끝 -->
-        	
-        	<div class="outDiv">
-        		<div class="innerDiv">
-        			<!-- <div class="plzTitleDiv">
-        				<span class="plzTitle">쪼르기상품</span>
-        			</div> -->
-        			<hr />	
-        			<div class="plzProduct">
-        				<span class="plzImgs">
-                            <!-- <span id="mainImg"> -->
-                                <img class="plzImg" src="../resources/images/please/p9.jpg"/>
-                            <!-- </span> -->
-        				</span>
-        				
-         			<span class="plzInfo">
-         				<div class="plzUpperDiv">
-         					<div class="plzBrand">TATRAS</div>
-         					<div class="plzPName">
-         						남성 라구사 RAGUSA <br />
-         						MTA19S8064TT01</div>
-         					<div class="plzOriPrice"><strike>318,000</strike></div>
-         					<!-- <div class="plzNowPrice"> -->
-         						<span class="plzPercent"><em>53%</em></span>
-         						<span class="plzPrice">151,050</span>
-         						<span class="plzWon">원</span>	
-         					<!-- </div> -->
-         				</div>
-         				<div class="plzDownDiv">
-         					<div class="until">마감까지</div><br />
-         					<div class="plzRemainingTime">
-         						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
-         						<span class="expNum">12</span><span class="expWord">시</span>
-         						<span class="expNum">35</span><span class="expWord">분</span>
-         						<span class="expNum">20</span><span class="expWord">초</span>
-         					</div>
-         					 <div class="progress">
-									<div class="progress-bar bg-warning" style="width:100%">100%</div>
-							</div>
-							<span class="plzAchivementRate">700 / 700 달성</span>
-         				</div>
-         				<button class="pleaseBtn">쪼르기 성공!</button>
-         			</span>
-        			</div>
-        		</div>
-        	</div> <!-- 3 끝 -->
-        	
-        	<div class="outDiv">
-        		<div class="innerDiv">
-        			<!-- <div class="plzTitleDiv">
-        				<span class="plzTitle">쪼르기상품</span>
-        			</div> -->
-        			<hr />	
-        			<div class="plzProduct">
-        				<span class="plzImgs">
-                            <!-- <span id="mainImg"> -->
-                                <img class="plzImg" src="../resources/images/please/p10.jpg"/>
-                            <!-- </span> -->
-        				</span>
-        				
-         			<span class="plzInfo">
-         				<div class="plzUpperDiv">
-         					<div class="plzBrand">OFF WHITE</div>
-         					<div class="plzPName">
-         						애로우 체크 플란넬 오버셔츠 <br />
-         						OMGA133R21FAB0022500</div>
-         					<div class="plzOriPrice"><strike>588,000</strike></div>
-         					<!-- <div class="plzNowPrice"> -->
-         						<span class="plzPercent"><em>22%</em></span>
-         						<span class="plzPrice">457,000</span>
-         						<span class="plzWon">원</span>	
-         					<!-- </div> -->
-         				</div>
-         				<div class="plzDownDiv">
-         					<div class="until">마감까지</div><br />
-         					<div class="plzRemainingTime">
-         						<span class="expNum" style="margin-left:10px;">20</span><span class="expWord">일</span>
-         						<span class="expNum">12</span><span class="expWord">시</span>
-         						<span class="expNum">35</span><span class="expWord">분</span>
-         						<span class="expNum">20</span><span class="expWord">초</span>
-         					</div>
-         					 <div class="progress">
-									<div class="progress-bar bg-warning" style="width:70%">70%</div>
-							</div>
-							<span class="plzAchivementRate">490 / 700 달성</span>
-         				</div>
-         				<button class="pleaseBtn">쪼르기 실패!</button>
-         			</span>
-        			</div>
-        		</div>
-        	</div> <!-- 4 끝 -->
-        	
-        </div>
-        <!-- 마감한 쪼르기 끝  -->
-                
-
 </div>
 </body>
 </html>

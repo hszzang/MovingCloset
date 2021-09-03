@@ -1,6 +1,7 @@
 package movingcloset.command.moyo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,13 +33,20 @@ public class PleaseCommand implements CommandImpl {
 		ArrayList<PleaseDTO> plzList = sqlSession
 				.getMapper(MybatisMoyoImpl.class).getPlzList();
 		model.addAttribute("plzList", plzList);
+//		System.out.println(plzList);
 
 		if(!plzList.isEmpty()) {
 			
+			HashMap<String, Integer> countPlzUser = new HashMap<String, Integer>();
+			ArrayList<ProductDTO> plzProduct = new ArrayList<ProductDTO>();
 			for(PleaseDTO p : plzList) {
-				ArrayList<ProductDTO> plzProduct = sqlSession
-						.getMapper(MybatisMoyoImpl.class).getPlzProduct(p.getP_code());
+				countPlzUser.put(p.getPlz_idx(), sqlSession
+						.getMapper(MybatisMoyoImpl.class).countPlzUser(p.getPlz_idx()));
+				plzProduct.add(sqlSession
+						.getMapper(MybatisMoyoImpl.class).getPlzProduct(p.getP_code()));
+				model.addAttribute("countPlzUser", countPlzUser);
 				model.addAttribute("plzProduct", plzProduct);
+//				System.out.println(plzProduct);
 			}
 		}
 	}

@@ -15,6 +15,7 @@ import movingcloset.command.moyo.MoyoCommand;
 import movingcloset.command.moyo.MoyoFormCommand;
 import movingcloset.command.moyo.MoyoJoinCommand;
 import movingcloset.command.moyo.PleaseCommand;
+import movingcloset.command.moyo.PleaseJoinCommand;
 import mybatis.MoyoDTO;
 
 @Controller
@@ -33,6 +34,9 @@ public class MoyoController {
 	
 	@Autowired
 	PleaseCommand pleaseCommand;
+	
+	@Autowired
+	PleaseJoinCommand pleaseJoinCommand;
 	
 	// 모여
 	@RequestMapping(value="/movingcloset/moyo.do", method={RequestMethod.GET, RequestMethod.POST})
@@ -78,11 +82,15 @@ public class MoyoController {
 		return "body/moyo/please";
 	}
 	
-	// 조르기 신청폼
-	@RequestMapping(value="/movingcloset/pleaseForm.do", method=RequestMethod.GET)
-	public String pleaseForm() {
+	// 조르기 신청
+	@RequestMapping(value="/movingcloset/pleaseJoin.do", method=RequestMethod.GET)
+	public String pleaseJoin(Model model, HttpServletRequest req) {
 		
-		return "body/moyo/pleaseForm";
+		model.addAttribute("req", req);
+		command = pleaseJoinCommand;
+		command.execute(model);
+		
+		return "redirect:/movingcloset/mypage_please.do";
 	}
 	
 	// 지난 모여/조르기 목록
