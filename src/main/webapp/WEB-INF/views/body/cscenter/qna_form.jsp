@@ -53,15 +53,15 @@
         	width:250px; height:35px;
         	border:lightgray solid 1px;
         }
-        #qTitle{
+        #q_title{
         	width:98%; height:35px;
         	border:none;
         }
-        #qCate{
+        #q_cate{
         	width:98%; height:35px;
         	border:none;
         }
-        #qContents{
+        #q_content{
         	width:98%; height:350px;
         	border:lightgray solid 1px;
         }
