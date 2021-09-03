@@ -1,5 +1,7 @@
 package movingcloset.command.store;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -51,7 +53,7 @@ public class StoreBuyCommand implements CommandImpl{
 		 */
 		
 		String userid = (String)session.getAttribute("siteUserInfo");
-		String b_buyer = req.getParameter("username");
+		String b_buyer = req.getParameter("b_buyer");
 		String mobile1 = req.getParameter("mobile1");
 		String mobile2 = req.getParameter("mobile2");  
 		String mobile3 = req.getParameter("mobile3");
@@ -65,16 +67,22 @@ public class StoreBuyCommand implements CommandImpl{
 		String bd_size = req.getParameter("bd_size");
 		String b_totalpay = req.getParameter("b_totalpay");
 		String b_payment = req.getParameter("b_payment");
-		//String[] cou_code = req.getParameterValues("cou_code");
-		 
-		System.out.println(
-				p_code +" "+b_totalpay
-				+" "+b_payment
-				
-				);
+		String accountnumber = req.getParameter("accountnumber");
+		String num = req.getParameter("num");
+		List<String> cou_code = new ArrayList();
+
+		try {
+			int intnum = Integer.parseInt(num);
+			for(int i=0; i<= intnum ; i++) {
+				cou_code.add(req.getParameter("cou_check"+i));
+			}			
+		} catch (NumberFormatException e) {
+
+		} catch (Exception e) {
 		
-		
-		
+		}
+			
+
 		BuyAndGroupDTO buyAndGroupDTO = new BuyAndGroupDTO();
 		
 		
@@ -90,7 +98,12 @@ public class StoreBuyCommand implements CommandImpl{
 		buyAndGroupDTO.setB_totalpay(b_totalpay);
 		buyAndGroupDTO.setB_payment(b_payment);
 		buyAndGroupDTO.setB_waybill("MC"+p_code);
+		buyAndGroupDTO.setAccountnumber(accountnumber);
+		buyAndGroupDTO.setCou_code(cou_code.toString());
 		
+		Map<String, Object> buylist = new HashMap<String, Object>();
+		buylist.put("buyAndGroupDTO", buyAndGroupDTO);
+		buylist.put("cou_code", cou_code);
 		
 
 		
@@ -98,13 +111,13 @@ public class StoreBuyCommand implements CommandImpl{
 			
 			int result = sqlSession.getMapper(MybatisProductImpl.class).insertBuyForm(buyAndGroupDTO);
 			int result2 = sqlSession.getMapper(MybatisProductImpl.class).insertBuy_groupForm(buyAndGroupDTO);
+			model.addAttribute("buyAndGroupDTO",buyAndGroupDTO);
 			System.out.println("구매폼 insert : "+result+"구매폼group insert : "+result2);
+		
+		
+		
+		
 		}
-		
-		
-		
-		
-		
 		
 	}
 	
