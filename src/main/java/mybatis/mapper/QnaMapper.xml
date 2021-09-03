@@ -11,7 +11,7 @@
 	</select>
 	
 	<select id="getQnaList" resultType="mybatis.QnaDTO" parameterType="java.util.List">
-		select q_idx, q_title, userid, q_content, q_date from QNA where userid=#{userid} order by q_idx desc
+		select q_idx, q_title, userid, q_content, q_date from QNA where userid=#{userid} or userid='admin' order by q_idx
 	</select>
 	
 	<select id="getQnaDetail" resultType="mybatis.QnaDTO" parameterType="hashmap">
