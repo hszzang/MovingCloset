@@ -27,6 +27,11 @@ public interface MybatisMoyoImpl {
 	//모여폼 제출 데이터 insert
 	public int moyoFormDataInsert(MoyoUseDTO moyoUseDTO);
 
+	//관리자용 모여 리스트 불러오기
+	public ArrayList<MoyoDTO> MoyoList();
+	//public ArrayList<String> MoyoList();
+	
+
 	
 	/****** 쪼르기 ******/
 	//쪼르기 리스트 불러오기
@@ -72,5 +77,6 @@ public interface MybatisMoyoImpl {
 	
 	
 	
+
 
 }

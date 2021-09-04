@@ -109,5 +109,35 @@
 	</select>
 	
 
+	<!-- 관리자용 모여리스트 불러오기 
+	<select id="MoyoList" resultType="String"> 
+		SELECT m.*, mb.mb_num
+		FROM moyo m, moyo_bus mb
+		WHERE m.m_idx=mb.m_idx
+		ORDER BY m_idx DESC
+		SELECT * FROM(
+			SELECT Tb.*, rownum rNum FROM (
+				SELECT * FROM moyo
+				ORDER BY m_idx DESC
+			)Tb
+		)
+		ORDER BY m_idx DESC
+		
+	-->
+	<select id="MoyoList" resultType="mybatis.MoyoDTO">
+		SELECT * FROM moyo ORDER BY m_idx DESC
+	</select>
+	
+	<insert id="newMoyo" parameterType="mybatis.MoyoDTO">
+		INSERT INTO moyo
+		VALUES (moyo_seq.nextval, #{m_idx}, #{m_name}, #{m_addr}, #{m_goal}, #{m_dday}, #{m_desc}, #{m_start}, #{m_end}, #{m_status})
+	</insert>
+
+	<update id="updateMoyo" parameterType="mybatis.MoyoDTO">
+		UPDATE moyo 
+		SET m_name=#{m_name}, m_addr=#{m_addr}, m_goal=#{m_goal}, m_dday=#{m_dday}, m_desc=#{m_desc}, 
+		m_start=#{m_start}, m_end=#{m_end}, m_status=#{m_status} 
+		WHERE m_idx=#{m_idx}
+	</update>
 </mapper>
  

@@ -254,6 +254,7 @@
 					<div id="price" class="updiv"><input class="update" name="p_price" value="${storeDetail.p_price }" /> </div>
 					<div id="color" class="updiv"><input class="update" name="pd_color" value="${productDetail.pd_color }" /> </div>					
 					<div id="flag" class="updiv"><input class="update" name="p_flag" value="${storeDetail.p_flag }" /> </div>
+					<div id="tag" class="updiv"><input class="update" name="p_tag" value="${storeDetail.p_tag }" /></div>
 					<input id="image" type="file" class="form-control" name="ofile" accept="image/*" value="${storeDetail.p_ofile }"
 						onchange="setThumbnail(event);" style="width:350px;height:40px;margin-bottom:10px;"  />
 					<div class="row">

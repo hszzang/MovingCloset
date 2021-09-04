@@ -21,6 +21,8 @@ import movingcloset.command.MemberEditCommand;
 import movingcloset.command.MemberOutCommand;
 import movingcloset.command.RegisterActionCommand;
 import movingcloset.command.cscenter.QnaCommand;
+import movingcloset.command.mypage.MyPageOrderDetailCommand;
+import movingcloset.command.mypage.MyPageOrderListCommand;
 import movingcloset.command.mypage.MypageMoyoBusCommand;
 import movingcloset.command.mypage.MypageMoyoDeleteCommand;
 import movingcloset.command.mypage.MypagePleaseCommand;
@@ -43,7 +45,7 @@ public class MypageController {
 	@Autowired
 	QnaCommand qnaCommand;
 
-    @Autowired
+	@Autowired
 	MypageMoyoBusCommand mypageMoyoBusCommand;
     
     @Autowired
@@ -55,7 +57,12 @@ public class MypageController {
     @Autowired
     MypageMoyoDeleteCommand mypageMoyoDeleteCommand;
     
-    
+	@Autowired
+	MyPageOrderListCommand myPageOrderListCommand;
+	
+	@Autowired
+	MyPageOrderDetailCommand myPageOrderDetailCommand;
+	
 	
 	@RequestMapping(value="movingcloset/mypage_coupon.do", method=RequestMethod.GET)
 	public String mypageCoupon (Model model, HttpServletRequest req) {
@@ -63,10 +70,26 @@ public class MypageController {
 		return "body/mypage/mypage_coupon";
 	}
 	@RequestMapping(value="movingcloset/mypage_order.do", method=RequestMethod.GET)
-	public String mypageOrder (Locale locale, Model model) {
+	public String mypageOrder (Locale locale, Model model, HttpServletRequest req) {
+		
+		model.addAttribute("req",req);
+		command = myPageOrderListCommand;
+		command.execute(model);
 		
 		return "body/mypage/mypage_order";
 	}
+	
+	@RequestMapping("/movingcloset/myorder.do")
+	public String myorder(Model model, HttpServletRequest req) {
+		
+		model.addAttribute("req",req);
+		
+		command = myPageOrderDetailCommand;
+		command.execute(model);
+		
+		return "body/store/payForm";
+	}
+	
 	
 	//내가 신청한 쪼르기내역 조회
 	@RequestMapping(value="movingcloset/mypage_please.do", method=RequestMethod.GET)
@@ -204,9 +227,10 @@ public class MypageController {
 	
 	//현진쓰작업중
 	@RequestMapping(value="movingcloset/mypage_myqna.do", method=RequestMethod.GET)
-	public String mypageQna (HttpServletRequest request, Model model, QnaDTO qnaDTO) {
+	public String mypageQna (HttpServletRequest req, Model model, QnaDTO qnaDTO) {
 		
-		model.addAttribute("request",request);
+		System.out.println("마이페이지리뷰내역 컨트롤러호출");
+		model.addAttribute("req",req);
 		command = qnaCommand;
 		command.execute(model);
 		

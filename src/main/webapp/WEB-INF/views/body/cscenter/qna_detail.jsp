@@ -69,13 +69,33 @@
         }
         #fileBtn:focus{outline:none;}
         #info{ color:gray; font-size:11pt;}
-        #modBtn{
+        #backBtn{
         	width:250px; height:40px;
         	margin:10px 36% 0 38%;
         	border:none; background-color:black;
         	color:white; font-size:15pt; font-weight:lighter;	
         }
+        #backBtn:focus{outline:none;}
+        #replyBtn{
+        	width:250px; height:40px;
+        	margin:10px 36% 0 38%;
+        	border:none; background-color:black;
+        	color:white; font-size:15pt; font-weight:lighter;	
+        }
+        #replyBtn{outline:none;}
+        #modBtn{
+        	width:124px; height:40px;
+        	margin:10px 0 0 38%;
+        	border:none; background-color:black;
+        	color:white; font-size:15pt; font-weight:lighter;	
+        }
         #modBtn:focus{outline:none;}
+        #delBtn{
+        	width:124px; height:40px;
+        	border:none; background-color:black;
+        	color:white; font-size:15pt; font-weight:lighter;	
+        }
+        #delBtn:focus{outline:none;}
         select, input, textarea:focus{outline:none;}
     </style>
    
@@ -115,14 +135,16 @@
 		                        	</div>
 		                        </td>
 		                    </tr>
-		  					<tr>
-		                        <td>첨부파일</td>
-		                        <td>
-									<div></div>
-		                        </td>
-		                    </tr>
+		  					
 		            </table>
-					<button id="modBtn"><a href="javascript:window.history.back();" style="text-decoration:none;color:white;">뒤로가기</a></button>
+		            
+					<button id="modBtn" style="text-decoration:none;color:white;">수정</button>
+					<button id="delBtn" style="text-decoration:none;color:white;">삭제</button>
+					<button id="backBtn" onClick="history.back(); return false;" style="text-decoration:none;color:white;">뒤로가기</button>
+					
+					
+					
+					
 					<br/><br/>
 	        	</form>
 	        </div>

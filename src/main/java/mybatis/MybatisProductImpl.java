@@ -10,8 +10,13 @@ import org.springframework.stereotype.Service;
 public interface MybatisProductImpl {
 	// 특정 상품 불러오기
 	public ProductDTO getProductDTO(String p_idx);  
-	//public ProductDTO getProductDTO(String p_code);  
+	public ProductDTO getProductDTOsfile(String p_code);  
 	//public String getDetailDTO(String pd_color);
+	
+	// 관리자 모드용
+	public List<ProductAndDetailDTO> StoreList(@Param("start")int start,
+												@Param("end") int end);
+	public List<ProductDTO> NewDList();
 	
 	// 스토어 리스트 불러오기
 	public List<ProductDTO> getStoreList(ProductDTO productDTO);
@@ -33,6 +38,7 @@ public interface MybatisProductImpl {
 	
 	// 페이징 위한 상품 수 카운트
 	public int getCount(@Param("flag") String flag);
+	public int getNewDCount();
 	
 	// 가격정렬
 	public List<ProductDTO> descPrice(ProductDTO productDTO);
@@ -67,6 +73,8 @@ public interface MybatisProductImpl {
 	
 	public BuyAndGroupDTO buyReview(String userid, String p_code);
 	
+	public int insertBuyForm(BuyAndGroupDTO buyAndGroupDTO);
+	public int insertBuy_groupForm(BuyAndGroupDTO buyAndGroupDTO);
 
 
 }
