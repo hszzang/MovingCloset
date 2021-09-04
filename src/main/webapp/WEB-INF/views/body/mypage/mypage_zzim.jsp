@@ -92,9 +92,41 @@
                         찜한 상품이 보여집니다.
                     </p>
                 </div>
-                <div class="result">
-                    <h6>등록된 상품이 없습니다.</h6>
-                </div>
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th width="15%">번호</th>
+                            <th width="30%">상품코드</th>
+                            <th width="20%">결제가격</th>
+                            <th width="20%">결제수단</th>
+                            <th width="15%">주문날짜</th>
+                        </tr>
+                    </thead>
+                    <c:choose>
+                        <c:when test="${empty buylist }">
+                            <tr>
+                                <td colspan="6" align="center">
+                                    등록된 리뷰내역이 없습니다.
+                                </td>
+                            </tr>
+                        </c:when>
+                        <c:otherwise>
+                            <c:forEach items="${zzimlist }" var="row" varStatus="loop">
+                            <tr>
+                                <td width="10%">
+                                    ${loop.index+1}	
+                                </td>
+                                <td width="30%" align="left">
+                                    <a href="../store/detail.do?p_code=${row.p_code }&check='zzim'">${row.p_code }</a>
+                                </td>
+                                <td width="20%" align="left">${row.b_totalpay }</td>
+                                <td width="20%" align="left">${row.b_payment }</td>
+                                <td width="15%" align="left">${row.b_date }</td>
+                            </tr>
+                            </c:forEach>
+                        </c:otherwise>
+                    </c:choose>
+                </table>
             </div>
         </div>
     </div>

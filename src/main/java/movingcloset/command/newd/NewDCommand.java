@@ -20,6 +20,7 @@ public class NewDCommand implements CommandImpl {
 	
 	public NewDCommand() {
 		System.out.println("뉴디커맨드 호출");
+		
 	}
 	
 	@Autowired

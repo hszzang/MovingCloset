@@ -211,21 +211,30 @@
 	<!-- 구매폼(buy) insert -->
 	<insert id="insertBuyForm" parameterType="mybatis.BuyAndGroupDTO" >
 		
-		INSERT INTO BUY (B_IDX, B_TOTALPAY, B_DATE, B_BUYER, B_PHONE, B_POSTCODE, B_ADDR, B_PAYMENT, B_WAYBILL, USERID,EMAIL)
-		VALUES (buy_seq.nextval,#{b_totalpay},sysdate,#{b_buyer},#{b_phone},#{b_postcode},#{b_addr},#{b_payment},#{b_waybill},#{userid},#{email} )
+		INSERT INTO BUY (B_IDX, B_TOTALPAY, B_DATE, B_BUYER, B_PHONE, B_POSTCODE, B_ADDR, B_PAYMENT, B_WAYBILL, USERID,EMAIL,accountnumber,cou_code)
+		VALUES (buy_seq.nextval,#{b_totalpay},sysdate,#{b_buyer},#{b_phone},#{b_postcode},#{b_addr},#{b_payment},#{b_waybill},#{userid},#{email},#{accountnumber},#{cou_code} )
+		<selectKey keyProperty="b_idx" order="AFTER" resultType="String">
+			select buy_seq.CURRVAL from dual
+		</selectKey>
 				
 	</insert>
 	
 	<!-- 구매폼(buy_group)에 insert -->
 	<insert id="insertBuy_groupForm" parameterType="mybatis.BuyAndGroupDTO" >
+
 		<choose>
 			<when test="cou_code != null">
 				insert into buy_group(BD_IDX, P_CODE, COU_CODE, B_IDX, BD_COUNT, BD_SIZE) 
-				values (buygroup_seq.nextval, #{p_code}, #{cou_code},buy_seq.CURRVAL,#{bd_count},#{bd_size})					
+				values (buygroup_seq.nextval, #{p_code}, 
+				<foreach item="item" index="index" collection="list">
+				#{cou_code},
+				</foreach>
+				
+				#{b_idx},#{bd_count},#{bd_size})					
 			</when>
 			<otherwise>
 				insert into buy_group(BD_IDX, P_CODE, B_IDX, BD_COUNT, BD_SIZE) 
-				values (buygroup_seq.nextval, #{p_code}, buy_seq.CURRVAL,#{bd_count},#{bd_size})		
+				values (buygroup_seq.nextval, #{p_code},#{b_idx},#{bd_count},#{bd_size})		
 			</otherwise>
 		</choose>
 	</insert>

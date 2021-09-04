@@ -14,6 +14,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script>
+
+
+
+
 	$(function(){
 
 		zzimList();
@@ -132,23 +136,26 @@
 			});
  		}
 	}
-	
-   function plusminus(id){
-      //console.log("넘어온 값 "+id);
-      var num = document.getElementById("quantity");
-	
-      if(id=="minus"){ 
-         if(num.value <= 1){
-            num.value = 1;
-         }else{
-            num.value = parseInt(num.value) - 1;
-         }
-      }
-      if(id=="plus"){ 
-         num.value = parseInt(num.value) + 1;
-      }      
-   }
 
+	function plusminus(id){
+		//console.log("넘어온 값 "+id);
+		var num = document.getElementById("quantity");
+
+		if(id=="minus"){ 
+			if(num.value <= 1){
+				num.value = 1;
+			}else{
+				num.value = parseInt(num.value) - 1;
+				num.value = num.value.toString();
+			}
+		}
+		if(id=="plus"){ 
+			num.value = parseInt(num.value) + 1;
+			num.value = num.value.toString();
+		}		
+	}
+   
+   
    $(function(){
       $('#btnReview').click(function(){
          

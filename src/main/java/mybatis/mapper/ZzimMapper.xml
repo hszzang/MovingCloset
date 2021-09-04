@@ -19,7 +19,9 @@
 	</insert>
 	
 	<select id="zzimAllList" resultType="mybatis.ZzimDTO">
-		SELECT * FROM zzim
+		SELECT Z.z_idx, Z.p_code, P.p_name, P.p_price, P.p_brand, P.p_sfile, P.p_tag, P.p_flag 
+		FROM zzim Z, product P
+		where Z.p_code = P.p_code and userid=#{userid};
 	</select>
 	
 </mapper>
