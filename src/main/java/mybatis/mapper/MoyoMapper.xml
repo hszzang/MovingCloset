@@ -20,12 +20,6 @@
 		ORDER BY m_dday DESC
 	</select>
 	
-<!-- 		<id column="m_idx" property="usernum" /> -->
-	<resultMap type="java.util.HashMap" id="countMoyoUser">
-		<result column="m_idx" property="m_idx" javaType="java.lang.String" />
-		<result column="usernum" property="usernum" javaType="java.lang.String" />
-	</resultMap>
-	
 	<select id="countMoyoUser" resultType="int">
 		SELECT count(*)
 		FROM moyo_use 
@@ -45,6 +39,26 @@
 		VALUES (#{m_idx}, #{userid}, #{mu_name}, #{mu_phone}, #{mu_email}, #{mu_time}, sysdate)
 	</insert>
 	
+	<!-- 쪼르기 -->
+	<select id="getPlzList" resultType="mybatis.PleaseDTO">
+		SELECT * FROM please 
+		WHERE plz_status='진행' ORDER BY plz_end
+	</select>
+	
+	<select id="getPlzProduct" resultType="mybatis.ProductDTO">
+		SELECT * FROM product WHERE p_code=#{0}
+	</select>
+	
+	<select id="countPlzUser" resultType="int">
+		SELECT COUNT(*) FROM please_use WHERE plz_idx=#{0}
+	</select>
+	
+	<insert id="insertPlzJoin">
+		INSERT INTO please_use VALUES(#{0}, #{1})
+	</insert>
+	
+	
+	<!-- 마이페이지 모여버스 -->
 	<select id="getMyMoyoUse" resultType="mybatis.MoyoUseDTO">
 		SELECT * FROM moyo_use
 		WHERE userid=#{0} ORDER BY mu_regidate DESC
@@ -57,6 +71,43 @@
 	<select id="getMyMoyoBus" resultType="mybatis.MoyoBusDTO">
 		SELECT * FROM moyo_bus WHERE m_idx=#{0}
 	</select>
+	
+	<delete id="deleteMyMoyo">
+		DELETE FROM moyo_use
+		WHERE m_idx=#{0} AND userid=#{1}
+	</delete>
+	
+	
+	
+	<!-- 마이페이지 쪼르기내역 -->
+	<select id="getMyPlzList" resultType="mybatis.PleaseDTO">
+		SELECT * FROM please 
+		WHERE plz_idx IN (
+			SELECT plz_idx FROM please_use WHERE userid=#{0})
+	</select>
+	
+	<select id="getMyPlzProduct" resultType="mybatis.ProductDTO">
+		SELECT * FROM product WHERE p_code=#{0}
+	</select>
+	
+	<delete id="deleteMyPlz">
+		DELETE FROM please_use 
+		WHERE plz_idx=#{0} AND userid=#{1}
+	</delete> 
+	
+	
+	
+	<!-- 지난모여쪼르기 -->
+	<select id="endMoyoList" resultType="mybatis.MoyoDTO">
+		SELECT * FROM moyo WHERE m_status!='진행'
+		ORDER BY m_end
+	</select>
+	
+	<select id="endPlzList" resultType="mybatis.PleaseDTO">
+		SELECT * FROM please WHERE plz_status!='진행'
+		ORDER BY plz_end
+	</select>
+	
 
 	<!-- 관리자용 모여리스트 불러오기 
 	<select id="MoyoList" resultType="String"> 

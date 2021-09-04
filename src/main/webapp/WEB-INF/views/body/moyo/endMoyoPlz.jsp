@@ -16,52 +16,7 @@
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   	
   	<script>
-		/*카운트다운*/
-		var countDownDate = [];
-		<c:forEach items="${plzList }" var="pList" varStatus="pListLoop">
-			countDownDate[${pListLoop.index }] = new Date("${pList.plz_end }").getTime();
-		</c:forEach>
-
-		// Update the count down every 1 second
-		var x = setInterval(function() {
-		
-			// Get today's date and time
-			var now = new Date().getTime();
-			    
-			// Find the distance between now and the count down date
-			var distance = [];
-			var days = [];
-			var hours = [];
-			var minutes = [];
-			var seconds = [];
-			for(var i = 0; i < ${fn:length(plzList)}; i++) {
-				
-				distance[i] = countDownDate[i] - now;
-				
-				if(distance[i] < 0) {
-					clearInterval(x);
-					  document.getElementsByClassName("CountDown")[i].innerHTML = "마감되었습니다";
-				}
-				else {
-					days[i] = Math.floor(distance[i] / (1000 * 60 * 60 * 24));
-					hours[i] = Math.floor((distance[i] % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-					minutes[i] = Math.floor((distance[i] % (1000 * 60 * 60)) / (1000 * 60));
-					seconds[i] = Math.floor((distance[i] % (1000 * 60)) / 1000);
-					
-					document.getElementsByClassName("CountDown")[i].innerHTML = days[i] + "일 " + hours[i] + "시간 "
-																				+ minutes[i] + "분 " + seconds[i] + "초";
-				}
-			}
-		}, 1000);
-		
-		function clickPlzBtn(idx) {
-			var confirmCheck = confirm("해당 상품을 쪼르기 신청하시겠습니까?");
-			if(confirmCheck == true) {
-				alert("신청이 완료되었습니다.");
-				location.href='../movingcloset/pleaseJoin.do?plz_idx='+idx;
-			}
-		}
-		
+  	
   	</script>
   	
     <style>
@@ -152,7 +107,7 @@
 		.plzInfo{
 			width:60%; height:350px;
 			border:none; margin:0;
-			float:left; display:inline-block;
+			float:left; display:inline-block; padding-top: 20px;
 		}
 		
 		.plzUpperDiv{
@@ -170,14 +125,14 @@
 	    .plzWon{color:black; font-size:18pt; font-weight:bold; display:inline;}
 		
 		.plzDownDiv{
-			width:100%; height:55%; margin:0;
+			width:100%; height:55%; margin-top: 40px;
 			border: solid 1px #800000; 
 			background-color:#800000;
 			border-radius:10px;
 			padding-left:1%; padding-top:1%; padding-bottom:1%;
 		}
 		.plzDownDiv2{
-			width:100%; height:55%; margin:0;
+			width:100%; height:55%; margin-top: 40px;
 			border: solid 1px #274069; 
 			background-color:#274069;
 			border-radius:10px;
@@ -247,39 +202,26 @@
         	text-align:center;
         	font-size:30pt;
         	font-family: Noto Sans Korean;
-        	margin-top:10px;
+       	    margin-bottom: 5%; margin-top: 5%;
         	color:white;
         }
         
         .progress-info{
-        	padding-top:5px;
-        	text-align:center;
+        	padding-top:5px; padding-right: 20px;
+        	text-align:right;
         	color:white;
         }
         
         /* 마감임박 */
         .deadTitle{
-			padding-bottom:30px;
+			padding-bottom:0px;
 			padding-left:55px;
+			margin-top: 40px;
 		}
         
         .deadline {
 		  height: 20px;
 		  
-		}
-		
-		.deadline span {
-		  position: relative;
-		  font-weight:bold;
-		  top: 10px;
-		  margin-right: -5px;
-		  display: inline-block;
-		  animation: bounce 0.3s ease infinite alternate;
-		  font-size: 30px;
-		  color: #A52A2A;
-		  /* text-shadow: 0 1px 0 #ccc, 0 2px 0 #ccc, 0 3px 0 #ccc, 0 4px 0 #ccc,
-		    0 5px 0 #ccc, 0 6px 0 transparent, 0 7px 0 transparent, 0 8px 0 transparent,
-		    0 9px 0 transparent, 0 5px 5px rgba(0, 0, 0, 0.4); */
 		}
 		
 		.deadline span:nth-child(2) {
@@ -367,118 +309,128 @@
         	margin-right:30px;
         }
         
+        .cateBtn { width: 150px; }
+        .btn-warning, .btn-warning:focus {
+		    color: white !important;
+		}
         
     </style>
 </head>
 <body>
 <div class="container bodyContainer">
 	<div class="section-title">
-		<h2>쪼 르 기</h2>
+		<h2>지난 모여 / 쪼르기</h2>
 	</div>
 	<div class="deadTitle">
-		<h1 class="deadline">
-			<span>마</span>
-			<span>감</span>
-			<span>임</span>
-			<span>박</span>
-			<span>!</span>
-		</h1>
+		<button type="button" onclick="javascript:location.href='../movingcloset/endMoyoPlz.do?category=moyo'" class="btn ${moyoBtn } cateBtn">모여</button>
+		<button type="button" onclick="javascript:location.href='../movingcloset/endMoyoPlz.do?category=plz'" class="btn ${plzBtn } cateBtn">쪼르기</button>
 	</div>
 	
 	<!-- 진행중인 쪼르기 -->
 	<div id="onGoing" class="tabcontent">
-		<div class="outDiv">
-       		<div class="innerDiv">
-       			<div class="plzProduct">
-       				<span class="plzImgs">
-                           <!-- <span id="mainImg"> -->
-                               <img class="plzImg" src="../resources/upload/${plzProduct[0].p_sfile }"/>
-                           <!-- </span> -->
-       				</span>
-       				
-        			<span class="plzInfo">
-        				<div class="plzUpperDiv">
-        					<div class="plzBrand">${plzProduct[0].p_brand }</div>
-        					<div class="plzPName">
-        						${plzProduct[0].p_name } ${plzProduct[0].p_code }</div>
-<%--         					<div class="plzOriPrice"><strike>${plzProduct[0].p_price }</strike></div> --%>
-        					<div class="plzNowPrice">
-<!--         						<span class="plzPercent"><em>34%</em></span> -->
-        						<span class="plzPrice"><fmt:formatNumber type="number" value="${plzProduct[0].p_price }" /></span>
-        						<span class="plzWon">원</span>	
-        					</div>
-        				</div>
-        				<div class="plzDownDiv">
-        					<span class="badge badge-warning HotTime">
-        						모집중!
-        					</span>
-							<div class="CountDown" id="time"></div>
-							<c:forEach items="${countPlzUser }" var="countPlzUser">
-								<c:if test="${countPlzUser.key eq plzList[0].plz_idx }">
-								<div class="progress" style="width:95%; height:20px; margin-left:10px;">
-									<div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width:${countPlzUser.value / plzList[0].plz_goal * 100}%; height:20px"></div>
-								</div>
-								<div class="progress-info"><b>${countPlzUser.value } / ${plzList[0].plz_goal }(명)</b></div>
-								</c:if>
-							</c:forEach>
-        				</div>
-        				<button class="pleaseBtn" onclick="clickPlzBtn(${plzList[0].plz_idx });">쪼르기</button>
-        			</span>
-       			</div>
-       		</div>
-       	</div>
-       	<hr style="width:90%; margin-left:0; border: solid 1px #000000; background-color:#000000; margin-top:50px; margin-bottom:40px;" >
-        <div class="ingTitle">	
-        	<h1 class="ing">진행중</h1>
-        </div>	
-    		<c:forEach items="${plzProduct }" var="pInfo" varStatus="pInfoLoop" begin="1" >
-       	<div class="outDiv">
-       		<div class="innerDiv2">
-       			<div class="plzProduct">
-       				<span class="plzImgs">
-                           <span id="mainImg">
-                               <img class="plzImg" src="../resources/upload/${pInfo.p_sfile }"/>
-                           </span>
-       				</span>
-       				
-        			<span class="plzInfo">
-        				<div class="plzUpperDiv">
-        					<div class="plzBrand">${pInfo.p_brand }</div>
-        					<div class="plzPName">
-        						${pInfo.p_name } ${pInfo.p_code }
-        					</div>
-<%--         					<div class="plzOriPrice"><strike>${pInfo.p_price }</strike></div> --%>
-        					<div class="plzNowPrice">
-<!--         						<span class="plzPercent"><em>40%</em></span> -->
-        						<span class="plzPrice"><fmt:formatNumber type="number" value="${pInfo.p_price }" /></span>
-        						<span class="plzWon">원</span>	
-        					</div>
-        				</div>
-        				<div class="plzDownDiv2">
-	       					<span class="badge badge-warning HotTime">
-	       						모집중!
-	       					</span>
-							<div class="CountDown" id="time2"></div>
-							<c:forEach items="${countPlzUser }" var="countPlzUser">
-								<c:if test="${countPlzUser.key eq plzList[pInfoLoop.index].plz_idx }">
-									<c:set var="achievementRate" value="${countPlzUser.value / plzList[pInfoLoop.index].plz_goal * 100}" />
-									<c:set var="countPlzUserVar" value="${countPlzUser.value }" />
-								</c:if>
-							</c:forEach>
-							<div class="progress" style="width:95%; height:20px; margin-left:10px;">
-								<div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width:${achievementRate }%; height:20px"></div>
-							</div>
-							<div class="progress-info"><b>${countPlzUserVar } / ${plzList[pInfoLoop.index].plz_goal }(명)</b></div>
-       					</div>
-        				<button class="pleaseBtn" onclick="clickPlzBtn(${plzList[pInfoLoop.index].plz_idx });">쪼르기</button>
-        			</span>
-       			</div>
-       		</div>
-       	</div>
-       		</c:forEach>
-    <!-- 진행중 쪼르기 끝 -->   
-        
-	</div>
+		<c:if test="${not empty moyoList }">
+			<c:forEach items="${moyoList }" var="mList">
+				<c:set var="statusColor" value="" />
+				<c:if test="${mList.m_status eq '성공' }">
+					<c:set var="statusColor" value="2" />
+				</c:if>
+				<div class="outDiv">
+		       		<div class="innerDiv2">
+		       			<div class="plzProduct">
+		       				<span class="plzImgs">
+		                           <span id="mainImg">
+		                               <img class="plzImg" src="../resources/upload/${mList.m_sfile }"/>
+		                           </span>
+		       				</span>
+		       				
+		        			<span class="plzInfo">
+		        				<div class="plzUpperDiv">
+									<fmt:parseDate value="${mList.m_dday }" var="moyoday" pattern="yyyy-MM-dd HH:mm:ss" />
+									<fmt:formatDate value="${moyoday }" var="moyoday" pattern="yyyy-MM-dd" />
+		        					
+		        					<div class="plzBrand">모여 DAY : ${moyoday }</div>
+		        					<div class="plzPName">
+		        						${mList.m_name } 
+		        					</div>
+  									<fmt:parseDate value="${mList.m_start }" var="startday" pattern="yyyy-MM-dd HH:mm:ss" />
+									<fmt:formatDate value="${startday }" var="startday" pattern="yyyy-MM-dd" />
+  									<fmt:parseDate value="${mList.m_end }" var="endday" pattern="yyyy-MM-dd HH:mm:ss" />
+									<fmt:formatDate value="${endday }" var="endday" pattern="yyyy-MM-dd" />
+		        					진행기간 : ${startday } ~ ${endday }<br/>
+		        					${mList.m_desc } 
+		        				</div>
+		        				<div class="plzDownDiv${statusColor }">
+									<div class="CountDown" id="time2">모여 ${mList.m_status } !</div>
+									<c:forEach items="${countMoyoUser }" var="countMoyoUser">
+										<c:if test="${countMoyoUser.key eq mList.m_idx }">
+											<c:set var="achievementRate" value="${countMoyoUser.value / mList.m_goal * 100}" />
+											<c:set var="countMoyoUserVar" value="${countMoyoUser.value }" />
+										</c:if>
+									</c:forEach>
+									<div class="progress" style="width:95%; height:20px; margin-left:10px;">
+										<div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width:${achievementRate }%; height:20px"></div>
+									</div>
+									<div class="progress-info"><b>${countMoyoUserVar } / ${mList.m_goal }(명)</b></div>
+		       					</div>
+		        			</span>
+		       			</div>
+		       		</div>
+		       	</div>
+				
+			</c:forEach>
+		</c:if>
+		<c:if test="${empty moyoList }">
+			<c:forEach items="${plzProduct }" var="pList" varStatus="pListLoop">
+				<c:set var="statusColor" value="" />
+				<c:if test="${plzList[pListLoop.index].plz_status eq '성공' }">
+					<c:set var="statusColor" value="2" />
+				</c:if>
+				<div class="outDiv">
+		       		<div class="innerDiv2">
+		       			<div class="plzProduct">
+		       				<span class="plzImgs">
+		                           <span id="mainImg">
+		                               <img class="plzImg" src="../resources/upload/${pList.p_sfile }"/>
+		                           </span>
+		       				</span>
+		       				
+		        			<span class="plzInfo">
+		        				<div class="plzUpperDiv">
+		        					<div class="plzBrand">${pList.p_brand }</div>
+		        					<div class="plzPName">
+		        						${pList.p_name } ${pList.p_code }
+		        					</div>
+  									<fmt:parseDate value="${plzList[pListLoop.index].plz_start }" var="startday" pattern="yyyy-MM-dd HH:mm:ss" />
+									<fmt:formatDate value="${startday }" var="startday" pattern="yyyy-MM-dd" />
+  									<fmt:parseDate value="${plzList[pListLoop.index].plz_end }" var="endday" pattern="yyyy-MM-dd HH:mm:ss" />
+									<fmt:formatDate value="${endday }" var="endday" pattern="yyyy-MM-dd" />
+		        					
+		        					진행기간 : ${startday } ~ ${endday }
+		        					<div class="plzNowPrice">
+		        						<span class="plzPrice"><fmt:formatNumber type="number" value="${pList.p_price }" /></span>
+		        						<span class="plzWon">원</span>	
+		        					</div>
+		        				</div>
+		        				<div class="plzDownDiv${statusColor }">
+									<div class="CountDown" id="time2">쪼르기 ${plzList[pListLoop.index].plz_status } !</div>
+									<c:forEach items="${countPlzUser }" var="countPlzUser">
+										<c:if test="${countPlzUser.key eq plzList[pListLoop.index].plz_idx }">
+											<c:set var="achievementRate" value="${countPlzUser.value / plzList[pListLoop.index].plz_goal * 100}" />
+											<c:set var="countPlzUserVar" value="${countPlzUser.value }" />
+										</c:if>
+									</c:forEach>
+									<div class="progress" style="width:95%; height:20px; margin-left:10px;">
+										<div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width:${achievementRate }%; height:20px"></div>
+									</div>
+									<div class="progress-info"><b>${countPlzUserVar } / ${plzList[pListLoop.index].plz_goal }(명)</b></div>
+		       					</div>
+		        			</span>
+		       			</div>
+		       		</div>
+		       	</div>
+			</c:forEach>
+		</c:if>
+    </div>
 </div>
 </body>
 </html>
