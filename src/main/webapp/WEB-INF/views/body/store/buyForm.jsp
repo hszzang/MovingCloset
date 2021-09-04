@@ -194,6 +194,14 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 	}
 	
 	function validate(frm){
+		
+		var select = document.getElementById("accontnumber");
+		var selectcheck = select.options[select.selectedIndex].value;
+		
+		if(selectcheck==""){
+			alert("입금할 은행을 선택해주세요.");
+			return false;
+		}
 		if(frm.username.value==""){
 			alert("이름을 입력해주세요.");
 			return false;
@@ -219,10 +227,22 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 		
 	}
 	
+
+	
 	
 	var totalSale = 0;
-	function couponChecked(idx,cou_per){
-	
+	var couponNum = 0;
+	function couponChecked(idx,cou_per,t){
+		if(t.checked == true){
+			couponNum += 1;
+			document.getElementById("num").value=couponNum;			
+		}else if(t.checked == false ){
+			couponNum -= 1;
+			document.getElementById("num").value=couponNum;				
+		}
+		
+		
+		
 		var cb = document.getElementById("couponBox"+idx);
 		var originalPrice = document.getElementById("hidPrice").value;
 		var bd_count = document.getElementById("hidCount").value;
@@ -409,8 +429,8 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 													<input type="checkbox" class="custom-control-input" id="couponBox${status.index }" name="cou_check${status.index }"> 
 												</label>
 											</div> --%>
-											<input type="checkbox" value="${couDTO.cou_code }" id="couponBox${status.index }" name="cou_check${status.index }" onclick="couponChecked(${status.index},${couDTO.cou_per });"> 
-											<input type="hidden" value="${status.end}" name="num"/>
+											<input class="couponnum" type="checkbox" value="${couDTO.cou_code }" id="couponBox${status.index }" name="cou_check${status.index }" onclick="couponChecked(${status.index},${couDTO.cou_per },this);"> 
+											<input type="hidden" name="num" id="num"/>
 							    		</td>
 							    		<c:if test="${couDTO.cou_sfile != null }">
 							    		<td><img class="goodsImg" src="../resources/upload/${couDTO.cou_sfile }" /></td>
@@ -546,7 +566,7 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 									<td class="text-left"
 										style="vertical-align:middle;"><span class="red">*</span>입금은행</td>
 									<td class="form-inline">
-										<select name="accountnumber"style="border: solid lightgray 1px; border-radius:2px; padding:3px;">
+										<select id="accontnumber" name="accountnumber"style="border: solid lightgray 1px; border-radius:2px; padding:3px;">
 											<option value=""diabled select hidden>은행선택</option>
 											<option value="국민 222222-55-333333">국민 222222-55-333333</option>
 											<option value="카카오뱅크 1111-22-55333333">카카오뱅크 1111-22-55333333</option>
@@ -562,7 +582,7 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 									<td class="text-left"
 										style="vertical-align:middle;"><span class="red">*</span>입금자명</td>
 									<td>
-										<input type="text" name="b_buyer" class="form-control" style="width: 250px;"/> 
+										<input type="text" name="b_buyer" class="form-control" style="width: 250px;" required/> 
 									</td>
 								</tr>
 								</tbody>
