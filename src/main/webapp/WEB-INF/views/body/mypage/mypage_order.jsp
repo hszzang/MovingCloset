@@ -105,7 +105,7 @@
                         <c:when test="${empty buylist }">
                             <tr>
                                 <td colspan="6" align="center">
-                                    등록된 리뷰내역이 없습니다.
+                                    등록된 주문내역이 없습니다.
                                 </td>
                             </tr>
                         </c:when>
@@ -116,7 +116,7 @@
                                     ${loop.index+1}	
                                 </td>
                                 <td width="30%" align="left">
-                                    <a href="../mvcboard/view.do?b_idx=${row.b_idx }">${row.p_code }</a>
+                                    <a href="../movingcloset/myorder.do?b_idx=${row.b_idx }&p_code=${row.p_code}">${row.p_code }</a>
                                 </td>
                                 <td width="20%" align="left">${row.b_totalpay }</td>
                                 <td width="20%" align="left">${row.b_payment }</td>

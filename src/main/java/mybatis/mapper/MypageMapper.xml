@@ -14,5 +14,15 @@
 		WHERE USERID = #{userid}  
 	</select>
 
+	<select id="orderdetail" resultType="mybatis.BuyAndGroupDTO" parameterType="string">
+		SELECT * 
+		FROM BUY B
+		INNER JOIN BUY_GROUP BG
+		ON B.B_IDX=BG.B_IDX
+		WHERE USERID = #{0} and b.b_idx = #{1} 
+	
+	</select>
+
+
 
 </mapper>
