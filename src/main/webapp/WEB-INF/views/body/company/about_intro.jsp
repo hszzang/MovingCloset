@@ -193,65 +193,96 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>인재상</h2>
+          <h2>프로젝트후기</h2>
           <p>
-          성장에 욕심있는 착하고 열정적인 직원을 찾습니다. <br>
+          <!-- 성장에 욕심있는 착하고 열정적인 직원을 찾습니다. <br>
           1. 소통할 줄 아는 사람<br/>
           2. 성장할 줄 아는 사람<br/>
           3. 열정적으로 일 할 사람<br/>
-          언제든 무빙클로젯의 문을 두드려주세요.
+          언제든 무빙클로젯의 문을 두드려주세요. -->
           </p>
         </div>
 
         <div class="owl-carousel testimonials-carousel">
 
-          <div class="testimonial-item">
-            <img src="../resources/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-            <h3>문경건</h3>
-            <h4>Ceo &amp; Founder</h4>
-            <p>
-              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-              새로운 기술을 빠르게 적용할 수 있는 환경, 의지가 있는 누군가가 선행학습을 하면 바로 업무에 적용할 수 있는 환경을 만들었습니다. 새로운 환경을 만들고 있어한 회사에서도 다양한 경험과 학습을 할 수 있습니다.
-              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-            </p>
-          </div>
-
-          <div class="testimonial-item">
-            <img src="../resources/assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-            <h3>민세원</h3>
-            <h4>Designer</h4>
-            <p>
-              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-              직접 스케줄을 결정하는 환경, 구성원들이 직접 최종 일정을 결정합니다. 무리한 개발 일정으로 대충 일을 해결하는 것 보다 시작 단계에서 탄탄한 구조를 만드는 것이 효율적이라는 것을 모두가 알고 있기 때문이죠.
-              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-            </p>
-          </div>
-
-          <div class="testimonial-item">
-            <img src="../resources/assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
+        <div class="testimonial-item">
+        	<img src="../resources/assets/img/testimonials/kang.jpg" class="testimonial-img" alt="">
             <h3>강혜수</h3>
-            <h4>Store Owner</h4>
+            <h4>Team Leader</h4>
             <p>
               <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-              이거 나중에 느낀점으로 활용하면 좋을 것 같기도하고.. 아직 뭐라고 더 넣어야되는지 머리 굳음요
+              <br/>Movingcloset은 제가 처음 진행해본 팀 프로젝트였고, 팀원들도 대부분 팀 프로젝트 경험이 없었습니다. 이 때문에 프로젝트의 초반에는 어떻게 시작해야할지, 협업은 어떤 방식으로 해야하는지에 대해 어려움을 겪었습니다. 하지만 적극적인 팀원들과 다같이 Github에 대해 공부하며, 역할을 나워 UI부터 개발을 시작하니 혼자 프로젝트를 진행할때 보다 수월하게 진행할 수 있었습니다. 또한 프로젝트를 진행하며 6개월간 공부했던 내용을 정리하며 기존 지식에 대해 다시 공부하고, 추가적인 기술을 사용하기 위해 더 공부하며 프로그래밍에 대해서도 더 자신을 얻게 되었습니다.<br/>
               <i class="bx bxs-quote-alt-right quote-icon-right"></i>
             </p>
-          </div>
+        </div>
 
-          <div class="testimonial-item">
-            <img src="../resources/assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-            <h3>김득환</h3>
-            <h4>Freelancer</h4>
+        <div class="testimonial-item">
+            <img src="../resources/assets/img/testimonials/min.jpg" class="testimonial-img" alt="">
+            <h3>민세원</h3>
+            <h4>Team Leader 2nd</h4>
             <p>
               <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-              무빙클로젯은 일과 학습을 구분하지 않습니다. 우리는 업무중에 당연히 공부를 하고 새로운 스킬을 배우기 위해 일합니다. 성장을 위한 프로그램이 준비되어 있답니다.
+              <br>세원후기<br>
               <i class="bx bxs-quote-alt-right quote-icon-right"></i>
             </p>
-          </div>
+        </div>
+          
+        <div class="testimonial-item">
+            <img src="../resources/assets/img/testimonials/ki.jpg" class="testimonial-img" alt="">
+            <h3>기은서</h3>
+            <h4>Team members</h4>
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+              <br>이번 프로젝트로 6개월간의 배움을 복습하고 개발자로서의 역량을 더 쌓고 팀워크와 협업의 가치 및 중요성을 더욱 더 깊히 이해할 수 있었습니다. 뿐만 아니라 팀원들과의 소통과 협력으로 잊지 못할 추억을 쌓을 수 있었습니다.<br>
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+        </div>
+        <div class="testimonial-item">
+            <img src="../resources/assets/img/testimonials/moon.png" class="testimonial-img" alt="">
+            <h3>문경건</h3>
+            <h4>Team members</h4>
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+              <br>프로젝트를 진행하면서 개인의 역량도 중요하지만 팀원들간의 직접적인 소통이 가장 중요하다는 것을 몸소 겪으면서 이러한 커뮤니케이션 능력을 키울수 있었으며 다시 한번 나의 실력과 마음가짐을 돌아 볼 수있는 시간이었습니다.<br>
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+        </div>
+        <div class="testimonial-item">
+            <img src="../resources/assets/img/testimonials/hong.jpg" class="testimonial-img" alt="">
+            <h3>장홍제</h3>
+            <h4>Team members</h4>
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+              <br>개발자로서 나아가기위한 꼭 필수 요소였던 프로젝트였다고 생각합니다. 특히 팀원들과 협업을 하고 개개인의 결과물들을 하나의 프로젝트로 완성시키는것이 너무나도 짜릿했고, 더 좋은 개발자가 되기 위한 부족함을 메우기 위해 늘 노력을 해야겠다는 점을 크게 느꼈습니다.<br>
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+        </div>
+        <div class="testimonial-item">
+            <img src="../resources/assets/img/testimonials/hyun.jpg" class="testimonial-img" alt="">
+            <h3>이현진</h3>
+            <h4>Team members</h4>
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+              설계단계부터 개발단계까지 팀원들과의 소통을 통해 무빙클로젯을 단계별로 만들어가면서 전체적인 프로그래밍에 대한 이해는 물론 협업의 중요성도 깨달았습니다. 함께한 팀원들을 믿고 나아가니 어렵게 느껴졌던 코드들도 이해할 수 있었고, 맡은 바 역할을 즐겁게 해낼 수 있었습니다.
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+        </div>
+
+
+        <div class="testimonial-item">
+            <img src="../resources/assets/img/testimonials/dumi.jpg" class="testimonial-img" alt="">
+            <h3>김득환</h3>
+            <h4>Team members</h4>
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+              <br>서로 소통하며 협력하는게 어떠한 것인지 느낄수 있었던 계기가 되었습니다. 팀원들과 함께한 프로젝트 경험은 앞으로 살아가는데 많은 교훈을 주었습니다.<br>
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+        </div>
 
         
 
-        </div>
+    </div>
 
     </div>
     </section><!-- End Testimonials Section -->

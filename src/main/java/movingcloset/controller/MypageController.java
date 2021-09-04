@@ -14,6 +14,8 @@ import movingcloset.command.CommandImpl;
 import movingcloset.command.MemberEditCommand;
 import movingcloset.command.MemberOutCommand;
 import movingcloset.command.cscenter.QnaCommand;
+import movingcloset.command.mypage.MyPageOrderDetailCommand;
+import movingcloset.command.mypage.MyPageOrderListCommand;
 import movingcloset.command.mypage.MypageMoyoBusCommand;
 import movingcloset.command.mypage.MypageReviewCommand;
 import movingcloset.command.store.ReviewListCommand;
@@ -38,6 +40,12 @@ public class MypageController {
 
 	@Autowired
 	MypageReviewCommand mypageReviewCommand;
+
+	MyPageOrderListCommand myPageOrderListCommand;
+	
+	@Autowired
+	MyPageOrderDetailCommand myPageOrderDetailCommand;
+
 	
 	
 	@RequestMapping(value="movingcloset/mypage_coupon.do", method=RequestMethod.GET)
@@ -46,10 +54,29 @@ public class MypageController {
 		return "body/mypage/mypage_coupon";
 	}
 	@RequestMapping(value="movingcloset/mypage_order.do", method=RequestMethod.GET)
-	public String mypageOrder (Locale locale, Model model) {
+	public String mypageOrder (Locale locale, Model model, HttpServletRequest req) {
+		
+		model.addAttribute("req",req);
+		command = myPageOrderListCommand;
+		command.execute(model);
 		
 		return "body/mypage/mypage_order";
 	}
+	
+	
+	@RequestMapping("/movingcloset/myorder.do")
+	public String myorder(Model model, HttpServletRequest req) {
+		
+		model.addAttribute("req",req);
+		
+		command = myPageOrderDetailCommand;
+		command.execute(model);
+		
+		return "body/store/payForm";
+	}
+	
+	
+	
 	@RequestMapping(value="movingcloset/mypage_please.do", method=RequestMethod.GET)
 	public String mypagePlease (Locale locale, Model model) {
 		
@@ -158,9 +185,10 @@ public class MypageController {
 	
 	//현진쓰작업중
 	@RequestMapping(value="movingcloset/mypage_myqna.do", method=RequestMethod.GET)
-	public String mypageQna (HttpServletRequest request, Model model, QnaDTO qnaDTO) {
+	public String mypageQna (HttpServletRequest req, Model model, QnaDTO qnaDTO) {
 		
-		model.addAttribute("request",request);
+		System.out.println("마이페이지리뷰내역 컨트롤러호출");
+		model.addAttribute("req",req);
 		command = qnaCommand;
 		command.execute(model);
 		

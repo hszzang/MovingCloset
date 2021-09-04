@@ -5,11 +5,53 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="mybatis.MybatisProductImpl">
-
+<!-- 관리자 모드 메인에 불러오기 -->
+<!--	<select id="StoreList" resultType="mybatis.ProductAndDetailDTO">   -->
+	<select id="StoreList" resultType="mybatis.ProductAndDetailDTO">
+		SELECT p.*, d.*
+		FROM product p, product_detail d
+		WHERE p.p_code=d.p_code 
+		AND p_idx BETWEEN #{start} AND #{end}
+		ORDER BY p_idx DESC
+	</select>
+	
+<!-- 관리자 모드에서 뉴디 불러오기(임시) 
+		SELECT p.*
+		FROM product p, product_detail d
+		WHERE p.p_code=d.p_code
+		AND p_flag='뉴디'
+		ORDER BY p_idx DESC
+-->
+	<select id="NewDList" resultType="mybatis.ProductAndDetailDTO">
+		SELECT p.*, d.*
+		FROM product p, product_detail d
+		WHERE p.p_code=d.p_code
+		AND p_flag='뉴디'
+		ORDER BY p_idx DESC
+	</select>
+	<!--  
+		SELECT * FROM (
+		SELECT Tb.*, ROWNUM rNum FROM (
+			SELECT * FROM product
+			WHERE p_flag='뉴디'
+			<choose>
+				<when test='order=="asc"'>
+					ORDER BY p_price DESC
+				</when>
+				<when test='order=="desc"'>
+					ORDER BY p_price ASC
+				</when>
+				<otherwise>
+					ORDER BY p_idx ASC
+				</otherwise>
+			</choose>
+			)Tb
+		)
+		ORDER BY rNum desc
+		-->
 	<select id="getProductDTO" resultType="mybatis.ProductDTO">
 		SELECT * FROM product WHERE p_idx=#{p_idx}
 	</select>
-	
 	<!-- 리스트 (전체최근순) -->
 	<select id="getStoreList" parameterType="int" resultType="mybatis.ProductDTO">
 		SELECT * FROM product 
@@ -17,15 +59,16 @@
 	</select>
 
 	<!-- 페이징 적용된 리스트 + 신상품/가격정렬 + 플래그 분류 적용 -->
-	<select id="getPagedList" resultType="mybatis.ProductDTO">  
+	<select id="getPagedList" resultType="mybatis.ProductAndDetailDTO">  
 				SELECT * FROM ( 		
 				SELECT Tb.*, ROWNUM rNum FROM ( 
 				      SELECT * FROM product
 				      <choose>
 				      	<when test='flag=="all" or flag==null'>
+				      		WHERE p_flag!='뉴디'
 				      	</when>
 				      	<when test='flag!=null'>
-				     	 WHERE p_flag=#{flag} AND p_flag!='뉴디'
+				     		WHERE p_flag=#{flag} AND p_flag!='뉴디'
 				     	</when>
 				      </choose>
 						<choose>
@@ -57,6 +100,10 @@
 			</otherwise>
 		</choose>
 	</select>
+<!-- 뉴디 카운트 -->
+	<select id="getNewDCount" resultType="int">
+		SELECT COUNT(*) FROM product WHERE p_flag='뉴디' 
+	</select>	
 	
 	<!-- 상품 입력 -->
 	<insert id="insertProduct" parameterType="mybatis.ProductDTO" >
@@ -164,30 +211,47 @@
 	<!-- 구매폼(buy) insert -->
 	<insert id="insertBuyForm" parameterType="mybatis.BuyAndGroupDTO" >
 		
-		INSERT INTO BUY (B_IDX, B_TOTALPAY, B_DATE, B_BUYER, B_PHONE, B_POSTCODE, B_ADDR, B_PAYMENT, B_WAYBILL, USERID,EMAIL)
-		VALUES (buy_seq.nextval,#{b_totalpay},sysdate,#{b_buyer},#{b_phone},#{b_postcode},#{b_addr},#{b_payment},#{b_waybill},#{userid},#{email} )
+		INSERT INTO BUY (B_IDX, B_TOTALPAY, B_DATE, B_BUYER, B_PHONE, B_POSTCODE, B_ADDR, B_PAYMENT, B_WAYBILL, USERID,EMAIL,accountnumber,cou_code)
+		VALUES (buy_seq.nextval,#{b_totalpay},sysdate,#{b_buyer},#{b_phone},#{b_postcode},#{b_addr},#{b_payment},#{b_waybill},#{userid},#{email},#{accountnumber},#{cou_code} )
+		<selectKey keyProperty="b_idx" order="AFTER" resultType="String">
+			select buy_seq.CURRVAL from dual
+		</selectKey>
 				
 	</insert>
 	
 	<!-- 구매폼(buy_group)에 insert -->
 	<insert id="insertBuy_groupForm" parameterType="mybatis.BuyAndGroupDTO" >
+
 		<choose>
 			<when test="cou_code != null">
 				insert into buy_group(BD_IDX, P_CODE, COU_CODE, B_IDX, BD_COUNT, BD_SIZE) 
-				values (buygroup_seq.nextval, #{p_code}, #{cou_code},buy_seq.CURRVAL,#{bd_count},#{bd_size})					
+				values (buygroup_seq.nextval, #{p_code}, 
+				<foreach item="item" index="index" collection="list">
+				#{cou_code},
+				</foreach>
+				
+				#{b_idx},#{bd_count},#{bd_size})					
 			</when>
 			<otherwise>
 				insert into buy_group(BD_IDX, P_CODE, B_IDX, BD_COUNT, BD_SIZE) 
-				values (buygroup_seq.nextval, #{p_code}, buy_seq.CURRVAL,#{bd_count},#{bd_size})		
+				values (buygroup_seq.nextval, #{p_code},#{b_idx},#{bd_count},#{bd_size})		
 			</otherwise>
 		</choose>
 	</insert>
 	
+
 	<!-- 마이페이지 리뷰리스트 가져오기 -->
 	<select id="mypageReviewList" resultType="mybatis.ReviewDTO">
 		SELECT * FROM review where userid=#{userid}
 	</select>
 	
+
+	
+	<!-- 주문내역에서 보여질 상품 -->	
+	<select id="getProductDTOsfile" parameterType="string" resultType="mybatis.ProductDTO">
+		select * from product where p_code = #{p_code}
+	</select>
+
 	
 	
 	

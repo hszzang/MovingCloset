@@ -1,6 +1,6 @@
 package mybatis;
 
-import java.util.Date;
+
 
 import lombok.Data;
 
@@ -11,7 +11,7 @@ public class QnaDTO {
 	private String userid;
 	private String q_cate;
 	private String q_content;
-	private Date q_date;
+	private String q_date;
 	private String q_ofile;
 	private String q_sfile;
 	private String q_title;

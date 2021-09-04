@@ -435,10 +435,9 @@ public class StoreController {
 	
 	// 상품 구매하기
 	@RequestMapping("/store/buyProduct.do")
-	public String buyProduct(Model model, HttpServletRequest req, BuyAndGroupDTO buyAndGroupDTO) {
+	public String buyProduct(Model model, HttpServletRequest req) {
 		
 		model.addAttribute("req",req);
-		model.addAttribute("buyAndGroupDTO",buyAndGroupDTO);
 		
 		command = storeBuyCommand;
 		command.execute(model);
@@ -446,6 +445,7 @@ public class StoreController {
 		return "body/store/payForm";
 	}
 	
+
 	
 	
 }

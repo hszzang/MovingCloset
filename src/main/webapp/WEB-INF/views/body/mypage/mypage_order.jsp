@@ -91,9 +91,41 @@
                         분리 배송된 상품별로 운송장이 발급되어 다른 날짜에 받으실 수 있으며, 마이페이지에서 배송조회가 가능합니다.
                     </p>
                 </div>
-                <div class="result">
-                    <p>주문한 내역이 없습니다.</p>
-                </div>
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th width="15%">번호</th>
+                            <th width="30%">상품코드</th>
+                            <th width="20%">결제가격</th>
+                            <th width="20%">결제수단</th>
+                            <th width="15%">주문날짜</th>
+                        </tr>
+                    </thead>
+                    <c:choose>
+                        <c:when test="${empty buylist }">
+                            <tr>
+                                <td colspan="6" align="center">
+                                    등록된 주문내역이 없습니다.
+                                </td>
+                            </tr>
+                        </c:when>
+                        <c:otherwise>
+                            <c:forEach items="${buylist }" var="row" varStatus="loop">
+                            <tr>
+                                <td width="10%">
+                                    ${loop.index+1}	
+                                </td>
+                                <td width="30%" align="left">
+                                    <a href="../movingcloset/myorder.do?b_idx=${row.b_idx }&p_code=${row.p_code}">${row.p_code }</a>
+                                </td>
+                                <td width="20%" align="left">${row.b_totalpay }</td>
+                                <td width="20%" align="left">${row.b_payment }</td>
+                                <td width="15%" align="left">${row.b_date }</td>
+                            </tr>
+                            </c:forEach>
+                        </c:otherwise>
+                    </c:choose>
+                </table>
             </div>
         </div>
     </div>
