@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public interface MybatisProductImpl {
 	// 특정 상품 불러오기
 	public ProductDTO getProductDTO(String p_idx);  
-	//public ProductDTO getProductDTO(String p_code);  
+	public ProductDTO getProductDTOsfile(String p_code);  
 	//public String getDetailDTO(String pd_color);
 	
 	// 관리자 모드용
