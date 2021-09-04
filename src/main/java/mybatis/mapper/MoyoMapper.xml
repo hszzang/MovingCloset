@@ -72,17 +72,29 @@
 		SELECT * FROM moyo_bus WHERE m_idx=#{0}
 	</select>
 	
+	<delete id="deleteMyMoyo">
+		DELETE FROM moyo_use
+		WHERE m_idx=#{0} AND userid=#{1}
+	</delete>
+	
+	
 	
 	<!-- 마이페이지 쪼르기내역 -->
 	<select id="getMyPlzList" resultType="mybatis.PleaseDTO">
 		SELECT * FROM please 
-		WHERE plz_idx = (
+		WHERE plz_idx IN (
 			SELECT plz_idx FROM please_use WHERE userid=#{0})
 	</select>
 	
 	<select id="getMyPlzProduct" resultType="mybatis.ProductDTO">
 		SELECT * FROM product WHERE p_code=#{0}
 	</select>
+	
+	<delete id="deleteMyPlz">
+		DELETE FROM please_use 
+		WHERE plz_idx=#{0} AND userid=#{1}
+	</delete> 
+	
 	
 	
 	<!-- 지난모여쪼르기 -->

@@ -93,13 +93,14 @@
   }
   
   .moyoInfo {
-  	align-self: center; margin-left: 4%;
+  	align-self: center; margin-left: 4%; width:35%;
   }
   
   .moyoInfo_title { font-weight: bold; font-size: 1.2em; }
   .moyoInfo_detail { font-size: 0.9em; }
   
   .moyoBusInfo {
+  	width:45%;
   	margin-left: 11%;
   	align-self: center; text-align: center;
   }
@@ -117,11 +118,11 @@
   
   .userOption {
   	align-self: center; width:15%; text-align: right;
-  	color: black; cursor: pointer;
+  	color: black; cursor: pointer; margin-right:5px; 
   }
   
   .userOption i {
-  	color:black;
+  	color:black; cursor: pointer; 
   }
   
 </style>
@@ -130,7 +131,7 @@
 function plzDelete(idx) {
 	var confirmCheck = confirm("해당 상품에 대한 쪼르기 신청을 취소하시겠습니까?");
 	if(confirmCheck == true) {
-		alert("삭제가 완료되었습니다.");
+		alert("신청이 취소되었습니다.");
 		location.href='../movingcloset/myPagePlzDelete.do?plz_idx='+idx;
 	}
 }
@@ -214,7 +215,7 @@ function plzDelete(idx) {
 							<div class="dropdown-menu dropdown-menu-right" >
 <!-- 								<a onclick="commentEdit();" class="dropdown-item" >수정</a> -->
 								<a class="dropdown-item" 
-									onclick="plzDelete("${myPlzList[plzLoop.index].plz_idx }");">신청 취소</a>
+									onclick="plzDelete(${myPlzList[plzLoop.index].plz_idx });">신청 취소</a>
 							</div>
                         </div>
                     </div>

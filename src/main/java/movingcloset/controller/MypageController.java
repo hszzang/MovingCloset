@@ -22,7 +22,9 @@ import movingcloset.command.MemberOutCommand;
 import movingcloset.command.RegisterActionCommand;
 import movingcloset.command.cscenter.QnaCommand;
 import movingcloset.command.mypage.MypageMoyoBusCommand;
+import movingcloset.command.mypage.MypageMoyoDeleteCommand;
 import movingcloset.command.mypage.MypagePleaseCommand;
+import movingcloset.command.mypage.MypagePlzDeleteCommand;
 import mybatis.MemberDTO;
 import mybatis.MybatisMemberImpl;
 import mybatis.QnaDTO;
@@ -47,7 +49,13 @@ public class MypageController {
     @Autowired
     MypagePleaseCommand mypagePleaseCommand;
 
-	
+    @Autowired
+    MypagePlzDeleteCommand mypagePlzDeleteCommand;
+    
+    @Autowired
+    MypageMoyoDeleteCommand mypageMoyoDeleteCommand;
+    
+    
 	
 	@RequestMapping(value="movingcloset/mypage_coupon.do", method=RequestMethod.GET)
 	public String mypageCoupon (Model model, HttpServletRequest req) {
@@ -59,6 +67,8 @@ public class MypageController {
 		
 		return "body/mypage/mypage_order";
 	}
+	
+	//내가 신청한 쪼르기내역 조회
 	@RequestMapping(value="movingcloset/mypage_please.do", method=RequestMethod.GET)
 	public String mypagePlease (Model model, HttpServletRequest req) {
 		
@@ -68,6 +78,18 @@ public class MypageController {
 		
 		return "body/mypage/mypage_please";
 	}
+	
+	//쪼르기 신청 취소
+	@RequestMapping(value="movingcloset/myPagePlzDelete.do", method=RequestMethod.GET)
+	public String myPagePlzDelete (Model model, HttpServletRequest req) {
+		
+		model.addAttribute("req", req);
+		command = mypagePlzDeleteCommand;
+		command.execute(model);
+		
+		return "redirect:/movingcloset/mypage_please.do";
+	}
+	
 	@RequestMapping(value="movingcloset/mypage_zzim.do", method=RequestMethod.GET)
 	public String mypageZzim (Locale locale, Model model) {
 		
@@ -118,6 +140,17 @@ public class MypageController {
 		command.execute(model);
 		
 		return "body/mypage/mypage_moyoBus";
+	}
+	
+	//쪼르기 신청 취소
+	@RequestMapping(value="movingcloset/myPageMoyoDelete.do", method=RequestMethod.GET)
+	public String myPageMoyoDelete (Model model, HttpServletRequest req) {
+		
+		model.addAttribute("req", req);
+		command = mypageMoyoDeleteCommand;
+		command.execute(model);
+		
+		return "redirect:/movingcloset/mypage_bus.do";
 	}
 	
 	@RequestMapping(value="movingcloset/mypage_out.do", method=RequestMethod.GET)

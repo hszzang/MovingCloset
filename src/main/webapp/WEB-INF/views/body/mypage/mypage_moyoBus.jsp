@@ -109,11 +109,11 @@
   
   .userOption {
   	align-self: center; text-align: right;
-  	color: black; cursor: pointer; margin-right:5px; 
+  	color: black; margin-right:5px; 
   }
   
   .userOption i {
-  	color:black;
+  	color:black; cursor: pointer;
   }
   
 </style>
@@ -122,7 +122,7 @@
 function moyoDelete(idx) {
 	var confirmCheck = confirm("해당 모여의 신청을 취소하시겠습니까?");
 	if(confirmCheck == true) {
-		alert("삭제가 완료되었습니다.");
+		alert("신청이 취소되었습니다.");
 		location.href='../movingcloset/myPageMoyoDelete.do?m_idx='+idx;
 	}
 }

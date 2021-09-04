@@ -52,11 +52,16 @@ public interface MybatisMoyoImpl {
 	//내 모여신청내역(MoyoBus) 조회
 	public MoyoBusDTO getMyMoyoBus(String m_idx);
 	
+	//내 모여 삭제
+	public int deleteMyMoyo(String m_idx, String userid);
+
 	
 	/****** 마이페이지 쪼르기내역 ******/
 	public ArrayList<PleaseDTO> getMyPlzList(String userid);
 	
 	public ProductDTO getMyPlzProduct(String p_code);
+	
+	public int deleteMyPlz(String plz_idx, String userid); 
 	
 	
 	/****** 지난모여쪼르기 ******/
