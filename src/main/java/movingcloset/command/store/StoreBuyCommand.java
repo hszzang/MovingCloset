@@ -21,6 +21,7 @@ import mybatis.MybatisEventCouponImpl;
 import mybatis.MybatisMoyoImpl;
 import mybatis.MybatisProductImpl;
 import mybatis.ProductAndDetailDTO;
+import mybatis.ProductDTO;
 
 @Service
 public class StoreBuyCommand implements CommandImpl{
@@ -35,7 +36,7 @@ public class StoreBuyCommand implements CommandImpl{
 		Map<String, Object> paramMap = model.asMap();
 		HttpServletRequest req = (HttpServletRequest)paramMap.get("req");
 		HttpSession session = req.getSession();
-		ProductAndDetailDTO productAndDetailDTO = new ProductAndDetailDTO();
+		ProductDTO productDTO = new ProductDTO();
 		
 		/*
 			-private String  b_totalpay;
@@ -112,6 +113,9 @@ public class StoreBuyCommand implements CommandImpl{
 			int result = sqlSession.getMapper(MybatisProductImpl.class).insertBuyForm(buyAndGroupDTO);
 			int result2 = sqlSession.getMapper(MybatisProductImpl.class).insertBuy_groupForm(buyAndGroupDTO);
 			model.addAttribute("buyAndGroupDTO",buyAndGroupDTO);
+			productDTO = sqlSession.getMapper(MybatisProductImpl.class).getProductDTOsfile(p_code);
+			
+			model.addAttribute("productDTO",productDTO);
 			System.out.println("구매폼 insert : "+result+"구매폼group insert : "+result2);
 		
 		

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,7 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<title>결제폼 :: MovingCloset</title>
+<title>주문내역 :: MovingCloset</title>
 <style>
 
 
@@ -196,10 +197,38 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 <body>
 	<div class="container" style="margin-top:200px;">
 		<div class="sectiontitle">
-		    <h2>주문 완료</h2>
+		    <h2>주문 내역</h2>
 	    </div>
-		<div class="input-form-background row">
+			<div class="input-form" style="padding-bottom:15px;">
+				<div class="row" style="margin-top:15px;">
+					<table class="table table-hover" id="goodsTable">
+						<thead class="goodsTitle">
+							<tr>
+							  <th>상품이미지</th>	
+							  <th>브랜드</th>
+							  <th>상품명&nbsp;(상품코드)</th>
+							  <th>가격</th>
+							  <th>수량</th>
+							  <th>사이즈</th>
+							</tr>
+					    </thead>
+					    <tbody>
+					    	<tr id="goods">
+					    		<td><img class="goodsImg" src="../resources/upload/${productDTO.p_sfile }" /></td>
+					    		<td style="vertical-align:middle;">${productDTO.p_brand }</td>
+					    		<td style="vertical-align:middle;">${productDTO.p_name }<br />(${productDTO.p_code })</td>
+					    		<td style="vertical-align:middle;">${buyAndGroupDTO.b_totalpay }</td>
+					    		<td style="vertical-align:middle;">${buyAndGroupDTO.bd_count }</td>
+					    		<td style="vertical-align:middle;">${buyAndGroupDTO.bd_size }</td>
+					    	</tr>
+					    </tbody>
+					</table>
+				</div>
+			</div>
+				
+			
 			<div class="input-form col-md-12 mx-auto">
+				
 				<div class="input-form-wrap">
 					<br />
 					<h3>주문 내역</h3>
