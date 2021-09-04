@@ -83,6 +83,19 @@
 	<select id="getMyPlzProduct" resultType="mybatis.ProductDTO">
 		SELECT * FROM product WHERE p_code=#{0}
 	</select>
+	
+	
+	<!-- 지난모여쪼르기 -->
+	<select id="endMoyoList" resultType="mybatis.MoyoDTO">
+		SELECT * FROM moyo WHERE m_status!='진행'
+		ORDER BY m_end
+	</select>
+	
+	<select id="endPlzList" resultType="mybatis.PleaseDTO">
+		SELECT * FROM please WHERE plz_status!='진행'
+		ORDER BY plz_end
+	</select>
+	
 
 </mapper>
  

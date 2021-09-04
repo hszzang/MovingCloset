@@ -59,6 +59,13 @@ public interface MybatisMoyoImpl {
 	public ProductDTO getMyPlzProduct(String p_code);
 	
 	
+	/****** 지난모여쪼르기 ******/
+	public ArrayList<MoyoDTO> endMoyoList();
+	
+	public ArrayList<PleaseDTO> endPlzList();
+	
+	
+	
 	
 
 }

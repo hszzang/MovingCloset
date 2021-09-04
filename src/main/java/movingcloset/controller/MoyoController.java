@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import movingcloset.command.CommandImpl;
+import movingcloset.command.moyo.EndMoyoPlzCommand;
 import movingcloset.command.moyo.MoyoCommand;
 import movingcloset.command.moyo.MoyoFormCommand;
 import movingcloset.command.moyo.MoyoJoinCommand;
@@ -37,6 +38,9 @@ public class MoyoController {
 	
 	@Autowired
 	PleaseJoinCommand pleaseJoinCommand;
+	
+	@Autowired
+	EndMoyoPlzCommand endMoyoPlzCommand;
 	
 	// 모여
 	@RequestMapping(value="/movingcloset/moyo.do", method={RequestMethod.GET, RequestMethod.POST})
@@ -95,7 +99,11 @@ public class MoyoController {
 	
 	// 지난 모여/조르기 목록
 	@RequestMapping(value="/movingcloset/endMoyoPlz.do", method=RequestMethod.GET)
-	public String endMoyoPlz() {
+	public String endMoyoPlz(Model model, HttpServletRequest req) {
+		
+		model.addAttribute("req", req);
+		command = endMoyoPlzCommand;
+		command.execute(model);
 		
 		return "body/moyo/endMoyoPlz";
 	}
