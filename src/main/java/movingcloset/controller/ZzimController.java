@@ -11,11 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import movingcloset.command.CommandImpl2;
-import movingcloset.command.cart.CartListRemoveCommand;
+import movingcloset.command.zzim.ZzimAllListCommand;
 import movingcloset.command.zzim.ZzimCreateCommand;
 import movingcloset.command.zzim.ZzimListCommand;
 import movingcloset.command.zzim.ZzimRemoveCommand;
-import mybatis.CartDTO;
 import mybatis.ZzimDTO;
 
 @Controller
@@ -31,6 +30,9 @@ public class ZzimController {
 	
 	@Autowired
 	ZzimCreateCommand zzimCreateCommand;
+	
+	@Autowired
+	ZzimAllListCommand zzimAllListCommand;
 	
 	@ResponseBody
 	@RequestMapping(value = "/zzimList", method = RequestMethod.POST)

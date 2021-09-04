@@ -9,4 +9,6 @@ public interface MybatisZzimImpl {
 	public void zzimListRemove(ZzimDTO zzimDTO);
 	
 	public void zzimListCreate(ZzimDTO zzimDTO);
+	
+	public ArrayList<ZzimDTO> zzimAllList(ZzimDTO zzimDTO);
 }

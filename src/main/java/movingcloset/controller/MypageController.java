@@ -61,7 +61,8 @@ public class MypageController {
 		return "body/mypage/mypage_please";
 	}
 	@RequestMapping(value="movingcloset/mypage_zzim.do", method=RequestMethod.GET)
-	public String mypageZzim (Locale locale, Model model) {
+	public String mypageZzim (Model model, HttpServletRequest req) {
+		
 		
 		return "body/mypage/mypage_zzim";
 	}

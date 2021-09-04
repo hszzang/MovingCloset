@@ -18,5 +18,9 @@
 		INSERT INTO zzim(z_idx, userid, p_code) values (zzim_seq.nextval, #{userid}, #{p_code})
 	</insert>
 	
+	<select id="zzimAllList" resultType="mybatis.ZzimDTO">
+		SELECT * FROM zzim
+	</select>
+	
 </mapper>
  
