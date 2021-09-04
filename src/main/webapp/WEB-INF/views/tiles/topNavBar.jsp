@@ -237,7 +237,7 @@
 			<c:choose>
 				<c:when test="${sessionScope.siteUserInfo != null}">
 					<a href="#" onclick="logout();"><i class="material-icons" id="icon">exit_to_app</i></a>&nbsp;
-					<a href="./mypage_coupon.do"><i class="material-icons" id="icon" onclick="infoclick();">info_outline</i></a>
+					<a href="../movingcloset/mypage_coupon.do"><i class="material-icons" id="icon" onclick="infoclick();">info_outline</i></a>
 				</c:when>
 				<c:otherwise>  
 					<a href="../movingcloset/login.do"><i class="material-icons" id="icon">person</i></a>
@@ -278,8 +278,8 @@
 			 <div class="contentLink d-flex justify-content-around">
 	            <a href="../movingcloset/moyo.do" id="sub-content">모여</a>
 <!-- 	            <a href="../movingcloset/moyoForm.do" id="sub-content">모여신청</a> -->
-	            <a href="" id="sub-content">조르기</a>
-	            <a href="" id="sub-content">지난 모여&nbsp;/&nbsp;조르기</a>
+	            <a href="../movingcloset/please.do" id="sub-content">쪼르기</a>
+	            <a href="../movingcloset/endMoyoPlz.do" id="sub-content">지난 모여&nbsp;/&nbsp;쪼르기</a>
 	        </div>
 		</div>
 	</div>

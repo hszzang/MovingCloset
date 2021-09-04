@@ -20,12 +20,6 @@
 		ORDER BY m_dday DESC
 	</select>
 	
-<!-- 		<id column="m_idx" property="usernum" /> -->
-	<resultMap type="java.util.HashMap" id="countMoyoUser">
-		<result column="m_idx" property="m_idx" javaType="java.lang.String" />
-		<result column="usernum" property="usernum" javaType="java.lang.String" />
-	</resultMap>
-	
 	<select id="countMoyoUser" resultType="int">
 		SELECT count(*)
 		FROM moyo_use 
@@ -45,6 +39,26 @@
 		VALUES (#{m_idx}, #{userid}, #{mu_name}, #{mu_phone}, #{mu_email}, #{mu_time}, sysdate)
 	</insert>
 	
+	<!-- 쪼르기 -->
+	<select id="getPlzList" resultType="mybatis.PleaseDTO">
+		SELECT * FROM please 
+		WHERE plz_status='진행' ORDER BY plz_end
+	</select>
+	
+	<select id="getPlzProduct" resultType="mybatis.ProductDTO">
+		SELECT * FROM product WHERE p_code=#{0}
+	</select>
+	
+	<select id="countPlzUser" resultType="int">
+		SELECT COUNT(*) FROM please_use WHERE plz_idx=#{0}
+	</select>
+	
+	<insert id="insertPlzJoin">
+		INSERT INTO please_use VALUES(#{0}, #{1})
+	</insert>
+	
+	
+	<!-- 마이페이지 모여버스 -->
 	<select id="getMyMoyoUse" resultType="mybatis.MoyoUseDTO">
 		SELECT * FROM moyo_use
 		WHERE userid=#{0} ORDER BY mu_regidate DESC
@@ -57,6 +71,43 @@
 	<select id="getMyMoyoBus" resultType="mybatis.MoyoBusDTO">
 		SELECT * FROM moyo_bus WHERE m_idx=#{0}
 	</select>
+	
+	<delete id="deleteMyMoyo">
+		DELETE FROM moyo_use
+		WHERE m_idx=#{0} AND userid=#{1}
+	</delete>
+	
+	
+	
+	<!-- 마이페이지 쪼르기내역 -->
+	<select id="getMyPlzList" resultType="mybatis.PleaseDTO">
+		SELECT * FROM please 
+		WHERE plz_idx IN (
+			SELECT plz_idx FROM please_use WHERE userid=#{0})
+	</select>
+	
+	<select id="getMyPlzProduct" resultType="mybatis.ProductDTO">
+		SELECT * FROM product WHERE p_code=#{0}
+	</select>
+	
+	<delete id="deleteMyPlz">
+		DELETE FROM please_use 
+		WHERE plz_idx=#{0} AND userid=#{1}
+	</delete> 
+	
+	
+	
+	<!-- 지난모여쪼르기 -->
+	<select id="endMoyoList" resultType="mybatis.MoyoDTO">
+		SELECT * FROM moyo WHERE m_status!='진행'
+		ORDER BY m_end
+	</select>
+	
+	<select id="endPlzList" resultType="mybatis.PleaseDTO">
+		SELECT * FROM please WHERE plz_status!='진행'
+		ORDER BY plz_end
+	</select>
+	
 
 	<!-- 관리자용 모여리스트 불러오기 
 	<select id="MoyoList" resultType="String"> 
@@ -76,17 +127,22 @@
 	<select id="MoyoList" resultType="mybatis.MoyoDTO">
 		SELECT * FROM moyo ORDER BY m_idx DESC
 	</select>
-	
-	<insert id="newMoyo" parameterType="mybatis.MoyoDTO">
+	<!-- 관리자 모여 추가 -->
+	<insert id="MoyoInsert" parameterType="mybatis.MoyoDTO">
 		INSERT INTO moyo
-		VALUES (moyo_seq.nextval, #{m_idx}, #{m_name}, #{m_addr}, #{m_goal}, #{m_dday}, #{m_desc}, #{m_start}, #{m_end}, #{m_status})
+		VALUES (moyo_seq.nextval, #{m_name}, #{m_addr}, #{m_lat}, #{m_lon}, #{m_goal}, #{m_dday}, #{m_desc}, #{m_start}, #{m_end}, #{m_status}, #{m_ofile}, #{m_sfile})
 	</insert>
-
-	<update id="updateMoyo" parameterType="mybatis.MoyoDTO">
+	<!--  관리자 모여 수정 -->
+	<update id="MoyoUpdate" parameterType="mybatis.MoyoDTO">
 		UPDATE moyo 
 		SET m_name=#{m_name}, m_addr=#{m_addr}, m_goal=#{m_goal}, m_dday=#{m_dday}, m_desc=#{m_desc}, 
 		m_start=#{m_start}, m_end=#{m_end}, m_status=#{m_status} 
 		WHERE m_idx=#{m_idx}
 	</update>
+	<!-- 관리자 모여 삭제 -->
+	<delete id="MoyoDelete">
+		DELETE FROM moyo WHERE m_idx=#{m_idx}
+	</delete>
+	
 </mapper>
  

@@ -1,22 +1,16 @@
 package movingcloset.controller;
 
 import java.util.Locale;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import movingcloset.command.CommandImpl;
-import movingcloset.command.LoginCommand;
 import movingcloset.command.MemberEditCommand;
 import movingcloset.command.MemberOutCommand;
 import movingcloset.command.RegisterActionCommand;
@@ -25,9 +19,15 @@ import movingcloset.command.cscenter.QnaCommand;
 import movingcloset.command.mypage.MyPageOrderDetailCommand;
 import movingcloset.command.mypage.MyPageOrderListCommand;
 import movingcloset.command.mypage.MypageMoyoBusCommand;
+
 import movingcloset.command.zzim.ZzimAllListCommand;
+import movingcloset.command.mypage.MypageMoyoDeleteCommand;
+import movingcloset.command.mypage.MypagePleaseCommand;
+import movingcloset.command.mypage.MypagePlzDeleteCommand;
 import mybatis.MemberDTO;
 import mybatis.MybatisMemberImpl;
+import movingcloset.command.mypage.MypageReviewCommand;
+import movingcloset.command.store.ReviewListCommand;
 import mybatis.QnaDTO;
 
 @Controller
@@ -46,8 +46,19 @@ public class MypageController {
 
 	@Autowired
 	MypageMoyoBusCommand mypageMoyoBusCommand;
+    
+    @Autowired
+    MypagePleaseCommand mypagePleaseCommand;
 
+    @Autowired
+    MypagePlzDeleteCommand mypagePlzDeleteCommand;
+    
+    @Autowired
+    MypageMoyoDeleteCommand mypageMoyoDeleteCommand;
+    
 	@Autowired
+	MypageReviewCommand mypageReviewCommand;
+
 	MyPageOrderListCommand myPageOrderListCommand;
 	
 	@Autowired
@@ -55,6 +66,7 @@ public class MypageController {
 	
 	@Autowired
 	MyPageOrderDetailCommand myPageOrderDetailCommand;
+
 	
 	@Autowired
 	CouponMyListCommand couponMyListCommand;
@@ -79,7 +91,6 @@ public class MypageController {
 		return "body/mypage/mypage_order";
 	}
 	
-	
 	@RequestMapping("/movingcloset/myorder.do")
 	public String myorder(Model model, HttpServletRequest req) {
 		
@@ -92,12 +103,28 @@ public class MypageController {
 	}
 	
 	
-	
+	//내가 신청한 쪼르기내역 조회
 	@RequestMapping(value="movingcloset/mypage_please.do", method=RequestMethod.GET)
-	public String mypagePlease (Locale locale, Model model) {
+	public String mypagePlease (Model model, HttpServletRequest req) {
+		
+		model.addAttribute("req", req);
+		command = mypagePleaseCommand;
+		command.execute(model);
 		
 		return "body/mypage/mypage_please";
 	}
+	
+	//쪼르기 신청 취소
+	@RequestMapping(value="movingcloset/myPagePlzDelete.do", method=RequestMethod.GET)
+	public String myPagePlzDelete (Model model, HttpServletRequest req) {
+		
+		model.addAttribute("req", req);
+		command = mypagePlzDeleteCommand;
+		command.execute(model);
+		
+		return "redirect:/movingcloset/mypage_please.do";
+	}
+	
 	@RequestMapping(value="movingcloset/mypage_zzim.do", method=RequestMethod.GET)
 	public String mypageZzim (Model model, HttpServletRequest req) {
 		
@@ -152,6 +179,17 @@ public class MypageController {
 		command.execute(model);
 		
 		return "body/mypage/mypage_moyoBus";
+	}
+	
+	//쪼르기 신청 취소
+	@RequestMapping(value="movingcloset/myPageMoyoDelete.do", method=RequestMethod.GET)
+	public String myPageMoyoDelete (Model model, HttpServletRequest req) {
+		
+		model.addAttribute("req", req);
+		command = mypageMoyoDeleteCommand;
+		command.execute(model);
+		
+		return "redirect:/movingcloset/mypage_bus.do";
 	}
 	
 	@RequestMapping(value="movingcloset/mypage_out.do", method=RequestMethod.GET)
@@ -221,7 +259,13 @@ public class MypageController {
 	
 	
 	@RequestMapping(value="movingcloset/mypage_review.do", method=RequestMethod.GET)
-	public String mypageReview (Locale locale, Model model) {
+	public String mypageReview (HttpServletRequest req, Model model) {
+		
+		
+		model.addAttribute("req", req);
+		command = mypageReviewCommand;
+		command.execute(model);
+		 
 		
 		return "body/mypage/mypage_review";
 	}

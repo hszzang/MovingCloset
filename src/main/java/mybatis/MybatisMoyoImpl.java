@@ -28,10 +28,30 @@ public interface MybatisMoyoImpl {
 	public int moyoFormDataInsert(MoyoUseDTO moyoUseDTO);
 
 	//관리자용 모여 리스트 불러오기
-	public ArrayList<MoyoDTO> MoyoList();
+	public List<MoyoDTO> MoyoList();
 	//public ArrayList<String> MoyoList();
-	
 
+	// 관리자에서 모여 추가
+	public void MoyoInsert(MoyoDTO moyoDTO);
+	// 관리자에서 모여 수정
+	public void MoyoUpdate(MoyoDTO moyoDTO);
+	// 관리자에서 모여 삭제
+	public void MoyoDelete(String m_idx);
+
+	
+	
+	/****** 쪼르기 ******/
+	//쪼르기 리스트 불러오기
+	public ArrayList<PleaseDTO> getPlzList();
+	
+	//쪼르기 상품정보 불러오기
+	public ProductDTO getPlzProduct(String p_code);
+	
+	//쪼르기별 모인 인원수 가져오기
+	public int countPlzUser(String plz_idx);
+	
+	//쪼르기 신청
+	public int insertPlzJoin(String plz_idx, String userid);
 	
 	
 	/****** 마이페이지 모여버스 ******/
@@ -43,6 +63,27 @@ public interface MybatisMoyoImpl {
 	
 	//내 모여신청내역(MoyoBus) 조회
 	public MoyoBusDTO getMyMoyoBus(String m_idx);
+	
+	//내 모여 삭제
+	public int deleteMyMoyo(String m_idx, String userid);
+
+	
+	/****** 마이페이지 쪼르기내역 ******/
+	public ArrayList<PleaseDTO> getMyPlzList(String userid);
+	
+	public ProductDTO getMyPlzProduct(String p_code);
+	
+	public int deleteMyPlz(String plz_idx, String userid); 
+	
+	
+	/****** 지난모여쪼르기 ******/
+	public ArrayList<MoyoDTO> endMoyoList();
+	
+	public ArrayList<PleaseDTO> endPlzList();
+	
+	
+	
+	
 
 
 }

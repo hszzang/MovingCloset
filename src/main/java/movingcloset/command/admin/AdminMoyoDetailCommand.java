@@ -19,9 +19,9 @@ import mybatis.ProductAndDetailDTO;
 import mybatis.ProductDTO;
 
 @Service
-public class AdminMoyoCommand implements CommandImpl {
+public class AdminMoyoDetailCommand implements CommandImpl {
 
-	public AdminMoyoCommand() {}
+	public AdminMoyoDetailCommand() {}
 	
 	@Autowired
 	private SqlSession sqlSession;
@@ -29,17 +29,23 @@ public class AdminMoyoCommand implements CommandImpl {
 	@Override
 	public void execute(Model model) {
 		
+		System.out.println("AdminMoyoDetailCommand 호출");
+		MoyoDTO moyoDTO = new MoyoDTO();
+		
 		Map<String, Object> paramMap = model.asMap();
 		HttpServletRequest req = (HttpServletRequest)paramMap.get("req");
 		
-		List<MoyoDTO> MoyoList = sqlSession.getMapper(MybatisMoyoImpl.class).MoyoList();
-		//ArrayList<String> MoyoList = sqlSession.getMapper(MybatisMoyoImpl.class).MoyoList();
+		//moyoDTO = (MoyoDTO)paramMap.get("moyoDTO");
+		//System.out.println("AdminMoyoUpdateCommand 호출2");
 		
-		//List<ProductAndDetailDTO> StoreList = sqlSession.getMapper(MybatisProductImpl.class).StoreList(start, end);
+		String m_idx = req.getParameter("m_idx");
+		moyoDTO = sqlSession.getMapper(MybatisMoyoImpl.class).getMoyoData(m_idx);
 		
-		model.addAttribute("MoyoList", MoyoList);
+		//sqlSession.getMapper(MybatisMoyoImpl.class).MoyoUpdate(moyoDTO);
 		
+		model.addAttribute("moyoDTO", moyoDTO);
 		
+		System.out.println("AdminMoyoDetailCommand 완료");
 	}
 	
 }

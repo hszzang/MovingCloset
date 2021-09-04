@@ -13,5 +13,8 @@ public interface MybatisQNAImpl {
 	public QnaDTO getQnaDetail(String q_idx); 
 	public void insertQNA(QnaDTO qnaDTO);
 
-	
+	// 관리자모드 질답 리스트 불러오기
+	public List<QnaDTO> QnAList();
+	// 관리자 답변
+	public QnaDTO adminAnswer(QnaDTO qnaDTO);
 }

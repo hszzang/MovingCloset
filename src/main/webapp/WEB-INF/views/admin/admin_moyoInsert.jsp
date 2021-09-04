@@ -46,7 +46,7 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 
 
 #moyoFrm {
-	margin: 4% 7%; width: 70%;
+	margin: 0; width: 80%;
 }
 
 #moyoFrm *:not(input, select){
@@ -62,8 +62,8 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 
 
 #moyoInfo {
-	margin: 5% 0;
-	margin-left: 5%;
+	margin: 0 0 5% 30px;
+
 }
 
 #moyoInfo h3 {
@@ -79,7 +79,7 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 }
 #moyoInfoWrap {
 	display: flex; align-items: center;
-	margin-top: -10px;
+	margin-top: -10px; margin-left:50px; padding:auto;
 }
 
 #moyoAgree {
@@ -137,17 +137,23 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 .moyoIn{
 	width:350px; height:40px;
 }
+.moyoLoc{
+	width:170px; height:40px;
+}
+#p_image{
+	width:400px; height:500px;
+}
 </style>
 
 <script type="text/javascript">
-
+/*
 	function checkLogin() {
 		if(${empty siteUserInfo}) {
 			alert("로그인 후 이용해주세요.");
 			location.href="../movingcloset/login.do";
 		}
 	}
-
+*/
 	function moyoFormCheck() {
 		
 		var personalAgreeChk = document.getElementById("personalAgree");
@@ -221,6 +227,20 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 			document.moyoFrm.email1.value = "";
 		}
 	}
+	
+	function setThumbnail(event){
+		var reader = new FileReader();
+		
+		reader.onload = function(event){
+			var before = document.getElementById("p_image");
+			before.remove();
+			
+			var img = document.createElement("img");
+			img.setAttribute("src", event.target.result);
+			document.querySelector("div#image_container").appendChild(img);
+		};
+		reader.readAsDataURL(event.target.files[0]);
+	}
 
 </script>
 
@@ -236,142 +256,66 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 				<div class="input-form-wrap">
 				
 					<div id="moyoInfoWrap">
-						<!-- 
-						<fmt:parseDate value="${moyoDTO.m_start }" var="strmstart" pattern="yyyy-MM-dd HH:mm:ss"/>
-						<fmt:formatDate value="${strmstart }" var="frmmstart" pattern="yyyy. MM. dd"/>
-						<fmt:parseDate value="${moyoDTO.m_end }" var="strmend" pattern="yyyy-MM-dd HH:mm:ss"/>
-						<fmt:formatDate value="${strmend }" var="frmmend" pattern="yyyy. MM. dd"/>
-						<fmt:parseDate value="${moyoDTO.m_dday }" var="strmdday" pattern="yyyy-MM-dd HH:mm:ss"/>
-						 -->
-						<c:if test="${empty moyoDTO.m_sfile }">
-							<img class="productImg" src="../resources/images/list/${moyoDTO.m_idx }.jpg">
-						</c:if>
-						<c:if test="${not empty moyoDTO.m_sfile }">
-							<img class="productImg" src="../resources/upload/${moyoDTO.m_sfile }">
-						</c:if>
-						<div id="moyoInfo">
-							<input class="moyoIn" type="text" /><br />&mdash;
-							<h6>모집시작</h6><input class="moyoIn" type="text" /><br />&mdash;
-							<h6>모집마감</h6><input class="moyoIn" type="text" /><br />&mdash;
-							<h6>모임일자</h6><input class="moyoIn" type="text" /><br />&mdash;
-							<h6>모일장소</h6><input class="moyoIn" type="text" /><br />&mdash;
-							<h6>목표인원</h6><input class="moyoIn" type="text" /><br />&mdash;
-							<h6>마감일</h6><input class="moyoIn" type="text" /><br />&mdash;
-							<h6>공지사항</h6><input class="moyoIn" style="" type="text" /><br />
-						</div>
-<!-- 						<h3>컨버스 팝업스토어 in 가산</h3> -->
-<!-- 						<h6>모집기간</h6> 2021.08.01 - 2021.08.03 <br />&mdash; -->
-<!-- 						<h6>모임일자</h6> 2021년 08월 05일 목요일 <br />&mdash; -->
-<!-- 						<h6>모일장소</h6> 서울시 금천구 가산동 426-5 월드메르디앙 앞 <br />&mdash; -->
-<!-- 						<h6>판매자 공지사항</h6> 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다. 안녕하세요 나이키입니다.  <br /> -->
-					</div>
-				</div>
-			</div>
-			
-			<!-- 
-			<div class="input-form col-md-12 mx-auto">
-				<div class="input-form-wrap">
-					<h3>신청자 정보</h3>
-					<div class="custom-control custom-checkbox" id="fillMoyoInfoWrap" align="right">
-						<input type="checkbox" class="custom-control-input" id="fillMoyoInfo" name="fillMoyoInfo" onClick="fillMoyoInfos(this);" required> 
-						<label class="custom-control-label"
-							for="fillMoyoInfo">기존 정보로 입력하기</label>
+						<form name="moyoInsertFrm" method="post" enctype="multipart/form-data" 
+							action="<c:url value="/movingcloset/adminmoyoinsertact.do" />" >
+							<input type="hidden" name="m_idx" value="${moyoDTO.m_idx }"/>
+							<div style="display:inline;float:left;">
+								<!-- 
+								<fmt:parseDate value="${moyoDTO.m_start }" var="strmstart" pattern="yyyy-MM-dd HH:mm:ss"/>
+								<fmt:formatDate value="${strmstart }" var="frmmstart" pattern="yyyy. MM. dd"/>
+								
+								<fmt:parseDate value="${moyoDTO.m_end }" var="strmend" pattern="yyyy-MM-dd HH:mm:ss"/>
+								<fmt:formatDate value="${strmend }" var="frmmend" pattern="yyyy. MM. dd"/>
+								
+								<fmt:parseDate value="${moyoDTO.m_dday }" var="strmdday" pattern="yyyy-MM-dd HH:mm:ss"/>
+								 -->
+								<div id="image_container" style="width:400px;height:500px;">
+									 <c:if test="${empty moyoDTO.m_sfile }">
+										<img class="productImg" src="../resources/images/list/${moyoDTO.m_idx }.jpg"  id="p_image"/>
+									</c:if>
+									<c:if test="${not empty moyoDTO.m_sfile }">
+										<img class="productImg" src="../resources/upload/${moyoDTO.m_sfile }" id="p_image" />
+									</c:if>
+								</div>
+								<span style="display:inline; float:left;">
+									<input id="imgIn" class="moyoIn" type="file" name="ofile" onchange="setThumbnail(event);" style="display:block;"/>
+									<input type="submit" id="moyoInsert" value="등록"
+										style="width:400px;height:40px;background-color:white;color:orangered;border:orangered solid 1px; margin-bottom:10px;display:block;">
+									<button type="reset" class="btn" style="border:lightgray solid 1px;width:400px;height:40px;margin-bottom:10px;display:block;">리셋</button>
+									<button type="button" class="btn" style="border:lightgray solid 1px;width:400px;height:40px;display:block;margin-bottom:50px;"
+										onclick="javascript:location.href='/movingcloset/movingcloset/adminmoyo.do';">돌아가기</button>
+								</span>
+							</div>
+							<div id="moyoInfo" style="display:inline;float:left;" >
+								<input class="moyoIn" name="m_name" type="text" value="모여!" /><br />&mdash;
+								<h6>모집기간</h6>
+								<input class="moyoLoc" name="m_start" type="text" placeholder="모집시작일" />
+								<input class="moyoLoc" name="m_end" type="text" placeholder="모집마감일"/><br />&mdash;
+								<h6>모임일자</h6><input class="moyoIn" name="m_dday" type="text" /><br />&mdash;
+								<h6>모일장소</h6><input class="moyoIn" name="m_addr" type="text" style="margin-bottom:5px;" /><br />
+								<input class="moyoLoc" name="m_lat" type="text" placeholder="위도" />
+								<input class="moyoLoc" name="m_lon" type="text" placeholder="경도" style="margin-left:5px;"/><br />&mdash;
+								<h6>목표인원</h6><input class="moyoIn" name="m_goal" type="text" /><br />&mdash;
+								<h6>공지사항</h6>
+								<textarea name="m_desc" id="moyoNoti" cols="47" rows="7"></textarea>
+								<br />
+
+								<!--  
+								<input class="moyoIn" name="m_desc" style="" type="text" style="height:100px;"/><br />
+								<input type="hidden" name="m_lat" value="00" />
+								<input type="hidden" name="m_lon" value="00" />
+								-->
+								<input type="hidden" name="m_status" value="진행" />
+							</div>
+						</form>
 					</div>
 					
-					<form name="moyoFrm" id="moyoFrm" action="../movingcloset/moyoJoin.do" method="post"> 
-						<input type="hidden" value="${moyoDTO.m_idx }" name="m_idx">
-						<table class="table table-bordered">
-							<colgroup>
-								<col width="20%"/>
-								<col width="*"/>
-							</colgroup>
-							<tbody>
-								<tr>
-									<td class="text-left"
-										style="vertical-align:middle;">이름</td>
-									<td>
-										<input type="text" name="username" class="form-control" style="width: 230px;" required/>
-									</td>
-								</tr>
-								<tr>
-									<td class="text-left"
-										style="vertical-align:middle;">전화번호</td>
-									<td class="form-inline">
-										<select name="mobile1" class="form-control" 
-										onchange="phoneFocus(3, this, 'mobile2');" style="width:80px;" required>
-			 -->										
-<!-- 											<option value=" "> </option> -->
-<!--  
-											<option value="010">010</option>
-											<option value="011">011</option>
-											<option value="016">016</option>
-											<option value="017">017</option>
-											<option value="018">018</option>
-											<option value="019">019</option>
-										</select>
-										&nbsp;&nbsp;-&nbsp;&nbsp;
-										<input type="text" class="form-control" name="mobile2" value="" 
-										maxlength="4" onkeyup="phoneFocus(4, this, 'mobile3');" style="width:100px;" required/>
-										&nbsp;&nbsp;-&nbsp;&nbsp;
-										<input type="text" class="form-control" name="mobile3"  value="" 
-										maxlength="4" style="width:100px;" required/>
-									</td>
-								</tr>
-								<tr>
-									<td class="text-left"
-										style="vertical-align:middle;">이메일&nbsp;&nbsp;&nbsp;</td>
-										<td class="form-inline">
-										<input type="text" class="form-control" name="email1" value="" style="width:30%;" required />
-										&nbsp;@&nbsp;
-										<input type="text" class="form-control" name="email2" value="" style="width:30%;" required/>&nbsp;&nbsp;
-										<select name="email_domain" class="form-control" onchange="emailSelect(this);" style="width:25%;">
-											<option value="">- 직접입력 -</option>
-											<option value="naver.com">naver.com</option>
-											<option value="hanmail.net">hanmail.net</option>
-											<option value="gmail.com">gmail.com</option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td class="text-left"
-										style="vertical-align:middle;">방문예정시간</td>
-									<td class="form-inline">
-										<input type="number" name="moyoHour" class="form-control" min="10" max="22" value="10" /> &nbsp;시&nbsp;&nbsp;
-										<input type="number" name="moyoMinute" class="form-control" min="0" max="50" value="00" step="10" /> &nbsp;분
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</form>
-					
-					<hr class="mt-4 mb-5">
-
-					<h3>약관동의</h3>
-
-					<div id="moyoAgree">
-						<textarea rows="6" name="content" class="form-control" style="resize:none;"
-							placeholder="개인정보수집약관" readonly></textarea>
-						<div class="custom-control custom-checkbox mb-4 mt-2">
-							<input type="checkbox" class="custom-control-input" id="personalAgree" name="personalAgree" required> 
-							<label class="custom-control-label"
-								for="personalAgree">개인정보 수집 및 이용에 동의합니다.</label>
-						</div>
-						<textarea rows="6" name="content" class="form-control" style="resize:none;"
-							placeholder="노쇼약관노쇼약관" readonly></textarea>
-						<div class="custom-control custom-checkbox mb-5 mt-2">
-							<input type="checkbox" class="custom-control-input" id="cancelAgree" name="cancelAgree" required> 
-							<label class="custom-control-label"
-								for="cancelAgree">무단 취소 시 부여되는 경고사항에 대해 동의합니다.</label>
-						</div>
-
-						<button class="btn btn-primary btn-lg btn-block" id="moyoSubmitBtn"
-							type="button" onclick="moyoFormCheck();">모여!</button>
-					</div>
 				</div>
 			</div>
-	-->
 		</div>
+		
 	</div>
+	
 </body>
 </html>
 
