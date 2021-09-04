@@ -135,7 +135,9 @@
 						<option value="신발">신발</option>
 						<option value="가방">가방</option>
 						<option value="잡화">잡화</option>
+						<option value="뉴디">뉴디</option>
 					</select>
+					<div id="tag" class="updiv"><input class="insert" name="p_tag" placeholder="상품태그" /></div>
 					<input id="image" type="file" class="form-control" name="ofile" accept="image/*" value="파일첨부"
 						onchange="setThumbnail(event);" style="width:350px;height:40px;margin-bottom:10px;"  />
 					<div class="row">

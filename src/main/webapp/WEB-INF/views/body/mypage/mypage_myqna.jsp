@@ -116,14 +116,15 @@
                                 <c:forEach items="${qnaList }" var="qna" varStatus="loop">
                                 <tr>
                                     <td width="15%">
-                                        ${map.totalCount - (((map.pageNum-1) * map.pageSize)
-                                            + loop.index) }	
+                                    ${qna.q_idx }
+                                        <!--  ${map.totalCount - (((map.pageNum-1) * map.pageSize)
+                                            + loop.index) }	-->
                                     </td>
                                     <td width="50%" align="left">
                                         <a href='<c:url value='/movingcloset/qnadetail.do?q_idx=${qna.q_idx }'/>'>${qna.q_title }</a>
                                     </td>
                                     <td width="15%" align="left">${qna.userid }</td>
-                                    <td width="20%" align="left"><fmt:formatDate value="${qna.q_date}" pattern="yyyy-MM-dd" /></td>
+                                    <td width="20%" align="left">${qna.q_date}</td>
                                 </tr>
                                 </c:forEach>
                             </c:otherwise>
