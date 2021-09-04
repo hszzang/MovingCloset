@@ -19,9 +19,9 @@ import mybatis.ProductAndDetailDTO;
 import mybatis.ProductDTO;
 
 @Service
-public class AdminMoyoCommand implements CommandImpl {
+public class AdminMoyoDeleteCommand implements CommandImpl {
 
-	public AdminMoyoCommand() {}
+	public AdminMoyoDeleteCommand() {}
 	
 	@Autowired
 	private SqlSession sqlSession;
@@ -32,12 +32,13 @@ public class AdminMoyoCommand implements CommandImpl {
 		Map<String, Object> paramMap = model.asMap();
 		HttpServletRequest req = (HttpServletRequest)paramMap.get("req");
 		
-		List<MoyoDTO> MoyoList = sqlSession.getMapper(MybatisMoyoImpl.class).MoyoList();
-		//ArrayList<String> MoyoList = sqlSession.getMapper(MybatisMoyoImpl.class).MoyoList();
+		String m_idx = req.getParameter("m_idx");
 		
-		//List<ProductAndDetailDTO> StoreList = sqlSession.getMapper(MybatisProductImpl.class).StoreList(start, end);
+		sqlSession.getMapper(MybatisMoyoImpl.class).MoyoDelete(m_idx);
 		
-		model.addAttribute("MoyoList", MoyoList);
+		//List<MoyoDTO> MoyoList = sqlSession.getMapper(MybatisMoyoImpl.class).MoyoList();
+		
+		//model.addAttribute("MoyoList", MoyoList);
 		
 		
 	}

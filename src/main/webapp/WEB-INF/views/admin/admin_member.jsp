@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -120,6 +120,10 @@
                             <a class="nav-link" href="/movingcloset/movingcloset/adminmember.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 MEMBER
+                            </a>
+                            <a class="nav-link" href="/movingcloset/movingcloset/adminqna.do">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                QnA
                             </a>
                              <a class="nav-link" href="/movingcloset/movingcloset/adminstore.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
@@ -244,7 +248,14 @@
                                             <td>${member.postcode }</td>
                                             <td>${member.birth }</td>
                                             <td>${member.tag }</td>
-                                            <td>${member.regidate }</td>
+                                            <td>
+                                            <!-- 왜 안되는겅미...! 
+                                            	<%--fmt:parseDate value="${member.regidate }" var="strrd" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                            	<fmt:formatDate value="${strrd }" var="frmrd" pattern="yyyy. MM. dd"/--%>
+                                           		 ${frmrd}
+                                           	-->
+                                           	${member.regidate }
+                                            </td>
                                             <td>${member.loginbrand }</td>
                                             <!--  
                                             <td></td>

@@ -234,11 +234,11 @@ sup {
 }
 
 a {
-  color: #0d6efd;
+  color:white;
   text-decoration: underline;
 }
 a:hover {
-  color: #0a58ca;
+  color: #FFEBCD;
 }
 
 a:not([href]):not([class]), a:not([href]):not([class]):hover {
@@ -3952,7 +3952,7 @@ textarea.form-control-lg {
 .nav-link {
   display: block;
   padding: 0.5rem 1rem;
-  color: #0d6efd;
+  color: white;
   text-decoration: none;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }
@@ -3962,7 +3962,7 @@ textarea.form-control-lg {
   }
 }
 .nav-link:hover, .nav-link:focus {
-  color: #0a58ca;
+  color: #FFEBCD;
 }
 .nav-link.disabled {
   color: #6c757d;

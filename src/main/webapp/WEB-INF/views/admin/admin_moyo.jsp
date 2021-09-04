@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 
 <!DOCTYPE html>
@@ -39,9 +40,9 @@
 		    	location.href="/movingcloset/movingcloset/adminstore.do?order="+order+"&pageShow=${pageC}";	
 			}	
 	    
-		    function delProduct(p_idx){
+		    function delMoyo(m_idx){
 				if(confirm("정말 상품을 삭제하시겠습니까?")){
-					location.href="/movingcloset/store/delete.do?p_idx=" + p_idx;
+					location.href="/movingcloset/movingcloset/adminmoyodelete.do?m_idx="+m_idx;
 				}
 			}
 		    
@@ -79,6 +80,12 @@
 		    		page = page + 1;
 		    		location.href="/movingcloset/movingcloset/adminstore.do?order=${order}&pageShow="+page;
 		    	}
+		    	
+		    	function delMoyo(m_idx){
+					if(confirm("정말 상품을 삭제하시겠습니까?")){
+						location.href="/movingcloset/movingcloset/adminmoyodelete.do?m_idx=" + m_idx;
+					}
+				}
 	    </script>
     </head>
     <body class="sb-nav">
@@ -113,13 +120,17 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                             <a class="nav-link" href="/movingcloset/movingcloset/admin.do">
+                            <a class="nav-link" href="/movingcloset/movingcloset/admin.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 ADMIN
                             </a>
                             <a class="nav-link" href="/movingcloset/movingcloset/adminmember.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 MEMBER
+                            </a>
+                            <a class="nav-link" href="/movingcloset/movingcloset/adminqna.do">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                QnA
                             </a>
                              <a class="nav-link" href="/movingcloset/movingcloset/adminstore.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
@@ -239,15 +250,30 @@
                                             <td>${moyo.m_name }</td>
                                             <td>${moyo.m_addr }</td>
                                             <td>${moyo.m_goal }</td>
-                                            <td>${moyo.m_dday }</td>
+                                            <td>
+                                            	<fmt:parseDate value="${moyo.m_dday }" var="strmdday" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                            	<fmt:formatDate value="${strmdday }" var="frmmdday" pattern="yyyy. MM. dd"/>
+                                            	${frmmdday }
+                                            </td>
                                             <td>${moyo.m_desc }</td>
-                                            <td>${moyo.m_start }</td>
-                                            <td>${moyo.m_end }</td>
+                                            <td>
+	                                            <fmt:parseDate value="${moyo.m_start }" var="strmstart" pattern="yyyy-MM-dd HH:mm:ss"/>
+	                                            <fmt:formatDate value="${strmstart }" var="frmmstart" pattern="yyyy. MM. dd"/>
+	                                            ${frmmstart }
+                                            </td>
+                                            <td>
+                                            	<fmt:parseDate value="${moyo.m_end }" var="strmend" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                            	<fmt:formatDate value="${strmend }" var="frmmend" pattern="yyyy. MM. dd"/>
+                                            	${frmmend }
+                                            </td>
                                             <td>${moyo.m_status }</td>
                                             <td></td>
                                             <th>
-                                            	<button type="button" class="pBtns" id="productUpdate" onclick="javascript:location.href='';">수정</button>
-                                            	<button type="button" class="pBtns" id="productDelete" onclick="">삭제</button>	
+                                            	<button type="button" class="pBtns" id="Update" onclick="javascript:location.href='/movingcloset/movingcloset/adminmoyoupdate.do?m_idx=${moyo.m_idx }';">수정</button>
+                                            	<button type="button" class="pBtns" id="Delete" onclick="javascript:location.href='/movingcloset/movingcloset/adminmoyodelete.do?m_idx=${moyo.m_idx }';">삭제</button>
+                                            	<!--  	
+                                            	<button type="button" class="pBtns" id="Delete" onclick="delMoyo(${moyo.m_idx});">삭제</button>	
+                                            	-->
                                             </th>
                                         </tr>
                                     	</c:forEach>   
