@@ -42,12 +42,20 @@ public class StoreDetailCommand implements CommandImpl {
 			HttpServletRequest req = (HttpServletRequest)paramMap.get("req");
 			HttpSession session = req.getSession();
 			
-			
+			String check = req.getParameter("check");
 			String p_idx = req.getParameter("p_idx");
-			storeDetail = sqlSession.getMapper(MybatisProductImpl.class).getStoreDetail(p_idx);
+			String p_code = req.getParameter("p_code");
 			
-			String p_code = storeDetail.getP_code();
+			if(check == null) {
+				storeDetail = sqlSession.getMapper(MybatisProductImpl.class).getStoreDetail(p_idx);				
+			}else {
+			 
+				storeDetail = sqlSession.getMapper(MybatisProductImpl.class).getProductDTOsfile(p_code);	
+			}
+			
 			productDetail = sqlSession.getMapper(MybatisProductImpl.class).getProductDetail(p_code);
+			
+			
 			
 			String p_size = productDetail.getPd_size();
 			String[] sizes = p_size.split(",");
@@ -57,15 +65,19 @@ public class StoreDetailCommand implements CommandImpl {
 			String[] stocks = p_stock.split(",");
 			System.out.println(p_stock);
 			
-			List<ReviewDTO> reviews = sqlSession.getMapper(MybatisProductImpl.class).getReviews(p_code);
-			
-			String userid = (String) session.getAttribute("siteUserInfo");
-			if(userid != null) {
-				
-				buyAndGroupDTO = sqlSession.getMapper(MybatisProductImpl.class).buyReview(userid,p_code);
-				model.addAttribute("buyAndGroupDTO",buyAndGroupDTO);
-				
-			}
+			/*
+			 * List<ReviewDTO> reviews =
+			 * sqlSession.getMapper(MybatisProductImpl.class).getReviews(p_code);
+			 * 
+			 * String userid = (String) session.getAttribute("siteUserInfo"); if(userid !=
+			 * null) {
+			 * 
+			 * buyAndGroupDTO =
+			 * sqlSession.getMapper(MybatisProductImpl.class).buyReview(userid,p_code);
+			 * model.addAttribute("buyAndGroupDTO",buyAndGroupDTO);
+			 * 
+			 * } 잠시비활성화
+			 */
 			
 			
 			
@@ -77,7 +89,7 @@ public class StoreDetailCommand implements CommandImpl {
 			model.addAttribute("stocks", stocks);
 			//model.addAttribute("stocks", p_stock);
 			
-			model.addAttribute("reviews", reviews);
+			/* model.addAttribute("reviews", reviews); 잠시비활성화*/
 
 			
 			System.out.println("StoreDetailCommand 호출 완료");

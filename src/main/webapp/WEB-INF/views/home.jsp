@@ -37,9 +37,9 @@
       
 <!--       <a href="./project/myplease.do">내쪼르기리스트(ver.1)</a> -->
       <a href="./movingcloset/please.do">쪼르기</a>
-      <a href="./movingcloset/event_main.do">이벤트페이지(메인 ver.1.0)</a>
-      <a href="./movingcloset/coupon_main.do">쿠폰페이지(메인 ver.1.0)</a>
-      
+      <a href="./movingcloset/event.do">이벤트페이지(메인 ver.1.0)</a>
+      <a href="./movingcloset/coupon.do">쿠폰페이지(메인 ver.1.0)</a>
+      <a href="./movingcloset/cart.do">장바구니(메인 ver.1.0)</a>
       
       
    </li>

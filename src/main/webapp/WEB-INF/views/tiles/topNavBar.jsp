@@ -229,9 +229,9 @@
 		<a class="nav-link" id="nav-title5" href="javascript:void(0);">Events&nbsp;|&nbsp;Coupons</a>
 		<a class="nav-link" id="nav-title6" href="../movingcloset/notice.do">CS center</a>
 		<div id="icons">
-			<a href="./movingcloset/search.do"><i class="material-icons" id="icon">search</i></a>
+			<a href="../movingcloset/search.do"><i class="material-icons" id="icon">search</i></a>
 			&nbsp;
-			<a href=""><i class="material-icons" id="icon">shopping_basket</i></a>
+			<a href="../movingcloset/cart.do"><i class="material-icons" id="icon">shopping_basket</i></a>
 			&nbsp;
 			
 			<c:choose>
@@ -300,8 +300,8 @@
 	<div class="nav-sub5" id="nav-sub">
 		<div class="nav-content container-fluid">
 			 <div class="contentLink d-flex justify-content-center">
-	            <a href="../movingcloset/event_main.do" id="sub-content" style="margin-right:120px">EVENT</a>
-	            <a href="../movingcloset/coupon_main.do" id="sub-content" style="margin-left:120px">COUPON</a>
+	            <a href="../movingcloset/event.do" id="sub-content" style="margin-right:120px">EVENT</a>
+	            <a href="../movingcloset/coupon.do" id="sub-content" style="margin-left:120px">COUPON</a>
 	        </div>
 		</div>
 	</div>

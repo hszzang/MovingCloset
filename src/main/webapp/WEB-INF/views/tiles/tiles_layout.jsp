@@ -24,9 +24,10 @@
 	레이아웃으로 배치한다.
 -->
 
-<!--  
+<!--   
 	아래의 주석 부분은 마이페이지에서 쓸 사이드바 부분
 -->
+
 
 <tiles:insertAttribute name="top"/>
 <tiles:insertAttribute name="body"/>

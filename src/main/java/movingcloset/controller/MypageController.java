@@ -13,10 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import movingcloset.command.CommandImpl;
 import movingcloset.command.MemberEditCommand;
 import movingcloset.command.MemberOutCommand;
+import movingcloset.command.RegisterActionCommand;
+import movingcloset.command.coupon.CouponMyListCommand;
 import movingcloset.command.cscenter.QnaCommand;
 import movingcloset.command.mypage.MyPageOrderDetailCommand;
 import movingcloset.command.mypage.MyPageOrderListCommand;
 import movingcloset.command.mypage.MypageMoyoBusCommand;
+
+import movingcloset.command.zzim.ZzimAllListCommand;
 import movingcloset.command.mypage.MypageMoyoDeleteCommand;
 import movingcloset.command.mypage.MypagePleaseCommand;
 import movingcloset.command.mypage.MypagePlzDeleteCommand;
@@ -58,15 +62,25 @@ public class MypageController {
 	MyPageOrderListCommand myPageOrderListCommand;
 	
 	@Autowired
+	ZzimAllListCommand zzimAllListCommand;
+	
+	@Autowired
 	MyPageOrderDetailCommand myPageOrderDetailCommand;
 
 	
+	@Autowired
+	CouponMyListCommand couponMyListCommand;
 	
 	@RequestMapping(value="movingcloset/mypage_coupon.do", method=RequestMethod.GET)
 	public String mypageCoupon (Model model, HttpServletRequest req) {
 		
+		model.addAttribute("req", req);
+		command = couponMyListCommand;
+		command.execute(model);
+		
 		return "body/mypage/mypage_coupon";
 	}
+	
 	@RequestMapping(value="movingcloset/mypage_order.do", method=RequestMethod.GET)
 	public String mypageOrder (Locale locale, Model model, HttpServletRequest req) {
 		
@@ -112,7 +126,11 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value="movingcloset/mypage_zzim.do", method=RequestMethod.GET)
-	public String mypageZzim (Locale locale, Model model) {
+	public String mypageZzim (Model model, HttpServletRequest req) {
+		
+		model.addAttribute("req", req);
+		command = zzimAllListCommand;
+		command.execute(model);
 		
 		return "body/mypage/mypage_zzim";
 	}

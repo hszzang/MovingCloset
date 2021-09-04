@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
  
 import movingcloset.command.CommandImpl;
+import movingcloset.command.CommandImpl2;
 import movingcloset.command.GetMemberProductCommand;
 import movingcloset.command.store.ReviewDeleteCommand;
 import movingcloset.command.store.ReviewInsertCommand;
@@ -45,6 +46,8 @@ import mybatis.ReviewDTO;
 public class StoreController {
 	
 	CommandImpl command = null;
+	
+	CommandImpl2 command2 = null;
 	
 	@Autowired
 	StoreListCommand storelistCommand;
@@ -68,7 +71,7 @@ public class StoreController {
 	StoreBuyCommand storeBuyCommand;
 	@Autowired
 	GetMemberProductCommand getMemberProductCommand;
-	
+	 
 	
 	// 스토어 리스트
 	@RequestMapping(value="/movingcloset/store.do", method=RequestMethod.GET)
@@ -444,8 +447,5 @@ public class StoreController {
 		
 		return "body/store/payForm";
 	}
-	
-
-	
 	
 }
