@@ -182,4 +182,14 @@
 			</otherwise>
 		</choose>
 	</insert>
+	
+	<!-- 마이페이지 리뷰리스트 가져오기 -->
+	<select id="mypageReviewList" resultType="mybatis.ReviewDTO">
+		SELECT * FROM review where userid=#{userid}
+	</select>
+	
+	
+	
+	
+	
 </mapper>

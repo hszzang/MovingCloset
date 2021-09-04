@@ -1,5 +1,6 @@
 package mybatis;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -70,5 +71,7 @@ public interface MybatisProductImpl {
 	public int insertBuyForm(BuyAndGroupDTO buyAndGroupDTO);
 	public int insertBuy_groupForm(BuyAndGroupDTO buyAndGroupDTO);
 
-
+	
+	//마이페이지 리뷰리스트
+	public ArrayList<ReviewDTO> mypageReviewList(String userid);
 }
