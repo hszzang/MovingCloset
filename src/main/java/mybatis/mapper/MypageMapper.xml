@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mybatis.MybatisMypageImpl">
+
+	<select id="orderlist" resultType="mybatis.BuyAndGroupDTO" parameterType="string">
+		SELECT * 
+		FROM BUY B
+		INNER JOIN BUY_GROUP BG
+		ON B.B_IDX=BG.B_IDX
+		WHERE USERID = #{userid}  
+	</select>
+
+	<select id="orderdetail" resultType="mybatis.BuyAndGroupDTO" parameterType="string">
+		SELECT * 
+		FROM BUY B
+		INNER JOIN BUY_GROUP BG
+		ON B.B_IDX=BG.B_IDX
+		WHERE USERID = #{0} and b.b_idx = #{1} 
+	
+	</select>
+
+
+
+</mapper>

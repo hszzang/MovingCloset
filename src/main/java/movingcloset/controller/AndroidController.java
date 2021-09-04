@@ -1,57 +1,24 @@
 package movingcloset.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 
 import movingcloset.command.CommandImpl;
-import movingcloset.command.FindIdCommand;
-import movingcloset.command.FindPwCommand;
-import movingcloset.command.IdcheckCommand;
-import movingcloset.command.LoginCommand;
-import movingcloset.command.RegisterActionCommand;
 import mybatis.MemberDTO;
 import mybatis.MoyoBusDTO;
 import mybatis.MoyoDTO;
 import mybatis.MoyoUseDTO;
 import mybatis.MybatisAndroidImpl;
-import mybatis.MybatisMemberImpl;
-import mybatis.MybatisMoyoImpl;
 
 @Controller
 public class AndroidController {

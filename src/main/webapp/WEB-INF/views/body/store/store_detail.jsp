@@ -24,10 +24,12 @@
 				num.value = 1;
 			}else{
 				num.value = parseInt(num.value) - 1;
+				num.value = num.value.toString();
 			}
 		}
 		if(id=="plus"){ 
 			num.value = parseInt(num.value) + 1;
+			num.value = num.value.toString();
 		}		
 	}
 

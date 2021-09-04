@@ -13,6 +13,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <style>
 #maintain{
@@ -92,51 +94,80 @@
                         상품에 리뷰한 내역이 보여집니다.
                     </p>
                 </div>
-                <table class="table">
-                    <tr>
-                        <td align="center">
-                            <select name="searchField">
-                                <option value="date">기간별</option>
-                            </select>
-                        </td>
-                    </tr>
-                </table>
-                <table class="table table-hover">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th width="10%">번호</th>
-                            <th width="50%">제목</th>
-                            <th width="15%">작성자</th>
-                            <th width="10%">조회수</th>
-                            <th width="15%">작성일</th>
-                        </tr>
-                    </thead>
-                    <c:choose>
-                        <c:when test="${empty boardLists }">
-                            <tr>
-                                <td colspan="6" align="center">
-                                    등록된 리뷰내역이 없습니다.
-                                </td>
-                            </tr>
-                        </c:when>
-                        <c:otherwise>
-                            <c:forEach items="${boardLists }" var="row" varStatus="loop">
-                            <tr>
-                                <td width="10%">
-                                    ${map.totalCount - (((map.pageNum-1) * map.pageSize)
-                                        + loop.index) }	
-                                </td>
-                                <td width="50%" align="left">
-                                    <a href="../mvcboard/view.do?idx=${row.idx }">${row.title }</a>
-                                </td>
-                                <td width="15%" align="left">${row.name }</td>
-                                <td width="10%" align="left">${row.visitcount }</td>
-                                <td width="15%" align="left">${row.postdate }</td>
-                            </tr>
-                            </c:forEach>
-                        </c:otherwise>
-                    </c:choose>
-                </table>
+                
+                <form action="" name="MypageReviewlist" method="POST"  enctype="multipart/form-data">
+				<input type="hidden" name="ofileCheck" /> 
+				<table class="table table-hover" style="text-align: center;">
+					<thead>
+					<tr>
+						<th style="width: 18%;">평점&nbsp;
+							<i class="fa fa-star" style="color:#FF6C2F; font-size:8pt;"></i>
+							<i class="fa fa-star" style="color:#FF6C2F; font-size:8pt;"></i>
+							<i class="fa fa-star" style="color:#FF6C2F; font-size:8pt;"></i>
+							<i class="fa fa-star" style="color:#FF6C2F; font-size:8pt;"></i>
+							<i class="fa fa-star" style="color:#FF6C2F; font-size:8pt;"></i>
+						</th>
+						<th style="width: 35%;">한줄평</th>
+						<th style="width: 15%;">작성일</th>
+						<th style="width: 15%;">작성자</th>				
+						<th style="width: 35%;">사진</th>
+						<!-- <th style="width: 20%;"></th> -->
+					</tr>
+					</thead>
+					<tbody>
+					
+					<c:forEach items="${mypageReview }" var="mypageReview" >
+						<tr >
+							<td>
+							평점 <!-- 평점 수정했습니다!------>&nbsp;
+								<c:forEach begin="1" end="${mypageReview.r_rate }" step="1">
+									<i class="fa fa-star" style="color:#FF6C2F; font-size:8pt;"></i>					
+								</c:forEach>
+							</td>
+							
+							<td>
+								<a class="r_content" id="rid${mypageReview.r_idx }" href="./store/detail.do">
+									${mypageReview.r_content }
+								</a>
+		
+							</td>
+							
+							
+							<td>${mypageReview.r_date }</td>
+							<td>
+								${mypageReview.userid }
+								<%-- <input type="hidden" name="r_idx" value="${review.r_idx }"/> --%>
+								<input type="hidden" name="p_code" value="${mypageReview.p_code }"/>
+								<input type="hidden" name="p_idx" value="${storeDetail.p_idx }"/>
+							</td>
+							<td>
+							<div id="photo${mypageReview.r_idx }">
+								<c:choose>  
+									<c:when test="${mypageReview.r_sfile eq null }">
+									</c:when>
+									<c:otherwise>
+										<img class="myImg" id="r_image${mypageReview.r_idx }" name="ofile" src="../resources/upload/${review.r_sfile }" alt="상품이미지"
+										style="width: 100px; height: auto;"/>	
+															
+									</c:otherwise>
+								</c:choose>
+							</div>
+							</td>
+							<%-- <td>
+								<div id="btnDiv${mypageReview.r_idx }">  
+								<c:if test="${sessionScope.siteUserInfo != null && siteUserInfo eq mypageReview.userid }">
+									<button type="button" class="btnstyle" onclick="rUpdate(${mypageReview.r_idx});">수정</button>
+									<button type="button" class="delBtn" onclick="delReview(${mypageReview.r_idx}, ${storeDetail.p_idx });">삭제</button>
+								</c:if>
+								</div>					
+							</td> --%>
+						</tr>
+						
+					</c:forEach>
+					</tbody>
+				</table>
+				
+				</form>
             </div>
         </div>
     </div>

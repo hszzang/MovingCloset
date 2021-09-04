@@ -1,5 +1,6 @@
 package mybatis;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 public interface MybatisProductImpl {
 	// 특정 상품 불러오기
 	public ProductDTO getProductDTO(String p_idx);  
-	//public ProductDTO getProductDTO(String p_code);  
+	public ProductDTO getProductDTOsfile(String p_code);  
 	//public String getDetailDTO(String pd_color);
 	
 	// 관리자 모드용
@@ -76,5 +77,7 @@ public interface MybatisProductImpl {
 	public int insertBuyForm(BuyAndGroupDTO buyAndGroupDTO);
 	public int insertBuy_groupForm(BuyAndGroupDTO buyAndGroupDTO);
 
-
+	
+	//마이페이지 리뷰리스트
+	public ArrayList<ReviewDTO> mypageReviewList(String userid);
 }

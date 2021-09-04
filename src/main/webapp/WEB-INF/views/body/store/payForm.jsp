@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,26 +13,26 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<title>결제폼 :: MovingCloset</title>
+<title>주문내역 :: MovingCloset</title>
 <style>
 
-.input-form-background {
-padding-bottom: 50px; 
 
+.container {
+	margin-top: 95px;
+	margin-bottom: 30px;
 }
+.input-form-background {
+padding-top: 0px; padding-bottom: 50px; 
 
-.input-form-background h5{
-	padding-bottom:10px;
-	padding-left:10px;
 }
 
 .input-form-wrap {
-	width: 90%; height: 90%;
+	width: 80%; height: 90%;
 }
 
 .input-form {
 margin-bottom: 15px;
-padding-bottom: 40px;
+padding-bottom: 80px;
 justify-content: center;
 display: flex;
 align-items: center;
@@ -43,57 +44,39 @@ border-radius: 10px;
 box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 }
 
-#buyFrm {
-	margin: 4% 0%; width: 100%;
+
+
+.productImg {
+	width: 400px; height: 400px;
+	border: 1px solid lightgray;
+	border-radius: 3px;
 }
 
-#buyFrm *:not(input, select){
-	border: 0;
+
+.input-form-wrap h3 {
+	margin-top: 20px; 
 }
 
-
-#buyAgree {
-	margin: 5%; margin-bottom: 8%;
-}
-
-#buyFrm .form-control:focus, #buySubmitBtn:focus, #buyAgree .form-control:focus{
+.form-control:focus, #buySubmitBtn:focus{
 	border-color: #FFFFFF;
 	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px #ff6c2f;
 }
 
 #buySubmitBtn {
-	background-color: #ff6c2f; color: white;
-	border: 0;
+	background-color: white;
+	color: #ff6c2f;
+	border: #ff6c2f 1px solid;
 }
 
-
-
-.goodsImg{
-	width:100px; height:100px;
+.custom-control-input:checked ~ .custom-control-label::before {
+    border-color: #ff6c2f !important;
+    background-color: #ff6c2f !important;
 }
 
-.goodsTitle{
-	background-color:#ff6c2f ;
-}
-
-#goodsBox{
-	margin-top:30px;
-	background-color: #f2d082;
-	border-radius: 20px;
-}
-
-#goodsTable{
-	text-align:center;
-	
-}
-
-.kakaoPay{
-	width:70px; height:30px;
-}
-
-#postBtn:hover{
-	background-color: black;
-	color: white;
+.custom-control-input:focus ~ 
+          .custom-control-label::before {
+	border-color: #ff6c2f !important;
+	box-shadow: 0 0 0 0rem rgba(0, 0, 0, 0) !important;
 }
 
 .sectiontitle {
@@ -124,16 +107,7 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 .red{
 	color:red;
 }
-.custom-control-input:checked ~ .custom-control-label::before {
-    border-color: #ff6c2f !important;
-    background-color: #ff6c2f !important;
-}
 
-.custom-control-input:focus ~ 
-          .custom-control-label::before {
-	border-color: #ff6c2f !important;
-	box-shadow: 0 0 0 0rem rgba(0, 0, 0, 0) !important;
-}
 
 </style>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -221,190 +195,91 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 </script>
 </head>
 <body>
-	<div class="container" >
-		<div class="sectiontitle" style="margin-top:200px;">
-			<h2>구매상품 정보</h2>
-		</div>
-		<div class="input-form-background" align="center">
-			<form name="buyFrm" id="buyFrm" action="/store/buyProduct.do" method="post" onsubmit="return validate(this.form);"> 
-				<div class="input-form">
-					<div class="container" id="goodsBox" >
-						<div class="row">
-							<table class="table table-hover" id="goodsTable">
-								<thead class="goodsTitle">
-									<tr>
-									  <th>상품이미지</th>	
-									  <th>브랜드</th>
-									  <th>상품명&nbsp;(상품코드)</th>
-									  <th>가격</th>
-									  <th>수량</th>
-									  <th>사이즈</th>
-									</tr>
-							    </thead>
-							    <tbody>
-						    		<fmt:parseNumber value="${productAndDetailDTO.p_price}" var="p_priceNum"/>
-							    	<tr id="goods">
-							    		<td><img class="goodsImg" src="../resources/upload/${productDTO.p_sfile }" /></td>
-							    		<td style="vertical-align:middle;">${productAndDetailDTO.p_brand }</td>
-							    		<td style="vertical-align:middle;">${productAndDetailDTO.p_name }<br />(${productAndDetailDTO.p_code })</td>
-							    		<td style="vertical-align:middle;">${productAndDetailDTO.p_price }</td>
-							    		<td style="vertical-align:middle;">${bd_count }</td>
-							    		<td style="vertical-align:middle;">${productAndDetailDTO.pd_size }</td>
-							    	</tr>
-							    </tbody>
-							</table>
-						</div>
-					</div>
+	<div class="container" style="margin-top:200px;">
+		<div class="sectiontitle">
+		    <h2>주문 내역</h2>
+	    </div>
+			<div class="input-form" style="padding-bottom:15px;">
+				<div class="row" style="margin-top:15px;">
+					<table class="table table-hover" id="goodsTable">
+						<thead class="goodsTitle">
+							<tr>
+							  <th>상품이미지</th>	
+							  <th>브랜드</th>
+							  <th>상품명&nbsp;(상품코드)</th>
+							  <th>가격</th>
+							  <th>수량</th>
+							  <th>사이즈</th>
+							</tr>
+					    </thead>
+					    <tbody>
+					    	<tr id="goods">
+					    		<td><img class="goodsImg" src="../resources/upload/${productDTO.p_sfile }" /></td>
+					    		<td style="vertical-align:middle;">${productDTO.p_brand }</td>
+					    		<td style="vertical-align:middle;">${productDTO.p_name }<br />(${productDTO.p_code })</td>
+					    		<td style="vertical-align:middle;">${buyAndGroupDTO.b_totalpay }</td>
+					    		<td style="vertical-align:middle;">${buyAndGroupDTO.bd_count }</td>
+					    		<td style="vertical-align:middle;">${buyAndGroupDTO.bd_size }</td>
+					    	</tr>
+					    </tbody>
+					</table>
 				</div>
-				<br />
-				<div class="input-form">
-					<div class="container" id="goodsBox" >
-					<div class="row">
-					
-					<c:forEach items="${couponAndUseDTO }" var="couDTO" varStatus="status">
-							<table class="table table-hover" id="goodsTable">
-								<thead class="goodsTitle">
-									<tr>
-										<th>쿠폰선택</th>
-									<c:if test="${couDTO.cou_sfile != null }">
-									  <th>쿠폰이미지</th>										
-									</c:if>
-										  <th>브랜드</th>
-										  <th>쿠폰명&nbsp;(쿠폰코드)</th>
-										  <th>쿠폰내용</th>
-										  <th>할인율</th>
-										  <th>쿠폰기한</th>
-										  
-									</tr>
-							    </thead>
-							    <tbody>
-						    		<fmt:parseNumber value="${couDTO.cou_per}" var="p_priceNum"/>
-							    	<tr id="goods">
-							    		<td align="center" valign="middle">
-<%-- 								    		<div class="custom-control custom-checkbox">
-												<label class="custom-control-label"	for="couponBox">
-													<input type="checkbox" class="custom-control-input" id="couponBox${status.index }" name="cou_check${status.index }"> 
-												</label>
-											</div> --%>
-											<input type="checkbox" id="couponBox${status.index }" name="cou_check${status.index }"> 
-											
-							    		</td>
-							    		<c:if test="${couDTO.cou_sfile != null }">
-							    		<td><img class="goodsImg" src="../resources/upload/${couDTO.cou_sfile }" /></td>
-							    		</c:if>
-							    		<td style="vertical-align:middle;">${couDTO.cou_brand }</td>
-							    		<td style="vertical-align:middle;">${couDTO.cou_name }<br />(${couDTO.cou_code })</td>
-							    		<td style="vertical-align:middle;">${couDTO.cou_content }</td>
-							    		<td style="vertical-align:middle;">${couDTO.cou_per }%</td>
-							    		<td style="vertical-align:middle;">${couDTO.cou_start }&nbsp;-&nbsp;${couDTO.cou_end }</td>
-							    		
-							    	</tr>
-							    </tbody>
-							</table>
-					</c:forEach>
-						</div>
-					</div>
-					
-				</div>
-				<br />
-				<div class="input-form col-md-12 mx-auto">
-			    	<input type="hidden" name="bd_count" value="${bd_count }"/>
-			    	<input type="hidden" name="bd_size" value="${productAndDetailDTO.pd_size }"/>
+			</div>
+				
+			
+			<div class="input-form col-md-12 mx-auto">
+				
+				<div class="input-form-wrap">
+					<br />
+					<h3>주문 내역</h3>
+						<table class="table table-bordered">
+							<colgroup>
+								<col width="20%"/>
+								<col width="*"/>
+							</colgroup>
+							<tbody>
+								<tr>
+									<td class="text-left"
+										style="vertical-align:middle;">이름</td>
+									<td>
+										${buyAndGroupDTO.b_buyer }
+									</td>
+								</tr>
+								<tr>
+									<td class="text-left"
+										style="vertical-align:middle;">전화번호</td>
+									<td class="form-inline">
+										${buyAndGroupDTO.b_phone }
+									</td>
+								</tr>
+								<tr>
+									<td class="text-left"
+										style="vertical-align:middle;">우편번호</td>
+									<td>
+										${buyAndGroupDTO.b_postcode } 
+									</td>
+								</tr>
+								<tr>
+									<td class="text-left"
+										style="vertical-align:middle;">주소</td>
+									<td>
+										${buyAndGroupDTO.b_addr }
+									</td>
+								</tr>
+								<tr>
+									<td class="text-left"
+										style="vertical-align:middle;">이메일&nbsp;&nbsp;&nbsp;</td>
+									<td class="form-inline">
+										${buyAndGroupDTO.email }
+									</td>
+								</tr>
 
-					<div class="input-form-wrap">
-						<h3 style="text-align:left;padding-top:25px;">구매자 정보</h3>
-							<table class="table table-bordered">
-								<colgroup>
-									<col width="20%"/>
-									<col width="*"/>
-								</colgroup>
-								<tbody>
-									<tr>
-										<td class="text-left"
-											style="vertical-align:middle;"><span class="red">*</span>이름</td>
-										<td>
-											<input type="text" name="username" class="form-control" style="width: 230px;" required/>
-										</td>
-									</tr>
-									<tr>
-										<td class="text-left"
-											style="vertical-align:middle;"><span class="red">*</span>전화번호</td>
-										<td class="form-inline">
-											<select name="mobile1" class="form-control" 
-											onchange="phoneFocus(3, this, 'mobile2');" style="width:80px;" required>
-												<option value=" "> </option>
-												<option value="010">010</option>
-												<option value="011">011</option>
-												<option value="016">016</option>
-												<option value="017">017</option>
-												<option value="018">018</option>
-												<option value="019">019</option>
-											</select>
-											&nbsp;&nbsp;-&nbsp;&nbsp;
-											<input type="text" class="form-control" name="mobile2" value="" 
-											maxlength="4" onkeyup="phoneFocus(4, this, 'mobile3');" style="width:100px;" required/>
-											&nbsp;&nbsp;-&nbsp;&nbsp;
-											<input type="text" class="form-control" name="mobile3"  value="" 
-											maxlength="4" style="width:100px;" required/>
-										</td>
-									</tr>
-									<tr>
-										<td class="text-left"
-											style="vertical-align:middle;"><span class="red">*</span>주소
-										</td>
-											<td class="form-inline">
-											<input type="text" name="postcode" class="form-control" style="width: 250px;"
-												required placeholder="우편번호" />&nbsp;&nbsp;&nbsp;&nbsp;
-											<button type="button" id="postBtn" onclick="zipcodeFind();"
-												style="width: 120px;height: 40px;">우편번호</button>
-										</td>
-									</tr>
-									<tr>
-										<td class="text-left" style="vertical-align:middle;"></td>
-										<td>
-											<input type="text" name="addr1" class="form-control" style="width: 500px;"
-												required placeholder="주소를 입력해주세요." />&nbsp;&nbsp;&nbsp;&nbsp;
-											<input type="text" name="addr2" class="form-control" style="width: 500px;"
-												 placeholder="상세주소를 입력해주세요." />
-										</td>
-									</tr>
-									<tr>
-										<td class="text-left" style="vertical-align:middle;">
-											<span class="red">*</span>이메일&nbsp;&nbsp;&nbsp;
-										</td>	
-											<td class="form-inline">
-												<input type="text" class="form-control" name="email1" 
-													style="width:30%;" required />
-												&nbsp;@&nbsp;
-												<input type="text" class="form-control" name="email2" 
-													style="width:30%;" required />
-											</td>
-										</tr>	
-									<tr>
-										<td class="text-left"  style="vertical-align:middle">
-										결제수단
-										</td>
-										<td class="d-flex align-items-center">
-											<label><input type="radio" name="payment" checked />&nbsp;&nbsp;무통장</label>
-											<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<label><input type="radio" name="payment" />&nbsp;&nbsp;카드결제</label>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<label><input type="radio" name="payment" />
-											&nbsp;&nbsp;
-											<img src="../resources/images/buy/kakaoPay.png" class="kakaoPay" style="vertical-align:middle" /></label> -->
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						<hr class="mt-4 mb-5">
-	
-							<button class="btn btn-primary btn-lg btn-block" id="buySubmitBtn"
-								type="submit">결제하기</button>
-						</div>
+							</tbody>
+						</table>
 					</div>
 				</div>
-			</form>
-		</div>
+			</div>
+	
 	</div>
 </body>
 </html>

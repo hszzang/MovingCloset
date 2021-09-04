@@ -194,6 +194,14 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 	}
 	
 	function validate(frm){
+		
+		var select = document.getElementById("accontnumber");
+		var selectcheck = select.options[select.selectedIndex].value;
+		
+		if(selectcheck==""){
+			alert("입금할 은행을 선택해주세요.");
+			return false;
+		}
 		if(frm.username.value==""){
 			alert("이름을 입력해주세요.");
 			return false;
@@ -219,10 +227,22 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 		
 	}
 	
+
+	
 	
 	var totalSale = 0;
-	function couponChecked(idx,cou_per){
-	
+	var couponNum = 0;
+	function couponChecked(idx,cou_per,t){
+		if(t.checked == true){
+			couponNum += 1;
+			document.getElementById("num").value=couponNum;			
+		}else if(t.checked == false ){
+			couponNum -= 1;
+			document.getElementById("num").value=couponNum;				
+		}
+		
+		
+		
 		var cb = document.getElementById("couponBox"+idx);
 		var originalPrice = document.getElementById("hidPrice").value;
 		var bd_count = document.getElementById("hidCount").value;
@@ -363,6 +383,9 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 											<c:when test="${length == 6 }">
 							    				<td style="vertical-align:middle;">${fn:substring(priceValue,0,3)}${pricefinalEnd }</td>
 											</c:when>
+											<c:when test="${length == 7 }">
+							    				<td style="vertical-align:middle;">${fn:substring(priceValue,0,1)}${fn:substring(priceValue,1,4)}${pricefinalEnd }</td>
+											</c:when>
 							    		</c:choose>	
 							    		
 							    		<td style="vertical-align:middle;">${bd_count }</td>
@@ -406,8 +429,8 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 													<input type="checkbox" class="custom-control-input" id="couponBox${status.index }" name="cou_check${status.index }"> 
 												</label>
 											</div> --%>
-											<input type="checkbox" id="couponBox${status.index }" name="cou_check${status.index }" onclick="couponChecked(${status.index},${couDTO.cou_per });"> 
-											
+											<input class="couponnum" type="checkbox" value="${couDTO.cou_code }" id="couponBox${status.index }" name="cou_check${status.index }" onclick="couponChecked(${status.index},${couDTO.cou_per },this);"> 
+											<input type="hidden" name="num" id="num"/>
 							    		</td>
 							    		<c:if test="${couDTO.cou_sfile != null }">
 							    		<td><img class="goodsImg" src="../resources/upload/${couDTO.cou_sfile }" /></td>
@@ -527,20 +550,44 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 										</tr>	
 									<tr>
 										<td class="text-left"  style="vertical-align:middle">
-										결제수단
+										<span class="red">*</span>결제수단
 										</td>
 										<td class="d-flex align-items-center">
 											<label><input type="radio" name="b_payment" checked value="무통장"/>&nbsp;&nbsp;무통장</label>
-											<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											<label><input type="radio" name="b_payment" />&nbsp;&nbsp;카드결제</label>
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											<label><input type="radio" name="b_payment" />
 											&nbsp;&nbsp;
-											<img src="../resources/images/buy/kakaoPay.png" class="kakaoPay" style="vertical-align:middle" /></label> -->
+											<img src="../resources/images/buy/kakaoPay.png" class="kakaoPay" style="vertical-align:middle" /></label>
 										</td>
 									</tr>
+									<tr>
+									<td class="text-left"
+										style="vertical-align:middle;"><span class="red">*</span>입금은행</td>
+									<td class="form-inline">
+										<select id="accontnumber" name="accountnumber"style="border: solid lightgray 1px; border-radius:2px; padding:3px;">
+											<option value=""diabled select hidden>은행선택</option>
+											<option value="국민 222222-55-333333">국민 222222-55-333333</option>
+											<option value="카카오뱅크 1111-22-55333333">카카오뱅크 1111-22-55333333</option>
+											<option value="신한 123-22-55333333">신한 123-22-55333333</option>
+											<option value="농협 789-22-55300033">농협 789-22-55300033</option>
+											<option value="수협 565-66-55395233">수협 565-66-55395233</option>
+											<option value="우리 888-55-55333388">우리 888-55-55333388</option>
+											<option value="기업 152-44-78933333">기업 152-44-78933333</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td class="text-left"
+										style="vertical-align:middle;"><span class="red">*</span>입금자명</td>
+									<td>
+										<input type="text" name="b_buyer" class="form-control" style="width: 250px;" required/> 
+									</td>
+								</tr>
 								</tbody>
 							</table>
+
 						<hr class="mt-4 mb-5">
 	
 						<h3 style="text-align:left;">약관동의</h3>
