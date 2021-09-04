@@ -237,7 +237,7 @@
 			<c:choose>
 				<c:when test="${sessionScope.siteUserInfo != null}">
 					<a href="#" onclick="logout();"><i class="material-icons" id="icon">exit_to_app</i></a>&nbsp;
-					<a href="./mypage_coupon.do"><i class="material-icons" id="icon" onclick="infoclick();">info_outline</i></a>
+					<a href="../movingcloset/mypage_coupon.do"><i class="material-icons" id="icon" onclick="infoclick();">info_outline</i></a>
 				</c:when>
 				<c:otherwise>  
 					<a href="../movingcloset/login.do"><i class="material-icons" id="icon">person</i></a>

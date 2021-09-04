@@ -211,7 +211,6 @@ function moyoDelete(idx) {
                         <div class="userOption">
 	                        <a class="dropdown" data-toggle="dropdown"><i id="dropDown" class="material-icons">more_vert</i></a>
 							<div class="dropdown-menu dropdown-menu-right" >
-								<a onclick="commentEdit();" class="dropdown-item" >신청 정보 수정</a>
 								<a class="dropdown-item" 
 									onclick="moyoDelete(${list.m_idx});">신청 취소</a>
 							</div>
