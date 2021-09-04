@@ -316,7 +316,7 @@ public class StoreController {
 	}
 	
 	// 상품 제거
-	@RequestMapping("/store/delete.do")
+	@RequestMapping(value="/store/delete.do", method = RequestMethod.GET)
 	public String delete(Model model, HttpServletRequest req) {
 //		public String delete(Locale locale, Model model) {
 		System.out.println("delete 들어옴");

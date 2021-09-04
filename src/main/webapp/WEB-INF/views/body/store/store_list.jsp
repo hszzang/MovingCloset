@@ -205,55 +205,46 @@
     
     
 function clickPb(btn) {
-		//var flag = btn;
-		//flag.submit();
-		
+	
+		var flag = btn.value;
+		flag.submit();
+	
 		console.log(btn);
 		if(btn.checked == true) {
 			if(btn.value == "all") {
-				var flag = "all";
 				document.getElementsByClassName("filterLbl")[0].style.fontWeight = "500";
 				document.getElementsByClassName("filterLbl")[1].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[2].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[3].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[4].style.fontWeight = "100";
-				flag.submit();
 			}
 			else if(btn.value == "의류") {
-				var flag = "의류";
 				document.getElementsByClassName("filterLbl")[0].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[1].style.fontWeight = "500";
 				document.getElementsByClassName("filterLbl")[2].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[3].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[4].style.fontWeight = "100";
-				flag.submit();
 			}
 			else if(btn.value == "신발") {
-				var flag = "신발";
 				document.getElementsByClassName("filterLbl")[0].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[1].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[2].style.fontWeight = "500";
 				document.getElementsByClassName("filterLbl")[3].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[4].style.fontWeight = "100";
-				flag.submit();
 			}
 			else if(btn.value == "가방") {
-				var flag = "가방";
 				document.getElementsByClassName("filterLbl")[0].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[1].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[2].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[3].style.fontWeight = "500";
 				document.getElementsByClassName("filterLbl")[4].style.fontWeight = "100";
-				flag.submit();
 			}
-			else if(btn.value == "잡화") {
-				var flag = "잡화";
+			else if(btn.value == "잡화" || ${flag}=="잡화") {
 				document.getElementsByClassName("filterLbl")[0].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[1].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[2].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[3].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[4].style.fontWeight = "500";
-				flag.submit();
 			}
 			
 		}

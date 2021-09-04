@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 
 <!DOCTYPE html>
@@ -29,12 +30,19 @@
     		width:70px; background-color:#FF6C2F; border:#FF6C2F solid 1px; display:inline; float:right;
     	}
     	#datatablesSimple{ width:100%; margin-bottom:30px; }
-    	
 	    </style>
 	    <script>
-		    function delProduct(p_idx){
-				if(confirm("정말 상품을 삭제하시겠습니까?")){
-					location.href="/movingcloset/store/delete.do?p_idx=" + p_idx;
+	    	
+		    function selectOrder(order){ 
+		    	//obj.submit(); //obj자체가 form이다.
+		    	//var page = parseInt(val);
+		    	var order = order.value;
+		    	location.href="/movingcloset/movingcloset/adminstore.do?order="+order+"&pageShow=${pageC}";	
+			}	
+	    
+		    function delQnA(q_idx){
+				if(confirm("정말 해당 질문을 삭제하시겠습니까?")){
+					location.href="/movingcloset/movingcloset/adminmoyodelete.do?m_idx="+m_idx;
 				}
 			}
 		    
@@ -52,7 +60,7 @@
 		    		*/
 		    		left.disabled= "false";
 		    		page = page - 1;
-		    		location.href="/movingcloset/movingcloset/store.do?flag=${flag}&order=${order}&pageShow="+page;
+		    		location.href="/movingcloset/movingcloset/adminstore.do?&order=${order}&pageShow="+page;
 		    	}
 		    }
 		    
@@ -70,8 +78,14 @@
 		    		*/
 		    		right.disabled="false";
 		    		page = page + 1;
-		    		location.href="/movingcloset/movingcloset/store.do?flag=${flag}&order=${order}&pageShow="+page;
+		    		location.href="/movingcloset/movingcloset/adminstore.do?order=${order}&pageShow="+page;
 		    	}
+		    	
+		    	function delMoyo(m_idx){
+					if(confirm("정말 상품을 삭제하시겠습니까?")){
+						location.href="/movingcloset/movingcloset/adminmoyodelete.do?m_idx=" + m_idx;
+					}
+				}
 	    </script>
     </head>
     <body class="sb-nav">
@@ -180,70 +194,70 @@
                                 Charts
                             </a>
                              -->
+                           
                         </div>
                     </div>
-
                 </nav>
             </div>
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h4 class="mt-4">뉴디 관리</h4>
+                        <h4 class="mt-4">1:1문의 관리</h4>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">NewD</li>
+                            <li class="breadcrumb-item active">QnA</li>
                         <!-- 
                             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                             <li class="breadcrumb-item active">Tables</li>
                          -->
+                                
                         </ol>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                뉴디 목록
-                                <button type="button" class="pBtns" id="productInsert" onclick="javascript:location.href='/movingcloset/store/insert.do';">추가</button>
-                                 <select name="order" id="order" onchange="selectOrder(this)" >
+                                모여 목록
+                                <!-- 
+	                         	<button type="button" class="pBtns" id="productInsert" onclick="javascript:location.href='/movingcloset/movingcloset/adminmoyoinsert.do';">추가</button>
+                                 -->
+                                <select name="order" id="order" onchange="selectOrder(this)" >
 			                        	<option value="" diabled select hidden>정렬</option>
-			                            <option value="idx" >신상품순</option>
-			                            <option value="asc">낮은가격순</option>
-			                            <option value="desc">높은가격순</option>
-			                            <option value="sales">판매량순</option>
+			                            <option value="예정">답변예정</option>
+			                            <option value="완료">답변완료</option>
 			                    </select>
+			                    
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
                                     <thead style="text-align:center;">
                                         <tr style="text-align:center;">
-                                            <th style="width:5%;" >상품번호</th>
-                                            <th style="width:5%;">상품코드</th>
-                                            <th style="width:5%;">브랜드</th>
-                                            <th style="width:35%;">상품명</th>
-                                            <th style="width:10%;">가격</th>
-                                            <th style="width:10%;">사이즈</th>
-                                            <th style="width:5%;">재고</th>
-                                            <th style="width:5%;">판매량</th>
-                                            <th style="width:5%;">댓글</th>
-                                            <th style="width:5%;">새 댓글</th>
+                                            <th style="width:5%;" >번호</th>
+                                            <th style="width:5%;">분류</th>
+                                            <th style="width:30%;">제목</th>
+                                            <th style="width:10%;">질문자</th>
+                                            <th style="width:35%;">내용</th>
+                                            <th style="width:5%;">질문날짜</th>
+                                            <th style="width:10%;">답변여부</th>
+                                            <th style="width:10%;"></th>
+
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach items="${NewDList }" var="product">
+                                        <c:forEach items="${qnaList }" var="qna">
                                         <tr style="text-align:center;">
-                                            <td><a class="as" href="/movingcloset/store/detail.do?p_idx=${product.p_idx }&p_code=${product.p_code}">${product.p_idx }</a></td>
-                                            <td><a class="as" href="/movingcloset/store/detail.do?p_idx=${product.p_idx }&p_code=${product.p_code}">${product.p_code}</a></td>
-                                            <td>${product.p_brand}</td>
-                                            <td style="text-align:left;"><a class="as" href="/movingcloset/store/detail.do?p_idx=${product.p_idx }&p_code=${product.p_code}">${product.p_name}</a></td>
-                                            <td>${product.p_price}</td>
-                                            <td>${product.pd_size}</td>
-                                            <td>${product.pd_stock}</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td>${qna.q_idx }</td>
+                                            <td>${qna.q_cate  }</td>
+                                            <td><a href="/movingcloset/movingcloset/qnadetail.do?q_idx=${qna.q_idx }">${qna.q_title  }</a></td>
+                                            <td>${qna.userid  }</td>
+                                            <td>${qna.q_content  }</td>
+                                            <td>${qna.q_date }</td>
+                                            <td>${qna.q_status }</td>
                                             <th>
-                                            	<button type="button" class="pBtns" id="productUpdate" onclick="javascript:location.href='/movingcloset/store/update.do?p_idx=${product.p_idx }';">수정</button>
-                                            	<!-- 
-                                            	<button type="button" class="pBtns" id="productDelete" onclick="delProduct(${product.p_idx});">삭제</button>	
-                                            	 -->
+                                            	<button type="button" class="pBtns" id="Update" onclick="javascript:location.href='/movingcloset/movingcloset/adminanswer.do?q_idx=${qna.q_idx }';">답변</button>
+                                            	<!--  	
+                                            	<button type="button" class="pBtns" id="Update" onclick="javascript:location.href='/movingcloset/movingcloset/adminmoyoupdate.do?m_idx=${moyo.m_idx }';">수정</button>
+                                            	<button type="button" class="pBtns" id="Delete" onclick="javascript:location.href='/movingcloset/movingcloset/adminmoyodelete.do?m_idx=${moyo.m_idx }';">삭제</button>
+                                            	<button type="button" class="pBtns" id="Delete" onclick="delMoyo(${moyo.m_idx});">삭제</button>	
+                                            	-->
                                             </th>
                                         </tr>
                                     	</c:forEach>   
@@ -257,11 +271,11 @@
                                 	<span class="dataTable-info" style="display:inline;">${pageC } of ${pageEnd }</span>
 	                                	<nav class="dataTable-pagination" style="diaplay:inline;float:right;">
 	                                		<ul class="dataTable-pagination-list" style="text-align:right;">
-		                                		<li class="pager"><a id="pmL" href="javascript:void(0);" onclick="lpBtn(${pageC })" data-page="1">‹</a></li>
+	                                			<li class="pager"><a id="pmL" href="javascript:void(0);" onclick="lpBtn(${pageC })">‹</a></li>
 	                                			<c:forEach items="${pages }" var="page">
-	                                				<li value="${ page}"><a href="/movingcloset/movingcloset/adminnewd.do?pageShow=${ page}" data-page="${ page}">${ page}</a></li>
+	                                				<li value="${ page}"><a href="/movingcloset/movingcloset/adminstore.do?pageShow=${ page}" data-page="${ page}">${ page}</a></li>
 	                                			</c:forEach>
-		                                		<li class="pager"><a id="pmR" href="javascript:void(0);" onclick="rpBtn(${pageC })" data-page="2">›</a></li>
+		                                		<li class="pager"><a id="pmR" href="javascript:void(0);" onclick="rpBtn(${pageC })">›</a></li>
 	                                		</ul>
 	                                	</nav>
                                 	</form>

@@ -20,11 +20,7 @@
     	.as:hover{ text-decoration:none; color:gray;}
     </style>
     <script>
-	    function delProduct(p_idx){
-			if(confirm("정말 상품을 삭제하시겠습니까?")){
-				location.href="/movingcloset/store/delete.do?p_idx=" + p_idx;
-			}
-		}
+    
     </script>
     </head>
     <body class="sb-nav">
@@ -65,7 +61,11 @@
                             </a>
                             <a class="nav-link" href="/movingcloset/movingcloset/adminmember.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                MEMBER
+                                MEMBERS
+                            </a>
+                            <a class="nav-link" href="/movingcloset/movingcloset/adminqna.do">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                QnA
                             </a>
                              <a class="nav-link" href="/movingcloset/movingcloset/adminstore.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
@@ -137,14 +137,16 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h3 class="mt-4">관리자모드</h3>
+                        <h3 class="mt-4">관리자모드</h3><br />
+                        <!-- 
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
+                         -->
                         <div class="row">
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body">Primary Card</div>
+                                    <div class="card-body">MEMBERS</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="#">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -153,7 +155,7 @@
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-warning text-white mb-4">
-                                    <div class="card-body">Warning Card</div>
+                                    <div class="card-body">QnA</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="#">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -162,7 +164,7 @@
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-success text-white mb-4">
-                                    <div class="card-body">Success Card</div>
+                                    <div class="card-body">STORE</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="#">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -171,7 +173,7 @@
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-danger text-white mb-4">
-                                    <div class="card-body">Danger Card</div>
+                                    <div class="card-body">SALES</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="#">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -179,6 +181,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!--  
                         <div class="row">
                             <div class="col-xl-6">
                                 <div class="card mb-4">
@@ -199,12 +202,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-4">
+                        -->
+                        <div class="card mb-4" style="width:49%;display:inline;float:left;">
                             <div class="card-header">
                             	<a href="/movingcloset/movingcloset/adminstore.do">
                                 <i class="fas fa-table me-1"></i></a>
-                                스토어
+                                모여
+                                <!--  
                                 <button type="button" id="productInsert" onclick="javascript:location.href='/movingcloset/store/insert.do';">상품추가</button>
+                           		-->
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
@@ -245,6 +251,57 @@
                                 
                             </div>
                         </div>
+                        
+                        <div class="card mb-4" style="width:49%;display:inline;float:right;">
+                            <div class="card-header">
+                            	<a href="/movingcloset/movingcloset/adminstore.do">
+                                <i class="fas fa-table me-1"></i></a>
+                                쪼르기
+                                <!--  
+                                <button type="button" id="productInsert" onclick="javascript:location.href='/movingcloset/store/insert.do';">상품추가</button>
+                            	-->
+                            </div>
+                            <div class="card-body">
+                                <table id="datatablesSimple">
+                                    <thead>
+                                        <tr>
+                                            <th>상품번호</th>
+                                            <th>상품코드</th>
+                                            <th>브랜드</th>
+                                            <th>상품명</th>
+                                            <th>가격</th>
+                                            <th>사이즈</th>
+                                            <th>재고</th>
+                                            <th>판매량</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!--  
+                                   		<%--c:forEach items="${StoreList }" var="product"--%>
+                                        <tr>
+                                            <td><a class="as" href="/movingcloset/store/detail.do?p_idx=${product.p_idx }&p_code=${product.p_code}">${product.p_idx }</a></td>
+                                            <td><a class="as" href="/movingcloset/store/detail.do?p_idx=${product.p_idx }&p_code=${product.p_code}">${product.p_code}</a></td>
+                                            <td>${product.p_brand}</td>
+                                            <td><a class="as" href="/movingcloset/store/detail.do?p_idx=${product.p_idx }&p_code=${product.p_code}">${product.p_name}</a></td>
+                                            <td>${product.p_price}</td>
+                                            <td>${product.pd_size}</td>
+                                            <td>${product.pd_stock}</td>
+                                            <td></td>
+                                            <th>
+                                            	<button type="button" id="productUpdate" onclick="javascript:location.href='/movingcloset/store/update.do?p_idx=${product.p_idx }';">수정</button>
+                                            	<button type="button" id="productDelete" onclick="delProduct(${product.p_idx});">삭제</button>	
+                                            </th>
+                                        </tr>
+                                    	<%--/c:forEach --%>   
+                                    -->
+                                    </tbody>
+                                </table>
+                                
+                            </div>
+                        </div>
+                        
+                        
                     </div>
                 </main>
 

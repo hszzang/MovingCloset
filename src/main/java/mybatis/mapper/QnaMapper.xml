@@ -24,4 +24,22 @@
 	(QNA_seq.nextval, #{q_cate}, #{q_title}, #{q_content}, #{userid})
 	</insert>
 
+	<!-- 관리자용 질답리스트 불러오기 -->
+	<select id="QnAList" resultType="mybatis.QnaDTO">
+		SELECT * FROM(
+		SELECT Tb.*, ROWNUM rNum FROM(
+			SELECT * FROM QNA
+			WHERE userid!='admin'
+			ORDER BY q_idx ASC
+			)Tb
+		)
+		ORDER BY rNum DESC	
+	</select>
+	
+	<insert id="adminAnswer" parameterType="mybatis.QnaDTO">
+		insert into QNA (q_idx, q_cate, q_title, q_content, userid, q_status, q_flag)
+		values
+		(QNA_seq.nextval, #{q_cate}, #{q_title}, #{q_content}, #{userid}, #{q_status}, #{q_flag})
+	</insert>
+
 </mapper>
