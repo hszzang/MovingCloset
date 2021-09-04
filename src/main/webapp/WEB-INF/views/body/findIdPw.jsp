@@ -94,6 +94,13 @@ function findPwVali(fn){
 	return true;
 }
 
+function showSpinner(btn) {
+	
+	btn.disabled = true;
+	btn.innerHTML = "<span class='spinner-border spinner-border-sm'></span> 잠시만 기다려주세요 ";
+	btn.style.color = "black";
+}
+
 </script>
 
 
@@ -134,7 +141,7 @@ function findPwVali(fn){
 						<input name="email" type="text" class="form-control" placeholder="가입한 이메일" required>
 					</div>
 					<div class="form-group">
-						<button type="submit" class="form-control btn submit px-3">비밀번호찾기</button>
+						<button type="submit" class="form-control btn submit px-3" onclick="showSpinner(this);">비밀번호찾기</button>
 					</div>
 				</form>
 			</div>

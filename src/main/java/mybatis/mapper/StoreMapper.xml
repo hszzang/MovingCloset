@@ -234,11 +234,19 @@
 		</choose>
 	</insert>
 	
+
+	<!-- 마이페이지 리뷰리스트 가져오기 -->
+	<select id="mypageReviewList" resultType="mybatis.ReviewDTO">
+		SELECT * FROM review where userid=#{userid}
+	</select>
+	
+
 	
 	<!-- 주문내역에서 보여질 상품 -->	
 	<select id="getProductDTOsfile" parameterType="string" resultType="mybatis.ProductDTO">
 		select * from product where p_code = #{p_code}
 	</select>
+
 	
 	
 	
