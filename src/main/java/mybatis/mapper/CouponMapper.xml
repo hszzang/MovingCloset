@@ -51,6 +51,10 @@ order by 카테고리
 		INSERT INTO coupon_use (userid, cou_code) VALUES (#{userid}, #{cou_code})
 	</insert>
 	
+	<select id="MyCouponList" resultType="mybatis.CouponDTO" parameterType="mybatis.CouponDTO">
+		SELECT * FROM coupon C, coupon_use CU
+		WHERE C.cou_code = CU.cou_code and userid = #{userid}
+	</select>
 
 </mapper>
  

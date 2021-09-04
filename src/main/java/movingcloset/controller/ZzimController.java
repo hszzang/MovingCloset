@@ -31,9 +31,6 @@ public class ZzimController {
 	@Autowired
 	ZzimCreateCommand zzimCreateCommand;
 	
-	@Autowired
-	ZzimAllListCommand zzimAllListCommand;
-	
 	@ResponseBody
 	@RequestMapping(value = "/zzimList", method = RequestMethod.POST)
 	public ArrayList<ZzimDTO> zzimList(ZzimDTO zzimDTO) {

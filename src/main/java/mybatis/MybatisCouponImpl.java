@@ -8,4 +8,6 @@ public interface MybatisCouponImpl {
 	
 	public void couponDown(CouponDTO couponDTO);
 	
+	public ArrayList<CouponDTO> MyCouponList(CouponDTO couponDTO);
+	
 }

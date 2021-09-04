@@ -42,12 +42,20 @@ public class StoreDetailCommand implements CommandImpl {
 			HttpServletRequest req = (HttpServletRequest)paramMap.get("req");
 			HttpSession session = req.getSession();
 			
-			
+			String check = req.getParameter("check");
 			String p_idx = req.getParameter("p_idx");
-			storeDetail = sqlSession.getMapper(MybatisProductImpl.class).getStoreDetail(p_idx);
+			String p_code = req.getParameter("p_code");
 			
-			String p_code = storeDetail.getP_code();
+			if(check == null) {
+				storeDetail = sqlSession.getMapper(MybatisProductImpl.class).getStoreDetail(p_idx);				
+			}else {
+			 
+				storeDetail = sqlSession.getMapper(MybatisProductImpl.class).getProductDTOsfile(p_code);	
+			}
+			
 			productDetail = sqlSession.getMapper(MybatisProductImpl.class).getProductDetail(p_code);
+			
+			
 			
 			String p_size = productDetail.getPd_size();
 			String[] sizes = p_size.split(",");

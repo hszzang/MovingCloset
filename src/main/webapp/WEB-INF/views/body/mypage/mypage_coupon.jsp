@@ -98,19 +98,53 @@
 	                    <br>
 	                    구매 시 사용한 쿠폰은 반품 시 반환되지 않습니다.
 	                    <br>
-	                    이 외 상세 쿠폰 사용 안내 사항은 [자세히보기]를 확인하세요.
-	                        
+	                    이 외 상세 쿠폰 사용 안내 사항은 [자세히보기]를 확인하세요.     
 	                </p>
 	            </div>
-	            <div class="result_title" >
-	                <h4>쿠폰보유현황</h4>
-	            </div>
-	            <div class="result">
-	                <p>조르기한 상품이 없습니다.</p>
-	            </div>
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th width="7%">번호</th>
+                            <th width="15%">쿠폰</th>
+                            <th width="10%">브랜드</th>
+                            <th width="13%">쿠폰명</th>
+                            <th width="15%">쿠폰코드</th>
+                            <th width="10%">할인율</th>
+                            <th width="15%">시작/종료일</th>
+                            <th width="15%">쿠폰내용</th>
+                        </tr>
+                    </thead>
+                    <c:choose>
+                        <c:when test="${empty couponlist }">
+                            <tr>
+                                <td colspan="6" align="center">
+                                    다운로드한 쿠폰이 없습니다.
+                                </td>
+                            </tr>
+                        </c:when>
+                        <c:otherwise>
+                            <c:forEach items="${couponlist }" var="row" varStatus="loop">
+                            <tr>
+                                <td width="7%">
+                                    ${loop.index+1}	
+                                </td>
+                                <td width="15%">
+                                	<img src="../resources/upload/${row.cou_sfile }" alt="상품사진" style="width:50px;" />	
+                                </td>
+                                <td width="10%" align="left">${row.cou_brand }</td>
+                                <td width="13%" align="left">${row.cou_name }</td>
+                                <td width="15%" align="left">${row.cou_code }</td>
+                                <td width="10%" align="left">${row.cou_per }%</td>
+                                <td width="15%" align="left">${row.cou_start} ~ ${row.cou_end}</td>
+                                <td width="15%" align="left">${row.cou_content }</td>
+                            </tr>
+                            </c:forEach>
+                        </c:otherwise>
+                    </c:choose>
+                </table>
+            </div>
 	        </div>
 		</div>
-    </div>
 
 </body>
 </html>

@@ -95,18 +95,19 @@
                 <table class="table table-hover">
                     <thead class="thead-dark">
                         <tr>
-                            <th width="15%">번호</th>
-                            <th width="30%">상품코드</th>
-                            <th width="20%">결제가격</th>
-                            <th width="20%">결제수단</th>
-                            <th width="15%">주문날짜</th>
+                            <th width="10%">번호</th>
+                            <th width="20%">상품사진</th>
+                            <th width="15%">브랜드</th>
+                            <th width="25%">상품명</th>
+                            <th width="15%">상품코드</th>
+                            <th width="15%">상품가격</th>
                         </tr>
                     </thead>
                     <c:choose>
-                        <c:when test="${empty buylist }">
+                        <c:when test="${empty zzimlist }">
                             <tr>
                                 <td colspan="6" align="center">
-                                    등록된 리뷰내역이 없습니다.
+                                    찜한 상품이 없습니다.
                                 </td>
                             </tr>
                         </c:when>
@@ -116,12 +117,15 @@
                                 <td width="10%">
                                     ${loop.index+1}	
                                 </td>
-                                <td width="30%" align="left">
-                                    <a href="../store/detail.do?p_code=${row.p_code }&check='zzim'">${row.p_code }</a>
+                                <td width="20%">
+                                	<a href="../store/detail.do?p_code=${row.p_code }&check='zzim'">
+                                		<img src="../resources/upload/${row.p_sfile }" alt="상품사진" style="width:50px;" />
+                                	</a>	
                                 </td>
-                                <td width="20%" align="left">${row.b_totalpay }</td>
-                                <td width="20%" align="left">${row.b_payment }</td>
-                                <td width="15%" align="left">${row.b_date }</td>
+                                <td width="15%" align="left">${row.p_brand }</td>
+                                <td width="25%" align="left">${row.p_name }</td>
+                                <td width="15%" align="left">${row.p_code }</td>
+                                <td width="15%" align="left">${row.p_price }원</td>
                             </tr>
                             </c:forEach>
                         </c:otherwise>

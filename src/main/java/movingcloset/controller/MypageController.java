@@ -20,6 +20,7 @@ import movingcloset.command.LoginCommand;
 import movingcloset.command.MemberEditCommand;
 import movingcloset.command.MemberOutCommand;
 import movingcloset.command.RegisterActionCommand;
+import movingcloset.command.coupon.CouponMyListCommand;
 import movingcloset.command.cscenter.QnaCommand;
 import movingcloset.command.mypage.MyPageOrderDetailCommand;
 import movingcloset.command.mypage.MyPageOrderListCommand;
@@ -55,12 +56,19 @@ public class MypageController {
 	@Autowired
 	MyPageOrderDetailCommand myPageOrderDetailCommand;
 	
+	@Autowired
+	CouponMyListCommand couponMyListCommand;
 	
 	@RequestMapping(value="movingcloset/mypage_coupon.do", method=RequestMethod.GET)
 	public String mypageCoupon (Model model, HttpServletRequest req) {
 		
+		model.addAttribute("req", req);
+		command = couponMyListCommand;
+		command.execute(model);
+		
 		return "body/mypage/mypage_coupon";
 	}
+	
 	@RequestMapping(value="movingcloset/mypage_order.do", method=RequestMethod.GET)
 	public String mypageOrder (Locale locale, Model model, HttpServletRequest req) {
 		

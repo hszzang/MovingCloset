@@ -20,4 +20,6 @@ public class CouponDTO {
 	private String userid;
 	private String cou_ofile;
 	private String cou_sfile;
+	
+	private String cou_use;
 }
