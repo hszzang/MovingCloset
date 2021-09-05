@@ -218,7 +218,16 @@
 			
 		}
 		
-		
+		function cart() {
+			
+			if(${empty siteUserInfo}) {
+	            alert("로그인 후 이용해주세요.");
+	            location.href="../movingcloset/login.do";
+	        }
+	 		else {
+	 			location.href="../movingcloset/cart.do";
+	 		}
+		}
     </script>
 	 <div class="nav-menu">
 		<a class="large-logo" href="../movingcloset/main.do" id="logo">Moving Closet</a>
@@ -231,7 +240,7 @@
 		<div id="icons">
 			<a href="../movingcloset/search.do"><i class="material-icons" id="icon">search</i></a>
 			&nbsp;
-			<a href="../movingcloset/cart.do"><i class="material-icons" id="icon">shopping_basket</i></a>
+			<a href="javascript:void(0);" onclick="cart();"><i class="material-icons" id="icon">shopping_basket</i></a>
 			&nbsp;
 			
 			<c:choose>
@@ -239,7 +248,7 @@
 					<a href="#" onclick="logout();"><i class="material-icons" id="icon">exit_to_app</i></a>&nbsp;
 					<a href="../movingcloset/mypage_coupon.do"><i class="material-icons" id="icon" onclick="infoclick();">info_outline</i></a>
 				</c:when>
-				<c:otherwise>  
+				<c:otherwise>
 					<a href="../movingcloset/login.do"><i class="material-icons" id="icon">person</i></a>
 				</c:otherwise>
 			</c:choose>

@@ -110,6 +110,9 @@
             alert("로그인 후 이용해주세요.");
             location.href="../movingcloset/login.do";
         }
+		else if(document.getElementById("sizeNum").value == "") {
+			alert("사이즈를 선택해주세요.");
+		}
  		else {
 			var cartDTO = {};
 			
@@ -128,7 +131,14 @@
 				type : 'POST',
 				data : cartDTO,
 				success : function(result) {
-					alert("장바구니에 담았습니다.")
+					
+					var c=confirm("장바구니에 담았습니다. 장바구니로 이동하시겠습니까?");
+					if(c){
+						location.href = "../movingcloset/cart.do";
+					}
+					else{
+						location.href = "#";
+					}
 				},
 				error : function(request, status, error) {
 			    	alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);

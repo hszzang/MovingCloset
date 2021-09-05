@@ -67,6 +67,10 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 QnA
                             </a>
+                            <a class="nav-link" href="/movingcloset/movingcloset/adminorder.do">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                ORDER
+                            </a>
                              <a class="nav-link" href="/movingcloset/movingcloset/adminstore.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 STORE
@@ -78,6 +82,10 @@
                             <a class="nav-link" href="/movingcloset/movingcloset/adminmoyo.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 MOYO
+                            </a>
+                            <a class="nav-link" href="/movingcloset/movingcloset/adminzzim.do">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                ZZIM
                             </a>
                             <div class="sb-sidenav-menu-heading">Interface</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
@@ -215,22 +223,45 @@
                             <div class="card-body">
                                 <table id="datatablesSimple">
                                     <thead>
-                                        <tr>
-                                            <th>상품번호</th>
-                                            <th>상품코드</th>
-                                            <th>브랜드</th>
-                                            <th>상품명</th>
-                                            <th>가격</th>
-                                            <th>사이즈</th>
-                                            <th>재고</th>
-                                            <th>판매량</th>
-                                            <th></th>
-                                        </tr>
                                     </thead>
                                     <tbody>
+                                        <tr>
+                                        	[진행] 테스트 모여1 &nbsp;&nbsp;&nbsp;(83 / 120명 달성)
+                                        	<div class="progress" style="width:90%; height:10px; margin-left:10px;">
+												<div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width:71%; height:20px"></div>
+											</div>
+											<hr />
+                                        </tr>
+                                        <tr>
+                                        	[진행] 테스트 모여2 &nbsp;&nbsp;&nbsp;(62 / 100명 달성)
+                                        	<div class="progress" style="width:90%; height:10px; margin-left:10px;">
+												<div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width:62%; height:20px"></div>
+											</div>
+											<hr />
+                                        </tr>
+                                        <tr>
+                                        	<strike>[실패] 테스트 모여3 &nbsp;&nbsp;&nbsp;(88 / 100명 달성)</strike>
+                                        	<div class="progress" style="width:90%; height:10px; margin-left:10px;">
+												<div class="progress-bar bg-warning progress-bar-striped progress-bar" style="width:88%; height:20px"></div>
+											</div>
+											<hr />
+                                        </tr>
+                                       <tr>
+                                        	<strong>[성공] 테스트 모여4 &nbsp;&nbsp;&nbsp;(100 / 100명 달성) </strong>
+                                        	<div class="progress" style="width:90%; height:10px; margin-left:10px;">
+												<div class="progress-bar bg-warning progress-bar-striped progress-bar" style="width:100%; height:20px"></div>
+											</div>
+											<hr />
+                                        </tr>
+                                       <tr>
+                                        	<strong>[성공] 테스트 모여4 &nbsp;&nbsp;&nbsp;(100 / 100명 달성) </strong>
+                                        	<div class="progress" style="width:90%; height:10px; margin-left:10px;">
+												<div class="progress-bar bg-warning progress-bar-striped progress-bar" style="width:100%; height:20px"></div>
+											</div>
+											<hr />
+                                        </tr>
                                     <!--  
                                    		<%--c:forEach items="${StoreList }" var="product"--%>
-                                        <tr>
                                             <td><a class="as" href="/movingcloset/store/detail.do?p_idx=${product.p_idx }&p_code=${product.p_code}">${product.p_idx }</a></td>
                                             <td><a class="as" href="/movingcloset/store/detail.do?p_idx=${product.p_idx }&p_code=${product.p_code}">${product.p_code}</a></td>
                                             <td>${product.p_brand}</td>
@@ -243,7 +274,6 @@
                                             	<button type="button" id="productUpdate" onclick="javascript:location.href='/movingcloset/store/update.do?p_idx=${product.p_idx }';">수정</button>
                                             	<button type="button" id="productDelete" onclick="delProduct(${product.p_idx});">삭제</button>	
                                             </th>
-                                        </tr>
                                     	<%--/c:forEach --%>   
                                     -->
                                     </tbody>
@@ -264,19 +294,44 @@
                             <div class="card-body">
                                 <table id="datatablesSimple">
                                     <thead>
-                                        <tr>
-                                            <th>상품번호</th>
-                                            <th>상품코드</th>
-                                            <th>브랜드</th>
-                                            <th>상품명</th>
-                                            <th>가격</th>
-                                            <th>사이즈</th>
-                                            <th>재고</th>
-                                            <th>판매량</th>
-                                            <th></th>
-                                        </tr>
                                     </thead>
                                     <tbody>
+                                   		 <tr>
+                                        	[진행] 테스트 쪼르기1 &nbsp;&nbsp;&nbsp;(22 / 120명 달성) 
+                                        	<div class="progress" style="width:90%; height:10px; margin-left:10px;">
+												<div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" style="width:20%; height:20px"></div>
+											</div>
+											<hr />
+                                        </tr>
+                                        <tr>
+                                        	[진행] 테스트 쪼르기2 &nbsp;&nbsp;&nbsp;(76 / 100명 달성)
+                                        	<div class="progress" style="width:90%; height:10px; margin-left:10px;">
+												<div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" style="width:76%; height:20px"></div>
+											</div>
+											<hr />
+                                        </tr>
+                                        <tr>
+                                        	<strong>[성공] 테스트 쪼르기3 &nbsp;&nbsp;&nbsp;(100 / 100명 달성) </strong>
+                                        	<div class="progress" style="width:90%; height:10px; margin-left:10px;">
+												<div class="progress-bar bg-danger progress-bar-striped progress-bar" style="width:100%; height:20px"></div>
+											</div>
+											<hr />
+                                        </tr>
+                                        <tr>
+                                        	<strike>[실패] 테스트 쪼르기4 &nbsp;&nbsp;&nbsp;(94 / 100명 달성) </strike>
+                                        	<div class="progress" style="width:90%; height:10px; margin-left:10px;">
+												<div class="progress-bar bg-danger progress-bar-striped progress-bar" style="width:94%; height:20px"></div>
+											</div>
+											<hr />
+                                        </tr>
+                                        <tr>
+                                        	<strike>[실패] 테스트 쪼르기5 &nbsp;&nbsp;&nbsp;(84 / 100명 달성) </strike>
+                                        	<div class="progress" style="width:90%; height:10px; margin-left:10px;">
+												<div class="progress-bar bg-danger progress-bar-striped progress-bar" style="width:84%; height:20px"></div>
+											</div>
+											<hr />
+                                        </tr>
+                                        
                                     <!--  
                                    		<%--c:forEach items="${StoreList }" var="product"--%>
                                         <tr>

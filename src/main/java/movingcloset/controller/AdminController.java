@@ -32,8 +32,10 @@ import movingcloset.command.admin.AdminMoyoDetailCommand;
 import movingcloset.command.admin.AdminMoyoInsertCommand;
 import movingcloset.command.admin.AdminMoyoUpdateCommand;
 import movingcloset.command.admin.AdminNewDCommand;
+import movingcloset.command.admin.AdminOrderCommand;
 import movingcloset.command.admin.AdminQnACommand;
 import movingcloset.command.admin.AdminStoreCommand;
+import movingcloset.command.admin.AdminZzimCommand;
 import movingcloset.command.cscenter.QnaCommand;
 import mybatis.MoyoDTO;
 
@@ -64,6 +66,10 @@ public class AdminController {
 	AdminQnACommand adminQnACommand;
 	@Autowired
 	AdminAnswerCommand adminAnswerCommand;
+	@Autowired
+	AdminOrderCommand adminOrderCommand;
+	@Autowired
+	AdminZzimCommand adminZzimCommand;
 	
 	// 관리자 페이지 메인
 	@RequestMapping(value = "/movingcloset/admin.do", method = RequestMethod.GET)
@@ -380,9 +386,33 @@ public class AdminController {
 		public String adminAnswerAction(Locale locale, Model model, HttpServletRequest req) {
 
 			model.addAttribute("req", req);
+			//command = adminAnswerCommand;
 			command = adminAnswerCommand;
 			command.execute(model);
 						
 			return "admin/admin_qna";
 		}
+		
+		// 모든 주문 내역 조회
+		@RequestMapping(value = "/movingcloset/adminorder.do")
+		public String adminOrderList(Locale locale, Model model, HttpServletRequest req) {
+
+			model.addAttribute("req", req);
+			command = adminOrderCommand;
+			command.execute(model);
+						
+			return "admin/admin_order";
+		}
+		
+		// 모든 짬 내역 조회
+		@RequestMapping(value = "/movingcloset/adminzzim.do")
+		public String adminZzimList(Locale locale, Model model, HttpServletRequest req) {
+
+			model.addAttribute("req", req);
+			command = adminZzimCommand;
+			command.execute(model);
+								
+			return "admin/admin_zzim";
+		}
+		
 }
