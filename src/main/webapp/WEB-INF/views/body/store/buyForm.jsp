@@ -7,12 +7,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <title>구매폼 :: MovingCloset</title>
 <style>
 
@@ -338,6 +336,14 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 		
 	}
 	
+	
+	function showSpinner(btn) {
+		
+		btn.disabled = true;
+		btn.innerHTML = "<span class='spinner-border spinner-border-sm'></span> 잠시만 기다려주세요 ";
+		document.buyFrm.submit();
+	}
+
 </script>
 </head>
 <body>
@@ -674,7 +680,7 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 							</div>
 	
 							<button class="btn btn-primary btn-lg btn-block" id="buySubmitBtn"
-								type="submit">결제하기</button>
+								type="submit" onclick="showSpinner(this);">결제하기</button>
 						</div>
 					</div>
 				</div>
