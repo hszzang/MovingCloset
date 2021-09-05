@@ -199,6 +199,9 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 		<div class="sectiontitle">
 		    <h2>주문 내역</h2>
 	    </div>
+			<div style="text-align: center;padding-top:15px;padding-bottom:15px;">
+				<h4 style="color:#ff6c2f;">주문 내역은 가입하신 메일로 발송됩니다.</h4>
+			</div>
 			<div class="input-form" style="padding-bottom:15px;">
 				<div class="row" style="margin-top:15px;">
 					<table class="table table-hover" id="goodsTable">
