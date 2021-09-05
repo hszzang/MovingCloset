@@ -18,7 +18,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 @Service
-public class KakaoService {
+public class KakaoService {   
 
     public String getAccessToken (String authorize_code) {
         String access_Token = "";

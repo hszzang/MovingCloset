@@ -25,5 +25,17 @@
 		(cart_seq.nextval, #{c_qty}, #{userid}, #{p_code}, #{p_sfile}, #{p_flag}, #{pd_size}, #{p_price}, #{p_brand}, #{pd_color})
 	</insert>
 	
+	<select id="cartBuyList" resultType="mybatis.CartDTO" parameterType="string">
+		select * from cart where userid=#{0} and c_idx=#{1}
+	</select>
+	
+	
+	<select id="cartBuyListMap" resultType="mybatis.CartDTO" parameterType="hashMap">
+		select * from cart where userid=#{userid} and c_idx in 
+		        <foreach collection="arrlist" item="item" index="index" separator="," open="(" close=")">
+                    #{item}
+                </foreach>
+	</select>
+	
 </mapper>
  
