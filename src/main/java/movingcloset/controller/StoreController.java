@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import movingcloset.command.CommandImpl;
 import movingcloset.command.CommandImpl2;
 import movingcloset.command.GetMemberProductCommand;
+import movingcloset.command.cart.CartBuyCommand;
 import movingcloset.command.store.ReviewDeleteCommand;
 import movingcloset.command.store.ReviewInsertCommand;
 import movingcloset.command.store.ReviewListCommand;
@@ -71,7 +72,8 @@ public class StoreController {
 	StoreBuyCommand storeBuyCommand;
 	@Autowired
 	GetMemberProductCommand getMemberProductCommand;
-	 
+	@Autowired
+	CartBuyCommand cartBuyCommand;
 	
 	// 스토어 리스트
 	@RequestMapping(value="/movingcloset/store.do", method=RequestMethod.GET)
@@ -441,11 +443,22 @@ public class StoreController {
 	public String buyProduct(Model model, HttpServletRequest req) {
 		
 		model.addAttribute("req",req);
-		
 		command = storeBuyCommand;
 		command.execute(model);
 		
 		return "body/store/payForm";
 	}
+	
+	// 구매폼으로 이동
+	@RequestMapping(value="/store/cartbuy.do", method=RequestMethod.POST)
+	public String cartbuy(Model model, HttpServletRequest req) {
+		
+		model.addAttribute("req",req);
+		command = cartBuyCommand;
+		command.execute(model);
+		
+		return "body/cart/cartbuyForm";
+	}
+	
 	
 }

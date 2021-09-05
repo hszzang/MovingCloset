@@ -1,6 +1,6 @@
 package com.project.movingcloset;
 
-import java.io.IOException;
+import java.io.IOException;   
 import java.util.UUID; 
 import javax.servlet.http.HttpSession;
 import org.springframework.util.StringUtils;

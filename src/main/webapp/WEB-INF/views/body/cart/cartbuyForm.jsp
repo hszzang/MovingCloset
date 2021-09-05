@@ -243,9 +243,8 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 		
 		var cb = document.getElementById("couponBox"+idx);
 		var originalPrice = document.getElementById("hidPrice").value;
-		var bd_count = document.getElementById("hidCount").value;
 		
-		originalPrice = parseInt(originalPrice)*parseInt(bd_count);
+		originalPrice = parseInt(originalPrice);
 		var percent = parseInt(cou_per);
 		var result = originalPrice*(1-(percent/100));
 		var resultString = result.toString();
@@ -359,58 +358,45 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 							<table class="table table-hover" id="goodsTable">
 								<thead class="goodsTitle">
 									<tr>
+									  <th>번호</th>	
 									  <th>상품이미지</th>	
 									  <th>브랜드</th>
 									  <th>상품명&nbsp;(상품코드)</th>
 									  <th>가격</th>
 									  <th>수량</th>
 									  <th>사이즈</th>
+									  <th>색상</th>
 									</tr>
 							    </thead>
 							    <tbody>
-						    		<fmt:parseNumber value="${productAndDetailDTO.p_price}" var="p_priceNum"/>
-						    		<fmt:parseNumber value="${bd_count}" var="bd_countNum"/>
-						    		<fmt:formatNumber var="priceValue" value="${p_priceNum*bd_countNum }"/>
-						    		
-						    		<c:set var = "length" value = "${fn:length(priceValue)}"/>
-						    		
-								    <c:set var = "pricefinalEnd" value = "${fn:substring(priceValue,length-3,length)}"/>
+							    <%-- <c:set var = "total" value = "0" /> --%>
+							    <c:forEach items="${cartDTO }" var="cartDTO" varStatus="status">
+							    
 							    	<tr id="goods">
-							    		<td><img class="goodsImg" src="../resources/upload/${productDTO.p_sfile }" /></td>
-							    		<td style="vertical-align:middle;">${productAndDetailDTO.p_brand }</td>
-							    		<td style="vertical-align:middle;">${productAndDetailDTO.p_name }<br />(${productAndDetailDTO.p_code })</td>
-								    	<c:choose>
-							    			<c:when test="${length == 4 }">
-							    				<td style="vertical-align:middle;">${fn:substring(priceValue,0,1)}${pricefinalEnd }</td>
-							    			</c:when>
-							    			<c:when test="${length == 5 }">
-							    				<td style="vertical-align:middle;">${fn:substring(priceValue,0,2)}${pricefinalEnd }</td>
-							    			</c:when>
-											<c:when test="${length == 6 }">
-							    				<td style="vertical-
-							    				align:middle;">${fn:substring(priceValue,0,3)}${pricefinalEnd }</td>
-											</c:when>
-											<c:when test="${length == 7 }">
-							    				<td style="vertical-align:middle;">${fn:substring(priceValue,0,1)}${fn:substring(priceValue,1,4)}${pricefinalEnd }</td>
-											</c:when>
-							    		</c:choose>	
-							    		
-							    		<td style="vertical-align:middle;">${bd_count }</td>
-							    		<td style="vertical-align:middle;">${productAndDetailDTO.pd_size }</td>
+							    		<td>${status.count }</td>
+							    		<td><img class="goodsImg" src="../resources/upload/${cartDTO.p_sfile }" /></td>
+							    		<td style="vertical-align:middle;">${cartDTO.p_brand }</td>
+							    		<td style="vertical-align:middle;">${cartDTO.p_code }</td>
+							    		<td style="vertical-align:middle;">${cartDTO.p_price}</td>
+							    		<td style="vertical-align:middle;">${cartDTO.c_qty }</td>
+							    		<td style="vertical-align:middle;">${cartDTO.pd_size }</td>
+							    		<td style="vertical-align:middle;">${cartDTO.pd_color }</td>
+							    		<%-- <c:set var= "total" value="${total + (cartDTO.p_price * cartDTO.c_qty)}"/> --%>
 							    	</tr>
+							    </c:forEach>
 							    </tbody>
 							</table>
 						</div>
 					</div>
 				</div>
 				<br />
-				<input type="hidden" id="hidPrice" value="${productAndDetailDTO.p_price }"/>
-				<input type="hidden" id="hidCount" value="${bd_count }"/>
-				<input type="hidden" name="p_code" value="${productAndDetailDTO.p_code }"/>
+ 				<input type="hidden" id="hidPrice" value="${totalprice }"/>
+				<%-- <input type="hidden" id="hidCount" value="${cartDTO.bd_count }"/> --%>
+				<input type="hidden" name="p_code" value="${cartDTO.p_code }"/> 
 				<div class="input-form">
 					<div class="container" id="goodsBox" >
 					<div class="row">
-					
+ 					
 					<c:forEach items="${couponAndUseDTO }" var="couDTO" varStatus="status">
 							<table class="table table-hover" id="goodsTable">
 								<thead class="goodsTitle">
@@ -424,18 +410,21 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 										  <th>쿠폰내용</th>
 										  <th>할인율</th>
 										  <th>쿠폰기한</th>
-										  
 									</tr>
 							    </thead>
 							    <tbody>
 						    		<fmt:parseNumber value="${couDTO.cou_per}" var="couPerNum"/>
-							    	<tr id="goods">
+						    		<fmt:parseDate value="${couDTO.cou_start }" var="strmstart" pattern="yyyy-MM-dd HH:mm:ss"/>
+									<fmt:formatDate value="${strmstart }" var="frmmstart" pattern="yyyy. MM. dd"/>
+									<fmt:parseDate value="${couDTO.cou_end }" var="strmend" pattern="yyyy-MM-dd HH:mm:ss"/>
+									<fmt:formatDate value="${strmend }" var="frmmend" pattern="yyyy. MM. dd"/>
+									<tr id="goods">
 							    		<td align="center" valign="middle">
-<%-- 								    		<div class="custom-control custom-checkbox">
+								    		<div class="custom-control custom-checkbox">
 												<label class="custom-control-label"	for="couponBox">
 													<input type="checkbox" class="custom-control-input" id="couponBox${status.index }" name="cou_check${status.index }"> 
 												</label>
-											</div> --%>
+											</div>
 											<input class="couponnum" type="checkbox" value="${couDTO.cou_code }" id="couponBox${status.index }" name="cou_check${status.index }" onclick="couponChecked(${status.index},${couDTO.cou_per },this);"> 
 											<input type="hidden" name="num" id="num"/>
 							    		</td>
@@ -446,24 +435,30 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 							    		<td style="vertical-align:middle;">${couDTO.cou_name }<br />(${couDTO.cou_code })</td>
 							    		<td style="vertical-align:middle;">${couDTO.cou_content }</td>
 							    		<td style="vertical-align:middle;">${couDTO.cou_per }%</td>
-							    		<td style="vertical-align:middle;">${couDTO.cou_start }&nbsp;-&nbsp;${couDTO.cou_end }</td>
-							    		
+							    		<td style="vertical-align:middle;">${frmmstart } - ${frmmend }</td>
 							    	</tr>
 							    </tbody>
 							</table>
 							<table class="table" id="price${status.index }" style="text-align:center;">
 
 							</table>
-						</c:forEach>
+						</c:forEach> 
 						</div>
 					</div>
 				</div>
 				 <br />
-					<div id="resultPrice">
-						<input type="hidden" name="b_totalpay" value="${priceValue }"/>
+	 				<div id="resultPrice">
+						<%-- <fmt:parseNumber value="${cartDTO.p_price}" var="p_priceNum"/>
+			    		<fmt:parseNumber value="${cartDTO.c_qty}" var="bd_countNum"/> --%>
+			    		<fmt:formatNumber var="priceValue" value="${total }"/>
+			    		
+			    		<c:set var = "length" value = "${fn:length(priceValue)}"/>
+			    		
+					    <c:set var = "pricefinalEnd" value = "${fn:substring(priceValue,length-3,length)}"/>
+						<input type="hidden" name="b_totalpay" value="${cartDTO.p_price }"/>
 						<h1>총 결제 금액</h1>
 						<br />
-						<c:choose>
+						<%-- <c:choose>
 			    			<c:when test="${length == 4 }">
 			    				<td style="vertical-align:middle;"><h2>${fn:substring(priceValue,0,1)}${pricefinalEnd }</h2></td>
 			    			</c:when>
@@ -473,12 +468,18 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 							<c:when test="${length == 6 }">
 			    				<td style="vertical-align:middle;"><h2>${fn:substring(priceValue,0,3)}${pricefinalEnd }</h2></td>
 							</c:when>
+							<c:when test="${length == 7 }">
+			    				<td style="vertical-align:middle;">${fn:substring(priceValue,0,1)}${fn:substring(priceValue,1,4)}${pricefinalEnd }</td>
+							</c:when>
 			    		</c:choose>	
+			    		 --%>
+			    		<div style="vertical-align:middle;">${total }</div>
+			    		 
 					</div>
 				<br />	
 				<div class="input-form col-md-12 mx-auto">
-			    	<input type="hidden" name="bd_count" value="${bd_count }"/>
-			    	<input type="hidden" name="bd_size" value="${productAndDetailDTO.pd_size }"/>
+			    	<%-- <input type="hidden" name="bd_count" value="${cartDTO.c_qty }"/>
+			    	<input type="hidden" name="bd_size" value="${cartDTO.pd_size }"/> --%>
 
 					<div class="input-form-wrap">
 						<h3 style="text-align:left;padding-top:25px;">구매자 정보</h3>

@@ -42,7 +42,7 @@ function cartList() {
         		
         		info += "<div class='bucket_info'>"
         		+ "<div style='width: 3%;'>"
-                + "<input type='checkbox' id='check_sol' name='check_sol' onclick='totalPrice("+i+","+p_price+")'/>"
+                + "<input type='checkbox' id='check_sol' name='check_sol' value='"+result[i].c_idx+"' onclick='totalPrice("+i+","+p_price+","+result[i].c_idx+")'/>"
                 + "</div>"
                 + "<div>"
                 + "<a>"
@@ -109,15 +109,24 @@ function listRemove(c_idx) {
 }
 
 let total = 0;
-function totalPrice(i, p_price) {
-		
+function totalPrice(i, p_price, c_idx) {
+	var obj = $("[name=check_sol]");
+	var chkArray = new Array();
+	
+	$('input:checkbox[name=check_sol]:checked').each(function(){
+		chkArray.push(this.value);
+	});
+	 $('#hiddenValue').val(chkArray);
+	
+
+	
 	var sol = document.getElementsByName("check_sol")[i];
 
 	if(sol.checked == true) {
-		total += p_price;
+		total += parseInt(p_price);
 	}
 	else if(sol.checked == false) {
-		total -= p_price;
+		total -= parseInt(p_price);
 	}
 	
 	if(total <= 0) {
@@ -146,7 +155,7 @@ function totalPrice(i, p_price) {
     	totalString = total1+","+total2+","+total3;        		
 	}
 	
-	document.getElementById("totalDiv").innerText = totalString+"원";
+	document.getElementById("totalDiv").value = totalString+"원";
 };
 
 /* var total = 0;
@@ -219,6 +228,7 @@ function totalPrice(i){
 <body> 
 
 	<div class="container">
+	<form action="../store/cartbuy.do" name="cartFrm" method="post">
 		<div class="sectiontitle" style="margin-top:150px;">
 	    	<h2>SHOPPING LIST</h2>
 	    </div>
@@ -232,15 +242,17 @@ function totalPrice(i){
         </div>
         <div class="bucket_division">
             <div style="width: 50%; text-align: center;">
-                <h3>상품정보</h1>
+                <h3>상품정보</h3>
             </div>
             <div style="width: 30%; text-align: center;">
-                <h3>상품옵션</h1>
+                <h3>상품옵션</h3>
             </div>
             <div style="width: 15%; text-align: center;">
-                <h3>상품금액</h1>
+                <h3>상품금액</h3>
             </div>
         </div>
+        <input type="hidden" name="hiddencidx" id="hiddenValue" value=""/>
+
         <div class="bucket_info_wrap">
 	        <!-- <div class="bucket_info">
 	            <div style="width: 3%;">
@@ -276,15 +288,16 @@ function totalPrice(i){
 	            </div>
 	        </div> -->
         </div>
-        <div class="bucket_result" >
-        <div style="text-align: center; font-weight: bold; font-size: 25px;">총 결제 금액</div>
-            <div id='totalDiv' style="text-align: center; color: red; font-size: 30px; font-weight: bold;">0원</div>
+        <div class="bucket_result" style="text-align: center;" >
+        	<div style="text-align: center; font-weight: bold; font-size: 25px;">총 결제 금액</div>
+            <input id='totalDiv' name="totalprice" style="text-align: center; color: red; font-size: 30px; font-weight: bold;border:none;" value="0원"/>
         </div>
         <div class="bucket_buy">
-            <button>
+            <button type="submit">
                 <img src="../resources/images/icon/buy.png" style="height: 150px; width: 150px;">
             </button>
         </div>
+        </form>
     </div>
     
 </body>
