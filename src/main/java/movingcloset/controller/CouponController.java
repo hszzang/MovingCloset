@@ -62,19 +62,12 @@ public class CouponController {
 		System.out.println(couponDTO);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		String userid = "userid01";
-		couponDTO.setUserid(userid);
 		
-		if(userid != null) {
-			System.out.println("null이 아니다.");
-			map.put("couponDTO", couponDTO);
-			command2 = couponDownCommand;
-			command2.mapexecute(map);
-			map.put("alert", "쿠폰 발급이 완료 되었습니다.");
-		}
-		else {
-			map.put("alert", "로그인을 해주십시오.");
-		}
+		System.out.println("null이 아니다.");
+		map.put("couponDTO", couponDTO);
+		command2 = couponDownCommand;
+		command2.mapexecute(map);
+		map.put("alert", "쿠폰 발급이 완료 되었습니다.");
 		
 		return map;
 	}

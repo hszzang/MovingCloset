@@ -11,10 +11,6 @@
 
 <title>COUPON :: MovingCloset</title>
 
-<%
-CouponDTO couponDTO = new CouponDTO();
-couponDTO.setUserid((String)session.getAttribute("siteUserInfo"));
-%>
 <script>
 
 $(function() {
@@ -26,7 +22,7 @@ $(function() {
         	let res = "";
         	for(let i=0 ; i<result.length ; i++){
         		res += "<div class='list_coupon'>"
-				+ "<img src='../resources/images/coupon/musinsa_blackfriday.jpg'>"
+				+ "<img src='../resources/upload/"+ result[i].cou_sfile +"'>"
 				+ "<div class='list_coupon_cont'>"
 				+ "<strong>"+ result[i].cou_name +"</strong>"
 				+ "<p>"+ result[i].cou_content +"</p>"
@@ -64,24 +60,32 @@ function callByType(type) {
 };
  
 function callBydownload(code) {
+	couponDTO.userid = "<c:out value='${siteUserInfo}' />";
 	couponDTO.cou_code = code;
 	download(couponDTO);
 };
 
 function download(couponDTO) {
 	
-	$.ajax({
-		url : '../download',
-		type : 'POST',
-		data : couponDTO,
-		dataType : 'json',
-		success : function(map) {
-			alert(map.alert);
-		},
-		error : function(request, status, error) {
-	    	alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
-	    }
-	});
+	if(${empty siteUserInfo}) {
+        alert("로그인 후 이용해주세요.");
+        location.href="../movingcloset/login.do";
+    }
+	else {
+		$.ajax({
+			url : '../download',
+			type : 'POST',
+			data : couponDTO,
+			dataType : 'json',
+			success : function(map) {
+				alert(map.alert);
+			},
+			error : function(request, status, error) {
+		    	alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
+		    }
+		});
+	}
+	
 };
 
 function search(couponDTO) {
@@ -95,7 +99,7 @@ function search(couponDTO) {
         	let res = "";
         	for(let i=0 ; i<result.length ; i++){
         		res += "<div class='list_coupon'>"
-				+ "<img src='../resources/images/coupon/musinsa_blackfriday.jpg'>"
+				+ "<img src='../resources/upload/"+ result[i].cou_sfile +"'>"
 				+ "<div class='list_coupon_cont'>"
 				+ "<strong>"+ result[i].cou_name +"</strong>"
 				+ "<p>"+ result[i].cou_content +"</p>"
