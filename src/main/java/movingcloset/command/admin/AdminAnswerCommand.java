@@ -40,9 +40,40 @@ public class AdminAnswerCommand implements CommandImpl {
 		
 		QnaDTO qnaDTO = new QnaDTO();
 		
-		List<QnaDTO> qnaList = sqlSession.getMapper(MybatisQNAImpl.class).QnAList();
+		String q_idx = req.getParameter("q_idx");
+		String q_cate = req.getParameter("q_cate");
+		String q_title = req.getParameter("q_title");
+		String q_content = req.getParameter("q_content");
+		//String q_date = req.getParameter("q_date");
 		
-		model.addAttribute("qnaList", qnaList);
+		
+		qnaDTO.setQ_idx(q_idx);
+		qnaDTO.setQ_cate(q_cate);
+		qnaDTO.setQ_title(q_title);
+		qnaDTO.setQ_content(q_content);
+		//qnaDTO.setQ_date(q_date);
+		
+		//추가중
+		HttpSession session = req.getSession();
+		String userid = (String)session.getAttribute("siteUserInfo");
+		
+		if(userid != null) {
+			MemberDTO memberDTO = sqlSession
+					.getMapper(MybatisMoyoImpl.class).getMemberData(userid);
+			model.addAttribute("memberDTO", memberDTO);
+			System.out.println(memberDTO);
+					
+		}
+		
+		qnaDTO.setUserid(userid);
+		
+		sqlSession.getMapper(MybatisQNAImpl.class).insertQNA(qnaDTO);
+		
+		model.addAttribute("qnaDTO", qnaDTO);
+		
+		//List<QnaDTO> qnaList = sqlSession.getMapper(MybatisQNAImpl.class).QnAList();
+		
+		//model.addAttribute("qnaList", qnaList);
 		
 		
 	}

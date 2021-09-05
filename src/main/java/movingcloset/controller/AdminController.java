@@ -386,6 +386,7 @@ public class AdminController {
 		public String adminAnswerAction(Locale locale, Model model, HttpServletRequest req) {
 
 			model.addAttribute("req", req);
+			//command = adminAnswerCommand;
 			command = adminAnswerCommand;
 			command.execute(model);
 						

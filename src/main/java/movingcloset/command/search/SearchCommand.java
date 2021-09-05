@@ -2,6 +2,7 @@ package movingcloset.command.search;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -29,7 +30,8 @@ public class SearchCommand implements CommandImpl {
 	@Override
 	public void execute(Model model) {
 		
-		List<String> colorShow; // 색상 보기용
+		//List<String> colorShow; // 색상 보기용
+		Set<String> colorShow = new HashSet<String>(); // 색상 보기용
 		List<String> tagShow; // 태그 보기용
 		ArrayList<String> sWords = new ArrayList<String>(); // 검색어 안에 스페이스 있을 경우 사용
 		
@@ -60,13 +62,15 @@ public class SearchCommand implements CommandImpl {
 			sWords.add(0, search);
 			sWords.add(1, " ");
 		}
-		System.out.println("sWords2 : " + sWords);
+		//System.out.println("sWords2 : " + sWords);
 
 		// 색상 보기
 		colorShow = sqlSession.getMapper(MybatisSearchImpl.class).getColors();
 
 		String[] colors = new String[colorShow.size()];
 		colors = colorShow.toArray(colors);
+
+		//colors = colorShow.toArray(colors);
 		
 		String[] viewColors =  new String[colors.length];
 		String temp = null;
@@ -76,9 +80,10 @@ public class SearchCommand implements CommandImpl {
 			temp = colors[i];
 			temp2 = temp.split(",");
 			viewColors[i] = temp2[0].toUpperCase();	
+			System.out.println(viewColors[i]);
 		}
 		//Arrays.sort(viewColors);
-		Set<Object> set = Arrays.stream(viewColors).collect(Collectors.toSet());
+		//Set<Object> set = Arrays.stream(viewColors).collect(Collectors.toSet()); // --> 이거 누가 했져..?
 
 		// 보기에서 색상 선택
 		String color = req.getParameter("color");

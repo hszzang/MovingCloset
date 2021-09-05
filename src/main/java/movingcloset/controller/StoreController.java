@@ -206,6 +206,7 @@ public class StoreController {
 		이동한 페이지 경로(요청명)와 같이 하면 뷰를 호출 않고 페이지 이동
 		 */
 		return "redirect:/movingcloset/store.do";
+		//return "/movingcloset/adminstore.do";
 		}
 	
 	// 상품 수정
@@ -316,6 +317,7 @@ public class StoreController {
 		command.execute(model);
 		
 		return "redirect:/store/detail.do?p_idx=" + req.getParameter("p_idx");
+		//return "/movingcloset/adminstore.do";
 	}
 	
 	// 상품 제거

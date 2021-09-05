@@ -69,32 +69,33 @@
         }
         #fileBtn:focus{outline:none;}
         #info{ color:gray; font-size:11pt;}
-        #backBtn{
-        	width:250px; height:40px;
-        	margin:10px 36% 0 38%;
-        	border:none; background-color:black;
-        	color:white; font-size:15pt; font-weight:lighter;	
-        }
-        #backBtn:focus{outline:none;}
         #replyBtn{
         	width:250px; height:40px;
         	margin:10px 36% 0 38%;
-        	border:none; background-color:black;
-        	color:white; font-size:15pt; font-weight:lighter;	
+        	border:black solid 1px; background-color:white;
+        	color:black; font-size:14pt; font-weight:lighter;	
         }
-        #replyBtn{outline:none;}
-        #modBtn{
-        	width:124px; height:40px;
-        	margin:10px 0 0 38%;
-        	border:none; background-color:black;
-        	color:white; font-size:15pt; font-weight:lighter;	
-        }
-        #modBtn:focus{outline:none;}
         #delBtn{
         	width:124px; height:40px;
-        	border:none; background-color:black;
-        	color:white; font-size:15pt; font-weight:lighter;	
+        	border:black solid 1px; background-color:white;
+        	color:black; font-size:14pt; font-weight:lighter;	
         }
+
+        #modBtn{
+        	width:250px; height:40px;
+        	margin:10px 0 0 38%;
+        	border:black solid 1px; background-color:white;
+        	color:black; font-size:14pt; font-weight:lighter;	
+        }
+        #modBtn:focus{outline:none;}
+        #backBtn{
+        	width:250px; height:40px;
+        	margin:10px 36% 0 38%;
+        	border:black solid 1px; background-color:white;
+        	color:black; font-size:14pt; font-weight:lighter;	
+        }
+        #backBtn:focus{outline:none;}
+        
         #delBtn:focus{outline:none;}
         select, input, textarea:focus{outline:none;}
     </style>
@@ -139,13 +140,14 @@
 		        <div>
 	        		<form method="post" action="<c:url value="/movingcloset/adminansweract.do" />">
 		        		<input type="hidden" name="userid" value="admin" />
-		        		<input type="hidden" name="q_flag" value="${qnaDTO.userid }" />
+		        		<input type="hidden" name="q_flag" value="관리자" />
 		        		<input type="hidden" name="q_status" value="답변" />
-		        		<input type="text" name="q_content" id="reply" style="width:400px;" />
 		        		
-						<button id="modBtn" type="submit" style="text-decoration:none;color:white;">작성</button>
-						<button id="delBtn" style="text-decoration:none;color:white;">삭제</button>
+						<button id="modBtn" type="submit" style="text-decoration:none;color:white;">답변작성</button>
 						<button id="backBtn" onClick="history.back(); return false;" style="text-decoration:none;color:white;">돌아가기</button>
+						<!--  
+						<button id="delBtn" type="reset" style="text-decoration:none;color:white;">삭제</button>
+						-->
 					<br/>
 	        		</form>
 	        	</div>
