@@ -2,6 +2,7 @@ package mybatis;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,8 @@ public interface MybatisSearchImpl {
 											@Param("sWords") ArrayList<String> sWords,
 											@Param("order") String order);
 	
-	public List<String> getColors();
+	//public List<String> getColors();
+	public Set<String> getColors();
 	public List<String> getTags();
 	
 	public List<ProductDTO> colorPicked(@Param("color") String color);

@@ -222,10 +222,7 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                모여 목록
-                                <!-- 
-	                         	<button type="button" class="pBtns" id="productInsert" onclick="javascript:location.href='/movingcloset/movingcloset/adminmoyoinsert.do';">추가</button>
-                                 -->
+                                1:1 QnA
                                 <select name="order" id="order" onchange="selectOrder(this)" >
 			                        	<option value="" diabled select hidden>정렬</option>
 			                            <option value="예정">답변예정</option>
@@ -241,9 +238,9 @@
                                             <th style="width:5%;">분류</th>
                                             <th style="width:25%;">제목</th>
                                             <th style="width:10%;">질문자</th>
-                                            <th style="width:35%;">내용</th>
-                                            <th style="width:10%;">질문날짜</th>
-                                            <th style="width:10%;">답변여부</th>
+                                            <th style="width:45%;">내용</th>
+                                            <th style="width:5%;">질문날짜</th>
+                                            <th style="width:5%;">답변여부</th>
 
                                             <th></th>
                                         </tr>
@@ -257,15 +254,25 @@
                                             <td>${qna.userid  }</td>
                                             <td>${qna.q_content  }</td>
                                             <td>${qna.q_date }</td>
-                                            <td>${qna.q_status }</td>
-                                            <th>
+                                            <td>
+                                            	<c:choose>
+	                                            	<c:when test="${qna.q_status eq null && qna.userid ne 'admin' }">
+	                                            		<button type="button" class="pBtns" id="productInsert" onclick="javascript:location.href='/movingcloset/movingcloset/adminanswer.do?'+${qna.q_idx+1};">답변</button>
+	                                            	</c:when>
+	                                            	<c:when test="${qna.userid eq 'admin' }">
+	                                            		관리자
+	                                            	</c:when>
+                                            	</c:choose>
+                                            	${qna.q_status }
+                                            </td>
                                             	<!--  	
+                                            <th>
                                             	<button type="button" class="pBtns" id="Update" onclick="javascript:location.href='/movingcloset/movingcloset/adminanswer.do?q_idx=${qna.q_idx }';">답변</button>
                                             	<button type="button" class="pBtns" id="Update" onclick="javascript:location.href='/movingcloset/movingcloset/adminmoyoupdate.do?m_idx=${moyo.m_idx }';">수정</button>
                                             	<button type="button" class="pBtns" id="Delete" onclick="javascript:location.href='/movingcloset/movingcloset/adminmoyodelete.do?m_idx=${moyo.m_idx }';">삭제</button>
                                             	<button type="button" class="pBtns" id="Delete" onclick="delMoyo(${moyo.m_idx});">삭제</button>	
-                                            	-->
                                             </th>
+                                            	-->
                                         </tr>
                                     	</c:forEach>   
                                     </tbody>

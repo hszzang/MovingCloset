@@ -80,7 +80,7 @@
 	</select>
 	
 	<select id="getColors" resultType="String">
-		SELECT DISTINCT pd_color from product_detail
+		SELECT DISTINCT pd_color from product_detail 
 	</select>
 	
 	<select id="getTags" resultType="String">
