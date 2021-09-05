@@ -55,7 +55,7 @@ function cartList() {
                 + "<strong>"+ result[i].p_code +"</strong>"
                 + "</a>"
                 + "</div>"
-                + "<div style=' width: 30%; height: 140px; padding: 0 10px; border-right: solid rgb(230, 230, 230) 1px;'>"
+                + "<div style=' width: 30%; heighty: 140px; padding: 0 10px; border-right: solid rgb(230, 230, 230) 1px;'>"
                 + "<p>"+ result[i].p_flag +" / "+ result[i].pd_color +" / "+ result[i].pd_size +" / "+ result[i].c_qty +"</p>"
                 + "<div>"
                 + "수량 :"
