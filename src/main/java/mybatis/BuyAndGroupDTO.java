@@ -20,6 +20,7 @@ public class BuyAndGroupDTO {
 	private String  bd_count;
 	private String  bd_size;
 	private String 	email;
+	private String  b_status; // 관리자용 확인 (결제 전/ 결제 완료/ 배송준비/ 배송중/ 배송완료)
 	
 	//accountnumber null 가능
 	private String  accountnumber;

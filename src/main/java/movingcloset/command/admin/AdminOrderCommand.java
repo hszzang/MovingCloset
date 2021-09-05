@@ -13,9 +13,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import movingcloset.command.CommandImpl;
+import mybatis.BuyAndGroupDTO;
 import mybatis.MemberDTO;
 import mybatis.MoyoDTO;
 import mybatis.MybatisMoyoImpl;
+import mybatis.MybatisMypageImpl;
 import mybatis.MybatisProductImpl;
 import mybatis.MybatisQNAImpl;
 import mybatis.ProductAndDetailDTO;
@@ -23,9 +25,9 @@ import mybatis.ProductDTO;
 import mybatis.QnaDTO;
 
 @Service
-public class AdminQnACommand implements CommandImpl {
+public class AdminOrderCommand implements CommandImpl {
 
-	public AdminQnACommand() {}
+	public AdminOrderCommand() {}
 	
 	@Autowired
 	private SqlSession sqlSession;
@@ -33,17 +35,14 @@ public class AdminQnACommand implements CommandImpl {
 	@Override
 	public void execute(Model model) {
 		
-		System.out.println("관리자 QNA 리스트 커맨드 호출");
+		System.out.println("관리자 오더 리스트 커맨드 호출");
 		
 		Map<String, Object> paramMap = model.asMap();
 		HttpServletRequest req = (HttpServletRequest)paramMap.get("req");
 		
-		QnaDTO qnaDTO = new QnaDTO();
+		List<BuyAndGroupDTO> OrderList = sqlSession.getMapper(MybatisMypageImpl.class).allOrderList();
 		
-		List<QnaDTO> qnaList = sqlSession.getMapper(MybatisQNAImpl.class).QnAList();
-		//List<QnaDTO> qnaList = sqlSession.getMapper(MybatisQNAImpl.class).getQnaDTO();
-		
-		model.addAttribute("qnaList", qnaList);
+		model.addAttribute("OrderList", OrderList);
 		
 		
 	}

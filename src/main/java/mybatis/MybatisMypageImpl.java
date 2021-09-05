@@ -12,5 +12,8 @@ public interface MybatisMypageImpl {
 	
 	// 마이페이지 구매내역 상세보기
 	public BuyAndGroupDTO orderdetail(String userid, String b_idx);
+
+	// 관리자용 모든 구매내역 조회
+	public List<BuyAndGroupDTO> allOrderList();
 	
 }

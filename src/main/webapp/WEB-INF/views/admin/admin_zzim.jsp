@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 
 <!DOCTYPE html>
@@ -39,9 +40,9 @@
 		    	location.href="/movingcloset/movingcloset/adminstore.do?order="+order+"&pageShow=${pageC}";	
 			}	
 	    
-		    function delProduct(p_idx){
-				if(confirm("정말 해당 상품을 삭제하시겠습니까?")){
-					location.href="/movingcloset/store/delete.do?p_idx="+p_idx;
+		    function delQnA(q_idx){
+				if(confirm("정말 해당 질문을 삭제하시겠습니까?")){
+					location.href="/movingcloset/movingcloset/adminmoyodelete.do?m_idx="+m_idx;
 				}
 			}
 		    
@@ -79,6 +80,12 @@
 		    		page = page + 1;
 		    		location.href="/movingcloset/movingcloset/adminstore.do?order=${order}&pageShow="+page;
 		    	}
+		    	
+		    	function delMoyo(m_idx){
+					if(confirm("정말 상품을 삭제하시겠습니까?")){
+						location.href="/movingcloset/movingcloset/adminmoyodelete.do?m_idx=" + m_idx;
+					}
+				}
 	    </script>
     </head>
     <body class="sb-nav">
@@ -113,7 +120,7 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                           <a class="nav-link" href="/movingcloset/movingcloset/admin.do">
+                            <a class="nav-link" href="/movingcloset/movingcloset/admin.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 ADMIN
                             </a>
@@ -203,9 +210,9 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h4 class="mt-4">스토어 관리</h4>
+                        <h4 class="mt-4">찜 관리</h4>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">STORE</li>
+                            <li class="breadcrumb-item active">QnA</li>
                         <!-- 
                             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                             <li class="breadcrumb-item active">Tables</li>
@@ -215,14 +222,14 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                상품 목록
-	                         	<button type="button" class="pBtns" id="productInsert" onclick="javascript:location.href='/movingcloset/store/insert.do';">상품추가</button>
+                                찜 목록
+                                <!-- 
+	                         	<button type="button" class="pBtns" id="productInsert" onclick="javascript:location.href='/movingcloset/movingcloset/adminmoyoinsert.do';">추가</button>
+                                 -->
                                 <select name="order" id="order" onchange="selectOrder(this)" >
 			                        	<option value="" diabled select hidden>정렬</option>
-			                            <option value="idx" >신상품순</option>
-			                            <option value="asc">낮은가격순</option>
-			                            <option value="desc">높은가격순</option>
-			                            <option value="sales">판매량순</option>
+			                            <option value="desc">찜많은순</option>
+			                            <option value="asc">찜적은순</option>
 			                    </select>
 			                    
                             </div>
@@ -230,41 +237,34 @@
                                 <table id="datatablesSimple">
                                     <thead style="text-align:center;">
                                         <tr style="text-align:center;">
-                                            <th style="width:5%;" >상품번호</th>
-                                            <th style="width:5%;">상품코드</th>
-                                            <th style="width:5%;">브랜드</th>
-                                            <th style="width:30%;">상품명</th>
-                                            <th style="width:10%;">가격</th>
-                                            <th style="width:10%;">사이즈</th>
-                                            <th style="width:5%;">재고</th>
-                                            <th style="width:5%;">찜</th>
-                                            <th style="width:5%;">판매량</th>
-                                            <th style="width:5%;">댓글</th>
-                                            <th style="width:5%;">새 댓글</th>
-                                            <th></th>
+                                            <th style="width:5%;" >번호</th>
+                                            <th style="width:10%;">아이디</th>
+                                            <th style="width:15%;">상품코드</th>
+                                            <th style="width:30%;">상품이름</th>
+                                            <th style="width:15%;">브랜드</th>
+                                            <th style="width:20%;">상품태그</th>
+                                            <th style="width:5%;">상품분류</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach items="${StoreList }" var="product">
-	                                        <tr style="text-align:center;">
-	                                            <td><a class="as" href="/movingcloset/store/detail.do?p_idx=${product.p_idx }&p_code=${product.p_code}">${product.p_idx }</a></td>
-	                                            <td><a class="as" href="/movingcloset/store/detail.do?p_idx=${product.p_idx }&p_code=${product.p_code}">${product.p_code}</a></td>
-	                                            <td>${product.p_brand}</td>
-	                                            <td style="text-align:left;"><a class="as" href="/movingcloset/store/detail.do?p_idx=${product.p_idx }&p_code=${product.p_code}">${product.p_name}</a></td>
-	                                            <td>${product.p_price}</td>
-	                                            <td>${product.pd_size}</td>
-	                                            <td>${product.pd_stock}</td>
-	                                            <td></td>
-	                                            <td></td>
-	                                            <td></td>
-	                                            <td></td>
-	                                            <th>
-	                                            	<button type="button" class="pBtns" id="productUpdate" onclick="javascript:location.href='/movingcloset/store/update.do?p_idx=${product.p_idx }';">수정</button>
-	                                            	<!--  
-	                                            	<button type="button" class="pBtns" id="productDelete" onclick="delProduct(${product.p_idx});">삭제</button>	
-	                                            	-->
-	                                            </th>
-	                                        </tr>
+                                        <c:forEach items="${ZzimList }" var="zzim">
+                                        <tr style="text-align:center;">
+                                            <td>${zzim.z_idx }</td>
+                                            <td>${zzim.userid  }</td>
+                                            <td>${zzim.p_code }</td>
+                                            <td>${zzim.p_name  }</td>
+                                            <td>${zzim.p_brand  }</td>
+                                            <td>${zzim.p_tag }</td>
+                                            <td>${zzim.p_flag }</td>
+                                            <th>
+                                            	<!--  	
+                                            	<button type="button" class="pBtns" id="Update" onclick="javascript:location.href='/movingcloset/movingcloset/adminanswer.do?q_idx=${qna.q_idx }';">답변</button>
+                                            	<button type="button" class="pBtns" id="Update" onclick="javascript:location.href='/movingcloset/movingcloset/adminmoyoupdate.do?m_idx=${moyo.m_idx }';">수정</button>
+                                            	<button type="button" class="pBtns" id="Delete" onclick="javascript:location.href='/movingcloset/movingcloset/adminmoyodelete.do?m_idx=${moyo.m_idx }';">삭제</button>
+                                            	<button type="button" class="pBtns" id="Delete" onclick="delMoyo(${moyo.m_idx});">삭제</button>	
+                                            	-->
+                                            </th>
+                                        </tr>
                                     	</c:forEach>   
                                     </tbody>
                                 </table>

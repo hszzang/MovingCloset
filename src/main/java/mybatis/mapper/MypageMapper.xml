@@ -23,6 +23,9 @@
 	
 	</select>
 
-
+	<!-- 관리자 모드 모든 주문내역 조회 -->
+	<select id="allOrderList" resultType="mybatis.BuyAndGroupDTO">
+		SELECT * FROM buy
+	</select>
 
 </mapper>
