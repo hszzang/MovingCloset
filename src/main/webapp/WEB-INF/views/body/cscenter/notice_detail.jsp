@@ -62,7 +62,7 @@
 		
 		<span style="float:right;">
 			<br>
-		    <button id="listBtn"><a href="javascript:window.history.back();" style="text-decoration:none;color:white;">뒤로가기</a></button>
+		    <button id="listBtn" onclick="javascript:window.history.back();"><a style="text-decoration:none;color:white;">뒤로가기</a></button>
 		</span>
 		<br/>
     </div>
