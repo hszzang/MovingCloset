@@ -92,9 +92,45 @@
                         찜한 상품이 보여집니다.
                     </p>
                 </div>
-                <div class="result">
-                    <h6>등록된 상품이 없습니다.</h6>
-                </div>
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th width="10%">번호</th>
+                            <th width="20%">상품사진</th>
+                            <th width="15%">브랜드</th>
+                            <th width="25%">상품명</th>
+                            <th width="15%">상품코드</th>
+                            <th width="15%">상품가격</th>
+                        </tr>
+                    </thead>
+                    <c:choose>
+                        <c:when test="${empty zzimlist }">
+                            <tr>
+                                <td colspan="6" align="center">
+                                    찜한 상품이 없습니다.
+                                </td>
+                            </tr>
+                        </c:when>
+                        <c:otherwise>
+                            <c:forEach items="${zzimlist }" var="row" varStatus="loop">
+                            <tr>
+                                <td width="10%">
+                                    ${loop.index+1}	
+                                </td>
+                                <td width="20%">
+                                	<a href="../store/detail.do?p_code=${row.p_code }&check='zzim'">
+                                		<img src="../resources/upload/${row.p_sfile }" alt="상품사진" style="width:50px;" />
+                                	</a>	
+                                </td>
+                                <td width="15%" align="left">${row.p_brand }</td>
+                                <td width="25%" align="left">${row.p_name }</td>
+                                <td width="15%" align="left">${row.p_code }</td>
+                                <td width="15%" align="left">${row.p_price }원</td>
+                            </tr>
+                            </c:forEach>
+                        </c:otherwise>
+                    </c:choose>
+                </table>
             </div>
         </div>
     </div>

@@ -28,10 +28,17 @@ public interface MybatisMoyoImpl {
 	public int moyoFormDataInsert(MoyoUseDTO moyoUseDTO);
 
 	//관리자용 모여 리스트 불러오기
-	public ArrayList<MoyoDTO> MoyoList();
+	public List<MoyoDTO> MoyoList();
 	//public ArrayList<String> MoyoList();
-	
 
+	// 관리자에서 모여 추가
+	public void MoyoInsert(MoyoDTO moyoDTO);
+	// 관리자에서 모여 수정
+	public void MoyoUpdate(MoyoDTO moyoDTO);
+	// 관리자에서 모여 삭제
+	public void MoyoDelete(String m_idx);
+
+	
 	
 	/****** 쪼르기 ******/
 	//쪼르기 리스트 불러오기

@@ -40,9 +40,6 @@ public class QnaCommand implements CommandImpl {
 		
 		QnaDTO qnaDTO = new QnaDTO();
 		
-
-		
-		
 		HttpSession session = req.getSession();
 		String userid = (String)session.getAttribute("siteUserInfo");
 		if(userid != null) {

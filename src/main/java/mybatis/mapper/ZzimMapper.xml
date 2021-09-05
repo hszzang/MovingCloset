@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="mybatis.MybatisZzimImpl">
+	
+	<select id="getZzimList" resultType="mybatis.ZzimDTO">
+		SELECT z_idx FROM zzim WHERE userid = #{userid} AND p_code = #{p_code}
+	</select> 
+
+	<delete id="zzimListRemove">
+		DELETE FROM zzim WHERE z_idx = #{z_idx}
+	</delete>
+	
+	<insert id="zzimListCreate" parameterType="mybatis.ZzimDTO">
+		INSERT INTO zzim(z_idx, userid, p_code) values (zzim_seq.nextval, #{userid}, #{p_code})
+	</insert>
+	
+	<select id="zzimAllList" resultType="mybatis.ZzimDTO" parameterType="mybatis.ZzimDTO">
+		SELECT Z.z_idx, Z.p_code, P.p_name, P.p_price, P.p_brand, P.p_sfile, P.p_tag, P.p_flag 
+		FROM zzim Z, product P
+		where Z.p_code = P.p_code and userid = #{userid}
+	</select>
+	
+</mapper>
+ 

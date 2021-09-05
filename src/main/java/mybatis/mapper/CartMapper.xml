@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="mybatis.MybatisCartImpl">
+	
+	<select id="getCartList" resultType="mybatis.CartDTO">
+		SELECT * FROM CART 
+	</select>
+
+	<delete id="cartListRemove">
+		DELETE FROM cart WHERE c_idx = #{c_idx}
+	</delete>
+	
+	<update id="qtyTrans" parameterType="mybatis.CartDTO">
+		UPDATE cart SET c_qty = #{c_qty} WHERE c_idx = #{c_idx}
+	</update>
+	
+	<insert id="addcart" parameterType="mybatis.CartDTO" >
+		INSERT INTO cart 
+		(c_idx, c_qty, userid, p_code, p_sfile, p_flag, pd_size, p_price, p_brand, pd_color)
+			values 
+		(cart_seq.nextval, #{c_qty}, #{userid}, #{p_code}, #{p_sfile}, #{p_flag}, #{pd_size}, #{p_price}, #{p_brand}, #{pd_color})
+	</insert>
+	
+</mapper>
+ 

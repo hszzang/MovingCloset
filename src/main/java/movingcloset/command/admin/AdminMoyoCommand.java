@@ -32,7 +32,7 @@ public class AdminMoyoCommand implements CommandImpl {
 		Map<String, Object> paramMap = model.asMap();
 		HttpServletRequest req = (HttpServletRequest)paramMap.get("req");
 		
-		ArrayList<MoyoDTO> MoyoList = sqlSession.getMapper(MybatisMoyoImpl.class).MoyoList();
+		List<MoyoDTO> MoyoList = sqlSession.getMapper(MybatisMoyoImpl.class).MoyoList();
 		//ArrayList<String> MoyoList = sqlSession.getMapper(MybatisMoyoImpl.class).MoyoList();
 		
 		//List<ProductAndDetailDTO> StoreList = sqlSession.getMapper(MybatisProductImpl.class).StoreList(start, end);

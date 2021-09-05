@@ -114,6 +114,10 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 MEMBER
                             </a>
+                            <a class="nav-link" href="/movingcloset/movingcloset/adminqna.do">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                QnA
+                            </a>
                              <a class="nav-link" href="/movingcloset/movingcloset/adminstore.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 STORE
@@ -237,7 +241,9 @@
                                             <td></td>
                                             <th>
                                             	<button type="button" class="pBtns" id="productUpdate" onclick="javascript:location.href='/movingcloset/store/update.do?p_idx=${product.p_idx }';">수정</button>
+                                            	<!-- 
                                             	<button type="button" class="pBtns" id="productDelete" onclick="delProduct(${product.p_idx});">삭제</button>	
+                                            	 -->
                                             </th>
                                         </tr>
                                     	</c:forEach>   
