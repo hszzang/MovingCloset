@@ -166,7 +166,32 @@
     	var flag = val;
     	flag.submit();
     }
-    
+    /*
+    function check() {
+    	var flag;
+    		
+    	  if(document.frm.flag[1].checked == true){
+    		  var flag = document.frm.flag[1];
+    		  flag.submit();
+    	  }
+    	  else if(document.frm.flag[2].checked == true){
+    		  var flag = document.frm.flag[2];
+    		  flag.submit();
+    	  }
+    	  else if(document.frm.flag[3].checked == true){
+    		  var flag = document.frm.flag[3];
+    		  flag.submit();
+    	  }
+    	  else if(document.frm.flag[4].checked == true){
+    		  var flag = document.frm.flag[4];
+    		  flag.submit();
+    	  }
+    	  else if(document.frm.flag[5].checked == true){
+    		  var flag = document.frm.flag[5];
+    		  flag.submit();
+    	  }
+    	}
+    */
     function lpBtn(page){
     	var left = document.getElementById("pmL");
     	if(page <= ${start}){
@@ -203,48 +228,55 @@
     	}
     }
     
-    
 function clickPb(btn) {
-	
-		var flag = btn.value;
-		flag.submit();
-	
-		console.log(btn);
-		if(btn.checked == true) {
+	var flag;
+	console.log(btn);
+		//if(btn.checked == true){
+		if(btn.checked == true || ${flag}!=null){
 			if(btn.value == "all") {
+				flag="all";
 				document.getElementsByClassName("filterLbl")[0].style.fontWeight = "500";
 				document.getElementsByClassName("filterLbl")[1].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[2].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[3].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[4].style.fontWeight = "100";
+				location.href="/movingcloset/movingcloset/store.do?flag="+flag;
 			}
 			else if(btn.value == "의류") {
+				flag="의류";
 				document.getElementsByClassName("filterLbl")[0].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[1].style.fontWeight = "500";
 				document.getElementsByClassName("filterLbl")[2].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[3].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[4].style.fontWeight = "100";
+				location.href="/movingcloset/movingcloset/store.do?flag="+flag;
 			}
 			else if(btn.value == "신발") {
+				flag="신발"; 
 				document.getElementsByClassName("filterLbl")[0].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[1].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[2].style.fontWeight = "500";
 				document.getElementsByClassName("filterLbl")[3].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[4].style.fontWeight = "100";
+				location.href="/movingcloset/movingcloset/store.do?flag="+flag;
 			}
 			else if(btn.value == "가방") {
+				flag="가방"; 
 				document.getElementsByClassName("filterLbl")[0].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[1].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[2].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[3].style.fontWeight = "500";
 				document.getElementsByClassName("filterLbl")[4].style.fontWeight = "100";
+				location.href="/movingcloset/movingcloset/store.do?flag="+flag;
 			}
-			else if(btn.value == "잡화" || ${flag}=="잡화") {
+			else if(btn.value == "잡화") {
+				flag="잡화"; 
 				document.getElementsByClassName("filterLbl")[0].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[1].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[2].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[3].style.fontWeight = "100";
 				document.getElementsByClassName("filterLbl")[4].style.fontWeight = "500";
+				location.href="/movingcloset/movingcloset/store.do?flag="+flag;
 			}
 			
 		}
@@ -261,7 +293,7 @@ function clickPb(btn) {
         
             <div id="list">
 	                <div id="filter">
-		            	<form action="/movingcloset/movingcloset/store.do?flag=${flag }&order=${order }&pageShow=${pageC }" method="get" >
+		            	<form name="listFrm" action="/movingcloset/movingcloset/store.do?flag=${flag }&order=${order }&pageShow=${pageC }" method="get" >
 		            		<hr /><br />
 		            		<div id="filterBtn">
 								<span><label class="filterLbl"><input type="radio" name="flag" checked value="all" class="radiobtn" onclick="clickPb(this);" />ALL</label></span>
@@ -302,7 +334,7 @@ function clickPb(btn) {
                             <div class="brand">${product.p_brand }</div>
                             <div class="name"><label>${product.p_name }</label></div>
                             <div class="price">
-                                <span class="origPrice"><strike>${product.p_price}</strike></span>
+                                <!--  <span class="origPrice"><strike>${product.p_price}</strike></span> -->
                                 <span class="discountedPrice">${product.p_price}</span>
                                 <span class="won">원</span>
                                 <span class="heart" style="text-align:right;">

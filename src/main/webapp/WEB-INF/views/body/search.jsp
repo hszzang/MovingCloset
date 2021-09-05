@@ -96,13 +96,13 @@
         
         #filterDropdown{ display:inline; margin:auto; padding:auto;}
 		#colorView{
-			width:100%; height:auto; color:gray; margin-left:20%; font-size:10pt; text-align:center;
+			width:100%; height:auto; color:gray; margin-left:0; font-size:10pt; text-align:center;
 		}
 		.colorpicks{ text-decoration:none; color:gray; }
 		.colorpicks:hover{ text-decoration:none; color:black; }
 		
 		#tagView{
-			width:100%; height:auto; color:gray; margin-left:25%; font-size:10pt; text-align:center;
+			width:100%; height:auto; color:gray; margin-left:0; font-size:10pt; text-align:center;
 		}
 		.tagpicks{ text-decoration:none; color:gray; }
 		.tagpicks:hover{ text-decoration:none; color:black; }
@@ -235,16 +235,18 @@
 	                    </div>
 	                    <br /><hr />
 	                    <div id="filterDropdown" style="display:inline;margin:auto;text-align:center">
-			                <span id="colorView" style="display:none;">
-									<c:forEach items="${viewColors }" var="color">
-										<a class="colorpicks" href="/movingcloset/movingcloset/search.do?color=${color }&search=${search }&keyword=${keyword }&order=${order }">${color }</a>&nbsp;&nbsp;
-									</c:forEach>
-			                </span>
-			                <span id="tagView" style="display:none;">
-									<c:forEach items="${viewTags }" var="tag">
-										<a class="tagpicks" href="/movingcloset/movingcloset/search.do?tag=${tag }&search=${search }&keyword=${keyword }&order=${order }">${tag }</a>&nbsp;&nbsp;
-									</c:forEach>
-			                </span>
+	                    	<div style="margin:0;height:30px;">
+				                <span id="colorView" style="display:none;">
+										<c:forEach items="${viewColors }" var="color">
+											<a class="colorpicks" href="/movingcloset/movingcloset/search.do?color=${color }&search=${search }&keyword=${keyword }&order=${order }">${color }</a>&nbsp;&nbsp;
+										</c:forEach>
+				                </span>
+				                <span id="tagView" style="display:none;">
+										<c:forEach items="${viewTags }" var="tag">
+											<a class="tagpicks" href="/movingcloset/movingcloset/search.do?tag=${tag }&search=${search }&keyword=${keyword }&order=${order }">${tag }</a>&nbsp;&nbsp;
+										</c:forEach>
+				                </span>
+				            </div>
 	                        <select id="order" name="order" onchange="selectOrder(this)" style="display:inline;">
 	                        	<option value="" diabled select hidden>정렬</option>
 		                            <option value="idx" >신상품순</option>
