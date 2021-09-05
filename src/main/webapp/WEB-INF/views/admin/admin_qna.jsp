@@ -120,17 +120,21 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                             <a class="nav-link" href="/movingcloset/movingcloset/admin.do">
+                            <a class="nav-link" href="/movingcloset/movingcloset/admin.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 ADMIN
                             </a>
                             <a class="nav-link" href="/movingcloset/movingcloset/adminmember.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                MEMBER
+                                MEMBERS
                             </a>
                             <a class="nav-link" href="/movingcloset/movingcloset/adminqna.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 QnA
+                            </a>
+                            <a class="nav-link" href="/movingcloset/movingcloset/adminorder.do">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                ORDER
                             </a>
                              <a class="nav-link" href="/movingcloset/movingcloset/adminstore.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
@@ -143,6 +147,10 @@
                             <a class="nav-link" href="/movingcloset/movingcloset/adminmoyo.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 MOYO
+                            </a>
+                            <a class="nav-link" href="/movingcloset/movingcloset/adminzzim.do">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                ZZIM
                             </a>
                             <div class="sb-sidenav-menu-heading">Interface</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
@@ -231,12 +239,11 @@
                                         <tr style="text-align:center;">
                                             <th style="width:5%;" >번호</th>
                                             <th style="width:5%;">분류</th>
-                                            <th style="width:30%;">제목</th>
+                                            <th style="width:25%;">제목</th>
                                             <th style="width:10%;">질문자</th>
                                             <th style="width:35%;">내용</th>
-                                            <th style="width:5%;">질문날짜</th>
+                                            <th style="width:10%;">질문날짜</th>
                                             <th style="width:10%;">답변여부</th>
-                                            <th style="width:10%;"></th>
 
                                             <th></th>
                                         </tr>
@@ -252,8 +259,8 @@
                                             <td>${qna.q_date }</td>
                                             <td>${qna.q_status }</td>
                                             <th>
-                                            	<button type="button" class="pBtns" id="Update" onclick="javascript:location.href='/movingcloset/movingcloset/adminanswer.do?q_idx=${qna.q_idx }';">답변</button>
                                             	<!--  	
+                                            	<button type="button" class="pBtns" id="Update" onclick="javascript:location.href='/movingcloset/movingcloset/adminanswer.do?q_idx=${qna.q_idx }';">답변</button>
                                             	<button type="button" class="pBtns" id="Update" onclick="javascript:location.href='/movingcloset/movingcloset/adminmoyoupdate.do?m_idx=${moyo.m_idx }';">수정</button>
                                             	<button type="button" class="pBtns" id="Delete" onclick="javascript:location.href='/movingcloset/movingcloset/adminmoyodelete.do?m_idx=${moyo.m_idx }';">삭제</button>
                                             	<button type="button" class="pBtns" id="Delete" onclick="delMoyo(${moyo.m_idx});">삭제</button>	
