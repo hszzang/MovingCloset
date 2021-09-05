@@ -24,8 +24,7 @@
 	(QNA_seq.nextval, #{q_cate}, #{q_title}, #{q_content}, #{userid})
 	</insert>
 
-	<!-- 관리자용 질답리스트 불러오기 -->
-	<select id="QnAList" resultType="mybatis.QnaDTO">
+	<!-- 관리자용 질답리스트 불러오기 
 		SELECT * FROM(
 		SELECT Tb.*, ROWNUM rNum FROM(
 			SELECT * FROM QNA
@@ -34,6 +33,9 @@
 			)Tb
 		)
 		ORDER BY rNum DESC	
+	-->
+	<select id="QnAList" resultType="mybatis.QnaDTO">
+		SELECT * FROM QNA
 	</select>
 	
 	<insert id="adminAnswer" parameterType="mybatis.QnaDTO">

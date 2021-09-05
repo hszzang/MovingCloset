@@ -54,7 +54,7 @@ public class FindPwCommand implements CommandImpl{
 				messageHelper.setTo("<"+ email +">");
 				messageHelper.setSubject("[MovingCloset] 임시 비밀번호를 발송하였습니다.");
 				messageHelper.setText(
-						"<div><br/><h5>MovingCloset 회원님의 임시 비밀번호를 발급드립니다.</h5><br/><br/>"
+						"<div><br/><h2>MovingCloset 회원님의 임시 비밀번호를 발급드립니다.</h2><br/><br/>"
 								+ "<h4>[ " + newPassword + " ]</h4><br/>"
 								+ "해당 비밀번호는 임시 비밀번호이므로, 로그인 후 비밀번호를 변경해주세요.<br/></div>", true);
 				mailSender.send(message);

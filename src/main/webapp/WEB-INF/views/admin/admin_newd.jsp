@@ -112,11 +112,15 @@
                             </a>
                             <a class="nav-link" href="/movingcloset/movingcloset/adminmember.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                MEMBER
+                                MEMBERS
                             </a>
                             <a class="nav-link" href="/movingcloset/movingcloset/adminqna.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 QnA
+                            </a>
+                            <a class="nav-link" href="/movingcloset/movingcloset/adminorder.do">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                ORDER
                             </a>
                              <a class="nav-link" href="/movingcloset/movingcloset/adminstore.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
@@ -129,6 +133,10 @@
                             <a class="nav-link" href="/movingcloset/movingcloset/adminmoyo.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 MOYO
+                            </a>
+                            <a class="nav-link" href="/movingcloset/movingcloset/adminzzim.do">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                ZZIM
                             </a>
                             <div class="sb-sidenav-menu-heading">Interface</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">

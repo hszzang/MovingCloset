@@ -203,9 +203,9 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h4 class="mt-4">스토어 관리</h4>
+                        <h4 class="mt-4">주문 관리</h4>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">STORE</li>
+                            <li class="breadcrumb-item active">ORDER</li>
                         <!-- 
                             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                             <li class="breadcrumb-item active">Tables</li>
@@ -216,51 +216,56 @@
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
                                 상품 목록
+                                <!-- 
 	                         	<button type="button" class="pBtns" id="productInsert" onclick="javascript:location.href='/movingcloset/store/insert.do';">상품추가</button>
                                 <select name="order" id="order" onchange="selectOrder(this)" >
 			                        	<option value="" diabled select hidden>정렬</option>
-			                            <option value="idx" >신상품순</option>
+			                            <option value="idx" >날짜순</option>
 			                            <option value="asc">낮은가격순</option>
 			                            <option value="desc">높은가격순</option>
 			                            <option value="sales">판매량순</option>
 			                    </select>
+                                 -->
 			                    
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
                                     <thead style="text-align:center;">
                                         <tr style="text-align:center;">
-                                            <th style="width:5%;" >상품번호</th>
-                                            <th style="width:5%;">상품코드</th>
-                                            <th style="width:5%;">브랜드</th>
-                                            <th style="width:30%;">상품명</th>
-                                            <th style="width:10%;">가격</th>
-                                            <th style="width:10%;">사이즈</th>
-                                            <th style="width:5%;">재고</th>
-                                            <th style="width:5%;">찜</th>
-                                            <th style="width:5%;">판매량</th>
-                                            <th style="width:5%;">댓글</th>
-                                            <th style="width:5%;">새 댓글</th>
-                                            <th></th>
+                                            <th style="width:5%;" >주문번호</th>
+                                            <th style="width:5%;">결제금액</th>                                            
+                                            <th style="width:10%;">주문일</th>
+                                            <th style="width:5%;">주문자</th>
+                                            <th style="width:15%;">주소</th>
+                                            <th style="width:10%;">연락처</th>
+                                            <th style="width:10%;">우편번호</th>
+                                            <th style="width:10%;">결제수단</th>
+                                            <th style="width:5%;">운송장</th>
+                                            <th style="width:5%;">아이디</th>
+                                            <th style="width:5%;">이메일</th>
+                                            <th style="width:5%;">쿠폰</th>                                            
+                                            <th>진행상황</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach items="${StoreList }" var="product">
+                                        <c:forEach items="${OrderList }" var="order">
 	                                        <tr style="text-align:center;">
-	                                            <td><a class="as" href="/movingcloset/store/detail.do?p_idx=${product.p_idx }&p_code=${product.p_code}">${product.p_idx }</a></td>
-	                                            <td><a class="as" href="/movingcloset/store/detail.do?p_idx=${product.p_idx }&p_code=${product.p_code}">${product.p_code}</a></td>
-	                                            <td>${product.p_brand}</td>
-	                                            <td style="text-align:left;"><a class="as" href="/movingcloset/store/detail.do?p_idx=${product.p_idx }&p_code=${product.p_code}">${product.p_name}</a></td>
-	                                            <td>${product.p_price}</td>
-	                                            <td>${product.pd_size}</td>
-	                                            <td>${product.pd_stock}</td>
+	                                            <td>${order.b_idx }</td>
+	                                            <td>${order.b_totalpay }</td>
+	                                            <td>${order.b_date }</td>
+	                                            <td>${order.b_buyer }</td>
+	                                            <td>${order.b_addr }</td>
+	                                            <td>${order.b_phone }</td>
+	                                            <td>${order.b_postcode }</td>
+	                                            <td>${order.b_payment }</td>
+	                                            <td>${order.b_waybill }</td>
+	                                            <td>${order.userid }</td>
+	                                            <td>${order.email }</td>
 	                                            <td></td>
-	                                            <td></td>
-	                                            <td></td>
-	                                            <td></td>
+	                                            <td>${order.b_status }</td>
 	                                            <th>
-	                                            	<button type="button" class="pBtns" id="productUpdate" onclick="javascript:location.href='/movingcloset/store/update.do?p_idx=${product.p_idx }';">수정</button>
 	                                            	<!--  
+	                                            	<button type="button" class="pBtns" id="productUpdate" onclick="javascript:location.href='/movingcloset/store/update.do?p_idx=${product.p_idx }';">수정</button>
 	                                            	<button type="button" class="pBtns" id="productDelete" onclick="delProduct(${product.p_idx});">삭제</button>	
 	                                            	-->
 	                                            </th>

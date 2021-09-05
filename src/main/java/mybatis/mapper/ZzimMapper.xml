@@ -24,5 +24,12 @@
 		where Z.p_code = P.p_code and userid = #{userid}
 	</select>
 	
+	<!-- 관리자용 찜 전체 불러오기 -->
+	<select id="AllZzimList" resultType="mybatis.ZzimDTO">
+		SELECT z.*, p.p_name, p.p_brand, p.p_tag, p.p_flag 
+		FROM zzim z, product p
+		WHERE z.p_code=p.p_code
+		ORDER BY z_idx DESC
+	</select>
 </mapper>
  
