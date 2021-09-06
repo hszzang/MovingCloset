@@ -114,23 +114,35 @@ public class CartPayCommand implements CommandImpl {
 		String[] bd_counts = req.getParameterValues("bd_count");
 		String[] p_codes = req.getParameterValues("p_code");
 		String[] bd_sizes = req.getParameterValues("bd_size");
+		
+
 		List<String> cartbuylist = new ArrayList<String>();
 		Map<String, Object> param = new HashMap<String, Object>();
-		/*
-		 * List<String> count = new ArrayList<String>(); List<String> code = new
-		 * ArrayList<String>(); List<String> size = new ArrayList<String>();
-		 * 
-		 * for(int j=0; j<=bd_counts.length; j++) {
-		 * 
-		 * count.add(bd_counts[j].toString()); code.add(p_codes[j].toString());
-		 * size.add(bd_sizes[j].toString());
-		 * 
-		 * 
-		 * }
-		 */
-		param.put("countlist", bd_counts);
-		param.put("codelist", p_codes);
-		param.put("sizelist", bd_sizes);
+		
+		List<String> count = new ArrayList<String>(); 
+		List<String> code = new	ArrayList<String>(); 
+		List<String> size = new ArrayList<String>();
+		
+		for(int j=0; j<=bd_counts.length-1; j++) {
+			System.out.println("bd_counts[j] : "+bd_counts[j]);
+			count.add(bd_counts[j].toString()); 		
+			code.add(p_codes[j].toString());		
+			size.add(bd_sizes[j].toString());		
+		}
+
+		List<String> allList = new ArrayList<String>();
+		System.out.println("count : "+count);
+		System.out.println("code : "+code);
+		System.out.println("size : "+size);
+		
+		for(int k=0; k<=bd_counts.length-1; k++) {
+			allList.add(bd_counts[k].toString()+","+p_codes[k].toString()+","+bd_sizes[k].toString());
+		}
+		
+		/*param.put("countlist", count);
+		param.put("codelist", code);
+		param.put("sizelist", size);*/
+		param.put("allList", allList);
 		param.put("b_buyer", b_buyer);
 		param.put("userid", userid);
 		param.put("b_phone", mobile1+"-"+mobile2+"-"+mobile3);
@@ -142,35 +154,37 @@ public class CartPayCommand implements CommandImpl {
 		param.put("b_waybill", "MC"+random);
 		param.put("accountnumber", accountnumber);
 
+		
 		if (userid != null) {
-
-			int result = sqlSession.getMapper(MybatisProductImpl.class).insertBuyFormMap(param);
-			int result2 = 0;
-			if (cou_code == "" || coulist.length == 1) {
-				param.put("cou_code", cou_code);
-				//buyAndGroupDTO.setCou_code(cou_code);
-				result2 = sqlSession.getMapper(MybatisProductImpl.class).insertBuy_groupFormMap(param);
-			} else if (coulist.length > 1) {
-
-				for (int j = 0; j < Integer.parseInt(num); j++) {
-					String cou = coulist[j];
-					param.put("cou_code", cou);
-					//buyAndGroupDTO.setCou_code(cou);
-					result2 = sqlSession.getMapper(MybatisProductImpl.class).insertBuy_groupFormMap(param);
-				}
+		 
+		int result = sqlSession.getMapper(MybatisProductImpl.class).insertBuyFormMap(param); 
+		int	result2 = 0; 
+		if (cou_code == "" || coulist.length == 1) {
+			param.put("cou_code", cou_code); 
+			//buyAndGroupDTO.setCou_code(cou_code);
+			result2 =sqlSession.getMapper(MybatisProductImpl.class).insertBuy_groupFormMap(param);
+		} else if (coulist.length > 1) {
+		
+			for (int j = 0; j < Integer.parseInt(num); j++) { 
+				String cou = coulist[j];
+				param.put("cou_code", cou); 
+				//buyAndGroupDTO.setCou_code(cou); 
+				result2 =sqlSession.getMapper(MybatisProductImpl.class).insertBuy_groupFormMap(param);
+				} 
 			}
-
-			// productDTO =
-			// sqlSession.getMapper(MybatisProductImpl.class).getProductDTOsfile(p_code);
-
-			model.addAttribute("buyAndGroupDTO", buyAndGroupDTO);
-			model.addAttribute("productDTO", productDTO);
-			System.out.println("구매폼 insert : " + result + "구매폼group insert : " + result2);
+		
+		// productDTO = 
+		//sqlSession.getMapper(MybatisProductImpl.class).getProductDTOsfile(p_code);
+		
+		model.addAttribute("buyAndGroupDTO", buyAndGroupDTO);
+		model.addAttribute("productDTO", productDTO);
+		System.out.println("구매폼 insert : " + result + "구매폼group insert : " +	result2); 
 		}
+		
 	
 
 		/************ 주문내역 메일발송 ************/
-		try {
+		/*try {
 
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
@@ -255,7 +269,7 @@ public class CartPayCommand implements CommandImpl {
 			mailSender.send(message);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}*/
 
 	}
 

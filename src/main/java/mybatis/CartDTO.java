@@ -17,6 +17,5 @@ public class CartDTO {
 	private String p_brand;
 	private String pd_color;
 	
-	private String totalprice;
-	private String hiddencidx;
+	
 }

@@ -251,17 +251,17 @@
 		<choose>
 			<when test="#{cou_code} != null">
 				
-			<foreach collection="list" item="item" index="index" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
-                 INTO into buy_group(BD_IDX, P_CODE, COU_CODE, B_IDX, BD_COUNT, BD_SIZE)                
-                ) VALUES(buygroup_seq.nextval, #{codelist},#{cou_code},#{b_idx},#{countlist},#{sizelist})
+			<foreach collection="allList" item="item" index="index" open="INSERT ALL" close="SELECT * FROM DUAL">
+                 INTO into buy_group(BD_IDX, COU_CODE, B_IDX, BD_COUNT, P_CODE, BD_SIZE)                
+                VALUES(buygroup_seq.nextval,#{cou_code},#{b_idx}, #{item})
              </foreach>
 				
 								
 			</when>
 			<otherwise>
-			<foreach collection="list" item="item" index="index" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
-                 INTO into buy_group(BD_IDX, P_CODE,  B_IDX, BD_COUNT, BD_SIZE)                
-                ) VALUES(buygroup_seq.nextval, #{codelist},#{b_idx},#{countlist},#{sizelist})
+			<foreach collection="allList" item="item" index="index" open="INSERT ALL" close="SELECT * FROM DUAL">
+                 INTO into buy_group(BD_IDX,B_IDX, BD_COUNT,P_CODE, BD_SIZE)                
+                VALUES(buygroup_seq.nextval,#{b_idx}, #{item})
              </foreach>
 			</otherwise>
 		</choose>

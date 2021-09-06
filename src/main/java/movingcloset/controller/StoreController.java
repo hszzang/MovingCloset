@@ -28,6 +28,7 @@ import movingcloset.command.CommandImpl;
 import movingcloset.command.CommandImpl2;
 import movingcloset.command.GetMemberProductCommand;
 import movingcloset.command.cart.CartBuyCommand;
+import movingcloset.command.cart.CartPayCommand;
 import movingcloset.command.store.ReviewDeleteCommand;
 import movingcloset.command.store.ReviewInsertCommand;
 import movingcloset.command.store.ReviewListCommand;
@@ -74,6 +75,8 @@ public class StoreController {
 	GetMemberProductCommand getMemberProductCommand;
 	@Autowired
 	CartBuyCommand cartBuyCommand;
+	@Autowired
+	CartPayCommand cartPayCommand;
 	
 	// 스토어 리스트
 	@RequestMapping(value="/movingcloset/store.do", method=RequestMethod.GET)
@@ -467,10 +470,10 @@ public class StoreController {
 	public String cartbuyProduct(Model model, HttpServletRequest req) {
 		
 		model.addAttribute("req",req);
-		command = storeBuyCommand;
+		command = cartPayCommand;
 		command.execute(model);
 		
-		return "body/store/cartpayForm";
+		return "body/cart/cartPayForm";
 	}
 	
 	
