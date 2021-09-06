@@ -35,7 +35,7 @@
 		ORDER BY rNum DESC	
 	-->
 	<select id="QnAList" resultType="mybatis.QnaDTO">
-		SELECT * FROM QNA
+		SELECT * FROM QNA ORDER BY q_idx DESC
 	</select>
 	
 	<insert id="adminAnswer" parameterType="mybatis.QnaDTO">

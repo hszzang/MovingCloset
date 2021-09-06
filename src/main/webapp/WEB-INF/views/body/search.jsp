@@ -207,6 +207,33 @@
 		}
 	}
 
+	function price(p_price) {
+		
+		let totalString = total.toString();
+		let total1 = "";
+		let total2 = "";
+		if(totalString.length <= 4 || totalString.length==7){
+			total1 = totalString.substr(0,1);
+			total2 = totalString.substr(1,3);
+		}else if(totalString.length <= 5 || totalString.length==8){
+			total1 = totalString.substr(0,2);
+			total2 = totalString.substr(2,3);
+		}else if(totalString.length <= 6 || totalString.length==9){
+			total1 = totalString.substr(0,3);
+			total2 = totalString.substr(3,3);
+		}    			
+		let total3 = totalString.substr(totalString.length-3,3);
+		
+		if(totalString.length <= 6){
+	    	totalString = total1+","+total2;        		
+		}
+		else if(totalString.length <=9){
+	    	totalString = total1+","+total2+","+total3;        		
+		}
+		
+		document.getElementById("totalDiv").innerText = totalString;
+	};
+	
     </script>
 </head>
 <body>
@@ -265,12 +292,12 @@
 
 					 <c:forEach items="${searchList }" var="product">	
 						<span class="products">
-							<a class="pAs" href="/movingcloset/store/detail.do?p_idx=${product.p_idx }"><img class="pImg" src="../resources/upload/${product.p_sfile }"></a>
+							<a class="pAs" href="/movingcloset/store/detail.do?p_idx=${product.p_idx }&p_code=${product.p_code}"><img class="pImg" src="../resources/upload/${product.p_sfile }"></a>
                             <div class="brand">${product.p_brand }</div>
                             <div class="name"><label>${product.p_name }</label></div>
                             <div class="price">
                                 <span class="origPrice"><strike>${product.p_price}</strike></span>
-                                <span class="discountedPrice">${product.p_price}</span>
+                                <span class="discountedPrice" id="totalDiv">${product.p_price}</span>
                                 <span class="won">원</span>
                                 <span class="heart" style="text-align:right;">
                                 	<label class="heart">
