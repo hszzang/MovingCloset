@@ -231,15 +231,16 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 	var totalSale = 0;
 	var couponNum = 0;
 	function couponChecked(idx,cou_per,t){
+		
 		if(t.checked == true){
 			couponNum += 1;
-			document.getElementById("num").value=couponNum;			
+			document.getElementById("num").value=couponNum;		
+
 		}else if(t.checked == false ){
 			couponNum -= 1;
-			document.getElementById("num").value=couponNum;				
+			document.getElementById("num").value=couponNum;		
+
 		}
-		
-		
 		
 		var cb = document.getElementById("couponBox"+idx);
 		var originalPrice = document.getElementById("hidPrice").value;
@@ -412,6 +413,7 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 					<div class="row">
 					
 					<c:forEach items="${couponAndUseDTO }" var="couDTO" varStatus="status">
+					<input type="hidden" name="couidx" id="couidx" value=""/>
 							<table class="table table-hover" id="goodsTable">
 								<thead class="goodsTitle">
 									<tr>

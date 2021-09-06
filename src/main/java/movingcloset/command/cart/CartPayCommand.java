@@ -62,7 +62,9 @@ public class CartPayCommand implements CommandImpl {
 		String num = req.getParameter("num");
 		String cou_code = "";
 		String temp = "";
-
+		String couidx = req.getParameter("couidx");
+		System.out.println("couidx : "+couidx);
+		
 		BuyAndGroupDTO buyAndGroupDTO = new BuyAndGroupDTO();
 
 		int random = (int) (Math.random() * 1000);
@@ -80,19 +82,25 @@ public class CartPayCommand implements CommandImpl {
 
 		String[] coulist = cou_code.split(",");
 
-		
+		// intnum 은 쿠폰의 총개수
+		/*
+		만약 num은 1인데 cou_check2가 되었으면
+		cou_check2 가 되어야 하는데 이때 value는 어떻게 가져오나 
+		*/
 		try {
 			int intnum = Integer.parseInt(num);
-			for (int i = 0; i <= intnum; i++) {
-				temp = req.getParameter("cou_check" + i);
-				if (temp != null) {
-					if (i == 0) {
-						cou_code = temp;
-					} else {
-						cou_code = cou_code + "," + temp;
+			if(intnum != 0) {
+				for (int i = 0; i <= intnum-1; i++) {
+					temp = req.getParameter("cou_check" + i);
+					if (temp != null) {
+						if (i == 0) {
+							cou_code = temp;
+						} else {
+							cou_code = cou_code + "," + temp;
+						}
+						System.out.println("coucode : " + cou_code);
 					}
-					System.out.println("coucode : " + cou_code);
-				}
+				}				
 			}
 		} catch (NumberFormatException e) {
 			System.out.println("coucode 안들어옴");
@@ -111,32 +119,36 @@ public class CartPayCommand implements CommandImpl {
 			sqlSession.getMapper(MybatisProductImpl.class).insertBuyForm(buyAndGroupDTO);
 			
 			
-			for(int x=0; x<=bd_counts.length-1; x++) {
-				
-				buyAndGroupDTO.setBd_count(bd_counts[x].toString());
-				buyAndGroupDTO.setP_code(p_codes[x].toString());
-				buyAndGroupDTO.setBd_size(bd_sizes[x].toString());	
-				
-				
-				if (cou_code == "" || coulist.length == 1) {
-					buyAndGroupDTO.setCou_code(cou_code);
+			if (cou_code == "" || coulist.length == 1) {
+				buyAndGroupDTO.setCou_code(cou_code);
+				for(int x=0; x<=bd_counts.length-1; x++) {
+					
+					buyAndGroupDTO.setBd_count(bd_counts[x].toString());
+					buyAndGroupDTO.setP_code(p_codes[x].toString());
+					buyAndGroupDTO.setBd_size(bd_sizes[x].toString());	
 					sqlSession.getMapper(MybatisProductImpl.class).insertBuy_groupForm(buyAndGroupDTO);
-					//bgDTO = sqlSession.getMapper(MybatisProductImpl.class).getbuyAndGroup();
-					
-					
-				} else if (coulist.length > 1) {
-				
-					for (int y = 0; y < Integer.parseInt(num); y++) { 
-						String cou = coulist[y];
-						buyAndGroupDTO.setCou_code(cou); 
-						sqlSession.getMapper(MybatisProductImpl.class).insertBuy_groupForm(buyAndGroupDTO);
-
-					} 
 				}
 				
 				
+			} else if (coulist.length > 1) {
+			
+				for (int y = 0; y < Integer.parseInt(num); y++) { 
+					String cou = coulist[y];
+					buyAndGroupDTO.setCou_code(cou); 
+					
+					for(int x=0; x<=bd_counts.length-1; x++) {
+						
+						buyAndGroupDTO.setBd_count(bd_counts[x].toString());
+						buyAndGroupDTO.setP_code(p_codes[x].toString());
+						buyAndGroupDTO.setBd_size(bd_sizes[x].toString());	
+						sqlSession.getMapper(MybatisProductImpl.class).insertBuy_groupForm(buyAndGroupDTO);
+					}
+
+				} 
 			}
+			
 				
+			
 			
 			model.addAttribute("bgDTO", bgDTO);
 		}
@@ -144,7 +156,7 @@ public class CartPayCommand implements CommandImpl {
 	
 
 		/************ 주문내역 메일발송 ************/
-		/*try {
+		try {
 
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
@@ -229,7 +241,7 @@ public class CartPayCommand implements CommandImpl {
 			mailSender.send(message);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}*/
+		}
 
 	}
 
