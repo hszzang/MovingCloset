@@ -7,7 +7,7 @@
 <mapper namespace="mybatis.MybatisCartImpl">
 	
 	<select id="getCartList" resultType="mybatis.CartDTO">
-		SELECT * FROM CART 
+		SELECT * FROM CART WHERE userid = #{userid}
 	</select>
 
 	<delete id="cartListRemove">
