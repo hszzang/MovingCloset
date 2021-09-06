@@ -199,90 +199,89 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 		<div class="sectiontitle">
 		    <h2>주문 내역</h2>
 	    </div>
-			<div style="text-align: center;padding-top:15px;padding-bottom:15px;">
-				<h4 style="color:#ff6c2f;">주문 내역은 가입하신 메일로 발송됩니다.</h4>
+		<div style="text-align: center;padding-top:15px;padding-bottom:15px;">
+			<h4 style="color:#ff6c2f;">주문 내역은 가입하신 메일로 발송됩니다.</h4>
+		</div>
+		<div class="input-form" style="padding-bottom:15px;">
+			<div class="row" style="margin-top:15px;">
+				<table class="table table-hover" id="goodsTable">
+					<thead class="goodsTitle">
+						<tr>
+						  <th>상품이미지</th>	
+						  <th>브랜드</th>
+						  <th>상품명&nbsp;(상품코드)</th>
+						  <th>가격</th>
+						  <th>수량</th>
+						  <th>사이즈</th>
+						</tr>
+				    </thead>
+				    <tbody>
+				    	<tr id="goods">
+				    		<td><img class="goodsImg" src="../resources/upload/${productDTO.p_sfile }" /></td>
+				    		<td style="vertical-align:middle;">${productDTO.p_brand }</td>
+				    		<td style="vertical-align:middle;">${productDTO.p_name }<br />(${productDTO.p_code })</td>
+				    		<td style="vertical-align:middle;">${buyAndGroupDTO.b_totalpay }</td>
+				    		<td style="vertical-align:middle;">${buyAndGroupDTO.bd_count }</td>
+				    		<td style="vertical-align:middle;">${buyAndGroupDTO.bd_size }</td>
+				    	</tr>
+				    </tbody>
+				</table>
 			</div>
-			<div class="input-form" style="padding-bottom:15px;">
-				<div class="row" style="margin-top:15px;">
-					<table class="table table-hover" id="goodsTable">
-						<thead class="goodsTitle">
-							<tr>
-							  <th>상품이미지</th>	
-							  <th>브랜드</th>
-							  <th>상품명&nbsp;(상품코드)</th>
-							  <th>가격</th>
-							  <th>수량</th>
-							  <th>사이즈</th>
-							</tr>
-					    </thead>
-					    <tbody>
-					    	<tr id="goods">
-					    		<td><img class="goodsImg" src="../resources/upload/${productDTO.p_sfile }" /></td>
-					    		<td style="vertical-align:middle;">${productDTO.p_brand }</td>
-					    		<td style="vertical-align:middle;">${productDTO.p_name }<br />(${productDTO.p_code })</td>
-					    		<td style="vertical-align:middle;">${buyAndGroupDTO.b_totalpay }</td>
-					    		<td style="vertical-align:middle;">${buyAndGroupDTO.bd_count }</td>
-					    		<td style="vertical-align:middle;">${buyAndGroupDTO.bd_size }</td>
-					    	</tr>
-					    </tbody>
-					</table>
-				</div>
-			</div>
-				
+		</div>
 			
-			<div class="input-form col-md-12 mx-auto">
-				
-				<div class="input-form-wrap">
-					<br />
-					<h3>주문 내역</h3>
-						<table class="table table-bordered">
-							<colgroup>
-								<col width="20%"/>
-								<col width="*"/>
-							</colgroup>
-							<tbody>
-								<tr>
-									<td class="text-left"
-										style="vertical-align:middle;">이름</td>
-									<td>
-										${buyAndGroupDTO.b_buyer }
-									</td>
-								</tr>
-								<tr>
-									<td class="text-left"
-										style="vertical-align:middle;">전화번호</td>
-									<td class="form-inline">
-										${buyAndGroupDTO.b_phone }
-									</td>
-								</tr>
-								<tr>
-									<td class="text-left"
-										style="vertical-align:middle;">우편번호</td>
-									<td>
-										${buyAndGroupDTO.b_postcode } 
-									</td>
-								</tr>
-								<tr>
-									<td class="text-left"
-										style="vertical-align:middle;">주소</td>
-									<td>
-										${buyAndGroupDTO.b_addr }
-									</td>
-								</tr>
-								<tr>
-									<td class="text-left"
-										style="vertical-align:middle;">이메일&nbsp;&nbsp;&nbsp;</td>
-									<td class="form-inline">
-										${buyAndGroupDTO.email }
-									</td>
-								</tr>
+		
+		<div class="input-form col-md-12 mx-auto">
+			
+			<div class="input-form-wrap">
+				<br />
+				<h3>주문 내역</h3>
+				<table class="table table-bordered">
+					<colgroup>
+						<col width="20%"/>
+						<col width="*"/>
+					</colgroup>
+					<tbody>
+						<tr>
+							<td class="text-left"
+								style="vertical-align:middle;">이름</td>
+							<td>
+								${buyAndGroupDTO.b_buyer }
+							</td>
+						</tr>
+						<tr>
+							<td class="text-left"
+								style="vertical-align:middle;">전화번호</td>
+							<td class="form-inline">
+								${buyAndGroupDTO.b_phone }
+							</td>
+						</tr>
+						<tr>
+							<td class="text-left"
+								style="vertical-align:middle;">우편번호</td>
+							<td>
+								${buyAndGroupDTO.b_postcode } 
+							</td>
+						</tr>
+						<tr>
+							<td class="text-left"
+								style="vertical-align:middle;">주소</td>
+							<td>
+								${buyAndGroupDTO.b_addr }
+							</td>
+						</tr>
+						<tr>
+							<td class="text-left"
+								style="vertical-align:middle;">이메일&nbsp;&nbsp;&nbsp;</td>
+							<td class="form-inline">
+								${buyAndGroupDTO.email }
+							</td>
+						</tr>
 
-							</tbody>
-						</table>
-					</div>
-				</div>
+					</tbody>
+				</table>
 			</div>
-	
+		</div>
 	</div>
+	
 </body>
 </html>

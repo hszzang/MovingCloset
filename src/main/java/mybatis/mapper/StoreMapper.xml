@@ -250,22 +250,29 @@
 
 		<choose>
 			<when test="#{cou_code} != null">
-				
-			<foreach collection="allList" item="item" index="index" open="INSERT ALL" close="SELECT * FROM DUAL">
-                 INTO into buy_group(BD_IDX, COU_CODE, B_IDX, BD_COUNT, P_CODE, BD_SIZE)                
-                VALUES(buygroup_seq.nextval,#{cou_code},#{b_idx}, #{item})
-             </foreach>
-				
-								
+                 into buy_group(BD_IDX, COU_CODE, B_IDX, BD_COUNT, P_CODE, BD_SIZE)                
+                VALUES(buygroup_seq.nextval,#{cou_code},#{b_idx}, #{bd_count}, #{p_code}, #{bd_size})
 			</when>
 			<otherwise>
-			<foreach collection="allList" item="item" index="index" open="INSERT ALL" close="SELECT * FROM DUAL">
-                 INTO into buy_group(BD_IDX,B_IDX, BD_COUNT,P_CODE, BD_SIZE)                
-                VALUES(buygroup_seq.nextval,#{b_idx}, #{item})
-             </foreach>
+                 into buy_group(BD_IDX,B_IDX, BD_COUNT,P_CODE, BD_SIZE)                
+                VALUES(buygroup_seq.nextval,#{b_idx},#{bd_count}, #{p_code}, #{bd_size})
 			</otherwise>
 		</choose>
 	</insert>
+	
+	<select id="getbuyAndGroup" parameterType="mybatis.BuyAndGroupDTO" resultType="list">
+	
+		select *
+		from buy b
+		inner join buy_group bg
+		on b.b_idx = bg.b_idx
+		inner join product p
+		on bg.p_code = p.p_code
+		where b.b_idx=#{b_idx}
+	
+	</select>
+	
+	
 	
 
 	<!-- 마이페이지 리뷰리스트 가져오기 -->

@@ -65,12 +65,6 @@ public class CartPayCommand implements CommandImpl {
 
 		BuyAndGroupDTO buyAndGroupDTO = new BuyAndGroupDTO();
 
-		//String bd_count = req.getParameter("bd_count");
-		//String p_code = req.getParameter("p_code");
-		//String bd_size = req.getParameter("bd_size");
-		
-
-
 		int random = (int) (Math.random() * 1000);
 
 		buyAndGroupDTO.setB_buyer(b_buyer);
@@ -79,9 +73,6 @@ public class CartPayCommand implements CommandImpl {
 		buyAndGroupDTO.setB_postcode(postcode);
 		buyAndGroupDTO.setB_addr(addr1 + " " + addr2);
 		buyAndGroupDTO.setEmail(email1 + "@" + email2);
-		//buyAndGroupDTO.setBd_count(bd_count);
-		//buyAndGroupDTO.setP_code(p_code);
-		//buyAndGroupDTO.setBd_size(bd_size);
 		buyAndGroupDTO.setB_totalpay(b_totalpay);
 		buyAndGroupDTO.setB_payment(b_payment);
 		buyAndGroupDTO.setB_waybill("MC"+random);
@@ -110,75 +101,44 @@ public class CartPayCommand implements CommandImpl {
 
 		}
 		
-		
 		String[] bd_counts = req.getParameterValues("bd_count");
 		String[] p_codes = req.getParameterValues("p_code");
 		String[] bd_sizes = req.getParameterValues("bd_size");
-		
+		List<BuyAndGroupDTO> bgDTO = new ArrayList<BuyAndGroupDTO>();
 
-		List<String> cartbuylist = new ArrayList<String>();
-		Map<String, Object> param = new HashMap<String, Object>();
-		
-		List<String> count = new ArrayList<String>(); 
-		List<String> code = new	ArrayList<String>(); 
-		List<String> size = new ArrayList<String>();
-		
-		for(int j=0; j<=bd_counts.length-1; j++) {
-			System.out.println("bd_counts[j] : "+bd_counts[j]);
-			count.add(bd_counts[j].toString()); 		
-			code.add(p_codes[j].toString());		
-			size.add(bd_sizes[j].toString());		
-		}
-
-		List<String> allList = new ArrayList<String>();
-		System.out.println("count : "+count);
-		System.out.println("code : "+code);
-		System.out.println("size : "+size);
-		
-		for(int k=0; k<=bd_counts.length-1; k++) {
-			allList.add(bd_counts[k].toString()+","+p_codes[k].toString()+","+bd_sizes[k].toString());
-		}
-		
-		/*param.put("countlist", count);
-		param.put("codelist", code);
-		param.put("sizelist", size);*/
-		param.put("allList", allList);
-		param.put("b_buyer", b_buyer);
-		param.put("userid", userid);
-		param.put("b_phone", mobile1+"-"+mobile2+"-"+mobile3);
-		param.put("b_postcode", postcode);
-		param.put("b_addr", addr1+" "+addr2);
-		param.put("email", email1+"@"+email2);
-		param.put("b_totalpay", b_totalpay);
-		param.put("b_payment", b_payment);
-		param.put("b_waybill", "MC"+random);
-		param.put("accountnumber", accountnumber);
-
-		
 		if (userid != null) {
-		 
-		int result = sqlSession.getMapper(MybatisProductImpl.class).insertBuyFormMap(param); 
-		int	result2 = 0; 
-		if (cou_code == "" || coulist.length == 1) {
-			param.put("cou_code", cou_code); 
-			//buyAndGroupDTO.setCou_code(cou_code);
-			result2 =sqlSession.getMapper(MybatisProductImpl.class).insertBuy_groupFormMap(param);
-		} else if (coulist.length > 1) {
 		
-			for (int j = 0; j < Integer.parseInt(num); j++) { 
-				String cou = coulist[j];
-				param.put("cou_code", cou); 
-				//buyAndGroupDTO.setCou_code(cou); 
-				result2 =sqlSession.getMapper(MybatisProductImpl.class).insertBuy_groupFormMap(param);
-				} 
+			sqlSession.getMapper(MybatisProductImpl.class).insertBuyForm(buyAndGroupDTO);
+			
+			
+			for(int x=0; x<=bd_counts.length-1; x++) {
+				
+				buyAndGroupDTO.setBd_count(bd_counts[x].toString());
+				buyAndGroupDTO.setP_code(p_codes[x].toString());
+				buyAndGroupDTO.setBd_size(bd_sizes[x].toString());	
+				
+				
+				if (cou_code == "" || coulist.length == 1) {
+					buyAndGroupDTO.setCou_code(cou_code);
+					sqlSession.getMapper(MybatisProductImpl.class).insertBuy_groupForm(buyAndGroupDTO);
+					//bgDTO = sqlSession.getMapper(MybatisProductImpl.class).getbuyAndGroup();
+					
+					
+				} else if (coulist.length > 1) {
+				
+					for (int y = 0; y < Integer.parseInt(num); y++) { 
+						String cou = coulist[y];
+						buyAndGroupDTO.setCou_code(cou); 
+						sqlSession.getMapper(MybatisProductImpl.class).insertBuy_groupForm(buyAndGroupDTO);
+
+					} 
+				}
+				
+				
 			}
-		
-		// productDTO = 
-		//sqlSession.getMapper(MybatisProductImpl.class).getProductDTOsfile(p_code);
-		
-		model.addAttribute("buyAndGroupDTO", buyAndGroupDTO);
-		model.addAttribute("productDTO", productDTO);
-		System.out.println("구매폼 insert : " + result + "구매폼group insert : " +	result2); 
+				
+			
+			model.addAttribute("bgDTO", bgDTO);
 		}
 		
 	
