@@ -87,6 +87,13 @@
 		SELECT DISTINCT p_tag from product
 	</select>
 	
+	<select id="productSearch" resultType="mybatis.ProductDTO">
+		SELECT * FROM product WHERE p_code=#{p_code}
+	</select>
+	<select id="detailSearch" resultType="mybatis.ProductDetailDTO">
+		SELECT * FROM product_detail WHERE p_code=#{p_code}
+	</select>
+	
 </mapper>
 
 <!--  
