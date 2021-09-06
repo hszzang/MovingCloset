@@ -80,7 +80,10 @@ public interface MybatisProductImpl {
 	public int insertBuyFormMap(Map<String, Object> param);
 	public int insertBuy_groupFormMap(Map<String, Object> param);
 
-	public List<BuyAndGroupDTO> getbuyAndGroup();
+	public List<BuyAndGroupDTO> getbuyAndGroup(String b_idx);
+	public int getMaxBidx();
+	
+	
 	
 	//마이페이지 리뷰리스트
 	public ArrayList<ReviewDTO> mypageReviewList(String userid);

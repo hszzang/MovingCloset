@@ -233,10 +233,9 @@
 			</otherwise>
 		</choose>
 	</insert>
-	
 
 	
-	<select id="getbuyAndGroup" parameterType="mybatis.BuyAndGroupDTO" resultType="list">
+	<select id="getbuyAndGroup"  resultType="mybatis.BuyAndGroupDTO">
 	
 		select *
 		from buy b
@@ -244,8 +243,13 @@
 		on b.b_idx = bg.b_idx
 		inner join product p
 		on bg.p_code = p.p_code
-		where b.b_idx=#{b_idx}
+		where b.b_idx = #{b_idx}
 	
+	</select>
+	
+	<select id="getMaxBidx" resultType="int">
+		select max(b_idx)
+		from buy
 	</select>
 	
 	

@@ -90,7 +90,7 @@ public class CartPayCommand implements CommandImpl {
 		try {
 			int intnum = Integer.parseInt(num);
 			if(intnum != 0) {
-				for (int i = 0; i <= intnum-1; i++) {
+				for (int i = 0; i < intnum; i++) {
 					temp = req.getParameter("cou_check" + i);
 					if (temp != null) {
 						if (i == 0) {
@@ -112,7 +112,6 @@ public class CartPayCommand implements CommandImpl {
 		String[] bd_counts = req.getParameterValues("bd_count");
 		String[] p_codes = req.getParameterValues("p_code");
 		String[] bd_sizes = req.getParameterValues("bd_size");
-		List<BuyAndGroupDTO> bgDTO = new ArrayList<BuyAndGroupDTO>();
 
 		if (userid != null) {
 		
@@ -150,9 +149,11 @@ public class CartPayCommand implements CommandImpl {
 				
 			
 			
-			model.addAttribute("bgDTO", bgDTO);
 		}
 		
+
+		
+	
 	
 
 		/************ 주문내역 메일발송 ************/

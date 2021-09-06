@@ -30,7 +30,15 @@ public class BuyAndGroupDTO {
 	private String  cou_per;
 	
 	// 장바구니-구매폼 주문내역 출력시 쓸 sfile 저장
+	
+	private String p_name;
+	private String p_price;
+	private String p_brand;
+	private String p_ofile;
 	private String p_sfile;
+	private String p_flag;
+	private String p_tag;
+
 	
 	
 }
