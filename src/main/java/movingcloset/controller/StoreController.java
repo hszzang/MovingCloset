@@ -452,7 +452,7 @@ public class StoreController {
 	}
 	
 	// 장바구니에서 구매폼으로 이동
-	@RequestMapping(value="/store/cartbuy.do", method=RequestMethod.POST)
+	@RequestMapping(value="/store/cartbuy.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public String cartbuy(Model model, HttpServletRequest req) {
 		
 		model.addAttribute("req",req);
@@ -460,6 +460,17 @@ public class StoreController {
 		command.execute(model);
 		
 		return "body/cart/cartbuyForm";
+	}
+	
+	// 상품 구매하기
+	@RequestMapping("/store/cartbuyProduct.do")
+	public String cartbuyProduct(Model model, HttpServletRequest req) {
+		
+		model.addAttribute("req",req);
+		command = storeBuyCommand;
+		command.execute(model);
+		
+		return "body/store/cartpayForm";
 	}
 	
 	

@@ -38,7 +38,13 @@ public class CartBuyCommand implements CommandImpl{
 		String totalprice = req.getParameter("totalprice");
 		String allCidx = req.getParameter("hiddencidx");
 		System.out.println("cidx 체크박스 : "+allCidx);
+		CartDTO car = new CartDTO();
 		List<CartDTO> cartDTO = new ArrayList<CartDTO>();
+
+		totalprice = totalprice.substring(0, totalprice.length()-1);
+		totalprice = totalprice.replaceAll(",", ""); 
+		System.out.println("totalprice : "+totalprice );
+				
 		List<String> arrlist = new ArrayList<String>();
 		Map<String, Object> param = new HashMap<String, Object>();
 		
@@ -47,6 +53,7 @@ public class CartBuyCommand implements CommandImpl{
 			cartDTO = sqlSession
 					.getMapper(MybatisCartImpl.class).cartBuyList(userid,allCidx);
 		}else {
+			
 		    for(int i=0; i< arrcidx.length; i++){
 		         
 		    	arrlist.add(arrcidx[i].toString());

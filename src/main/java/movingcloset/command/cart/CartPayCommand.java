@@ -1,4 +1,4 @@
-package movingcloset.command.store;
+package movingcloset.command.cart;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ import mybatis.ProductAndDetailDTO;
 import mybatis.ProductDTO;
 
 @Service
-public class StoreBuyCommand implements CommandImpl {
+public class CartPayCommand implements CommandImpl {
 
 	@Autowired
 	private SqlSession sqlSession;
@@ -45,7 +45,7 @@ public class StoreBuyCommand implements CommandImpl {
 		HttpServletRequest req = (HttpServletRequest) paramMap.get("req");
 		HttpSession session = req.getSession();
 		ProductDTO productDTO = new ProductDTO();
-		
+
 		String userid = (String) session.getAttribute("siteUserInfo");
 		String b_buyer = req.getParameter("b_buyer");
 		String mobile1 = req.getParameter("mobile1");
@@ -65,11 +65,31 @@ public class StoreBuyCommand implements CommandImpl {
 
 		BuyAndGroupDTO buyAndGroupDTO = new BuyAndGroupDTO();
 
+		//String bd_count = req.getParameter("bd_count");
+		//String p_code = req.getParameter("p_code");
+		//String bd_size = req.getParameter("bd_size");
+		
 
-		String bd_count = req.getParameter("bd_count");
-		String p_code = req.getParameter("p_code");
-		String bd_size = req.getParameter("bd_size");
 
+		int random = (int) (Math.random() * 1000);
+
+		buyAndGroupDTO.setB_buyer(b_buyer);
+		buyAndGroupDTO.setUserid(userid);
+		buyAndGroupDTO.setB_phone(mobile1 + "-" + mobile2 + "-" + mobile3);
+		buyAndGroupDTO.setB_postcode(postcode);
+		buyAndGroupDTO.setB_addr(addr1 + " " + addr2);
+		buyAndGroupDTO.setEmail(email1 + "@" + email2);
+		//buyAndGroupDTO.setBd_count(bd_count);
+		//buyAndGroupDTO.setP_code(p_code);
+		//buyAndGroupDTO.setBd_size(bd_size);
+		buyAndGroupDTO.setB_totalpay(b_totalpay);
+		buyAndGroupDTO.setB_payment(b_payment);
+		buyAndGroupDTO.setB_waybill("MC"+random);
+		buyAndGroupDTO.setAccountnumber(accountnumber);
+
+		String[] coulist = cou_code.split(",");
+
+		
 		try {
 			int intnum = Integer.parseInt(num);
 			for (int i = 0; i <= intnum; i++) {
@@ -89,42 +109,59 @@ public class StoreBuyCommand implements CommandImpl {
 		} catch (Exception e) {
 
 		}
-
-		int random = (int) (Math.random() * 1000);
-
-		buyAndGroupDTO.setB_buyer(b_buyer);
-		buyAndGroupDTO.setUserid(userid);
-		buyAndGroupDTO.setB_phone(mobile1 + "-" + mobile2 + "-" + mobile3);
-		buyAndGroupDTO.setB_postcode(postcode);
-		buyAndGroupDTO.setB_addr(addr1 + " " + addr2);
-		buyAndGroupDTO.setEmail(email1 + "@" + email2);
-		buyAndGroupDTO.setBd_count(bd_count);
-		buyAndGroupDTO.setP_code(p_code);
-		buyAndGroupDTO.setBd_size(bd_size);
-		buyAndGroupDTO.setB_totalpay(b_totalpay);
-		buyAndGroupDTO.setB_payment(b_payment);
-		buyAndGroupDTO.setB_waybill("MC"+random);
-		buyAndGroupDTO.setAccountnumber(accountnumber);
-
-		String[] coulist = cou_code.split(",");
+		
+		
+		String[] bd_counts = req.getParameterValues("bd_count");
+		String[] p_codes = req.getParameterValues("p_code");
+		String[] bd_sizes = req.getParameterValues("bd_size");
+		List<String> cartbuylist = new ArrayList<String>();
+		Map<String, Object> param = new HashMap<String, Object>();
+		/*
+		 * List<String> count = new ArrayList<String>(); List<String> code = new
+		 * ArrayList<String>(); List<String> size = new ArrayList<String>();
+		 * 
+		 * for(int j=0; j<=bd_counts.length; j++) {
+		 * 
+		 * count.add(bd_counts[j].toString()); code.add(p_codes[j].toString());
+		 * size.add(bd_sizes[j].toString());
+		 * 
+		 * 
+		 * }
+		 */
+		param.put("countlist", bd_counts);
+		param.put("codelist", p_codes);
+		param.put("sizelist", bd_sizes);
+		param.put("b_buyer", b_buyer);
+		param.put("userid", userid);
+		param.put("b_phone", mobile1+"-"+mobile2+"-"+mobile3);
+		param.put("b_postcode", postcode);
+		param.put("b_addr", addr1+" "+addr2);
+		param.put("email", email1+"@"+email2);
+		param.put("b_totalpay", b_totalpay);
+		param.put("b_payment", b_payment);
+		param.put("b_waybill", "MC"+random);
+		param.put("accountnumber", accountnumber);
 
 		if (userid != null) {
 
-			int result = sqlSession.getMapper(MybatisProductImpl.class).insertBuyForm(buyAndGroupDTO);
+			int result = sqlSession.getMapper(MybatisProductImpl.class).insertBuyFormMap(param);
 			int result2 = 0;
 			if (cou_code == "" || coulist.length == 1) {
-				buyAndGroupDTO.setCou_code(cou_code);
-				result2 = sqlSession.getMapper(MybatisProductImpl.class).insertBuy_groupForm(buyAndGroupDTO);
+				param.put("cou_code", cou_code);
+				//buyAndGroupDTO.setCou_code(cou_code);
+				result2 = sqlSession.getMapper(MybatisProductImpl.class).insertBuy_groupFormMap(param);
 			} else if (coulist.length > 1) {
 
 				for (int j = 0; j < Integer.parseInt(num); j++) {
 					String cou = coulist[j];
-					buyAndGroupDTO.setCou_code(cou);
-					result2 = sqlSession.getMapper(MybatisProductImpl.class).insertBuy_groupForm(buyAndGroupDTO);
+					param.put("cou_code", cou);
+					//buyAndGroupDTO.setCou_code(cou);
+					result2 = sqlSession.getMapper(MybatisProductImpl.class).insertBuy_groupFormMap(param);
 				}
 			}
 
-			productDTO = sqlSession.getMapper(MybatisProductImpl.class).getProductDTOsfile(p_code);
+			// productDTO =
+			// sqlSession.getMapper(MybatisProductImpl.class).getProductDTOsfile(p_code);
 
 			model.addAttribute("buyAndGroupDTO", buyAndGroupDTO);
 			model.addAttribute("productDTO", productDTO);
