@@ -62,7 +62,7 @@
         #wrapper{
         	width:70%; height:auto;
         	border: none;
-        	margin: 100px 15% 200px 15%;
+        	margin: 100px 15% 100px 15%;
         	padding: 0;
         }
         #title{font-size:3em; color:black; font-weight:bold;
@@ -156,7 +156,7 @@
     		
     		<div id="titleDiv">
     			<span id="title">CS Center</span>
-    			<span id="workTime">MON - FRI / 9AM - 6PM</span>
+    			<span id="workTime">MON - FRI / 10AM - 5PM</span>
     		</div>
 
 			<div class="tabs">
