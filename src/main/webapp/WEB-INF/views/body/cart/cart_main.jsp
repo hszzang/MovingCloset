@@ -17,6 +17,7 @@ $(function(){
 });
 
 let allCheckTotalPrice = 0;
+let allCheckCIdx = new Array();
 function cartList() {
     $.ajax({
         url:'../cartlist',
@@ -31,6 +32,7 @@ function cartList() {
         		let p_price = result[i].p_price*result[i].c_qty;
         		
         		allCheckTotalPrice += p_price;
+        		allCheckCIdx.push(result[i].c_idx);
         		
         		let p_priceString = p_price.toString();
         		let price1 = "";
@@ -300,10 +302,12 @@ function submitbtn() {
          if(this.checked == true) {
         	 total = allCheckTotalPrice;
         	 document.getElementById("totalDiv").value = allCheckTotalPrice.toLocaleString('ko-KR')+"원";
+        	 document.getElementById("hiddenValue").value = allCheckCIdx;
          }
          if(this.checked == false) {
         	 total = 0;
         	 document.getElementById("totalDiv").value = "0원";
+        	 document.getElementById("hiddenValue").value = "";
          }
     });
       
