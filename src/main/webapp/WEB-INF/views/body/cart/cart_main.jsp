@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,9 +18,14 @@ $(function(){
 
 let allCheckTotalPrice = 0;
 function cartList() {
+	
+	var cartDTO = {};
+	cartDTO.userid = "<c:out value='${siteUserInfo}' />";
+	
     $.ajax({
         url:'../cartlist',
         type : 'POST',
+        data : cartDTO,
         dataType:'json',
         success :  function(result){
         	
