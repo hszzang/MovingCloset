@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +16,7 @@ $(function(){
 	cartList();
 });
 
+let allCheckTotalPrice = 0;
 function cartList() {
     $.ajax({
         url:'../cartlist',
@@ -26,6 +29,8 @@ function cartList() {
         	let total = 0;
         	for(let i=0 ; i<result.length ; i++){
         		let p_price = result[i].p_price*result[i].c_qty;
+        		
+        		allCheckTotalPrice += p_price;
         		
         		let p_priceString = p_price.toString();
         		let price1 = "";
@@ -55,7 +60,7 @@ function cartList() {
                 + "<strong>"+ result[i].p_code +"</strong>"
                 + "</a>"
                 + "</div>"
-                + "<div style=' width: 30%; height: 140px; padding: 0 10px; border-right: solid rgb(230, 230, 230) 1px;'>"
+                + "<div style=' width: 30%; heighty: 140px; padding: 0 10px; border-right: solid rgb(230, 230, 230) 1px;'>"
                 + "<p>"+ result[i].p_flag +" / "+ result[i].pd_color +" / "+ result[i].pd_size +" / "+ result[i].c_qty +"</p>"
                 + "<div>"
                 + "수량 :"
@@ -109,7 +114,19 @@ function listRemove(c_idx) {
 }
 
 let total = 0;
+// var total = 0;
+// var checkArray = [];
 function totalPrice(i, p_price, c_idx) {
+	
+	
+// 	if(obj.checked == true) {
+// 		total += p_price;
+// 	}
+// 	if(obj.checked == false) {
+// 		total -= p_price;
+// 	}
+	
+// 	document.getElementById("totalDiv").value = total.toString() +" 원";
 	var obj = $("[name=check_sol]");
 	var chkArray = new Array();
 	
@@ -119,41 +136,44 @@ function totalPrice(i, p_price, c_idx) {
 	 $('#hiddenValue').val(chkArray);
 	
 	var sol = document.getElementsByName("check_sol")[i];
+	var allcheckbox = document.getElementById("check_all");
 
 	if(sol.checked == true) {
 		total += parseInt(p_price);
 	}
 	else if(sol.checked == false) {
 		total -= parseInt(p_price);
+		allcheckbox.checked = false;
 	}
 	
 	if(total <= 0) {
 		total = 0;
 	}
 	
-	let totalString = total.toString();
-	let total1 = "";
-	let total2 = "";
-	if(totalString.length <= 4 || totalString.length==7){
-		total1 = totalString.substr(0,1);
-		total2 = totalString.substr(1,3);
-	}else if(totalString.length <= 5 || totalString.length==8){
-		total1 = totalString.substr(0,2);
-		total2 = totalString.substr(2,3);
-	}else if(totalString.length <= 6 || totalString.length==9){
-		total1 = totalString.substr(0,3);
-		total2 = totalString.substr(3,3);
-	}    			
-	let total3 = totalString.substr(totalString.length-3,3);
+// 	let totalString = total.toString();
+// 	let total1 = "";
+// 	let total2 = "";
+// 	if(totalString.length <= 4 || totalString.length==7){
+// 		total1 = totalString.substr(0,1);
+// 		total2 = totalString.substr(1,3);
+// 	}else if(totalString.length <= 5 || totalString.length==8){
+// 		total1 = totalString.substr(0,2);
+// 		total2 = totalString.substr(2,3);
+// 	}else if(totalString.length <= 6 || totalString.length==9){
+// 		total1 = totalString.substr(0,3);
+// 		total2 = totalString.substr(3,3);
+// 	}    			
+// 	let total3 = totalString.substr(totalString.length-3,3);
 	
-	if(totalString.length <= 6){
-    	totalString = total1+","+total2;        		
-	}
-	else if(totalString.length <=9){
-    	totalString = total1+","+total2+","+total3;        		
-	}
+// 	if(totalString.length <= 6){
+//     	totalString = total1+","+total2;        		
+// 	}
+// 	else if(totalString.length <=9){
+//     	totalString = total1+","+total2+","+total3;        		
+// 	}
 	
-	document.getElementById("totalDiv").value = totalString+"원";
+	document.getElementById("totalDiv").value = total.toLocaleString('ko-KR')+"원";
+// 	document.getElementById("totalDiv").value = totalString+"원";
 };
 
 function submitbtn() {
@@ -275,6 +295,15 @@ function submitbtn() {
          var list = document.querySelectorAll("input[id=check_sol]");
          for (var i = 0; i < list.length; i++) {
              list[i].checked = this.checked;
+         }
+         
+         if(this.checked == true) {
+        	 total = allCheckTotalPrice;
+        	 document.getElementById("totalDiv").value = allCheckTotalPrice.toLocaleString('ko-KR')+"원";
+         }
+         if(this.checked == false) {
+        	 total = 0;
+        	 document.getElementById("totalDiv").value = "0원";
          }
     });
       

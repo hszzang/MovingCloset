@@ -99,6 +99,7 @@ function showSpinner(btn) {
 	btn.disabled = true;
 	btn.innerHTML = "<span class='spinner-border spinner-border-sm'></span> 잠시만 기다려주세요 ";
 	btn.style.color = "black";
+	document.findPwForm.submit();
 }
 
 </script>

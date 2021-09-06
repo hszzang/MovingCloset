@@ -41,6 +41,10 @@
 		SET mb_lat=#{0}, mb_lon=#{1}, mb_addr=#{2}, mb_status=#{3}, mb_lastupdate=sysdate
 		WHERE busid=#{4} 
 	</update>
+	
+	<select id="andGetMoyoBus" resultType="mybatis.MoyoBusDTO">
+		SELECT * FROM moyo_bus WHERE m_idx=#{0}
+	</select>
 
 
 </mapper>

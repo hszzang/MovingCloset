@@ -30,6 +30,8 @@ public interface MybatisAndroidImpl {
 	//안드로이드에서 가져온 모여버스 정보 업데이트
 	public int andUpdateMoyoBus(String latitude, String longitude, String mb_addr, String mb_status, String busid);
 	
+	//모여버스 정보 가져오기
+	public MoyoBusDTO andGetMoyoBus(String m_idx);
 	
 
 }
