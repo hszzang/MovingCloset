@@ -37,7 +37,7 @@ public class NewDCommand implements CommandImpl {
 		
 		
 		model.addAttribute("newdList", newdList);
-		 
+		System.out.println(newdList);
 		
 		
 	}

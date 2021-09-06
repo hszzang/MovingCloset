@@ -40,7 +40,9 @@
         #wrapper{
         	width:70%; height:auto;
         	border: none;
-        	margin: 100px 15% 200px 15%;
+        	margin-top: 150px; margin-bottom: 100px;
+        	margin-left: 14%;
+/*         	margin: 200px 15% 200px 150px; */
         	padding: 0;
         }
         #title{font-size:3em; color:black; font-weight:bold;
@@ -85,14 +87,14 @@
             background-color:none;
             border-top:black solid 2.5px;
             border-bottom:black solid 1px;
-            height: 40px;
+            height: 60px;
             font-size: 12px;
         }
         tr,
         td {
             padding: 4px 0px;
             border-bottom:darkgray solid 1px;
-            height:40px;
+            height:60px;
             font-size: 10pt;
         }
         
@@ -217,18 +219,18 @@
     	</div>
     		<br />
 
-			<div id="pages">
-			    <select name="pageSel" id="pageSel" placeholder="1">
-					<option value="pageNum">1</option>
-					<option value="pageNum">2</option>
-					<option value="pageNum">3</option>
-					<option value="pageNum">4</option>
-					<option value="pageNum">5</option>
-			    </select>
-			    <span id="pgTotal">of 5</span>
-			    <button class="pageMove" id="pmL"> < </button>
-			    <button class="pageMove" id="pmR"> > </button>
-			</div>
+<!-- 			<div id="pages"> -->
+<!-- 			    <select name="pageSel" id="pageSel" placeholder="1"> -->
+<!-- 					<option value="pageNum">1</option> -->
+<!-- 					<option value="pageNum">2</option> -->
+<!-- 					<option value="pageNum">3</option> -->
+<!-- 					<option value="pageNum">4</option> -->
+<!-- 					<option value="pageNum">5</option> -->
+<!-- 			    </select> -->
+<!-- 			    <span id="pgTotal">of 5</span> -->
+<!-- 			    <button class="pageMove" id="pmL"> < </button> -->
+<!-- 			    <button class="pageMove" id="pmR"> > </button> -->
+<!-- 			</div> -->
 	
     </div>
 </body>

@@ -296,7 +296,7 @@
 	    									<h4 class="mb-0">Apply for store entry</h4>
 	    								</div>
 	    							</div>
-	    							<h2 class="mb-4"><a href="https://docs.google.com/forms/d/e/1FAIpQLScshnBPRPHU_e6PrzpVhhjieqepsr_FScM-BS9A1-d0l3syTw/viewform">MovingCloset Parter</a></h2>
+	    							<h2 class="mb-4"><a href="https://docs.google.com/forms/d/e/1FAIpQLScshnBPRPHU_e6PrzpVhhjieqepsr_FScM-BS9A1-d0l3syTw/viewform">MovingCloset Partner</a></h2>
 	    							<p>
 	    							업계 최저 수수료와 트렌디함을 즐기는 쇼퍼들이 모여있는 이 곳<br>
 	    							새로운 쇼핑플랫폼인 MovingCloset의 파트너가 되어주세요.<br>
