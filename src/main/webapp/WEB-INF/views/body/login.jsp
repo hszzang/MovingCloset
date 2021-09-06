@@ -118,7 +118,7 @@ function logout(){
 							</div>
 							<div class="w-50 text-md-right">
 								<div style="float:left;padding-right:20px;" >
-									<a id="klogin" href="https://kauth.kakao.com/oauth/authorize?client_id=d22c6a95056d752c59d1e73f60101ab7&redirect_uri=http://localhost:8082/movingcloset/movingcloset/kakaologin.do&response_type=code">
+									<a id="klogin" href="https://kauth.kakao.com/oauth/authorize?client_id=d22c6a95056d752c59d1e73f60101ab7&redirect_uri=http://localhost:8081/movingcloset/movingcloset/kakaologin.do&response_type=code">
 										<img class="socialLogin" src="../resources/images/login/kakao_login_medium.png" alt="" />
 									</a>								
 								</div>

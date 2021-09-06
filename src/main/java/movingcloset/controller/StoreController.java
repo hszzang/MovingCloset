@@ -28,6 +28,7 @@ import movingcloset.command.CommandImpl;
 import movingcloset.command.CommandImpl2;
 import movingcloset.command.GetMemberProductCommand;
 import movingcloset.command.cart.CartBuyCommand;
+import movingcloset.command.cart.CartPayCommand;
 import movingcloset.command.store.ReviewDeleteCommand;
 import movingcloset.command.store.ReviewInsertCommand;
 import movingcloset.command.store.ReviewListCommand;
@@ -74,6 +75,8 @@ public class StoreController {
 	GetMemberProductCommand getMemberProductCommand;
 	@Autowired
 	CartBuyCommand cartBuyCommand;
+	@Autowired
+	CartPayCommand cartPayCommand;
 	
 	// 스토어 리스트
 	@RequestMapping(value="/movingcloset/store.do", method=RequestMethod.GET)
@@ -452,7 +455,7 @@ public class StoreController {
 	}
 	
 	// 장바구니에서 구매폼으로 이동
-	@RequestMapping(value="/store/cartbuy.do", method=RequestMethod.POST)
+	@RequestMapping(value="/store/cartbuy.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public String cartbuy(Model model, HttpServletRequest req) {
 		
 		model.addAttribute("req",req);
@@ -460,6 +463,17 @@ public class StoreController {
 		command.execute(model);
 		
 		return "body/cart/cartbuyForm";
+	}
+	
+	// 상품 구매하기
+	@RequestMapping("/store/cartbuyProduct.do")
+	public String cartbuyProduct(Model model, HttpServletRequest req) {
+		
+		model.addAttribute("req",req);
+		command = cartPayCommand;
+		command.execute(model);
+		
+		return "body/cart/cartPayForm";
 	}
 	
 	
