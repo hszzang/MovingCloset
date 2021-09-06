@@ -140,8 +140,6 @@ function totalPrice(i, p_price, c_idx) {
 	});
 	 $('#hiddenValue').val(chkArray);
 	
-
-	
 	var sol = document.getElementsByName("check_sol")[i];
 	var allcheckbox = document.getElementById("check_all");
 
@@ -183,44 +181,14 @@ function totalPrice(i, p_price, c_idx) {
 // 	document.getElementById("totalDiv").value = totalString+"원";
 };
 
-/* var total = 0;
-function totalPrice(i){
-
-	var sol =  document.getElementsByName("check_sol")[i];
-	if(sol.checked == true){
-		total += parseInt(sol.value);
-		
-	}else{
-		total = total;
-	}
+function submitbtn() {
+	var tp = document.getElementById("totalDiv").value;	
+	var hv = document.getElementById("hiddenValue").value;	
+	
+	location.href = "../store/cartbuy.do?totalprice="+tp+"&hiddencidx="+hv+"";
 	
 	
-	let totalString = total.toString();
-	let total1 = "";
-	let total2 = "";
-	if(totalString.length <= 4 || totalString.length==7){
-		total1 = totalString.substr(0,1);
-		total2 = totalString.substr(1,3);
-	}else if(totalString.length <= 5 || totalString.length==8){
-		total1 = totalString.substr(0,2);
-		total2 = totalString.substr(2,3);
-	}else if(totalString.length <= 6 || totalString.length==9){
-		total1 = totalString.substr(0,3);
-		total2 = totalString.substr(3,3);
-	}    			
-	let total3 = totalString.substr(totalString.length-3,3);
-	
-	if(totalString.length <= 6){
-    	totalString = total1+","+total2;        		
-	}else if(totalString.length <=9){
-    	totalString = total1+","+total2+","+total3;        		
-	}
-	
-	
-	document.getElementById("totalDiv").innerText = totalString;
-	
-	
-} */ 
+}
 
 </script>
 <style type="text/css">
@@ -253,7 +221,7 @@ function totalPrice(i){
 <body> 
 
 	<div class="container">
-	<form action="../store/cartbuy.do" name="cartFrm" method="post">
+	<!-- <form action="../store/cartbuy.do" name="cartFrm" method="post"> -->
 		<div class="sectiontitle" style="margin-top:150px;">
 	    	<h2>SHOPPING LIST</h2>
 	    </div>
@@ -318,11 +286,11 @@ function totalPrice(i){
             <input id='totalDiv' name="totalprice" style="text-align: center; color: red; font-size: 30px; font-weight: bold;border:none;" value="0원"/>
         </div>
         <div class="bucket_buy">
-            <button type="submit">
+            <button type="button" id="subBTN"  onclick="submitbtn();">
                 <img src="../resources/images/icon/buy.png" style="height: 150px; width: 150px;">
             </button>
         </div>
-        </form>
+        <!-- </form> -->
     </div>
     
 </body>
@@ -370,6 +338,7 @@ function totalPrice(i){
             	    	alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
             	    }
             	});
+	            return false;
                 
             }
             
@@ -389,6 +358,7 @@ function totalPrice(i){
             	    	alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
             	    }
             	});
+	            return false;
                 
             }
         	

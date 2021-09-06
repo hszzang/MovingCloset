@@ -234,6 +234,46 @@
 		</choose>
 	</insert>
 	
+	<!-- 장바구니 구매폼(buy) insert -->
+	<insert id="insertBuyFormMap" parameterType="hashMap" >
+		
+		INSERT INTO BUY (B_IDX, B_TOTALPAY, B_DATE, B_BUYER, B_PHONE, B_POSTCODE, B_ADDR, B_PAYMENT, B_WAYBILL, USERID,EMAIL,accountnumber)
+		VALUES (buy_seq.nextval,#{b_totalpay},sysdate,#{b_buyer},#{b_phone},#{b_postcode},#{b_addr},#{b_payment},#{b_waybill},#{userid},#{email},#{accountnumber} )
+		<selectKey keyProperty="b_idx" order="AFTER" resultType="String">
+			select buy_seq.CURRVAL from dual
+		</selectKey>
+				
+	</insert>
+	
+	<!-- 장바구니 구매폼(buy_group)에 insert -->
+	<insert id="insertBuy_groupFormMap" parameterType="hashMap" >
+
+		<choose>
+			<when test="#{cou_code} != null">
+                 into buy_group(BD_IDX, COU_CODE, B_IDX, BD_COUNT, P_CODE, BD_SIZE)                
+                VALUES(buygroup_seq.nextval,#{cou_code},#{b_idx}, #{bd_count}, #{p_code}, #{bd_size})
+			</when>
+			<otherwise>
+                 into buy_group(BD_IDX,B_IDX, BD_COUNT,P_CODE, BD_SIZE)                
+                VALUES(buygroup_seq.nextval,#{b_idx},#{bd_count}, #{p_code}, #{bd_size})
+			</otherwise>
+		</choose>
+	</insert>
+	
+	<select id="getbuyAndGroup" parameterType="mybatis.BuyAndGroupDTO" resultType="list">
+	
+		select *
+		from buy b
+		inner join buy_group bg
+		on b.b_idx = bg.b_idx
+		inner join product p
+		on bg.p_code = p.p_code
+		where b.b_idx=#{b_idx}
+	
+	</select>
+	
+	
+	
 
 	<!-- 마이페이지 리뷰리스트 가져오기 -->
 	<select id="mypageReviewList" resultType="mybatis.ReviewDTO">

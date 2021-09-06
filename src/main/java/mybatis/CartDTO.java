@@ -16,4 +16,6 @@ public class CartDTO {
 	private int p_price;
 	private String p_brand;
 	private String pd_color;
+	
+	
 }
