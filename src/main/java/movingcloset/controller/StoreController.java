@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,6 +41,7 @@ import movingcloset.command.store.StoreInsertCommand;
 import movingcloset.command.store.StoreListCommand;
 import movingcloset.command.store.StoreUpdateCommand;
 import mybatis.BuyAndGroupDTO;
+import mybatis.MybatisProductImpl;
 import mybatis.ProductDTO;
 import mybatis.ProductDetailDTO;
 import mybatis.ReviewDTO;
@@ -77,6 +79,8 @@ public class StoreController {
 	CartBuyCommand cartBuyCommand;
 	@Autowired
 	CartPayCommand cartPayCommand;
+	@Autowired
+	private SqlSession sqlSession;
 	
 	// 스토어 리스트
 	@RequestMapping(value="/movingcloset/store.do", method=RequestMethod.GET)
@@ -472,6 +476,14 @@ public class StoreController {
 		model.addAttribute("req",req);
 		command = cartPayCommand;
 		command.execute(model);
+		
+		List<BuyAndGroupDTO> bgDTO = new ArrayList<BuyAndGroupDTO>();
+		
+		int idx = sqlSession.getMapper(MybatisProductImpl.class).getMaxBidx();
+		String b_idx = Integer.toString(idx);
+		bgDTO = sqlSession.getMapper(MybatisProductImpl.class).getbuyAndGroup(b_idx);
+		model.addAttribute("bgDTO", bgDTO);
+
 		
 		return "body/cart/cartPayForm";
 	}

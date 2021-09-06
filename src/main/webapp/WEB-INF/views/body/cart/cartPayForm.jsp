@@ -216,14 +216,17 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 						</tr>
 				    </thead>
 				    <tbody>
+				    	<c:forEach items="${bgDTO }" var="bgDTO">
+				    	
 				    	<tr id="goods">
-				    		<td><img class="goodsImg" src="../resources/upload/${productDTO.p_sfile }" /></td>
-				    		<td style="vertical-align:middle;">${productDTO.p_brand }</td>
-				    		<td style="vertical-align:middle;">${productDTO.p_name }<br />(${productDTO.p_code })</td>
-				    		<td style="vertical-align:middle;">${buyAndGroupDTO.b_totalpay }</td>
-				    		<td style="vertical-align:middle;">${buyAndGroupDTO.bd_count }</td>
-				    		<td style="vertical-align:middle;">${buyAndGroupDTO.bd_size }</td>
+				    		<td><img class="goodsImg" src="../resources/upload/${bgDTO.p_sfile }" /></td>
+				    		<td style="vertical-align:middle;">${bgDTO.p_brand }</td>
+				    		<td style="vertical-align:middle;">${bgDTO.p_name }<br />(${bgDTO.p_code })</td>
+				    		<td style="vertical-align:middle;">${bgDTO.b_totalpay }</td>
+				    		<td style="vertical-align:middle;">${bgDTO.bd_count }</td>
+				    		<td style="vertical-align:middle;">${bgDTO.bd_size }</td>
 				    	</tr>
+				    	</c:forEach>
 				    </tbody>
 				</table>
 			</div>
@@ -241,42 +244,43 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 						<col width="*"/>
 					</colgroup>
 					<tbody>
+					<c:forEach items="${bgDTO }" var="bgDTO" end="0">
 						<tr>
 							<td class="text-left"
 								style="vertical-align:middle;">이름</td>
 							<td>
-								${buyAndGroupDTO.b_buyer }
+								${bgDTO.b_buyer }
 							</td>
 						</tr>
 						<tr>
 							<td class="text-left"
 								style="vertical-align:middle;">전화번호</td>
 							<td class="form-inline">
-								${buyAndGroupDTO.b_phone }
+								${bgDTO.b_phone }
 							</td>
 						</tr>
 						<tr>
 							<td class="text-left"
 								style="vertical-align:middle;">우편번호</td>
 							<td>
-								${buyAndGroupDTO.b_postcode } 
+								${bgDTO.b_postcode } 
 							</td>
 						</tr>
 						<tr>
 							<td class="text-left"
 								style="vertical-align:middle;">주소</td>
 							<td>
-								${buyAndGroupDTO.b_addr }
+								${bgDTO.b_addr }
 							</td>
 						</tr>
 						<tr>
 							<td class="text-left"
 								style="vertical-align:middle;">이메일&nbsp;&nbsp;&nbsp;</td>
 							<td class="form-inline">
-								${buyAndGroupDTO.email }
+								${bgDTO.email }
 							</td>
 						</tr>
-
+					</c:forEach>
 					</tbody>
 				</table>
 			</div>
