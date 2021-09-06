@@ -44,7 +44,7 @@ public class ZzimController {
 		command = zzimListCommand;
 		command.mapexecute(map);
 		ArrayList<ZzimDTO> zzimList = (ArrayList<ZzimDTO>) map.get("zzimList");
-		System.out.println("카트리스트출력"+zzimList);
+		System.out.println("찜리스트출력 : "+zzimList);
 		return zzimList;
 	}
 	
