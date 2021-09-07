@@ -24,7 +24,8 @@
 			border:none;
 			/* width:80%;  */
             height:auto;
-			margin-top:50px;
+			margin-top:100px;
+			margin-bottom: 100px;
 			padding-top:50px;
 		}
 		

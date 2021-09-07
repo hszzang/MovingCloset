@@ -28,8 +28,8 @@
 
 <style>
 .container {
-	margin-top: 100px;
-	margin-bottom: 10px;
+	margin-top: 150px;
+	margin-bottom: 100px;
 }
 
 .container .row {

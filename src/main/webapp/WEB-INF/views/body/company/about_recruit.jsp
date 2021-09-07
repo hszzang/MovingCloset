@@ -40,7 +40,7 @@
         #wrapper{
         	width:70%; height:auto;
         	border: none;
-        	margin-top: 150px; margin-bottom: 100px;
+        	margin-top: 90px; margin-bottom: 100px;
         	margin-left: 14%;
 /*         	margin: 200px 15% 200px 150px; */
         	padding: 0;
