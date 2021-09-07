@@ -18,8 +18,8 @@
 <style>
 
 .container {
-	margin-top: 95px;
-	margin-bottom: 30px;
+	margin-top: 150px;
+	margin-bottom: 100px;
 }
 .input-form-background {
 padding-top: 0px; padding-bottom: 50px; 

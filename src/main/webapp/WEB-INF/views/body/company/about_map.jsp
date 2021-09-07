@@ -22,7 +22,7 @@
     #wrapper{
        	width:70%; height:auto;
        	border: none;
-       	margin: 100px 15% 200px 15%;
+       	margin: 120px 15% 200px 15%;
        	padding: 0;
     }
 	
@@ -52,7 +52,9 @@
 		box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px #ff6c2f;
 	}
 
-
+	.section-title {
+		margin-top: 200px;
+	}
 
 
 </style>
@@ -62,7 +64,6 @@
 
 	<div class="container">
 		
-		<br/><br/><br/><br/><br/>
 	   	<div class="section-title">
           <h2>오시는 길</h2>
         </div>
