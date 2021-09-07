@@ -201,8 +201,8 @@ public class CartPayCommand implements CommandImpl {
 							+ buyAndGroupDTO.getAccountnumber()
 							+ "</td></tr><tr style='border-collapse:collapse;'><th colspan='1' rowspan='1' style='border-bottom:1px solid #DDDDDD;line-height:26px;text-align:center;font-size:14px;padding:9px;color:#434343;word-break:break-all;width:120px;font-weight:700;background-color:#F8F8F8;'>"
 							+ "상품명</th><td colspan='3' style='padding:9px;Margin:0;border-bottom:1px solid #DDDDDD;line-height:26px;text-align:left;font-size:14px;color:#434343;word-break:break-all;'>"
-							+ productDTO.getP_name()
-							+ " 등</td></tr></tbody></table></td></tr></tbody></table> </td></tr></tbody></table> </td></tr></tbody></table> "
+//							+ 
+							+ "코튼 린넨 9부 크롭 와이드팬츠 밴딩 등</td></tr></tbody></table></td></tr></tbody></table> </td></tr></tbody></table> </td></tr></tbody></table> "
 							+ "<table cellpadding='0' cellspacing='0' width='100%' style='mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;'>  "
 							+ "                 <tbody><tr style='border-collapse:collapse;'><td align='center' valign='top' width='720' style='padding:0;Margin:0;'>  "
 							+ "                   <table cellpadding='0' cellspacing='0' width='100%' style='mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;'>  "
