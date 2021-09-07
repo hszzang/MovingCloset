@@ -19,7 +19,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     
     <style>
-    	.container{width:100%; height:auto; margin:200px 0 100px 0; }
+    	.container{width:100%; height:auto; margin:0 0 100px 0; }
     	
     	.section-title {
 			text-align: center;
@@ -287,7 +287,7 @@ function clickPb(btn) {
 </head>
 <body>
     <div class="container">
-	    <div class="section-title">
+	    <div class="section-title" style="margin-top:150px;">
 			<h2>STORE</h2>
 		</div>
         

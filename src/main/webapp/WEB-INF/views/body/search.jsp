@@ -15,7 +15,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
     <style>
-    	.container{margin-top:200px; margin-bottom:200px;}
+    	.container{ margin-bottom:200px;}
     	
     	.section-title {
 			text-align: center;
@@ -241,7 +241,7 @@
     <!--  
         <form action="">
         -->
-        <div class="section-title">
+        <div class="section-title" style="margin-top:150px;">
 			<h2>Search</h2>
 		</div>
             <div id="list">
@@ -296,7 +296,6 @@
                             <div class="brand">${product.p_brand }</div>
                             <div class="name"><label>${product.p_name }</label></div>
                             <div class="price">
-                                <span class="origPrice"><strike>${product.p_price}</strike></span>
                                 <span class="discountedPrice" id="totalDiv">${product.p_price}</span>
                                 <span class="won">원</span>
                                 <span class="heart" style="text-align:right;">
